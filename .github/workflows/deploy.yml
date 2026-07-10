@@ -1,0 +1,50 @@
+name: Actualizar Partidos y Desplegar a GitHub Pages
+
+on:
+  push:
+    branches: ["main", "master"]
+  schedule:
+    - cron: '0 10 * * *'
+    - cron: '0 18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+      
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          
+      - name: Buscar Partidos en Vivo (Ejecutando IA)
+        run: |
+          python backend/data_generator.py
+          
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Preparar carpeta frontend/
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './frontend'
+          
+      - name: Desplegar a la Nube (GitHub Pages)
+        id: deployment
+        uses: actions/deploy-pages@v4
