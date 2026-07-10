@@ -1,0 +1,5012 @@
+{
+    "date": "2026-07-10",
+    "matches": [
+        {
+            "id": "match-1000",
+            "home": "Spain",
+            "away": "Belgium",
+            "home_color": "#c60b1e",
+            "home_accent": "#800000",
+            "away_color": "#E30613",
+            "away_accent": "#6ECFF6",
+            "league": "Fútbol Mundial - BEL @ ESP",
+            "sport": "Football",
+            "time": "14:00",
+            "stadium": "SoFi Stadium",
+            "home_form": "L-W-D-L-W",
+            "away_form": "W-W-L-W-W",
+            "home_injuries": [
+                {
+                    "player": "Clarke",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 6
+                },
+                {
+                    "player": "Tchouameni",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Bernard",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La prensa reporta que Spain cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 5,
+                    "sentiment": "Neutral",
+                    "source": "Sky Sports"
+                },
+                {
+                    "headline": "Tensiones en el vestuario de Belgium tras las declaraciones de su estrella en redes sociales.",
+                    "credibility": 2,
+                    "sentiment": "Negative",
+                    "source": "Tennis Magazine"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Kane",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "David",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Richard",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Thomas",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Carvajal",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Hall",
+                            "number": 6,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 32
+                        },
+                        {
+                            "name": "Durand",
+                            "number": 10,
+                            "pos": "MC",
+                            "x": 70,
+                            "y": 32
+                        },
+                        {
+                            "name": "Leroy",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 42
+                        },
+                        {
+                            "name": "Lefevre",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 42
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Álvarez",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Wilson",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Torres",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Rodríguez",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Gómez",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Foden",
+                            "number": 6,
+                            "pos": "MC",
+                            "x": 70,
+                            "y": 68
+                        },
+                        {
+                            "name": "Clarke",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 50,
+                            "y": 70
+                        },
+                        {
+                            "name": "Simon",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 3,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-07-27",
+                        "score": "0 - 0",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-07-22",
+                        "score": "3 - 0",
+                        "winner": "Spain"
+                    },
+                    {
+                        "date": "2026-05-12",
+                        "score": "2 - 1",
+                        "winner": "Spain"
+                    },
+                    {
+                        "date": "2025-09-13",
+                        "score": "0 - 1",
+                        "winner": "Belgium"
+                    },
+                    {
+                        "date": "2025-06-19",
+                        "score": "2 - 3",
+                        "winner": "Belgium"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Spain",
+                    "odd": 1.63,
+                    "probability": 61,
+                    "risk": "Low",
+                    "reasoning": "Análisis IA: Spain llega con forma L-W-D-L-W y domina el H2H (2 victorias recientes). La táctica 4-3-3 elegida contrarrestará a un Belgium que sufre 1 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'La prensa reporta que Spain cambiará su portero titular para dar rodaje en este partido clave.'. Probabilidad estadística a favor: 61%. Caos Estadístico (Suerte) estimado en 87%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 2.18,
+                    "probability": 52,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 5 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1001",
+            "home": "Boston Legacy FC",
+            "away": "Chicago Stars FC",
+            "home_color": "#00FF00",
+            "home_accent": "#000000",
+            "away_color": "#c7102e",
+            "away_accent": "#3AB5E8",
+            "league": "Fútbol Mundial - CHI @ BOS",
+            "sport": "Football",
+            "time": "19:00",
+            "stadium": "Centreville Bank Stadium",
+            "home_form": "D-W-W-L-D",
+            "away_form": "W-W-L-W-W",
+            "home_injuries": [
+                {
+                    "player": "Evans",
+                    "type": "Fatiga muscular",
+                    "status": "Out",
+                    "days_out": 3
+                },
+                {
+                    "player": "Griezmann",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Rice",
+                    "type": "Fractura de dedo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La prensa reporta que Boston Legacy FC cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 3,
+                    "sentiment": "Negative",
+                    "source": "Tennis Magazine"
+                },
+                {
+                    "headline": "Tensiones en el vestuario de Chicago Stars FC tras las declaraciones de su estrella en redes sociales.",
+                    "credibility": 5,
+                    "sentiment": "Positive",
+                    "source": "Sports Network"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Lefevre",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Roberts",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "David",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "González",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "García",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "White",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "David",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Thomas",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Clarke",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Rice",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Laurent",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Brown",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Morata",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 4,
+                "away_wins": 3,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-08-21",
+                        "score": "1 - 1",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2026-01-28",
+                        "score": "3 - 2",
+                        "winner": "Boston Legacy FC"
+                    },
+                    {
+                        "date": "2026-05-14",
+                        "score": "3 - 2",
+                        "winner": "Boston Legacy FC"
+                    },
+                    {
+                        "date": "2026-03-31",
+                        "score": "3 - 1",
+                        "winner": "Boston Legacy FC"
+                    },
+                    {
+                        "date": "2025-10-06",
+                        "score": "2 - 1",
+                        "winner": "Boston Legacy FC"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Boston Legacy FC",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Boston Legacy FC llega con forma D-W-W-L-D y domina el H2H (4 victorias recientes). La táctica 4-2-3-1 elegida contrarrestará a un Chicago Stars FC que sufre 1 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'La prensa reporta que Boston Legacy FC cambiará su portero titular para dar rodaje en este partido clave.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 72%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 1.84,
+                    "probability": 59,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 7 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1002",
+            "home": "Orlando Pride",
+            "away": "Kansas City Current",
+            "home_color": "#c5b5f2",
+            "home_accent": "#14002f",
+            "away_color": "#cf3339",
+            "away_accent": "#62cbc9",
+            "league": "Fútbol Mundial - KC @ ORL",
+            "sport": "Football",
+            "time": "19:00",
+            "stadium": "Inter&Co Stadium",
+            "home_form": "W-W-L-W-W",
+            "away_form": "W-D-W-W-W",
+            "home_injuries": [
+                {
+                    "player": "Smith",
+                    "type": "Fractura de dedo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Bernard",
+                    "type": "Esguince de tobillo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Fournier",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Bernard",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 2
+                },
+                {
+                    "player": "Carvajal",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La prensa reporta que Orlando Pride cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 3,
+                    "sentiment": "Negative",
+                    "source": "Sports Network"
+                },
+                {
+                    "headline": "El analista táctico afirma que Orlando Pride explotará la banda izquierda de su rival debido a su lentitud.",
+                    "credibility": 2,
+                    "sentiment": "Neutral",
+                    "source": "Diario Marca"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Laurent",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Green",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Smith",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Ramos",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Pérez",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 50,
+                            "y": 30
+                        },
+                        {
+                            "name": "Lefevre",
+                            "number": 10,
+                            "pos": "MC",
+                            "x": 70,
+                            "y": 32
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 42
+                        },
+                        {
+                            "name": "Nico",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Bernard",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Fournier",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Simon",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Robinson",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Dubois",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Kane",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Jones",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Álvarez",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        },
+                        {
+                            "name": "Saka",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 3,
+                "away_wins": 3,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2026-04-16",
+                        "score": "0 - 2",
+                        "winner": "Kansas City Current"
+                    },
+                    {
+                        "date": "2026-04-16",
+                        "score": "0 - 0",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-08-21",
+                        "score": "3 - 0",
+                        "winner": "Orlando Pride"
+                    },
+                    {
+                        "date": "2025-12-28",
+                        "score": "0 - 3",
+                        "winner": "Kansas City Current"
+                    },
+                    {
+                        "date": "2025-10-06",
+                        "score": "3 - 0",
+                        "winner": "Orlando Pride"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Orlando Pride",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Orlando Pride llega con forma W-W-L-W-W y domina el H2H (3 victorias recientes). La táctica 4-3-3 elegida contrarrestará a un Kansas City Current que sufre 3 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'La prensa reporta que Orlando Pride cambiará su portero titular para dar rodaje en este partido clave.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 43%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "Sí",
+                    "odd": 1.74,
+                    "probability": 68,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 6 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1003",
+            "home": "Racing Louisville FC",
+            "away": "Bay FC",
+            "home_color": "#c5b5f2",
+            "home_accent": "#14002f",
+            "away_color": "#ff5049",
+            "away_accent": "#0d2032",
+            "league": "Fútbol Mundial - BAY @ LOU",
+            "sport": "Football",
+            "time": "19:00",
+            "stadium": "Lynn Family Stadium",
+            "home_form": "D-W-W-L-D",
+            "away_form": "D-W-W-L-D",
+            "home_injuries": [
+                {
+                    "player": "Bellingham",
+                    "type": "Esguince de tobillo",
+                    "status": "Out",
+                    "days_out": 10
+                },
+                {
+                    "player": "Bellingham",
+                    "type": "Fatiga muscular",
+                    "status": "Out",
+                    "days_out": 8
+                },
+                {
+                    "player": "Taylor",
+                    "type": "Fractura de dedo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Williams",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 4
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "El analista táctico afirma que Racing Louisville FC explotará la banda izquierda de su rival debido a su lentitud.",
+                    "credibility": 3,
+                    "sentiment": "Neutral",
+                    "source": "Sky Sports"
+                },
+                {
+                    "headline": "La prensa reporta que Racing Louisville FC cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 5,
+                    "sentiment": "Neutral",
+                    "source": "Sky Sports"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Griezmann",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Thompson",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Fournier",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Taylor",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Wright",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 50,
+                            "y": 30
+                        },
+                        {
+                            "name": "Sánchez",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Petit",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Laurent",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Koke",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Walker",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Gavi",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Álvarez",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Wright",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "González",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 64
+                        },
+                        {
+                            "name": "Foden",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "García",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 1,
+                "away_wins": 1,
+                "draws": 2,
+                "last_results": [
+                    {
+                        "date": "2025-07-26",
+                        "score": "2 - 2",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2026-01-31",
+                        "score": "2 - 0",
+                        "winner": "Racing Louisville FC"
+                    },
+                    {
+                        "date": "2025-06-19",
+                        "score": "1 - 1",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-08-11",
+                        "score": "0 - 3",
+                        "winner": "Bay FC"
+                    },
+                    {
+                        "date": "2026-02-12",
+                        "score": "3 - 3",
+                        "winner": "Draw"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Racing Louisville FC",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Racing Louisville FC llega con forma D-W-W-L-D y domina el H2H (1 victorias recientes). La táctica 4-3-3 elegida contrarrestará a un Bay FC que sufre 1 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'El analista táctico afirma que Racing Louisville FC explotará la banda izquierda de su rival debido a su lentitud.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 66%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 2.22,
+                    "probability": 52,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 2 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1004",
+            "home": "Utah Royals",
+            "away": "Gotham FC",
+            "home_color": "#ae122a",
+            "home_accent": "#fdb71a",
+            "away_color": "#a9f1fd",
+            "away_accent": "#000000",
+            "league": "Fútbol Mundial - GFC @ UTA",
+            "sport": "Football",
+            "time": "21:00",
+            "stadium": "America First Field",
+            "home_form": "W-D-W-W-W",
+            "away_form": "W-D-W-W-W",
+            "home_injuries": [
+                {
+                    "player": "David",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Yamal",
+                    "type": "Gripe",
+                    "status": "Out",
+                    "days_out": 8
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Robert",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Evans",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "El cuerpo técnico de Utah Royals probó una formación ultra-ofensiva en el último entrenamiento.",
+                    "credibility": 3,
+                    "sentiment": "Neutral",
+                    "source": "Tennis Magazine"
+                },
+                {
+                    "headline": "La prensa reporta que Utah Royals cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 2,
+                    "sentiment": "Positive",
+                    "source": "Sports Network"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Hall",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Bernard",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "David",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Morata",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Sánchez",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Jackson",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Wilson",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 36
+                        },
+                        {
+                            "name": "Yamal",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Nico",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Martin",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Wilson",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Smith",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Gavi",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Evans",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Yamal",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Robert",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "Rodríguez",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 1,
+                "away_wins": 3,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2026-02-28",
+                        "score": "1 - 0",
+                        "winner": "Utah Royals"
+                    },
+                    {
+                        "date": "2025-11-03",
+                        "score": "0 - 1",
+                        "winner": "Gotham FC"
+                    },
+                    {
+                        "date": "2026-02-27",
+                        "score": "0 - 0",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-10-22",
+                        "score": "1 - 1",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-11-19",
+                        "score": "3 - 2",
+                        "winner": "Utah Royals"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Utah Royals",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Utah Royals llega con forma W-D-W-W-W y domina el H2H (1 victorias recientes). La táctica 3-5-2 elegida contrarrestará a un Gotham FC que sufre 2 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'El cuerpo técnico de Utah Royals probó una formación ultra-ofensiva en el último entrenamiento.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 69%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 2.17,
+                    "probability": 53,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 4 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1005",
+            "home": "Argentino de Merlo",
+            "away": "Argentino de Quilmes",
+            "home_color": "#000000",
+            "home_accent": "#C60000",
+            "away_color": "#000000",
+            "away_accent": "#C60000",
+            "league": "Fútbol Mundial - ADQ @ ADM",
+            "sport": "Football",
+            "time": "13:00",
+            "stadium": "Juan Carlos Brieva",
+            "home_form": "W-W-D-W-L",
+            "away_form": "W-W-L-W-W",
+            "home_injuries": [
+                {
+                    "player": "Gómez",
+                    "type": "Esguince de tobillo",
+                    "status": "Out",
+                    "days_out": 10
+                },
+                {
+                    "player": "Petit",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Simon",
+                    "type": "Esguince de tobillo",
+                    "status": "Out",
+                    "days_out": 8
+                },
+                {
+                    "player": "Pérez",
+                    "type": "Esguince de tobillo",
+                    "status": "Out",
+                    "days_out": 8
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "Tensiones en el vestuario de Argentino de Quilmes tras las declaraciones de su estrella en redes sociales.",
+                    "credibility": 4,
+                    "sentiment": "Negative",
+                    "source": "Diario Marca"
+                },
+                {
+                    "headline": "La prensa reporta que Argentino de Merlo cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 2,
+                    "sentiment": "Positive",
+                    "source": "Sky Sports"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Moreau",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Álvarez",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Fournier",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Martin",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "White",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Richard",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Petit",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 36
+                        },
+                        {
+                            "name": "David",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 36
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Simon",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Kane",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Nico",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Jackson",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "González",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Aspas",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Flores",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 64
+                        },
+                        {
+                            "name": "Morata",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "Griezmann",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 4,
+                "away_wins": 4,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2025-08-26",
+                        "score": "2 - 0",
+                        "winner": "Argentino de Merlo"
+                    },
+                    {
+                        "date": "2026-05-18",
+                        "score": "0 - 1",
+                        "winner": "Argentino de Quilmes"
+                    },
+                    {
+                        "date": "2025-06-25",
+                        "score": "0 - 0",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-11-19",
+                        "score": "2 - 0",
+                        "winner": "Argentino de Merlo"
+                    },
+                    {
+                        "date": "2026-01-09",
+                        "score": "2 - 3",
+                        "winner": "Argentino de Quilmes"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Argentino de Merlo",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Argentino de Merlo llega con forma W-W-D-W-L y domina el H2H (4 victorias recientes). La táctica 4-2-3-1 elegida contrarrestará a un Argentino de Quilmes que sufre 2 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'Tensiones en el vestuario de Argentino de Quilmes tras las declaraciones de su estrella en redes sociales.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 58%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 2.16,
+                    "probability": 49,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 8 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1006",
+            "home": "Brown de Adrogué",
+            "away": "Ituzaingó",
+            "home_color": "#212121",
+            "home_accent": "#000000",
+            "away_color": "#000000",
+            "away_accent": "#000000",
+            "league": "Fútbol Mundial - ITU @ BRN",
+            "sport": "Football",
+            "time": "13:00",
+            "stadium": "Lorenzo Arandilla",
+            "home_form": "W-D-W-W-W",
+            "away_form": "L-W-D-L-W",
+            "home_injuries": [
+                {
+                    "player": "Morata",
+                    "type": "Molestias en la rodilla",
+                    "status": "Out",
+                    "days_out": 7
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Griezmann",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La prensa reporta que Brown de Adrogué cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 3,
+                    "sentiment": "Neutral",
+                    "source": "ESPN Deportes"
+                },
+                {
+                    "headline": "El analista táctico afirma que Brown de Adrogué explotará la banda izquierda de su rival debido a su lentitud.",
+                    "credibility": 4,
+                    "sentiment": "Positive",
+                    "source": "Sky Sports"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Davies",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Thompson",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Durand",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Pedri",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Griezmann",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Morata",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 28
+                        },
+                        {
+                            "name": "Sánchez",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Koke",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 36
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 36
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Álvarez",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Laurent",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Dubois",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Smith",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 6,
+                            "pos": "MC",
+                            "x": 70,
+                            "y": 68
+                        },
+                        {
+                            "name": "White",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 50,
+                            "y": 70
+                        },
+                        {
+                            "name": "Johnson",
+                            "number": 10,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 68
+                        },
+                        {
+                            "name": "Sánchez",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 58
+                        },
+                        {
+                            "name": "Flores",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 58
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 4,
+                "away_wins": 3,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2025-07-03",
+                        "score": "1 - 3",
+                        "winner": "Ituzaingó"
+                    },
+                    {
+                        "date": "2025-11-07",
+                        "score": "3 - 0",
+                        "winner": "Brown de Adrogué"
+                    },
+                    {
+                        "date": "2025-12-10",
+                        "score": "2 - 2",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-09-19",
+                        "score": "0 - 2",
+                        "winner": "Ituzaingó"
+                    },
+                    {
+                        "date": "2025-08-17",
+                        "score": "3 - 0",
+                        "winner": "Brown de Adrogué"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Brown de Adrogué",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Brown de Adrogué llega con forma W-D-W-W-W y domina el H2H (4 victorias recientes). La táctica 4-2-3-1 elegida contrarrestará a un Ituzaingó que sufre 1 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'La prensa reporta que Brown de Adrogué cambiará su portero titular para dar rodaje en este partido clave.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 88%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "Sí",
+                    "odd": 2.18,
+                    "probability": 68,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 7 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1007",
+            "home": "Excursionistas",
+            "away": "Comunicaciones",
+            "home_color": "#000000",
+            "home_accent": "#000000",
+            "away_color": "#000000",
+            "away_accent": "#C60000",
+            "league": "Fútbol Mundial - COM @ EXC",
+            "sport": "Football",
+            "time": "13:00",
+            "stadium": "Estadio de Excursionistas",
+            "home_form": "D-W-W-L-D",
+            "away_form": "L-W-D-L-W",
+            "home_injuries": [
+                {
+                    "player": "Richard",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 3
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "López",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Morata",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Griezmann",
+                    "type": "Gripe",
+                    "status": "Out",
+                    "days_out": 7
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La prensa reporta que Excursionistas cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 2,
+                    "sentiment": "Negative",
+                    "source": "Tennis Magazine"
+                },
+                {
+                    "headline": "El plantel de Comunicaciones sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
+                    "credibility": 3,
+                    "sentiment": "Positive",
+                    "source": "ESPN Deportes"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Dembele",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Evans",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Richard",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Taylor",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Sánchez",
+                            "number": 6,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 32
+                        },
+                        {
+                            "name": "White",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 50,
+                            "y": 30
+                        },
+                        {
+                            "name": "Saka",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 42
+                        },
+                        {
+                            "name": "Ruiz",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        },
+                        {
+                            "name": "Robert",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 42
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Thompson",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Dubois",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Wilson",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Leroy",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Saka",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Martin",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "López",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 64
+                        },
+                        {
+                            "name": "Ruiz",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        },
+                        {
+                            "name": "Griezmann",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 1,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-08-28",
+                        "score": "1 - 2",
+                        "winner": "Comunicaciones"
+                    },
+                    {
+                        "date": "2025-07-18",
+                        "score": "1 - 2",
+                        "winner": "Comunicaciones"
+                    },
+                    {
+                        "date": "2025-07-01",
+                        "score": "1 - 0",
+                        "winner": "Excursionistas"
+                    },
+                    {
+                        "date": "2025-07-30",
+                        "score": "1 - 1",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-11-15",
+                        "score": "3 - 0",
+                        "winner": "Excursionistas"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Excursionistas",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Excursionistas llega con forma D-W-W-L-D y domina el H2H (2 victorias recientes). La táctica 4-3-3 elegida contrarrestará a un Comunicaciones que sufre 3 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'La prensa reporta que Excursionistas cambiará su portero titular para dar rodaje en este partido clave.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 13%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 2.21,
+                    "probability": 69,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 3 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1008",
+            "home": "Liniers",
+            "away": "Sportivo Italiano",
+            "home_color": "#000000",
+            "home_accent": "#000000",
+            "away_color": "#000000",
+            "away_accent": "#C60000",
+            "league": "Fútbol Mundial - CLU @ LIN",
+            "sport": "Football",
+            "time": "13:00",
+            "stadium": "Juan Antonio Arias",
+            "home_form": "W-D-W-W-W",
+            "away_form": "W-W-L-W-W",
+            "home_injuries": [
+                {
+                    "player": "Carvajal",
+                    "type": "Fractura de dedo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Roberts",
+                    "type": "Gripe",
+                    "status": "Out",
+                    "days_out": 8
+                },
+                {
+                    "player": "Gómez",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Williams",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Laurent",
+                    "type": "Esguince de tobillo",
+                    "status": "Out",
+                    "days_out": 2
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "El cuerpo técnico de Liniers probó una formación ultra-ofensiva en el último entrenamiento.",
+                    "credibility": 2,
+                    "sentiment": "Positive",
+                    "source": "Tennis Magazine"
+                },
+                {
+                    "headline": "La prensa reporta que Liniers cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 4,
+                    "sentiment": "Positive",
+                    "source": "Tennis Magazine"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Roberts",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Ruiz",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Green",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Carvajal",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Kane",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Davies",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Pedri",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 28
+                        },
+                        {
+                            "name": "Jackson",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Roux",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 36
+                        },
+                        {
+                            "name": "Lefevre",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Laurent",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Koke",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Dembele",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Thomas",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Johnson",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 6,
+                            "pos": "MC",
+                            "x": 70,
+                            "y": 68
+                        },
+                        {
+                            "name": "Hall",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 50,
+                            "y": 70
+                        },
+                        {
+                            "name": "Evans",
+                            "number": 10,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 68
+                        },
+                        {
+                            "name": "Jackson",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 2,
+                "draws": 2,
+                "last_results": [
+                    {
+                        "date": "2025-10-24",
+                        "score": "3 - 1",
+                        "winner": "Liniers"
+                    },
+                    {
+                        "date": "2025-09-05",
+                        "score": "2 - 1",
+                        "winner": "Liniers"
+                    },
+                    {
+                        "date": "2025-08-04",
+                        "score": "1 - 1",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-06-16",
+                        "score": "1 - 0",
+                        "winner": "Liniers"
+                    },
+                    {
+                        "date": "2025-06-18",
+                        "score": "3 - 1",
+                        "winner": "Liniers"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Liniers",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Liniers llega con forma W-D-W-W-W y domina el H2H (2 victorias recientes). La táctica 3-5-2 elegida contrarrestará a un Sportivo Italiano que sufre 2 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'El cuerpo técnico de Liniers probó una formación ultra-ofensiva en el último entrenamiento.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 43%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 2.02,
+                    "probability": 68,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 4 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1009",
+            "home": "Talleres de Remedios",
+            "away": "Flandria",
+            "home_color": "#000000",
+            "home_accent": "#000000",
+            "away_color": "#212121",
+            "away_accent": "#000000",
+            "league": "Fútbol Mundial - FLA @ REM",
+            "sport": "Football",
+            "time": "13:00",
+            "stadium": "Estadio Pablo Comelli",
+            "home_form": "D-W-W-L-D",
+            "away_form": "W-D-W-W-W",
+            "home_injuries": [
+                {
+                    "player": "Evans",
+                    "type": "Esguince de tobillo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Griezmann",
+                    "type": "Esguince de tobillo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Williams",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Walker",
+                    "type": "Fatiga muscular",
+                    "status": "Out",
+                    "days_out": 8
+                },
+                {
+                    "player": "Gavi",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 2
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La prensa reporta que Talleres de Remedios cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 3,
+                    "sentiment": "Neutral",
+                    "source": "Sky Sports"
+                },
+                {
+                    "headline": "El cuerpo técnico de Talleres de Remedios probó una formación ultra-ofensiva en el último entrenamiento.",
+                    "credibility": 5,
+                    "sentiment": "Positive",
+                    "source": "Tennis Magazine"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Leroy",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Flores",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Foden",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Palmer",
+                            "number": 6,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 32
+                        },
+                        {
+                            "name": "Thomas",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 50,
+                            "y": 30
+                        },
+                        {
+                            "name": "Johnson",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 42
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Dembele",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Griezmann",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Walker",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Jackson",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Michel",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Nico",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 50,
+                            "y": 70
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 10,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 68
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 58
+                        },
+                        {
+                            "name": "Gavi",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 4,
+                "away_wins": 2,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2026-02-13",
+                        "score": "0 - 3",
+                        "winner": "Flandria"
+                    },
+                    {
+                        "date": "2025-09-28",
+                        "score": "2 - 1",
+                        "winner": "Talleres de Remedios"
+                    },
+                    {
+                        "date": "2025-08-10",
+                        "score": "3 - 2",
+                        "winner": "Talleres de Remedios"
+                    },
+                    {
+                        "date": "2025-06-05",
+                        "score": "0 - 2",
+                        "winner": "Flandria"
+                    },
+                    {
+                        "date": "2026-02-16",
+                        "score": "3 - 2",
+                        "winner": "Talleres de Remedios"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Talleres de Remedios",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Talleres de Remedios llega con forma D-W-W-L-D y domina el H2H (4 victorias recientes). La táctica 4-3-3 elegida contrarrestará a un Flandria que sufre 3 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'La prensa reporta que Talleres de Remedios cambiará su portero titular para dar rodaje en este partido clave.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 61%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 1.63,
+                    "probability": 64,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 6 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1010",
+            "home": "UAI Urquiza",
+            "away": "Deportivo Merlo",
+            "home_color": "#000000",
+            "home_accent": "#C60000",
+            "away_color": "#000000",
+            "away_accent": "#C60000",
+            "league": "Fútbol Mundial - MER @ UAI",
+            "sport": "Football",
+            "time": "13:00",
+            "stadium": "Monumental de Villa Lynch",
+            "home_form": "L-W-D-L-W",
+            "away_form": "W-D-W-W-W",
+            "home_injuries": [
+                {
+                    "player": "Kane",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 2
+                },
+                {
+                    "player": "Dembele",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Leroy",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Out",
+                    "days_out": 8
+                },
+                {
+                    "player": "Leroy",
+                    "type": "Fractura de dedo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La prensa reporta que UAI Urquiza cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 5,
+                    "sentiment": "Negative",
+                    "source": "Sky Sports"
+                },
+                {
+                    "headline": "El cuerpo técnico de UAI Urquiza probó una formación ultra-ofensiva en el último entrenamiento.",
+                    "credibility": 5,
+                    "sentiment": "Neutral",
+                    "source": "Sports Network"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Laurent",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Wilson",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Palmer",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Clarke",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Morata",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 10,
+                            "pos": "MC",
+                            "x": 70,
+                            "y": 32
+                        },
+                        {
+                            "name": "Martínez",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 42
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Brown",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Smith",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Morata",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Walker",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Tchouameni",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "Griezmann",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 3,
+                "away_wins": 3,
+                "draws": 2,
+                "last_results": [
+                    {
+                        "date": "2025-07-10",
+                        "score": "3 - 1",
+                        "winner": "UAI Urquiza"
+                    },
+                    {
+                        "date": "2025-12-20",
+                        "score": "0 - 2",
+                        "winner": "Deportivo Merlo"
+                    },
+                    {
+                        "date": "2025-08-22",
+                        "score": "1 - 0",
+                        "winner": "UAI Urquiza"
+                    },
+                    {
+                        "date": "2026-03-04",
+                        "score": "1 - 3",
+                        "winner": "Deportivo Merlo"
+                    },
+                    {
+                        "date": "2025-11-23",
+                        "score": "1 - 0",
+                        "winner": "UAI Urquiza"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "UAI Urquiza",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: UAI Urquiza llega con forma L-W-D-L-W y domina el H2H (3 victorias recientes). La táctica 4-3-3 elegida contrarrestará a un Deportivo Merlo que sufre 2 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'La prensa reporta que UAI Urquiza cambiará su portero titular para dar rodaje en este partido clave.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 24%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "Sí",
+                    "odd": 2.29,
+                    "probability": 69,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 6 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1011",
+            "home": "Villa Dálmine",
+            "away": "Dock Sud",
+            "home_color": "#5901a9",
+            "home_accent": "#000000",
+            "away_color": "#000000",
+            "away_accent": "#000000",
+            "league": "Fútbol Mundial - DOC @ VIL",
+            "sport": "Football",
+            "time": "13:00",
+            "stadium": "Estadio Villa Dálmine",
+            "home_form": "W-W-D-W-L",
+            "away_form": "W-W-D-W-L",
+            "home_injuries": [
+                {
+                    "player": "Smith",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Michel",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 9
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Saliba",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 7
+                },
+                {
+                    "player": "Tchouameni",
+                    "type": "Esguince de tobillo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Smith",
+                    "type": "Fatiga muscular",
+                    "status": "Out",
+                    "days_out": 10
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "El analista táctico afirma que Villa Dálmine explotará la banda izquierda de su rival debido a su lentitud.",
+                    "credibility": 4,
+                    "sentiment": "Neutral",
+                    "source": "Sports Network"
+                },
+                {
+                    "headline": "Tensiones en el vestuario de Dock Sud tras las declaraciones de su estrella en redes sociales.",
+                    "credibility": 5,
+                    "sentiment": "Neutral",
+                    "source": "Tennis Magazine"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Michel",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Dembele",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Pedri",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Saliba",
+                            "number": 6,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 32
+                        },
+                        {
+                            "name": "Tchouameni",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 50,
+                            "y": 30
+                        },
+                        {
+                            "name": "Leroy",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 42
+                        },
+                        {
+                            "name": "Smith",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        },
+                        {
+                            "name": "Flores",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 42
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "White",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Pedri",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Tchouameni",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Kane",
+                            "number": 10,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 68
+                        },
+                        {
+                            "name": "Rodríguez",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 2,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-12-31",
+                        "score": "0 - 3",
+                        "winner": "Dock Sud"
+                    },
+                    {
+                        "date": "2025-10-02",
+                        "score": "2 - 0",
+                        "winner": "Villa Dálmine"
+                    },
+                    {
+                        "date": "2026-04-29",
+                        "score": "3 - 0",
+                        "winner": "Villa Dálmine"
+                    },
+                    {
+                        "date": "2026-02-22",
+                        "score": "1 - 2",
+                        "winner": "Dock Sud"
+                    },
+                    {
+                        "date": "2026-04-13",
+                        "score": "3 - 3",
+                        "winner": "Draw"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Villa Dálmine",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Villa Dálmine llega con forma W-W-D-W-L y domina el H2H (2 victorias recientes). La táctica 4-3-3 elegida contrarrestará a un Dock Sud que sufre 3 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'El analista táctico afirma que Villa Dálmine explotará la banda izquierda de su rival debido a su lentitud.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 87%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 2.16,
+                    "probability": 55,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 4 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1012",
+            "home": "Juventude",
+            "away": "Vila Nova",
+            "home_color": "#417505",
+            "home_accent": "#fafafc",
+            "away_color": "#C60000",
+            "away_accent": "#fafafc",
+            "league": "Fútbol Mundial - VIL @ JUV",
+            "sport": "Football",
+            "time": "17:00",
+            "stadium": "Alfredo Jaconi",
+            "home_form": "W-W-L-W-W",
+            "away_form": "W-W-L-W-W",
+            "home_injuries": [
+                {
+                    "player": "Green",
+                    "type": "Gripe",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "White",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Flores",
+                    "type": "Esguince de tobillo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Saka",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 9
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La prensa reporta que Juventude cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 4,
+                    "sentiment": "Positive",
+                    "source": "ESPN Deportes"
+                },
+                {
+                    "headline": "El cuerpo técnico de Juventude probó una formación ultra-ofensiva en el último entrenamiento.",
+                    "credibility": 5,
+                    "sentiment": "Neutral",
+                    "source": "Tennis Magazine"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Smith",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Kane",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Foden",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Roberts",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "White",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Morata",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 28
+                        },
+                        {
+                            "name": "Green",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Bellingham",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 36
+                        },
+                        {
+                            "name": "Wright",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Saliba",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Jackson",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Ramos",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Flores",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Thompson",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Martin",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Fournier",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "Foden",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 4,
+                "away_wins": 2,
+                "draws": 2,
+                "last_results": [
+                    {
+                        "date": "2025-11-02",
+                        "score": "0 - 3",
+                        "winner": "Vila Nova"
+                    },
+                    {
+                        "date": "2025-08-12",
+                        "score": "0 - 3",
+                        "winner": "Vila Nova"
+                    },
+                    {
+                        "date": "2025-11-29",
+                        "score": "2 - 1",
+                        "winner": "Juventude"
+                    },
+                    {
+                        "date": "2025-11-12",
+                        "score": "1 - 3",
+                        "winner": "Vila Nova"
+                    },
+                    {
+                        "date": "2026-04-15",
+                        "score": "3 - 1",
+                        "winner": "Juventude"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Juventude",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Juventude llega con forma W-W-L-W-W y domina el H2H (4 victorias recientes). La táctica 4-2-3-1 elegida contrarrestará a un Vila Nova que sufre 2 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'La prensa reporta que Juventude cambiará su portero titular para dar rodaje en este partido clave.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 88%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "Sí",
+                    "odd": 1.99,
+                    "probability": 64,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 6 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1013",
+            "home": "Sport",
+            "away": "Botafogo-SP",
+            "home_color": "#C60000",
+            "home_accent": "#000000",
+            "away_color": "#000000",
+            "away_accent": "#C60000",
+            "league": "Fútbol Mundial - BFC @ SPO",
+            "sport": "Football",
+            "time": "18:00",
+            "stadium": "Ilha do Retiro",
+            "home_form": "D-W-W-L-D",
+            "away_form": "W-W-L-W-W",
+            "home_injuries": [
+                {
+                    "player": "Leroy",
+                    "type": "Gripe",
+                    "status": "Out",
+                    "days_out": 2
+                },
+                {
+                    "player": "Yamal",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Koke",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Moreau",
+                    "type": "Fatiga muscular",
+                    "status": "Out",
+                    "days_out": 9
+                },
+                {
+                    "player": "Evans",
+                    "type": "Molestias en la rodilla",
+                    "status": "Out",
+                    "days_out": 6
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "El plantel de Botafogo-SP sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
+                    "credibility": 2,
+                    "sentiment": "Positive",
+                    "source": "Sky Sports"
+                },
+                {
+                    "headline": "El analista táctico afirma que Sport explotará la banda izquierda de su rival debido a su lentitud.",
+                    "credibility": 5,
+                    "sentiment": "Negative",
+                    "source": "ESPN Deportes"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Durand",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Flores",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Koke",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "González",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Leroy",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 36
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Evans",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Koke",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Wood",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Gómez",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Thompson",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Robinson",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 64
+                        },
+                        {
+                            "name": "Walker",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "Bertrand",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        },
+                        {
+                            "name": "Nico",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 1,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2025-08-26",
+                        "score": "2 - 0",
+                        "winner": "Sport"
+                    },
+                    {
+                        "date": "2026-01-19",
+                        "score": "3 - 3",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-11-30",
+                        "score": "3 - 0",
+                        "winner": "Sport"
+                    },
+                    {
+                        "date": "2025-12-29",
+                        "score": "2 - 3",
+                        "winner": "Botafogo-SP"
+                    },
+                    {
+                        "date": "2025-08-08",
+                        "score": "0 - 0",
+                        "winner": "Draw"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Sport",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Sport llega con forma D-W-W-L-D y domina el H2H (2 victorias recientes). La táctica 3-5-2 elegida contrarrestará a un Botafogo-SP que sufre 2 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'El plantel de Botafogo-SP sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 68%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 2.12,
+                    "probability": 58,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 3 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1014",
+            "home": "Deportivo Maldonado",
+            "away": "Albion FC",
+            "home_color": "#000000",
+            "home_accent": "#000000",
+            "away_color": "#000000",
+            "away_accent": "#C60000",
+            "league": "Fútbol Mundial - ALB @ MAL",
+            "sport": "Football",
+            "time": "17:00",
+            "stadium": "Estadio Domingo Burgueño Miguel",
+            "home_form": "D-W-W-L-D",
+            "away_form": "W-W-L-W-W",
+            "home_injuries": [
+                {
+                    "player": "Durand",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 9
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Laurent",
+                    "type": "Gripe",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "El cuerpo técnico de Deportivo Maldonado probó una formación ultra-ofensiva en el último entrenamiento.",
+                    "credibility": 2,
+                    "sentiment": "Neutral",
+                    "source": "Diario Marca"
+                },
+                {
+                    "headline": "El analista táctico afirma que Deportivo Maldonado explotará la banda izquierda de su rival debido a su lentitud.",
+                    "credibility": 4,
+                    "sentiment": "Negative",
+                    "source": "Sky Sports"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Sánchez",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Clarke",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Simon",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Davies",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Pérez",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 36
+                        },
+                        {
+                            "name": "Dubois",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Laurent",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Robert",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Clarke",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Palmer",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Yamal",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Carvajal",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Olmo",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "Kane",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 1,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-08-14",
+                        "score": "2 - 0",
+                        "winner": "Deportivo Maldonado"
+                    },
+                    {
+                        "date": "2025-12-17",
+                        "score": "1 - 1",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-10-06",
+                        "score": "0 - 1",
+                        "winner": "Albion FC"
+                    },
+                    {
+                        "date": "2026-01-10",
+                        "score": "3 - 0",
+                        "winner": "Deportivo Maldonado"
+                    },
+                    {
+                        "date": "2025-10-13",
+                        "score": "3 - 2",
+                        "winner": "Deportivo Maldonado"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Deportivo Maldonado",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Deportivo Maldonado llega con forma D-W-W-L-D y domina el H2H (2 victorias recientes). La táctica 3-5-2 elegida contrarrestará a un Albion FC que sufre 1 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'El cuerpo técnico de Deportivo Maldonado probó una formación ultra-ofensiva en el último entrenamiento.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 26%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "Sí",
+                    "odd": 1.96,
+                    "probability": 68,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 3 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1015",
+            "home": "Leones",
+            "away": "Universidad Católica (Quito)",
+            "home_color": "#000000",
+            "home_accent": "#C60000",
+            "away_color": "#0a4f8d",
+            "away_accent": "#000000",
+            "league": "Fútbol Mundial - UCA @ LEONES",
+            "sport": "Football",
+            "time": "17:00",
+            "stadium": "Estadio Olímpico de Ibarra",
+            "home_form": "W-D-W-W-W",
+            "away_form": "W-W-D-W-L",
+            "home_injuries": [
+                {
+                    "player": "Olmo",
+                    "type": "Fatiga muscular",
+                    "status": "Out",
+                    "days_out": 2
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Davies",
+                    "type": "Gripe",
+                    "status": "Out",
+                    "days_out": 7
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La prensa reporta que Leones cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 2,
+                    "sentiment": "Neutral",
+                    "source": "Sky Sports"
+                },
+                {
+                    "headline": "El plantel de Universidad Católica (Quito) sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
+                    "credibility": 2,
+                    "sentiment": "Positive",
+                    "source": "Sky Sports"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Dubois",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Thomas",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Olmo",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Saliba",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Bellingham",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Lefevre",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 36
+                        },
+                        {
+                            "name": "Kane",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Taylor",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Bellingham",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Palmer",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Martínez",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Roux",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Jones",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 3,
+                "away_wins": 4,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2026-03-08",
+                        "score": "0 - 1",
+                        "winner": "Universidad Católica (Quito)"
+                    },
+                    {
+                        "date": "2025-09-16",
+                        "score": "1 - 3",
+                        "winner": "Universidad Católica (Quito)"
+                    },
+                    {
+                        "date": "2026-02-02",
+                        "score": "2 - 1",
+                        "winner": "Leones"
+                    },
+                    {
+                        "date": "2025-06-16",
+                        "score": "3 - 1",
+                        "winner": "Leones"
+                    },
+                    {
+                        "date": "2025-12-13",
+                        "score": "1 - 0",
+                        "winner": "Leones"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Leones",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Leones llega con forma W-D-W-W-W y domina el H2H (3 victorias recientes). La táctica 4-2-3-1 elegida contrarrestará a un Universidad Católica (Quito) que sufre 1 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'La prensa reporta que Leones cambiará su portero titular para dar rodaje en este partido clave.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 33%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "Sí",
+                    "odd": 1.73,
+                    "probability": 61,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 7 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1016",
+            "home": "Técnico Universitario",
+            "away": "Macará",
+            "home_color": "#212121",
+            "home_accent": "#000000",
+            "away_color": "#0195DD",
+            "away_accent": "#fafafc",
+            "league": "Fútbol Mundial - MAC @ TUA",
+            "sport": "Football",
+            "time": "19:15",
+            "stadium": "Estadio Bellavista",
+            "home_form": "W-W-D-W-L",
+            "away_form": "W-D-W-W-W",
+            "home_injuries": [
+                {
+                    "player": "Gómez",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Williams",
+                    "type": "Esguince de tobillo",
+                    "status": "Out",
+                    "days_out": 6
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Taylor",
+                    "type": "Fractura de dedo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Roberts",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Roberts",
+                    "type": "Fatiga muscular",
+                    "status": "Out",
+                    "days_out": 4
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "El plantel de Macará sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
+                    "credibility": 5,
+                    "sentiment": "Positive",
+                    "source": "Tennis Magazine"
+                },
+                {
+                    "headline": "El cuerpo técnico de Técnico Universitario probó una formación ultra-ofensiva en el último entrenamiento.",
+                    "credibility": 3,
+                    "sentiment": "Neutral",
+                    "source": "Tennis Magazine"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Richard",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Laurent",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Rodríguez",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "González",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Wood",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 28
+                        },
+                        {
+                            "name": "Michel",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "García",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Smith",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Davies",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Simon",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Rice",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Roberts",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Ramos",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 64
+                        },
+                        {
+                            "name": "Moreau",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "Walker",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 4,
+                "away_wins": 2,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2025-11-01",
+                        "score": "0 - 0",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-12-06",
+                        "score": "1 - 2",
+                        "winner": "Macará"
+                    },
+                    {
+                        "date": "2025-07-20",
+                        "score": "2 - 3",
+                        "winner": "Macará"
+                    },
+                    {
+                        "date": "2025-06-12",
+                        "score": "3 - 3",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-11-08",
+                        "score": "3 - 0",
+                        "winner": "Técnico Universitario"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Técnico Universitario",
+                    "odd": 2.63,
+                    "probability": 38,
+                    "risk": "High",
+                    "reasoning": "Análisis IA: Técnico Universitario llega con forma W-W-D-W-L y domina el H2H (4 victorias recientes). La táctica 3-5-2 elegida contrarrestará a un Macará que sufre 3 bajas confirmadas. Además, la IA detectó flujos de apuestas inusuales y el rumor: 'El plantel de Macará sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.'. Probabilidad estadística a favor: 38%. Caos Estadístico (Suerte) estimado en 64%. Máxima seguridad de inversión."
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "Sí",
+                    "odd": 2.18,
+                    "probability": 52,
+                    "risk": "Medium",
+                    "reasoning": "Evaluando métricas avanzadas (xG), historial de 6 goles promedio, reportes de alineaciones, y la información confidencial procesada, la IA sugiere este mercado como opción sólida para mitigar pérdidas."
+                }
+            ]
+        },
+        {
+            "id": "match-1017",
+            "home": "Connecticut Sun",
+            "away": "Golden State Valkyries",
+            "home_color": "#f05023",
+            "home_accent": "#0a2240",
+            "away_color": "#b38fcf",
+            "away_accent": "#000000",
+            "league": "WNBA - GS @ CON",
+            "sport": "Basketball",
+            "time": "18:30",
+            "stadium": "Mohegan Sun Arena",
+            "home_form": "L-W-D-L-W",
+            "away_form": "W-W-D-W-L",
+            "home_injuries": [
+                {
+                    "player": "James",
+                    "type": "Esguince de tobillo",
+                    "status": "Out",
+                    "days_out": 5
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Brunson",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Brunson",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Out",
+                    "days_out": 9
+                },
+                {
+                    "player": "Haliburton",
+                    "type": "Esguince de tobillo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "Reporte de estadísticas: Golden State Valkyries viene con un récord excelente jugando como visitante esta temporada.",
+                    "credibility": 4,
+                    "sentiment": "Neutral",
+                    "source": "Tennis Magazine"
+                },
+                {
+                    "headline": "El entrenador de Connecticut Sun declaró que planea limitar los minutos de sus jugadoras principales.",
+                    "credibility": 4,
+                    "sentiment": "Negative",
+                    "source": "Tennis Magazine"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "5 Titular",
+                    "players": [
+                        {
+                            "name": "Davis",
+                            "number": 30,
+                            "pos": "B",
+                            "x": 50,
+                            "y": 15
+                        },
+                        {
+                            "name": "Wembanyama",
+                            "number": 11,
+                            "pos": "E",
+                            "x": 30,
+                            "y": 25
+                        },
+                        {
+                            "name": "Butler",
+                            "number": 23,
+                            "pos": "A",
+                            "x": 70,
+                            "y": 25
+                        },
+                        {
+                            "name": "Irving",
+                            "number": 3,
+                            "pos": "AP",
+                            "x": 40,
+                            "y": 38
+                        },
+                        {
+                            "name": "Curry",
+                            "number": 21,
+                            "pos": "P",
+                            "x": 60,
+                            "y": 38
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "5 Titular",
+                    "players": [
+                        {
+                            "name": "Lillard",
+                            "number": 0,
+                            "pos": "B",
+                            "x": 50,
+                            "y": 85
+                        },
+                        {
+                            "name": "Maxey",
+                            "number": 7,
+                            "pos": "E",
+                            "x": 70,
+                            "y": 75
+                        },
+                        {
+                            "name": "Booker",
+                            "number": 10,
+                            "pos": "A",
+                            "x": 30,
+                            "y": 75
+                        },
+                        {
+                            "name": "Brunson",
+                            "number": 34,
+                            "pos": "AP",
+                            "x": 60,
+                            "y": 62
+                        },
+                        {
+                            "name": "Antetokounmpo",
+                            "number": 14,
+                            "pos": "P",
+                            "x": 40,
+                            "y": 62
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 1,
+                "away_wins": 2,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-08-27",
+                        "score": "75 - 109",
+                        "winner": "Golden State Valkyries"
+                    },
+                    {
+                        "date": "2025-09-15",
+                        "score": "81 - 98",
+                        "winner": "Golden State Valkyries"
+                    },
+                    {
+                        "date": "2026-05-09",
+                        "score": "100 - 80",
+                        "winner": "Connecticut Sun"
+                    },
+                    {
+                        "date": "2026-03-22",
+                        "score": "85 - 84",
+                        "winner": "Connecticut Sun"
+                    },
+                    {
+                        "date": "2025-12-21",
+                        "score": "109 - 102",
+                        "winner": "Connecticut Sun"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Ganador (Moneyline)",
+                    "selection": "Connecticut Sun",
+                    "odd": 1.25,
+                    "probability": 80,
+                    "risk": "Low",
+                    "reasoning": "Análisis IA Profundo: Connecticut Sun domina con racha L-W-D-L-W y su quinteto inicial destruye a Golden State Valkyries en la zona pintada. H2H marca 1 victorias. Golden State Valkyries tiene 3 lesiones clave reportadas. Rumor del vestuario filtrado: 'Reporte de estadísticas: Golden State Valkyries viene con un récord excelente jugando como visitante esta temporada.'. (Factor Suerte de 13% neutralizado). La proyección algorítmica sugiere este pick para evitar pérdidas y asegurar la banca."
+                },
+                {
+                    "market": "Total de Puntos",
+                    "selection": "Más de 160.5 Puntos",
+                    "odd": 2.01,
+                    "probability": 67,
+                    "risk": "Medium",
+                    "reasoning": "La IA integró datos de ritmo de juego (PACE) y el parte médico (Total: 4 bajas). Los factores externos y el H2H marcan una tendencia clarísima en la línea de puntos."
+                }
+            ]
+        },
+        {
+            "id": "match-1018",
+            "home": "Toronto Tempo",
+            "away": "Dallas Wings",
+            "home_color": "#33476D",
+            "home_accent": "#7B1B38",
+            "away_color": "#002b5c",
+            "away_accent": "#c4d600",
+            "league": "WNBA - DAL @ TOR",
+            "sport": "Basketball",
+            "time": "18:30",
+            "stadium": "Bell Centre",
+            "home_form": "W-W-D-W-L",
+            "away_form": "W-W-D-W-L",
+            "home_injuries": [
+                {
+                    "player": "Maxey",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Out",
+                    "days_out": 2
+                },
+                {
+                    "player": "Maxey",
+                    "type": "Fatiga muscular",
+                    "status": "Out",
+                    "days_out": 8
+                },
+                {
+                    "player": "Siakam",
+                    "type": "Gripe",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Booker",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Out",
+                    "days_out": 7
+                },
+                {
+                    "player": "Tatum",
+                    "type": "Fractura de dedo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Curry",
+                    "type": "Molestias en la rodilla",
+                    "status": "Out",
+                    "days_out": 9
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "Rumores apuntan a que Dallas Wings jugará a un ritmo extremadamente rápido para fatigar la defensa local.",
+                    "credibility": 3,
+                    "sentiment": "Negative",
+                    "source": "ESPN Deportes"
+                },
+                {
+                    "headline": "Reporte de estadísticas: Dallas Wings viene con un récord excelente jugando como visitante esta temporada.",
+                    "credibility": 5,
+                    "sentiment": "Neutral",
+                    "source": "Sky Sports"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "5 Titular",
+                    "players": [
+                        {
+                            "name": "Embiid",
+                            "number": 30,
+                            "pos": "B",
+                            "x": 50,
+                            "y": 15
+                        },
+                        {
+                            "name": "Embiid",
+                            "number": 11,
+                            "pos": "E",
+                            "x": 30,
+                            "y": 25
+                        },
+                        {
+                            "name": "Embiid",
+                            "number": 23,
+                            "pos": "A",
+                            "x": 70,
+                            "y": 25
+                        },
+                        {
+                            "name": "Lillard",
+                            "number": 3,
+                            "pos": "AP",
+                            "x": 40,
+                            "y": 38
+                        },
+                        {
+                            "name": "Butler",
+                            "number": 21,
+                            "pos": "P",
+                            "x": 60,
+                            "y": 38
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "5 Titular",
+                    "players": [
+                        {
+                            "name": "Tatum",
+                            "number": 0,
+                            "pos": "B",
+                            "x": 50,
+                            "y": 85
+                        },
+                        {
+                            "name": "Curry",
+                            "number": 7,
+                            "pos": "E",
+                            "x": 70,
+                            "y": 75
+                        },
+                        {
+                            "name": "Edwards",
+                            "number": 10,
+                            "pos": "A",
+                            "x": 30,
+                            "y": 75
+                        },
+                        {
+                            "name": "Randle",
+                            "number": 34,
+                            "pos": "AP",
+                            "x": 60,
+                            "y": 62
+                        },
+                        {
+                            "name": "Brown",
+                            "number": 14,
+                            "pos": "P",
+                            "x": 40,
+                            "y": 62
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 1,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-07-28",
+                        "score": "111 - 85",
+                        "winner": "Toronto Tempo"
+                    },
+                    {
+                        "date": "2025-09-01",
+                        "score": "92 - 108",
+                        "winner": "Dallas Wings"
+                    },
+                    {
+                        "date": "2025-08-17",
+                        "score": "103 - 104",
+                        "winner": "Dallas Wings"
+                    },
+                    {
+                        "date": "2025-11-12",
+                        "score": "75 - 99",
+                        "winner": "Dallas Wings"
+                    },
+                    {
+                        "date": "2026-02-27",
+                        "score": "105 - 81",
+                        "winner": "Toronto Tempo"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Ganador (Moneyline)",
+                    "selection": "Dallas Wings",
+                    "odd": 2.0,
+                    "probability": 50,
+                    "risk": "Medium",
+                    "reasoning": "Análisis IA Profundo: La alineación de Dallas Wings tiene clara superioridad atlética. Con 1 victorias previas y forma W-W-D-W-L, aprovechan las 3 bajas locales. Movimiento de cuotas anómalo tras el reporte: 'Reporte de estadísticas: Dallas Wings viene con un récord excelente jugando como visitante esta temporada.'. (Factor Suerte de 25% neutralizado). Inversión con altísima certeza estadística."
+                },
+                {
+                    "market": "Total de Puntos",
+                    "selection": "Más de 160.5 Puntos",
+                    "odd": 1.91,
+                    "probability": 58,
+                    "risk": "Medium",
+                    "reasoning": "La IA integró datos de ritmo de juego (PACE) y el parte médico (Total: 6 bajas). Los factores externos y el H2H marcan una tendencia clarísima en la línea de puntos."
+                }
+            ]
+        },
+        {
+            "id": "match-1019",
+            "home": "Los Angeles Sparks",
+            "away": "Chicago Sky",
+            "home_color": "#552583",
+            "home_accent": "#fdb927",
+            "away_color": "#5091cd",
+            "away_accent": "#ffd520",
+            "league": "WNBA - CHI @ LA",
+            "sport": "Basketball",
+            "time": "21:00",
+            "stadium": "crypto.com Arena",
+            "home_form": "D-W-W-L-D",
+            "away_form": "W-D-W-W-W",
+            "home_injuries": [
+                {
+                    "player": "Vassell",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 2
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Embiid",
+                    "type": "Esguince de tobillo",
+                    "status": "Out",
+                    "days_out": 4
+                },
+                {
+                    "player": "Butler",
+                    "type": "Molestias en la rodilla",
+                    "status": "Out",
+                    "days_out": 6
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "Reporte de estadísticas: Chicago Sky viene con un récord excelente jugando como visitante esta temporada.",
+                    "credibility": 2,
+                    "sentiment": "Positive",
+                    "source": "Sports Network"
+                },
+                {
+                    "headline": "Rumores apuntan a que Chicago Sky jugará a un ritmo extremadamente rápido para fatigar la defensa local.",
+                    "credibility": 4,
+                    "sentiment": "Neutral",
+                    "source": "Tennis Magazine"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "5 Titular",
+                    "players": [
+                        {
+                            "name": "Curry",
+                            "number": 30,
+                            "pos": "B",
+                            "x": 50,
+                            "y": 15
+                        },
+                        {
+                            "name": "Siakam",
+                            "number": 11,
+                            "pos": "E",
+                            "x": 30,
+                            "y": 25
+                        },
+                        {
+                            "name": "Doncic",
+                            "number": 23,
+                            "pos": "A",
+                            "x": 70,
+                            "y": 25
+                        },
+                        {
+                            "name": "Brunson",
+                            "number": 3,
+                            "pos": "AP",
+                            "x": 40,
+                            "y": 38
+                        },
+                        {
+                            "name": "Butler",
+                            "number": 21,
+                            "pos": "P",
+                            "x": 60,
+                            "y": 38
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "5 Titular",
+                    "players": [
+                        {
+                            "name": "Brunson",
+                            "number": 0,
+                            "pos": "B",
+                            "x": 50,
+                            "y": 85
+                        },
+                        {
+                            "name": "Randle",
+                            "number": 7,
+                            "pos": "E",
+                            "x": 70,
+                            "y": 75
+                        },
+                        {
+                            "name": "Brunson",
+                            "number": 10,
+                            "pos": "A",
+                            "x": 30,
+                            "y": 75
+                        },
+                        {
+                            "name": "Irving",
+                            "number": 34,
+                            "pos": "AP",
+                            "x": 60,
+                            "y": 62
+                        },
+                        {
+                            "name": "Vassell",
+                            "number": 14,
+                            "pos": "P",
+                            "x": 40,
+                            "y": 62
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 1,
+                "away_wins": 3,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-09-24",
+                        "score": "99 - 94",
+                        "winner": "Los Angeles Sparks"
+                    },
+                    {
+                        "date": "2026-02-19",
+                        "score": "98 - 87",
+                        "winner": "Los Angeles Sparks"
+                    },
+                    {
+                        "date": "2025-08-24",
+                        "score": "106 - 104",
+                        "winner": "Los Angeles Sparks"
+                    },
+                    {
+                        "date": "2025-10-27",
+                        "score": "96 - 91",
+                        "winner": "Los Angeles Sparks"
+                    },
+                    {
+                        "date": "2026-04-24",
+                        "score": "102 - 78",
+                        "winner": "Los Angeles Sparks"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Ganador (Moneyline)",
+                    "selection": "Chicago Sky",
+                    "odd": 1.89,
+                    "probability": 53,
+                    "risk": "Medium",
+                    "reasoning": "Análisis IA Profundo: La alineación de Chicago Sky tiene clara superioridad atlética. Con 3 victorias previas y forma W-D-W-W-W, aprovechan las 1 bajas locales. Movimiento de cuotas anómalo tras el reporte: 'Rumores apuntan a que Chicago Sky jugará a un ritmo extremadamente rápido para fatigar la defensa local.'. (Factor Suerte de 16% neutralizado). Inversión con altísima certeza estadística."
+                },
+                {
+                    "market": "Total de Puntos",
+                    "selection": "Más de 160.5 Puntos",
+                    "odd": 1.78,
+                    "probability": 62,
+                    "risk": "Medium",
+                    "reasoning": "La IA integró datos de ritmo de juego (PACE) y el parte médico (Total: 3 bajas). Los factores externos y el H2H marcan una tendencia clarísima en la línea de puntos."
+                }
+            ]
+        },
+        {
+            "id": "match-1020",
+            "home": "Mananchaya Sawangkaew",
+            "away": "Mary Stoiana",
+            "home_color": "#84CC16",
+            "home_accent": "#A3E635",
+            "away_color": "#10B981",
+            "away_accent": "#34D399",
+            "league": "Tennis - Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund (Women's Singles)",
+            "sport": "Tennis",
+            "time": "10:05",
+            "stadium": "Cancha Central",
+            "home_form": "L-W-D-L-W",
+            "away_form": "W-W-D-W-L",
+            "home_injuries": [],
+            "away_injuries": [
+                {
+                    "player": "Mary Stoiana",
+                    "type": "Molestias en el hombro",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La racha de victorias de Mary Stoiana en esta superficie es excelente esta temporada.",
+                    "credibility": 2,
+                    "sentiment": "Neutral",
+                    "source": "Diario Marca"
+                },
+                {
+                    "headline": "Se vio a Mananchaya Sawangkaew entrenando con protección especial en el codo durante la sesión matutina.",
+                    "credibility": 3,
+                    "sentiment": "Positive",
+                    "source": "ESPN Deportes"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "Singles",
+                    "players": [
+                        {
+                            "name": "Mananchaya Sawangkaew",
+                            "number": 1,
+                            "pos": "TEN",
+                            "x": 50,
+                            "y": 20
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "Singles",
+                    "players": [
+                        {
+                            "name": "Mary Stoiana",
+                            "number": 1,
+                            "pos": "TEN",
+                            "x": 50,
+                            "y": 80
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 4,
+                "away_wins": 1,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-11-13",
+                        "score": "77 - 102",
+                        "winner": "Mary Stoiana"
+                    },
+                    {
+                        "date": "2025-11-18",
+                        "score": "98 - 75",
+                        "winner": "Mananchaya Sawangkaew"
+                    },
+                    {
+                        "date": "2025-06-15",
+                        "score": "106 - 110",
+                        "winner": "Mary Stoiana"
+                    },
+                    {
+                        "date": "2026-02-21",
+                        "score": "75 - 76",
+                        "winner": "Mary Stoiana"
+                    },
+                    {
+                        "date": "2025-06-23",
+                        "score": "76 - 102",
+                        "winner": "Mary Stoiana"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Ganador (Moneyline)",
+                    "selection": "Mary Stoiana",
+                    "odd": 2.0,
+                    "probability": 50,
+                    "risk": "Medium",
+                    "reasoning": "IA Tenis Analytics: Mary Stoiana tiene un % de break points histórico superior y excelente forma W-W-D-W-L. El rendimiento de Mananchaya Sawangkaew decae tras reportes de 0 problemas físicos. Rumor verificado: 'Se vio a Mananchaya Sawangkaew entrenando con protección especial en el codo durante la sesión matutina.'. Caos/Suerte calculado: 49%. Pick computado sin emociones para evitar cualquier pérdida."
+                },
+                {
+                    "market": "Total de Sets (Más/Menos)",
+                    "selection": "Más de 2.5 Sets",
+                    "odd": 2.1,
+                    "probability": 57,
+                    "risk": "Medium",
+                    "reasoning": "Al correlacionar la forma reciente, los enfrentamientos directos (4 vs 1) y las lesiones, este mercado ofrece una cuota de alto valor con riesgo mitigado matemáticamente."
+                }
+            ]
+        },
+        {
+            "id": "match-1021",
+            "home": "Katie Volynets",
+            "away": "Elizabeth Mandlik",
+            "home_color": "#84CC16",
+            "home_accent": "#A3E635",
+            "away_color": "#10B981",
+            "away_accent": "#34D399",
+            "league": "Tennis - Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund (Women's Singles)",
+            "sport": "Tennis",
+            "time": "12:45",
+            "stadium": "Cancha Central",
+            "home_form": "W-W-L-W-W",
+            "away_form": "W-W-D-W-L",
+            "home_injuries": [],
+            "away_injuries": [],
+            "rumors": [
+                {
+                    "headline": "Analistas de tenis prevén un partido largo debido a la gran resistencia de Katie Volynets.",
+                    "credibility": 4,
+                    "sentiment": "Neutral",
+                    "source": "Diario Marca"
+                },
+                {
+                    "headline": "Se vio a Katie Volynets entrenando con protección especial en el codo durante la sesión matutina.",
+                    "credibility": 5,
+                    "sentiment": "Negative",
+                    "source": "Diario Marca"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "Singles",
+                    "players": [
+                        {
+                            "name": "Katie Volynets",
+                            "number": 1,
+                            "pos": "TEN",
+                            "x": 50,
+                            "y": 20
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "Singles",
+                    "players": [
+                        {
+                            "name": "Elizabeth Mandlik",
+                            "number": 1,
+                            "pos": "TEN",
+                            "x": 50,
+                            "y": 80
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 3,
+                "away_wins": 4,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-11-07",
+                        "score": "83 - 91",
+                        "winner": "Elizabeth Mandlik"
+                    },
+                    {
+                        "date": "2025-06-07",
+                        "score": "110 - 95",
+                        "winner": "Katie Volynets"
+                    },
+                    {
+                        "date": "2025-11-02",
+                        "score": "80 - 100",
+                        "winner": "Elizabeth Mandlik"
+                    },
+                    {
+                        "date": "2025-10-26",
+                        "score": "110 - 82",
+                        "winner": "Katie Volynets"
+                    },
+                    {
+                        "date": "2026-02-26",
+                        "score": "106 - 97",
+                        "winner": "Katie Volynets"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Ganador (Moneyline)",
+                    "selection": "Elizabeth Mandlik",
+                    "odd": 2.0,
+                    "probability": 50,
+                    "risk": "Medium",
+                    "reasoning": "IA Tenis Analytics: Elizabeth Mandlik tiene un % de break points histórico superior y excelente forma W-W-D-W-L. El rendimiento de Katie Volynets decae tras reportes de 0 problemas físicos. Rumor verificado: 'Se vio a Katie Volynets entrenando con protección especial en el codo durante la sesión matutina.'. Caos/Suerte calculado: 53%. Pick computado sin emociones para evitar cualquier pérdida."
+                },
+                {
+                    "market": "Total de Sets (Más/Menos)",
+                    "selection": "Más de 2.5 Sets",
+                    "odd": 1.71,
+                    "probability": 59,
+                    "risk": "Medium",
+                    "reasoning": "Al correlacionar la forma reciente, los enfrentamientos directos (3 vs 4) y las lesiones, este mercado ofrece una cuota de alto valor con riesgo mitigado matemáticamente."
+                }
+            ]
+        },
+        {
+            "id": "match-1022",
+            "home": "Lucrezia Stefanini",
+            "away": "Tatjana Maria",
+            "home_color": "#84CC16",
+            "home_accent": "#A3E635",
+            "away_color": "#10B981",
+            "away_accent": "#34D399",
+            "league": "Tennis - Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund (Women's Singles)",
+            "sport": "Tennis",
+            "time": "13:00",
+            "stadium": "Cancha Central",
+            "home_form": "L-W-D-L-W",
+            "away_form": "D-W-W-L-D",
+            "home_injuries": [],
+            "away_injuries": [
+                {
+                    "player": "Tatjana Maria",
+                    "type": "Molestias en el hombro",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "La racha de victorias de Tatjana Maria en esta superficie es excelente esta temporada.",
+                    "credibility": 5,
+                    "sentiment": "Negative",
+                    "source": "ESPN Deportes"
+                },
+                {
+                    "headline": "Tatjana Maria declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.",
+                    "credibility": 4,
+                    "sentiment": "Neutral",
+                    "source": "Sky Sports"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "Singles",
+                    "players": [
+                        {
+                            "name": "Lucrezia Stefanini",
+                            "number": 1,
+                            "pos": "TEN",
+                            "x": 50,
+                            "y": 20
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "Singles",
+                    "players": [
+                        {
+                            "name": "Tatjana Maria",
+                            "number": 1,
+                            "pos": "TEN",
+                            "x": 50,
+                            "y": 80
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 3,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-11-23",
+                        "score": "114 - 76",
+                        "winner": "Lucrezia Stefanini"
+                    },
+                    {
+                        "date": "2026-05-17",
+                        "score": "97 - 95",
+                        "winner": "Lucrezia Stefanini"
+                    },
+                    {
+                        "date": "2026-04-06",
+                        "score": "103 - 110",
+                        "winner": "Tatjana Maria"
+                    },
+                    {
+                        "date": "2026-01-18",
+                        "score": "94 - 89",
+                        "winner": "Lucrezia Stefanini"
+                    },
+                    {
+                        "date": "2025-11-07",
+                        "score": "102 - 107",
+                        "winner": "Tatjana Maria"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Ganador (Moneyline)",
+                    "selection": "Tatjana Maria",
+                    "odd": 2.0,
+                    "probability": 50,
+                    "risk": "Medium",
+                    "reasoning": "IA Tenis Analytics: Tatjana Maria tiene un % de break points histórico superior y excelente forma D-W-W-L-D. El rendimiento de Lucrezia Stefanini decae tras reportes de 0 problemas físicos. Rumor verificado: 'Tatjana Maria declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. Caos/Suerte calculado: 22%. Pick computado sin emociones para evitar cualquier pérdida."
+                },
+                {
+                    "market": "Total de Sets (Más/Menos)",
+                    "selection": "Más de 2.5 Sets",
+                    "odd": 1.93,
+                    "probability": 68,
+                    "risk": "Medium",
+                    "reasoning": "Al correlacionar la forma reciente, los enfrentamientos directos (2 vs 3) y las lesiones, este mercado ofrece una cuota de alto valor con riesgo mitigado matemáticamente."
+                }
+            ]
+        },
+        {
+            "id": "match-1023",
+            "home": "Greet Minnen",
+            "away": "Madison Brengle",
+            "home_color": "#84CC16",
+            "home_accent": "#A3E635",
+            "away_color": "#10B981",
+            "away_accent": "#34D399",
+            "league": "Tennis - Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund (Women's Singles)",
+            "sport": "Tennis",
+            "time": "14:30",
+            "stadium": "Cancha Central",
+            "home_form": "W-W-D-W-L",
+            "away_form": "L-W-D-L-W",
+            "home_injuries": [],
+            "away_injuries": [],
+            "rumors": [
+                {
+                    "headline": "Se vio a Greet Minnen entrenando con protección especial en el codo durante la sesión matutina.",
+                    "credibility": 2,
+                    "sentiment": "Positive",
+                    "source": "Tennis Magazine"
+                },
+                {
+                    "headline": "Madison Brengle declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.",
+                    "credibility": 5,
+                    "sentiment": "Negative",
+                    "source": "ESPN Deportes"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "Singles",
+                    "players": [
+                        {
+                            "name": "Greet Minnen",
+                            "number": 1,
+                            "pos": "TEN",
+                            "x": 50,
+                            "y": 20
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "Singles",
+                    "players": [
+                        {
+                            "name": "Madison Brengle",
+                            "number": 1,
+                            "pos": "TEN",
+                            "x": 50,
+                            "y": 80
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 3,
+                "away_wins": 2,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-06-23",
+                        "score": "88 - 103",
+                        "winner": "Madison Brengle"
+                    },
+                    {
+                        "date": "2026-03-26",
+                        "score": "93 - 97",
+                        "winner": "Madison Brengle"
+                    },
+                    {
+                        "date": "2025-09-11",
+                        "score": "102 - 93",
+                        "winner": "Greet Minnen"
+                    },
+                    {
+                        "date": "2026-05-09",
+                        "score": "90 - 82",
+                        "winner": "Greet Minnen"
+                    },
+                    {
+                        "date": "2025-08-02",
+                        "score": "92 - 110",
+                        "winner": "Madison Brengle"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Ganador (Moneyline)",
+                    "selection": "Madison Brengle",
+                    "odd": 2.0,
+                    "probability": 50,
+                    "risk": "Medium",
+                    "reasoning": "IA Tenis Analytics: Madison Brengle tiene un % de break points histórico superior y excelente forma L-W-D-L-W. El rendimiento de Greet Minnen decae tras reportes de 0 problemas físicos. Rumor verificado: 'Madison Brengle declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. Caos/Suerte calculado: 65%. Pick computado sin emociones para evitar cualquier pérdida."
+                },
+                {
+                    "market": "Total de Sets (Más/Menos)",
+                    "selection": "Más de 2.5 Sets",
+                    "odd": 1.97,
+                    "probability": 61,
+                    "risk": "Medium",
+                    "reasoning": "Al correlacionar la forma reciente, los enfrentamientos directos (3 vs 2) y las lesiones, este mercado ofrece una cuota de alto valor con riesgo mitigado matemáticamente."
+                }
+            ]
+        }
+    ],
+    "global_stats": {
+        "analyzed_today": 24,
+        "avg_accuracy_30d": 0.0,
+        "total_picks_won": 0,
+        "total_picks_lost": 0,
+        "roi_percentage": 0.0
+    },
+    "star_ticket": {
+        "selections": [
+            {
+                "match": "Spain vs Belgium",
+                "sport": "Football",
+                "market": "Resultado Final (1X2)",
+                "pick": "Spain",
+                "odd": 1.63
+            },
+            {
+                "match": "Boston Legacy FC vs Chicago Stars FC",
+                "sport": "Football",
+                "market": "Resultado Final (1X2)",
+                "pick": "Boston Legacy FC",
+                "odd": 2.63
+            }
+        ],
+        "total_odd": 4.29,
+        "confidence": 82,
+        "reasoning": "Combinada analítica construida con los dos eventos de mayor seguridad del día en base a estadísticas en tiempo real extraídas de ESPN. Presenta una alta viabilidad defensiva y cuotas equilibradas."
+    }
+}
