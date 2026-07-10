@@ -1715,6 +1715,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <option value="pending" ${bet.status === 'pending' ? 'selected' : ''}>Pendiente</option>
                     <option value="won" ${bet.status === 'won' ? 'selected' : ''}>Ganada</option>
                     <option value="lost" ${bet.status === 'lost' ? 'selected' : ''}>Perdida</option>
+                    <option value="voided" ${bet.status === 'voided' ? 'selected' : ''}>Anulada</option>
                 </select>
             `;
 
@@ -2317,6 +2318,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <option value="pending" ${item.status === 'pending' ? 'selected' : ''}>Pendiente</option>
                             <option value="won" ${item.status === 'won' ? 'selected' : ''}>Ganado</option>
                             <option value="lost" ${item.status === 'lost' ? 'selected' : ''}>Perdido</option>
+                            <option value="voided" ${item.status === 'voided' ? 'selected' : ''}>Anulado</option>
                         </select>
                     </td>
                 </tr>
@@ -2356,6 +2358,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         renderEscaleraTab();
                         alert(`📈 ¡Día ${dayEdited} Ganado! Avanzas al Día ${escaleraCurrentDay}.`);
                     }
+                } else if (newStatus === "voided" && runItem.status === "pending") {
+                    runItem.status = "voided";
+                    const returnVal = runItem.stake;
+                    runItem.return = returnVal;
+                    localStorage.setItem("escalera_current_run", JSON.stringify(currentRun));
+                    
+                    escaleraCurrentDay = dayEdited;
+                    escaleraCurrentStake = returnVal;
+                    localStorage.setItem("escalera_day", escaleraCurrentDay);
+                    localStorage.setItem("escalera_current_stake", escaleraCurrentStake);
+                    renderEscaleraTab();
+                    alert(`🔄 Día ${dayEdited} Anulado. Repites el mismo día con tu inversión intacta ($${returnVal}).`);
                 }
             });
         });
