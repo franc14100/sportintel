@@ -2543,4 +2543,150 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     init();
+    // ==========================================================================
+    // AI Assistant Chat Logic
+    // ==========================================================================
+    const aiAssistantTab = document.getElementById("aiassistant");
+    const geminiModal = document.getElementById("gemini-api-modal");
+    const btnConfigureAi = document.getElementById("btn-configure-ai");
+    const btnCloseGeminiModal = document.getElementById("btn-close-gemini-modal");
+    const geminiModalOverlay = document.getElementById("gemini-api-modal-overlay");
+    const btnSaveGeminiKey = document.getElementById("btn-save-gemini-key");
+    const inputGeminiKey = document.getElementById("input-gemini-api-key");
+    const btnAiSend = document.getElementById("btn-ai-send");
+    const aiChatInput = document.getElementById("ai-chat-input");
+    const aiChatHistory = document.getElementById("ai-chat-history");
+
+    function openGeminiModal() {
+        geminiModal.classList.remove("hidden");
+        const savedKey = localStorage.getItem("gemini_api_key");
+        if (savedKey) inputGeminiKey.value = savedKey;
+    }
+    
+    function closeGeminiModal() {
+        geminiModal.classList.add("hidden");
+    }
+
+    if (btnConfigureAi) btnConfigureAi.onclick = openGeminiModal;
+    if (btnCloseGeminiModal) btnCloseGeminiModal.onclick = closeGeminiModal;
+    if (geminiModalOverlay) geminiModalOverlay.onclick = closeGeminiModal;
+
+    if (btnSaveGeminiKey) {
+        btnSaveGeminiKey.onclick = () => {
+            const key = inputGeminiKey.value.trim();
+            if (key) {
+                localStorage.setItem("gemini_api_key", key);
+                closeGeminiModal();
+                alert("Clave guardada con éxito. Ya puedes chatear.");
+            } else {
+                alert("Por favor ingresa una clave válida.");
+            }
+        };
+    }
+
+    function addChatMessage(role, text) {
+        const msgDiv = document.createElement("div");
+        msgDiv.className = `chat-message ${role === "user" ? "user-message" : "ai-message"}`;
+        msgDiv.style.alignSelf = role === "user" ? "flex-end" : "flex-start";
+        msgDiv.style.maxWidth = "85%";
+        
+        const innerDiv = document.createElement("div");
+        if (role === "user") {
+            innerDiv.style.background = "var(--accent-cyan)";
+            innerDiv.style.color = "#fff";
+            innerDiv.style.borderRadius = "12px";
+            innerDiv.style.borderTopRightRadius = "2px";
+        } else {
+            innerDiv.style.background = "rgba(6, 182, 212, 0.1)";
+            innerDiv.style.border = "1px solid rgba(6, 182, 212, 0.2)";
+            innerDiv.style.color = "var(--text-primary)";
+            innerDiv.style.borderRadius = "12px";
+            innerDiv.style.borderTopLeftRadius = "2px";
+        }
+        innerDiv.style.padding = "12px 16px";
+        innerDiv.style.fontSize = "0.9rem";
+        innerDiv.style.lineHeight = "1.5";
+        
+        let htmlText = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+        htmlText = htmlText.replace(/\n/g, '<br>');
+        innerDiv.innerHTML = htmlText;
+        
+        msgDiv.appendChild(innerDiv);
+        if (aiChatHistory) {
+            aiChatHistory.appendChild(msgDiv);
+            aiChatHistory.scrollTop = aiChatHistory.scrollHeight;
+        }
+    }
+
+    if (btnAiSend && aiChatInput) {
+        const sendMsg = async () => {
+            const text = aiChatInput.value.trim();
+            if (!text) return;
+            
+            const apiKey = localStorage.getItem("gemini_api_key");
+            if (!apiKey) {
+                openGeminiModal();
+                return;
+            }
+
+            addChatMessage("user", text);
+            aiChatInput.value = "";
+            btnAiSend.disabled = true;
+            
+            const typingId = "typing-" + Date.now();
+            const typingDiv = document.createElement("div");
+            typingDiv.id = typingId;
+            typingDiv.style.alignSelf = "flex-start";
+            typingDiv.style.color = "var(--text-muted)";
+            typingDiv.style.fontSize = "0.8rem";
+            typingDiv.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analizando...';
+            if (aiChatHistory) {
+                aiChatHistory.appendChild(typingDiv);
+                aiChatHistory.scrollTop = aiChatHistory.scrollHeight;
+            }
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: `Eres SportIntel Bot, un analista experto en apuestas deportivas. Responde de manera concisa y directa dando la apuesta más exacta posible, cuota estimada y probabilidad para el evento que menciona. Pregunta del usuario: ${text}`
+                            }]
+                        }],
+                        generationConfig: { maxOutputTokens: 500, temperature: 0.7 }
+                    })
+                });
+
+                const tDiv = document.getElementById(typingId);
+                if (tDiv) tDiv.remove();
+                btnAiSend.disabled = false;
+
+                if (!response.ok) {
+                    addChatMessage("ai", "Error de conexión. Verifica que tu Clave API sea correcta.");
+                    return;
+                }
+
+                const data = await response.json();
+                const aiText = data.candidates[0].content.parts[0].text;
+                addChatMessage("ai", aiText);
+                
+            } catch (error) {
+                const tDiv = document.getElementById(typingId);
+                if (tDiv) tDiv.remove();
+                btnAiSend.disabled = false;
+                addChatMessage("ai", "Error de red.");
+            }
+        };
+
+        btnAiSend.onclick = sendMsg;
+        aiChatInput.onkeypress = (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendMsg();
+            }
+        };
+    }
+
 });

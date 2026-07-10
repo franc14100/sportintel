@@ -54,6 +54,10 @@
                     <i class="fa-solid fa-stairs"></i>
                     <span>Reto Escalera</span>
                 </button>
+                <button class="nav-item" data-tab="aiassistant" id="nav-aiassistant">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Asistente IA</span>
+                </button>
             </nav>
             <div class="sidebar-footer">
                 <div class="accuracy-badge">
@@ -747,6 +751,35 @@
                     </div>
                 </div>
             </section>
+            <!-- AI Assistant Tab -->
+            <section id="aiassistant" class="tab-content" style="display: flex; flex-direction: column; height: calc(100vh - 120px); max-height: 800px;">
+                <div class="card" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+                    <div class="card-header" style="border-bottom: 1px solid var(--border-color); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(8, 11, 17, 0.8);">
+                        <div>
+                            <h3 style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-robot" style="color: var(--accent-cyan);"></i> SportIntel Bot</h3>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Asistente en Vivo impulsado por Google Gemini</p>
+                        </div>
+                        <button class="btn btn-secondary" id="btn-configure-ai" style="padding: 6px 12px; font-size: 0.75rem;">
+                            <i class="fa-solid fa-gear"></i> API Key
+                        </button>
+                    </div>
+                    
+                    <div id="ai-chat-history" style="flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;">
+                        <div class="chat-message ai-message" style="align-self: flex-start; max-width: 85%;">
+                            <div style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: 12px; border-top-left-radius: 2px; padding: 12px 16px; color: var(--text-primary); font-size: 0.9rem; line-height: 1.5;">
+                                ¡Hola! Soy tu asistente en vivo. Puedo analizar cualquier partido que me pidas o responder dudas sobre estrategias de bankroll. ¿De qué evento quieres la apuesta más exacta?
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px 20px; border-top: 1px solid var(--border-color); background: rgba(8, 11, 17, 0.95); display: flex; gap: 10px;">
+                        <textarea id="ai-chat-input" class="form-input" placeholder="Ej: Analiza el partido Real Madrid vs Barcelona y dame la mejor cuota..." style="flex: 1; resize: none; height: 50px; border-radius: 25px; padding: 14px 20px; font-size: 0.9rem;"></textarea>
+                        <button id="btn-ai-send" class="btn btn-primary" style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; justify-content: center; align-items: center; background: var(--accent-cyan); border: none; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -814,6 +847,32 @@
                 </div>
                 <button class="btn btn-primary btn-full-width" id="btn-save-api-key">
                     <i class="fa-solid fa-floppy-disk"></i> Guardar y Sincronizar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gemini API Key Modal -->
+    <div class="modal hidden" id="gemini-api-modal">
+        <div class="modal-overlay" id="gemini-api-modal-overlay"></div>
+        <div class="modal-card">
+            <button class="modal-close" id="btn-close-gemini-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-robot modal-player-avatar" style="color: var(--accent-cyan); font-size: 2.2rem; display: flex; align-items: center; justify-content: center;"></i>
+                <div>
+                    <h3>Configurar Asistente IA</h3>
+                    <p>Comunicación directa con Google Gemini</p>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-top: 10px;">
+                <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+                    Para usar el Chat en Vivo de forma gratuita y sin servidores, necesitas usar tu propia API Key de Gemini. Se guardará de forma segura en tu navegador.
+                </p>
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <input type="password" id="input-gemini-api-key" class="form-input" placeholder="Ingresa tu API Key (Ej: AIzaSy...)" style="font-family: monospace; font-size: 0.85rem; padding: 10px 14px;">
+                </div>
+                <button class="btn btn-primary btn-full-width" id="btn-save-gemini-key">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar Clave y Chatear
                 </button>
             </div>
         </div>
