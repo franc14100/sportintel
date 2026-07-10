@@ -1974,6 +1974,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (inputEscaleraCurrentStake) inputEscaleraCurrentStake.value = escaleraCurrentStake.toFixed(2);
 
         safestPicks = getSafestPicksOfTheDay();
+        safestPicks.push({
+            match: { home: "Evento", away: "Manual", time: "--:--", stadium: "Personalizado" },
+            pick: { market: "Manual", selection: "Tu Pronóstico", odd: 1.50, probability: "-", reasoning: "Has elegido registrar tu propia apuesta. Llena los campos de abajo." },
+            isManual: true
+        });
+
         // Reset selection if out of bounds
         if (selectedEscaleraPickIndex >= safestPicks.length) selectedEscaleraPickIndex = 0;
 
@@ -2080,16 +2086,36 @@ document.addEventListener("DOMContentLoaded", () => {
         const selectedSP = safestPicks[selectedEscaleraPickIndex];
         const match = selectedSP.match;
         const pick = selectedSP.pick;
-
-        escaleraPickCardContent.innerHTML = `
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">Selecciona una de las 3 opciones propuestas por la IA para tu apuesta del día:</p>
-            ${optionsHtml}
-            
-            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; margin-top: 10px;">
+        
+        let matchDetailsHtml = "";
+        if (selectedSP.isManual) {
+            matchDetailsHtml = `
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
+                    <div>
+                        <label class="form-label" style="font-size: 0.75rem; color: var(--accent-cyan);">Nombre del Evento (Manual)</label>
+                        <input type="text" id="input-escalera-manual-match" class="form-input" placeholder="Ej: España vs Belgica" style="font-size: 0.85rem; padding: 8px 12px; border-color: rgba(6, 182, 212, 0.3);">
+                    </div>
+                    <div>
+                        <label class="form-label" style="font-size: 0.75rem; color: var(--accent-cyan);">Tu Selección / Mercado</label>
+                        <input type="text" id="input-escalera-manual-selection" class="form-input" placeholder="Ej: España gana" style="font-size: 0.85rem; padding: 8px 12px; border-color: rgba(6, 182, 212, 0.3);">
+                    </div>
+                </div>
+            `;
+        } else {
+            matchDetailsHtml = `
                 <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
                     <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary);"><i class="fa-solid fa-crosshairs" style="color:var(--accent-cyan)"></i> Selección Activa: Opción ${selectedEscaleraPickIndex + 1}</h3>
                     <div style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-solid fa-location-dot"></i> ${match.stadium} | ${match.time} HS</div>
                 </div>
+            `;
+        }
+
+        escaleraPickCardContent.innerHTML = `
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">Selecciona una de las opciones propuestas por la IA o usa la Opción Manual:</p>
+            ${optionsHtml}
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; margin-top: 10px;">
+                ${matchDetailsHtml}
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; text-align: center;">
                     <div style="background: rgba(8, 11, 17, 0.5); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
@@ -2146,12 +2172,24 @@ document.addEventListener("DOMContentLoaded", () => {
             const finalOdd = (customOddInput && !isNaN(parseFloat(customOddInput.value))) ? parseFloat(customOddInput.value) : selectedPick.pick.odd;
             const returnVal = parseFloat((escaleraCurrentStake * finalOdd).toFixed(2));
             
+            let finalMatch = `${selectedPick.match.home} vs ${selectedPick.match.away}`;
+            let finalSelection = selectedPick.pick.selection;
+            
+            if (selectedPick.isManual) {
+                const manualMatchInput = document.getElementById("input-escalera-manual-match");
+                const manualSelInput = document.getElementById("input-escalera-manual-selection");
+                if (manualMatchInput && manualMatchInput.value.trim() !== "") finalMatch = manualMatchInput.value.trim();
+                else { alert("Ingresa el nombre del evento manual."); return; }
+                if (manualSelInput && manualSelInput.value.trim() !== "") finalSelection = manualSelInput.value.trim();
+                else { alert("Ingresa tu selección manual."); return; }
+            }
+
             // Registrar el día exacto en el historial actual
             escaleraCurrentRun.push({
                 day: escaleraCurrentDay,
                 date: new Date().toISOString().split("T")[0],
-                match: `${selectedPick.match.home} vs ${selectedPick.match.away}`,
-                selection: selectedPick.pick.selection,
+                match: finalMatch,
+                selection: finalSelection,
                 odd: finalOdd,
                 stake: escaleraCurrentStake,
                 return: returnVal,
@@ -2186,11 +2224,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const finalOdd = (customOddInput && !isNaN(parseFloat(customOddInput.value))) ? parseFloat(customOddInput.value) : selectedPick.pick.odd;
             const returnVal = parseFloat((escaleraCurrentStake * finalOdd).toFixed(2));
             
+            let finalMatch = `${selectedPick.match.home} vs ${selectedPick.match.away}`;
+            let finalSelection = selectedPick.pick.selection;
+            
+            if (selectedPick.isManual) {
+                const manualMatchInput = document.getElementById("input-escalera-manual-match");
+                const manualSelInput = document.getElementById("input-escalera-manual-selection");
+                if (manualMatchInput && manualMatchInput.value.trim() !== "") finalMatch = manualMatchInput.value.trim();
+                else { alert("Ingresa el nombre del evento manual."); return; }
+                if (manualSelInput && manualSelInput.value.trim() !== "") finalSelection = manualSelInput.value.trim();
+                else { alert("Ingresa tu selección manual."); return; }
+            }
+
             escaleraCurrentRun.push({
                 day: escaleraCurrentDay,
                 date: new Date().toISOString().split("T")[0],
-                match: `${selectedPick.match.home} vs ${selectedPick.match.away}`,
-                selection: selectedPick.pick.selection,
+                match: finalMatch,
+                selection: finalSelection,
                 odd: finalOdd,
                 stake: escaleraCurrentStake,
                 return: returnVal,
