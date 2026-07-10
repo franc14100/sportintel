@@ -59,7 +59,7 @@ def fetch_live_matches():
                                     continue
                                     
                                 status_state = event.get("status", {}).get("type", {}).get("state", "")
-                                if status_state != "pre":
+                                if status_state not in ["pre", "in"]:
                                     continue
                                     
                                 dt_str = comp.get("date", "")
@@ -143,7 +143,7 @@ def fetch_live_matches():
                             continue
                             
                         status_state = event.get("status", {}).get("type", {}).get("state", "")
-                        if status_state != "pre":
+                        if status_state not in ["pre", "in"]:
                             continue
                             
                         dt_str = event.get("date", "")

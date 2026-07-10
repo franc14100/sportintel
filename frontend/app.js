@@ -1625,7 +1625,16 @@ document.addEventListener("DOMContentLoaded", () => {
         // Listen for new bet additions
         if (btnSubmitBet) {
             btnSubmitBet.onclick = () => {
-                const matchVal = betMatchSelect.value;
+                let matchVal = betMatchSelect.value;
+                if (matchVal === "Otro Evento (Manual)") {
+                    const manualInput = document.getElementById("bet-manual-match-input");
+                    matchVal = manualInput ? manualInput.value.trim() : "";
+                    if (!matchVal) {
+                        alert("Por favor, ingresa el nombre del evento manual.");
+                        return;
+                    }
+                }
+                
                 const marketVal = betMarketInput.value.trim();
                 const oddVal = parseFloat(betOddInput.value);
                 const stakeVal = parseFloat(betStakeInput.value);
@@ -1654,6 +1663,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 betOddInput.value = "";
                 betStakeInput.value = "";
                 betStatusSelect.value = "pending";
+                const manualInput = document.getElementById("bet-manual-match-input");
+                if (manualInput) manualInput.value = "";
 
                 updateBankrollMetrics();
                 populateBetsTable();

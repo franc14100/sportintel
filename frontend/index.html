@@ -553,9 +553,13 @@
                             <form id="form-add-bet" onsubmit="return false;">
                                 <div class="form-group" style="margin-bottom: 15px;">
                                     <label class="form-label" for="bet-match-select">Selecciona el Partido</label>
-                                    <select id="bet-match-select" class="form-input" style="font-size: 0.85rem; padding: 10px 14px;">
+                                    <select id="bet-match-select" class="form-input" style="font-size: 0.85rem; padding: 10px 14px;" onchange="document.getElementById('manual-match-group').style.display = this.value === 'Otro Evento (Manual)' ? 'block' : 'none'">
                                         <!-- Dinámico -->
                                     </select>
+                                </div>
+                                <div class="form-group" id="manual-match-group" style="margin-bottom: 15px; display: none;">
+                                    <label class="form-label" for="bet-manual-match-input">Nombre del Evento (Manual)</label>
+                                    <input type="text" id="bet-manual-match-input" class="form-input" placeholder="Ej: España vs Belgica" style="font-size: 0.85rem; padding: 10px 14px;">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 15px;">
                                     <label class="form-label" for="bet-market-input">Mercado / Selección</label>
