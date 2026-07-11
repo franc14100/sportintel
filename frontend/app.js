@@ -2646,9 +2646,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'x-goog-api-key': apiKey
+                    },
                     body: JSON.stringify({
                         contents: [{
                             parts: [{
@@ -2664,7 +2667,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 btnAiSend.disabled = false;
 
                 if (!response.ok) {
-                    addChatMessage("ai", "Error de conexión. Verifica que tu Clave API sea correcta.");
+                    let exactError = "Error desconocido.";
+                    try {
+                        const errData = await response.json();
+                        if (errData.error && errData.error.message) {
+                            exactError = errData.error.message;
+                        }
+                    } catch(e) {}
+                    addChatMessage("ai", `Error de conexión. Google dice: <b>${exactError}</b><br><br>Verifica tu clave o espera unos minutos si acabas de crearla.`);
                     return;
                 }
 
