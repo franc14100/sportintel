@@ -2608,7 +2608,9 @@ document.addEventListener("DOMContentLoaded", () => {
         innerDiv.style.fontSize = "0.9rem";
         innerDiv.style.lineHeight = "1.5";
         
-        let htmlText = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+        // Escapar HTML para evitar que etiquetas accidentales rompan el chat o corten el texto
+        let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        let htmlText = safeText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
         htmlText = htmlText.replace(/\n/g, '<br>');
         innerDiv.innerHTML = htmlText;
         
@@ -2667,7 +2669,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 4. Si te pide una combinada (parlay), selecciona 2 o 3 partidos de la lista con buena probabilidad y calcula la cuota total.
                 `;
 
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`, {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',
