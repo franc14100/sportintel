@@ -2646,6 +2646,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             try {
+                // Simplificar los datos para no sobrecargar el modelo
+                const simplifiedMatches = matchData.matches ? matchData.matches.map(m => ({
+                    local: m.homeTeam,
+                    visitante: m.awayTeam,
+                    cuotas: m.odds
+                })) : [];
+                
+                const promptContext = `Eres SportIntel Bot, el analista de apuestas de IA oficial y experto de esta plataforma.
+                Tu objetivo es dar recomendaciones claras, directas y con alto valor (ROI).
+                Se cortés y profesional. Usa el siguiente listado de partidos actualizados al día de hoy para dar tu respuesta:
+                Partidos del dia: ${JSON.stringify(simplifiedMatches)}
+                
+                Consulta del usuario: ${userInput}
+                
+                Reglas:
+                1. Si el usuario saluda, preséntate brevemente y dile qué puedes hacer (ej. analizar un partido, dar una combinada, explicar bankroll).
+                2. Si el usuario pregunta por un partido específico, búscalo en "Partidos del dia". Si está, dale el pronóstico 1X2 o de goles con la cuota.
+                3. Si el usuario pregunta por un partido que NO está en la lista de hoy, dile amablemente que solo tienes datos de los partidos de hoy mostrados en la lista.
+                4. Si te pide una combinada (parlay), selecciona 2 o 3 partidos de la lista con buena probabilidad y calcula la cuota total.
+                `;
+
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent`, {
                     method: 'POST',
                     headers: { 
