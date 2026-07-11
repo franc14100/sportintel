@@ -1640,8 +1640,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const stakeVal = parseFloat(betStakeInput.value);
                 const statusVal = betStatusSelect.value;
 
-                if (!marketVal || isNaN(oddVal) || isNaN(stakeVal) || oddVal <= 1 || stakeVal <= 0) {
-                    alert("Por favor, completa todos los campos con valores válidos (Cuota > 1.01 y Stake > 0).");
+                if (!matchVal || !marketVal || isNaN(oddVal) || isNaN(stakeVal) || oddVal <= 1 || stakeVal <= 0) {
+                    alert("Por favor, selecciona un partido o ingresa un nombre manual, y completa todos los campos numéricos (Cuota > 1.01 y Stake > 0).");
                     return;
                 }
 
@@ -1690,7 +1690,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Populate dropdown with loaded games
     function populateMatchSelect() {
         if (!betMatchSelect || !appData || !appData.matches) return;
-        let selectHtml = `<option value="Otro Evento (Manual)">Otro Evento (Manual)</option>`;
+        let selectHtml = `<option value="" selected disabled>Selecciona un partido...</option>`;
+        selectHtml += `<option value="Otro Evento (Manual)">Otro Evento (Manual)</option>`;
         appData.matches.forEach(m => {
             selectHtml += `<option value="${m.home} vs ${m.away}">${m.home} vs ${m.away} (${m.league})</option>`;
         });
