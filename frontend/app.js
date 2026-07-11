@@ -2667,7 +2667,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 4. Si te pide una combinada (parlay), selecciona 2 o 3 partidos de la lista con buena probabilidad y calcula la cuota total.
                 `;
 
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent`, {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',
@@ -2707,7 +2707,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const data = await response.json();
                 const aiText = data.candidates[0].content.parts.map(p => p.text).join("");
-                addChatMessage("ai", aiText);
+                const finishReason = data.candidates[0].finishReason;
+                const diagnosticText = finishReason && finishReason !== 'STOP' ? `\n\n*(El mensaje se cortó por: ${finishReason})*` : '';
+                addChatMessage("ai", aiText + diagnosticText);
                 
             } catch (error) {
                 const tDiv = document.getElementById(typingId);
