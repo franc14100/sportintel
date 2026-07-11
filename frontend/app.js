@@ -2647,11 +2647,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             try {
-                // Simplificar los datos para no sobrecargar el modelo
-                const simplifiedMatches = matchData.matches ? matchData.matches.map(m => ({
-                    local: m.homeTeam,
-                    visitante: m.awayTeam,
-                    cuotas: m.odds
+                const simplifiedMatches = (appData && appData.matches) ? appData.matches.map(m => ({
+                    local: m.home,
+                    visitante: m.away,
+                    cuotas: m.picks.map(p => `${p.market}: ${p.odd}`)
                 })) : [];
                 
                 const promptContext = `Eres SportIntel Bot, el analista de apuestas de IA oficial y experto de esta plataforma.
