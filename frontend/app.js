@@ -2679,7 +2679,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 text: promptContext
                             }]
                         }],
-                        generationConfig: { maxOutputTokens: 500, temperature: 0.7 }
+                        generationConfig: { maxOutputTokens: 1000, temperature: 0.7 }
                     })
                 });
 
@@ -2700,7 +2700,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 const data = await response.json();
-                const aiText = data.candidates[0].content.parts[0].text;
+                const aiText = data.candidates[0].content.parts.map(p => p.text).join("");
                 addChatMessage("ai", aiText);
                 
             } catch (error) {
