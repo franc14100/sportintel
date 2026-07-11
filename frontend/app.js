@@ -2679,7 +2679,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 text: promptContext
                             }]
                         }],
-                        generationConfig: { maxOutputTokens: 1000, temperature: 0.7 },
+                        generationConfig: { temperature: 0.7 },
                         safetySettings: [
                             { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
                             { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
