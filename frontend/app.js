@@ -2676,7 +2676,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: JSON.stringify({
                         contents: [{
                             parts: [{
-                                text: `Eres SportIntel Bot, un analista experto en apuestas deportivas. Responde de manera concisa y directa dando la apuesta más exacta posible, cuota estimada y probabilidad para el evento que menciona. Pregunta del usuario: ${text}`
+                                text: promptContext
                             }]
                         }],
                         generationConfig: { maxOutputTokens: 500, temperature: 0.7 }
