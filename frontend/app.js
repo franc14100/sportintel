@@ -2659,7 +2659,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Se cortés y profesional. Usa el siguiente listado de partidos actualizados al día de hoy para dar tu respuesta:
                 Partidos del dia: ${JSON.stringify(simplifiedMatches)}
                 
-                Consulta del usuario: ${userInput}
+                Consulta del usuario: ${text}
                 
                 Reglas:
                 1. Si el usuario saluda, preséntate brevemente y dile qué puedes hacer (ej. analizar un partido, dar una combinada, explicar bankroll).
