@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportIntel AI - Analista Deportivo Inteligente</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Mobile Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-brain-circuit brand-icon"></i>
+                <div class="brand-text">
+                    <h2>SportIntel</h2>
+                    <span>AI BET ANALYST</span>
+                </div>
+            </div>
+            <nav class="sidebar-menu">
+                <button class="nav-item active" data-tab="dashboard" id="nav-dashboard">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" data-tab="matches" id="nav-matches">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>Análisis de Partidos</span>
+                </button>
+                <button class="nav-item" data-tab="generator" id="nav-generator">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>Generador de Boletos</span>
+                </button>
+                <button class="nav-item" data-tab="news" id="nav-news">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span>Noticias y Lesionados</span>
+                </button>
+                <button class="nav-item" data-tab="bankroll" id="nav-bankroll">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Mi Bankroll</span>
+                </button>
+                <button class="nav-item" data-tab="escalera" id="nav-escalera">
+                    <i class="fa-solid fa-stairs"></i>
+                    <span>Reto Escalera</span>
+                </button>
+                <button class="nav-item" data-tab="aiassistant" id="nav-aiassistant">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Asistente IA</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="accuracy-badge">
+                    <div class="accuracy-circle">
+                        <span id="global-accuracy">74.6%</span>
+                    </div>
+                    <div class="accuracy-info">
+                        <span class="lbl">Tasa de Acierto</span>
+                        <span class="sub">Últimos 30 días</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button id="mobile-menu-btn" class="mobile-menu-btn hidden-desktop">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1 id="page-title">Panel Principal</h1>
+                        <p class="subtitle" id="current-date-display">Cargando fecha...</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="status-indicator">
+                        <span class="pulse-dot"></span>
+                        <span class="status-text">Mercado Actualizado</span>
+                    </div>
+                    <button class="btn btn-primary" id="btn-open-custom-bet-modal" style="background: var(--accent-pink); border-color: var(--accent-pink); box-shadow: var(--shadow-pink);">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Analizar Mi Apuesta
+                    </button>
+                    <button class="btn btn-secondary" id="refresh-data-btn">
+                        <i class="fa-solid fa-arrows-rotate"></i> Actualizar Análisis
+                    </button>
+                    <button class="btn btn-secondary" id="btn-open-api-modal" style="border-color: var(--accent-amber); color: var(--accent-amber);">
+                        <i class="fa-solid fa-key"></i> Sincronizar 1xBet
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <!-- Global Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="card-icon cyan"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <div class="card-value" id="stat-analyzed">0</div>
+                        <div class="card-label">Partidos Analizados Hoy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon green"><i class="fa-solid fa-bullseye"></i></div>
+                        <div class="card-value" id="stat-accuracy">0%</div>
+                        <div class="card-label">Precisión del Algoritmo</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon amber"><i class="fa-solid fa-wallet"></i></div>
+                        <div class="card-value" id="stat-roi">0%</div>
+                        <div class="card-label">ROI Promedio</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon pink"><i class="fa-solid fa-trophy"></i></div>
+                        <div class="card-value" id="stat-won-picks">0</div>
+                        <div class="card-label">Predicciones Ganadoras</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-layout">
+                    <!-- Column 1: Star Ticket -->
+                    <div class="card star-ticket-card">
+                        <div class="card-header">
+                            <span class="badge badge-star"><i class="fa-solid fa-star"></i> RECOMENDACIÓN PREMIUM</span>
+                            <h3>Boleto Estrella del Día</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="ticket-container" id="star-ticket-details">
+                                <!-- Dinámico -->
+                            </div>
+                            <div class="ticket-footer-info">
+                                <div class="confidence-box">
+                                    <div class="confidence-header">
+                                        <span>Nivel de Confianza</span>
+                                        <span id="star-ticket-confidence">0%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" id="star-ticket-progress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="analysis-reasoning">
+                                    <h4><i class="fa-solid fa-brain"></i> Análisis Técnico del Boleto</h4>
+                                    <p id="star-ticket-reasoning">Analizando variables del mercado...</p>
+                                </div>
+                                <button class="btn btn-primary btn-full-width" id="btn-copy-star-ticket">
+                                    <i class="fa-regular fa-copy"></i> Copiar Selecciones del Boleto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Performance Chart -->
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h3>Rendimiento del Analista IA</h3>
+                            <span class="sub">Tasa de acierto acumulada (%)</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="performance-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Highlight Matches Grid -->
+                <div class="highlight-section">
+                    <h3 class="section-title">Partidos Clave de Hoy</h3>
+                    <div class="matches-compact-grid" id="dashboard-matches-grid">
+                        <!-- Dinámico -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Matches Tab -->
+            <section id="matches" class="tab-content">
+                <div class="matches-layout">
+                    <!-- Left: Matches List -->
+                    <div class="matches-list-panel">
+                        <div class="filter-bar">
+                            <button class="filter-btn active" data-sport="all">Todos</button>
+                            <button class="filter-btn" data-sport="Football"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
+                            <button class="filter-btn" data-sport="Basketball"><i class="fa-solid fa-basketball"></i> Basket</button>
+                            <button class="filter-btn" data-sport="Tennis"><i class="fa-solid fa-baseball"></i> Tenis</button>
+                        </div>
+                        <div class="match-search-panel" style="margin-bottom: 12px;">
+                            <input type="text" id="match-search-input" placeholder="🔍 Buscar equipos o ligas (ej: España, Sun, MLS)..." class="form-input" style="font-size: 0.82rem; padding: 8px 12px;">
+                        </div>
+                        <div class="matches-list" id="matches-list-container">
+                            <!-- Dinámico -->
+                        </div>
+                    </div>
+
+                    <!-- Right: Match Detailed Analysis -->
+                    <div class="match-detail-panel" id="match-detail-view">
+                        <div class="empty-state" id="detail-empty-state">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <p>Selecciona un partido de la lista para ver el análisis táctico de la IA, alineaciones estimadas y cuotas recomendadas.</p>
+                        </div>
+                        
+                        <div class="detail-content hidden" id="detail-main-content">
+                            <!-- Match Header -->
+                            <div class="detail-header-card">
+                                <div class="league-tag" id="detail-league">LaLiga</div>
+                                <div class="teams-versus">
+                                    <div class="team-meta home">
+                                        <div class="team-avatar" id="detail-home-avatar">RM</div>
+                                        <h2 id="detail-home-name">Real Madrid</h2>
+                                    </div>
+                                    <div class="vs-badge">VS</div>
+                                    <div class="team-meta away">
+                                        <div class="team-avatar" id="detail-away-avatar">FCB</div>
+                                        <h2 id="detail-away-name">Barcelona</h2>
+                                    </div>
+                                </div>
+                                <div class="match-location-time">
+                                    <span id="detail-stadium"><i class="fa-solid fa-location-dot"></i> Bernabéu</span>
+                                    <span id="detail-time"><i class="fa-regular fa-clock"></i> 16:00</span>
+                                </div>
+                            </div>
+
+                            <!-- Tabs for Match Analysis -->
+                            <div class="detail-tabs">
+                                <button class="detail-tab-btn active" data-section="tactics">Alineaciones 2D</button>
+                                <button class="detail-tab-btn" data-section="stats">Estadísticas & H2H</button>
+                                <button class="detail-tab-btn" data-section="tips">Predicciones & Cuotas</button>
+                            </div>
+
+                            <!-- Tactics Section -->
+                            <div class="detail-section active" id="sect-tactics">
+                                <div class="tactical-field-container">
+                                    <div class="field-pitch">
+                                        <!-- Líneas del campo pintadas con CSS -->
+                                        <div class="pitch-line pitch-center-circle"></div>
+                                        <div class="pitch-line pitch-center-line"></div>
+                                        <div class="pitch-line pitch-box-top"></div>
+                                        <div class="pitch-line pitch-box-bottom"></div>
+                                        
+                                        <!-- Jugadores Local (Mitad Superior) -->
+                                        <div id="home-players-pitch"></div>
+                                        <!-- Jugadores Visitante (Mitad Inferior) -->
+                                        <div id="away-players-pitch"></div>
+                                    </div>
+                                    <div class="tactical-legend">
+                                        <div class="formation-badge" id="tactics-formation-label">4-3-3 vs 4-3-3</div>
+                                        <p class="legend-note">* Toca sobre un jugador en el campo táctico para ver su estado actual o sustitutos sugeridos.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Stats Section -->
+                            <div class="detail-section" id="sect-stats">
+                                <div class="form-comparison-card">
+                                    <h4>Forma Reciente</h4>
+                                    <div class="form-row">
+                                        <div class="team-side">
+                                            <span class="name" id="stats-home-form-name">Real Madrid</span>
+                                            <div class="form-bubbles" id="stats-home-form-bubbles"></div>
+                                        </div>
+                                        <div class="team-side">
+                                            <span class="name" id="stats-away-form-name">Barcelona</span>
+                                            <div class="form-bubbles" id="stats-away-form-bubbles"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="h2h-history-card">
+                                    <h4>Histórico Cara a Cara (Últimos 5)</h4>
+                                    <div class="h2h-bars">
+                                        <div class="h2h-bar home-win-bar" id="h2h-home-wins" style="width: 40%">Local: 2</div>
+                                        <div class="h2h-bar draw-bar" id="h2h-draws" style="width: 20%">Empates: 1</div>
+                                        <div class="h2h-bar away-win-bar" id="h2h-away-wins" style="width: 40%">Visita: 2</div>
+                                    </div>
+                                    <div class="h2h-list" id="h2h-list-container">
+                                        <!-- Dinámico -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tips Section -->
+                            <div class="detail-section" id="sect-tips">
+                                <div class="market-search-bar" style="margin-bottom: 15px;">
+                                    <input type="text" id="market-search" placeholder="🔍 Buscar mercado en 1xBet (ej: Hándicap, Goles, Córners, Tarjetas)..." class="form-input" style="font-size: 0.85rem; padding: 10px 14px;">
+                                </div>
+                                <div class="filter-bar" style="margin-bottom: 20px; font-size: 0.75rem; padding: 2px;">
+                                    <button class="filter-btn active" id="market-filter-all" data-market-cat="all">Todos</button>
+                                    <button class="filter-btn" data-market-cat="main">Principales</button>
+                                    <button class="filter-btn" data-market-cat="goals">Goles / Puntos</button>
+                                    <button class="filter-btn" data-market-cat="handicaps">Hándicaps</button>
+                                    <button class="filter-btn" data-market-cat="specials">Córners / Tarjetas</button>
+                                </div>
+                                <h4 style="margin-bottom: 12px; font-size: 0.95rem; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-brain-circuit"></i> Análisis de Valor IA
+                                </h4>
+                                <div class="picks-list" id="detail-picks-container" style="margin-bottom: 25px;">
+                                    <!-- Dinámico: Picks recomendados con análisis -->
+                                </div>
+                                <h4 style="margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-list-check"></i> Otros Mercados Disponibles (+1000)
+                                </h4>
+                                <div class="all-markets-grid" id="detail-all-markets-container">
+                                    <!-- Dinámico: Cuadrícula completa de mercados de 1xBet -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Generator Tab -->
+            <section id="generator" class="tab-content">
+                <div class="generator-layout">
+                    <!-- Left: Control Panel -->
+                    <div class="generator-controls card">
+                        <div class="card-header">
+                            <h3>Ajustes del Algoritmo</h3>
+                            <p class="sub">Configura tu perfil de apostador</p>
+                        </div>
+                        <div class="card-body">
+                            <form id="bet-generator-form">
+                                <div class="form-group">
+                                    <label class="form-label">Deporte</label>
+                                    <div class="sport-select-grid">
+                                        <label class="sport-option">
+                                            <input type="radio" name="gen-sport" value="all" checked>
+                                            <div class="sport-box">
+                                                <i class="fa-solid fa-globe"></i>
+                                                <span>Todos</span>
+                                            </div>
+                                        </label>
+                                        <label class="sport-option">
+                                            <input type="radio" name="gen-sport" value="Football">
+                                            <div class="sport-box">
+                                                <i class="fa-solid fa-soccer-ball"></i>
+                                                <span>Fútbol</span>
+                                            </div>
+                                        </label>
+                                        <label class="sport-option">
+                                            <input type="radio" name="gen-sport" value="Basketball">
+                                            <div class="sport-box">
+                                                <i class="fa-solid fa-basketball"></i>
+                                                <span>Basket</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="input-stake">Presupuesto / Stake Total ($)</label>
+                                    <input type="number" id="input-stake" class="form-input" value="100" min="5" max="10000" step="5">
+                                    <div class="slider-hint">El stake se distribuirá según la confianza de cada evento.</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="label-with-value">
+                                        <label class="form-label">Perfil de Riesgo</label>
+                                        <span id="risk-value-display" class="badge bg-green">Conservador</span>
+                                    </div>
+                                    <input type="range" id="input-risk" class="form-range" min="1" max="3" value="1" step="1">
+                                    <div class="range-labels">
+                                        <span>Conservador</span>
+                                        <span>Equilibrado</span>
+                                        <span>Agresivo</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Filtrar por Cuota Máxima Evento</label>
+                                    <div class="range-odds-container">
+                                        <input type="range" id="input-max-odd" class="form-range" min="1.3" max="5.0" value="2.5" step="0.1">
+                                        <div class="odds-val"><span id="odd-max-display">2.50</span></div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-full-width" id="btn-generate-ticket">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generar Boleto Inteligente
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right: Ticket Output -->
+                    <div class="generator-output">
+                        <div class="ticket-visualizer" id="ticket-visualizer-container">
+                            <div class="ticket-placeholder" id="ticket-empty-state">
+                                <i class="fa-solid fa-ticket-simple"></i>
+                                <h3>Boleto no generado</h3>
+                                <p>Configura las opciones en el panel izquierdo y haz clic en "Generar Boleto Inteligente" para que la IA arme la combinada más rentable.</p>
+                            </div>
+                            
+                            <!-- Loading State -->
+                            <div class="ticket-loader hidden" id="ticket-loading-state">
+                                <div class="loader-spinner"></div>
+                                <h4>Analizando mercado de apuestas...</h4>
+                                <p>Evaluando formaciones, lesiones de último minuto y rumores...</p>
+                            </div>
+
+                            <!-- Generated Ticket Content -->
+                            <div class="generated-ticket hidden" id="ticket-main-content">
+                                <div class="ticket-glow-border"></div>
+                                <div class="ticket-header">
+                                    <div class="ticket-brand">
+                                        <i class="fa-solid fa-brain-circuit"></i>
+                                        <span>SportIntel AI Ticket</span>
+                                    </div>
+                                    <div class="ticket-id" id="lbl-ticket-id">#TK-837482</div>
+                                </div>
+                                
+                                <div class="ticket-subheader">
+                                    <div class="meta-item">
+                                        <span class="lbl">Riesgo</span>
+                                        <span class="val badge" id="ticket-risk-badge">Bajo</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="lbl">Confianza</span>
+                                        <span class="val" id="ticket-confidence-val">85%</span>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-events-list" id="ticket-events-container">
+                                    <!-- Dinámico -->
+                                </div>
+
+                                <div class="ticket-summary">
+                                    <div class="summary-row">
+                                        <span>Inversión (Stake)</span>
+                                        <span id="ticket-stake-display">$100.00</span>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span>Cuota Total</span>
+                                        <span id="ticket-total-odd-display" class="highlight-odd">3.45</span>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="summary-row payout-row">
+                                        <span>Ganancia Potencial</span>
+                                        <span id="ticket-payout-display" class="highlight-payout">$345.00</span>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-barcode-section">
+                                    <div class="barcode"></div>
+                                    <div class="barcode-number">SportIntel Algorithmic System 2.0</div>
+                                </div>
+
+                                <div class="ticket-actions">
+                                    <button class="btn btn-secondary btn-full-width" id="btn-export-ticket">
+                                        <i class="fa-solid fa-download"></i> Descargar Imagen del Boleto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News & Injuries Tab -->
+            <section id="news" class="tab-content">
+                <div class="news-layout">
+                    <!-- Column 1: Gossip News -->
+                    <div class="news-column card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-bullhorn text-cyan"></i> Rumores de Vestuario & Última Hora</h3>
+                            <p class="sub">Información filtrada y noticias de la prensa deportiva</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="news-list" id="gossip-list-container">
+                                <!-- Dinámico -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Injuries List -->
+                    <div class="news-column card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-user-injured text-pink"></i> Reporte Médico General</h3>
+                            <p class="sub">Estado físico y bajas confirmadas/dudosas</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table class="injuries-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Jugador</th>
+                                            <th>Equipo</th>
+                                            <th>Lesión / Molestia</th>
+                                            <th>Gravedad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="injuries-table-body">
+                                        <!-- Dinámico -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bankroll Tab -->
+            <section id="bankroll" class="tab-content">
+                <!-- Summary Metrics Cards -->
+                <div class="metrics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 24px;">
+                    <div class="stat-card">
+                        <div class="card-icon green"><i class="fa-solid fa-wallet"></i></div>
+                        <div class="card-value" id="bankroll-balance-val">$1,000.00</div>
+                        <div class="card-label">Bankroll Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon cyan"><i class="fa-solid fa-percent"></i></div>
+                        <div class="card-value" id="bankroll-roi-val">+0.0%</div>
+                        <div class="card-label">ROI Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon amber"><i class="fa-solid fa-dollar-sign"></i></div>
+                        <div class="card-value" id="bankroll-profit-val">+$0.00</div>
+                        <div class="card-label">Beneficio Neto</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon pink"><i class="fa-solid fa-chart-pie"></i></div>
+                        <div class="card-value" id="bankroll-winrate-val">0.0%</div>
+                        <div class="card-label">Tasa de Acierto (Win Rate)</div>
+                    </div>
+                </div>
+
+                <!-- Growth Graph Panel -->
+                <div class="card" style="margin-bottom: 24px; padding: 24px;">
+                    <div class="card-header" style="padding-bottom: 12px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color);">
+                        <h3>📈 Historial de Crecimiento del Capital</h3>
+                        <p class="sub">Evolución de tu saldo tras resolver tus apuestas</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="height: 250px; position: relative;">
+                            <canvas id="bankroll-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control Layout: Form & Bets History -->
+                <div class="generator-layout">
+                    <!-- Column 1: Log Bet Form -->
+                    <div class="card generator-controls">
+                        <div class="card-header" style="padding-bottom: 12px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color);">
+                            <h3>📝 Registrar Nueva Apuesta</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="form-add-bet" onsubmit="return false;">
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label class="form-label" for="bet-match-select">Selecciona el Partido</label>
+                                    <select id="bet-match-select" class="form-input" style="font-size: 0.85rem; padding: 10px 14px;" onchange="document.getElementById('manual-match-group').style.display = this.value === 'Otro Evento (Manual)' ? 'block' : 'none'">
+                                        <!-- Dinámico -->
+                                    </select>
+                                </div>
+                                <div class="form-group" id="manual-match-group" style="margin-bottom: 15px; display: none;">
+                                    <label class="form-label" for="bet-manual-match-input">Nombre del Evento (Manual)</label>
+                                    <input type="text" id="bet-manual-match-input" class="form-input" placeholder="Ej: España vs Belgica" style="font-size: 0.85rem; padding: 10px 14px;">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label class="form-label" for="bet-market-input">Mercado / Selección</label>
+                                    <input type="text" id="bet-market-input" class="form-input" placeholder="Ej: España gana, Más de 2.5 goles" style="font-size: 0.85rem; padding: 10px 14px;">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label class="form-label" for="bet-odd-input">Cuota (Odd)</label>
+                                    <input type="number" id="bet-odd-input" class="form-input" placeholder="Ej: 1.63" step="0.01" min="1.01" style="font-size: 0.85rem; padding: 10px 14px;">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label class="form-label" for="bet-stake-input">Importe Apostado (Stake)</label>
+                                    <input type="number" id="bet-stake-input" class="form-input" placeholder="Ej: 100" min="1" style="font-size: 0.85rem; padding: 10px 14px;">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 20px;">
+                                    <label class="form-label" for="bet-status-select">Estado de la Apuesta</label>
+                                    <select id="bet-status-select" class="form-input" style="font-size: 0.85rem; padding: 10px 14px;">
+                                        <option value="pending" selected>Pendiente</option>
+                                        <option value="won">Ganada</option>
+                                        <option value="lost">Perdida</option>
+                                        <option value="voided">Anulada</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-full-width" id="btn-submit-bet">
+                                    <i class="fa-solid fa-plus"></i> Registrar Apuesta
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Bets Log List -->
+                    <div class="card" style="overflow: hidden;">
+                        <div class="card-header" style="padding-bottom: 12px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                            <h3>📋 Registro de Apuestas</h3>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px;">
+                                    <span style="font-size: 0.7rem; color: var(--text-muted);">Capital Inicial:</span>
+                                    <input type="number" id="input-starting-bankroll" value="1000" min="10" style="width: 75px; background: none; border: none; color: var(--accent-green); font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; text-align: right; outline: none; padding: 0;">
+                                </div>
+                                <button class="btn btn-secondary" id="btn-clear-bets" style="padding: 4px 10px; font-size: 0.72rem; border-color: var(--accent-pink); color: var(--accent-pink); cursor: pointer;">
+                                    <i class="fa-solid fa-trash-can"></i> Limpiar Historial
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="padding: 0;">
+                            <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+                                <table class="injuries-table" style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: left; padding: 12px 8px; font-size: 0.75rem;">Evento / Selección</th>
+                                            <th style="padding: 12px 8px; text-align: center; font-size: 0.75rem;">Cuota</th>
+                                            <th style="padding: 12px 8px; text-align: center; font-size: 0.75rem;">Stake</th>
+                                            <th style="padding: 12px 8px; text-align: center; font-size: 0.75rem;">Retorno</th>
+                                            <th style="padding: 12px 8px; text-align: center; font-size: 0.75rem;">Estado</th>
+                                            <th style="padding: 12px 8px; text-align: center; font-size: 0.75rem;">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bets-table-body">
+                                        <!-- Dinámico -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Escalera Tab -->
+            <section id="escalera" class="tab-content">
+                <!-- Challenge Parameters Header & Dashboard Metrics -->
+                <div class="metrics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 24px;">
+                    <div class="stat-card">
+                        <div class="card-icon green" style="background: rgba(16, 185, 129, 0.1);"><i class="fa-solid fa-calendar-day"></i></div>
+                        <div class="card-value" id="escalera-day-val">Día 1 / 30</div>
+                        <div class="card-label">Progreso del Reto</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon amber" style="background: rgba(245, 158, 11, 0.1);"><i class="fa-solid fa-sack-dollar"></i></div>
+                        <div class="card-value" id="escalera-stake-val">$10.00</div>
+                        <div class="card-label">Importe Acumulado (Stake)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon cyan" style="background: rgba(6, 182, 212, 0.1);"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <div class="card-value" id="escalera-next-return-val">$13.50</div>
+                        <div class="card-label">Retorno Próximo Día</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon pink" style="background: rgba(239, 68, 68, 0.1);"><i class="fa-solid fa-trophy"></i></div>
+                        <div class="card-value" id="escalera-goal-val">$26,200.00</div>
+                        <div class="card-label">Meta Final (Día 30)</div>
+                    </div>
+                </div>
+
+                <!-- Horizontal Step Visualizer -->
+                <div class="card" style="margin-bottom: 24px; padding: 20px;">
+                    <div class="card-header" style="padding-bottom: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+                        <h3>🧗 Mapa del Reto Escalera (30 Días)</h3>
+                        <p class="sub">Cada círculo representa un día. ¡Completa los 30 seguidos sin perder para ganar el reto!</p>
+                    </div>
+                    <div class="card-body">
+                        <div id="escalera-steps-container" style="display: flex; gap: 10px; overflow-x: auto; padding: 12px 6px; scrollbar-width: thin;">
+                            <!-- Dinámico: 30 círculos de progreso -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Area: Safe Pick of the Day & History -->
+                <div class="generator-layout">
+                    <!-- Column 1: Escalera Recommended Pick -->
+                    <div class="card" style="border: 2px solid var(--accent-cyan); box-shadow: var(--shadow-cyan);">
+                        <div class="card-header" style="padding-bottom: 12px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                            <span class="badge bg-green" style="text-transform: none;"><i class="fa-solid fa-shield-halved"></i> LA MÁS SEGURA DEL DÍA</span>
+                            <h4 id="lbl-escalera-day-title" style="font-size: 0.95rem;">Día 1 del Reto</h4>
+                        </div>
+                        <div class="card-body" id="escalera-pick-card-content">
+                            <!-- Dinámico: Detalles del partido más seguro -->
+                        </div>
+                        <div class="card-footer" style="padding: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px;">
+                            <button class="btn btn-primary" id="btn-escalera-win" style="flex: 1; background: var(--accent-green); border-color: var(--accent-green); cursor: pointer; padding: 10px 5px; font-size: 0.8rem;">
+                                <i class="fa-solid fa-check"></i> Ganado
+                            </button>
+                            <button class="btn btn-secondary" id="btn-escalera-pending" style="flex: 1; border-color: var(--accent-amber); color: var(--accent-amber); cursor: pointer; padding: 10px 5px; font-size: 0.8rem;">
+                                <i class="fa-solid fa-clock"></i> Pendiente
+                            </button>
+                            <button class="btn btn-secondary" id="btn-escalera-lose" style="flex: 1; border-color: var(--accent-pink); color: var(--accent-pink); cursor: pointer; padding: 10px 5px; font-size: 0.8rem;">
+                                <i class="fa-solid fa-xmark"></i> Perdido
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Challenge Settings & Attempts History -->
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Settings -->
+                        <div class="card" style="padding: 18px;">
+                            <div class="card-header" style="padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+                                <h3>⚙️ Configuración del Reto</h3>
+                            </div>
+                            <div class="card-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label" style="font-size: 0.75rem;">Importe Inicial ($)</label>
+                                    <input type="number" id="input-escalera-start-stake" value="10" min="1" class="form-input" style="font-size: 0.8rem; padding: 6px 10px;">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label" style="font-size: 0.75rem;">Objetivo (Días)</label>
+                                    <input type="number" id="input-escalera-target-days" value="30" min="3" max="50" class="form-input" style="font-size: 0.8rem; padding: 6px 10px;">
+                                </div>
+                            </div>
+                            <div class="card-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label" style="font-size: 0.75rem; color: var(--accent-cyan);">Día Actual (Editar)</label>
+                                    <input type="number" id="input-escalera-current-day" value="1" min="1" class="form-input" style="font-size: 0.8rem; padding: 6px 10px; border-color: rgba(6, 182, 212, 0.3);">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label" style="font-size: 0.75rem; color: var(--accent-cyan);">Capital Actual (Editar)</label>
+                                    <input type="number" id="input-escalera-current-stake" value="10" step="0.01" min="1" class="form-input" style="font-size: 0.8rem; padding: 6px 10px; border-color: rgba(6, 182, 212, 0.3);">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Current Run History -->
+                        <div class="card" style="flex: 1; overflow: hidden;">
+                            <div class="card-header" style="padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                                <h3>📜 Historial del Reto Actual</h3>
+                                <button class="btn btn-secondary" id="btn-clear-escalera-history" style="padding: 2px 8px; font-size: 0.68rem; border-color: var(--text-muted); color: var(--text-muted); cursor: pointer;">
+                                    Reiniciar
+                                </button>
+                            </div>
+                            <div class="card-body" style="padding: 0;">
+                                <div class="table-container" style="max-height: 250px; overflow-y: auto;">
+                                    <table class="injuries-table" style="width: 100%; border-collapse: collapse;">
+                                        <thead>
+                                            <tr>
+                                                <th style="padding: 10px 8px; text-align: left; font-size: 0.72rem;">Día / Fecha</th>
+                                                <th style="padding: 10px 8px; text-align: left; font-size: 0.72rem;">Selección (Cuota)</th>
+                                                <th style="padding: 10px 8px; text-align: center; font-size: 0.72rem;">Capital -> Retorno</th>
+                                                <th style="padding: 10px 8px; text-align: center; font-size: 0.72rem;">Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="escalera-history-table-body">
+                                            <!-- Dinámico -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- AI Assistant Tab -->
+            <section id="aiassistant" class="tab-content" style="display: flex; flex-direction: column; height: calc(100vh - 120px); max-height: 800px;">
+                <div class="card" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+                    <div class="card-header" style="border-bottom: 1px solid var(--border-color); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(8, 11, 17, 0.8);">
+                        <div>
+                            <h3 style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-robot" style="color: var(--accent-cyan);"></i> SportIntel Bot</h3>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Asistente en Vivo impulsado por Google Gemini</p>
+                        </div>
+                        <button class="btn btn-secondary" id="btn-configure-ai" style="padding: 6px 12px; font-size: 0.75rem;">
+                            <i class="fa-solid fa-gear"></i> API Key
+                        </button>
+                    </div>
+                    
+                    <div id="ai-chat-history" style="flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;">
+                        <div class="chat-message ai-message" style="align-self: flex-start; max-width: 85%;">
+                            <div style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: 12px; border-top-left-radius: 2px; padding: 12px 16px; color: var(--text-primary); font-size: 0.9rem; line-height: 1.5;">
+                                ¡Hola! Soy tu asistente en vivo. Puedo analizar cualquier partido que me pidas o responder dudas sobre estrategias de bankroll. ¿De qué evento quieres la apuesta más exacta?
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px 20px; border-top: 1px solid var(--border-color); background: rgba(8, 11, 17, 0.95); display: flex; gap: 10px;">
+                        <textarea id="ai-chat-input" class="form-input" placeholder="Ej: Analiza el partido Real Madrid vs Barcelona y dame la mejor cuota..." style="flex: 1; resize: none; height: 50px; border-radius: 25px; padding: 14px 20px; font-size: 0.9rem;"></textarea>
+                        <button id="btn-ai-send" class="btn btn-primary" style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; justify-content: center; align-items: center; background: var(--accent-cyan); border: none; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Custom Dialog / Modal for Player Details -->
+    <div class="modal hidden" id="player-modal">
+        <div class="modal-overlay" id="player-modal-overlay"></div>
+        <div class="modal-card">
+            <button class="modal-close" id="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-user-circle modal-player-avatar"></i>
+                <div>
+                    <h3 id="modal-player-name">Nombre Jugador</h3>
+                    <p id="modal-player-team">Real Madrid</p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="label">Posición</span>
+                        <span class="value" id="modal-player-pos">Defensa</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Dorsal</span>
+                        <span class="value" id="modal-player-num">4</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Condición</span>
+                        <span class="value badge" id="modal-player-status">Disponible</span>
+                    </div>
+                </div>
+                <div class="player-commentary">
+                    <h4>Análisis de Rendimiento</h4>
+                    <p id="modal-player-desc">El jugador se encuentra entrenando al 100% y se proyecta como inicialista clave en la estrategia táctica.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Key Modal for 1xBet Sync -->
+    <div class="modal hidden" id="api-modal">
+        <div class="modal-overlay" id="api-modal-overlay"></div>
+        <div class="modal-card">
+            <button class="modal-close" id="btn-close-api-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-key modal-player-avatar" style="color: var(--accent-amber); font-size: 2.2rem; display: flex; align-items: center; justify-content: center;"></i>
+                <div>
+                    <h3>Sincronizar Cuotas 1xBet</h3>
+                    <p>Cuotas en tiempo real por API</p>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-top: 10px;">
+                <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+                    Para sincronizar de manera exacta con 1xBet, conéctate a la API de cuotas gratuitas de <b>The Odds API</b>:
+                </p>
+                <ol style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 15px; margin-bottom: 15px; line-height: 1.6;">
+                    <li>Regístrate gratis en <a href="https://the-odds-api.com" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">the-odds-api.com</a> (toma 10 segundos).</li>
+                    <li>Copia la clave (API Key) recibida en tu correo.</li>
+                    <li>Pégala a continuación para sincronizar las cuotas de 1xBet:</li>
+                </ol>
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <input type="text" id="api-key-input" class="form-input" placeholder="Pega aquí tu API Key (ej: a73f...)" style="font-family: monospace; font-size: 0.85rem; padding: 10px 14px;">
+                </div>
+                <div id="api-sync-status" class="badge" style="display: block; text-align: center; padding: 8px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.02); text-transform: none; font-size: 0.75rem;">
+                    Estado: Desconectado (Usando cuotas estimadas)
+                </div>
+                <button class="btn btn-primary btn-full-width" id="btn-save-api-key">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar y Sincronizar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gemini API Key Modal -->
+    <div class="modal hidden" id="gemini-api-modal">
+        <div class="modal-overlay" id="gemini-api-modal-overlay"></div>
+        <div class="modal-card">
+            <button class="modal-close" id="btn-close-gemini-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-robot modal-player-avatar" style="color: var(--accent-cyan); font-size: 2.2rem; display: flex; align-items: center; justify-content: center;"></i>
+                <div>
+                    <h3>Configurar Asistente IA</h3>
+                    <p>Comunicación directa con Google Gemini</p>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-top: 10px;">
+                <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+                    Para usar el Chat en Vivo de forma gratuita y sin servidores, necesitas usar tu propia API Key de Gemini. Se guardará de forma segura en tu navegador.
+                </p>
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <input type="password" id="input-gemini-api-key" class="form-input" placeholder="Ingresa tu API Key (Ej: AIzaSy...)" style="font-family: monospace; font-size: 0.85rem; padding: 10px 14px;">
+                </div>
+                <button class="btn btn-primary btn-full-width" id="btn-save-gemini-key">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar Clave y Chatear
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Bet Analyzer Modal -->
+    <div class="modal hidden" id="custom-bet-modal">
+        <div class="modal-overlay" id="custom-bet-modal-overlay"></div>
+        <div class="modal-card" style="width: 450px;">
+            <button class="modal-close" id="btn-close-custom-bet-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-wand-magic-sparkles modal-player-avatar" style="color: var(--accent-pink); font-size: 2.2rem; display: flex; align-items: center; justify-content: center;"></i>
+                <div>
+                    <h3>Analizador de Apuestas Propias</h3>
+                    <p>La IA evalúa si tu boleto es seguro</p>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-top: 10px;">
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label class="form-label" style="font-size: 0.75rem;">Partido / Evento</label>
+                    <input type="text" id="custom-bet-event" class="form-input" placeholder="Ej: Real Madrid vs Barcelona" style="font-size: 0.85rem; padding: 10px 14px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label class="form-label" style="font-size: 0.75rem;">Mercado / Selección</label>
+                    <input type="text" id="custom-bet-selection" class="form-input" placeholder="Ej: Real Madrid Gana" style="font-size: 0.85rem; padding: 10px 14px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" style="font-size: 0.75rem;">Cuota (Odd)</label>
+                    <input type="number" id="custom-bet-odd" class="form-input" placeholder="Ej: 1.85" step="0.01" min="1.01" style="font-size: 0.85rem; padding: 10px 14px;">
+                </div>
+                
+                <button class="btn btn-primary btn-full-width" id="btn-analyze-custom-bet" style="margin-bottom: 15px;">
+                    <i class="fa-solid fa-brain-circuit"></i> Ejecutar Análisis IA
+                </button>
+
+                <div id="custom-bet-result" class="hidden" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px;">
+                    <h4 style="margin-bottom: 10px; font-size: 0.9rem; display: flex; align-items: center; gap: 6px;" id="custom-bet-result-title">
+                        <i class="fa-solid fa-shield-check text-green"></i> Veredicto: Seguro
+                    </h4>
+                    <p id="custom-bet-result-text" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+                        Análisis...
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Recomendación de Bankroll:</span>
+                        <span id="custom-bet-result-bank" class="badge bg-green" style="font-size: 0.85rem;">3%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
