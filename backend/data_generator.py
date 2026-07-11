@@ -14,6 +14,11 @@ def fetch_live_matches():
 
     urls = [
         ("Fútbol Mundial", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard"),
+        ("Liga Pro Ecuador", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/ecu.1/scoreboard"),
+        ("Liga Argentina", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard"),
+        ("Liga Colombiana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/col.1/scoreboard"),
+        ("Copa Libertadores", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.libertadores/scoreboard"),
+        ("Copa Sudamericana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.sudamericana/scoreboard"),
         ("WNBA", "Basketball", "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard"),
         ("NBA", "Basketball", "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"),
         ("Tenis ATP/WTA", "Tennis", "https://site.api.espn.com/apis/site/v2/sports/tennis/all/scoreboard")
