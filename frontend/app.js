@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Load Data from JSON ---
     async function loadSportsData() {
         try {
-            const response = await fetch("data.json");
+            const response = await fetch(`data.json?v=${new Date().getTime()}`);
             if (!response.ok) {
                 throw new Error("No se pudo cargar el archivo data.json");
             }
