@@ -562,11 +562,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Set Headers
-        detailLeague.textContent = selectedMatch.league;
+        let statusBadgeHtml = "";
+        let scoreHtml = "";
+        if (selectedMatch.status === "in") {
+            statusBadgeHtml = `<span class="match-status-badge status-in">EN VIVO</span>`;
+            scoreHtml = `<div class="final-score">${selectedMatch.home_score || 0} - ${selectedMatch.away_score || 0}</div>`;
+        } else if (selectedMatch.status === "post") {
+            statusBadgeHtml = `<span class="match-status-badge status-post">FINALIZADO</span>`;
+            scoreHtml = `<div class="final-score">${selectedMatch.home_score || 0} - ${selectedMatch.away_score || 0}</div>`;
+        }
+
+        detailLeague.innerHTML = `${selectedMatch.league} ${statusBadgeHtml}`;
         detailHomeName.textContent = selectedMatch.home;
         detailAwayName.textContent = selectedMatch.away;
         detailStadium.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${selectedMatch.stadium}`;
-        detailTime.innerHTML = `<i class="fa-regular fa-clock"></i> ${selectedMatch.time} HS`;
+        detailTime.innerHTML = `<i class="fa-regular fa-clock"></i> ${selectedMatch.time} HS ${scoreHtml}`;
         
         // Avatars / Logos initials
         detailHomeAvatar.textContent = selectedMatch.home.split(" ").map(w => w[0]).join("").substring(0, 3).toUpperCase();
@@ -713,11 +723,21 @@ document.addEventListener("DOMContentLoaded", () => {
         // 3. Render Predictions List
         let picksHtml = "";
         selectedMatch.picks.forEach(pick => {
+            let statusClass = "";
+            let statusBadge = "";
+            if (pick.status === "won") {
+                statusClass = "pick-won";
+                statusBadge = `<span style="color: #10B981; font-weight: bold; margin-left: 10px; font-size: 0.8rem"><i class="fa-solid fa-check-circle"></i> ACIERTO IA</span>`;
+            } else if (pick.status === "lost") {
+                statusClass = "pick-lost";
+                statusBadge = `<span style="color: #EF4444; font-weight: bold; margin-left: 10px; font-size: 0.8rem"><i class="fa-solid fa-times-circle"></i> FALLO</span>`;
+            }
+
             picksHtml += `
-                <div class="pick-card">
+                <div class="pick-card ${statusClass}">
                     <div class="pick-card-header">
                         <span class="pick-market">${pick.market}</span>
-                        <span class="pick-odd-badge">@${pick.odd.toFixed(2)}</span>
+                        <span class="pick-odd-badge">@${pick.odd.toFixed(2)} ${statusBadge}</span>
                     </div>
                     <div class="pick-selection-row">
                         <span class="pick-selection">${pick.selection}</span>
