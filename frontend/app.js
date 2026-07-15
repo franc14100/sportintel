@@ -722,7 +722,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 3. Render Predictions List
         let picksHtml = "";
-        selectedMatch.picks.forEach(pick => {
+        selectedMatch.picks.forEach((pick, pickIndex) => {
             let statusClass = "";
             let statusBadge = "";
             if (pick.status === "won") {
@@ -731,6 +731,42 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (pick.status === "lost") {
                 statusClass = "pick-lost";
                 statusBadge = `<span style="color: #EF4444; font-weight: bold; margin-left: 10px; font-size: 0.8rem"><i class="fa-solid fa-times-circle"></i> FALLO</span>`;
+            }
+
+            // Build reasoning HTML — supports both string (legacy) and object (structured)
+            let reasoningHtml = "";
+            if (typeof pick.reasoning === "object" && pick.reasoning !== null) {
+                reasoningHtml = `
+                    <div class="analysis-panel" id="analysis-${selectedMatch.id}-${pickIndex}" style="display:none;">
+                        <div class="analysis-section analysis-tactical">
+                            <div class="analysis-section-header">
+                                <i class="fa-solid fa-chess"></i>
+                                <span>Análisis Táctico</span>
+                            </div>
+                            <p>${pick.reasoning.tactical}</p>
+                        </div>
+                        <div class="analysis-section analysis-statistical">
+                            <div class="analysis-section-header">
+                                <i class="fa-solid fa-chart-bar"></i>
+                                <span>Edge Estadístico</span>
+                            </div>
+                            <p>${pick.reasoning.statistical}</p>
+                        </div>
+                        <div class="analysis-section analysis-market">
+                            <div class="analysis-section-header">
+                                <i class="fa-solid fa-signal"></i>
+                                <span>Inteligencia de Mercado</span>
+                            </div>
+                            <p>${pick.reasoning.market}</p>
+                        </div>
+                    </div>
+                    <button class="btn-expand-analysis" data-target="analysis-${selectedMatch.id}-${pickIndex}">
+                        <i class="fa-solid fa-microscope"></i> Ver Análisis Completo de la IA
+                        <i class="fa-solid fa-chevron-down expand-chevron"></i>
+                    </button>`;
+            } else {
+                // Legacy string reasoning
+                reasoningHtml = `<div class="pick-reasoning">${pick.reasoning || ""}</div>`;
             }
 
             picksHtml += `
@@ -743,13 +779,32 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span class="pick-selection">${pick.selection}</span>
                         <span class="pick-prob-badge"><i class="fa-solid fa-brain"></i> Confianza IA: ${pick.probability}%</span>
                     </div>
-                    <div class="pick-reasoning">
-                        ${pick.reasoning}
-                    </div>
+                    ${reasoningHtml}
                 </div>
             `;
         });
         detailPicksContainer.innerHTML = picksHtml;
+
+        // Wire up expandable analysis buttons
+        detailPicksContainer.querySelectorAll(".btn-expand-analysis").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const targetId = btn.getAttribute("data-target");
+                const panel = document.getElementById(targetId);
+                const chevron = btn.querySelector(".expand-chevron");
+                if (panel.style.display === "none" || panel.style.display === "") {
+                    panel.style.display = "block";
+                    panel.classList.add("analysis-panel-open");
+                    btn.classList.add("expanded");
+                    chevron.style.transform = "rotate(180deg)";
+                    btn.innerHTML = `<i class="fa-solid fa-microscope"></i> Ocultar Análisis <i class="fa-solid fa-chevron-down expand-chevron" style="transform:rotate(180deg)"></i>`;
+                } else {
+                    panel.style.display = "none";
+                    panel.classList.remove("analysis-panel-open");
+                    btn.classList.remove("expanded");
+                    btn.innerHTML = `<i class="fa-solid fa-microscope"></i> Ver Análisis Completo de la IA <i class="fa-solid fa-chevron-down expand-chevron"></i>`;
+                }
+            });
+        });
 
         // Resetear buscador y filtros de mercados de 1xBet al cambiar de partido
         if (marketSearchInput) marketSearchInput.value = "";
