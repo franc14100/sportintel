@@ -822,6 +822,25 @@ def generate_daily_sports_data():
             loser_injuries = len(away_injuries) if prob_home > prob_away else len(home_injuries)
             winner_formation = lineups['home']['formation'] if prob_home > prob_away else lineups['away']['formation']
             loser_formation = lineups['away']['formation'] if prob_home > prob_away else lineups['home']['formation']
+
+            # Detect neutral venue (World Cup, Copa Libertadores, etc.) - no home/away advantage
+            league_name_lower = match.get('league', '').lower()
+            neutral_venue = any(kw in league_name_lower for kw in [
+                'world cup', 'mundial', 'copa libertadores', 'copa sudamericana',
+                'champions league', 'europa league', 'nations league', 'eurocup',
+                'olympic', 'olímpico', 'conmebol'
+            ])
+            
+            if neutral_venue:
+                venue_winner_txt = f"{winner_name} (favorito)"
+                venue_loser_txt = f"{loser_name} (rival)"
+                venue_btts_defensive = f"la formación defensiva de al menos uno de los equipos reduce las probabilidades de gol, sin ventaja de localidad."
+                venue_context = f"Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes."
+            else:
+                venue_winner_txt = f"{winner_name}"
+                venue_loser_txt = f"{loser_name}"
+                venue_btts_defensive = f"la formación defensiva del equipo local reduce las probabilidades de gol visitante."
+                venue_context = f"El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición."
             
             total_goals_h2h = sum([int(r['score'].split('-')[0].strip()) + int(r['score'].split('-')[1].strip()) for r in h2h['last_results'] if r['score']])
             avg_goals = round(total_goals_h2h / max(len(h2h['last_results']), 1), 1)
@@ -829,14 +848,14 @@ def generate_daily_sports_data():
             btts_prob = random.randint(55, 75) if btts_selection == "Sí" else random.randint(50, 68)
             
             analysis_1x2 = {
-                "tactical": f"La formación {winner_formation} de {winner_name} tiene una ventaja estructural sobre el esquema {loser_formation} de {loser_name}. El equipo favorito presiona alto con efectividad demostrada en sus últimos {home_form.count('W') + away_form.count('W')} partidos combinados. Los {loser_injuries} baja(s) clave en {loser_name} debilitan notablemente su línea defensiva y el mediocampo de control.",
+                "tactical": f"La formación {winner_formation} de {venue_winner_txt} tiene una ventaja estructural sobre el esquema {loser_formation} de {venue_loser_txt}. El equipo favorito presiona alto con efectividad demostrada en sus últimos {home_form.count('W') + away_form.count('W')} partidos combinados. Los {loser_injuries} baja(s) clave en {loser_name} debilitan notablemente su línea defensiva y el mediocampo de control. {venue_context}",
                 "statistical": f"En los últimos 5 H2H, {winner_name} acumula {winner_wins} victorias directas. Su racha reciente {winner_form} supera estadísticamente a la del rival. La probabilidad matemática calculada por el algoritmo es del {int(max(prob_home, prob_away))}%, lo que representa un Edge (ventaja) de valor positivo sobre las cuotas del mercado. Promedio de goles en H2H: {avg_goals} por partido.",
-                "market": f"Se detectaron movimientos de línea favorables. El rumor filtrado ('{rumors[0]['headline']}') generó flujo de apuestas sharps hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en {factor_suerte}%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                "market": f"Se detectaron movimientos de línea favorables hacia {winner_name}. El rumor filtrado ('{rumors[0]['headline']}') generó flujo de apuestas sharps hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en {factor_suerte}%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
             }
             analysis_btts = {
-                "tactical": f"Con un promedio de {avg_goals} goles en los últimos 5 enfrentamientos directos, la tendencia goleadora de este H2H es {'alta' if avg_goals >= 2.5 else 'moderada'}. La formación {'ambos equipos apuestan al ataque con líneas adelantadas' if btts_selection == 'Sí' else 'defensiva de al menos uno de los equipos reduce las probabilidades de gol visitante'}.",
-                "statistical": f"Análisis de Expected Goals (xG): El modelo proyecta un xG combinado de {round(avg_goals * random.uniform(0.8, 1.1), 2)} goles. {home_name} ha marcado en {random.randint(60, 90)}% de sus partidos recientes. {away_name} ha marcado en {random.randint(50, 85)}% de sus salidas. Con {len(home_injuries) + len(away_injuries)} bajas totales entre ambos equipos, el potencial ofensivo es {'el esperado' if btts_selection == 'Sí' else 'inferior al normal'}.",
-                "market": f"Las cuotas para 'Ambos Anotan {btts_selection}' reflejan un valor de mercado sólido. La IA detectó {random.randint(60, 85)}% del volumen de apuestas sharps orientado a este resultado. El rumor: '{rumors[1]['headline']}' puede impactar el estado mental del equipo, {'favoreciendo' if btts_selection == 'Sí' else 'reduciendo'} la producción ofensiva."
+                "tactical": f"Con un promedio de {avg_goals} goles en los últimos 5 enfrentamientos directos, la tendencia goleadora de este H2H es {'alta' if avg_goals >= 2.5 else 'moderada'}. {'Ambos equipos apuestan al ataque con líneas adelantadas' if btts_selection == 'Sí' else venue_btts_defensive.capitalize()}.",
+                "statistical": f"Análisis de Expected Goals (xG): El modelo proyecta un xG combinado de {round(avg_goals * random.uniform(0.8, 1.1), 2)} goles. {home_name} ha marcado en {random.randint(60, 90)}% de sus partidos recientes. {away_name} ha marcado en {random.randint(50, 85)}% de sus últimos encuentros. Con {len(home_injuries) + len(away_injuries)} bajas totales entre ambos equipos, el potencial ofensivo es {'el esperado' if btts_selection == 'Sí' else 'inferior al normal'}. {venue_context}",
+                "market": f"Las cuotas para 'Ambos Anotan {btts_selection}' reflejan un valor de mercado sólido. La IA detectó {random.randint(60, 85)}% del volumen de apuestas sharps orientado a este resultado. El rumor: '{rumors[1]['headline']}' puede impactar el estado mental de alguno de los equipos, {'favoreciendo' if btts_selection == 'Sí' else 'reduciendo'} la producción ofensiva."
             }
 
             reasoning_1x2 = analysis_1x2
