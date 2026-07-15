@@ -2209,9 +2209,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
 
-                <div class="player-commentary" style="background: rgba(6, 182, 212, 0.02); padding: 15px; border-radius: 8px; border-left: 3px solid var(--accent-cyan);">
-                    <h4 style="font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 8px; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-brain-circuit"></i> Argumentación de la IA para esta opción</h4>
-                    <p style="font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary);">${pick.reasoning}</p>
+                <div class="player-commentary" style="background: rgba(6, 182, 212, 0.02); padding: 12px; border-radius: 8px; border-left: 3px solid var(--accent-cyan);">
+                    <h4 style="font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 10px; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-brain-circuit"></i> Argumentación de la IA para esta opción</h4>
+                    ${typeof pick.reasoning === 'object' && pick.reasoning !== null ? `
+                        <div style="display:flex; flex-direction:column; gap:8px;">
+                            <div style="padding:8px 10px; background:rgba(6,182,212,0.06); border-radius:6px; border-left:2px solid var(--accent-cyan);">
+                                <div style="font-size:0.7rem; font-weight:700; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:4px;"><i class="fa-solid fa-chess"></i> Táctica</div>
+                                <p style="font-size:0.8rem; line-height:1.5; color:var(--text-secondary); margin:0;">${pick.reasoning.tactical}</p>
+                            </div>
+                            <div style="padding:8px 10px; background:rgba(16,185,129,0.06); border-radius:6px; border-left:2px solid var(--accent-green);">
+                                <div style="font-size:0.7rem; font-weight:700; color:var(--accent-green); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:4px;"><i class="fa-solid fa-chart-bar"></i> Estadística</div>
+                                <p style="font-size:0.8rem; line-height:1.5; color:var(--text-secondary); margin:0;">${pick.reasoning.statistical}</p>
+                            </div>
+                            <div style="padding:8px 10px; background:rgba(139,92,246,0.06); border-radius:6px; border-left:2px solid #8B5CF6;">
+                                <div style="font-size:0.7rem; font-weight:700; color:#8B5CF6; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:4px;"><i class="fa-solid fa-signal"></i> Mercado</div>
+                                <p style="font-size:0.8rem; line-height:1.5; color:var(--text-secondary); margin:0;">${pick.reasoning.market}</p>
+                            </div>
+                        </div>
+                    ` : `<p style="font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary);">${pick.reasoning || ''}</p>`}
                 </div>
             </div>
         `;
