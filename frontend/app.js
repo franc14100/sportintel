@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(updateBankrollChart, 100);
             }
             if (targetTab === "escalera") {
-                pageTitle.textContent = "Reto Escalera 30 Días";
+                pageTitle.textContent = "Reto Escalera Semanal (7 Días)";
                 renderEscaleraTab();
             }
             
@@ -2049,7 +2049,7 @@ document.addEventListener("DOMContentLoaded", () => {
         escaleraCurrentDay = parseInt(localStorage.getItem("escalera_day")) || 1;
         escaleraStartingStake = parseFloat(localStorage.getItem("escalera_start_stake")) || 10;
         escaleraCurrentStake = parseFloat(localStorage.getItem("escalera_current_stake")) || 10;
-        escaleraTargetDays = parseInt(localStorage.getItem("escalera_target_days")) || 30;
+        escaleraTargetDays = parseInt(localStorage.getItem("escalera_target_days")) || 7;
         escaleraCurrentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
         
         
