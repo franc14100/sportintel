@@ -1196,18 +1196,108 @@ def generate_daily_sports_data():
         
     json_path = os.path.join(frontend_dir, "data.json")
     
-    # Armar boleto estrella premium combinando las 2 mejores selecciones encontradas
+    # Armar boleto estrella premium de forma inteligente (Simple vs Combinado, priorizando Fútbol y Tenis)
+    priority_picks = []
+    fallback_picks = []
+    for m in matches_data:
+        sport = m.get('sport')
+        for p in m.get('picks', []):
+            pick_info = {
+                "match": f"{m['home']} vs {m['away']}",
+                "sport": sport,
+                "market": p['market'],
+                "selection": p['selection'],
+                "odd": p['odd'],
+                "probability": p['probability'],
+                "reasoning": p['reasoning']
+            }
+            if sport in ['Football', 'Tennis']:
+                priority_picks.append(pick_info)
+            else:
+                fallback_picks.append(pick_info)
+
+    # Ordenar por seguridad/probabilidad descendente
+    priority_picks = sorted(priority_picks, key=lambda x: x['probability'], reverse=True)
+    fallback_picks = sorted(fallback_picks, key=lambda x: x['probability'], reverse=True)
+    
+    usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
+    
     star_selections = []
+    ticket_type = "Simple"
     total_odd = 1.0
-    for m in matches_data[:2]:
-        star_selections.append({
-            "match": f"{m['home']} vs {m['away']}",
-            "sport": m['sport'],
-            "market": m['picks'][0]['market'],
-            "pick": m['picks'][0]['selection'],
-            "odd": m['picks'][0]['odd']
-        })
-        total_odd *= m['picks'][0]['odd']
+    star_reasoning = ""
+    star_confidence = 85
+    
+    if usable_picks:
+        best_pick = usable_picks[0]
+        # Si el pick individual más seguro ya tiene una gran cuota de valor (>= 1.50) y alta confianza (>= 72%)
+        # hacemos un Boleto Simple para minimizar riesgos.
+        if best_pick['odd'] >= 1.50 and best_pick['probability'] >= 72:
+            ticket_type = "Simple"
+            star_selections.append({
+                "match": best_pick["match"],
+                "sport": best_pick["sport"],
+                "market": best_pick["market"],
+                "pick": best_pick["selection"],
+                "odd": best_pick["odd"]
+            })
+            total_odd = best_pick["odd"]
+            star_confidence = best_pick["probability"]
+            
+            r_text = ""
+            if isinstance(best_pick["reasoning"], dict):
+                r_text = best_pick["reasoning"].get("tactical", "") or best_pick["reasoning"].get("statistical", "")
+            else:
+                r_text = best_pick["reasoning"]
+                
+            star_reasoning = f"Boleto Simple de Alta Seguridad. Elegimos este pick único porque ofrece una cuota de valor superior a 1.50 (@{total_odd:.2f}) con una probabilidad de acierto excepcional del {best_pick['probability']}%. Análisis: {r_text}"
+        else:
+            # Si el pick más seguro tiene cuota menor a 1.50, combinamos los dos más seguros de diferentes partidos para pasar el 1.50
+            ticket_type = "Combinado"
+            star_selections.append({
+                "match": best_pick["match"],
+                "sport": best_pick["sport"],
+                "market": best_pick["market"],
+                "pick": best_pick["selection"],
+                "odd": best_pick["odd"]
+            })
+            total_odd = best_pick["odd"]
+            
+            # Buscar el segundo pick de un partido diferente
+            second_pick = None
+            for p in usable_picks[1:]:
+                if p["match"] != best_pick["match"]:
+                    second_pick = p
+                    break
+            
+            if second_pick:
+                star_selections.append({
+                    "match": second_pick["match"],
+                    "sport": second_pick["sport"],
+                    "market": second_pick["market"],
+                    "pick": second_pick["selection"],
+                    "odd": second_pick["odd"]
+                })
+                total_odd *= second_pick["odd"]
+                # La confianza combinada es el promedio de ambas
+                star_confidence = int((best_pick["probability"] + second_pick["probability"]) / 2)
+                
+                r1 = best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
+                r2 = second_pick["reasoning"].get("tactical", "") if isinstance(second_pick["reasoning"], dict) else second_pick["reasoning"]
+                star_reasoning = f"Boleto Combinado Premium de Bajo Riesgo (Cuota total: @{total_odd:.2f}). Combinamos dos selecciones con probabilidades individuales muy altas ({best_pick['probability']}% y {second_pick['probability']}%) para superar la barrera de 1.50 de forma segura. Análisis combinados: 1) {r1} 2) {r2}"
+            else:
+                # Si no hay un segundo partido disponible
+                ticket_type = "Simple"
+                total_odd = best_pick["odd"]
+                star_confidence = best_pick["probability"]
+                r1 = best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
+                star_reasoning = f"Boleto Simple de Seguridad. Cuota: @{total_odd:.2f}, Probabilidad: {best_pick['probability']}%. Análisis: {r1}"
+    else:
+        # Fallback si no hay picks generados
+        star_selections = []
+        total_odd = 1.50
+        star_confidence = 80
+        star_reasoning = "Analizando variables de mercado..."
         
     total_won = previous_data.get("global_stats", {}).get("total_picks_won", 0) if previous_data else 0
     total_lost = previous_data.get("global_stats", {}).get("total_picks_lost", 0) if previous_data else 0
@@ -1241,10 +1331,11 @@ def generate_daily_sports_data():
             "roi_percentage": round((total_won * 0.85) - (total_lost * 1.0), 2)
         },
         "star_ticket": {
+            "type": ticket_type,
             "selections": star_selections,
             "total_odd": round(total_odd, 2),
-            "confidence": 82,
-            "reasoning": f"Combinada analítica construida con los dos eventos de mayor seguridad del día en base a estadísticas en tiempo real extraídas de ESPN. Presenta una alta viabilidad defensiva y cuotas equilibradas."
+            "confidence": star_confidence,
+            "reasoning": star_reasoning
         }
     }
 
