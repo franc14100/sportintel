@@ -1045,7 +1045,7 @@ def generate_daily_sports_data():
             rating_away = TEAM_RATINGS.get(away_name, 80)
             rating_diff = rating_home - rating_away
             
-            prob_home = min(max(50 + rating_diff * 3.0, 10), 90)
+            prob_home = min(max(50 + rating_diff * 1.2, 10), 90)
             prob_away = 100 - prob_home
             
             odd_home = round(100.0 / prob_home, 2)
@@ -1108,7 +1108,7 @@ def generate_daily_sports_data():
                 
             rating_diff = rating_home - rating_away
             
-            prob_home = min(max(50 + rating_diff * 3.5, 10), 90)
+            prob_home = min(max(50 + rating_diff * 1.2, 10), 90)
             prob_away = 100 - prob_home
             
             odd_home = round(100.0 / prob_home, 2)
