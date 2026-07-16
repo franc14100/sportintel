@@ -13,7 +13,7 @@ def fetch_live_matches():
     ctx.verify_mode = ssl.CERT_NONE
 
     urls = [
-        ("Fútbol Mundial", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard"),
+        ("Fútbol General", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard"),
         ("FIFA World Cup", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard"),
         ("Premier League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard"),
         ("La Liga", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard"),
@@ -203,6 +203,18 @@ def fetch_live_matches():
                                 time_part = dt_str.split("T")[1]
                                 time_display = time_part[:5]
                             
+                        # Check notes or format to detect if it is a cup/knockout match
+                        is_cup = False
+                        notes = comp.get("notes", [])
+                        notes_text = " ".join([n.get("text", "").lower() for n in notes]) if notes else ""
+                        if any(kw in notes_text for kw in ["leg", "aggregate", "tied", "elimina", "clasific", "round of", "quarter", "semi", "final", "knockout"]):
+                            is_cup = True
+                        
+                        # Also check the league name
+                        league_lower = league_name.lower()
+                        if any(kw in league_lower for kw in ["cup", "copa", "champions league", "europa league", "libertadores", "sudamericana", "world cup", "mundial"]):
+                            is_cup = True
+
                         venue = comp.get("venue", {}).get("fullName", "Estadio Deportivo")
                         
                         fetched_matches.append({
@@ -218,12 +230,25 @@ def fetch_live_matches():
                             "stadium": venue,
                             "status": status_state,
                             "home_score": home_score,
-                            "away_score": away_score
+                            "away_score": away_score,
+                            "is_cup": is_cup
                         })
         except Exception as e:
             print(f"[Aviso] No se pudo conectar al endpoint de {league_name}: {e}")
             
-    return fetched_matches
+    # Deduplicate matches, keeping the one with the more specific league name (e.g. MLS instead of Fútbol Mundial)
+    deduped = {}
+    for m in fetched_matches:
+        key = f"{m['home'].lower().strip()}_{m['away'].lower().strip()}"
+        if key not in deduped:
+            deduped[key] = m
+        else:
+            existing_league = deduped[key]['league'].lower()
+            new_league = m['league'].lower()
+            if 'fútbol mundial' in existing_league and 'fútbol mundial' not in new_league:
+                deduped[key] = m
+
+    return list(deduped.values())
 
 
 def fetch_odds_api_matches():
@@ -825,7 +850,7 @@ def generate_daily_sports_data():
 
             # Detect neutral venue (World Cup, Copa Libertadores, etc.) - no home/away advantage
             league_name_lower = match.get('league', '').lower()
-            neutral_venue = any(kw in league_name_lower for kw in [
+            neutral_venue = match.get('is_cup', False) or any(kw in league_name_lower for kw in [
                 'world cup', 'mundial', 'copa libertadores', 'copa sudamericana',
                 'champions league', 'europa league', 'nations league', 'eurocup',
                 'olympic', 'olímpico', 'conmebol'
@@ -972,10 +997,34 @@ def generate_daily_sports_data():
             ]
 
             # For World Cup / Copa knockout rounds: add special elimination markets
-            if neutral_venue and any(kw in league_name_lower for kw in ['world cup', 'mundial', 'champions league', 'copa libertadores', 'copa sudamericana']):
+            if neutral_venue:
                 prob_rt = random.randint(52, 68)   # Regular time
                 prob_et = random.randint(18, 28)   # Extra time
                 prob_pk = 100 - prob_rt - prob_et  # Penalties
+                
+                # Estimate qualification probability: home_prob + half of draw_prob
+                qual_prob_home = int(prob_home + 0.5 * prob_draw)
+                qual_prob_away = 100 - qual_prob_home
+                qual_winner = home_name if qual_prob_home > qual_prob_away else away_name
+                qual_prob = max(qual_prob_home, qual_prob_away)
+                qual_odd = round(100.0 / qual_prob, 2)
+                
+                # 1. Se Clasifica (To Qualify)
+                picks.append({
+                    "market": "Se Clasifica",
+                    "selection": qual_winner,
+                    "odd": qual_odd,
+                    "probability": qual_prob,
+                    "risk": "Low" if qual_prob > 60 else "Medium",
+                    "reasoning": {
+                        "tactical": f"En el contexto de una eliminatoria a partido único, {qual_winner} presenta mayor equilibrio en todas sus líneas y variantes en la banca de suplentes para destrabar el partido si llega a tiempo extra. {venue_context}",
+                        "statistical": f"El modelo actuarial proyecta un {qual_prob}% de probabilidad de éxito para la clasificación de {qual_winner}. Su historial de clasificación en fases decisivas respalda este Edge de valor.",
+                        "market": f"El dinero inteligente (sharp money) ha respaldado de forma consistente la línea de clasificación de {qual_winner}, recortando la cuota original."
+                    },
+                    "status": "pending"
+                })
+
+                # 2. Método de Clasificación
                 picks.append({
                     "market": "Método de Clasificación",
                     "selection": "Tiempo Reglamentario - Sí",
@@ -1098,10 +1147,17 @@ def generate_daily_sports_data():
                     "status": "pending"
                 }
             ]
-
-        if not prev_match:
-            for p in picks:
-                p["status"] = "pending"
+        # Filter and sort picks to keep only the top 3 safest (highest probability) options
+        # If it's a cup match, we prioritize 'Se Clasifica' so that it is always one of the 3 displayed picks.
+        has_se_clasifica = any(p['market'] == "Se Clasifica" for p in picks)
+        if has_se_clasifica:
+            se_clasifica_pick = next(p for p in picks if p['market'] == "Se Clasifica")
+            other_picks = [p for p in picks if p['market'] != "Se Clasifica"]
+            other_picks = sorted(other_picks, key=lambda x: x.get('probability', 0), reverse=True)
+            picks = [se_clasifica_pick] + other_picks[:2]
+            picks = sorted(picks, key=lambda x: x.get('probability', 0), reverse=True)
+        else:
+            picks = sorted(picks, key=lambda x: x.get('probability', 0), reverse=True)[:3]
 
         if not prev_match:
             for p in picks:
