@@ -280,6 +280,18 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Star Ticket render
         const ticket = appData.star_ticket;
+        
+        // Update ticket type badge dynamically
+        const starHeaderTitle = document.querySelector(".star-ticket-card h3");
+        if (starHeaderTitle) {
+            const typeStr = ticket.type || "Combinado";
+            const badgeBg = typeStr === "Simple" ? "rgba(16, 185, 129, 0.15)" : "rgba(139, 92, 246, 0.15)";
+            const badgeColor = typeStr === "Simple" ? "var(--accent-green)" : "#c084fc";
+            const badgeBorder = typeStr === "Simple" ? "rgba(16, 185, 129, 0.3)" : "rgba(139, 92, 246, 0.3)";
+            
+            starHeaderTitle.innerHTML = `Boleto Estrella del Día <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
+        }
+
         let selectionsHtml = "";
         
         ticket.selections.forEach(sel => {
