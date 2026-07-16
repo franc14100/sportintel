@@ -654,6 +654,11 @@
                         <div class="card-value" id="escalera-goal-val">$56.29</div>
                         <div class="card-label">Meta Final (Día 7)</div>
                     </div>
+                    <div class="stat-card" style="border: 1px dashed var(--accent-green);">
+                        <div class="card-icon green" style="background: rgba(16, 185, 129, 0.1);"><i class="fa-solid fa-vault"></i></div>
+                        <div class="card-value" id="escalera-saved-val">$0.00</div>
+                        <div class="card-label">Bolsillo Seguro (Asegurado)</div>
+                    </div>
                 </div>
 
                 <!-- Horizontal Step Visualizer -->
@@ -709,6 +714,15 @@
                                     <label class="form-label" style="font-size: 0.75rem;">Objetivo (Días)</label>
                                     <input type="number" id="input-escalera-target-days" value="7" min="3" max="50" class="form-input" style="font-size: 0.8rem; padding: 6px 10px;">
                                 </div>
+                            </div>
+                            <div class="form-group" style="margin-top: 15px; margin-bottom: 15px;">
+                                <label class="form-label" style="font-size: 0.75rem; color: var(--accent-green);"><i class="fa-solid fa-shield-heart"></i> Escudo de Protección de Capital</label>
+                                <select id="select-escalera-protection" class="form-input" style="font-size: 0.8rem; padding: 6px 10px; background: var(--bg-card); color: var(--text-primary); border-color: var(--border-color);">
+                                    <option value="none">Sin Protección (Arriesgar Todo)</option>
+                                    <option value="withdraw_initial" selected>Retirar Inversión Inicial (Cero Riesgo al Duplicar)</option>
+                                    <option value="save_50_profit">Asegurar 50% de la Ganancia Diaria (Crecimiento Conservador)</option>
+                                    <option value="save_20_profit">Asegurar 20% de la Ganancia Diaria (Crecimiento Moderado)</option>
+                                </select>
                             </div>
                             <div class="card-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
                                 <div class="form-group" style="margin-bottom: 0;">
