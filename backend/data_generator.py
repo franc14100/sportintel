@@ -1095,8 +1095,17 @@ def generate_daily_sports_data():
             ]
         else:
             # Tenis
-            rating_home = TEAM_RATINGS.get(home_name, 80)
-            rating_away = TEAM_RATINGS.get(away_name, 80)
+            # Tenis: Calculate stable distinct ratings based on player names if not pre-rated
+            rating_home = TEAM_RATINGS.get(home_name)
+            if not rating_home:
+                score_home = sum(ord(c) for c in home_name)
+                rating_home = 70 + (score_home % 16)
+                
+            rating_away = TEAM_RATINGS.get(away_name)
+            if not rating_away:
+                score_away = sum(ord(c) for c in away_name)
+                rating_away = 70 + (score_away % 16)
+                
             rating_diff = rating_home - rating_away
             
             prob_home = min(max(50 + rating_diff * 3.5, 10), 90)
@@ -1252,25 +1261,31 @@ def generate_daily_sports_data():
                 
             star_reasoning = f"Boleto Simple de Alta Seguridad. Elegimos este pick único porque ofrece una cuota de valor superior a 1.50 (@{total_odd:.2f}) con una probabilidad de acierto excepcional del {best_pick['probability']}%. Análisis: {r_text}"
         else:
-            # Si el pick más seguro tiene cuota menor a 1.50, combinamos los dos más seguros de diferentes partidos para pasar el 1.50
-            ticket_type = "Combinado"
-            star_selections.append({
-                "match": best_pick["match"],
-                "sport": best_pick["sport"],
-                "market": best_pick["market"],
-                "pick": best_pick["selection"],
-                "odd": best_pick["odd"]
-            })
-            total_odd = best_pick["odd"]
-            
-            # Buscar el segundo pick de un partido diferente
+            # Si el pick más seguro tiene cuota menor a 1.50, buscamos el segundo pick más seguro de un partido diferente que nos permita pasar el 1.50
+            # Recorremos la lista ordenada por probabilidad descendente para elegir el segundo pick más seguro posible.
             second_pick = None
             for p in usable_picks[1:]:
                 if p["match"] != best_pick["match"]:
-                    second_pick = p
-                    break
+                    if best_pick["odd"] * p["odd"] >= 1.50:
+                        second_pick = p
+                        break
+            
+            # Si no encontramos ningún pick que pase el 1.50 (todos muy bajos), tomamos el segundo pick más seguro disponible
+            if not second_pick:
+                for p in usable_picks[1:]:
+                    if p["match"] != best_pick["match"]:
+                        second_pick = p
+                        break
             
             if second_pick:
+                ticket_type = "Combinado"
+                star_selections.append({
+                    "match": best_pick["match"],
+                    "sport": best_pick["sport"],
+                    "market": best_pick["market"],
+                    "pick": best_pick["selection"],
+                    "odd": best_pick["odd"]
+                })
                 star_selections.append({
                     "match": second_pick["match"],
                     "sport": second_pick["sport"],
@@ -1278,7 +1293,7 @@ def generate_daily_sports_data():
                     "pick": second_pick["selection"],
                     "odd": second_pick["odd"]
                 })
-                total_odd *= second_pick["odd"]
+                total_odd = best_pick["odd"] * second_pick["odd"]
                 # La confianza combinada es el promedio de ambas
                 star_confidence = int((best_pick["probability"] + second_pick["probability"]) / 2)
                 
