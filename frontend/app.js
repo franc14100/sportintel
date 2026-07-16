@@ -2052,6 +2052,15 @@ document.addEventListener("DOMContentLoaded", () => {
         escaleraTargetDays = parseInt(localStorage.getItem("escalera_target_days")) || 7;
         escaleraCurrentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
         
+        const escaleraSavedVal = document.getElementById("escalera-saved-val");
+        const currentSaved = parseFloat(localStorage.getItem("escalera_saved_profit")) || 0;
+        if (escaleraSavedVal) escaleraSavedVal.textContent = `$${currentSaved.toFixed(2)}`;
+        
+        const selectProtection = document.getElementById("select-escalera-protection");
+        if (selectProtection) {
+            const storedProt = localStorage.getItem("escalera_protection_type") || "withdraw_initial";
+            selectProtection.value = storedProt;
+        }
         
         if (inputEscaleraStartStake) inputEscaleraStartStake.value = escaleraStartingStake;
         if (inputEscaleraTargetDays) inputEscaleraTargetDays.value = escaleraTargetDays;
@@ -2301,19 +2310,57 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             localStorage.setItem("escalera_current_run", JSON.stringify(escaleraCurrentRun));
             
+            // Lógica de Protección de Capital / Escudo contra Varianza
+            const selectProt = document.getElementById("select-escalera-protection");
+            const protectionType = selectProt ? selectProt.value : "withdraw_initial";
+            localStorage.setItem("escalera_protection_type", protectionType);
+            
+            let savedToday = 0;
+            let nextStake = returnVal;
+            let currentSaved = parseFloat(localStorage.getItem("escalera_saved_profit")) || 0;
+            
+            if (protectionType === "withdraw_initial") {
+                const alreadyWithdrawn = localStorage.getItem("escalera_withdrawn_initial") === "true";
+                if (!alreadyWithdrawn && returnVal >= (2 * escaleraStartingStake)) {
+                    savedToday = escaleraStartingStake;
+                    nextStake = returnVal - escaleraStartingStake;
+                    localStorage.setItem("escalera_withdrawn_initial", "true");
+                    alert(`🛡️ ¡PROTECCIÓN ACTIVADA! Tu meta ha superado el doble de tu stake inicial. Hemos retirado tu inversión inicial de $${escaleraStartingStake.toFixed(2)} y la guardamos en tu bolsillo seguro. ¡Ahora juegas gratis con dinero ganado!`);
+                }
+            } else if (protectionType === "save_50_profit") {
+                const profit = returnVal - escaleraCurrentStake;
+                if (profit > 0) {
+                    savedToday = parseFloat((profit * 0.50).toFixed(2));
+                    nextStake = parseFloat((returnVal - savedToday).toFixed(2));
+                }
+            } else if (protectionType === "save_20_profit") {
+                const profit = returnVal - escaleraCurrentStake;
+                if (profit > 0) {
+                    savedToday = parseFloat((profit * 0.20).toFixed(2));
+                    nextStake = parseFloat((returnVal - savedToday).toFixed(2));
+                }
+            }
+            
+            if (savedToday > 0) {
+                currentSaved = parseFloat((currentSaved + savedToday).toFixed(2));
+                localStorage.setItem("escalera_saved_profit", currentSaved.toFixed(2));
+            }
+            
             if (escaleraCurrentDay >= escaleraTargetDays) {
-                alert(`🎉 ¡RETADO COMPLETADO! Has finalizado el Reto Escalera de ${escaleraTargetDays} días con éxito. Convertiste $${escaleraStartingStake} en $${returnVal.toFixed(2)}.`);
-                logEscaleraAttempt("Ganado", returnVal);
+                const totalReturned = returnVal;
+                const totalSecured = currentSaved;
+                alert(`🎉 ¡RETO COMPLETADO CON ÉXITO! Convertiste tu capital inicial en $${totalReturned.toFixed(2)} y aseguraste $${totalSecured.toFixed(2)} en tu bolsillo seguro.`);
+                logEscaleraAttempt("Ganado", totalReturned + totalSecured);
                 resetEscalera();
             } else {
                 escaleraCurrentDay++;
-                escaleraCurrentStake = returnVal;
+                escaleraCurrentStake = nextStake;
                 
                 localStorage.setItem("escalera_day", escaleraCurrentDay);
                 localStorage.setItem("escalera_current_stake", escaleraCurrentStake);
                 
                 renderEscaleraTab();
-                alert(`📈 ¡Día Ganado! Avanzas al Día ${escaleraCurrentDay}.`);
+                alert(`📈 ¡Día Ganado! Avanzas al Día ${escaleraCurrentDay}. Stake para mañana: $${nextStake.toFixed(2)}${savedToday > 0 ? ` (Aseguraste $${savedToday.toFixed(2)} hoy)` : ""}`);
             }
         };
     }
@@ -2372,6 +2419,8 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("escalera_day", escaleraCurrentDay);
         localStorage.setItem("escalera_current_stake", escaleraCurrentStake);
         localStorage.setItem("escalera_current_run", JSON.stringify(escaleraCurrentRun));
+        localStorage.setItem("escalera_saved_profit", "0");
+        localStorage.setItem("escalera_withdrawn_initial", "false");
         renderEscaleraTab();
     }
 
@@ -2534,6 +2583,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem("escalera_current_stake", escaleraCurrentStake);
                 renderEscaleraTab();
             }
+        };
+    }
+
+    const selectEscaleraProtection = document.getElementById("select-escalera-protection");
+    if (selectEscaleraProtection) {
+        selectEscaleraProtection.onchange = (e) => {
+            const val = e.target.value;
+            localStorage.setItem("escalera_protection_type", val);
+            renderEscaleraTab();
         };
     }
     
