@@ -32,6 +32,132 @@ document.addEventListener("DOMContentLoaded", () => {
         sidebarOverlay.addEventListener("click", window.closeMobileMenu);
     }
 
+    // --- Cloud Sync Manager (PC ⇄ Mobile) ---
+    const SyncManager = {
+        getSyncId: function() {
+            return localStorage.getItem("escalera_sync_id") || "";
+        },
+        
+        setSyncId: function(id) {
+            localStorage.setItem("escalera_sync_id", id.trim());
+        },
+        
+        gatherState: function() {
+            return {
+                ub: JSON.parse(localStorage.getItem("user_bets")) || [],
+                sb: parseFloat(localStorage.getItem("starting_bankroll")) || 200,
+                oak: localStorage.getItem("odds_api_key") || "",
+                gak: localStorage.getItem("gemini_api_key") || "",
+                ed: parseInt(localStorage.getItem("escalera_day")) || 1,
+                ess: parseFloat(localStorage.getItem("escalera_start_stake")) || 10,
+                ecs: parseFloat(localStorage.getItem("escalera_current_stake")) || 10,
+                etd: parseInt(localStorage.getItem("escalera_target_days")) || 7,
+                ecr: JSON.parse(localStorage.getItem("escalera_current_run")) || [],
+                esp: parseFloat(localStorage.getItem("escalera_saved_profit")) || 0,
+                ewi: localStorage.getItem("escalera_withdrawn_initial") || "false",
+                ept: localStorage.getItem("escalera_protection_type") || "withdraw_initial",
+                eh: JSON.parse(localStorage.getItem("escalera_history")) || []
+            };
+        },
+        
+        applyState: function(s) {
+            if (!s) return;
+            if (s.ub) localStorage.setItem("user_bets", JSON.stringify(s.ub));
+            if (s.sb !== undefined) localStorage.setItem("starting_bankroll", s.sb);
+            if (s.oak !== undefined) localStorage.setItem("odds_api_key", s.oak);
+            if (s.gak !== undefined) localStorage.setItem("gemini_api_key", s.gak);
+            if (s.ed !== undefined) localStorage.setItem("escalera_day", s.ed);
+            if (s.ess !== undefined) localStorage.setItem("escalera_start_stake", s.ess);
+            if (s.ecs !== undefined) localStorage.setItem("escalera_current_stake", s.ecs);
+            if (s.etd !== undefined) localStorage.setItem("escalera_target_days", s.etd);
+            if (s.ecr) localStorage.setItem("escalera_current_run", JSON.stringify(s.ecr));
+            if (s.esp !== undefined) localStorage.setItem("escalera_saved_profit", s.esp);
+            if (s.ewi !== undefined) localStorage.setItem("escalera_withdrawn_initial", s.ewi);
+            if (s.ept !== undefined) localStorage.setItem("escalera_protection_type", s.ept);
+            if (s.eh) localStorage.setItem("escalera_history", JSON.stringify(s.eh));
+        },
+        
+        pushState: async function() {
+            const id = this.getSyncId();
+            if (!id) return;
+            const state = this.gatherState();
+            try {
+                const encoded = encodeURIComponent(JSON.stringify(state));
+                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state/${encoded}`, {
+                    method: "POST"
+                });
+                console.log("[Sync] State pushed successfully to cloud.");
+            } catch (e) {
+                console.error("[Sync] Error pushing state:", e);
+            }
+        },
+        
+        pullState: async function() {
+            const id = this.getSyncId();
+            if (!id) return false;
+            try {
+                const res = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${id}/state`);
+                const dataText = await res.text();
+                if (dataText) {
+                    const cleaned = dataText.trim().replace(/^"|"$/g, '');
+                    if (cleaned && cleaned !== "null" && cleaned !== "Value not found" && !cleaned.includes("Error")) {
+                        const decoded = JSON.parse(decodeURIComponent(cleaned));
+                        this.applyState(decoded);
+                        console.log("[Sync] State pulled successfully from cloud.");
+                        return true;
+                    }
+                }
+            } catch (e) {
+                console.error("[Sync] Error pulling state:", e);
+            }
+            return false;
+        },
+        
+        generateNewPIN: async function() {
+            try {
+                const res = await fetch("https://keyvalue.immanuel.co/api/KeyVal/GetAppKey");
+                const keyText = await res.text();
+                const cleanKey = keyText.trim().replace(/^"|"$/g, '');
+                if (cleanKey) {
+                    this.setSyncId(cleanKey);
+                    await this.pushState();
+                    return cleanKey;
+                }
+            } catch (e) {
+                console.error("[Sync] Error generating new PIN:", e);
+            }
+            return "";
+        }
+    };
+
+    // Debounced automatic cloud push
+    let syncPushTimeout = null;
+    function triggerAutoSyncPush() {
+        if (SyncManager.getSyncId()) {
+            clearTimeout(syncPushTimeout);
+            syncPushTimeout = setTimeout(() => {
+                SyncManager.pushState();
+            }, 1000);
+        }
+    }
+    
+    // Override localStorage.setItem to auto-trigger cloud push on state changes
+    const originalSetItem = localStorage.setItem;
+    localStorage.setItem = function(key, value) {
+        originalSetItem.apply(this, arguments);
+        if (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll") {
+            triggerAutoSyncPush();
+        }
+    };
+
+    // Automatic cloud pull on load
+    (async () => {
+        if (SyncManager.getSyncId()) {
+            console.log("[Sync] Device linked. Pulling state on page load...");
+            await SyncManager.pullState();
+        }
+    })();
+
     // --- Global State ---
     let appData = null;
     let selectedMatch = null;
@@ -2099,6 +2225,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderEscaleraProgressMap();
         renderEscaleraPickCard(nextReturn);
         populateEscaleraHistoryTable();
+        renderSyncPanel();
     }
 
     function renderEscaleraProgressMap() {
@@ -2701,6 +2828,136 @@ document.addEventListener("DOMContentLoaded", () => {
                     btnAnalyzeCustomBet.disabled = false;
                 }, 1200);
             };
+        }
+    }
+
+    function renderSyncPanel() {
+        const container = document.getElementById("sync-container");
+        if (!container) return;
+        
+        const syncId = SyncManager.getSyncId();
+        if (!syncId) {
+            container.innerHTML = `
+                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+                    Comparte apuestas, balance de bankroll y progreso del reto escalera en tiempo real entre tu computadora y tu iPhone o Android de forma automática.
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <button class="btn btn-primary" id="btn-sync-generate" style="background: var(--accent-cyan); border-color: var(--accent-cyan); cursor: pointer; padding: 8px 12px; font-size: 0.8rem; font-weight: 700; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        <i class="fa-solid fa-key"></i> Generar PIN de Enlace
+                    </button>
+                    
+                    <div style="text-align: center; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">o vincular con código existente</div>
+                    
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <input type="text" id="input-sync-pin" placeholder="Pegar PIN (ej: ukjb4o5h)" class="form-input" style="font-size: 0.8rem; padding: 6px 10px; flex: 1; text-align: center; font-family: var(--font-display); text-transform: lowercase;">
+                        <button class="btn btn-secondary" id="btn-sync-link" style="border-color: var(--accent-green); color: var(--accent-green); cursor: pointer; padding: 6px 15px; font-size: 0.8rem; font-weight: 700;">
+                            Vincular
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            const btnGenerate = document.getElementById("btn-sync-generate");
+            if (btnGenerate) {
+                btnGenerate.onclick = async () => {
+                    btnGenerate.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generando...`;
+                    btnGenerate.disabled = true;
+                    const pin = await SyncManager.generateNewPIN();
+                    btnGenerate.disabled = false;
+                    if (pin) {
+                        renderSyncPanel();
+                        alert(`🔗 ¡PIN Generado! Utiliza el código "${pin}" en la sección de enlace en la nube de tu teléfono.`);
+                    } else {
+                        btnGenerate.innerHTML = `<i class="fa-solid fa-key"></i> Generar PIN de Enlace`;
+                        alert("Error de conexión. Inténtalo de nuevo.");
+                    }
+                };
+            }
+            
+            const btnLink = document.getElementById("btn-sync-link");
+            if (btnLink) {
+                btnLink.onclick = async () => {
+                    const pinVal = document.getElementById("input-sync-pin").value.trim().toLowerCase();
+                    if (!pinVal) {
+                        alert("Ingresa un PIN de enlace válido.");
+                        return;
+                    }
+                    btnLink.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
+                    btnLink.disabled = true;
+                    SyncManager.setSyncId(pinVal);
+                    const success = await SyncManager.pullState();
+                    btnLink.disabled = false;
+                    btnLink.innerHTML = "Vincular";
+                    if (success) {
+                        renderSyncPanel();
+                        alert("📱 ¡Dispositivo Vinculado con éxito! Tus datos se han sincronizado con la nube.");
+                        location.reload();
+                    } else {
+                        SyncManager.setSyncId("");
+                        alert("PIN no encontrado o error de conexión. Verifica el código e inténtalo de nuevo.");
+                    }
+                };
+            }
+        } else {
+            container.innerHTML = `
+                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
+                    Este navegador está vinculado a la nube. Los cambios en el reto y apuestas se sincronizan de forma bidireccional automática.
+                </div>
+                <div style="background: rgba(6,182,212,0.06); padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(6,182,212,0.2); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 0.62rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">PIN de Enlace Activo</div>
+                        <div id="sync-pin-display" style="font-size: 1.2rem; font-family: var(--font-display); font-weight: 800; color: var(--accent-cyan); letter-spacing: 1px;">${syncId}</div>
+                    </div>
+                    <button class="btn btn-secondary" id="btn-sync-copy" style="padding: 5px 10px; font-size: 0.72rem; border-color: var(--accent-cyan); color: var(--accent-cyan); cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-regular fa-copy"></i> Copiar
+                    </button>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 12px;">
+                    <button class="btn btn-primary" id="btn-sync-refresh" style="flex: 1.2; background: var(--accent-green); border-color: var(--accent-green); cursor: pointer; padding: 8px 5px; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px;">
+                        <i class="fa-solid fa-rotate"></i> Traer Datos Nube
+                    </button>
+                    <button class="btn btn-secondary" id="btn-sync-unlink" style="flex: 0.8; border-color: var(--accent-pink); color: var(--accent-pink); cursor: pointer; padding: 8px 5px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 4px;">
+                        <i class="fa-solid fa-unlink"></i> Desvincular
+                    </button>
+                </div>
+            `;
+            
+            const btnCopy = document.getElementById("btn-sync-copy");
+            if (btnCopy) {
+                btnCopy.onclick = () => {
+                    navigator.clipboard.writeText(syncId);
+                    btnCopy.innerHTML = `<i class="fa-solid fa-check"></i> Copiado`;
+                    setTimeout(() => { btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar`; }, 2000);
+                };
+            }
+            
+            const btnRefresh = document.getElementById("btn-sync-refresh");
+            if (btnRefresh) {
+                btnRefresh.onclick = async () => {
+                    btnRefresh.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Cargando...`;
+                    btnRefresh.disabled = true;
+                    const success = await SyncManager.pullState();
+                    btnRefresh.disabled = false;
+                    btnRefresh.innerHTML = `<i class="fa-solid fa-rotate"></i> Traer Datos Nube`;
+                    if (success) {
+                        alert("☁️ Datos de la nube cargados con éxito.");
+                        location.reload();
+                    } else {
+                        alert("No hay cambios en la nube o error de conexión.");
+                    }
+                };
+            }
+            
+            const btnUnlink = document.getElementById("btn-sync-unlink");
+            if (btnUnlink) {
+                btnUnlink.onclick = () => {
+                    if (confirm("¿Estás seguro de que deseas desvincular este dispositivo? Conservarás tus datos locales actuales, pero ya no se sincronizarán con los otros dispositivos.")) {
+                        SyncManager.setSyncId("");
+                        renderSyncPanel();
+                        alert("Dispositivo desvinculado.");
+                    }
+                };
+            }
         }
     }
 
