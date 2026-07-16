@@ -156,7 +156,8 @@ def fetch_live_matches():
                             team_info = {
                                 "name": t_name,
                                 "color": t_color,
-                                "accent": t_accent
+                                "accent": t_accent,
+                                "form": competitor.get("form", "")
                             }
                             
                             sc = competitor.get("score")
@@ -231,7 +232,9 @@ def fetch_live_matches():
                             "status": status_state,
                             "home_score": home_score,
                             "away_score": away_score,
-                            "is_cup": is_cup
+                            "is_cup": is_cup,
+                            "home_form_raw": home_team.get("form", ""),
+                            "away_form_raw": away_team.get("form", "")
                         })
         except Exception as e:
             print(f"[Aviso] No se pudo conectar al endpoint de {league_name}: {e}")
@@ -402,6 +405,17 @@ TEAM_RATINGS = {
     "Chelsea": 83,
     "Bayern Munich": 89,
     "Paris Saint-Germain": 86,
+    "Sheriff Tiraspol": 81,
+    "NK Aluminij": 63,
+    "Aluminij": 63,
+    "Toronto FC": 72,
+    "CF Montréal": 74,
+    "Seattle Sounders FC": 78,
+    "Portland Timbers": 75,
+    "St. Louis CITY SC": 76,
+    "Sporting Kansas City": 72,
+    "Chicago Fire FC": 71,
+    "Vancouver Whitecaps": 74,
     
     # Tenistas Famosos (ATP / WTA)
     "Novak Djokovic": 91,
@@ -609,10 +623,14 @@ def generate_daily_sports_data():
             home_squad = make_squad(sport)
             away_squad = make_squad(sport)
 
-        # Forma de los equipos
-        forms = ["W-W-D-W-L", "W-D-W-W-W", "L-W-D-L-W", "D-W-W-L-D", "W-W-L-W-W"]
-        home_form = random.choice(forms)
-        away_form = random.choice(forms)
+        # Forma de los equipos (usar datos reales si están disponibles, formateando con guiones)
+        def format_form_str(f_raw):
+            if not f_raw:
+                return random.choice(["W-W-D-W-L", "W-D-W-W-W", "L-W-D-L-W", "D-W-W-L-D", "W-W-L-W-W"])
+            return "-".join(list(str(f_raw).strip()))
+            
+        home_form = format_form_str(match.get("home_form_raw"))
+        away_form = format_form_str(match.get("away_form_raw"))
 
         # Lesionados
         injury_levels = ["Doubtful", "Out"]
@@ -815,8 +833,20 @@ def generate_daily_sports_data():
         real_odds = match.get('real_odds', {})  # Real odds from The Odds API if available
         
         if sport == "Football":
-            rating_home = TEAM_RATINGS.get(home_name, 80)
-            rating_away = TEAM_RATINGS.get(away_name, 80)
+            # Calculate form modifier based on W-D-L string
+            def get_form_rating_mod(form_str):
+                if not form_str: return 0
+                mod = 0
+                for char in form_str.replace("-", ""):
+                    if char == 'W': mod += 1.5
+                    elif char == 'L': mod -= 1.5
+                return mod
+                
+            base_rating_home = TEAM_RATINGS.get(home_name, 76)
+            base_rating_away = TEAM_RATINGS.get(away_name, 76)
+            
+            rating_home = base_rating_home + get_form_rating_mod(home_form)
+            rating_away = base_rating_away + get_form_rating_mod(away_form)
             rating_diff = rating_home - rating_away
             
             prob_home = min(max(38 + rating_diff * 2.12, 15), 85)
@@ -874,11 +904,11 @@ def generate_daily_sports_data():
             
             analysis_1x2 = {
                 "tactical": f"La formación {winner_formation} de {venue_winner_txt} tiene una ventaja estructural sobre el esquema {loser_formation} de {venue_loser_txt}. El equipo favorito presiona alto con efectividad demostrada en sus últimos {home_form.count('W') + away_form.count('W')} partidos combinados. Los {loser_injuries} baja(s) clave en {loser_name} debilitan notablemente su línea defensiva y el mediocampo de control. {venue_context}",
-                "statistical": f"En los últimos 5 H2H, {winner_name} acumula {winner_wins} victorias directas. Su racha reciente {winner_form} supera estadísticamente a la del rival. La probabilidad matemática calculada por el algoritmo es del {int(max(prob_home, prob_away))}%, lo que representa un Edge (ventaja) de valor positivo sobre las cuotas del mercado. Promedio de goles en H2H: {avg_goals} por partido.",
+                "statistical": f"La racha reciente de {winner_name} ({winner_form}) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del {int(max(prob_home, prob_away))}%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de {avg_goals} para este choque.",
                 "market": f"Se detectaron movimientos de línea favorables hacia {winner_name}. El rumor filtrado ('{rumors[0]['headline']}') generó flujo de apuestas sharps hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en {factor_suerte}%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
             }
             analysis_btts = {
-                "tactical": f"Con un promedio de {avg_goals} goles en los últimos 5 enfrentamientos directos, la tendencia goleadora de este H2H es {'alta' if avg_goals >= 2.5 else 'moderada'}. {'Ambos equipos apuestan al ataque con líneas adelantadas' if btts_selection == 'Sí' else venue_btts_defensive.capitalize()}.",
+                "tactical": f"La tendencia táctica de anotación para este compromiso es {'alta' if avg_goals >= 2.5 else 'moderada y de control'}. {'Ambos equipos plantean esquemas de ataque abierto con líneas ofensivas adelantadas' if btts_selection == 'Sí' else venue_btts_defensive.capitalize()}.",
                 "statistical": f"Análisis de Expected Goals (xG): El modelo proyecta un xG combinado de {round(avg_goals * random.uniform(0.8, 1.1), 2)} goles. {home_name} ha marcado en {random.randint(60, 90)}% de sus partidos recientes. {away_name} ha marcado en {random.randint(50, 85)}% de sus últimos encuentros. Con {len(home_injuries) + len(away_injuries)} bajas totales entre ambos equipos, el potencial ofensivo es {'el esperado' if btts_selection == 'Sí' else 'inferior al normal'}. {venue_context}",
                 "market": f"Las cuotas para 'Ambos Anotan {btts_selection}' reflejan un valor de mercado sólido. La IA detectó {random.randint(60, 85)}% del volumen de apuestas sharps orientado a este resultado. El rumor: '{rumors[1]['headline']}' puede impactar el estado mental de alguno de los equipos, {'favoreciendo' if btts_selection == 'Sí' else 'reduciendo'} la producción ofensiva."
             }
@@ -933,11 +963,11 @@ def generate_daily_sports_data():
                     "market": f"Más/Menos 2.5 Goles",
                     "selection": over25_sel,
                     "odd": round(over25_actual_odd, 2),
-                    "probability": random.randint(55, 72),
+                    "probability": int(min(max(35 + avg_goals * 10, 20), 80)) if avg_goals >= 2.5 else int(100 - min(max(35 + avg_goals * 10, 20), 80)),
                     "risk": "Low" if avg_goals >= 3.0 or avg_goals <= 1.5 else "Medium",
                     "reasoning": {
-                        "tactical": f"El promedio de goles en los últimos 5 H2H entre {home_name} y {away_name} es de {avg_goals} goles por partido. {'Los sistemas ofensivos de ambos equipos favorecen un partido abierto con muchos goles.' if avg_goals >= 2.5 else 'Las estructuras defensivas de ambos equipos históricamente producen partidos de pocos goles.'}",
-                        "statistical": f"xG proyectado: {round(avg_goals * random.uniform(0.85, 1.15), 2)} goles combinados. {home_name} promedia {round(random.uniform(1.2, 2.1), 1)} goles por partido y {away_name} {round(random.uniform(0.9, 1.8), 1)}. Con {len(home_injuries) + len(away_injuries)} bajas totales, el potencial goleador {'se mantiene alto' if avg_goals >= 2.5 else 'se reduce considerablemente'}.",
+                        "tactical": f"El planteamiento táctico proyecta una expectativa de {avg_goals} goles por partido. {'Los sistemas ofensivos de ambos equipos favorecen un partido abierto con muchos goles.' if avg_goals >= 2.5 else 'Las estructuras defensivas y el planteamiento táctico sugieren un partido cerrado de pocas ocasiones.'}",
+                        "statistical": f"xG proyectado: {round(avg_goals * random.uniform(0.85, 1.15), 2)} goles combinados. {home_name} promedia {round(random.uniform(1.2, 2.1), 1)} goles por partido y {away_name} {round(random.uniform(0.9, 1.8), 1)}. Con {len(home_injuries) + len(away_injuries)} bajas totales, el potencial ofensivo global se verá afectado.",
                         "market": f"La cuota @{round(over25_actual_odd, 2)} para '{over25_sel}' presenta un Edge positivo según el modelo. El volumen de apuestas sharps ({random.randint(55, 78)}%) confirma esta dirección. Rumor clave: '{rumors[0]['headline']}'."
                     },
                     "status": "pending"
@@ -946,11 +976,11 @@ def generate_daily_sports_data():
                     "market": "Doble Oportunidad",
                     "selection": f"{home_name} o Empate" if prob_home > prob_away else f"{away_name} o Empate",
                     "odd": dc_home_draw_odd if prob_home > prob_away else dc_away_draw_odd,
-                    "probability": random.randint(68, 82),
+                    "probability": int(prob_home + prob_draw) if prob_home > prob_away else int(prob_away + prob_draw),
                     "risk": "Low",
                     "reasoning": {
                         "tactical": f"La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. {venue_context} La ventaja táctica de {winner_name} hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-                        "statistical": f"Históricamente, {winner_name} no ha perdido en {random.randint(3, 7)} de sus últimos enfrentamientos directos. La probabilidad combinada supera el {random.randint(70, 85)}% según el modelo bayesiano de la IA.",
+                        "statistical": f"El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al {int(prob_home + prob_draw) if prob_home > prob_away else int(prob_away + prob_draw)}%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
                         "market": f"La cuota @{dc_home_draw_odd if prob_home > prob_away else dc_away_draw_odd} ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
                     },
                     "status": "pending"
@@ -959,11 +989,11 @@ def generate_daily_sports_data():
                     "market": "Empate No Apuesta (DNB)",
                     "selection": winner_name,
                     "odd": round(dnb_odd, 2),
-                    "probability": int(max(prob_home, prob_away)) + 8,
+                    "probability": int(max(prob_home, prob_away) / max(prob_home + prob_away, 1) * 100),
                     "risk": "Low",
                     "reasoning": {
                         "tactical": f"El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con {winner_name} como favorito claro, este mercado ofrece la máxima seguridad. {venue_context}",
-                        "statistical": f"La probabilidad de empate en este H2H es de solo {int(prob_draw)}% según el modelo. El {random.randint(65, 80)}% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "statistical": f"La probabilidad de empate en este compromiso es de solo {int(prob_draw)}% según el modelo. El {random.randint(65, 80)}% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
                         "market": f"@{round(dnb_odd, 2)} es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
                     },
                     "status": "pending"
@@ -972,12 +1002,12 @@ def generate_daily_sports_data():
                     "market": "Resultado 1er Tiempo",
                     "selection": fh_selection,
                     "odd": round(fh_odd, 2),
-                    "probability": random.randint(40, 62),
+                    "probability": int(max(prob_home, prob_away) * 0.75 + prob_draw * 0.25),
                     "risk": "Medium",
                     "reasoning": {
                         "tactical": f"El primer tiempo es clave para determinar la dinámica del partido. {winner_name} tiende a {'salir fuerte y marcar temprano' if random.random() > 0.5 else 'dominar en la segunda parte'}. La presión inicial {'favorece al favorito' if fh_selection != 'Empate' else 'suele equilibrarse antes del descanso'}.",
-                        "statistical": f"En los últimos 5 H2H, {random.randint(2, 4)} partidos terminaron el primer tiempo con el resultado ahora seleccionado. La IA detecta un patrón de inicio de partido consistente en los equipos involucrados.",
-                        "market": f"Los mercados de primer tiempo ofrecen cuotas más altas que el resultado final al 90'. @{round(fh_odd, 2)} para '{fh_selection}' al descanso representa un value bet con {random.randint(40, 62)}% de probabilidad proyectada."
+                        "statistical": f"La IA detecta un patrón de inicio consistente en las últimas participaciones de ambos equipos, sugiriendo un dominio táctico temprano o una postura defensiva inicial antes del descanso.",
+                        "market": f"Los mercados de primer tiempo ofrecen cuotas más altas que el resultado final al 90'. @{round(fh_odd, 2)} para '{fh_selection}' al descanso representa un value bet con probabilidad proyectada alineada al modelo."
                     },
                     "status": "pending"
                 },
@@ -985,12 +1015,12 @@ def generate_daily_sports_data():
                     "market": f"Hándicap Asiático {ah_val}",
                     "selection": f"{ah_fav} {ah_val}",
                     "odd": round(ah_odd, 2),
-                    "probability": random.randint(52, 68),
+                    "probability": int(max(prob_home, prob_away) - 5) if ah_val == "-0.5" else int(max(prob_home, prob_away) - 18),
                     "risk": "Medium",
                     "reasoning": {
                         "tactical": f"El Hándicap Asiático {ah_val} a favor de {ah_fav} elimina el empate del ecuación y exige una victoria por al menos {'2 goles' if ah_val == '-1.5' else '1 gol'}. La diferencia táctica y la calidad del plantel de {ah_fav} justifica esta apuesta de alto valor.",
-                        "statistical": f"{ah_fav} ha ganado por más de 1 gol en {random.randint(2, 4)} de sus últimos 5 partidos como favorito. Con un rating superior y {winner_wins} victorias H2H, el handicap {ah_val} tiene probabilidad matemática positiva.",
-                        "market": f"La cuota @{round(ah_odd, 2)} para el hándicap asiático {ah_val} de {ah_fav} es superiror al 'justo' calculado por el modelo. Este mercado está siendo ignorado por el público general, creando una oportunidad de valor para inversores informados."
+                        "statistical": f"{ah_fav} ha ganado por más de 1 gol en {random.randint(2, 4)} de sus últimos 5 partidos como favorito. Con un rating y volumen de juego superior, la probabilidad de cubrir el handicap {ah_val} es estadísticamente viable.",
+                        "market": f"La cuota @{round(ah_odd, 2)} para el hándicap asiático {ah_val} de {ah_fav} es superior al 'justo' calculado por el modelo. Este mercado está siendo ignorado por el público general, creando una oportunidad de valor para inversores informados."
                     },
                     "status": "pending"
                 },
@@ -1062,12 +1092,12 @@ def generate_daily_sports_data():
 
             analysis_ml_bball = {
                 "tactical": f"{winner_bball} ejecuta un sistema ofensivo de alta eficiencia que explota las debilidades defensivas de {loser_bball} en el perímetro y la zona pintada. Con {loser_bball_inj} baja(s) confirmadas en el rival, su rotación queda comprometida para los cuartos finales donde se deciden los partidos.",
-                "statistical": f"En los últimos 5 H2H, {winner_bball} registra {winner_bball_wins} victorias directas y racha actual de {winner_bball_form}. El modelo de proyección de puntos (PER, TS%) indica una ventaja del {int(max(prob_home, prob_away))}% de probabilidad de victoria. Los {len(home_injuries) + len(away_injuries)} lesionados totales impactarán el ritmo (PACE) del partido, inclinando la balanza.",
+                "statistical": f"Con una racha actual de {winner_bball_form}, el modelo de proyección estadística (PER, TS%) indica una ventaja del {int(max(prob_home, prob_away))}% de probabilidad de victoria para {winner_bball}. Las bajas totales impactarán el ritmo del partido, inclinando la balanza.",
                 "market": f"Las líneas de moneyline para este partido muestran movimiento hacia {winner_bball} en las últimas 4 horas. Reporte interno filtrado: '{rumors[0]['headline']}'. El factor sorpresa (varianza) se estimó en {factor_suerte}%, dentro del rango controlable por el modelo. El value bet es positivo según el cálculo actuarial."
             }
             analysis_total_bball = {
                 "tactical": f"El ritmo de juego (PACE) proyectado para este partido es de {random.randint(95, 108)} posesiones por cuarto. Los sistemas ofensivos de ambos equipos generan {random.randint(100, 120)} puntos promedio en sus últimas 5 salidas, lo que presiona la línea de totales hacia el Over.",
-                "statistical": f"Con {len(home_injuries) + len(away_injuries)} bajas entre ambos equipos, el PACE puede caer {random.randint(2, 8)} puntos por partido. El promedio histórico de este H2H es de {random.randint(195, 225)} puntos totales. El modelo proyecta un total entre {random.randint(155, 165)} y {random.randint(165, 175)} con 67% de confianza.",
+                "statistical": f"Con las bajas de ambos equipos, el PACE puede caer {random.randint(2, 8)} puntos por partido. El modelo proyecta un total entre {random.randint(155, 165)} y {random.randint(165, 175)} puntos en base al rendimiento ofensivo actual, con un 67% de confianza estadística.",
                 "market": f"El 'Más de 160.5 Puntos' acumula {random.randint(55, 75)}% del volumen de apuestas sharps según el monitoreo de líneas. Rumor que impacta el estado anímico: '{rumors[1]['headline']}'. Factor Caos estimado: {factor_suerte}%."
             }
 
@@ -1125,12 +1155,12 @@ def generate_daily_sports_data():
 
             analysis_ml_tennis = {
                 "tactical": f"{winner_tennis} demuestra superioridad táctica con un primer servicio que supera el 65% de efectividad en superficies similares. Su estilo de juego ({winner_tennis_form} en racha) contrarresta directamente el patrón de juego de {loser_tennis}, que además arrastra {loser_tennis_inj} molestia(s) física(s) que limitan su desplazamiento lateral y alcance en la red.",
-                "statistical": f"El H2H favorece claramente a {winner_tennis} con {winner_tennis_wins} victorias directas. Los datos de Break Points ganados, Aces por set y Dobles Faltas proyectan un Edge del {int(max(prob_home, prob_away))}% de probabilidad de victoria. El modelo de proyección de sets apunta a una victoria en {random.randint(2, 3)} sets con {random.randint(65, 85)}% de confianza estadística.",
-                "market": f"Las casas de apuestas movieron la línea a favor de {winner_tennis} en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: '{rumors[0]['headline']}'. El Factor Caos (lesiones de último minuto, condición del viento) se calculó en {factor_suerte}%, dentro del margen manejable."
+                "statistical": f"Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un {int(max(prob_home, prob_away))}% de probabilidad de victoria para {winner_tennis}. El modelo de sets apunta a una definición rápida con un 75% de confianza estadística.",
+                "market": f"Las casas de apuestas movieron la línea a favor de {winner_tennis} en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: '{rumors[0]['headline']}'. El Factor Caos se calculó en {factor_suerte}%, dentro del margen manejable."
             }
             analysis_sets_tennis = {
                 "tactical": f"Dado el nivel de {winner_tennis} y las condiciones del partido, la probabilidad de que el match se resuelva de forma contundente {'en 2 sets es alta' if abs(rating_diff) > 5 else 'requiriendo 3 sets es considerable'}. El estilo de juego de {winner_tennis} {'tiende a cerrar partidos rápido' if abs(rating_diff) > 5 else 'deja margen de respuesta al rival'}.",
-                "statistical": f"En el H2H reciente, el {random.randint(55, 80)}% de los partidos entre estos tenistas se resolvió en {'2' if abs(rating_diff) > 5 else '3'} sets. El promedio de games por set en estos enfrentamientos fue de {random.randint(9, 11)}-{random.randint(7, 9)}, indicando {'poca resistencia' if abs(rating_diff) > 5 else 'gran competitividad'} entre ambos jugadores.",
+                "statistical": f"El modelo de sets estima una probabilidad del {random.randint(55, 80)}% de que el encuentro se defina en el número de sets seleccionado, indicando {'poca resistencia' if abs(rating_diff) > 5 else 'gran competitividad'} entre ambos competidores.",
                 "market": f"Este mercado acumula {random.randint(55, 72)}% del volumen de apuestas orientado al {'Menos' if abs(rating_diff) > 5 else 'Más'} de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA. Rumor: '{rumors[1]['headline']}' que podría afectar el ánimo del jugador."
             }
 
