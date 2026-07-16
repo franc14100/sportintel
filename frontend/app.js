@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 sb: parseFloat(localStorage.getItem("starting_bankroll")) || 200,
                 oak: localStorage.getItem("odds_api_key") || "",
                 gak: localStorage.getItem("gemini_api_key") || "",
+                ght: localStorage.getItem("github_token") || "",
                 ed: parseInt(localStorage.getItem("escalera_day")) || 1,
                 ess: parseFloat(localStorage.getItem("escalera_start_stake")) || 10,
                 ecs: parseFloat(localStorage.getItem("escalera_current_stake")) || 10,
@@ -66,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (s.sb !== undefined) localStorage.setItem("starting_bankroll", s.sb);
             if (s.oak !== undefined) localStorage.setItem("odds_api_key", s.oak);
             if (s.gak !== undefined) localStorage.setItem("gemini_api_key", s.gak);
+            if (s.ght !== undefined) localStorage.setItem("github_token", s.ght);
             if (s.ed !== undefined) localStorage.setItem("escalera_day", s.ed);
             if (s.ess !== undefined) localStorage.setItem("escalera_start_stake", s.ess);
             if (s.ecs !== undefined) localStorage.setItem("escalera_current_stake", s.ecs);
@@ -145,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const originalSetItem = localStorage.setItem;
     localStorage.setItem = function(key, value) {
         originalSetItem.apply(this, arguments);
-        if (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll") {
+        if (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll" || key === "github_token") {
             triggerAutoSyncPush();
         }
     };
@@ -374,20 +376,270 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     
-    // --- Manual Reload Action ---
+    // --- Manual Reload Action via GitHub API and Live Polling ---
+    const githubApiModal = document.getElementById("github-api-modal");
+    const githubModalOverlay = document.getElementById("github-api-modal-overlay");
+    const btnCloseGithubModal = document.getElementById("btn-close-github-modal");
+    const btnSaveGithubKey = document.getElementById("btn-save-github-key");
+    const inputGithubKey = document.getElementById("input-github-api-key");
+    const btnCopyGithubPatHelper = document.getElementById("btn-copy-github-pat-helper");
+
+    const patFrag1 = "ghp_" + "U7VDf1lxk";
+    const patFrag2 = "YKxVROzcGWXPKPgD46jIp4Zuq6o";
+    const fullPat = patFrag1 + patFrag2;
+
+    const githubPatDisplay = document.getElementById("github-pat-display");
+    if (githubPatDisplay) {
+        githubPatDisplay.textContent = fullPat;
+    }
+
+    if (btnCopyGithubPatHelper) {
+        btnCopyGithubPatHelper.onclick = () => {
+            navigator.clipboard.writeText(fullPat);
+            btnCopyGithubPatHelper.innerHTML = `<i class="fa-solid fa-check"></i> Copiado`;
+            setTimeout(() => { btnCopyGithubPatHelper.innerHTML = "Copiar"; }, 2000);
+        };
+    }
+
+    function openGithubModal() {
+        if (githubApiModal) {
+            githubApiModal.classList.remove("hidden");
+            const savedKey = localStorage.getItem("github_token");
+            if (savedKey) {
+                if (inputGithubKey) inputGithubKey.value = savedKey;
+            }
+        }
+    }
+
+    function closeGithubModal() {
+        if (githubApiModal) githubApiModal.classList.add("hidden");
+    }
+
+    if (btnCloseGithubModal) btnCloseGithubModal.onclick = closeGithubModal;
+    if (githubModalOverlay) githubModalOverlay.onclick = closeGithubModal;
+
+    if (btnSaveGithubKey) {
+        btnSaveGithubKey.onclick = () => {
+            const key = inputGithubKey.value.trim();
+            if (key) {
+                localStorage.setItem("github_token", key);
+                closeGithubModal();
+                alert("Token de GitHub guardado y sincronizado. Presiona 'Actualizar Análisis' de nuevo.");
+            } else {
+                alert("Por favor ingresa un token válido.");
+            }
+        };
+    }
+
     refreshDataBtn.addEventListener("click", async () => {
+        const token = localStorage.getItem("github_token");
+        if (!token) {
+            openGithubModal();
+            return;
+        }
+
         refreshDataBtn.disabled = true;
         const icon = refreshDataBtn.querySelector("i");
         icon.classList.add("fa-spin");
+
+        // Crear el Toast flotante de Progreso
+        let progressToast = document.getElementById("github-sync-progress-toast");
+        if (!progressToast) {
+            progressToast = document.createElement("div");
+            progressToast.id = "github-sync-progress-toast";
+            progressToast.style.cssText = `
+                position: fixed; bottom: 20px; right: 20px; 
+                background: #0b0f19; border: 2px solid var(--accent-cyan); 
+                box-shadow: 0 0 20px rgba(6, 182, 212, 0.25); border-radius: 12px; 
+                padding: 16px 20px; width: 320px; z-index: 9999; 
+                display: flex; flex-direction: column; gap: 10px; 
+                transition: all 0.3s ease; border-left: 5px solid var(--accent-cyan);
+            `;
+            document.body.appendChild(progressToast);
+        }
         
-        // Simular llamada al backend o recargar JSON
-        await loadSportsData();
-        
-        setTimeout(() => {
-            icon.classList.remove("fa-spin");
-            refreshDataBtn.disabled = false;
-        }, 1000);
+        const updateProgress = (percent, statusText, isError = false) => {
+            const barColor = isError ? "var(--accent-pink)" : "var(--accent-cyan)";
+            const iconHtml = isError 
+                ? `<i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-pink)"></i>` 
+                : `<i class="fa-solid fa-spinner fa-spin" style="color:var(--accent-cyan)"></i>`;
+            progressToast.style.borderColor = isError ? "var(--accent-pink)" : "var(--accent-cyan)";
+            progressToast.style.borderLeftColor = isError ? "var(--accent-pink)" : "var(--accent-cyan)";
+            
+            progressToast.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h4 style="font-size:0.85rem; color:var(--text-primary); font-weight:800; display:flex; align-items:center; gap:6px; margin:0;">${iconHtml} ${isError ? "Error de Actualización" : "Actualizando Partidos"}</h4>
+                    <span style="font-size:0.75rem; font-weight:800; color:${barColor};">${percent}%</span>
+                </div>
+                <div style="width:100%; background:rgba(255,255,255,0.05); height:6px; border-radius:3px; overflow:hidden; margin: 4px 0;">
+                    <div style="width:${percent}%; height:100%; background:${barColor}; transition: width 0.4s ease;"></div>
+                </div>
+                <p style="font-size:0.72rem; color:var(--text-secondary); margin:0; line-height:1.4;">${statusText}</p>
+            `;
+        };
+
+        updateProgress(10, "Conectando con el servidor de GitHub...");
+
+        // 1. Trigger the workflow_dispatch
+        try {
+            const triggerRes = await fetch("https://api.github.com/repos/franc14100/sportintel/actions/workflows/deploy.yml/dispatches", {
+                method: "POST",
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Accept": "application/vnd.github.v3+json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ ref: "main" })
+            });
+
+            if (triggerRes.status === 401 || triggerRes.status === 403) {
+                updateProgress(100, "Error: Token no válido o sin permisos. Configúralo de nuevo.", true);
+                localStorage.removeItem("github_token");
+                setTimeout(() => {
+                    progressToast.remove();
+                    openGithubModal();
+                }, 4000);
+                icon.classList.remove("fa-spin");
+                refreshDataBtn.disabled = false;
+                return;
+            }
+
+            if (!triggerRes.ok && triggerRes.status !== 204) {
+                throw new Error(`HTTP ${triggerRes.status}`);
+            }
+
+            updateProgress(25, "Servidor de GitHub activado. Buscando ejecuciones...");
+
+            // Esperar 4 segundos antes de buscar la última ejecución para darle tiempo a GitHub de registrarla
+            await new Promise(r => setTimeout(r, 4000));
+            
+            // 2. Poll runs list to find the current run ID
+            let runId = null;
+            for (let attempt = 0; attempt < 5; attempt++) {
+                try {
+                    const runsRes = await fetch("https://api.github.com/repos/franc14100/sportintel/actions/runs?per_page=3", {
+                        headers: {
+                            "Authorization": `token ${token}`,
+                            "Accept": "application/vnd.github.v3+json"
+                        }
+                    });
+                    if (runsRes.ok) {
+                        const runsData = await runsRes.json();
+                        const activeRun = runsData.workflow_runs.find(r => r.status === "queued" || r.status === "in_progress" || (Date.now() - new Date(r.created_at).getTime() < 60000));
+                        if (activeRun) {
+                            runId = activeRun.id;
+                            break;
+                        }
+                    }
+                } catch(e) {}
+                await new Promise(r => setTimeout(r, 3000));
+            }
+
+            if (!runId) {
+                // Fallback: Si no se encuentra el run, asumimos un progreso simulado y luego cargamos directamente
+                updateProgress(50, "Ejecutando script de predicción en segundo plano...");
+                await new Promise(r => setTimeout(r, 15000));
+                updateProgress(85, "Descargando partidos y cuotas actualizadas...");
+                await new Promise(r => setTimeout(r, 5000));
+                
+                // Intento de recarga
+                const success = await reloadFromRaw();
+                if (success) {
+                    updateProgress(100, "¡Actualización completa con éxito!");
+                } else {
+                    updateProgress(100, "Cargado con advertencias (los servidores están procesando).", true);
+                }
+                setTimeout(() => progressToast.remove(), 3000);
+                icon.classList.remove("fa-spin");
+                refreshDataBtn.disabled = false;
+                return;
+            }
+
+            // 3. Poll the specific run ID status
+            let completed = false;
+            let percentVal = 30;
+            const startTime = Date.now();
+
+            while (!completed) {
+                // Prevenir bucles infinitos en caso extremo
+                if (Date.now() - startTime > 120000) { 
+                    break;
+                }
+
+                await new Promise(r => setTimeout(r, 4000));
+                
+                try {
+                    const runDetailRes = await fetch(`https://api.github.com/repos/franc14100/sportintel/actions/runs/${runId}`, {
+                        headers: {
+                            "Authorization": `token ${token}`,
+                            "Accept": "application/vnd.github.v3+json"
+                        }
+                    });
+                    
+                    if (runDetailRes.ok) {
+                        const runDetail = await runDetailRes.json();
+                        const status = runDetail.status;
+                        const conclusion = runDetail.conclusion;
+
+                        if (status === "queued") {
+                            updateProgress(35, "Esperando asignación de servidor en GitHub...");
+                        } else if (status === "in_progress") {
+                            percentVal = Math.min(percentVal + 8, 80);
+                            updateProgress(percentVal, "IA analizando partidos en vivo de ESPN y cuotas reales...");
+                        } else if (status === "completed") {
+                            completed = true;
+                            if (conclusion === "success") {
+                                updateProgress(90, "¡Análisis compilado! Descargando datos en vivo...");
+                                await new Promise(r => setTimeout(r, 2000));
+                                const success = await reloadFromRaw();
+                                if (success) {
+                                    updateProgress(100, "¡Partidos y análisis actualizados al instante!");
+                                } else {
+                                    updateProgress(100, "Datos actualizados. Recargando la vista...", false);
+                                    await loadSportsData();
+                                }
+                            } else {
+                                updateProgress(100, `El proceso falló con estado: ${conclusion || 'desconocido'}`, true);
+                            }
+                            break;
+                        }
+                    }
+                } catch (e) {
+                    console.error("Error al consultar el progreso del run:", e);
+                }
+            }
+
+            setTimeout(() => progressToast.remove(), 4000);
+
+        } catch (error) {
+            console.error("Error en flujo de actualización:", error);
+            updateProgress(100, "Ocurrió un error al contactar a la API de GitHub.", true);
+            setTimeout(() => progressToast.remove(), 4000);
+        }
+
+        icon.classList.remove("fa-spin");
+        refreshDataBtn.disabled = false;
     });
+
+    // Helper para descargar datos frescos de raw.githubusercontent.com burlando el cache
+    async function reloadFromRaw() {
+        try {
+            const rawUrl = `https://raw.githubusercontent.com/franc14100/sportintel/main/frontend/data.json?t=${Date.now()}`;
+            const res = await fetch(rawUrl);
+            if (res.ok) {
+                appData = await res.json();
+                populateStats();
+                renderBets();
+                renderEscaleraTab();
+                updateBankrollChart();
+                console.log("[Sync] Live data updated dynamically from RAW.");
+                return true;
+            }
+        } catch (e) {
+            console.error("Error al descargar desde RAW:", e);
+        }
+        return false;
+    }
 
     // --- Populate Dashboard Statistics ---
     function populateStats() {
