@@ -2056,11 +2056,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentSaved = parseFloat(localStorage.getItem("escalera_saved_profit")) || 0;
         if (escaleraSavedVal) escaleraSavedVal.textContent = `$${currentSaved.toFixed(2)}`;
         
+        const storedProt = localStorage.getItem("escalera_protection_type") || "withdraw_initial";
         const selectProtection = document.getElementById("select-escalera-protection");
-        if (selectProtection) {
-            const storedProt = localStorage.getItem("escalera_protection_type") || "withdraw_initial";
-            selectProtection.value = storedProt;
-        }
+        if (selectProtection) selectProtection.value = storedProt;
+        const selectProtectionCard = document.getElementById("select-escalera-protection-card");
+        if (selectProtectionCard) selectProtectionCard.value = storedProt;
         
         if (inputEscaleraStartStake) inputEscaleraStartStake.value = escaleraStartingStake;
         if (inputEscaleraTargetDays) inputEscaleraTargetDays.value = escaleraTargetDays;
@@ -2214,6 +2214,16 @@ document.addEventListener("DOMContentLoaded", () => {
             
             <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; margin-top: 10px;">
                 ${matchDetailsHtml}
+                
+                <div style="margin-bottom: 20px; text-align: left;">
+                    <label class="form-label" style="font-size: 0.75rem; color: var(--accent-green); display: block; margin-bottom: 6px;"><i class="fa-solid fa-shield-heart"></i> Escudo de Protección de Capital</label>
+                    <select id="select-escalera-protection-card" class="form-input" style="font-size: 0.82rem; padding: 8px 12px; background: rgba(0,0,0,0.3); color: var(--text-primary); border-color: var(--border-color); width: 100%; border-radius: 6px;">
+                        <option value="none">Sin Protección (Arriesgar Todo)</option>
+                        <option value="withdraw_initial">Retirar Inversión Inicial (Cero Riesgo al Duplicar)</option>
+                        <option value="save_50_profit">Asegurar 50% de la Ganancia Diaria (Crecimiento Conservador)</option>
+                        <option value="save_20_profit">Asegurar 20% de la Ganancia Diaria (Crecimiento Moderado)</option>
+                    </select>
+                </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; text-align: center;">
                     <div style="background: rgba(8, 11, 17, 0.5); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
@@ -2594,6 +2604,13 @@ document.addEventListener("DOMContentLoaded", () => {
             renderEscaleraTab();
         };
     }
+    document.addEventListener("change", (e) => {
+        if (e.target && e.target.id === "select-escalera-protection-card") {
+            const val = e.target.value;
+            localStorage.setItem("escalera_protection_type", val);
+            renderEscaleraTab();
+        }
+    });
     
     // --- Custom Bet Analyzer Modal ---
     const btnOpenCustomBetModal = document.getElementById("btn-open-custom-bet-modal");
