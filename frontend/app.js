@@ -314,6 +314,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Update Page Title
             if (targetTab === "dashboard") pageTitle.textContent = "Panel Principal";
+            if (targetTab === "predictions") {
+                pageTitle.textContent = "Predicciones y Resultados en Vivo";
+                renderPredictionsTab();
+            }
             if (targetTab === "matches") pageTitle.textContent = "Análisis del Mercado";
             if (targetTab === "generator") pageTitle.textContent = "Creador de Apuestas";
             if (targetTab === "news") pageTitle.textContent = "Reporte de Noticias y Bajas";
@@ -381,6 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
             populateDashboardPicks();
             populateMatchesList();
             populateNewsAndInjuries();
+            renderPredictionsTab();
             
             // Render first visual chart
             renderChart();
@@ -3601,5 +3606,152 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
     }
+
+    // ==========================================================================
+    // Predictions & Scores Tab Rendering
+    // ==========================================================================
+    let currentPredSportFilter = "all";
+
+    function renderPredictionsTab() {
+        if (!appData || !appData.matches) return;
+
+        const grid = document.getElementById("predictions-grid");
+        if (!grid) return;
+
+        const filteredMatches = appData.matches.filter(m => {
+            if (currentPredSportFilter === "all") return true;
+            return m.sport === currentPredSportFilter;
+        });
+
+        let html = "";
+        let totalPicks = 0;
+        let wonPicks = 0;
+        let lostPicks = 0;
+
+        filteredMatches.forEach(match => {
+            // Determine match status label and colors
+            let statusBadgeHtml = "";
+            let scoreHtml = "";
+            
+            const homeScoreVal = match.home_score !== undefined && match.home_score !== null ? match.home_score : "0";
+            const awayScoreVal = match.away_score !== undefined && match.away_score !== null ? match.away_score : "0";
+
+            if (match.status === "post") {
+                statusBadgeHtml = `<span class="badge" style="background: rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.65rem; border: 1px solid rgba(255,255,255,0.1);"><i class="fa-solid fa-flag-checkered"></i> FINALIZADO</span>`;
+                scoreHtml = `<div style="font-size: 1.45rem; font-weight: 800; color: var(--text-primary); letter-spacing: 4px; background: rgba(255,255,255,0.02); padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border-color);">${homeScoreVal} - ${awayScoreVal}</div>`;
+            } else if (match.status === "in") {
+                statusBadgeHtml = `<span class="badge" style="background: rgba(239, 68, 68, 0.15); color: var(--accent-red); font-size: 0.65rem; border: 1px solid rgba(239, 68, 68, 0.3); animation: pulse 1.5s infinite;"><i class="fa-solid fa-circle"></i> EN VIVO</span>`;
+                scoreHtml = `<div style="font-size: 1.45rem; font-weight: 800; color: var(--accent-red); letter-spacing: 4px; background: rgba(239, 68, 68, 0.05); padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.2);">${homeScoreVal} - ${awayScoreVal}</div>`;
+            } else {
+                statusBadgeHtml = `<span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-green); font-size: 0.65rem; border: 1px solid rgba(16, 185, 129, 0.2);"><i class="fa-regular fa-clock"></i> ${match.time || 'Pendiente'}</span>`;
+                scoreHtml = `<div style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; background: rgba(255,255,255,0.02); padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border-color); letter-spacing: 1px;">vs</div>`;
+            }
+
+            // Get the principal pick (safest one from the picks list)
+            const mainPick = match.picks && match.picks.length > 0 ? match.picks[0] : null;
+            let pickHtml = "";
+
+            if (mainPick) {
+                totalPicks++;
+                if (mainPick.status === "won" || mainPick.status === "Acertado") wonPicks++;
+                else if (mainPick.status === "lost" || mainPick.status === "Fallado") lostPicks++;
+
+                let statusPickBadge = "";
+                if (mainPick.status === "won" || mainPick.status === "Acertado") {
+                    statusPickBadge = `<span class="badge bg-green" style="background: rgba(16,185,129,0.15); color: var(--accent-green); border:1px solid rgba(16,185,129,0.3); font-size:0.68rem; font-weight:700;"><i class="fa-solid fa-circle-check"></i> Acertado</span>`;
+                } else if (mainPick.status === "lost" || mainPick.status === "Fallado") {
+                    statusPickBadge = `<span class="badge bg-red" style="background: rgba(239,68,68,0.15); color: var(--accent-red); border:1px solid rgba(239,68,68,0.3); font-size:0.68rem; font-weight:700;"><i class="fa-solid fa-circle-xmark"></i> Fallado</span>`;
+                } else {
+                    statusPickBadge = `<span class="badge bg-yellow" style="background: rgba(245,158,11,0.15); color: #f59e0b; border:1px solid rgba(245,158,11,0.3); font-size:0.68rem; font-weight:700;"><i class="fa-solid fa-hourglass-half"></i> Pendiente</span>`;
+                }
+
+                pickHtml = `
+                    <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px; display:flex; flex-direction:column; gap: 4px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:0.68rem; color:var(--text-muted); font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">Pronóstico IA</span>
+                            ${statusPickBadge}
+                        </div>
+                        <div style="font-size:0.8rem; font-weight:800; color:var(--text-primary);">${mainPick.selection}</div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.72rem; color:var(--text-secondary); margin-top:2px;">
+                            <span>Mercado: <b>${mainPick.market}</b></span>
+                            <span style="color:var(--accent-green); font-weight:700;">@${mainPick.odd.toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                pickHtml = `
+                    <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px; text-align:center; font-size:0.75rem; color:var(--text-muted);">
+                        No hay pronósticos disponibles.
+                    </div>
+                `;
+            }
+
+            const sportIcon = match.sport === "Football" ? '<i class="fa-solid fa-soccer-ball" style="color:var(--accent-green);"></i>' :
+                              match.sport === "Basketball" ? '<i class="fa-solid fa-basketball" style="color:#f97316;"></i>' :
+                              '<i class="fa-solid fa-table-tennis-paddle-ball" style="color:var(--accent-cyan);"></i>';
+
+            html += `
+                <div class="card match-prediction-card" style="margin-bottom: 0; padding: 15px; display:flex; flex-direction:column; justify-content:space-between; border-left: 3px solid ${match.sport === 'Football' ? 'var(--accent-green)' : (match.sport === 'Basketball' ? '#f97316' : 'var(--accent-cyan)')};">
+                    <div>
+                        <!-- Header row -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; display:flex; align-items:center; gap: 4px;">
+                                ${sportIcon} ${match.league}
+                            </span>
+                            ${statusBadgeHtml}
+                        </div>
+                        
+                        <!-- Teams and Score row -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 8px 0;">
+                            <!-- Home team -->
+                            <div style="flex: 1; text-align: right; display: flex; flex-direction: column; align-items: flex-end; justify-content: center;">
+                                <span style="font-size: 0.88rem; font-weight: 800; color: var(--text-primary); line-height: 1.2; text-align: right;">${match.home}</span>
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: ${match.home_color || '#FFFFFF'}; margin-top: 4px; border:1px solid rgba(255,255,255,0.1);"></span>
+                            </div>
+                            
+                            <!-- Score -->
+                            ${scoreHtml}
+                            
+                            <!-- Away team -->
+                            <div style="flex: 1; text-align: left; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+                                <span style="font-size: 0.88rem; font-weight: 800; color: var(--text-primary); line-height: 1.2; text-align: left;">${match.away}</span>
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: ${match.away_color || '#CCCCCC'}; margin-top: 4px; border:1px solid rgba(255,255,255,0.1);"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Prediction block -->
+                    ${pickHtml}
+                </div>
+            `;
+        });
+
+        grid.innerHTML = html || `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted);">No hay partidos para el deporte seleccionado.</div>`;
+
+        // Update stats
+        const statTotal = document.getElementById("pred-stat-total");
+        const statWon = document.getElementById("pred-stat-won");
+        const statLost = document.getElementById("pred-stat-lost");
+        const statPct = document.getElementById("pred-stat-pct");
+
+        if (statTotal) statTotal.textContent = totalPicks;
+        if (statWon) statWon.textContent = wonPicks;
+        if (statLost) statLost.textContent = lostPicks;
+        if (statPct) {
+            const resolved = wonPicks + lostPicks;
+            const pct = resolved > 0 ? ((wonPicks / resolved) * 100).toFixed(1) : "0.0";
+            statPct.textContent = `${pct}%`;
+        }
+    }
+
+    // Bind sport filters
+    document.querySelectorAll(".pred-sport-filter").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".pred-sport-filter").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentPredSportFilter = btn.getAttribute("data-sport");
+            renderPredictionsTab();
+        });
+    });
 
 });
