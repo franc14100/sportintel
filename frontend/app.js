@@ -728,33 +728,52 @@ document.addEventListener("DOMContentLoaded", () => {
             const indStake = (recStake / numSelections);
 
             let selectionsHtml = "";
-            ticket.selections.forEach(sel => {
-                let indStakeHtml = "";
-                if (activeMode === "simple") {
-                    indStakeHtml = `<div style="font-size:0.68rem; color:var(--text-muted); margin-top:2px;">Inversión: <b>${indStake.toFixed(1)}%</b> ($${(currentCapital * indStake / 100).toFixed(2)})</div>`;
-                }
-                selectionsHtml += `
-                    <div class="ticket-line-item">
-                        <div class="ticket-item-details">
-                            <span class="ticket-item-match">${sel.match}</span>
-                            <span class="ticket-item-market">${sel.market}</span>
-                            <span class="ticket-item-pick">${sel.pick}</span>
-                            ${indStakeHtml}
-                        </div>
-                        <div class="ticket-item-odd">${sel.odd.toFixed(2)}</div>
-                    </div>
-                `;
-            });
+            const confidenceBox = document.querySelector(`#star-ticket-card-${suffix} .confidence-box`);
             
-            // Add combined / average odd
             if (activeMode === "simple") {
-                selectionsHtml += `
-                    <div class="ticket-summary-odd">
-                        <span>Picks Individuales</span>
-                        <span class="total-odd-val">${numSelections} Simples</span>
-                    </div>
-                `;
+                // Hide global confidence progress bar box
+                if (confidenceBox) confidenceBox.style.display = "none";
+                
+                ticket.selections.forEach((sel, index) => {
+                    const amount = (currentCapital * indStake / 100).toFixed(2);
+                    selectionsHtml += `
+                        <div class="simple-bet-slip" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-left: 4px solid ${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"}; border-radius: 8px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 6px;">
+                                <span style="font-size:0.68rem; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Apuesta Simple #${index + 1}</span>
+                                <span class="badge" style="font-size:0.7rem; font-weight:800; background: ${colorTheme === "green" ? "rgba(16,185,129,0.15)" : "rgba(6,182,212,0.15)"}; color: ${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"};">@${sel.odd.toFixed(2)}</span>
+                            </div>
+                            <div>
+                                <div style="font-size:0.82rem; font-weight:800; color:var(--text-primary); margin-bottom: 2px;">${sel.match}</div>
+                                <div style="font-size:0.72rem; color:var(--text-secondary);"><span style="color:var(--text-muted);">Mercado:</span> ${sel.market}</div>
+                                <div style="font-size:0.75rem; color:var(--text-primary); font-weight:700; margin-top:2px;"><span style="color:var(--text-muted);">Pronóstico:</span> ${sel.pick}</div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; background: rgba(255,255,255,0.02); padding: 6px 10px; border-radius: 6px; font-size:0.72rem;">
+                                <span style="color:var(--text-secondary);">Inversión Recomendada: <b>${indStake.toFixed(1)}%</b></span>
+                                <span style="color:var(--text-primary); font-weight:700;">$${amount}</span>
+                            </div>
+                            <button class="btn btn-secondary btn-copy-single-pick" data-copy-text="APUESTA IA SIMPLE - ${sel.match}\nMercado: ${sel.market}\nPronóstico: ${sel.pick}\nCuota: @${sel.odd.toFixed(2)}\nInversión Sugerida: ${indStake.toFixed(1)}% ($${amount})" style="padding: 4px 8px; font-size: 0.68rem; width: 100%; border-color: rgba(255,255,255,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;">
+                                <i class="fa-regular fa-copy"></i> Copiar esta Apuesta
+                            </button>
+                        </div>
+                    `;
+                });
             } else {
+                // Show global confidence progress bar box
+                if (confidenceBox) confidenceBox.style.display = "block";
+                
+                ticket.selections.forEach(sel => {
+                    selectionsHtml += `
+                        <div class="ticket-line-item">
+                            <div class="ticket-item-details">
+                                <span class="ticket-item-match">${sel.match}</span>
+                                <span class="ticket-item-market">${sel.market}</span>
+                                <span class="ticket-item-pick">${sel.pick}</span>
+                            </div>
+                            <div class="ticket-item-odd">${sel.odd.toFixed(2)}</div>
+                        </div>
+                    `;
+                });
+                
                 selectionsHtml += `
                     <div class="ticket-summary-odd">
                         <span>Cuota Acumulada</span>
@@ -763,7 +782,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
             }
             
-            if (container) container.innerHTML = selectionsHtml;
+            if (container) {
+                container.innerHTML = selectionsHtml;
+                // Add event listeners to the individual copy buttons
+                container.querySelectorAll(".btn-copy-single-pick").forEach(btn => {
+                    btn.onclick = (e) => {
+                        e.stopPropagation();
+                        const text = btn.getAttribute("data-copy-text");
+                        navigator.clipboard.writeText(text).then(() => {
+                            const originalText = btn.innerHTML;
+                            btn.innerHTML = `<i class="fa-solid fa-check"></i> ¡Copiado!`;
+                            btn.style.background = "#10b981";
+                            btn.style.borderColor = "#10b981";
+                            setTimeout(() => {
+                                btn.innerHTML = originalText;
+                                btn.style.background = "";
+                                btn.style.borderColor = "";
+                            }, 1500);
+                        });
+                    };
+                });
+            }
+            
             if (confidenceVal) confidenceVal.textContent = `${ticket.confidence}%`;
             if (progressFill) progressFill.style.width = `${ticket.confidence}%`;
             if (reasoning) reasoning.textContent = ticket.reasoning;
@@ -786,6 +826,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (btnCopy) {
+                // Change copy button label if simple
+                if (activeMode === "simple") {
+                    btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar Todas como Simples`;
+                } else {
+                    btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar Selecciones del Boleto`;
+                }
+                
                 btnCopy.onclick = () => {
                     let copyText = "";
                     if (activeMode === "simple") {
