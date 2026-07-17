@@ -57,7 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 esp: parseFloat(localStorage.getItem("escalera_saved_profit")) || 0,
                 ewi: localStorage.getItem("escalera_withdrawn_initial") || "false",
                 ept: localStorage.getItem("escalera_protection_type") || "withdraw_initial",
-                eh: JSON.parse(localStorage.getItem("escalera_history")) || []
+                eh: JSON.parse(localStorage.getItem("escalera_history")) || [],
+                tm1: localStorage.getItem("ticket_mode_1") || "combinado",
+                tm2: localStorage.getItem("ticket_mode_2") || "combinado"
             };
         },
         
@@ -77,6 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (s.ewi !== undefined) localStorage.setItem("escalera_withdrawn_initial", s.ewi);
             if (s.ept !== undefined) localStorage.setItem("escalera_protection_type", s.ept);
             if (s.eh) localStorage.setItem("escalera_history", JSON.stringify(s.eh));
+            if (s.tm1 !== undefined) localStorage.setItem("ticket_mode_1", s.tm1);
+            if (s.tm2 !== undefined) localStorage.setItem("ticket_mode_2", s.tm2);
         },
         
         pushState: async function() {
@@ -690,13 +694,28 @@ document.addEventListener("DOMContentLoaded", () => {
             const stakePercent = document.getElementById(`star-ticket-stake-percent-${suffix}`);
             const stakeCash = document.getElementById(`star-ticket-stake-cash-${suffix}`);
             const stakeBadge = document.getElementById(`star-ticket-stake-rec-${suffix}`);
+            const selectMode = document.getElementById(`select-ticket-mode-${suffix}`);
 
             if (!ticket) return;
+
+            // Get selected mode (default to combinado)
+            const activeMode = localStorage.getItem(`ticket_mode_${suffix}`) || "combinado";
+            if (selectMode) {
+                selectMode.value = activeMode;
+                selectMode.onchange = () => {
+                    localStorage.setItem(`ticket_mode_${suffix}`, selectMode.value);
+                    // Sync system-wide push
+                    if (typeof SyncManager !== "undefined") {
+                        SyncManager.pushState();
+                    }
+                    populateDashboardPicks();
+                };
+            }
 
             // Render type badge in header
             const headerTitle = document.querySelector(`#star-ticket-card-${suffix} h3`);
             if (headerTitle) {
-                const typeStr = ticket.type || "Combinado";
+                const typeStr = activeMode === "simple" ? "Simples" : (ticket.type || "Combinado");
                 const badgeBg = suffix === "1" ? "rgba(16, 185, 129, 0.15)" : "rgba(6, 182, 212, 0.15)";
                 const badgeColor = suffix === "1" ? "var(--accent-green)" : "var(--accent-cyan)";
                 const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : "rgba(6, 182, 212, 0.3)";
@@ -704,27 +723,45 @@ document.addEventListener("DOMContentLoaded", () => {
                 headerTitle.innerHTML = `Boleto Estrella ${suffix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
             }
 
+            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : 2.0);
+            const numSelections = ticket.selections.length || 1;
+            const indStake = (recStake / numSelections);
+
             let selectionsHtml = "";
             ticket.selections.forEach(sel => {
+                let indStakeHtml = "";
+                if (activeMode === "simple") {
+                    indStakeHtml = `<div style="font-size:0.68rem; color:var(--text-muted); margin-top:2px;">Inversión: <b>${indStake.toFixed(1)}%</b> ($${(currentCapital * indStake / 100).toFixed(2)})</div>`;
+                }
                 selectionsHtml += `
                     <div class="ticket-line-item">
                         <div class="ticket-item-details">
                             <span class="ticket-item-match">${sel.match}</span>
                             <span class="ticket-item-market">${sel.market}</span>
                             <span class="ticket-item-pick">${sel.pick}</span>
+                            ${indStakeHtml}
                         </div>
                         <div class="ticket-item-odd">${sel.odd.toFixed(2)}</div>
                     </div>
                 `;
             });
             
-            // Add combined odd
-            selectionsHtml += `
-                <div class="ticket-summary-odd">
-                    <span>Cuota Acumulada</span>
-                    <span class="total-odd-val">${ticket.total_odd.toFixed(2)}</span>
-                </div>
-            `;
+            // Add combined / average odd
+            if (activeMode === "simple") {
+                selectionsHtml += `
+                    <div class="ticket-summary-odd">
+                        <span>Picks Individuales</span>
+                        <span class="total-odd-val">${numSelections} Simples</span>
+                    </div>
+                `;
+            } else {
+                selectionsHtml += `
+                    <div class="ticket-summary-odd">
+                        <span>Cuota Acumulada</span>
+                        <span class="total-odd-val">${ticket.total_odd.toFixed(2)}</span>
+                    </div>
+                `;
+            }
             
             if (container) container.innerHTML = selectionsHtml;
             if (confidenceVal) confidenceVal.textContent = `${ticket.confidence}%`;
@@ -732,23 +769,39 @@ document.addEventListener("DOMContentLoaded", () => {
             if (reasoning) reasoning.textContent = ticket.reasoning;
 
             // Stakes calculation
-            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : 2.0);
-            if (stakePercent) stakePercent.textContent = `${recStake}%`;
-            if (stakeBadge) stakeBadge.textContent = `Stake: ${recStake}%`;
-            if (stakeCash) {
-                const amount = (currentCapital * recStake / 100).toFixed(2);
-                stakeCash.textContent = `$${amount}`;
+            if (activeMode === "simple") {
+                if (stakePercent) stakePercent.textContent = `${indStake.toFixed(1)}% por pick`;
+                if (stakeBadge) stakeBadge.textContent = `Stake: ${indStake.toFixed(1)}% c/u`;
+                if (stakeCash) {
+                    const amount = (currentCapital * indStake / 100).toFixed(2);
+                    stakeCash.textContent = `$${amount} c/u`;
+                }
+            } else {
+                if (stakePercent) stakePercent.textContent = `${recStake}%`;
+                if (stakeBadge) stakeBadge.textContent = `Stake: ${recStake}%`;
+                if (stakeCash) {
+                    const amount = (currentCapital * recStake / 100).toFixed(2);
+                    stakeCash.textContent = `$${amount}`;
+                }
             }
 
             if (btnCopy) {
                 btnCopy.onclick = () => {
-                    let copyText = `BOLETO ESTRELLA ${suffix} (${suffix === "1" ? "SEGURO" : "DE VALOR"}) - SportIntel AI\n`;
-                    ticket.selections.forEach(s => {
-                        copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: ${s.odd.toFixed(2)})\n`;
-                    });
-                    copyText += `Cuota Total: ${ticket.total_odd.toFixed(2)}\n`;
-                    copyText += `Confianza: ${ticket.confidence}%\n`;
-                    copyText += `Inversión Sugerida: ${recStake}% ($${(currentCapital * recStake / 100).toFixed(2)})`;
+                    let copyText = "";
+                    if (activeMode === "simple") {
+                        copyText = `APUESTAS SIMPLES ESTRELLA ${suffix} (${suffix === "1" ? "SEGURO" : "DE VALOR"}) - SportIntel AI\n`;
+                        ticket.selections.forEach(s => {
+                            copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: ${s.odd.toFixed(2)}) | Inversión: ${indStake.toFixed(1)}% ($${(currentCapital * indStake / 100).toFixed(2)})\n`;
+                        });
+                    } else {
+                        copyText = `BOLETO COMBINADO ESTRELLA ${suffix} (${suffix === "1" ? "SEGURO" : "DE VALOR"}) - SportIntel AI\n`;
+                        ticket.selections.forEach(s => {
+                            copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: ${s.odd.toFixed(2)})\n`;
+                        });
+                        copyText += `Cuota Total: ${ticket.total_odd.toFixed(2)}\n`;
+                        copyText += `Confianza: ${ticket.confidence}%\n`;
+                        copyText += `Inversión Sugerida: ${recStake}% ($${(currentCapital * recStake / 100).toFixed(2)})`;
+                    }
                     
                     navigator.clipboard.writeText(copyText).then(() => {
                         const originalText = btnCopy.innerHTML;
