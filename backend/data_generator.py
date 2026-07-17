@@ -133,16 +133,19 @@ def fetch_live_matches():
                                 })
                 else:
                     for event in events:
-                        comp = event.get("competitions", [{}])[0]
-                        competitors = comp.get("competitors", [])
+                        comps = event.get("competitions") or [{}]
+                        comp = comps[0] if comps else {}
+                        if not comp: comp = {}
+                        competitors = comp.get("competitors") or []
                         
                         home_team = None
                         away_team = None
                         
                         for competitor in competitors:
+                            if not competitor: continue
                             role = competitor.get("homeAway")
-                            team_data = competitor.get("team", {})
-                            t_name = team_data.get("displayName")
+                            team_data = competitor.get("team") or {}
+                            t_name = team_data.get("displayName") or team_data.get("name") or "TBD"
                             
                             t_color = team_data.get("color", "")
                             t_color = f"#{t_color}" if t_color else "#FFFFFF"
@@ -157,7 +160,7 @@ def fetch_live_matches():
                                 "name": t_name,
                                 "color": t_color,
                                 "accent": t_accent,
-                                "form": competitor.get("form", "")
+                                "form": competitor.get("form") or ""
                             }
                             
                             sc = competitor.get("score")
@@ -171,7 +174,10 @@ def fetch_live_matches():
                         if not home_team or not away_team or home_team["name"] == "TBD" or away_team["name"] == "TBD" or home_team["name"] == away_team["name"]:
                             continue
                             
-                        status_state = event.get("status", {}).get("type", {}).get("state", "")
+                        status = event.get("status") or {}
+                        status_type = status.get("type") or {}
+                        status_state = status_type.get("state", "")
+                        
                         if status_state not in ["pre", "in", "post"]:
                             continue
                             
@@ -206,8 +212,8 @@ def fetch_live_matches():
                             
                         # Check notes or format to detect if it is a cup/knockout match
                         is_cup = False
-                        notes = comp.get("notes", [])
-                        notes_text = " ".join([n.get("text", "").lower() for n in notes]) if notes else ""
+                        notes = comp.get("notes") or []
+                        notes_text = " ".join([n.get("text", "").lower() for n in notes if n]) if notes else ""
                         if any(kw in notes_text for kw in ["leg", "aggregate", "tied", "elimina", "clasific", "round of", "quarter", "semi", "final", "knockout"]):
                             is_cup = True
                         
@@ -215,6 +221,55 @@ def fetch_live_matches():
                         league_lower = league_name.lower()
                         if any(kw in league_lower for kw in ["cup", "copa", "champions league", "europa league", "libertadores", "sudamericana", "world cup", "mundial"]):
                             is_cup = True
+
+                        # Parse real odds from DraftKings/ESPN
+                        real_odds = {}
+                        odds_list = comp.get("odds", [])
+                        if odds_list and isinstance(odds_list[0], dict):
+                            first_odd = odds_list[0]
+                            moneyline = first_odd.get("moneyline")
+                            
+                            def american_to_decimal(val_str):
+                                if not val_str: return None
+                                try:
+                                    val = int(val_str)
+                                    if val > 0:
+                                        return round((val / 100.0) + 1.0, 2)
+                                    elif val < 0:
+                                        return round((100.0 / abs(val)) + 1.0, 2)
+                                    else:
+                                        return 1.0
+                                except:
+                                    return None
+                            
+                            if moneyline:
+                                home_section = moneyline.get("home")
+                                away_section = moneyline.get("away")
+                                draw_section = moneyline.get("draw")
+                                
+                                h = home_section.get("close", {}).get("odds") or home_section.get("open", {}).get("odds") if home_section else None
+                                a = away_section.get("close", {}).get("odds") or away_section.get("open", {}).get("odds") if away_section else None
+                                d = draw_section.get("close", {}).get("odds") or draw_section.get("open", {}).get("odds") if draw_section else None
+                                
+                                dec_h = american_to_decimal(h)
+                                dec_a = american_to_decimal(a)
+                                dec_d = american_to_decimal(d)
+                                
+                                if dec_h: real_odds['h2h_home'] = dec_h
+                                if dec_a: real_odds['h2h_away'] = dec_a
+                                if dec_d: real_odds['h2h_draw'] = dec_d
+                                
+                            # Parse total over/under
+                            total = first_odd.get("total")
+                            if total:
+                                over_section = total.get("over")
+                                under_section = total.get("under")
+                                o = over_section.get("close", {}).get("odds") or over_section.get("open", {}).get("odds") if over_section else None
+                                u = under_section.get("close", {}).get("odds") or under_section.get("open", {}).get("odds") if under_section else None
+                                dec_o = american_to_decimal(o)
+                                dec_u = american_to_decimal(u)
+                                if dec_o: real_odds['total_over'] = dec_o
+                                if dec_u: real_odds['total_under'] = dec_u
 
                         venue = comp.get("venue", {}).get("fullName", "Estadio Deportivo")
                         
@@ -234,10 +289,13 @@ def fetch_live_matches():
                             "away_score": away_score,
                             "is_cup": is_cup,
                             "home_form_raw": home_team.get("form", ""),
-                            "away_form_raw": away_team.get("form", "")
+                            "away_form_raw": away_team.get("form", ""),
+                            "real_odds": real_odds
                         })
         except Exception as e:
+            import traceback
             print(f"[Aviso] No se pudo conectar al endpoint de {league_name}: {e}")
+            traceback.print_exc()
             
     # Deduplicate matches, keeping the one with the more specific league name (e.g. MLS instead of Fútbol Mundial)
     deduped = {}
@@ -1306,6 +1364,8 @@ def generate_daily_sports_data():
     fallback_picks = sorted(fallback_picks, key=lambda x: x['probability'], reverse=True)
     
     usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
+    # Filter out picks with odds < 1.15 to avoid useless selections like @1.01 or @1.05
+    usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.15]
     
     # Generar Boleto Estrella 1 (Boleto Seguro)
     star_selections_1 = []
