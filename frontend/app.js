@@ -1766,6 +1766,26 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================================================
     // 🔑 1xBet / The Odds API Synchronization
     // ==========================================================================
+    // --- Cloud Sync Modal ---
+    const btnOpenSyncModal = document.getElementById("btn-open-sync-modal");
+    const btnCloseSyncModal = document.getElementById("btn-close-sync-modal");
+    const syncModal = document.getElementById("sync-modal");
+    const syncModalOverlay = document.getElementById("sync-modal-overlay");
+
+    if (btnOpenSyncModal) {
+        btnOpenSyncModal.onclick = () => {
+            renderSyncPanel();
+            syncModal.classList.remove("hidden");
+        };
+    }
+
+    const closeSyncModal = () => {
+        if (syncModal) syncModal.classList.add("hidden");
+    };
+
+    if (btnCloseSyncModal) btnCloseSyncModal.onclick = closeSyncModal;
+    if (syncModalOverlay) syncModalOverlay.onclick = closeSyncModal;
+
     const btnOpenApiModal = document.getElementById("btn-open-api-modal");
     const btnCloseApiModal = document.getElementById("btn-close-api-modal");
     const apiModal = document.getElementById("api-modal");
