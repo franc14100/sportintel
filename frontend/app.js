@@ -84,11 +84,16 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!id) return;
             const state = this.gatherState();
             try {
-                const encoded = encodeURIComponent(JSON.stringify(state));
-                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state/${encoded}`, {
+                const jsonStr = JSON.stringify(state);
+                const base64Url = btoa(unescape(encodeURIComponent(jsonStr)))
+                    .replace(/\+/g, '-')
+                    .replace(/\//g, '_')
+                    .replace(/=/g, '');
+                
+                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state/${base64Url}`, {
                     method: "POST"
                 });
-                console.log("[Sync] State pushed successfully to cloud.");
+                console.log("[Sync] State pushed successfully to cloud via Base64URL.");
             } catch (e) {
                 console.error("[Sync] Error pushing state:", e);
             }
@@ -103,9 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (dataText) {
                     const cleaned = dataText.trim().replace(/^"|"$/g, '');
                     if (cleaned && cleaned !== "null" && cleaned !== "Value not found" && !cleaned.includes("Error")) {
-                        const decoded = JSON.parse(decodeURIComponent(cleaned));
+                        let base64 = cleaned.replace(/-/g, '+').replace(/_/g, '/');
+                        while (base64.length % 4) {
+                            base64 += '=';
+                        }
+                        const decodedStr = decodeURIComponent(escape(atob(base64)));
+                        const decoded = JSON.parse(decodedStr);
                         this.applyState(decoded);
-                        console.log("[Sync] State pulled successfully from cloud.");
+                        console.log("[Sync] State pulled successfully from cloud via Base64URL.");
                         return true;
                     }
                 }
@@ -621,22 +631,34 @@ document.addEventListener("DOMContentLoaded", () => {
         refreshDataBtn.disabled = false;
     });
 
-    // Helper para descargar datos frescos de raw.githubusercontent.com burlando el cache
+    // Helper para descargar datos frescos de la API de contenidos de GitHub burlando el cache del CDN al 100%
     async function reloadFromRaw() {
+        const token = localStorage.getItem("github_token");
+        if (!token) return false;
         try {
-            const rawUrl = `https://raw.githubusercontent.com/franc14100/sportintel/main/frontend/data.json?t=${Date.now()}`;
-            const res = await fetch(rawUrl);
+            const res = await fetch("https://api.github.com/repos/franc14100/sportintel/contents/frontend/data.json", {
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Accept": "application/vnd.github.v3+json",
+                    "Cache-Control": "no-cache",
+                    "Pragma": "no-cache"
+                }
+            });
             if (res.ok) {
-                appData = await res.json();
+                const fileData = await res.json();
+                const base64Content = fileData.content.replace(/\s/g, '');
+                const decodedText = decodeURIComponent(escape(atob(base64Content)));
+                appData = JSON.parse(decodedText);
+                
                 populateStats();
                 renderBets();
                 renderEscaleraTab();
                 updateBankrollChart();
-                console.log("[Sync] Live data updated dynamically from RAW.");
+                console.log("[Sync] Live data updated directly from GitHub Contents API (Bypassing CDN Cache).");
                 return true;
             }
         } catch (e) {
-            console.error("Error al descargar desde RAW:", e);
+            console.error("Error al descargar desde GitHub Contents API:", e);
         }
         return false;
     }
@@ -655,69 +677,101 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Render "Star Ticket" & Key Matches ---
     function populateDashboardPicks() {
         if (!appData) return;
-        
-        // Star Ticket render
-        const ticket = appData.star_ticket;
-        
-        // Update ticket type badge dynamically
-        const starHeaderTitle = document.querySelector(".star-ticket-card h3");
-        if (starHeaderTitle) {
-            const typeStr = ticket.type || "Combinado";
-            const badgeBg = typeStr === "Simple" ? "rgba(16, 185, 129, 0.15)" : "rgba(139, 92, 246, 0.15)";
-            const badgeColor = typeStr === "Simple" ? "var(--accent-green)" : "#c084fc";
-            const badgeBorder = typeStr === "Simple" ? "rgba(16, 185, 129, 0.3)" : "rgba(139, 92, 246, 0.3)";
-            
-            starHeaderTitle.innerHTML = `Boleto Estrella del Día <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
-        }
 
-        let selectionsHtml = "";
+        const currentCapital = parseFloat(localStorage.getItem("starting_bankroll")) || 1000;
         
-        ticket.selections.forEach(sel => {
-            selectionsHtml += `
-                <div class="ticket-line-item">
-                    <div class="ticket-item-details">
-                        <span class="ticket-item-match">${sel.match}</span>
-                        <span class="ticket-item-market">${sel.market}</span>
-                        <span class="ticket-item-pick">${sel.pick}</span>
+        // Helper to render a single ticket
+        const renderTicket = (ticket, suffix, colorTheme) => {
+            const container = document.getElementById(`star-ticket-details-${suffix}`);
+            const confidenceVal = document.getElementById(`star-ticket-confidence-${suffix}`);
+            const progressFill = document.getElementById(`star-ticket-progress-${suffix}`);
+            const reasoning = document.getElementById(`star-ticket-reasoning-${suffix}`);
+            const btnCopy = document.getElementById(`btn-copy-star-ticket-${suffix}`);
+            const stakePercent = document.getElementById(`star-ticket-stake-percent-${suffix}`);
+            const stakeCash = document.getElementById(`star-ticket-stake-cash-${suffix}`);
+            const stakeBadge = document.getElementById(`star-ticket-stake-rec-${suffix}`);
+
+            if (!ticket) return;
+
+            // Render type badge in header
+            const headerTitle = document.querySelector(`#star-ticket-card-${suffix} h3`);
+            if (headerTitle) {
+                const typeStr = ticket.type || "Combinado";
+                const badgeBg = suffix === "1" ? "rgba(16, 185, 129, 0.15)" : "rgba(6, 182, 212, 0.15)";
+                const badgeColor = suffix === "1" ? "var(--accent-green)" : "var(--accent-cyan)";
+                const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : "rgba(6, 182, 212, 0.3)";
+                
+                headerTitle.innerHTML = `Boleto Estrella ${suffix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
+            }
+
+            let selectionsHtml = "";
+            ticket.selections.forEach(sel => {
+                selectionsHtml += `
+                    <div class="ticket-line-item">
+                        <div class="ticket-item-details">
+                            <span class="ticket-item-match">${sel.match}</span>
+                            <span class="ticket-item-market">${sel.market}</span>
+                            <span class="ticket-item-pick">${sel.pick}</span>
+                        </div>
+                        <div class="ticket-item-odd">${sel.odd.toFixed(2)}</div>
                     </div>
-                    <div class="ticket-item-odd">${sel.odd.toFixed(2)}</div>
+                `;
+            });
+            
+            // Add combined odd
+            selectionsHtml += `
+                <div class="ticket-summary-odd">
+                    <span>Cuota Acumulada</span>
+                    <span class="total-odd-val">${ticket.total_odd.toFixed(2)}</span>
                 </div>
             `;
-        });
-        
-        // Agregar cuota combinada
-        selectionsHtml += `
-            <div class="ticket-summary-odd">
-                <span>Cuota Acumulada</span>
-                <span class="total-odd-val">${ticket.total_odd.toFixed(2)}</span>
-            </div>
-        `;
-        
-        starTicketDetails.innerHTML = selectionsHtml;
-        starTicketConfidence.textContent = `${ticket.confidence}%`;
-        starTicketProgress.style.width = `${ticket.confidence}%`;
-        starTicketReasoning.textContent = ticket.reasoning;
-        
-        // Copy Ticket Button
-        btnCopyStarTicket.onclick = () => {
-            let copyText = `BOLETO ESTRELLA DEL DÍA - SportIntel AI\n`;
-            ticket.selections.forEach(s => {
-                copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: ${s.odd.toFixed(2)})\n`;
-            });
-            copyText += `Cuota Total: ${ticket.total_odd.toFixed(2)}\n`;
-            copyText += `Confianza: ${ticket.confidence}%`;
             
-            navigator.clipboard.writeText(copyText).then(() => {
-                const originalText = btnCopyStarTicket.innerHTML;
-                btnCopyStarTicket.innerHTML = `<i class="fa-solid fa-check"></i> ¡Copiado al portapapeles!`;
-                btnCopyStarTicket.classList.add("btn-success");
-                
-                setTimeout(() => {
-                    btnCopyStarTicket.innerHTML = originalText;
-                    btnCopyStarTicket.classList.remove("btn-success");
-                }, 2000);
-            });
+            if (container) container.innerHTML = selectionsHtml;
+            if (confidenceVal) confidenceVal.textContent = `${ticket.confidence}%`;
+            if (progressFill) progressFill.style.width = `${ticket.confidence}%`;
+            if (reasoning) reasoning.textContent = ticket.reasoning;
+
+            // Stakes calculation
+            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : 2.0);
+            if (stakePercent) stakePercent.textContent = `${recStake}%`;
+            if (stakeBadge) stakeBadge.textContent = `Stake: ${recStake}%`;
+            if (stakeCash) {
+                const amount = (currentCapital * recStake / 100).toFixed(2);
+                stakeCash.textContent = `$${amount}`;
+            }
+
+            if (btnCopy) {
+                btnCopy.onclick = () => {
+                    let copyText = `BOLETO ESTRELLA ${suffix} (${suffix === "1" ? "SEGURO" : "DE VALOR"}) - SportIntel AI\n`;
+                    ticket.selections.forEach(s => {
+                        copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: ${s.odd.toFixed(2)})\n`;
+                    });
+                    copyText += `Cuota Total: ${ticket.total_odd.toFixed(2)}\n`;
+                    copyText += `Confianza: ${ticket.confidence}%\n`;
+                    copyText += `Inversión Sugerida: ${recStake}% ($${(currentCapital * recStake / 100).toFixed(2)})`;
+                    
+                    navigator.clipboard.writeText(copyText).then(() => {
+                        const originalText = btnCopy.innerHTML;
+                        btnCopy.innerHTML = `<i class="fa-solid fa-check"></i> ¡Copiado al portapapeles!`;
+                        btnCopy.style.background = "#10b981";
+                        btnCopy.style.borderColor = "#10b981";
+                        
+                        setTimeout(() => {
+                            btnCopy.innerHTML = originalText;
+                            btnCopy.style.background = "";
+                            btnCopy.style.borderColor = "";
+                        }, 2000);
+                    });
+                };
+            }
         };
+
+        // Render both tickets
+        const ticket1 = appData.star_ticket_1 || appData.star_ticket;
+        const ticket2 = appData.star_ticket_2 || appData.star_ticket;
+
+        renderTicket(ticket1, "1", "green");
+        renderTicket(ticket2, "2", "cyan");
 
         // Key Matches of the Day grid
         let matchesGridHtml = "";
@@ -2379,14 +2433,38 @@ document.addEventListener("DOMContentLoaded", () => {
     function getSafestPicksOfTheDay() {
         if (!appData || !appData.matches) return [];
         
+        // Excluir selecciones que ya estén en los Boletos Estrella de la portada
+        const excludedMatches = new Set();
+        const excludeSelections = (ticket) => {
+            if (ticket && ticket.selections) {
+                ticket.selections.forEach(s => {
+                    excludedMatches.add(s.match.toLowerCase().trim());
+                });
+            }
+        };
+        excludeSelections(appData.star_ticket_1);
+        excludeSelections(appData.star_ticket_2);
+        excludeSelections(appData.star_ticket);
+
         let allPicks = [];
         appData.matches.forEach(match => {
+            const matchKey = `${match.home} vs ${match.away}`.toLowerCase().trim();
+            if (excludedMatches.has(matchKey)) {
+                return; // Omitir para que el Reto Escalera sea 100% distinto
+            }
             match.picks.forEach(pick => {
                 allPicks.push({ match, pick });
             });
         });
 
-        if (allPicks.length === 0) return [];
+        // Si no quedan picks después de filtrar, caemos en permitir todo
+        if (allPicks.length === 0) {
+            appData.matches.forEach(match => {
+                match.picks.forEach(pick => {
+                    allPicks.push({ match, pick });
+                });
+            });
+        }
 
         let candidates = allPicks.filter(item => item.pick.odd >= 1.12 && item.pick.odd <= 2.00);
         
