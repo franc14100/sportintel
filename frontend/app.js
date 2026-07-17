@@ -694,28 +694,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const stakePercent = document.getElementById(`star-ticket-stake-percent-${suffix}`);
             const stakeCash = document.getElementById(`star-ticket-stake-cash-${suffix}`);
             const stakeBadge = document.getElementById(`star-ticket-stake-rec-${suffix}`);
-            const selectMode = document.getElementById(`select-ticket-mode-${suffix}`);
 
             if (!ticket) return;
 
-            // Get selected mode (default to combinado)
-            const activeMode = localStorage.getItem(`ticket_mode_${suffix}`) || "combinado";
-            if (selectMode) {
-                selectMode.value = activeMode;
-                selectMode.onchange = () => {
-                    localStorage.setItem(`ticket_mode_${suffix}`, selectMode.value);
-                    // Sync system-wide push
-                    if (typeof SyncManager !== "undefined") {
-                        SyncManager.pushState();
-                    }
-                    populateDashboardPicks();
-                };
-            }
+            const isSimple = ticket.type === "Simple" || ticket.type === "simple";
 
             // Render type badge in header
             const headerTitle = document.querySelector(`#star-ticket-card-${suffix} h3`);
             if (headerTitle) {
-                const typeStr = activeMode === "simple" ? "Simples" : (ticket.type || "Combinado");
+                const typeStr = isSimple ? "Simple" : "Combinado";
                 const badgeBg = suffix === "1" ? "rgba(16, 185, 129, 0.15)" : "rgba(6, 182, 212, 0.15)";
                 const badgeColor = suffix === "1" ? "var(--accent-green)" : "var(--accent-cyan)";
                 const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : "rgba(6, 182, 212, 0.3)";
@@ -724,130 +711,95 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : 2.0);
-            const numSelections = ticket.selections.length || 1;
-            const indStake = (recStake / numSelections);
 
             let selectionsHtml = "";
             const confidenceBox = document.querySelector(`#star-ticket-card-${suffix} .confidence-box`);
             
-            if (activeMode === "simple") {
-                // Hide global confidence progress bar box
+            if (isSimple) {
+                // Hide global confidence progress bar box (not needed for simple)
                 if (confidenceBox) confidenceBox.style.display = "none";
-                
-                ticket.selections.forEach((sel, index) => {
-                    const amount = (currentCapital * indStake / 100).toFixed(2);
-                    selectionsHtml += `
-                        <div class="simple-bet-slip" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-left: 4px solid ${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"}; border-radius: 8px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px;">
-                            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 6px;">
-                                <span style="font-size:0.68rem; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Apuesta Simple #${index + 1}</span>
-                                <span class="badge" style="font-size:0.7rem; font-weight:800; background: ${colorTheme === "green" ? "rgba(16,185,129,0.15)" : "rgba(6,182,212,0.15)"}; color: ${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"};">@${sel.odd.toFixed(2)}</span>
-                            </div>
-                            <div>
-                                <div style="font-size:0.82rem; font-weight:800; color:var(--text-primary); margin-bottom: 2px;">${sel.match}</div>
-                                <div style="font-size:0.72rem; color:var(--text-secondary);"><span style="color:var(--text-muted);">Mercado:</span> ${sel.market}</div>
-                                <div style="font-size:0.75rem; color:var(--text-primary); font-weight:700; margin-top:2px;"><span style="color:var(--text-muted);">Pronóstico:</span> ${sel.pick}</div>
-                            </div>
-                            <div style="display:flex; justify-content:space-between; align-items:center; background: rgba(255,255,255,0.02); padding: 6px 10px; border-radius: 6px; font-size:0.72rem;">
-                                <span style="color:var(--text-secondary);">Inversión Recomendada: <b>${indStake.toFixed(1)}%</b></span>
-                                <span style="color:var(--text-primary); font-weight:700;">$${amount}</span>
-                            </div>
-                            <button class="btn btn-secondary btn-copy-single-pick" data-copy-text="APUESTA IA SIMPLE - ${sel.match}\nMercado: ${sel.market}\nPronóstico: ${sel.pick}\nCuota: @${sel.odd.toFixed(2)}\nInversión Sugerida: ${indStake.toFixed(1)}% ($${amount})" style="padding: 4px 8px; font-size: 0.68rem; width: 100%; border-color: rgba(255,255,255,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;">
-                                <i class="fa-regular fa-copy"></i> Copiar esta Apuesta
-                            </button>
-                        </div>
-                    `;
-                });
             } else {
-                // Show global confidence progress bar box
+                // Show global confidence progress bar box for parlay
                 if (confidenceBox) confidenceBox.style.display = "block";
-                
-                ticket.selections.forEach(sel => {
-                    selectionsHtml += `
-                        <div class="ticket-line-item">
-                            <div class="ticket-item-details">
-                                <span class="ticket-item-match">${sel.match}</span>
-                                <span class="ticket-item-market">${sel.market}</span>
-                                <span class="ticket-item-pick">${sel.pick}</span>
-                            </div>
-                            <div class="ticket-item-odd">${sel.odd.toFixed(2)}</div>
-                        </div>
-                    `;
-                });
-                
+            }
+
+            // Render each selection with its own separate tactical analysis
+            ticket.selections.forEach((sel, index) => {
+                const selReasoningHtml = sel.reasoning ? `
+                    <div class="selection-tactical-analysis" style="margin-top: 8px; padding: 8px 10px; background: rgba(255,255,255,0.015); border-left: 2px solid ${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"}; border-radius: 4px; font-size: 0.74rem; color: var(--text-secondary); line-height: 1.4;">
+                        <i class="fa-solid fa-brain" style="color:${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"}; margin-right: 4px;"></i>
+                        <b>Análisis Técnico:</b> ${sel.reasoning}
+                    </div>
+                ` : '';
+
                 selectionsHtml += `
-                    <div class="ticket-summary-odd">
-                        <span>Cuota Acumulada</span>
-                        <span class="total-odd-val">${ticket.total_odd.toFixed(2)}</span>
+                    <div class="ticket-line-item" style="display: block; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 10px; background: rgba(255,255,255,0.01);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 6px; margin-bottom: 6px;">
+                            <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-primary);"><i class="fa-solid fa-gamepad" style="opacity:0.6;"></i> ${sel.match}</span>
+                            <span class="badge" style="font-size: 0.75rem; font-weight: 800; background: ${colorTheme === "green" ? "rgba(16,185,129,0.15)" : "rgba(6,182,212,0.15)"}; color: ${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"}; border: 1px solid ${colorTheme === "green" ? "rgba(16,185,129,0.3)" : "rgba(6,182,212,0.3)"};">@${sel.odd.toFixed(2)}</span>
+                        </div>
+                        <div style="font-size: 0.72rem; color: var(--text-secondary);">
+                            <span style="color: var(--text-muted);">Mercado:</span> ${sel.market} | <span style="color: var(--text-muted);">Pronóstico:</span> <b style="color: var(--text-primary);">${sel.pick}</b>
+                        </div>
+                        ${selReasoningHtml}
+                    </div>
+                `;
+            });
+            
+            // Add footer totals
+            if (isSimple) {
+                selectionsHtml += `
+                    <div class="ticket-summary-odd" style="margin-top: 10px;">
+                        <span>Cuota Apuesta Simple</span>
+                        <span class="total-odd-val">@${ticket.total_odd.toFixed(2)}</span>
+                    </div>
+                `;
+            } else {
+                selectionsHtml += `
+                    <div class="ticket-summary-odd" style="margin-top: 10px;">
+                        <span>Cuota Combinada</span>
+                        <span class="total-odd-val">@${ticket.total_odd.toFixed(2)}</span>
                     </div>
                 `;
             }
             
-            if (container) {
-                container.innerHTML = selectionsHtml;
-                // Add event listeners to the individual copy buttons
-                container.querySelectorAll(".btn-copy-single-pick").forEach(btn => {
-                    btn.onclick = (e) => {
-                        e.stopPropagation();
-                        const text = btn.getAttribute("data-copy-text");
-                        navigator.clipboard.writeText(text).then(() => {
-                            const originalText = btn.innerHTML;
-                            btn.innerHTML = `<i class="fa-solid fa-check"></i> ¡Copiado!`;
-                            btn.style.background = "#10b981";
-                            btn.style.borderColor = "#10b981";
-                            setTimeout(() => {
-                                btn.innerHTML = originalText;
-                                btn.style.background = "";
-                                btn.style.borderColor = "";
-                            }, 1500);
-                        });
-                    };
-                });
-            }
-            
+            if (container) container.innerHTML = selectionsHtml;
             if (confidenceVal) confidenceVal.textContent = `${ticket.confidence}%`;
             if (progressFill) progressFill.style.width = `${ticket.confidence}%`;
             if (reasoning) reasoning.textContent = ticket.reasoning;
 
             // Stakes calculation
-            if (activeMode === "simple") {
-                if (stakePercent) stakePercent.textContent = `${indStake.toFixed(1)}% por pick`;
-                if (stakeBadge) stakeBadge.textContent = `Stake: ${indStake.toFixed(1)}% c/u`;
-                if (stakeCash) {
-                    const amount = (currentCapital * indStake / 100).toFixed(2);
-                    stakeCash.textContent = `$${amount} c/u`;
-                }
-            } else {
-                if (stakePercent) stakePercent.textContent = `${recStake}%`;
-                if (stakeBadge) stakeBadge.textContent = `Stake: ${recStake}%`;
-                if (stakeCash) {
-                    const amount = (currentCapital * recStake / 100).toFixed(2);
-                    stakeCash.textContent = `$${amount}`;
-                }
+            if (stakePercent) stakePercent.textContent = `${recStake}%`;
+            if (stakeBadge) stakeBadge.textContent = `Stake: ${recStake}%`;
+            if (stakeCash) {
+                const amount = (currentCapital * recStake / 100).toFixed(2);
+                stakeCash.textContent = `$${amount}`;
             }
 
             if (btnCopy) {
-                // Change copy button label if simple
-                if (activeMode === "simple") {
-                    btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar Todas como Simples`;
+                if (isSimple) {
+                    btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar Apuesta Simple`;
                 } else {
                     btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar Selecciones del Boleto`;
                 }
                 
                 btnCopy.onclick = () => {
                     let copyText = "";
-                    if (activeMode === "simple") {
-                        copyText = `APUESTAS SIMPLES ESTRELLA ${suffix} (${suffix === "1" ? "SEGURO" : "DE VALOR"}) - SportIntel AI\n`;
-                        ticket.selections.forEach(s => {
-                            copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: ${s.odd.toFixed(2)}) | Inversión: ${indStake.toFixed(1)}% ($${(currentCapital * indStake / 100).toFixed(2)})\n`;
-                        });
+                    if (isSimple) {
+                        const sel = ticket.selections[0];
+                        copyText = `APUESTA SIMPLE ESTRELLA ${suffix} (${suffix === "1" ? "SEGURO" : "DE VALOR"}) - SportIntel AI\n`;
+                        copyText += `- Partido: ${sel.match}\n- Mercado: ${sel.market}\n- Pronóstico: ${sel.pick}\n- Cuota: @${sel.odd.toFixed(2)}\n`;
+                        copyText += `Inversión Sugerida: ${recStake}% ($${(currentCapital * recStake / 100).toFixed(2)})\n`;
+                        copyText += `Análisis Táctico: ${sel.reasoning || ""}`;
                     } else {
                         copyText = `BOLETO COMBINADO ESTRELLA ${suffix} (${suffix === "1" ? "SEGURO" : "DE VALOR"}) - SportIntel AI\n`;
                         ticket.selections.forEach(s => {
                             copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: ${s.odd.toFixed(2)})\n`;
                         });
-                        copyText += `Cuota Total: ${ticket.total_odd.toFixed(2)}\n`;
+                        copyText += `Cuota Total: @${ticket.total_odd.toFixed(2)}\n`;
                         copyText += `Confianza: ${ticket.confidence}%\n`;
-                        copyText += `Inversión Sugerida: ${recStake}% ($${(currentCapital * recStake / 100).toFixed(2)})`;
+                        copyText += `Inversión Sugerida: ${recStake}% ($${(currentCapital * recStake / 100).toFixed(2)})\n`;
+                        copyText += `Explicación de Combinada: ${ticket.reasoning}`;
                     }
                     
                     navigator.clipboard.writeText(copyText).then(() => {
