@@ -83,23 +83,71 @@ document.addEventListener("DOMContentLoaded", () => {
             if (s.tm2 !== undefined) localStorage.setItem("ticket_mode_2", s.tm2);
         },
         
+        toB64: function(obj) {
+            const jsonStr = JSON.stringify(obj);
+            return btoa(unescape(encodeURIComponent(jsonStr)))
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=/g, '');
+        },
+
+        fromB64: function(cleaned) {
+            let base64 = cleaned.replace(/-/g, '+').replace(/_/g, '/');
+            while (base64.length % 4) {
+                base64 += '=';
+            }
+            const decodedStr = decodeURIComponent(escape(atob(base64)));
+            return JSON.parse(decodedStr);
+        },
+
         pushState: async function() {
             const id = this.getSyncId();
             if (!id) return;
-            const state = this.gatherState();
+            const fullState = this.gatherState();
+            
+            const coreState = {
+                sb: fullState.sb,
+                oak: fullState.oak,
+                gak: fullState.gak,
+                ght: fullState.ght,
+                ed: fullState.ed,
+                ess: fullState.ess,
+                ecs: fullState.ecs,
+                etd: fullState.etd,
+                esp: fullState.esp,
+                ewi: fullState.ewi,
+                ept: fullState.ept,
+                tm1: fullState.tm1,
+                tm2: fullState.tm2
+            };
+            
+            const historyState = {
+                eh: fullState.eh,
+                ecr: fullState.ecr
+            };
+            
+            const betsState = {
+                ub: fullState.ub
+            };
+            
             try {
-                const jsonStr = JSON.stringify(state);
-                const base64Url = btoa(unescape(encodeURIComponent(jsonStr)))
-                    .replace(/\+/g, '-')
-                    .replace(/\//g, '_')
-                    .replace(/=/g, '');
+                const b64Core = this.toB64(coreState);
+                const b64History = this.toB64(historyState);
+                const b64Bets = this.toB64(betsState);
                 
-                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state/${base64Url}`, {
+                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state_core?value=${encodeURIComponent(b64Core)}`, {
                     method: "POST"
                 });
-                console.log("[Sync] State pushed successfully to cloud via Base64URL.");
+                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state_history?value=${encodeURIComponent(b64History)}`, {
+                    method: "POST"
+                });
+                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state_bets?value=${encodeURIComponent(b64Bets)}`, {
+                    method: "POST"
+                });
+                
+                console.log("[Sync] Split state pushed successfully to cloud.");
             } catch (e) {
-                console.error("[Sync] Error pushing state:", e);
+                console.error("[Sync] Error pushing split states:", e);
             }
         },
         
@@ -107,24 +155,45 @@ document.addEventListener("DOMContentLoaded", () => {
             const id = this.getSyncId();
             if (!id) return false;
             try {
-                const res = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${id}/state`);
-                const dataText = await res.text();
-                if (dataText) {
-                    const cleaned = dataText.trim().replace(/^"|"$/g, '');
-                    if (cleaned && cleaned !== "null" && cleaned !== "Value not found" && !cleaned.includes("Error")) {
-                        let base64 = cleaned.replace(/-/g, '+').replace(/_/g, '/');
-                        while (base64.length % 4) {
-                            base64 += '=';
-                        }
-                        const decodedStr = decodeURIComponent(escape(atob(base64)));
-                        const decoded = JSON.parse(decodedStr);
-                        this.applyState(decoded);
-                        console.log("[Sync] State pulled successfully from cloud via Base64URL.");
-                        return true;
-                    }
+                const resCore = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${id}/state_core`);
+                const textCore = (await resCore.text()).trim().replace(/^"|"$/g, '');
+                
+                const resHistory = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${id}/state_history`);
+                const textHistory = (await resHistory.text()).trim().replace(/^"|"$/g, '');
+                
+                const resBets = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${id}/state_bets`);
+                const textBets = (await resBets.text()).trim().replace(/^"|"$/g, '');
+                
+                let combined = {};
+                
+                if (textCore && textCore !== "null" && textCore !== "Value not found" && !textCore.includes("Error")) {
+                    try {
+                        const core = this.fromB64(textCore);
+                        Object.assign(combined, core);
+                    } catch (e) { console.error("Error decoding core state:", e); }
+                }
+                
+                if (textHistory && textHistory !== "null" && textHistory !== "Value not found" && !textHistory.includes("Error")) {
+                    try {
+                        const history = this.fromB64(textHistory);
+                        Object.assign(combined, history);
+                    } catch (e) { console.error("Error decoding history state:", e); }
+                }
+                
+                if (textBets && textBets !== "null" && textBets !== "Value not found" && !textBets.includes("Error")) {
+                    try {
+                        const bets = this.fromB64(textBets);
+                        Object.assign(combined, bets);
+                    } catch (e) { console.error("Error decoding bets state:", e); }
+                }
+                
+                if (Object.keys(combined).length > 0) {
+                    this.applyState(combined);
+                    console.log("[Sync] Split states pulled and merged successfully.");
+                    return true;
                 }
             } catch (e) {
-                console.error("[Sync] Error pulling state:", e);
+                console.error("[Sync] Error pulling split states:", e);
             }
             return false;
         },
