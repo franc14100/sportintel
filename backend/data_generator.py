@@ -436,18 +436,60 @@ def generate_daily_sports_data():
     today = datetime.now()
     date_str = today.strftime("%Y-%m-%d")
 
-    # Load previous state to preserve picks and grade them
+    # Load previous state to preserve picks, grade them, and keep history
+    raw_previous_json = {}
+    
+    # Try reading from local frontend/data.json first
+    local_json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "frontend", "data.json")
+    if os.path.exists(local_json_path):
+        try:
+            with open(local_json_path, "r", encoding="utf-8") as f:
+                raw_previous_json = json.load(f)
+                print("[INFO] Estado previo cargado desde archivo local.")
+        except Exception as e:
+            print(f"[Aviso] No se pudo leer el archivo local: {e}")
+            
+    # Fallback to URL if local file is missing or empty
+    if not raw_previous_json:
+        try:
+            req = urllib.request.Request("https://franc14100.github.io/sportintel/data.json", headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=5) as response:
+                raw_previous_json = json.loads(response.read().decode('utf-8'))
+                print("[INFO] Estado previo cargado desde URL pública.")
+        except Exception as e:
+            print(f"[Aviso] No se pudo cargar el estado previo desde URL: {e}")
+
+    # Build previous_data dictionary for match scoring compatibility
     previous_data = {}
-    try:
-        req = urllib.request.Request("https://franc14100.github.io/sportintel/data.json", headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=5) as response:
-            prev_json = json.loads(response.read().decode('utf-8'))
-            if prev_json.get("date") == date_str:
-                for m in prev_json.get("matches", []):
-                    previous_data[f"{m['home']} vs {m['away']}"] = m
-                previous_data["global_stats"] = prev_json.get("global_stats", {})
-    except Exception as e:
-        print(f"[Aviso] No se pudo cargar el estado previo: {e}")
+    if raw_previous_json:
+        for m in raw_previous_json.get("matches", []):
+            previous_data[f"{m['home']} vs {m['away']}"] = m
+        previous_data["global_stats"] = raw_previous_json.get("global_stats", {})
+
+    # Sistema de Aprendizaje Autónomo y Auto-Corrección
+    # Analizamos los picks anteriores para ajustar los TEAM_RATINGS dinámicamente y corregir errores
+    RATING_ADJUSTMENTS = {}
+    if raw_previous_json and "matches" in raw_previous_json:
+        for old_match in raw_previous_json.get("matches", []):
+            home_t = old_match.get("home")
+            away_t = old_match.get("away")
+            for p in old_match.get("picks", []):
+                status = p.get("status")
+                selection = p.get("selection")
+                if status == "lost":
+                    # Si fallamos apoyando al local
+                    if home_t in selection or "1" in selection:
+                        RATING_ADJUSTMENTS[home_t] = RATING_ADJUSTMENTS.get(home_t, 0) - 2.5
+                    # Si fallamos apoyando al visitante
+                    if away_t in selection or "2" in selection:
+                        RATING_ADJUSTMENTS[away_t] = RATING_ADJUSTMENTS.get(away_t, 0) - 2.5
+                elif status == "won":
+                    # Si acertamos apoyando al local
+                    if home_t in selection or "1" in selection:
+                        RATING_ADJUSTMENTS[home_t] = RATING_ADJUSTMENTS.get(home_t, 0) + 0.8
+                    # Si acertamos apoyando al visitante
+                    if away_t in selection or "2" in selection:
+                        RATING_ADJUSTMENTS[away_t] = RATING_ADJUSTMENTS.get(away_t, 0) + 0.8
 
     print("[INFO] Conectando a internet para buscar partidos reales...")
     espn_matches = fetch_live_matches()
@@ -842,8 +884,8 @@ def generate_daily_sports_data():
                     elif char == 'L': mod -= 1.5
                 return mod
                 
-            base_rating_home = TEAM_RATINGS.get(home_name, 76)
-            base_rating_away = TEAM_RATINGS.get(away_name, 76)
+            base_rating_home = TEAM_RATINGS.get(home_name, 76) + RATING_ADJUSTMENTS.get(home_name, 0.0)
+            base_rating_away = TEAM_RATINGS.get(away_name, 76) + RATING_ADJUSTMENTS.get(away_name, 0.0)
             
             rating_home = base_rating_home + get_form_rating_mod(home_form)
             rating_away = base_rating_away + get_form_rating_mod(away_form)
@@ -1071,8 +1113,8 @@ def generate_daily_sports_data():
 
         elif sport == "Basketball":
             # Baloncesto
-            rating_home = TEAM_RATINGS.get(home_name, 80)
-            rating_away = TEAM_RATINGS.get(away_name, 80)
+            rating_home = TEAM_RATINGS.get(home_name, 80) + RATING_ADJUSTMENTS.get(home_name, 0.0)
+            rating_away = TEAM_RATINGS.get(away_name, 80) + RATING_ADJUSTMENTS.get(away_name, 0.0)
             rating_diff = rating_home - rating_away
             
             prob_home = min(max(50 + rating_diff * 1.2, 10), 90)
@@ -1127,14 +1169,18 @@ def generate_daily_sports_data():
             # Tenis
             # Tenis: Calculate stable distinct ratings based on player names if not pre-rated
             rating_home = TEAM_RATINGS.get(home_name)
-            if not rating_home:
+            if rating_home:
+                rating_home += RATING_ADJUSTMENTS.get(home_name, 0.0)
+            else:
                 score_home = sum(ord(c) for c in home_name)
-                rating_home = 70 + (score_home % 16)
+                rating_home = 70 + (score_home % 16) + RATING_ADJUSTMENTS.get(home_name, 0.0)
                 
             rating_away = TEAM_RATINGS.get(away_name)
-            if not rating_away:
+            if rating_away:
+                rating_away += RATING_ADJUSTMENTS.get(away_name, 0.0)
+            else:
                 score_away = sum(ord(c) for c in away_name)
-                rating_away = 70 + (score_away % 16)
+                rating_away = 70 + (score_away % 16) + RATING_ADJUSTMENTS.get(away_name, 0.0)
                 
             rating_diff = rating_home - rating_away
             
@@ -1419,6 +1465,117 @@ def generate_daily_sports_data():
     else:
         accuracy = previous_data.get("global_stats", {}).get("avg_accuracy_30d", 0.0) if previous_data else 0.0
 
+    # Cargar y actualizar el Registro Histórico de Boletos
+    historical_registry = []
+    if raw_previous_json and "historical_tickets_registry" in raw_previous_json:
+        historical_registry = raw_previous_json["historical_tickets_registry"]
+
+    # Diccionario de resultados de hoy para calificar boletos pendientes
+    match_results = {}
+    for m in matches_data:
+        home_n = m.get("home")
+        away_n = m.get("away")
+        match_key = f"{home_n} vs {away_n}".lower().strip()
+        if m.get("status") == "post" and m.get("home_score") is not None and m.get("away_score") is not None:
+            match_results[match_key] = {
+                "home_score": m["home_score"],
+                "away_score": m["away_score"],
+                "home_name": home_n,
+                "away_name": away_n
+            }
+
+    # Calificar boletos pendientes
+    def grade_selection(market, pick, h_score, a_score, h_name, a_name):
+        try:
+            h = float(h_score)
+            a = float(a_score)
+            p = pick.strip()
+            
+            if "Resultado Final" in market or "Ganador" in market:
+                if p == h_name and h > a: return "won"
+                if p == a_name and a > h: return "won"
+                if p == "Empate" and h == a: return "won"
+            elif "Doble Oportunidad" in market:
+                if "o Empate" in p:
+                    team = p.replace("o Empate", "").strip()
+                    if team == h_name and h >= a: return "won"
+                    if team == a_name and a >= h: return "won"
+                elif "o" in p:
+                    if h != a: return "won"
+            elif "Más/Menos" in market:
+                limit = 2.5
+                if "1.5" in market: limit = 1.5
+                if "3.5" in market: limit = 3.5
+                total = h + a
+                if "Más" in p and total > limit: return "won"
+                if "Menos" in p and total < limit: return "won"
+            elif Ambo := ("Ambos Equipos Anotan" in market):
+                if p == "Sí" and h > 0 and a > 0: return "won"
+                if p == "No" and (h == 0 or a == 0): return "won"
+        except Exception as e:
+            print(f"Error calificado de selección: {e}")
+        return "lost"
+
+    for ticket in historical_registry:
+        if ticket.get("status") == "pending":
+            all_selections_graded = True
+            ticket_won = True
+            
+            for sel in ticket.get("selections", []):
+                sel_match = sel.get("match").lower().strip()
+                if sel_match in match_results:
+                    res = match_results[sel_match]
+                    status = grade_selection(
+                        sel.get("market", ""),
+                        sel.get("pick", ""),
+                        res["home_score"],
+                        res["away_score"],
+                        res["home_name"],
+                        res["away_name"]
+                    )
+                    sel["status"] = status
+                    if status == "lost":
+                        ticket_won = False
+                else:
+                    # No tenemos el resultado aún, sigue pendiente
+                    all_selections_graded = False
+                    
+            if all_selections_graded:
+                ticket["status"] = "won" if ticket_won else "lost"
+
+    # Generar IDs y agregar los boletos de hoy al registro como "pending"
+    # Boleto Estrella 1 (Seguro)
+    new_ticket_1 = {
+        "date": date_str,
+        "ticket_id": f"TK-{random.randint(100000, 999999)}",
+        "name": "Boleto Seguro (Boleto 1)",
+        "selections": [dict(s, status="pending") for s in star_selections_1],
+        "total_odd": round(total_odd_1, 2),
+        "confidence": star_confidence_1,
+        "recommendation_stake": round(max(1.0, min(5.0, (star_confidence_1 / 18.0))), 1),
+        "status": "pending"
+    }
+    
+    # Boleto Estrella 2 (Valor)
+    new_ticket_2 = {
+        "date": date_str,
+        "ticket_id": f"TK-{random.randint(100000, 999999)}",
+        "name": "Boleto de Valor (Boleto 2)",
+        "selections": [dict(s, status="pending") for s in star_selections_2],
+        "total_odd": round(total_odd_2, 2),
+        "confidence": star_confidence_2,
+        "recommendation_stake": round(max(1.0, min(3.0, (star_confidence_2 / 32.0))), 1),
+        "status": "pending"
+    }
+
+    # Evitar duplicados del mismo día
+    historical_registry = [t for t in historical_registry if t.get("date") != date_str]
+    historical_registry.append(new_ticket_1)
+    historical_registry.append(new_ticket_2)
+    
+    # Mantener el registro compacto (últimos 30 boletos recomendados)
+    historical_registry = historical_registry[-30:]
+
     payload = {
         "date": date_str,
         "matches": matches_data,
@@ -1451,7 +1608,8 @@ def generate_daily_sports_data():
             "confidence": star_confidence_2,
             "reasoning": star_reasoning_2,
             "recommendation_stake": round(max(1.0, min(3.0, (star_confidence_2 / 32.0))), 1)
-        }
+        },
+        "historical_tickets_registry": historical_registry
     }
 
     with open(json_path, 'w', encoding='utf-8') as f:
