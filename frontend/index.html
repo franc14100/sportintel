@@ -227,6 +227,36 @@
                         <!-- Dinámico -->
                     </div>
                 </div>
+                <!-- Registro Histórico de Boletos de la IA -->
+                <div class="highlight-section" style="margin-top: 30px;">
+                    <h3 class="section-title"><i class="fa-solid fa-clock-rotate-left"></i> Registro Histórico y Eficacia de Boletos de la IA</h3>
+                    <div class="card" style="padding: 20px; border-top: 3px solid var(--accent-cyan);">
+                        <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px;">
+                            Aquí puedes auditar y verificar la eficacia de todos los boletos recomendados generados por la Inteligencia Artificial. Los resultados se actualizan automáticamente al raspar los marcadores de ESPN.
+                        </div>
+                        <div class="table-container" style="max-height: 350px; overflow-y: auto;">
+                            <table class="injuries-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 12px 10px; text-align: left; font-size: 0.75rem;">Fecha / ID</th>
+                                        <th style="padding: 12px 10px; text-align: left; font-size: 0.75rem;">Tipo de Recomendación</th>
+                                        <th style="padding: 12px 10px; text-align: left; font-size: 0.75rem;">Selecciones y Cuotas</th>
+                                        <th style="padding: 12px 10px; text-align: center; font-size: 0.75rem;">Cuota Total</th>
+                                        <th style="padding: 12px 10px; text-align: center; font-size: 0.75rem;">Confianza / Stake</th>
+                                        <th style="padding: 12px 10px; text-align: center; font-size: 0.75rem;">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historical-tickets-registry-body">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.8rem;">
+                                            No hay registros históricos disponibles. Generando...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Matches Tab -->
