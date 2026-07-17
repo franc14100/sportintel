@@ -1316,20 +1316,23 @@ def generate_daily_sports_data():
     
     if usable_picks:
         best_pick = usable_picks[0]
-        if best_pick['odd'] >= 1.50 and best_pick['probability'] >= 72:
+        # Decidir si ir a Simple o Combinado
+        if best_pick['odd'] >= 1.40 and best_pick['probability'] >= 72:
             ticket_type_1 = "Simple"
             star_selections_1.append({
                 "match": best_pick["match"],
                 "sport": best_pick["sport"],
                 "market": best_pick["market"],
                 "pick": best_pick["selection"],
-                "odd": best_pick["odd"]
+                "odd": best_pick["odd"],
+                "reasoning": best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
             })
             total_odd_1 = best_pick["odd"]
             star_confidence_1 = best_pick["probability"]
             r_text = best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
-            star_reasoning_1 = f"Boleto Simple de Alta Seguridad. Elegimos este pick único porque ofrece una cuota de valor superior a 1.50 (@{total_odd_1:.2f}) con una probabilidad de acierto excepcional del {best_pick['probability']}%. Análisis: {r_text}"
+            star_reasoning_1 = f"Recomendación de Apuesta Simple Segura. Hemos seleccionado un único evento fuerte con cuota de valor de @{total_odd_1:.2f} y una probabilidad muy alta del {best_pick['probability']}%. No es necesario correr el riesgo de combinarlo con otro evento."
         else:
+            # Buscar un segundo pick para formar una combinada
             second_pick = None
             for p in usable_picks[1:]:
                 if p["match"] != best_pick["match"]:
@@ -1348,26 +1351,33 @@ def generate_daily_sports_data():
                     "sport": best_pick["sport"],
                     "market": best_pick["market"],
                     "pick": best_pick["selection"],
-                    "odd": best_pick["odd"]
+                    "odd": best_pick["odd"],
+                    "reasoning": best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
                 })
                 star_selections_1.append({
                     "match": second_pick["match"],
                     "sport": second_pick["sport"],
                     "market": second_pick["market"],
                     "pick": second_pick["selection"],
-                    "odd": second_pick["odd"]
+                    "odd": second_pick["odd"],
+                    "reasoning": second_pick["reasoning"].get("tactical", "") if isinstance(second_pick["reasoning"], dict) else second_pick["reasoning"]
                 })
                 total_odd_1 = best_pick["odd"] * second_pick["odd"]
                 star_confidence_1 = int((best_pick["probability"] + second_pick["probability"]) / 2)
-                r1 = best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
-                r2 = second_pick["reasoning"].get("tactical", "") if isinstance(second_pick["reasoning"], dict) else second_pick["reasoning"]
-                star_reasoning_1 = f"Boleto Combinado Premium de Bajo Riesgo (Cuota total: @{total_odd_1:.2f}). Combinamos dos selecciones con probabilidades individuales muy altas ({best_pick['probability']}% y {second_pick['probability']}%) para superar la barrera de 1.50 de forma segura. Análisis combinados: 1) {r1} 2) {r2}"
+                star_reasoning_1 = f"Recomendamos esta Combinada de Bajo Riesgo (Cuota total: @{total_odd_1:.2f}). Combinamos estas dos selecciones porque sus cuotas individuales son bajas para apostar por separado (@{best_pick['odd']:.2f} y @{second_pick['odd']:.2f}), pero juntas forman una cuota segura con una probabilidad conjunta muy favorable de {star_confidence_1}%."
             else:
                 ticket_type_1 = "Simple"
+                star_selections_1.append({
+                    "match": best_pick["match"],
+                    "sport": best_pick["sport"],
+                    "market": best_pick["market"],
+                    "pick": best_pick["selection"],
+                    "odd": best_pick["odd"],
+                    "reasoning": best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
+                })
                 total_odd_1 = best_pick["odd"]
                 star_confidence_1 = best_pick["probability"]
-                r1 = best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
-                star_reasoning_1 = f"Boleto Simple de Seguridad. Cuota: @{total_odd_1:.2f}, Probabilidad: {best_pick['probability']}%. Análisis: {r1}"
+                star_reasoning_1 = f"Boleto Simple de Seguridad. Cuota: @{total_odd_1:.2f}. Recomendamos apuesta individual directa."
     else:
         total_odd_1 = 1.50
         star_confidence_1 = 80
@@ -1384,43 +1394,57 @@ def generate_daily_sports_data():
     used_matches = set(s["match"] for s in star_selections_1)
     unused_picks = [p for p in usable_picks if p["match"] not in used_matches]
     
-    if len(unused_picks) >= 2:
-        # Combinamos los dos mejores picks restantes para armar una cuota más alta
+    if unused_picks:
         p1 = unused_picks[0]
-        p2 = unused_picks[1]
-        star_selections_2.append({
-            "match": p1["match"],
-            "sport": p1["sport"],
-            "market": p1["market"],
-            "pick": p1["selection"],
-            "odd": p1["odd"]
-        })
-        star_selections_2.append({
-            "match": p2["match"],
-            "sport": p2["sport"],
-            "market": p2["market"],
-            "pick": p2["selection"],
-            "odd": p2["odd"]
-        })
-        total_odd_2 = p1["odd"] * p2["odd"]
-        star_confidence_2 = int((p1["probability"] + p2["probability"]) / 2)
-        r1 = p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
-        r2 = p2["reasoning"].get("tactical", "") if isinstance(p2["reasoning"], dict) else p2["reasoning"]
-        star_reasoning_2 = f"Boleto de Valor Elevado (Cuota total: @{total_odd_2:.2f}). Seleccionamos eventos alternativos con excelente relación riesgo/beneficio para buscar un retorno de mayor impacto. Análisis combinados: 1) {r1} 2) {r2}"
-    elif len(unused_picks) == 1:
-        p1 = unused_picks[0]
-        ticket_type_2 = "Simple"
-        star_selections_2.append({
-            "match": p1["match"],
-            "sport": p1["sport"],
-            "market": p1["market"],
-            "pick": p1["selection"],
-            "odd": p1["odd"]
-        })
-        total_odd_2 = p1["odd"]
-        star_confidence_2 = p1["probability"]
-        r1 = p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
-        star_reasoning_2 = f"Boleto Simple de Valor. Cuota: @{total_odd_2:.2f}. Análisis: {r1}"
+        # Decidir si Boleto de Valor debe ser Simple o Combinado
+        if p1['odd'] >= 1.70 and p1['probability'] >= 64:
+            ticket_type_2 = "Simple"
+            star_selections_2.append({
+                "match": p1["match"],
+                "sport": p1["sport"],
+                "market": p1["market"],
+                "pick": p1["selection"],
+                "odd": p1["odd"],
+                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
+            })
+            total_odd_2 = p1["odd"]
+            star_confidence_2 = p1["probability"]
+            star_reasoning_2 = f"Recomendación Simple de Valor. Cuota: @{total_odd_2:.2f}. El valor esperado para este pick es alto según el modelo, por lo que recomendamos apostar por separado sin necesidad de combinar."
+        elif len(unused_picks) >= 2:
+            p2 = unused_picks[1]
+            ticket_type_2 = "Combinado"
+            star_selections_2.append({
+                "match": p1["match"],
+                "sport": p1["sport"],
+                "market": p1["market"],
+                "pick": p1["selection"],
+                "odd": p1["odd"],
+                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
+            })
+            star_selections_2.append({
+                "match": p2["match"],
+                "sport": p2["sport"],
+                "market": p2["market"],
+                "pick": p2["selection"],
+                "odd": p2["odd"],
+                "reasoning": p2["reasoning"].get("tactical", "") if isinstance(p2["reasoning"], dict) else p2["reasoning"]
+            })
+            total_odd_2 = p1["odd"] * p2["odd"]
+            star_confidence_2 = int((p1["probability"] + p2["probability"]) / 2)
+            star_reasoning_2 = f"Recomendamos combinar estas dos selecciones de valor para buscar una cuota acumulada atractiva de @{total_odd_2:.2f}. Combinamos ambos mercados para maximizar el retorno de inversión con una probabilidad conjunta controlada de {star_confidence_2}%."
+        else:
+            ticket_type_2 = "Simple"
+            star_selections_2.append({
+                "match": p1["match"],
+                "sport": p1["sport"],
+                "market": p1["market"],
+                "pick": p1["selection"],
+                "odd": p1["odd"],
+                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
+            })
+            total_odd_2 = p1["odd"]
+            star_confidence_2 = p1["probability"]
+            star_reasoning_2 = f"Boleto Simple de Valor. Cuota: @{total_odd_2:.2f}."
     else:
         # Si no hay suficientes partidos distintos en ESPN, tomamos otros mercados de los mismos partidos
         fallback_unused = [p for p in priority_picks + fallback_picks if p["match"] not in used_matches]
@@ -1432,11 +1456,12 @@ def generate_daily_sports_data():
                 "sport": p1["sport"],
                 "market": p1["market"],
                 "pick": p1["selection"],
-                "odd": p1["odd"]
+                "odd": p1["odd"],
+                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
             })
             total_odd_2 = p1["odd"]
             star_confidence_2 = p1["probability"]
-            star_reasoning_2 = f"Boleto Simple de Valor. Cuota: @{total_odd_2:.2f}"
+            star_reasoning_2 = f"Boleto Simple de Valor. Cuota: @{total_odd_2:.2f}."
         else:
             # Fallback total
             ticket_type_2 = "Simple"
