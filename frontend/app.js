@@ -812,16 +812,74 @@ document.addEventListener("DOMContentLoaded", () => {
         
         dashboardMatchesGrid.innerHTML = matchesGridHtml;
 
-        // Click Handler for dashboard cards to open match details
-        dashboardMatchesGrid.querySelectorAll(".match-compact-card").forEach(card => {
-            card.addEventListener("click", () => {
-                const matchId = card.getAttribute("data-match-id");
-                // Switch Tab
-                document.getElementById("nav-matches").click();
-                // Select Match in list
-                selectMatchById(matchId);
-            });
-        });
+        
+        // Renderizar el Registro Histórico de Boletos de la IA
+        const registryBody = document.getElementById("historical-tickets-registry-body");
+        if (registryBody && appData.historical_tickets_registry) {
+            let registryHtml = "";
+            const sortedRegistry = [...appData.historical_tickets_registry].reverse(); // Most recent first
+            
+            if (sortedRegistry.length === 0) {
+                registryHtml = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.8rem;">
+                            No hay boletos registrados históricamente aún.
+                        </td>
+                    </tr>
+                `;
+            } else {
+                sortedRegistry.forEach(t => {
+                    let badgeClass = "badge bg-secondary";
+                    let badgeLabel = "Pendiente";
+                    if (t.status === "won") {
+                        badgeClass = "badge bg-green";
+                        badgeLabel = "Ganado";
+                    } else if (t.status === "lost") {
+                        badgeClass = "badge bg-pink";
+                        badgeLabel = "Perdido";
+                    }
+                    
+                    let selectionsStr = "";
+                    t.selections.forEach(sel => {
+                        let selStatusHtml = "";
+                        if (sel.status === "won") {
+                            selStatusHtml = ` <i class="fa-solid fa-circle-check" style="color:var(--accent-green)"></i>`;
+                        } else if (sel.status === "lost") {
+                            selStatusHtml = ` <i class="fa-solid fa-circle-xmark" style="color:var(--accent-pink)"></i>`;
+                        }
+                        selectionsStr += `<div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom: 2px;">
+                            • <b>${sel.match}</b>: ${sel.pick} (@${sel.odd.toFixed(2)})${selStatusHtml}
+                        </div>`;
+                    });
+                    
+                    registryHtml += `
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                            <td style="padding: 12px 10px; font-size:0.75rem; vertical-align: top;">
+                                <div><b>${t.date}</b></div>
+                                <div style="font-size:0.68rem; color:var(--text-muted); font-family:monospace;">${t.ticket_id}</div>
+                            </td>
+                            <td style="padding: 12px 10px; font-size:0.75rem; vertical-align: top; font-weight:700; color: ${t.name.includes("Seguro") ? "var(--accent-green)" : "var(--accent-cyan)"};">
+                                ${t.name}
+                            </td>
+                            <td style="padding: 12px 10px; font-size:0.75rem; vertical-align: top;">
+                                ${selectionsStr}
+                            </td>
+                            <td style="padding: 12px 10px; font-size:0.78rem; font-weight:700; text-align: center; vertical-align: top; color: var(--text-primary);">
+                                @${t.total_odd.toFixed(2)}
+                            </td>
+                            <td style="padding: 12px 10px; font-size:0.75rem; text-align: center; vertical-align: top;">
+                                <div>${t.confidence}% Conf.</div>
+                                <div style="font-size:0.68rem; color:var(--text-muted);">Stake: ${t.recommendation_stake || 2}%</div>
+                            </td>
+                            <td style="padding: 12px 10px; text-align: center; vertical-align: top;">
+                                <span class="${badgeClass}" style="font-size: 0.68rem; font-weight: 800; text-transform: uppercase;">${badgeLabel}</span>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+            registryBody.innerHTML = registryHtml;
+        }
     }
 
     // --- Render Accuracy Trend Chart ---
@@ -3169,11 +3227,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!syncId) {
             container.innerHTML = `
                 <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
-                    Comparte apuestas, balance de bankroll y progreso del reto escalera en tiempo real entre tu computadora y tu iPhone o Android de forma automática.
+                    Sincroniza todas tus configuraciones, banca (bankroll), historial de apuestas, claves de API, tokens de actualización y el progreso del Reto Escalera en tiempo real en todos tus dispositivos.
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 12px;">
                     <button class="btn btn-primary" id="btn-sync-generate" style="background: var(--accent-cyan); border-color: var(--accent-cyan); cursor: pointer; padding: 8px 12px; font-size: 0.8rem; font-weight: 700; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                        <i class="fa-solid fa-key"></i> Generar PIN de Enlace
+                        <i class="fa-solid fa-key"></i> Generar PIN de Enlace Global
                     </button>
                     
                     <div style="text-align: center; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">o vincular con código existente</div>
@@ -3198,7 +3256,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         renderSyncPanel();
                         alert(`🔗 ¡PIN Generado! Utiliza el código "${pin}" en la sección de enlace en la nube de tu teléfono.`);
                     } else {
-                        btnGenerate.innerHTML = `<i class="fa-solid fa-key"></i> Generar PIN de Enlace`;
+                        btnGenerate.innerHTML = `<i class="fa-solid fa-key"></i> Generar PIN de Enlace Global`;
                         alert("Error de conexión. Inténtalo de nuevo.");
                     }
                 };
@@ -3231,7 +3289,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             container.innerHTML = `
                 <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
-                    Este navegador está vinculado a la nube. Los cambios en el reto y apuestas se sincronizan de forma bidireccional automática.
+                    Este navegador está vinculado a la nube. Todos los cambios del sistema se sincronizan automáticamente de forma bidireccional.
                 </div>
                 <div style="background: rgba(6,182,212,0.06); padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(6,182,212,0.2); display: flex; justify-content: space-between; align-items: center;">
                     <div>
