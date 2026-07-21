@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Automatic cloud pull on load (including URL sync_pin parameter)
+    // Automatic cloud pull on load & continuous 5-second background real-time sync loop
     (async () => {
         const urlParams = new URLSearchParams(window.location.search);
         const urlSyncPin = urlParams.get("sync") || urlParams.get("sync_pin");
@@ -248,6 +248,13 @@ document.addEventListener("DOMContentLoaded", () => {
             await SyncManager.pullState();
         }
     })();
+
+    // Live background polling loop every 5 seconds for instant cross-device updates
+    setInterval(async () => {
+        if (SyncManager.getSyncId() && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "SELECT") {
+            await SyncManager.pullState();
+        }
+    }, 5000);
 
     // --- Global State ---
     let appData = null;
