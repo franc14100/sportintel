@@ -1175,14 +1175,15 @@
                 <h3 id="register-modal-title">Registrar Apuesta en Historial</h3>
                 <p class="sub" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Añada esta apuesta a su banca e historial personal para llevar el seguimiento en tiempo real.</p>
             </div>
-            <div class="modal-body" style="padding-top: 15px; display: flex; flex-direction: column; gap: 15px;">
-                <div style="background: rgba(8, 11, 17, 0.6); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
-                    <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px;">Selecciones del Boleto</div>
-                    <div id="register-modal-summary" style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary); line-height: 1.4;">--</div>
-                    <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.8rem;">
-                        <span style="color: var(--text-muted);">Cuota Total:</span>
-                        <b id="register-modal-odd" style="color: var(--accent-amber); font-family: var(--font-display);">@1.00</b>
-                    </div>
+            <div class="modal-body" style="padding-top: 15px; display: flex; flex-direction: column; gap: 12px;">
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Partido / Eventos (Editar)</label>
+                    <input type="text" id="input-register-match" class="form-input" placeholder="Ej: Clyde vs Annan + Fenerbahce vs Gornik" style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary); padding: 8px 12px;">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Mercado / Pronósticos (Editar)</label>
+                    <input type="text" id="input-register-market" class="form-input" placeholder="Ej: Más de 2.5 + G1" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); padding: 8px 12px;">
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
