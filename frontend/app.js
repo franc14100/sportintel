@@ -907,6 +907,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             btnCopy.style.borderColor = "";
                         }, 2000);
                     });
+            const btnRegister = document.getElementById(`btn-register-star-ticket-${suffix}`);
+            if (btnRegister) {
+                btnRegister.onclick = () => {
+                    openRegisterTicketModal(ticket, suffix);
                 };
             }
         };
@@ -2547,6 +2551,93 @@ document.addEventListener("DOMContentLoaded", () => {
             bankrollRoiVal.textContent = `${sign}${roi.toFixed(1)}%`;
         }
         if (bankrollWinrateVal) bankrollWinrateVal.textContent = `${winrate.toFixed(1)}%`;
+    }
+
+    // --- Register Ticket to History & Bankroll Modal Handler ---
+    let pendingRegisterTicket = null;
+
+    function openRegisterTicketModal(ticket, suffix) {
+        const modal = document.getElementById("register-ticket-modal");
+        const titleEl = document.getElementById("register-modal-title");
+        const summaryEl = document.getElementById("register-modal-summary");
+        const oddEl = document.getElementById("register-modal-odd");
+        const stakeInput = document.getElementById("input-register-stake");
+        const statusSelect = document.getElementById("select-register-status");
+
+        if (!modal || !ticket) return;
+
+        pendingRegisterTicket = ticket;
+        const currentCapital = parseFloat(localStorage.getItem("starting_bankroll")) || 1000;
+
+        let label = suffix === "3" ? "Apuesta Soñadora del Dólar" : (suffix === "1" ? "Boleto Estrella 1 (Seguro)" : "Boleto Estrella 2 (Valor)");
+        if (titleEl) titleEl.textContent = `Registrar ${label}`;
+
+        let summaryText = "";
+        ticket.selections.forEach((s, idx) => {
+            summaryText += `${idx > 0 ? " + " : ""}${s.match} (${s.pick})`;
+        });
+        if (summaryEl) summaryEl.textContent = summaryText;
+        if (oddEl) oddEl.textContent = `@${ticket.total_odd.toFixed(2)}`;
+
+        const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : 1.0));
+        let defaultCash = suffix === "3" ? 1.0 : (currentCapital * recStake / 100);
+        if (stakeInput) stakeInput.value = defaultCash.toFixed(2);
+        if (statusSelect) statusSelect.value = "pending";
+
+        modal.classList.remove("hidden");
+    }
+
+    // Modal controls
+    const btnCloseRegisterModal = document.getElementById("btn-close-register-ticket-modal");
+    const registerModalOverlay = document.getElementById("register-ticket-modal-overlay");
+    const btnConfirmRegister = document.getElementById("btn-confirm-register-ticket");
+
+    const closeRegisterModal = () => {
+        const modal = document.getElementById("register-ticket-modal");
+        if (modal) modal.classList.add("hidden");
+    };
+
+    if (btnCloseRegisterModal) btnCloseRegisterModal.onclick = closeRegisterModal;
+    if (registerModalOverlay) registerModalOverlay.onclick = closeRegisterModal;
+
+    if (btnConfirmRegister) {
+        btnConfirmRegister.onclick = () => {
+            if (!pendingRegisterTicket) return;
+            const stakeInput = document.getElementById("input-register-stake");
+            const statusSelect = document.getElementById("select-register-status");
+            const stakeVal = parseFloat(stakeInput.value) || 1.0;
+            const statusVal = statusSelect.value || "pending";
+
+            let matchSummary = "";
+            pendingRegisterTicket.selections.forEach((s, idx) => {
+                matchSummary += `${idx > 0 ? " + " : ""}${s.match}`;
+            });
+            let marketSummary = "";
+            pendingRegisterTicket.selections.forEach((s, idx) => {
+                marketSummary += `${idx > 0 ? " / " : ""}${s.market}: ${s.pick}`;
+            });
+
+            const newBet = {
+                id: Date.now(),
+                match: matchSummary,
+                market: marketSummary,
+                odd: pendingRegisterTicket.total_odd,
+                stake: stakeVal,
+                status: statusVal,
+                date: new Date().toISOString().split("T")[0]
+            };
+
+            userBets.push(newBet);
+            localStorage.setItem("user_bets", JSON.stringify(userBets));
+
+            updateBankrollMetrics();
+            populateBetsTable();
+            updateBankrollChart();
+            SyncManager.pushState();
+
+            closeRegisterModal();
+            alert("¡Apuesta registrada con éxito en tu Historial y Banca!");
+        };
     }
 
     // Chart.js render for bankroll evolution
