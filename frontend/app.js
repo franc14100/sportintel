@@ -3280,9 +3280,67 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("escalera_history", JSON.stringify(history));
     }
 
+    function syncEscaleraRunToUserBets() {
+        const currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+        let updated = false;
+
+        currentRun.forEach(item => {
+            const betKey = `Reto Escalera (Día ${item.day})`;
+            let existingBet = userBets.find(b => b.match && b.match.includes(betKey));
+
+            const targetStatus = item.status === "won" ? "won" : (item.status === "lost" ? "lost" : (item.status === "voided" ? "voided" : "pending"));
+
+            if (!existingBet) {
+                userBets.push({
+                    id: Date.now() + item.day,
+                    match: `${betKey}: ${item.match}`,
+                    market: item.selection,
+                    odd: item.odd,
+                    stake: item.stake,
+                    status: targetStatus,
+                    date: item.date || new Date().toISOString().split("T")[0]
+                });
+                updated = true;
+            } else {
+                if (existingBet.status !== targetStatus || existingBet.odd !== item.odd || existingBet.stake !== item.stake) {
+                    existingBet.status = targetStatus;
+                    existingBet.odd = item.odd;
+                    existingBet.stake = item.stake;
+                    updated = true;
+                }
+            }
+        });
+
+        if (updated) {
+            localStorage.setItem("user_bets", JSON.stringify(userBets));
+            updateBankrollMetrics();
+            populateBetsTable();
+            updateBankrollChart();
+        }
+    }
+
+    window.deleteEscaleraStep = (day) => {
+        if (!confirm(`¿Deseas eliminar el Día ${day} del historial del reto?`)) return;
+
+        let currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+        currentRun = currentRun.filter(item => item.day !== day);
+        localStorage.setItem("escalera_current_run", JSON.stringify(currentRun));
+
+        const betKey = `Reto Escalera (Día ${day})`;
+        userBets = userBets.filter(b => !(b.match && b.match.includes(betKey)));
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+
+        updateBankrollMetrics();
+        populateBetsTable();
+        renderEscaleraTab();
+    };
+
     function populateEscaleraHistoryTable() {
         if (!escaleraHistoryTableBody) return;
         const currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+
+        // Always sync current run to userBets for unified accuracy calculation
+        syncEscaleraRunToUserBets();
 
         if (currentRun.length === 0) {
             escaleraHistoryTableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 15px; color: var(--text-muted); background: rgba(255,255,255,0.01); font-size:0.75rem;">No hay registros en el reto actual. Gana tu primer día para verlo aquí.</td></tr>`;
@@ -3310,13 +3368,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         <i class="fa-solid fa-arrow-right" style="font-size: 0.6rem; margin: 0 4px;"></i>
                         <span style="color: ${statusColor}; font-weight: 700;">$${item.return.toFixed(2)}</span>
                     </td>
-                    <td style="padding: 10px 8px; text-align: center;">
+                    <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">
                         <select class="form-input history-status-select" data-day="${item.day}" style="padding: 4px; font-size: 0.7rem; width: auto; display: inline-block;">
                             <option value="pending" ${item.status === 'pending' ? 'selected' : ''}>Pendiente</option>
                             <option value="won" ${item.status === 'won' ? 'selected' : ''}>Ganado</option>
                             <option value="lost" ${item.status === 'lost' ? 'selected' : ''}>Perdido</option>
                             <option value="voided" ${item.status === 'voided' ? 'selected' : ''}>Anulado</option>
                         </select>
+                        <button class="btn btn-secondary" onclick="deleteEscaleraStep(${item.day})" title="Eliminar este día" style="padding: 3px 6px; font-size: 0.7rem; border-color: rgba(239,68,68,0.3); color: #f87171; background: rgba(239,68,68,0.05); cursor: pointer; border-radius: 4px; margin-left: 4px;">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -3332,19 +3393,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 if (newStatus === "lost") {
                     if(confirm(`¿Estás seguro de marcar el Día ${dayEdited} como perdido? El reto actual se considerará fracasado y volverás al Día 1.`)) {
+                        runItem.status = "lost";
+                        localStorage.setItem("escalera_current_run", JSON.stringify(currentRun));
+                        syncEscaleraRunToUserBets();
                         logEscaleraAttempt("Perdido", runItem.stake);
                         resetEscalera();
                     } else {
                         // Revert visual change
                         e.target.value = runItem.status;
                     }
-                } else if (newStatus === "won" && runItem.status === "pending") {
+                } else if (newStatus === "won") {
                     runItem.status = "won";
                     localStorage.setItem("escalera_current_run", JSON.stringify(currentRun));
+                    syncEscaleraRunToUserBets();
                     
                     const returnVal = runItem.return;
                     if (dayEdited >= escaleraTargetDays) {
-                        alert(`🎉 ¡RETADO COMPLETADO! Has finalizado el Reto Escalera con éxito.`);
+                        alert(`🎉 ¡RETO COMPLETADO! Has finalizado el Reto Escalera con éxito.`);
                         logEscaleraAttempt("Ganado", returnVal);
                         resetEscalera();
                     } else {
@@ -3355,11 +3420,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         renderEscaleraTab();
                         alert(`📈 ¡Día ${dayEdited} Ganado! Avanzas al Día ${escaleraCurrentDay}.`);
                     }
-                } else if (newStatus === "voided" && runItem.status === "pending") {
+                } else if (newStatus === "voided") {
                     runItem.status = "voided";
                     const returnVal = runItem.stake;
                     runItem.return = returnVal;
                     localStorage.setItem("escalera_current_run", JSON.stringify(currentRun));
+                    syncEscaleraRunToUserBets();
                     
                     escaleraCurrentDay = dayEdited;
                     escaleraCurrentStake = returnVal;
@@ -3367,6 +3433,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.setItem("escalera_current_stake", escaleraCurrentStake);
                     renderEscaleraTab();
                     alert(`🔄 Día ${dayEdited} Anulado. Repites el mismo día con tu inversión intacta ($${returnVal}).`);
+                } else if (newStatus === "pending") {
+                    runItem.status = "pending";
+                    localStorage.setItem("escalera_current_run", JSON.stringify(currentRun));
+                    syncEscaleraRunToUserBets();
+                    renderEscaleraTab();
                 }
             });
         });
