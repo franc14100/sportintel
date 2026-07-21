@@ -2972,6 +2972,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderEscaleraTab() {
+        // Auto rebuild Escalera run from userBets if escalera_current_run is missing/incomplete
+        let currentRunCheck = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+        const escaleraBets = (typeof userBets !== "undefined" ? userBets : []).filter(b => b.match && b.match.includes("Reto Escalera (Día "));
+        if (currentRunCheck.length < escaleraBets.length) {
+            currentRunCheck = [];
+            escaleraBets.forEach(b => {
+                const matchDay = b.match.match(/Reto Escalera \(Día (\d+)\):?\s*(.*)/);
+                if (matchDay) {
+                    const dayNum = parseInt(matchDay[1]);
+                    const cleanMatch = matchDay[2] || b.match;
+                    currentRunCheck.push({
+                        day: dayNum,
+                        date: b.date || new Date().toISOString().split("T")[0],
+                        match: cleanMatch,
+                        selection: b.market,
+                        odd: b.odd,
+                        stake: b.stake,
+                        return: b.stake * b.odd,
+                        status: b.status
+                    });
+                }
+            });
+            currentRunCheck.sort((a, b) => a.day - b.day);
+            localStorage.setItem("escalera_current_run", JSON.stringify(currentRunCheck));
+            
+            const maxDay = currentRunCheck.length > 0 ? Math.max(...currentRunCheck.map(r => r.day)) : 1;
+            const lastItem = currentRunCheck.find(r => r.day === maxDay);
+            let nextDay = maxDay;
+            let nextStake = lastItem ? lastItem.return : 10;
+            if (lastItem && lastItem.status === "won") {
+                nextDay = maxDay + 1;
+            }
+            localStorage.setItem("escalera_day", nextDay);
+            localStorage.setItem("escalera_current_stake", nextStake);
+        }
+
         escaleraCurrentDay = parseInt(localStorage.getItem("escalera_day")) || 1;
         escaleraStartingStake = parseFloat(localStorage.getItem("escalera_start_stake")) || 10;
         escaleraCurrentStake = parseFloat(localStorage.getItem("escalera_current_stake")) || 10;
