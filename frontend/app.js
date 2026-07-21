@@ -2313,12 +2313,18 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("starting_bankroll", startingBankroll);
         }
 
-        if (inputStartingBankroll) {
-            inputStartingBankroll.value = startingBankroll;
-            inputStartingBankroll.oninput = (e) => {
-                const val = parseFloat(e.target.value);
-                if (!isNaN(val) && val >= 0) {
-                    startingBankroll = val;
+        const input1xBet = document.getElementById("input-1xbet-balance");
+        if (input1xBet) {
+            input1xBet.oninput = (e) => {
+                const targetAvail = parseFloat(e.target.value);
+                if (!isNaN(targetAvail) && targetAvail >= 0) {
+                    let netProf = 0, pendStakes = 0;
+                    userBets.forEach(b => {
+                        if (b.status === "won") netProf += (b.stake * b.odd) - b.stake;
+                        else if (b.status === "lost") netProf -= b.stake;
+                        else if (b.status === "pending") pendStakes += b.stake;
+                    });
+                    startingBankroll = targetAvail + pendStakes - netProf;
                     localStorage.setItem("starting_bankroll", startingBankroll);
                     updateBankrollMetrics();
                     updateBankrollChart();
@@ -2546,10 +2552,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const winrate = resolvedBetsCount > 0 ? (wonBets / resolvedBetsCount) * 100 : 0;
 
         // Render card metrics
-        if (bankrollBalanceVal) bankrollBalanceVal.textContent = `$${currentBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-        const subAvailable = document.getElementById("bankroll-available-sub");
-        if (subAvailable) {
-            subAvailable.textContent = `Disponible: $${availableBalance.toFixed(2)} | En juego: $${pendingStakes.toFixed(2)}`;
+        const bankrollAvailVal = document.getElementById("bankroll-available-val");
+        if (bankrollAvailVal) bankrollAvailVal.textContent = `$${availableBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        if (bankrollBalanceVal) bankrollBalanceVal.textContent = `$${availableBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+        const subBalance = document.getElementById("bankroll-balance-sub");
+        if (subBalance) {
+            subBalance.textContent = `Patrimonio Total: $${currentBalance.toFixed(2)} | En juego: $${pendingStakes.toFixed(2)}`;
+        }
+
+        const input1xBet = document.getElementById("input-1xbet-balance");
+        if (input1xBet && document.activeElement !== input1xBet) {
+            input1xBet.value = availableBalance.toFixed(2);
         }
         if (bankrollProfitVal) {
             const prefix = netProfit >= 0 ? "+$" : "-$";
