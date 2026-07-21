@@ -2653,6 +2653,47 @@ document.addEventListener("DOMContentLoaded", () => {
             userBets.push(newBet);
             localStorage.setItem("user_bets", JSON.stringify(userBets));
 
+            // If registering a Reto Escalera ticket, update escaleraCurrentRun
+            if (pendingRegisterTicket.type && pendingRegisterTicket.type.includes("Reto Escalera")) {
+                const dayMatch = pendingRegisterTicket.type.match(/Día (\d+)/);
+                const dayNum = dayMatch ? parseInt(dayMatch[1]) : (escaleraCurrentRun.length + 1);
+
+                let existingRunItem = escaleraCurrentRun.find(r => r.day === dayNum);
+                const runStatus = statusVal === "won" ? "won" : (statusVal === "lost" ? "lost" : (statusVal === "voided" ? "voided" : "pending"));
+                const returnAmt = parseFloat((stakeVal * oddVal).toFixed(2));
+
+                if (!existingRunItem) {
+                    escaleraCurrentRun.push({
+                        day: dayNum,
+                        date: new Date().toISOString().split("T")[0],
+                        match: matchVal,
+                        selection: marketVal,
+                        odd: oddVal,
+                        stake: stakeVal,
+                        return: returnAmt,
+                        status: runStatus
+                    });
+                } else {
+                    existingRunItem.match = matchVal;
+                    existingRunItem.selection = marketVal;
+                    existingRunItem.odd = oddVal;
+                    existingRunItem.stake = stakeVal;
+                    existingRunItem.return = returnAmt;
+                    existingRunItem.status = runStatus;
+                }
+
+                escaleraCurrentRun.sort((a, b) => a.day - b.day);
+                localStorage.setItem("escalera_current_run", JSON.stringify(escaleraCurrentRun));
+
+                if (runStatus === "won") {
+                    escaleraCurrentDay = Math.max(escaleraCurrentDay, dayNum + 1);
+                    escaleraCurrentStake = returnAmt;
+                    localStorage.setItem("escalera_day", escaleraCurrentDay);
+                    localStorage.setItem("escalera_current_stake", escaleraCurrentStake);
+                }
+                renderEscaleraTab();
+            }
+
             updateBankrollMetrics();
             populateBetsTable();
             updateBankrollChart();
@@ -2660,6 +2701,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
             closeRegisterModal();
             alert("¡Apuesta registrada con éxito en tu Historial y Banca!");
+        };
+    }
+
+    const btnAddPastEscaleraDay = document.getElementById("btn-add-past-escalera-day");
+    if (btnAddPastEscaleraDay) {
+        btnAddPastEscaleraDay.onclick = () => {
+            const currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+            const nextDay = (currentRun.length > 0) ? (Math.max(...currentRun.map(r => r.day)) + 1) : 1;
+            const currentCap = parseFloat(localStorage.getItem("escalera_current_stake")) || 10;
+
+            openRegisterTicketModal({
+                type: `Reto Escalera (Día ${nextDay})`,
+                selections: [{
+                    match: "Partido Anterior (ej: San Antonio Bulo Bulo vs ABB)",
+                    market: "Selección (ej: San Antonio Bulo Bulo o Empate)",
+                    pick: "Selección",
+                    odd: 1.14,
+                    reasoning: "Registro retroactivo de día anterior"
+                }],
+                total_odd: 1.14,
+                recommendation_stake: currentCap
+            }, `Escalera Día ${nextDay}`);
         };
     }
 
