@@ -1370,10 +1370,26 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span class="pick-prob-badge"><i class="fa-solid fa-brain"></i> Confianza IA: ${pick.probability}%</span>
                     </div>
                     ${reasoningHtml}
+                    <div style="margin-top: 12px; display: flex; justify-content: flex-end;">
+                        <button class="btn-register-quick-bet" data-match="${selectedMatch.home} vs ${selectedMatch.away}" data-market="${pick.market}" data-selection="${pick.selection}" data-odd="${pick.odd}" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white; border: none; padding: 8px 14px; border-radius: 6px; font-weight: 600; font-size: 0.82rem; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);">
+                            <i class="fa-solid fa-plus-circle"></i> Registrar en Mi Banca ($)
+                        </button>
+                    </div>
                 </div>
             `;
         });
         detailPicksContainer.innerHTML = picksHtml;
+
+        // Wire up quick bet registration buttons
+        detailPicksContainer.querySelectorAll(".btn-register-quick-bet").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const matchName = btn.getAttribute("data-match");
+                const marketName = btn.getAttribute("data-market");
+                const selectionName = btn.getAttribute("data-selection");
+                const oddVal = parseFloat(btn.getAttribute("data-odd"));
+                window.registerQuickBet(matchName, marketName, selectionName, oddVal);
+            });
+        });
 
         // Wire up expandable analysis buttons
         detailPicksContainer.querySelectorAll(".btn-expand-analysis").forEach(btn => {
@@ -2228,7 +2244,51 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         container.innerHTML = marketsHtml;
+
+        // Wire up outcome click listeners to allow quick registration into Bankroll
+        container.querySelectorAll(".outcome-btn").forEach(btn => {
+            btn.style.cursor = "pointer";
+            btn.title = "Haz clic para registrar esta cuota en tu banca";
+            btn.addEventListener("click", () => {
+                const name = btn.getAttribute("data-outcome-name");
+                const matchName = `${selectedMatch.home} vs ${selectedMatch.away}`;
+                const oddText = btn.querySelector(".odd")?.textContent || "1.50";
+                window.registerQuickBet(matchName, "Mercado 1xBet", name, parseFloat(oddText));
+            });
+        });
     }
+
+    // Quick Bet Registration helper (Global)
+    window.registerQuickBet = (matchName, marketName, selectionName, oddVal) => {
+        const defaultStake = 5;
+        const stakeInput = prompt(`📌 REGISTRAR APUESTA EN TU BANKROLL:\n\nPartido: ${matchName}\nSelección: ${selectionName} (${marketName})\nCuota: @${parseFloat(oddVal).toFixed(2)}\n\n¿Cuánto deseas apostar ($)?`, defaultStake);
+        
+        if (stakeInput === null) return;
+        const stake = parseFloat(stakeInput);
+        if (isNaN(stake) || stake <= 0) {
+            alert("Por favor ingresa un monto válido mayor a 0.");
+            return;
+        }
+
+        const newBet = {
+            id: Date.now(),
+            match: matchName,
+            market: `${selectionName} (${marketName})`,
+            odd: parseFloat(oddVal),
+            stake: stake,
+            status: "pending",
+            date: new Date().toISOString().split("T")[0]
+        };
+
+        userBets.push(newBet);
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+
+        alert(`¡Apuesta de $${stake.toFixed(2)} a "${selectionName}" (@${parseFloat(oddVal).toFixed(2)}) registrada exitosamente en tu Bankroll e Historial!`);
+    };
 
     // ==========================================================================
     // 📈 Bankroll & Bets Tracking Logic
