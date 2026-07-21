@@ -2704,27 +2704,30 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    const btnAddPastEscaleraDay = document.getElementById("btn-add-past-escalera-day");
-    if (btnAddPastEscaleraDay) {
-        btnAddPastEscaleraDay.onclick = () => {
-            const currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
-            const nextDay = (currentRun.length > 0) ? (Math.max(...currentRun.map(r => r.day)) + 1) : 1;
-            const currentCap = parseFloat(localStorage.getItem("escalera_current_stake")) || 10;
+    const handleAddPastDay = () => {
+        const currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+        const nextDay = (currentRun.length > 0) ? (Math.max(...currentRun.map(r => r.day)) + 1) : 1;
+        const currentCap = parseFloat(localStorage.getItem("escalera_current_stake")) || 10;
 
-            openRegisterTicketModal({
-                type: `Reto Escalera (Día ${nextDay})`,
-                selections: [{
-                    match: "Partido Anterior (ej: San Antonio Bulo Bulo vs ABB)",
-                    market: "Selección (ej: San Antonio Bulo Bulo o Empate)",
-                    pick: "Selección",
-                    odd: 1.14,
-                    reasoning: "Registro retroactivo de día anterior"
-                }],
-                total_odd: 1.14,
-                recommendation_stake: currentCap
-            }, `Escalera Día ${nextDay}`);
-        };
-    }
+        openRegisterTicketModal({
+            type: `Reto Escalera (Día ${nextDay})`,
+            selections: [{
+                match: "Partido Anterior (ej: San Antonio Bulo Bulo vs ABB)",
+                market: "Selección (ej: San Antonio Bulo Bulo o Empate)",
+                pick: "Selección",
+                odd: 1.14,
+                reasoning: "Registro retroactivo de día anterior"
+            }],
+            total_odd: 1.14,
+            recommendation_stake: currentCap
+        }, `Escalera Día ${nextDay}`);
+    };
+
+    const btnAddPastEscaleraDay = document.getElementById("btn-add-past-escalera-day");
+    if (btnAddPastEscaleraDay) btnAddPastEscaleraDay.onclick = handleAddPastDay;
+
+    const btnAddPastEscaleraDayBig = document.getElementById("btn-add-past-escalera-day-big");
+    if (btnAddPastEscaleraDayBig) btnAddPastEscaleraDayBig.onclick = handleAddPastDay;
 
     // Chart.js render for bankroll evolution
     function updateBankrollChart() {
