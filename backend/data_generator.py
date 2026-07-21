@@ -1747,7 +1747,105 @@ def generate_daily_sports_data():
             "reasoning": star_reasoning_3,
             "recommendation_stake": 1.0
         },
-        "historical_tickets_registry": historical_registry
+        "historical_tickets_registry": historical_registry,
+        "starting_bankroll": 53.67,
+        "user_bets": [
+            {
+                "id": 1,
+                "match": "Reto Escalera (Día 1) - Sheriff Tiraspol vs Aluminij",
+                "market": "Doble Oportunidad - Sheriff o Empate",
+                "odd": 1.21,
+                "stake": 5.0,
+                "status": "won",
+                "date": "2026-07-16"
+            },
+            {
+                "id": 2,
+                "match": "Reto Escalera (Día 2) - San Antonio Bulo Bulo vs ABB",
+                "market": "Doble Oportunidad - San Antonio o Empate",
+                "odd": 1.39,
+                "stake": 6.05,
+                "status": "won",
+                "date": "2026-07-20"
+            },
+            {
+                "id": 3,
+                "match": "Clyde vs Annan Athletic + Fenerbahce vs Gornik",
+                "market": "Combinada Parley - Boleto #84703772889",
+                "odd": 1.691,
+                "stake": 5.0,
+                "status": "won",
+                "date": "2026-07-20"
+            },
+            {
+                "id": 4,
+                "match": "Apuesta Soñadora / Combinada",
+                "market": "Resultado Final + Goles",
+                "odd": 1.78,
+                "stake": 3.0,
+                "status": "won",
+                "date": "2026-07-20"
+            },
+            {
+                "id": 5,
+                "match": "Comerciantes Unidos vs Alianza Lima",
+                "market": "Doble Oportunidad: 2X - Boleto #84668684251",
+                "odd": 1.20,
+                "stake": 8.42,
+                "status": "pending",
+                "date": "2026-07-20"
+            },
+            {
+                "id": 6,
+                "match": "Reto Escalera (Día 3) - Ararat-Armenia vs Shamrock Rovers",
+                "market": "Doble Oportunidad - Ararat-Armenia o Empate",
+                "odd": 1.34,
+                "stake": 9.60,
+                "status": "pending",
+                "date": "2026-07-21"
+            },
+            {
+                "id": 7,
+                "match": "Apuesta Pendiente Control Bankroll",
+                "market": "Mercado Seleccionado 1xBet",
+                "odd": 1.30,
+                "stake": 6.00,
+                "status": "pending",
+                "date": "2026-07-21"
+            }
+        ],
+        "escalera_current_run": [
+            {
+                "day": 1,
+                "date": "2026-07-16",
+                "match": "Sheriff Tiraspol vs Aluminij",
+                "selection": "Sheriff o Empate",
+                "odd": 1.21,
+                "stake": 5.0,
+                "return": 6.05,
+                "status": "won"
+            },
+            {
+                "day": 2,
+                "date": "2026-07-20",
+                "match": "San Antonio Bulo Bulo vs ABB",
+                "selection": "San Antonio o Empate",
+                "odd": 1.39,
+                "stake": 6.05,
+                "return": 8.42,
+                "status": "won"
+            },
+            {
+                "day": 3,
+                "date": "2026-07-21",
+                "match": "Ararat-Armenia vs Shamrock Rovers",
+                "selection": "Ararat-Armenia o Empate",
+                "odd": 1.34,
+                "stake": 9.60,
+                "return": 12.83,
+                "status": "pending"
+            }
+        ]
     }
 
     with open(json_path, 'w', encoding='utf-8') as f:
