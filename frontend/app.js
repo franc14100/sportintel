@@ -2465,12 +2465,51 @@ document.addEventListener("DOMContentLoaded", () => {
         // Clear history button handler
         if (btnClearBets) {
             btnClearBets.onclick = () => {
-                if (confirm("¿Estás seguro de que deseas vaciar todo tu historial de apuestas? Esto reiniciará tu bankroll a $1,000.")) {
+                if (confirm("¿Estás seguro de que deseas vaciar todo tu historial de apuestas? Esto reiniciará tu bankroll.")) {
                     userBets = [];
                     localStorage.setItem("user_bets", JSON.stringify(userBets));
                     updateBankrollMetrics();
                     populateBetsTable();
                     updateBankrollChart();
+                }
+            };
+        }
+
+        // Export data handler
+        const btnExportData = document.getElementById("btn-export-data");
+        if (btnExportData) {
+            btnExportData.onclick = () => {
+                const exportObj = {
+                    starting_bankroll: localStorage.getItem("starting_bankroll") || 29.65,
+                    user_bets: localStorage.getItem("user_bets") || "[]",
+                    escalera_history: localStorage.getItem("escalera_history") || "[]"
+                };
+                const exportStr = JSON.stringify(exportObj);
+                navigator.clipboard.writeText(exportStr).then(() => {
+                    alert("¡Datos copiados al portapapeles! Puedes pegarlos en tu celular.");
+                }).catch(err => {
+                    prompt("Copia el siguiente texto para tu celular:", exportStr);
+                });
+            };
+        }
+
+        // Import data handler
+        const btnImportData = document.getElementById("btn-import-data");
+        if (btnImportData) {
+            btnImportData.onclick = () => {
+                const importStr = prompt("Pega aquí los datos copiados (Exportados desde otro dispositivo):");
+                if (importStr) {
+                    try {
+                        const importObj = JSON.parse(importStr);
+                        if (importObj.starting_bankroll) localStorage.setItem("starting_bankroll", importObj.starting_bankroll);
+                        if (importObj.user_bets) localStorage.setItem("user_bets", importObj.user_bets);
+                        if (importObj.escalera_history) localStorage.setItem("escalera_history", importObj.escalera_history);
+                        
+                        alert("¡Datos importados correctamente! La página se recargará.");
+                        location.reload();
+                    } catch (e) {
+                        alert("Error: El texto pegado no es válido.");
+                    }
                 }
             };
         }
