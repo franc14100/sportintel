@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Cloud Sync Manager (PC ⇄ Mobile) ---
     const SYNC_BLOB_URL = "https://jsonblob.com/api/jsonBlob/019f85c9-8e08-7b09-9b1b-ecd44ae950db";
+    let isApplyingCloudState = false;
     
     const SyncManager = {
         getSyncId: function() {
@@ -43,7 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
         setSyncId: function(id) {},
         
         gatherState: function() {
+            const now = Date.now();
             return {
+                ts: now,
                 ub: JSON.parse(localStorage.getItem("user_bets") || "[]"),
                 sb: localStorage.getItem("starting_bankroll") || "53.50918",
                 ed: localStorage.getItem("escalera_day") || "8",
@@ -56,10 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
         
         applyState: function(s) {
             if (!s) return;
+            isApplyingCloudState = true;
             const bets = typeof s.ub === "string" ? JSON.parse(s.ub) : s.ub;
             const run = typeof s.ecr === "string" ? JSON.parse(s.ecr) : s.ecr;
             const hist = typeof s.eh === "string" ? JSON.parse(s.eh) : s.eh;
             
+            if (s.ts) localStorage.setItem("sync_last_updated", s.ts);
             if (bets) localStorage.setItem("user_bets", JSON.stringify(bets));
             if (s.sb !== undefined) localStorage.setItem("starting_bankroll", s.sb);
             if (s.ed !== undefined) localStorage.setItem("escalera_day", s.ed);
@@ -67,17 +72,19 @@ document.addEventListener("DOMContentLoaded", () => {
             if (s.ecs !== undefined) localStorage.setItem("escalera_current_stake", s.ecs);
             if (run) localStorage.setItem("escalera_current_run", JSON.stringify(run));
             if (hist) localStorage.setItem("escalera_history", JSON.stringify(hist));
+            isApplyingCloudState = false;
         },
         
         pushState: async function() {
             try {
                 const fullState = this.gatherState();
+                originalSetItem.call(localStorage, "sync_last_updated", fullState.ts);
                 await fetch(SYNC_BLOB_URL, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(fullState)
                 });
-                console.log("[Sync] State pushed to JsonBlob cloud.");
+                console.log("[Sync] State pushed to JsonBlob cloud (ts: " + fullState.ts + ")");
             } catch (e) {
                 console.error("[Sync] Error pushing to cloud:", e);
             }
@@ -88,23 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const res = await fetch(SYNC_BLOB_URL);
                 if (!res.ok) return false;
                 const data = await res.json();
-                if (data) {
-                    const cloudBets = typeof data.ub === "string" ? JSON.parse(data.ub) : (data.ub || []);
-                    const localBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+                if (data && data.ts) {
+                    const cloudTs = parseInt(data.ts) || 0;
+                    const localTs = parseInt(localStorage.getItem("sync_last_updated")) || 0;
                     
-                    // If local device has MORE bets (e.g. bet just registered on phone), push local to cloud!
-                    if (localBets.length > cloudBets.length) {
-                        console.log("[Sync] Local bets count > cloud bets count. Pushing local to cloud...");
-                        await this.pushState();
-                        return false;
-                    }
-                    
-                    const localStr = JSON.stringify(localBets);
-                    const cloudStr = JSON.stringify(cloudBets);
-                    
-                    if (localStr !== cloudStr || localBets.length < cloudBets.length) {
+                    if (cloudTs > localTs) {
                         this.applyState(data);
-                        console.log("[Sync] Cloud state merged to local storage.");
+                        console.log("[Sync] Cloud state is newer (cloudTs: " + cloudTs + " > localTs: " + localTs + "). Merged to local storage.");
                         return true;
                     }
                 }
@@ -118,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Instant automatic cloud push (100ms debounce)
     let syncPushTimeout = null;
     function triggerAutoSyncPush() {
+        if (isApplyingCloudState) return;
         clearTimeout(syncPushTimeout);
         syncPushTimeout = setTimeout(() => {
             SyncManager.pushState();
@@ -128,7 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const originalSetItem = localStorage.setItem;
     localStorage.setItem = function(key, value) {
         originalSetItem.apply(this, arguments);
-        if (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll") {
+        if (!isApplyingCloudState && (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll")) {
+            originalSetItem.call(localStorage, "sync_last_updated", Date.now());
             triggerAutoSyncPush();
         }
     };
