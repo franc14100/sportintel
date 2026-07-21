@@ -682,11 +682,11 @@
             <section id="bankroll" class="tab-content">
                 <!-- Summary Metrics Cards -->
                 <div class="metrics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 24px;">
-                    <div class="stat-card">
+                    <div class="stat-card" style="border: 1px solid var(--accent-green);">
                         <div class="card-icon green"><i class="fa-solid fa-wallet"></i></div>
-                        <div class="card-value" id="bankroll-balance-val">$38.87</div>
-                        <div class="card-label">Bankroll Total</div>
-                        <div id="bankroll-available-sub" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">Disponible: $38.87 | En juego: $0.00</div>
+                        <div class="card-value" id="bankroll-available-val" style="color: var(--accent-green); font-size: 1.6rem;">$38.87</div>
+                        <div class="card-label">Saldo Disponible (1xBet)</div>
+                        <div id="bankroll-balance-sub" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">Patrimonio: $62.89 | En juego: $24.02</div>
                     </div>
                     <div class="stat-card">
                         <div class="card-icon cyan"><i class="fa-solid fa-percent"></i></div>
@@ -770,9 +770,9 @@
                         <div class="card-header" style="padding-bottom: 12px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                             <h3>📋 Registro de Apuestas</h3>
                             <div style="display: flex; gap: 8px; align-items: center;">
-                                <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px;">
-                                    <span style="font-size: 0.7rem; color: var(--text-muted);">Capital Inicial:</span>
-                                    <input type="number" id="input-starting-bankroll" value="1000" min="10" style="width: 75px; background: none; border: none; color: var(--accent-green); font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; text-align: right; outline: none; padding: 0;">
+                                <div style="display: flex; align-items: center; gap: 6px; background: rgba(6, 182, 212, 0.05); border: 1px solid var(--accent-cyan); padding: 4px 8px; border-radius: 6px;">
+                                    <span style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: 700;">Ajustar Saldo 1xBet ($):</span>
+                                    <input type="number" id="input-1xbet-balance" value="38.87" step="0.01" style="width: 80px; background: none; border: none; color: var(--accent-green); font-family: var(--font-display); font-weight: 800; font-size: 0.8rem; text-align: center; outline: none; padding: 0;">
                                 </div>
                                 <button class="btn btn-secondary" id="btn-clear-bets" style="padding: 4px 10px; font-size: 0.72rem; border-color: var(--accent-pink); color: var(--accent-pink); cursor: pointer;">
                                     <i class="fa-solid fa-trash-can"></i> Limpiar Historial
