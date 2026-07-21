@@ -2680,15 +2680,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 return; // Omitir para que el Reto Escalera sea 100% distinto
             }
             match.picks.forEach(pick => {
-                allPicks.push({ match, pick });
+                if (pick.market !== "Se Clasifica" && pick.market !== "Método de Clasificación") {
+                    allPicks.push({ match, pick });
+                }
             });
         });
 
-        // Si no quedan picks después de filtrar, caemos en permitir todo
+        // Si no quedan picks después de filtrar, caemos en permitir todo (sin clasificatorios de largo plazo)
         if (allPicks.length === 0) {
             appData.matches.forEach(match => {
                 match.picks.forEach(pick => {
-                    allPicks.push({ match, pick });
+                    if (pick.market !== "Se Clasifica" && pick.market !== "Método de Clasificación") {
+                        allPicks.push({ match, pick });
+                    }
                 });
             });
         }
