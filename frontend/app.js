@@ -2554,6 +2554,12 @@ document.addEventListener("DOMContentLoaded", () => {
             bankrollRoiVal.textContent = `${sign}${roi.toFixed(1)}%`;
         }
         if (bankrollWinrateVal) bankrollWinrateVal.textContent = `${winrate.toFixed(1)}%`;
+
+        if (resolvedBetsCount > 0) {
+            const displayWinrate = `${winrate.toFixed(1)}%`;
+            if (statAccuracy) statAccuracy.textContent = displayWinrate;
+            if (globalAccuracyBadge) globalAccuracyBadge.textContent = displayWinrate;
+        }
     }
 
     // --- Register Ticket to History & Bankroll Modal Handler ---
@@ -3062,7 +3068,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                         </div>
                     ` : `<p style="font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary);">${pick.reasoning || ''}</p>`}
-                </div>
+                <button class="btn btn-secondary btn-full-width" id="btn-register-escalera-pick" style="margin-top: 15px; border-color: var(--accent-cyan); color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem; padding: 10px;">
+                    <i class="fa-solid fa-bookmark"></i> 📌 Registrar este Día en Mi Historial y Banca
+                </button>
             </div>
         `;
 
@@ -3087,6 +3095,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (sideRet) sideRet.textContent = `$${newRet.toFixed(2)}`;
                 }
             });
+        }
+
+        // Listener para registrar día de la escalera en historial
+        const btnRegisterEscalera = document.getElementById("btn-register-escalera-pick");
+        if (btnRegisterEscalera) {
+            btnRegisterEscalera.onclick = () => {
+                const finalOdd = (customOddInput && !isNaN(parseFloat(customOddInput.value))) ? parseFloat(customOddInput.value) : pick.odd;
+                let matchName = selectedSP.isManual ? (document.getElementById("input-escalera-manual-match")?.value || "Partido Manual") : `${match.home} vs ${match.away}`;
+                let selMarket = selectedSP.isManual ? (document.getElementById("input-escalera-manual-selection")?.value || "Tu Selección") : `${pick.market}: ${pick.selection}`;
+
+                openRegisterTicketModal({
+                    type: `Reto Escalera (Día ${escaleraCurrentDay})`,
+                    selections: [{
+                        match: matchName,
+                        market: selMarket,
+                        pick: selMarket,
+                        odd: finalOdd,
+                        reasoning: typeof pick.reasoning === 'object' ? pick.reasoning.tactical : (pick.reasoning || '')
+                    }],
+                    total_odd: finalOdd,
+                    recommendation_stake: escaleraCurrentStake
+                }, `Escalera Día ${escaleraCurrentDay}`);
+            };
         }
     }
 
