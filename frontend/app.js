@@ -2919,13 +2919,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div style="font-size: 1.2rem; font-family: var(--font-display); font-weight: 800; color: var(--text-primary);">$${escaleraCurrentStake.toFixed(2)}</div>
                     </div>
                     <div style="background: rgba(8, 11, 17, 0.5); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">Cuota Real (Editar)</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">Cuota Real en tu Casa (Editar)</div>
                         <div style="display:flex; justify-content:center; align-items:center;">
                             <span style="color:var(--text-muted); margin-right:4px; font-weight:700;">@</span>
-                            <input type="number" id="input-escalera-custom-odd" value="${pick.odd.toFixed(2)}" step="0.01" style="width: 70px; text-align: center; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: var(--accent-green); font-size: 1.1rem; font-family: var(--font-display); font-weight: 800; border-radius: 4px; padding: 2px;">
+                            <input type="number" id="input-escalera-custom-odd" value="${pick.odd.toFixed(2)}" step="0.01" style="width: 75px; text-align: center; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: var(--accent-green); font-size: 1.1rem; font-family: var(--font-display); font-weight: 800; border-radius: 4px; padding: 2px;">
                         </div>
-                        <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 5px;">Retorno: <span id="escalera-custom-return" style="color:var(--accent-green); font-weight:800;">$${nextReturn.toFixed(2)}</span></div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 5px;">Retorno Real: <span id="escalera-custom-return" style="color:var(--accent-green); font-weight:800;">$${nextReturn.toFixed(2)}</span></div>
                     </div>
+                </div>
+
+                <div id="escalera-low-odd-warning" style="display: ${pick.odd < 1.25 ? 'block' : 'none'}; margin-bottom: 15px; padding: 8px 12px; background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; border-radius: 6px; font-size: 0.74rem; color: #f87171; text-align: left;">
+                    <i class="fa-solid fa-triangle-exclamation" style="margin-right: 4px;"></i> <b>Cuota baja detectada en tu Casa (@${pick.odd.toFixed(2)}):</b> Escribe en el recuadro 'Cuota Real' el valor exacto que te ofrece tu casa de apuestas (ej. 1.085) para recalcular tus ganancias, o elige otra de las opciones de arriba.
                 </div>
 
                 <div class="player-commentary" style="background: rgba(6, 182, 212, 0.02); padding: 12px; border-radius: 8px; border-left: 3px solid var(--accent-cyan);">
