@@ -33,246 +33,121 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- Cloud Sync Manager (PC ⇄ Mobile) ---
+    const SYNC_BLOB_URL = "https://jsonblob.com/api/jsonBlob/019f85c9-8e08-7b09-9b1b-ecd44ae950db";
+    
     const SyncManager = {
         getSyncId: function() {
-            return localStorage.getItem("escalera_sync_id") || "sportintel-user";
+            return "sportintel-user";
         },
         
-        setSyncId: function(id) {
-            localStorage.setItem("escalera_sync_id", id.trim());
-        },
+        setSyncId: function(id) {},
         
         gatherState: function() {
             return {
-                ub: JSON.parse(localStorage.getItem("user_bets")) || [],
-                sb: parseFloat(localStorage.getItem("starting_bankroll")) || 53.50918,
-                oak: localStorage.getItem("odds_api_key") || "",
-                gak: localStorage.getItem("gemini_api_key") || "",
-                ght: localStorage.getItem("github_token") || "",
-                ed: parseInt(localStorage.getItem("escalera_day")) || 8,
-                ess: parseFloat(localStorage.getItem("escalera_start_stake")) || 10,
-                ecs: parseFloat(localStorage.getItem("escalera_current_stake")) || 9.6,
-                etd: parseInt(localStorage.getItem("escalera_target_days")) || 7,
-                ecr: JSON.parse(localStorage.getItem("escalera_current_run")) || [],
-                esp: parseFloat(localStorage.getItem("escalera_saved_profit")) || 0,
-                ewi: localStorage.getItem("escalera_withdrawn_initial") || "false",
-                ept: localStorage.getItem("escalera_protection_type") || "withdraw_initial",
-                eh: JSON.parse(localStorage.getItem("escalera_history")) || [],
-                tm1: localStorage.getItem("ticket_mode_1") || "combinado",
-                tm2: localStorage.getItem("ticket_mode_2") || "combinado"
+                ub: JSON.parse(localStorage.getItem("user_bets") || "[]"),
+                sb: localStorage.getItem("starting_bankroll") || "53.50918",
+                ed: localStorage.getItem("escalera_day") || "8",
+                ess: localStorage.getItem("escalera_start_stake") || "10",
+                ecs: localStorage.getItem("escalera_current_stake") || "9.6",
+                ecr: JSON.parse(localStorage.getItem("escalera_current_run") || "[]"),
+                eh: JSON.parse(localStorage.getItem("escalera_history") || "[]")
             };
         },
         
         applyState: function(s) {
             if (!s) return;
-            if (s.ub) localStorage.setItem("user_bets", JSON.stringify(s.ub));
+            const bets = typeof s.ub === "string" ? JSON.parse(s.ub) : s.ub;
+            const run = typeof s.ecr === "string" ? JSON.parse(s.ecr) : s.ecr;
+            const hist = typeof s.eh === "string" ? JSON.parse(s.eh) : s.eh;
+            
+            if (bets) localStorage.setItem("user_bets", JSON.stringify(bets));
             if (s.sb !== undefined) localStorage.setItem("starting_bankroll", s.sb);
-            if (s.oak !== undefined) localStorage.setItem("odds_api_key", s.oak);
-            if (s.gak !== undefined) localStorage.setItem("gemini_api_key", s.gak);
-            if (s.ght !== undefined) localStorage.setItem("github_token", s.ght);
             if (s.ed !== undefined) localStorage.setItem("escalera_day", s.ed);
             if (s.ess !== undefined) localStorage.setItem("escalera_start_stake", s.ess);
             if (s.ecs !== undefined) localStorage.setItem("escalera_current_stake", s.ecs);
-            if (s.etd !== undefined) localStorage.setItem("escalera_target_days", s.etd);
-            if (s.ecr) localStorage.setItem("escalera_current_run", JSON.stringify(s.ecr));
-            if (s.esp !== undefined) localStorage.setItem("escalera_saved_profit", s.esp);
-            if (s.ewi !== undefined) localStorage.setItem("escalera_withdrawn_initial", s.ewi);
-            if (s.ept !== undefined) localStorage.setItem("escalera_protection_type", s.ept);
-            if (s.eh) localStorage.setItem("escalera_history", JSON.stringify(s.eh));
-            if (s.tm1 !== undefined) localStorage.setItem("ticket_mode_1", s.tm1);
-            if (s.tm2 !== undefined) localStorage.setItem("ticket_mode_2", s.tm2);
+            if (run) localStorage.setItem("escalera_current_run", JSON.stringify(run));
+            if (hist) localStorage.setItem("escalera_history", JSON.stringify(hist));
         },
         
-        toB64: function(obj) {
-            const jsonStr = JSON.stringify(obj);
-            return btoa(unescape(encodeURIComponent(jsonStr)))
-                .replace(/\+/g, '-')
-                .replace(/\//g, '_')
-                .replace(/=/g, '');
-        },
-
-        fromB64: function(cleaned) {
-            let base64 = cleaned.replace(/-/g, '+').replace(/_/g, '/');
-            while (base64.length % 4) {
-                base64 += '=';
-            }
-            const decodedStr = decodeURIComponent(escape(atob(base64)));
-            return JSON.parse(decodedStr);
-        },
-
         pushState: async function() {
-            const id = this.getSyncId();
-            if (!id) return;
-            const fullState = this.gatherState();
-            
-            const coreState = {
-                sb: fullState.sb,
-                oak: fullState.oak,
-                gak: fullState.gak,
-                ght: fullState.ght,
-                ed: fullState.ed,
-                ess: fullState.ess,
-                ecs: fullState.ecs,
-                etd: fullState.etd,
-                esp: fullState.esp,
-                ewi: fullState.ewi,
-                ept: fullState.ept,
-                tm1: fullState.tm1,
-                tm2: fullState.tm2
-            };
-            
-            const historyState = {
-                eh: fullState.eh,
-                ecr: fullState.ecr
-            };
-            
-            const betsState = {
-                ub: fullState.ub
-            };
-            
             try {
-                const b64Core = this.toB64(coreState);
-                const b64History = this.toB64(historyState);
-                const b64Bets = this.toB64(betsState);
-                
-                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state_core?value=${encodeURIComponent(b64Core)}`, {
-                    method: "POST"
+                const fullState = this.gatherState();
+                await fetch(SYNC_BLOB_URL, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(fullState)
                 });
-                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state_history?value=${encodeURIComponent(b64History)}`, {
-                    method: "POST"
-                });
-                await fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${id}/state_bets?value=${encodeURIComponent(b64Bets)}`, {
-                    method: "POST"
-                });
-                
-                console.log("[Sync] Split state pushed successfully to cloud.");
+                console.log("[Sync] State pushed to JsonBlob cloud.");
             } catch (e) {
-                console.error("[Sync] Error pushing split states:", e);
+                console.error("[Sync] Error pushing to cloud:", e);
             }
         },
         
         pullState: async function() {
-            const id = this.getSyncId();
-            if (!id) return false;
             try {
-                const resCore = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${id}/state_core`);
-                const textCore = (await resCore.text()).trim().replace(/^"|"$/g, '');
-                
-                const resHistory = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${id}/state_history`);
-                const textHistory = (await resHistory.text()).trim().replace(/^"|"$/g, '');
-                
-                const resBets = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${id}/state_bets`);
-                const textBets = (await resBets.text()).trim().replace(/^"|"$/g, '');
-                
-                let combined = {};
-                
-                if (textCore && textCore !== "null" && textCore !== "Value not found" && !textCore.includes("Error")) {
-                    try {
-                        const core = this.fromB64(textCore);
-                        Object.assign(combined, core);
-                    } catch (e) { console.error("Error decoding core state:", e); }
-                }
-                
-                if (textHistory && textHistory !== "null" && textHistory !== "Value not found" && !textHistory.includes("Error")) {
-                    try {
-                        const history = this.fromB64(textHistory);
-                        Object.assign(combined, history);
-                    } catch (e) { console.error("Error decoding history state:", e); }
-                }
-                
-                if (textBets && textBets !== "null" && textBets !== "Value not found" && !textBets.includes("Error")) {
-                    try {
-                        const bets = this.fromB64(textBets);
-                        Object.assign(combined, bets);
-                    } catch (e) { console.error("Error decoding bets state:", e); }
-                }
-                
-                if (Object.keys(combined).length > 0) {
+                const res = await fetch(SYNC_BLOB_URL);
+                if (!res.ok) return false;
+                const data = await res.json();
+                if (data) {
+                    const cloudBets = typeof data.ub === "string" ? JSON.parse(data.ub) : (data.ub || []);
                     const localBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
-                    const cloudBets = combined.ub || [];
                     
-                    // If local has MORE bets than cloud, local is newer! Push local to cloud instead of overwriting!
+                    // If local device has MORE bets (e.g. bet just registered on phone), push local to cloud!
                     if (localBets.length > cloudBets.length) {
-                        console.log("[Sync] Local state has more bets than cloud. Pushing local to cloud...");
+                        console.log("[Sync] Local bets count > cloud bets count. Pushing local to cloud...");
                         await this.pushState();
                         return false;
                     }
                     
-                    const currentLocalStr = JSON.stringify(localBets);
-                    const newCloudStr = JSON.stringify(cloudBets);
+                    const localStr = JSON.stringify(localBets);
+                    const cloudStr = JSON.stringify(cloudBets);
                     
-                    if (currentLocalStr !== newCloudStr || localBets.length < cloudBets.length) {
-                        this.applyState(combined);
-                        console.log("[Sync] New cloud state applied successfully.");
+                    if (localStr !== cloudStr || localBets.length < cloudBets.length) {
+                        this.applyState(data);
+                        console.log("[Sync] Cloud state merged to local storage.");
                         return true;
                     }
                 }
             } catch (e) {
-                console.error("[Sync] Error pulling split states:", e);
+                console.error("[Sync] Error pulling from cloud:", e);
             }
             return false;
-        },
-        
-        generateNewPIN: async function() {
-            try {
-                const res = await fetch("https://keyvalue.immanuel.co/api/KeyVal/GetAppKey");
-                const keyText = await res.text();
-                const cleanKey = keyText.trim().replace(/^"|"$/g, '');
-                if (cleanKey) {
-                    this.setSyncId(cleanKey);
-                    await this.pushState();
-                    return cleanKey;
-                }
-            } catch (e) {
-                console.error("[Sync] Error generating new PIN:", e);
-            }
-            return "";
         }
     };
 
     // Instant automatic cloud push (100ms debounce)
     let syncPushTimeout = null;
     function triggerAutoSyncPush() {
-        if (SyncManager.getSyncId()) {
-            clearTimeout(syncPushTimeout);
-            syncPushTimeout = setTimeout(() => {
-                SyncManager.pushState();
-            }, 100);
-        }
+        clearTimeout(syncPushTimeout);
+        syncPushTimeout = setTimeout(() => {
+            SyncManager.pushState();
+        }, 100);
     }
     
     // Override localStorage.setItem to auto-trigger cloud push on state changes
     const originalSetItem = localStorage.setItem;
     localStorage.setItem = function(key, value) {
         originalSetItem.apply(this, arguments);
-        if (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll" || key === "github_token") {
+        if (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll") {
             triggerAutoSyncPush();
         }
     };
 
     // Automatic cloud pull on load & continuous 3-second background real-time sync loop
     (async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlSyncPin = urlParams.get("sync") || urlParams.get("sync_pin");
-        if (urlSyncPin) {
-            SyncManager.setSyncId(urlSyncPin.trim().toLowerCase());
-        }
-
-        if (SyncManager.getSyncId()) {
-            console.log("[Sync] Device linked. Pulling state on page load...");
-            const pulled = await SyncManager.pullState();
-            if (pulled) {
-                if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
-                if (typeof populateBetsTable === "function") populateBetsTable();
-                if (typeof renderEscaleraTab === "function") renderEscaleraTab();
-                if (typeof updateBankrollChart === "function") updateBankrollChart();
-            }
+        console.log("[Sync] Connecting to JsonBlob cloud engine...");
+        const pulled = await SyncManager.pullState();
+        if (pulled) {
+            if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
+            if (typeof populateBetsTable === "function") populateBetsTable();
+            if (typeof renderEscaleraTab === "function") renderEscaleraTab();
+            if (typeof updateBankrollChart === "function") updateBankrollChart();
         }
     })();
 
     // Live background polling loop every 3 seconds for instant cross-device updates
     setInterval(async () => {
-        if (SyncManager.getSyncId() && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "SELECT") {
+        if (document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "SELECT") {
             const updated = await SyncManager.pullState();
             if (updated) {
                 if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
@@ -2396,8 +2271,8 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         }
         let savedBets = localStorage.getItem("user_bets");
-        if (!savedBets || JSON.parse(savedBets).length < 17) {
-            // Force load all 17 user's real bets data automatically
+        if (!savedBets) {
+            // User's real bets data automatically pre-loaded as default on initial launch
             userBets = [{"id":1784652695284,"match":"Reto Escalera (Día 1): Aluminij vs Sheriff Tiraspol","market":"Sheriff Tiraspol o Empate","odd":1.21,"stake":5,"status":"won","date":"2026-07-16"},{"id":1784652695285,"match":"Reto Escalera (Día 2): Alianza Lima vs Sport Huancayo","market":"Alianza Lima o Empate","odd":1.03,"stake":6.05,"status":"won","date":"2026-07-20"},{"id":1784653437721,"match":"Bolivar - Guabira","market":"Hándicap 1 (0) Bolivar - Guabira","odd":1.03,"stake":6.05,"status":"won","date":"2026-07-21"},{"id":1784653506063,"match":"NK Aluminij - Sheriff Tiraspol","market":"2X NK Aluminij - Sheriff Tiraspol","odd":1.21,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784653536600,"match":"Bolivar - Guabira","market":"Hándicap 1 (0) Bolivar - Guabira","odd":1.03,"stake":6.05,"status":"won","date":"2026-07-21"},{"id":1784653582991,"match":"Fluminense - Red Bull Bragantino","market":"1X Fluminense - Red Bull Bragantino","odd":1.235,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784653582997,"match":"Reto Escalera (Día 3): Fluminense - Red Bull Bragantino","market":"1X Fluminense - Red Bull Bragantino","odd":1.235,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784653635840,"match":"NJ-NY Gotham (F) - Seattle Reign (F)","market":"1X NJ-NY Gotham (F) - Seattle Reign (F)","odd":1.058,"stake":7.41,"status":"won","date":"2026-07-21"},{"id":1784653635847,"match":"Reto Escalera (Día 4): NJ-NY Gotham (F) - Seattle Reign (F)","market":"1X NJ-NY Gotham (F) - Seattle Reign (F)","odd":1.058,"stake":7.41,"status":"won","date":"2026-07-21"},{"id":1784653682511,"match":"Independiente del Valle - Emelec","market":"Hándicap 1 (0) Independiente del Valle - Emelec","odd":1.07,"stake":7.87,"status":"won","date":"2026-07-21"},{"id":1784653682520,"match":"Reto Escalera (Día 5): Independiente del Valle - Emelec","market":"Hándicap 1 (0) Independiente del Valle - Emelec","odd":1.07,"stake":7.87,"status":"won","date":"2026-07-21"},{"id":1784653946608,"match":"San Antonio Bulo Bulo - ABB","market":"1X San Antonio Bulo Bulo - ABB","odd":1.144,"stake":8.42,"status":"won","date":"2026-07-21"},{"id":1784653946616,"match":"Reto Escalera (Día 6): San Antonio Bulo Bulo - ABB","market":"1X San Antonio Bulo Bulo - ABB","odd":1.144,"stake":8.42,"status":"won","date":"2026-07-21"},{"id":1784654219950,"match":"Reto Escalera (Día 7): Ararat - Armenia - Shamrock Rovers","market":"Doble oportunidad: 1X","odd":1.336,"stake":9.6,"status":"pending","date":"2026-07-21"},{"id":1784654438054,"match":"Fenerbahce vs Gornik Zabrze + Clyde - Annan Athletic","market":"Resultado Final (1X2): Fenerbahce / Más/Menos 2.5 Goles: Más de 2.5 Goles","odd":1.692,"stake":5,"status":"pending","date":"2026-07-21"},{"id":1784654458974,"match":"FC Thun vs Dinamo Zagreb + Kilmarnock vs Hamilton Academical + Raith Rovers vs Peterhead + Atlético-MG vs Bahia + Ararat-Armenia vs Shamrock Rovers + Dunfermline Athletic vs Cove Rangers + Partick Thistle vs Stenhousemuir","market":"Doble Oportunidad: Dinamo Zagreb o Empate / Resultado Final (1X2): Kilmarnock / Resultado Final (1X2): Raith Rovers / Doble Oportunidad: Atlético-MG o Empate / Doble Oportunidad: Ararat-Armenia o Empate / Resultado Final (1X2): Dunfermline Athletic / Resultado Final (1X2): Partick Thistle","odd":4.47,"stake":1,"status":"pending","date":"2026-07-21"},{"id":1784654494254,"match":"Comerciantes Unidos - Alianza Lima","market":"Doble oportunidad: 2X","odd":1.2,"stake":8.42,"status":"pending","date":"2026-07-21"}];
             localStorage.setItem("user_bets", JSON.stringify(userBets));
             localStorage.setItem("starting_bankroll", "53.50918");
