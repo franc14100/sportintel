@@ -235,8 +235,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Automatic cloud pull on load
+    // Automatic cloud pull on load (including URL sync_pin parameter)
     (async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlSyncPin = urlParams.get("sync") || urlParams.get("sync_pin");
+        if (urlSyncPin) {
+            SyncManager.setSyncId(urlSyncPin.trim().toLowerCase());
+        }
+
         if (SyncManager.getSyncId()) {
             console.log("[Sync] Device linked. Pulling state on page load...");
             await SyncManager.pullState();
@@ -3779,6 +3785,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         <i class="fa-regular fa-copy"></i> Copiar
                     </button>
                 </div>
+                <button class="btn btn-secondary btn-full-width" id="btn-sync-copy-link" style="margin-top: 10px; border-color: var(--accent-green); color: var(--accent-green); font-weight: 700; font-size: 0.78rem; padding: 8px;">
+                    <i class="fa-brands fa-whatsapp"></i> Copiar Enlace Directo para Celular (WhatsApp)
+                </button>
                 <div style="display: flex; gap: 10px; margin-top: 12px;">
                     <button class="btn btn-primary" id="btn-sync-refresh" style="flex: 1.2; background: var(--accent-green); border-color: var(--accent-green); cursor: pointer; padding: 8px 5px; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px;">
                         <i class="fa-solid fa-rotate"></i> Traer Datos Nube
@@ -3788,6 +3797,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     </button>
                 </div>
             `;
+
+            const btnCopyLink = document.getElementById("btn-sync-copy-link");
+            if (btnCopyLink) {
+                btnCopyLink.onclick = () => {
+                    const directUrl = `${window.location.origin}${window.location.pathname}?sync_pin=${syncId}`;
+                    navigator.clipboard.writeText(directUrl);
+                    btnCopyLink.innerHTML = `<i class="fa-solid fa-check"></i> ¡Enlace Copiado! Ábrelo en tu Teléfono`;
+                    setTimeout(() => { btnCopyLink.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Copiar Enlace Directo para Celular (WhatsApp)`; }, 2500);
+                };
+            }
             
             const btnCopy = document.getElementById("btn-sync-copy");
             if (btnCopy) {
