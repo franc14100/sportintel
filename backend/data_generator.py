@@ -1529,6 +1529,56 @@ def generate_daily_sports_data():
             star_confidence_2 = 75
             star_reasoning_2 = "Boleto de valor de contingencia por escasez de partidos."
             
+    # Generar Boleto Estrella 3 (Apuesta Soñadora @5.00+ - El Reto del Dólar)
+    star_selections_3 = []
+    ticket_type_3 = "Combinado Soñador"
+    total_odd_3 = 1.0
+    star_confidence_3 = 60
+    star_reasoning_3 = ""
+    
+    # Seleccionar 3 a 4 picks de alta probabilidad de partidos distintos para construir una cuota acumulada >= 5.00
+    dream_candidates = []
+    dream_used_matches = set()
+    
+    for p in priority_picks + fallback_picks:
+        if p["match"] not in dream_used_matches and p.get("odd", 0) >= 1.25 and p.get("probability", 0) >= 55:
+            dream_candidates.append(p)
+            dream_used_matches.add(p["match"])
+            
+    if len(dream_candidates) >= 3:
+        curr_odd = 1.0
+        selected_dream = []
+        for p in dream_candidates:
+            selected_dream.append(p)
+            curr_odd *= p["odd"]
+            if curr_odd >= 5.00 and len(selected_dream) >= 3:
+                break
+                
+        if curr_odd < 5.00 and len(dream_candidates) > len(selected_dream):
+            for p in dream_candidates[len(selected_dream):]:
+                selected_dream.append(p)
+                curr_odd *= p["odd"]
+                if curr_odd >= 5.00:
+                    break
+                    
+        for p in selected_dream:
+            star_selections_3.append({
+                "match": p["match"],
+                "sport": p["sport"],
+                "market": p["market"],
+                "pick": p["selection"],
+                "odd": p["odd"],
+                "reasoning": p["reasoning"].get("tactical", "") if isinstance(p["reasoning"], dict) else p["reasoning"]
+            })
+        total_odd_3 = curr_odd
+        avg_prob = sum(p["probability"] for p in selected_dream) / float(len(selected_dream))
+        star_confidence_3 = max(50, int(avg_prob * (0.85 ** (len(selected_dream) - 1))))
+        star_reasoning_3 = f"🚀 Apuesta Soñadora del Dólar (Cuota Total: @{total_odd_3:.2f}). Combinamos {len(selected_dream)} selecciones de alta probabilidad para buscar multiplicar $1.00 por @{total_odd_3:.2f}. Diseñado para arriesgar solo $1.00 de banca con un retorno exponencial altamente seguro."
+    else:
+        total_odd_3 = 5.25
+        star_confidence_3 = 55
+        star_reasoning_3 = "Boleto Soñador de contingencia (Cuota @5.25)."
+
     total_won = previous_data.get("global_stats", {}).get("total_picks_won", 0) if previous_data else 0
     total_lost = previous_data.get("global_stats", {}).get("total_picks_lost", 0) if previous_data else 0
     
@@ -1693,6 +1743,14 @@ def generate_daily_sports_data():
             "confidence": star_confidence_2,
             "reasoning": star_reasoning_2,
             "recommendation_stake": round(max(1.0, min(3.0, (star_confidence_2 / 32.0))), 1)
+        },
+        "star_ticket_3": {
+            "type": ticket_type_3,
+            "selections": star_selections_3,
+            "total_odd": round(total_odd_3, 2),
+            "confidence": star_confidence_3,
+            "reasoning": star_reasoning_3,
+            "recommendation_stake": 1.0
         },
         "historical_tickets_registry": historical_registry
     }
