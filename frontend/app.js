@@ -3851,6 +3851,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Start initial load ---
     async function init() {
+        // Auto-sincronizar PIN de la Nube si se pasa por URL o si no existe PIN local
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlSyncPin = urlParams.get("sync") || urlParams.get("sync_pin");
+
+        if (urlSyncPin) {
+            console.log("[Sync] PIN detectado en URL:", urlSyncPin);
+            SyncManager.setSyncId(urlSyncPin.trim().toLowerCase());
+            await SyncManager.pullState();
+        } else if (!SyncManager.getSyncId()) {
+            const autoPin = "sportintel-" + Math.random().toString(36).substring(2, 7);
+            SyncManager.setSyncId(autoPin);
+            await SyncManager.pushState();
+            console.log("[Sync] PIN automático creado y datos locales subidos a la Nube:", autoPin);
+        } else {
+            await SyncManager.pushState();
+        }
+
         await loadSportsData();
         startLiveMarketFluctuations(); // Iniciar fluctuaciones en vivo
         initBankroll(); // Inicializar panel de bankroll y apuestas
