@@ -2564,6 +2564,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const titleEl = document.getElementById("register-modal-title");
         const summaryEl = document.getElementById("register-modal-summary");
         const oddEl = document.getElementById("register-modal-odd");
+        const oddInput = document.getElementById("input-register-odd");
         const stakeInput = document.getElementById("input-register-stake");
         const statusSelect = document.getElementById("select-register-status");
 
@@ -2581,6 +2582,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         if (summaryEl) summaryEl.textContent = summaryText;
         if (oddEl) oddEl.textContent = `@${ticket.total_odd.toFixed(2)}`;
+        if (oddInput) oddInput.value = ticket.total_odd.toFixed(2);
 
         const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : 1.0));
         let defaultCash = suffix === "3" ? 1.0 : (currentCapital * recStake / 100);
@@ -2606,8 +2608,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnConfirmRegister) {
         btnConfirmRegister.onclick = () => {
             if (!pendingRegisterTicket) return;
+            const oddInput = document.getElementById("input-register-odd");
             const stakeInput = document.getElementById("input-register-stake");
             const statusSelect = document.getElementById("select-register-status");
+            
+            const oddVal = parseFloat(oddInput ? oddInput.value : 0) || pendingRegisterTicket.total_odd;
             const stakeVal = parseFloat(stakeInput.value) || 1.0;
             const statusVal = statusSelect.value || "pending";
 
@@ -2624,7 +2629,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 id: Date.now(),
                 match: matchSummary,
                 market: marketSummary,
-                odd: pendingRegisterTicket.total_odd,
+                odd: oddVal,
                 stake: stakeVal,
                 status: statusVal,
                 date: new Date().toISOString().split("T")[0]
