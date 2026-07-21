@@ -1037,8 +1037,11 @@ def generate_daily_sports_data():
             fh_selection = winner_name if random.random() > 0.4 else "Empate"
             fh_odd = round(random.uniform(2.10, 3.50), 2) if fh_selection != "Empate" else round(random.uniform(1.80, 2.60), 2)
 
-            # DNB (Draw No Bet)
-            dnb_odd = round(odd_home * 0.85, 2) if prob_home > prob_away else round(odd_away * 0.85, 2)
+            # DNB (Draw No Bet) - Real bookmaker arbitrage formula: odd * (1.0 - 1/odd_draw)
+            if prob_home > prob_away:
+                dnb_odd = max(1.02, round(odd_home * (1.0 - (1.0 / max(1.1, odd_draw))), 2))
+            else:
+                dnb_odd = max(1.02, round(odd_away * (1.0 - (1.0 / max(1.1, odd_draw))), 2))
 
             picks = [
                 {
