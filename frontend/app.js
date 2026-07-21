@@ -364,30 +364,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 throw new Error("No se pudo cargar el archivo data.json");
             }
             appData = await response.json();
-
-            // Auto-cargar apuestas, bankroll y reto escalera desde data.json si el navegador está limpio
-            if (appData.user_bets && Array.isArray(appData.user_bets)) {
-                const storedBets = localStorage.getItem("user_bets");
-                if (!storedBets || storedBets.includes("Spain vs Belgium")) {
-                    localStorage.setItem("user_bets", JSON.stringify(appData.user_bets));
-                    userBets = appData.user_bets;
-                }
-            }
-
-            if (appData.escalera_current_run && Array.isArray(appData.escalera_current_run)) {
-                const storedRun = localStorage.getItem("escalera_current_run");
-                if (!storedRun) {
-                    localStorage.setItem("escalera_current_run", JSON.stringify(appData.escalera_current_run));
-                }
-            }
-
-            if (appData.starting_bankroll !== undefined) {
-                const storedCapital = localStorage.getItem("starting_bankroll");
-                if (!storedCapital || parseFloat(storedCapital) === 1000) {
-                    localStorage.setItem("starting_bankroll", appData.starting_bankroll);
-                    startingBankroll = appData.starting_bankroll;
-                }
-            }
             
             populateStats();
             populateDashboardPicks();
@@ -2388,7 +2364,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const importStr = prompt("Pega aquí los datos copiados (o introduce tu PIN de enlace de la nube):");
                 if (importStr) {
-                    if (importStr.trim().length > 0 && importStr.trim().length < 15 && !importStr.includes("{")) {
+                    if (importStr.trim().length > 0 && importStr.trim().length < 15 && !importStr.includes(String.fromCharCode(123))) {
                         // User typed a PIN
                         SyncManager.setSyncId(importStr.trim().toLowerCase());
                         const pulled = await SyncManager.pullState();
@@ -2913,7 +2889,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentRunCheck.length < escaleraBets.length) {
             currentRunCheck = [];
             escaleraBets.forEach(b => {
-                const matchDay = b.match.match(/Reto Escalera \(Día (\d+)\):?\s*(.*)/);
+                const matchDay = b.match.match(new RegExp("Reto Escalera \\(Día (\\d+)\\):?\\s*(.*)"));
                 if (matchDay) {
                     const dayNum = parseInt(matchDay[1]);
                     const cleanMatch = matchDay[2] || b.match;
