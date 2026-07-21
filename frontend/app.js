@@ -777,31 +777,33 @@ document.addEventListener("DOMContentLoaded", () => {
             const headerTitle = document.querySelector(`#star-ticket-card-${suffix} h3`);
             if (headerTitle) {
                 const typeStr = isSimple ? "Simple" : "Combinado";
-                const badgeBg = suffix === "1" ? "rgba(16, 185, 129, 0.15)" : "rgba(6, 182, 212, 0.15)";
-                const badgeColor = suffix === "1" ? "var(--accent-green)" : "var(--accent-cyan)";
-                const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : "rgba(6, 182, 212, 0.3)";
+                const badgeBg = suffix === "1" ? "rgba(16, 185, 129, 0.15)" : (suffix === "2" ? "rgba(6, 182, 212, 0.15)" : "rgba(168, 85, 247, 0.15)");
+                const badgeColor = suffix === "1" ? "var(--accent-green)" : (suffix === "2" ? "rgba(6, 182, 212, 0.15)" : "#a855f7");
+                const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : (suffix === "2" ? "rgba(6, 182, 212, 0.3)" : "rgba(168, 85, 247, 0.3)");
                 
-                headerTitle.innerHTML = `Boleto Estrella ${suffix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
+                const titlePrefix = suffix === "3" ? "Apuesta Soñadora del Dólar" : `Boleto Estrella ${suffix}`;
+                headerTitle.innerHTML = `${titlePrefix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
             }
 
-            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : 2.0);
+            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : 1.0));
 
             let selectionsHtml = "";
             const confidenceBox = document.querySelector(`#star-ticket-card-${suffix} .confidence-box`);
             
             if (isSimple) {
-                // Hide global confidence progress bar box (not needed for simple)
                 if (confidenceBox) confidenceBox.style.display = "none";
             } else {
-                // Show global confidence progress bar box for parlay
                 if (confidenceBox) confidenceBox.style.display = "block";
             }
 
-            // Render each selection with its own separate tactical analysis
+            const activeColor = colorTheme === "green" ? "var(--accent-green)" : (colorTheme === "cyan" ? "var(--accent-cyan)" : "#a855f7");
+            const activeBg = colorTheme === "green" ? "rgba(16,185,129,0.15)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.15)" : "rgba(168,85,247,0.15)");
+            const activeBorder = colorTheme === "green" ? "rgba(16,185,129,0.3)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.3)" : "rgba(168,85,247,0.3)");
+
             ticket.selections.forEach((sel, index) => {
                 const selReasoningHtml = sel.reasoning ? `
-                    <div class="selection-tactical-analysis" style="margin-top: 8px; padding: 8px 10px; background: rgba(255,255,255,0.015); border-left: 2px solid ${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"}; border-radius: 4px; font-size: 0.74rem; color: var(--text-secondary); line-height: 1.4;">
-                        <i class="fa-solid fa-brain" style="color:${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"}; margin-right: 4px;"></i>
+                    <div class="selection-tactical-analysis" style="margin-top: 8px; padding: 8px 10px; background: rgba(255,255,255,0.015); border-left: 2px solid ${activeColor}; border-radius: 4px; font-size: 0.74rem; color: var(--text-secondary); line-height: 1.4;">
+                        <i class="fa-solid fa-brain" style="color:${activeColor}; margin-right: 4px;"></i>
                         <b>Análisis Técnico:</b> ${sel.reasoning}
                     </div>
                 ` : '';
@@ -810,7 +812,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="ticket-line-item" style="display: block; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 10px; background: rgba(255,255,255,0.01);">
                         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 6px; margin-bottom: 6px;">
                             <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-primary);"><i class="fa-solid fa-gamepad" style="opacity:0.6;"></i> ${sel.match}</span>
-                            <span class="badge" style="font-size: 0.75rem; font-weight: 800; background: ${colorTheme === "green" ? "rgba(16,185,129,0.15)" : "rgba(6,182,212,0.15)"}; color: ${colorTheme === "green" ? "var(--accent-green)" : "var(--accent-cyan)"}; border: 1px solid ${colorTheme === "green" ? "rgba(16,185,129,0.3)" : "rgba(6,182,212,0.3)"};">@${sel.odd.toFixed(2)}</span>
+                            <span class="badge" style="font-size: 0.75rem; font-weight: 800; background: ${activeBg}; color: ${activeColor}; border: 1px solid ${activeBorder};">@${sel.odd.toFixed(2)}</span>
                         </div>
                         <div style="font-size: 0.72rem; color: var(--text-secondary);">
                             <span style="color: var(--text-muted);">Mercado:</span> ${sel.market} | <span style="color: var(--text-muted);">Pronóstico:</span> <b style="color: var(--text-primary);">${sel.pick}</b>
@@ -820,19 +822,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
             });
             
-            // Add footer totals
             if (isSimple) {
                 selectionsHtml += `
                     <div class="ticket-summary-odd" style="margin-top: 10px;">
                         <span>Cuota Apuesta Simple</span>
-                        <span class="total-odd-val">@${ticket.total_odd.toFixed(2)}</span>
+                        <span class="total-odd-val" style="color:${activeColor};">@${ticket.total_odd.toFixed(2)}</span>
                     </div>
                 `;
             } else {
                 selectionsHtml += `
                     <div class="ticket-summary-odd" style="margin-top: 10px;">
-                        <span>Cuota Combinada</span>
-                        <span class="total-odd-val">@${ticket.total_odd.toFixed(2)}</span>
+                        <span>Cuota Combinada Total</span>
+                        <span class="total-odd-val" style="color:${activeColor};">@${ticket.total_odd.toFixed(2)}</span>
                     </div>
                 `;
             }
@@ -843,15 +844,25 @@ document.addEventListener("DOMContentLoaded", () => {
             if (reasoning) reasoning.textContent = ticket.reasoning;
 
             // Stakes calculation
-            if (stakePercent) stakePercent.textContent = `${recStake}%`;
-            if (stakeBadge) stakeBadge.textContent = `Stake: ${recStake}%`;
-            if (stakeCash) {
-                const amount = (currentCapital * recStake / 100).toFixed(2);
-                stakeCash.textContent = `$${amount}`;
+            if (suffix === "3") {
+                if (stakePercent) stakePercent.textContent = "$1.00 Fijo";
+                if (stakeBadge) stakeBadge.textContent = "Stake: $1.00";
+                if (stakeCash) stakeCash.textContent = "$1.00";
+                const multEl = document.getElementById("star-ticket-multiplier-3");
+                if (multEl) multEl.textContent = ticket.total_odd.toFixed(2);
+            } else {
+                if (stakePercent) stakePercent.textContent = `${recStake}%`;
+                if (stakeBadge) stakeBadge.textContent = `Stake: ${recStake}%`;
+                if (stakeCash) {
+                    const amount = (currentCapital * recStake / 100).toFixed(2);
+                    stakeCash.textContent = `$${amount}`;
+                }
             }
 
             if (btnCopy) {
-                if (isSimple) {
+                if (suffix === "3") {
+                    btnCopy.innerHTML = `<i class="fa-solid fa-rocket"></i> Copiar Apuesta Soñadora (@${ticket.total_odd.toFixed(2)})`;
+                } else if (isSimple) {
                     btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar Apuesta Simple`;
                 } else {
                     btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar Selecciones del Boleto`;
@@ -859,7 +870,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 btnCopy.onclick = () => {
                     let copyText = "";
-                    if (isSimple) {
+                    if (suffix === "3") {
+                        copyText = `🚀 APUESTA SOÑADORA DEL DÓLAR (Cuota Total: @${ticket.total_odd.toFixed(2)}) - SportIntel AI\n`;
+                        ticket.selections.forEach(s => {
+                            copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: @${s.odd.toFixed(2)})\n`;
+                        });
+                        copyText += `Cuota Acumulada: @${ticket.total_odd.toFixed(2)}\n`;
+                        copyText += `Inversión Sugerida: $1.00 USD\n`;
+                        copyText += `Estrategia: ${ticket.reasoning}`;
+                    } else if (isSimple) {
                         const sel = ticket.selections[0];
                         copyText = `APUESTA SIMPLE ESTRELLA ${suffix} (${suffix === "1" ? "SEGURO" : "DE VALOR"}) - SportIntel AI\n`;
                         copyText += `- Partido: ${sel.match}\n- Mercado: ${sel.market}\n- Pronóstico: ${sel.pick}\n- Cuota: @${sel.odd.toFixed(2)}\n`;
@@ -879,8 +898,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     navigator.clipboard.writeText(copyText).then(() => {
                         const originalText = btnCopy.innerHTML;
                         btnCopy.innerHTML = `<i class="fa-solid fa-check"></i> ¡Copiado al portapapeles!`;
-                        btnCopy.style.background = "#10b981";
-                        btnCopy.style.borderColor = "#10b981";
+                        btnCopy.style.background = activeColor;
+                        btnCopy.style.borderColor = activeColor;
                         
                         setTimeout(() => {
                             btnCopy.innerHTML = originalText;
@@ -892,12 +911,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        // Render both tickets
+        // Render tickets
         const ticket1 = appData.star_ticket_1 || appData.star_ticket;
         const ticket2 = appData.star_ticket_2 || appData.star_ticket;
+        const ticket3 = appData.star_ticket_3;
 
         renderTicket(ticket1, "1", "green");
         renderTicket(ticket2, "2", "cyan");
+        if (ticket3) {
+            renderTicket(ticket3, "3", "purple");
+        }
 
         // Key Matches of the Day grid
         let matchesGridHtml = "";
@@ -2670,17 +2693,21 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        let candidates = allPicks.filter(item => item.pick.odd >= 1.12 && item.pick.odd <= 2.00);
+        let candidates = allPicks.filter(item => item.pick.odd >= 1.28 && item.pick.odd <= 1.65);
         
         if (candidates.length < 3) {
-            candidates = allPicks.filter(item => item.pick.odd > 1.01);
+            candidates = allPicks.filter(item => item.pick.odd >= 1.20 && item.pick.odd <= 1.85);
+        }
+
+        if (candidates.length < 3) {
+            candidates = allPicks.filter(item => item.pick.odd > 1.05);
         }
 
         candidates.sort((a, b) => {
-            if (b.pick.probability !== a.pick.probability) {
-                return b.pick.probability - a.pick.probability;
-            }
-            return a.pick.odd - b.pick.odd;
+            // Composite score: high probability + sweet spot odds (@1.30 to @1.48)
+            const scoreA = (a.pick.probability * 0.6) + (a.pick.odd >= 1.30 && a.pick.odd <= 1.48 ? 40 : (a.pick.odd >= 1.25 ? 20 : 0));
+            const scoreB = (b.pick.probability * 0.6) + (b.pick.odd >= 1.30 && b.pick.odd <= 1.48 ? 40 : (b.pick.odd >= 1.25 ? 20 : 0));
+            return scoreB - scoreA;
         });
 
         let uniqueCandidates = [];
