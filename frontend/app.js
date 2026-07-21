@@ -2302,13 +2302,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // 📈 Bankroll & Bets Tracking Logic
     // ==========================================================================
     let userBets = [];
-    let startingBankroll = 1000;
+    let startingBankroll = 29.65;
 
     // Load initial bets from local storage or set default mock data
     function initBankroll() {
         const savedCapital = localStorage.getItem("starting_bankroll");
         if (savedCapital) {
-            startingBankroll = parseFloat(savedCapital) || 1000;
+            startingBankroll = parseFloat(savedCapital) || 29.65;
         } else {
             localStorage.setItem("starting_bankroll", startingBankroll);
         }
@@ -2523,6 +2523,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let resolvedStakes = 0;
         let wonBets = 0;
         let resolvedBetsCount = 0;
+        let pendingStakes = 0;
 
         userBets.forEach(bet => {
             if (bet.status === "won") {
@@ -2534,15 +2535,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 netProfit -= bet.stake;
                 resolvedStakes += bet.stake;
                 resolvedBetsCount++;
+            } else if (bet.status === "pending") {
+                pendingStakes += bet.stake;
             }
         });
 
         const currentBalance = startingBankroll + netProfit;
+        const availableBalance = currentBalance - pendingStakes;
         const roi = resolvedStakes > 0 ? (netProfit / resolvedStakes) * 100 : 0;
         const winrate = resolvedBetsCount > 0 ? (wonBets / resolvedBetsCount) * 100 : 0;
 
         // Render card metrics
         if (bankrollBalanceVal) bankrollBalanceVal.textContent = `$${currentBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        const subAvailable = document.getElementById("bankroll-available-sub");
+        if (subAvailable) {
+            subAvailable.textContent = `Disponible: $${availableBalance.toFixed(2)} | En juego: $${pendingStakes.toFixed(2)}`;
+        }
         if (bankrollProfitVal) {
             const prefix = netProfit >= 0 ? "+$" : "-$";
             bankrollProfitVal.textContent = `${prefix}${Math.abs(netProfit).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
