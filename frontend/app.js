@@ -907,6 +907,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             btnCopy.style.borderColor = "";
                         }, 2000);
                     });
+                };
+            }
+
             const btnRegister = document.getElementById(`btn-register-star-ticket-${suffix}`);
             if (btnRegister) {
                 btnRegister.onclick = () => {
