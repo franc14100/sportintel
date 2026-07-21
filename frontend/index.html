@@ -171,6 +171,9 @@
                                     <button class="btn btn-primary btn-full-width" id="btn-copy-star-ticket-1" style="background: var(--accent-green); border-color: var(--accent-green); font-size:0.75rem; padding: 8px; font-weight:700;">
                                         <i class="fa-regular fa-copy"></i> Copiar Selecciones del Boleto
                                     </button>
+                                    <button class="btn btn-secondary btn-full-width" id="btn-register-star-ticket-1" style="margin-top: 8px; border-color: var(--accent-green); color: var(--accent-green); font-size:0.75rem; padding: 8px; font-weight:700;">
+                                        <i class="fa-solid fa-bookmark"></i> 📌 Registrar en Mi Historial y Banca
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -208,6 +211,9 @@
                                     <button class="btn btn-primary btn-full-width" id="btn-copy-star-ticket-2" style="background: var(--accent-cyan); border-color: var(--accent-cyan); font-size:0.75rem; padding: 8px; font-weight:700;">
                                         <i class="fa-regular fa-copy"></i> Copiar Selecciones del Boleto
                                     </button>
+                                    <button class="btn btn-secondary btn-full-width" id="btn-register-star-ticket-2" style="margin-top: 8px; border-color: var(--accent-cyan); color: var(--accent-cyan); font-size:0.75rem; padding: 8px; font-weight:700;">
+                                        <i class="fa-solid fa-bookmark"></i> 📌 Registrar en Mi Historial y Banca
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -244,6 +250,9 @@
                                     </div>
                                     <button class="btn btn-primary btn-full-width" id="btn-copy-star-ticket-3" style="background: #a855f7; border-color: #a855f7; font-size:0.75rem; padding: 8px; font-weight:700;">
                                         <i class="fa-regular fa-copy"></i> Copiar Selecciones de la Apuesta Soñadora
+                                    </button>
+                                    <button class="btn btn-secondary btn-full-width" id="btn-register-star-ticket-3" style="margin-top: 8px; border-color: #a855f7; color: #a855f7; font-size:0.75rem; padding: 8px; font-weight:700;">
+                                        <i class="fa-solid fa-bookmark"></i> 📌 Registrar en Mi Historial y Banca
                                     </button>
                                 </div>
                             </div>
@@ -1152,6 +1161,48 @@
             </div>
             <div class="modal-body" id="sync-container" style="padding-top: 15px; display: flex; flex-direction: column; gap: 15px;">
                 <!-- Dynamically loaded from app.js renderSyncPanel -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Ticket to History & Bankroll Modal -->
+    <div class="modal hidden" id="register-ticket-modal">
+        <div class="modal-overlay" id="register-ticket-modal-overlay"></div>
+        <div class="modal-card" style="width: 440px;">
+            <button class="modal-close" id="btn-close-register-ticket-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header" style="text-align: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+                <i class="fa-solid fa-bookmark" style="color: var(--accent-green); font-size: 2.2rem; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;"></i>
+                <h3 id="register-modal-title">Registrar Apuesta en Historial</h3>
+                <p class="sub" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Añada esta apuesta a su banca e historial personal para llevar el seguimiento en tiempo real.</p>
+            </div>
+            <div class="modal-body" style="padding-top: 15px; display: flex; flex-direction: column; gap: 15px;">
+                <div style="background: rgba(8, 11, 17, 0.6); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px;">Selecciones del Boleto</div>
+                    <div id="register-modal-summary" style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary); line-height: 1.4;">--</div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.8rem;">
+                        <span style="color: var(--text-muted);">Cuota Total:</span>
+                        <b id="register-modal-odd" style="color: var(--accent-amber); font-family: var(--font-display);">@1.00</b>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Monto Apostado ($ USD)</label>
+                    <input type="number" id="input-register-stake" step="0.5" class="form-input" style="font-size: 1rem; font-weight: 800; font-family: var(--font-display); text-align: center; color: var(--accent-green); padding: 8px 12px;">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Estado de la Apuesta</label>
+                    <select id="select-register-status" class="form-input" style="font-size: 0.85rem; font-weight: 700; padding: 8px 12px; background: rgba(0,0,0,0.3); color: var(--text-primary);">
+                        <option value="pending">⏳ Pendiente (Por jugar)</option>
+                        <option value="won">✅ Ganada (Acertada)</option>
+                        <option value="lost">❌ Perdida (Fallada)</option>
+                        <option value="voided">🔄 Anulada / Reembolsada</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary btn-full-width" id="btn-confirm-register-ticket" style="background: var(--accent-green); border-color: var(--accent-green); font-weight: 800; font-size: 0.9rem; padding: 10px;">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar en Mi Historial y Banca
+                </button>
             </div>
         </div>
     </div>
