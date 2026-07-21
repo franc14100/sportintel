@@ -2442,7 +2442,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // Export data handler
         const btnExportData = document.getElementById("btn-export-data");
         if (btnExportData) {
-            btnExportData.onclick = () => {
+            btnExportData.onclick = async () => {
+                if (SyncManager.getSyncId()) {
+                    await SyncManager.pushState();
+                }
                 const exportObj = {
                     starting_bankroll: localStorage.getItem("starting_bankroll") || 29.65,
                     user_bets: localStorage.getItem("user_bets") || "[]",
@@ -2450,7 +2453,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
                 const exportStr = JSON.stringify(exportObj);
                 navigator.clipboard.writeText(exportStr).then(() => {
-                    alert("¡Datos copiados al portapapeles! Puedes pegarlos en tu celular.");
+                    alert("¡Datos guardados en la nube y copiados al portapapeles! Ahora en tu celular presiona 'Importar'.");
                 }).catch(err => {
                     prompt("Copia el siguiente texto para tu celular:", exportStr);
                 });
@@ -2460,9 +2463,32 @@ document.addEventListener("DOMContentLoaded", () => {
         // Import data handler
         const btnImportData = document.getElementById("btn-import-data");
         if (btnImportData) {
-            btnImportData.onclick = () => {
-                const importStr = prompt("Pega aquí los datos copiados (Exportados desde otro dispositivo):");
+            btnImportData.onclick = async () => {
+                let success = false;
+                if (SyncManager.getSyncId()) {
+                    btnImportData.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Cargando...`;
+                    success = await SyncManager.pullState();
+                    btnImportData.innerHTML = `<i class="fa-solid fa-cloud-arrow-down"></i> Importar`;
+                }
+                
+                if (success) {
+                    alert("¡Datos descargados e importados desde la nube con éxito!");
+                    location.reload();
+                    return;
+                }
+
+                const importStr = prompt("Pega aquí los datos copiados (o introduce tu PIN de enlace de la nube):");
                 if (importStr) {
+                    if (importStr.trim().length > 0 && importStr.trim().length < 15 && !importStr.includes("{")) {
+                        // User typed a PIN
+                        SyncManager.setSyncId(importStr.trim().toLowerCase());
+                        const pulled = await SyncManager.pullState();
+                        if (pulled) {
+                            alert("¡Dispositivo vinculado y datos importados desde la nube!");
+                            location.reload();
+                            return;
+                        }
+                    }
                     try {
                         const importObj = JSON.parse(importStr);
                         if (importObj.starting_bankroll) localStorage.setItem("starting_bankroll", importObj.starting_bankroll);
@@ -2472,7 +2498,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         alert("¡Datos importados correctamente! La página se recargará.");
                         location.reload();
                     } catch (e) {
-                        alert("Error: El texto pegado no es válido.");
+                        alert("Error: El texto o PIN no es válido.");
                     }
                 }
             };
@@ -3921,6 +3947,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const urlData = urlParams.get("d") || urlParams.get("data");
         const urlSyncPin = urlParams.get("sync") || urlParams.get("sync_pin");
 
+        let stateApplied = false;
+
         if (urlData) {
             console.log("[Sync] Encoded state payload detected in URL. Decoding...");
             try {
@@ -3928,6 +3956,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (state) {
                     SyncManager.applyState(state);
                     console.log("[Sync] URL encoded state applied successfully!");
+                    stateApplied = true;
                 }
             } catch (e) {
                 console.error("[Sync] Error parsing URL encoded state payload:", e);
@@ -3937,7 +3966,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (urlSyncPin) {
             console.log("[Sync] PIN detectado en URL:", urlSyncPin);
             SyncManager.setSyncId(urlSyncPin.trim().toLowerCase());
-            await SyncManager.pullState();
+            
+            // Only pull if urlData wasn't explicitly provided, otherwise push urlData to cloud!
+            if (urlData) {
+                await SyncManager.pushState();
+            } else {
+                const pulled = await SyncManager.pullState();
+                if (pulled) stateApplied = true;
+            }
+        }
+
+        if (stateApplied) {
+            if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
+            if (typeof populateBetsTable === "function") populateBetsTable();
+            if (typeof renderEscaleraTab === "function") renderEscaleraTab();
+            if (typeof updateBankrollChart === "function") updateBankrollChart();
         } else if (!SyncManager.getSyncId()) {
             const autoPin = "sportintel-" + Math.random().toString(36).substring(2, 7);
             SyncManager.setSyncId(autoPin);
