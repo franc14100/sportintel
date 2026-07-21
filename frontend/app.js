@@ -30,7 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (sidebarOverlay) {
         sidebarOverlay.addEventListener("click", window.closeMobileMenu);
-        // --- Cloud Sync Manager (PC ⇄ Mobile) ---
+    }
+
+    // --- Cloud Sync Manager (PC ⇄ Mobile) ---
     const SYNC_BLOB_URL = "https://jsonblob.com/api/jsonBlob/019f85c9-8e08-7b09-9b1b-ecd44ae950db";
     let isApplyingCloudState = false;
     let lastLocalUserActionTime = 0;
@@ -130,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lastLocalUserActionTime = Date.now();
             triggerAutoSyncPush();
         }
-    };   };
+    };
 
     // Automatic cloud pull on load & continuous 3-second background real-time sync loop
     (async () => {
