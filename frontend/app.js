@@ -45,9 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
         setSyncId: function(id) {},
         
         gatherState: function() {
+            const bets = JSON.parse(localStorage.getItem("user_bets") || "[]");
             return {
-                ub: JSON.parse(localStorage.getItem("user_bets") || "[]"),
+                ub: bets,
+                user_bets: JSON.stringify(bets),
                 sb: localStorage.getItem("starting_bankroll") || "53.50918",
+                starting_bankroll: localStorage.getItem("starting_bankroll") || "53.50918",
                 ed: localStorage.getItem("escalera_day") || "8",
                 ess: localStorage.getItem("escalera_start_stake") || "10",
                 ecs: localStorage.getItem("escalera_current_stake") || "9.6",
@@ -59,12 +62,25 @@ document.addEventListener("DOMContentLoaded", () => {
         applyState: function(s) {
             if (!s) return;
             isApplyingCloudState = true;
-            const bets = typeof s.ub === "string" ? JSON.parse(s.ub) : s.ub;
-            const run = typeof s.ecr === "string" ? JSON.parse(s.ecr) : s.ecr;
-            const hist = typeof s.eh === "string" ? JSON.parse(s.eh) : s.eh;
+            const rawBets = s.ub || s.user_bets;
+            const bets = typeof rawBets === "string" ? JSON.parse(rawBets) : rawBets;
             
-            if (bets) originalSetItem.call(localStorage, "user_bets", JSON.stringify(bets));
-            if (s.sb !== undefined) originalSetItem.call(localStorage, "starting_bankroll", s.sb);
+            const rawRun = s.ecr || s.escalera_current_run;
+            const run = typeof rawRun === "string" ? JSON.parse(rawRun) : rawRun;
+            
+            const rawHist = s.eh || s.escalera_history;
+            const hist = typeof rawHist === "string" ? JSON.parse(rawHist) : rawHist;
+            
+            const sbVal = s.sb !== undefined ? s.sb : s.starting_bankroll;
+            
+            if (bets) {
+                userBets = bets;
+                originalSetItem.call(localStorage, "user_bets", JSON.stringify(bets));
+            }
+            if (sbVal !== undefined) {
+                startingBankroll = parseFloat(sbVal);
+                originalSetItem.call(localStorage, "starting_bankroll", sbVal);
+            }
             if (s.ed !== undefined) originalSetItem.call(localStorage, "escalera_day", s.ed);
             if (s.ess !== undefined) originalSetItem.call(localStorage, "escalera_start_stake", s.ess);
             if (s.ecs !== undefined) originalSetItem.call(localStorage, "escalera_current_stake", s.ecs);
