@@ -455,6 +455,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 throw new Error("No se pudo cargar el archivo data.json");
             }
             appData = await response.json();
+
+            // Auto-cargar apuestas, bankroll y reto escalera desde data.json si el navegador está limpio
+            if (appData.user_bets && Array.isArray(appData.user_bets)) {
+                const storedBets = localStorage.getItem("user_bets");
+                if (!storedBets || storedBets.includes("Spain vs Belgium")) {
+                    localStorage.setItem("user_bets", JSON.stringify(appData.user_bets));
+                    userBets = appData.user_bets;
+                }
+            }
+
+            if (appData.escalera_current_run && Array.isArray(appData.escalera_current_run)) {
+                const storedRun = localStorage.getItem("escalera_current_run");
+                if (!storedRun) {
+                    localStorage.setItem("escalera_current_run", JSON.stringify(appData.escalera_current_run));
+                }
+            }
+
+            if (appData.starting_bankroll !== undefined) {
+                const storedCapital = localStorage.getItem("starting_bankroll");
+                if (!storedCapital || parseFloat(storedCapital) === 1000) {
+                    localStorage.setItem("starting_bankroll", appData.starting_bankroll);
+                    startingBankroll = appData.starting_bankroll;
+                }
+            }
             
             populateStats();
             populateDashboardPicks();
