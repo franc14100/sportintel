@@ -3801,7 +3801,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const btnCopyLink = document.getElementById("btn-sync-copy-link");
             if (btnCopyLink) {
                 btnCopyLink.onclick = () => {
-                    const directUrl = `${window.location.origin}${window.location.pathname}?sync_pin=${syncId}`;
+                    const fullState = SyncManager.gatherState();
+                    const b64Data = SyncManager.toB64(fullState);
+                    const directUrl = `${window.location.origin}${window.location.pathname}?d=${b64Data}&sync_pin=${syncId}`;
                     navigator.clipboard.writeText(directUrl);
                     btnCopyLink.innerHTML = `<i class="fa-solid fa-check"></i> ¡Enlace Copiado! Ábrelo en tu Teléfono`;
                     setTimeout(() => { btnCopyLink.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Copiar Enlace Directo para Celular (WhatsApp)`; }, 2500);
@@ -3851,9 +3853,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Start initial load ---
     async function init() {
-        // Auto-sincronizar PIN de la Nube si se pasa por URL o si no existe PIN local
+        // Auto-sincronizar paquete de datos comprimidos si se pasa por URL
         const urlParams = new URLSearchParams(window.location.search);
+        const urlData = urlParams.get("d") || urlParams.get("data");
         const urlSyncPin = urlParams.get("sync") || urlParams.get("sync_pin");
+
+        if (urlData) {
+            console.log("[Sync] Encoded state payload detected in URL. Decoding...");
+            try {
+                const state = SyncManager.fromB64(urlData);
+                if (state) {
+                    SyncManager.applyState(state);
+                    console.log("[Sync] URL encoded state applied successfully!");
+                }
+            } catch (e) {
+                console.error("[Sync] Error parsing URL encoded state payload:", e);
+            }
+        }
 
         if (urlSyncPin) {
             console.log("[Sync] PIN detectado en URL:", urlSyncPin);
