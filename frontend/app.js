@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
         setSyncId: function(id) {},
         
         gatherState: function() {
-            const now = Date.now();
+            const curRev = (parseInt(localStorage.getItem("sync_rev")) || 0) + 1;
             return {
-                ts: now,
+                rev: curRev,
                 ub: JSON.parse(localStorage.getItem("user_bets") || "[]"),
                 sb: localStorage.getItem("starting_bankroll") || "53.50918",
                 ed: localStorage.getItem("escalera_day") || "8",
@@ -64,27 +64,27 @@ document.addEventListener("DOMContentLoaded", () => {
             const run = typeof s.ecr === "string" ? JSON.parse(s.ecr) : s.ecr;
             const hist = typeof s.eh === "string" ? JSON.parse(s.eh) : s.eh;
             
-            if (s.ts) localStorage.setItem("sync_last_updated", s.ts);
-            if (bets) localStorage.setItem("user_bets", JSON.stringify(bets));
-            if (s.sb !== undefined) localStorage.setItem("starting_bankroll", s.sb);
-            if (s.ed !== undefined) localStorage.setItem("escalera_day", s.ed);
-            if (s.ess !== undefined) localStorage.setItem("escalera_start_stake", s.ess);
-            if (s.ecs !== undefined) localStorage.setItem("escalera_current_stake", s.ecs);
-            if (run) localStorage.setItem("escalera_current_run", JSON.stringify(run));
-            if (hist) localStorage.setItem("escalera_history", JSON.stringify(hist));
+            if (s.rev !== undefined) originalSetItem.call(localStorage, "sync_rev", s.rev);
+            if (bets) originalSetItem.call(localStorage, "user_bets", JSON.stringify(bets));
+            if (s.sb !== undefined) originalSetItem.call(localStorage, "starting_bankroll", s.sb);
+            if (s.ed !== undefined) originalSetItem.call(localStorage, "escalera_day", s.ed);
+            if (s.ess !== undefined) originalSetItem.call(localStorage, "escalera_start_stake", s.ess);
+            if (s.ecs !== undefined) originalSetItem.call(localStorage, "escalera_current_stake", s.ecs);
+            if (run) originalSetItem.call(localStorage, "escalera_current_run", JSON.stringify(run));
+            if (hist) originalSetItem.call(localStorage, "escalera_history", JSON.stringify(hist));
             isApplyingCloudState = false;
         },
         
         pushState: async function() {
             try {
                 const fullState = this.gatherState();
-                originalSetItem.call(localStorage, "sync_last_updated", fullState.ts);
+                originalSetItem.call(localStorage, "sync_rev", fullState.rev);
                 await fetch(SYNC_BLOB_URL, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(fullState)
                 });
-                console.log("[Sync] State pushed to JsonBlob cloud (ts: " + fullState.ts + ")");
+                console.log("[Sync] State pushed to JsonBlob cloud (rev: " + fullState.rev + ")");
             } catch (e) {
                 console.error("[Sync] Error pushing to cloud:", e);
             }
@@ -95,13 +95,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 const res = await fetch(SYNC_BLOB_URL);
                 if (!res.ok) return false;
                 const data = await res.json();
-                if (data && data.ts) {
-                    const cloudTs = parseInt(data.ts) || 0;
-                    const localTs = parseInt(localStorage.getItem("sync_last_updated")) || 0;
+                if (data) {
+                    const cloudRev = parseInt(data.rev) || 0;
+                    const localRev = parseInt(localStorage.getItem("sync_rev")) || 0;
                     
-                    if (cloudTs > localTs) {
+                    const localBetsStr = localStorage.getItem("user_bets") || "[]";
+                    const cloudBets = typeof data.ub === "string" ? JSON.parse(data.ub) : (data.ub || []);
+                    const cloudBetsStr = JSON.stringify(cloudBets);
+                    
+                    if (cloudRev > localRev || (cloudRev === localRev && localBetsStr !== cloudBetsStr)) {
                         this.applyState(data);
-                        console.log("[Sync] Cloud state is newer (cloudTs: " + cloudTs + " > localTs: " + localTs + "). Merged to local storage.");
+                        console.log("[Sync] Cloud state applied (cloudRev: " + cloudRev + " >= localRev: " + localRev + ")");
                         return true;
                     }
                 }
@@ -127,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem = function(key, value) {
         originalSetItem.apply(this, arguments);
         if (!isApplyingCloudState && (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll")) {
-            originalSetItem.call(localStorage, "sync_last_updated", Date.now());
             triggerAutoSyncPush();
         }
     };
