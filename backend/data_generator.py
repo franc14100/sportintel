@@ -1293,17 +1293,9 @@ def generate_daily_sports_data():
                     "status": "pending"
                 }
             ]
-        # Filter and sort picks to keep only the top 3 safest (highest probability) options
-        # If it's a cup match, we prioritize 'Se Clasifica' so that it is always one of the 3 displayed picks.
-        has_se_clasifica = any(p['market'] == "Se Clasifica" for p in picks)
-        if has_se_clasifica:
-            se_clasifica_pick = next(p for p in picks if p['market'] == "Se Clasifica")
-            other_picks = [p for p in picks if p['market'] != "Se Clasifica"]
-            other_picks = sorted(other_picks, key=lambda x: x.get('probability', 0), reverse=True)
-            picks = [se_clasifica_pick] + other_picks[:2]
-            picks = sorted(picks, key=lambda x: x.get('probability', 0), reverse=True)
-        else:
-            picks = sorted(picks, key=lambda x: x.get('probability', 0), reverse=True)[:3]
+        # Filter out multi-week qualification markets ('Se Clasifica') for daily betting consistency
+        picks = [p for p in picks if p['market'] not in ["Se Clasifica", "Método de Clasificación"]]
+        picks = sorted(picks, key=lambda x: x.get('probability', 0), reverse=True)[:3]
 
         if not prev_match:
             for p in picks:
