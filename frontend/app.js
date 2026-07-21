@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Cloud Sync Manager (PC ⇄ Mobile) ---
     const SyncManager = {
         getSyncId: function() {
-            return localStorage.getItem("escalera_sync_id") || "";
+            return localStorage.getItem("escalera_sync_id") || "sportintel-user";
         },
         
         setSyncId: function(id) {
@@ -45,13 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         gatherState: function() {
             return {
                 ub: JSON.parse(localStorage.getItem("user_bets")) || [],
-                sb: parseFloat(localStorage.getItem("starting_bankroll")) || 200,
+                sb: parseFloat(localStorage.getItem("starting_bankroll")) || 53.50918,
                 oak: localStorage.getItem("odds_api_key") || "",
                 gak: localStorage.getItem("gemini_api_key") || "",
                 ght: localStorage.getItem("github_token") || "",
-                ed: parseInt(localStorage.getItem("escalera_day")) || 1,
+                ed: parseInt(localStorage.getItem("escalera_day")) || 8,
                 ess: parseFloat(localStorage.getItem("escalera_start_stake")) || 10,
-                ecs: parseFloat(localStorage.getItem("escalera_current_stake")) || 10,
+                ecs: parseFloat(localStorage.getItem("escalera_current_stake")) || 9.6,
                 etd: parseInt(localStorage.getItem("escalera_target_days")) || 7,
                 ecr: JSON.parse(localStorage.getItem("escalera_current_run")) || [],
                 esp: parseFloat(localStorage.getItem("escalera_saved_profit")) || 0,
@@ -188,9 +188,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 
                 if (Object.keys(combined).length > 0) {
-                    this.applyState(combined);
-                    console.log("[Sync] Split states pulled and merged successfully.");
-                    return true;
+                    const localBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+                    const cloudBets = combined.ub || [];
+                    
+                    // If local has MORE bets than cloud, local is newer! Push local to cloud instead of overwriting!
+                    if (localBets.length > cloudBets.length) {
+                        console.log("[Sync] Local state has more bets than cloud. Pushing local to cloud...");
+                        await this.pushState();
+                        return false;
+                    }
+                    
+                    const currentLocalStr = JSON.stringify(localBets);
+                    const newCloudStr = JSON.stringify(cloudBets);
+                    
+                    if (currentLocalStr !== newCloudStr || localBets.length < cloudBets.length) {
+                        this.applyState(combined);
+                        console.log("[Sync] New cloud state applied successfully.");
+                        return true;
+                    }
                 }
             } catch (e) {
                 console.error("[Sync] Error pulling split states:", e);
@@ -215,14 +230,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Debounced automatic cloud push
+    // Instant automatic cloud push (100ms debounce)
     let syncPushTimeout = null;
     function triggerAutoSyncPush() {
         if (SyncManager.getSyncId()) {
             clearTimeout(syncPushTimeout);
             syncPushTimeout = setTimeout(() => {
                 SyncManager.pushState();
-            }, 1000);
+            }, 100);
         }
     }
     
@@ -235,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Automatic cloud pull on load & continuous 5-second background real-time sync loop
+    // Automatic cloud pull on load & continuous 3-second background real-time sync loop
     (async () => {
         const urlParams = new URLSearchParams(window.location.search);
         const urlSyncPin = urlParams.get("sync") || urlParams.get("sync_pin");
@@ -245,16 +260,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (SyncManager.getSyncId()) {
             console.log("[Sync] Device linked. Pulling state on page load...");
-            await SyncManager.pullState();
+            const pulled = await SyncManager.pullState();
+            if (pulled) {
+                if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
+                if (typeof populateBetsTable === "function") populateBetsTable();
+                if (typeof renderEscaleraTab === "function") renderEscaleraTab();
+                if (typeof updateBankrollChart === "function") updateBankrollChart();
+            }
         }
     })();
 
-    // Live background polling loop every 5 seconds for instant cross-device updates
+    // Live background polling loop every 3 seconds for instant cross-device updates
     setInterval(async () => {
         if (SyncManager.getSyncId() && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "SELECT") {
-            await SyncManager.pullState();
+            const updated = await SyncManager.pullState();
+            if (updated) {
+                if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
+                if (typeof populateBetsTable === "function") populateBetsTable();
+                if (typeof renderEscaleraTab === "function") renderEscaleraTab();
+                if (typeof updateBankrollChart === "function") updateBankrollChart();
+            }
         }
-    }, 5000);
+    }, 3000);
 
     // --- Global State ---
     let appData = null;
