@@ -2562,8 +2562,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function openRegisterTicketModal(ticket, suffix) {
         const modal = document.getElementById("register-ticket-modal");
         const titleEl = document.getElementById("register-modal-title");
-        const summaryEl = document.getElementById("register-modal-summary");
-        const oddEl = document.getElementById("register-modal-odd");
+        const matchInput = document.getElementById("input-register-match");
+        const marketInput = document.getElementById("input-register-market");
         const oddInput = document.getElementById("input-register-odd");
         const stakeInput = document.getElementById("input-register-stake");
         const statusSelect = document.getElementById("select-register-status");
@@ -2576,12 +2576,17 @@ document.addEventListener("DOMContentLoaded", () => {
         let label = suffix === "3" ? "Apuesta Soñadora del Dólar" : (suffix === "1" ? "Boleto Estrella 1 (Seguro)" : "Boleto Estrella 2 (Valor)");
         if (titleEl) titleEl.textContent = `Registrar ${label}`;
 
-        let summaryText = "";
+        let matchSummary = "";
         ticket.selections.forEach((s, idx) => {
-            summaryText += `${idx > 0 ? " + " : ""}${s.match} (${s.pick})`;
+            matchSummary += `${idx > 0 ? " + " : ""}${s.match}`;
         });
-        if (summaryEl) summaryEl.textContent = summaryText;
-        if (oddEl) oddEl.textContent = `@${ticket.total_odd.toFixed(2)}`;
+        let marketSummary = "";
+        ticket.selections.forEach((s, idx) => {
+            marketSummary += `${idx > 0 ? " / " : ""}${s.market}: ${s.pick}`;
+        });
+
+        if (matchInput) matchInput.value = matchSummary;
+        if (marketInput) marketInput.value = marketSummary;
         if (oddInput) oddInput.value = ticket.total_odd.toFixed(2);
 
         const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : 1.0));
@@ -2608,27 +2613,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnConfirmRegister) {
         btnConfirmRegister.onclick = () => {
             if (!pendingRegisterTicket) return;
+            const matchInput = document.getElementById("input-register-match");
+            const marketInput = document.getElementById("input-register-market");
             const oddInput = document.getElementById("input-register-odd");
             const stakeInput = document.getElementById("input-register-stake");
             const statusSelect = document.getElementById("select-register-status");
-            
-            const oddVal = parseFloat(oddInput ? oddInput.value : 0) || pendingRegisterTicket.total_odd;
-            const stakeVal = parseFloat(stakeInput.value) || 1.0;
-            const statusVal = statusSelect.value || "pending";
 
-            let matchSummary = "";
+            let defaultMatchSummary = "";
             pendingRegisterTicket.selections.forEach((s, idx) => {
-                matchSummary += `${idx > 0 ? " + " : ""}${s.match}`;
+                defaultMatchSummary += `${idx > 0 ? " + " : ""}${s.match}`;
             });
-            let marketSummary = "";
+            let defaultMarketSummary = "";
             pendingRegisterTicket.selections.forEach((s, idx) => {
-                marketSummary += `${idx > 0 ? " / " : ""}${s.market}: ${s.pick}`;
+                defaultMarketSummary += `${idx > 0 ? " / " : ""}${s.market}: ${s.pick}`;
             });
+
+            const matchVal = (matchInput && matchInput.value.trim()) ? matchInput.value.trim() : defaultMatchSummary;
+            const marketVal = (marketInput && marketInput.value.trim()) ? marketInput.value.trim() : defaultMarketSummary;
+            const oddVal = parseFloat(oddInput ? oddInput.value : 0) || pendingRegisterTicket.total_odd;
+            const stakeVal = parseFloat(stakeInput ? stakeInput.value : 0) || 1.0;
+            const statusVal = statusSelect ? statusSelect.value : "pending";
 
             const newBet = {
                 id: Date.now(),
-                match: matchSummary,
-                market: marketSummary,
+                match: matchVal,
+                market: marketVal,
                 odd: oddVal,
                 stake: stakeVal,
                 status: statusVal,
