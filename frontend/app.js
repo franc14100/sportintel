@@ -101,7 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 ess: localStorage.getItem("escalera_start_stake") || "10",
                 ecs: localStorage.getItem("escalera_current_stake") || "9.6",
                 ecr: JSON.parse(localStorage.getItem("escalera_current_run") || "[]"),
-                eh: JSON.parse(localStorage.getItem("escalera_history") || "[]")
+                eh: JSON.parse(localStorage.getItem("escalera_history") || "[]"),
+                ts: parseInt(localStorage.getItem("sync_ts") || Date.now().toString())
             };
         },
         
@@ -132,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (s.ecs !== undefined) originalSetItem.call(localStorage, "escalera_current_stake", s.ecs);
             if (run) originalSetItem.call(localStorage, "escalera_current_run", JSON.stringify(run));
             if (hist) originalSetItem.call(localStorage, "escalera_history", JSON.stringify(hist));
+            if (s.ts) originalSetItem.call(localStorage, "sync_ts", s.ts.toString());
             
             lastLocalStateHash = getNormalizedStateHash(s);
             isApplyingCloudState = false;
@@ -163,10 +165,18 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!isInitializingPage && (isPushInFlight || (Date.now() - lastLocalUserActionTime < 5000))) return false;
             
             try {
-                const res = await fetch(SYNC_BLOB_URL);
+                const res = await fetch(SYNC_BLOB_URL, { cache: "no-store" });
                 if (!res.ok) return false;
                 const data = await res.json();
                 if (data) {
+                    const cloudTs = parseInt(data.ts || "0");
+                    const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
+                    
+                    // Prevent stale cloud cache from overwriting newer local changes
+                    if (cloudTs > 0 && localTs > 0 && cloudTs < localTs) {
+                        return false;
+                    }
+
                     const cloudHash = getNormalizedStateHash(data);
                     const localHash = getNormalizedStateHash(this.gatherState());
                     
@@ -199,6 +209,9 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem = function(key, value) {
         originalSetItem.apply(this, arguments);
         if (!isApplyingCloudState && !isInitializingPage && (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll")) {
+            if (key !== "sync_ts") {
+                originalSetItem.call(localStorage, "sync_ts", Date.now().toString());
+            }
             lastLocalUserActionTime = Date.now();
             triggerAutoSyncPush();
         }
