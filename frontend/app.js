@@ -3025,6 +3025,82 @@ document.addEventListener("DOMContentLoaded", () => {
         return uniqueCandidates;
     }
 
+    window.saveEscaleraOption = (idx) => {
+        if (!safestPicks || !safestPicks[idx]) return;
+        const selectedPick = safestPicks[idx];
+        const customOddInput = document.getElementById("input-escalera-custom-odd");
+        const finalOdd = (customOddInput && !isNaN(parseFloat(customOddInput.value))) ? parseFloat(customOddInput.value) : selectedPick.pick.odd;
+        
+        let finalMatch = `${selectedPick.match.home} vs ${selectedPick.match.away}`;
+        let finalSelection = `${selectedPick.pick.market}: ${selectedPick.pick.selection}`;
+        
+        if (selectedPick.isManual) {
+            const manualMatchInput = document.getElementById("input-escalera-manual-match");
+            const manualSelInput = document.getElementById("input-escalera-manual-selection");
+            if (manualMatchInput && manualMatchInput.value.trim() !== "") finalMatch = manualMatchInput.value.trim();
+            else { alert("Ingresa el nombre del evento manual."); return; }
+            if (manualSelInput && manualSelInput.value.trim() !== "") finalSelection = manualSelInput.value.trim();
+            else { alert("Ingresa tu selección manual."); return; }
+        }
+
+        const returnAmt = parseFloat((escaleraCurrentStake * finalOdd).toFixed(2));
+
+        let existingRunItem = escaleraCurrentRun.find(r => r.day === escaleraCurrentDay);
+        if (!existingRunItem) {
+            escaleraCurrentRun.push({
+                day: escaleraCurrentDay,
+                date: new Date().toISOString().split("T")[0],
+                match: finalMatch,
+                selection: finalSelection,
+                odd: finalOdd,
+                stake: escaleraCurrentStake,
+                return: returnAmt,
+                status: "pending"
+            });
+        } else {
+            existingRunItem.match = finalMatch;
+            existingRunItem.selection = finalSelection;
+            existingRunItem.odd = finalOdd;
+            existingRunItem.stake = escaleraCurrentStake;
+            existingRunItem.return = returnAmt;
+            existingRunItem.status = "pending";
+        }
+
+        escaleraCurrentRun.sort((a, b) => a.day - b.day);
+        localStorage.setItem("escalera_current_run", JSON.stringify(escaleraCurrentRun));
+
+        // Sync with userBets so it shows in Bankroll history
+        const betKey = `Reto Escalera (Día ${escaleraCurrentDay})`;
+        let userBetItem = userBets.find(b => b.match && b.match.includes(betKey));
+        if (!userBetItem) {
+            userBets.push({
+                id: Date.now(),
+                match: `${betKey}: ${finalMatch}`,
+                market: finalSelection,
+                odd: finalOdd,
+                stake: escaleraCurrentStake,
+                status: "pending",
+                date: new Date().toISOString().split("T")[0]
+            });
+        } else {
+            userBetItem.match = `${betKey}: ${finalMatch}`;
+            userBetItem.market = finalSelection;
+            userBetItem.odd = finalOdd;
+            userBetItem.stake = escaleraCurrentStake;
+            userBetItem.status = "pending";
+        }
+
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        renderEscaleraTab();
+
+        alert(`¡Día ${escaleraCurrentDay} del Reto Escalera guardado con éxito con "${finalMatch}" (@${finalOdd.toFixed(2)})!`);
+    };
+
     function renderEscaleraTab() {
         // Auto rebuild Escalera run from userBets if escalera_current_run is missing/incomplete
         let currentRunCheck = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
@@ -3204,10 +3280,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 3px;">${sp.pick.market}</div>
                     <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 12px;">${sp.pick.selection}</div>
                     
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                         <span class="badge bg-amber" style="font-size: 0.8rem;">@${sp.pick.odd.toFixed(2)}</span>
                         <span style="font-size: 0.7rem; color: var(--accent-green); font-weight: 700;"><i class="fa-solid fa-brain"></i> ${sp.pick.probability}%</span>
                     </div>
+                    
+                    <button class="btn-select-save-escalera" data-idx="${idx}" style="width: 100%; margin-top: 6px; background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%); color: white; border: none; padding: 8px 10px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: all 0.2s ease;">
+                        <i class="fa-solid fa-check-circle"></i> Elegir y Guardar Día ${escaleraCurrentDay}
+                    </button>
                 </div>
             `;
         });
@@ -3300,12 +3380,26 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-        // Añadir eventos a las tarjetas de opción
+        // Añadir eventos a las tarjetas de opción y al botón Elegir y Guardar
         document.querySelectorAll('.escalera-option').forEach(el => {
-            el.addEventListener('click', () => {
-                selectedEscaleraPickIndex = parseInt(el.getAttribute('data-idx'));
-                // Actualizar el DOM renderizando de nuevo la pestaña para que se recalculen valores
+            el.addEventListener('click', (e) => {
+                const idx = parseInt(el.getAttribute('data-idx'));
+                selectedEscaleraPickIndex = idx;
+                
+                if (e.target && e.target.closest('.btn-select-save-escalera')) {
+                    e.stopPropagation();
+                    window.saveEscaleraOption(idx);
+                    return;
+                }
                 renderEscaleraTab();
+            });
+        });
+
+        document.querySelectorAll('.btn-select-save-escalera').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const idx = parseInt(btn.getAttribute('data-idx'));
+                window.saveEscaleraOption(idx);
             });
         });
         
