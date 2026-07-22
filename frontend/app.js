@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const SYNC_BLOB_URL = "https://jsonblob.com/api/jsonBlob/019f85c9-8e08-7b09-9b1b-ecd44ae950db";
     let isApplyingCloudState = false;
     let isPushInFlight = false;
+    let isInitializingPage = true;
     let lastLocalUserActionTime = 0;
     let lastLocalStateHash = "";
     
@@ -137,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         
         pushState: async function() {
+            if (isInitializingPage) return;
             try {
                 isPushInFlight = true;
                 lastLocalUserActionTime = Date.now();
@@ -157,8 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         
         pullState: async function() {
-            // Don't overwrite if local push is in-flight or user performed a local action in the last 5 seconds
-            if (isPushInFlight || (Date.now() - lastLocalUserActionTime < 5000)) return false;
+            // Don't overwrite if local push is in-flight or user performed a local action in the last 5 seconds (unless page is initializing)
+            if (!isInitializingPage && (isPushInFlight || (Date.now() - lastLocalUserActionTime < 5000))) return false;
             
             try {
                 const res = await fetch(SYNC_BLOB_URL);
@@ -184,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Instant automatic cloud push (100ms debounce)
     let syncPushTimeout = null;
     function triggerAutoSyncPush() {
-        if (isApplyingCloudState) return;
+        if (isApplyingCloudState || isInitializingPage) return;
         lastLocalUserActionTime = Date.now();
         clearTimeout(syncPushTimeout);
         syncPushTimeout = setTimeout(() => {
@@ -196,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const originalSetItem = localStorage.setItem;
     localStorage.setItem = function(key, value) {
         originalSetItem.apply(this, arguments);
-        if (!isApplyingCloudState && (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll")) {
+        if (!isApplyingCloudState && !isInitializingPage && (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll")) {
             lastLocalUserActionTime = Date.now();
             triggerAutoSyncPush();
         }
@@ -212,6 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (typeof renderEscaleraTab === "function") renderEscaleraTab();
             if (typeof updateBankrollChart === "function") updateBankrollChart();
         }
+        isInitializingPage = false;
     })();
 
     // Live background polling loop every 3 seconds for instant cross-device updates
