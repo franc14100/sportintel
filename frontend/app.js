@@ -145,15 +145,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 isPushInFlight = true;
                 lastLocalUserActionTime = Date.now();
                 const fullState = this.gatherState();
-                lastLocalStateHash = getNormalizedStateHash(fullState);
-                await fetch(SYNC_BLOB_URL, {
+                
+                const res = await fetch(SYNC_BLOB_URL, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(fullState)
                 });
-                console.log("[Sync] State pushed to cloud.");
+                
+                if (res.ok) {
+                    lastLocalStateHash = getNormalizedStateHash(fullState);
+                    console.log("[Sync] State pushed to cloud.");
+                } else {
+                    console.error("[Sync] Push failed with status:", res.status);
+                    // On failure (like 429 rate limit), reset hash so we can attempt push again on next interaction
+                    lastLocalStateHash = "";
+                    // Automatically retry in 5 seconds
+                    setTimeout(() => {
+                        triggerAutoSyncPush();
+                    }, 5000);
+                }
             } catch (e) {
                 console.error("[Sync] Push error:", e);
+                lastLocalStateHash = "";
             } finally {
                 isPushInFlight = false;
                 lastLocalUserActionTime = Date.now();
@@ -230,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isInitializingPage = false;
     })();
 
-    // Live background polling loop every 3 seconds for instant cross-device updates
+    // Live background polling loop every 15 seconds for cross-device updates (preventing 429 Rate Limits)
     setInterval(async () => {
         if (document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "SELECT") {
             const updated = await SyncManager.pullState();
@@ -241,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (typeof updateBankrollChart === "function") updateBankrollChart();
             }
         }
-    }, 3000);
+    }, 15000);
 
     // --- Global State ---
     let appData = null;
