@@ -724,10 +724,22 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!appData) return;
         const stats = appData.global_stats;
         statAnalyzed.textContent = stats.analyzed_today;
-        statAccuracy.textContent = `${stats.avg_accuracy_30d}%`;
+        
+        // Calculate dynamic real winrate from userBets
+        const resolvedBets = userBets.filter(b => b.status === "won" || b.status === "lost");
+        if (resolvedBets.length > 0) {
+            const won = userBets.filter(b => b.status === "won").length;
+            const realWinrate = ((won / resolvedBets.length) * 100).toFixed(1) + "%";
+            if (statAccuracy) statAccuracy.textContent = realWinrate;
+            if (globalAccuracyBadge) globalAccuracyBadge.textContent = realWinrate;
+            if (statWonPicks) statWonPicks.textContent = won;
+        } else {
+            if (statAccuracy) statAccuracy.textContent = `${stats.avg_accuracy_30d}%`;
+            if (globalAccuracyBadge) globalAccuracyBadge.textContent = `${stats.avg_accuracy_30d}%`;
+            if (statWonPicks) statWonPicks.textContent = stats.total_picks_won;
+        }
+        
         statRoi.textContent = `+${stats.roi_percentage}%`;
-        statWonPicks.textContent = stats.total_picks_won;
-        globalAccuracyBadge.textContent = `${stats.avg_accuracy_30d}%`;
     }
 
     // --- Render "Star Ticket" & Key Matches ---
