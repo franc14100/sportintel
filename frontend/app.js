@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- Cloud Sync Manager (PC ⇄ Mobile) ---
-    const SYNC_BLOB_URL = "https://jsonblob.com/api/jsonBlob/019f85c9-8e08-7b09-9b1b-ecd44ae950db";
+    const SYNC_BLOB_URL = "https://jsonblob.com/api/jsonBlob/019f8b77-7c8c-7142-bcc5-c2e13753542e";
     let isApplyingCloudState = false;
     let isPushInFlight = false;
     let isInitializingPage = true;
