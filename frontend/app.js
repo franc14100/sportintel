@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Cloud Sync Manager (PC ⇄ Mobile) ---
     const SYNC_BLOB_URL = "https://jsonblob.com/api/jsonBlob/019f85c9-8e08-7b09-9b1b-ecd44ae950db";
     let isApplyingCloudState = false;
+    let isPushInFlight = false;
     let lastLocalUserActionTime = 0;
     let lastLocalStateHash = "";
     
@@ -137,6 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         pushState: async function() {
             try {
+                isPushInFlight = true;
+                lastLocalUserActionTime = Date.now();
                 const fullState = this.gatherState();
                 lastLocalStateHash = getNormalizedStateHash(fullState);
                 await fetch(SYNC_BLOB_URL, {
@@ -147,12 +150,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("[Sync] State pushed to cloud.");
             } catch (e) {
                 console.error("[Sync] Push error:", e);
+            } finally {
+                isPushInFlight = false;
+                lastLocalUserActionTime = Date.now();
             }
         },
         
         pullState: async function() {
-            // Don't overwrite if user performed a local action in the last 3 seconds
-            if (Date.now() - lastLocalUserActionTime < 3000) return false;
+            // Don't overwrite if local push is in-flight or user performed a local action in the last 5 seconds
+            if (isPushInFlight || (Date.now() - lastLocalUserActionTime < 5000)) return false;
             
             try {
                 const res = await fetch(SYNC_BLOB_URL);
