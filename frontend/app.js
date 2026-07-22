@@ -3045,10 +3045,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         escaleraCurrentDay = parseInt(localStorage.getItem("escalera_day")) || 1;
-        escaleraStartingStake = parseFloat(localStorage.getItem("escalera_start_stake")) || 10;
-        escaleraCurrentStake = parseFloat(localStorage.getItem("escalera_current_stake")) || 10;
-        escaleraTargetDays = parseInt(localStorage.getItem("escalera_target_days")) || 7;
         escaleraCurrentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+        
+        // Ensure starting stake reflects Day 1 of the current run if present
+        if (escaleraCurrentRun.length > 0 && escaleraCurrentRun[0].stake) {
+            escaleraStartingStake = parseFloat(escaleraCurrentRun[0].stake);
+        } else {
+            escaleraStartingStake = parseFloat(localStorage.getItem("escalera_start_stake")) || 5;
+        }
+        
+        escaleraCurrentStake = parseFloat(localStorage.getItem("escalera_current_stake")) || escaleraStartingStake;
+        
+        // Target days for Reto Escalera Semanal is 7 days
+        let storedTargetDays = parseInt(localStorage.getItem("escalera_target_days"));
+        if (!storedTargetDays || storedTargetDays === 30) {
+            escaleraTargetDays = 7;
+            localStorage.setItem("escalera_target_days", "7");
+        } else {
+            escaleraTargetDays = storedTargetDays;
+        }
         
         const escaleraSavedVal = document.getElementById("escalera-saved-val");
         const currentSaved = parseFloat(localStorage.getItem("escalera_saved_profit")) || 0;
@@ -3090,8 +3105,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const nextReturn = escaleraCurrentStake * nextOdd;
         if (escaleraNextReturnVal) escaleraNextReturnVal.textContent = `$${nextReturn.toFixed(2)}`;
 
-        // Estimación compuesto de meta final
-        const goalValue = escaleraStartingStake * Math.pow(1.28, escaleraTargetDays);
+        // Estimación compuesto de meta final para el reto de 7 días (ej. cuota promedio 1.25x - 1.28x)
+        const goalValue = escaleraStartingStake * Math.pow(1.25, escaleraTargetDays);
         if (escaleraGoalVal) escaleraGoalVal.textContent = `$${goalValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
         renderEscaleraProgressMap();
