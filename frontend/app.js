@@ -230,17 +230,63 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Automatic cloud pull on load & continuous 3-second background real-time sync loop
+    // On page load: try to pull from cloud first.
+    // If cloud is empty OR local data is newer (higher sync_ts), push local data to cloud.
+    // This ensures all devices converge to the same data automatically on load.
     (async () => {
         console.log("[Sync] Connecting to JsonBlob cloud engine...");
-        const pulled = await SyncManager.pullState();
-        if (pulled) {
+        
+        let applied = false;
+        try {
+            const res = await fetch(SYNC_BLOB_URL, { cache: "no-store" });
+            if (res.ok) {
+                const data = await res.json();
+                const cloudTs = parseInt(data && data.ts ? data.ts : "0");
+                const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
+                
+                // If cloud has data AND cloud is newer than local → apply cloud state
+                if (data && cloudTs > 0 && cloudTs >= localTs) {
+                    SyncManager.applyState(data);
+                    console.log("[Sync] Cloud state applied on load (cloud is newer).");
+                    applied = true;
+                } else {
+                    // Local is newer or cloud is empty → push local to cloud so other devices get it
+                    const localState = SyncManager.gatherState();
+                    if (!localState.ts || localState.ts === "0") {
+                        // First time ever: stamp with current time
+                        originalSetItem.call(localStorage, "sync_ts", Date.now().toString());
+                    }
+                    await fetch(SYNC_BLOB_URL, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(SyncManager.gatherState())
+                    });
+                    lastLocalStateHash = getNormalizedStateHash(SyncManager.gatherState());
+                    console.log("[Sync] Local state pushed to cloud on load (local is newer or cloud was empty).");
+                }
+            } else {
+                // Cloud blob not accessible – push local state to create/overwrite it
+                const localState = SyncManager.gatherState();
+                await fetch(SYNC_BLOB_URL, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(localState)
+                });
+                lastLocalStateHash = getNormalizedStateHash(localState);
+                console.log("[Sync] Created cloud state from local data.");
+            }
+        } catch(e) {
+            console.error("[Sync] Init error:", e);
+        }
+        
+        isInitializingPage = false;
+        
+        if (applied) {
             if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
             if (typeof populateBetsTable === "function") populateBetsTable();
             if (typeof renderEscaleraTab === "function") renderEscaleraTab();
             if (typeof updateBankrollChart === "function") updateBankrollChart();
         }
-        isInitializingPage = false;
     })();
 
     // Live background polling loop every 15 seconds for cross-device updates (preventing 429 Rate Limits)
