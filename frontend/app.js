@@ -36,7 +36,51 @@ document.addEventListener("DOMContentLoaded", () => {
     const SYNC_BLOB_URL = "https://jsonblob.com/api/jsonBlob/019f85c9-8e08-7b09-9b1b-ecd44ae950db";
     let isApplyingCloudState = false;
     let lastLocalUserActionTime = 0;
+    let lastLocalStateHash = "";
     
+    function getNormalizedStateHash(stateObj) {
+        if (!stateObj) return "";
+        let bets = [];
+        try {
+            const rawBets = stateObj.ub || stateObj.user_bets;
+            bets = typeof rawBets === "string" ? JSON.parse(rawBets) : (rawBets || []);
+        } catch(e) { bets = []; }
+
+        let run = [];
+        try {
+            const rawRun = stateObj.ecr || stateObj.escalera_current_run;
+            run = typeof rawRun === "string" ? JSON.parse(rawRun) : (rawRun || []);
+        } catch(e) { run = []; }
+
+        let hist = [];
+        try {
+            const rawHist = stateObj.eh || stateObj.escalera_history;
+            hist = typeof rawHist === "string" ? JSON.parse(rawHist) : (rawHist || []);
+        } catch(e) { hist = []; }
+
+        const sb = parseFloat(stateObj.sb !== undefined ? stateObj.sb : (stateObj.starting_bankroll || 53.50918)).toFixed(4);
+
+        const cleanBets = bets.map(b => ({
+            id: b.id,
+            match: (b.match || "").trim(),
+            market: (b.market || "").trim(),
+            odd: parseFloat(b.odd || 1),
+            stake: parseFloat(b.stake || 0),
+            status: b.status || "pending",
+            date: b.date || ""
+        })).sort((a, b) => a.id - b.id);
+
+        const cleanRun = run.map(r => ({
+            day: r.day,
+            match: (r.match || "").trim(),
+            odd: parseFloat(r.odd || 1),
+            stake: parseFloat(r.stake || 0),
+            status: r.status || "pending"
+        })).sort((a, b) => a.day - b.day);
+
+        return JSON.stringify({ bets: cleanBets, run: cleanRun, hist: hist, sb: sb });
+    }
+
     const SyncManager = {
         getSyncId: function() {
             return "sportintel-user";
@@ -86,12 +130,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (s.ecs !== undefined) originalSetItem.call(localStorage, "escalera_current_stake", s.ecs);
             if (run) originalSetItem.call(localStorage, "escalera_current_run", JSON.stringify(run));
             if (hist) originalSetItem.call(localStorage, "escalera_history", JSON.stringify(hist));
+            
+            lastLocalStateHash = getNormalizedStateHash(s);
             isApplyingCloudState = false;
         },
         
         pushState: async function() {
             try {
                 const fullState = this.gatherState();
+                lastLocalStateHash = getNormalizedStateHash(fullState);
                 await fetch(SYNC_BLOB_URL, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
@@ -104,19 +151,18 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         
         pullState: async function() {
-            // Don't overwrite if user performed a local action in the last 2 seconds
-            if (Date.now() - lastLocalUserActionTime < 2000) return false;
+            // Don't overwrite if user performed a local action in the last 3 seconds
+            if (Date.now() - lastLocalUserActionTime < 3000) return false;
             
             try {
                 const res = await fetch(SYNC_BLOB_URL);
                 if (!res.ok) return false;
                 const data = await res.json();
                 if (data) {
-                    const localState = this.gatherState();
-                    const cloudStr = JSON.stringify(data);
-                    const localStr = JSON.stringify(localState);
+                    const cloudHash = getNormalizedStateHash(data);
+                    const localHash = getNormalizedStateHash(this.gatherState());
                     
-                    if (cloudStr !== localStr) {
+                    if (cloudHash !== localHash && cloudHash !== lastLocalStateHash) {
                         this.applyState(data);
                         console.log("[Sync] Cloud diff detected. Applied cloud state!");
                         return true;
@@ -2529,6 +2575,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const bet = userBets.find(b => b.id === id);
         if (bet) {
             bet.status = status;
+            lastLocalUserActionTime = Date.now();
             localStorage.setItem("user_bets", JSON.stringify(userBets));
             updateBankrollMetrics();
             populateBetsTable();
@@ -2538,6 +2585,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.deleteBet = (id) => {
         userBets = userBets.filter(b => b.id !== id);
+        lastLocalUserActionTime = Date.now();
         localStorage.setItem("user_bets", JSON.stringify(userBets));
         updateBankrollMetrics();
         populateBetsTable();
