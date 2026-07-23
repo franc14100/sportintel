@@ -1822,10 +1822,45 @@ def generate_daily_sports_data():
     # - Boleto 2 (Valor): Se re-evalúa si la IA encuentra un pick de mayor EV.
     #   SOLO se preserva si el boleto existente ya era una Simple (señal de que el usuario pudo apostarlo).
     # - Boleto 3 (Soñador): SIEMPRE bloqueado. Es intradía por naturaleza.
+
+    # ─────────────────────────────────────────────────────────────────────────────
+    # BOLETO 1 HARDCODED: Boleto real apostado por el usuario el 23/07/2026
+    # Boleto #84774910925 - NO MODIFICAR NUNCA
+    # FC Lugano (G1) @1.186 + Hajduk vs Pafos Corners >7.5 @1.36
+    # ─────────────────────────────────────────────────────────────────────────────
+    ticket_type_1 = "Combinado"
+    star_selections_1 = [
+        {
+            "match": "FC Lugano vs Dukagjini",
+            "sport": "Football",
+            "league": "UEFA Conference League",
+            "market": "Resultado Final (1X2)",
+            "pick": "FC Lugano (1X2: G1)",
+            "odd": 1.186,
+            "status": "pending",
+            "reasoning": "Apuesta confirmada por el usuario - Boleto #84774910925"
+        },
+        {
+            "match": "HNK Hajduk Split vs Pafos",
+            "sport": "Football",
+            "league": "UEFA Europa League",
+            "market": "Saques de Esquina (Corners)",
+            "pick": "Total Saques de Esquina: Total mas de 7.5",
+            "odd": 1.36,
+            "status": "pending",
+            "reasoning": "Apuesta confirmada por el usuario - Boleto #84774910925"
+        }
+    ]
+    total_odd_1 = round(1.186 * 1.36, 3)
+    star_confidence_1 = 85
+    star_reasoning_1 = ("Boleto real apostado por el usuario el 23/07/2026 — Boleto #84774910925. "
+                        "Combinada: FC Lugano (G1) @1.186 + HNK Hajduk Split vs Pafos mas de 7.5 corners @1.36. "
+                        "Stake: 5 USD. Ganancia posible: 8.06 USD.")
+
     if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
         print("[INFO] Aplicando regla de bloqueo diferenciada por boleto.")
 
-        # BOLETO 1: Siempre bloqueado (usuario ya apostó)
+        # BOLETO 1: Hardcoded real - ya fue apostado, nunca cambia
         st1 = raw_previous_json.get("star_ticket_1", {})
         if st1 and st1.get("selections"):
             print("[INFO] Boleto 1 (Seguro) - BLOQUEADO permanentemente.")
