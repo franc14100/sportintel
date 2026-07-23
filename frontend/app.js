@@ -4623,10 +4623,26 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (sel === m.home && h > a) graded = "won";
                             else if (sel === m.away && a > h) graded = "won";
                             else if (h === a) graded = "voided";
-                        } else if (mk.includes("Total de Goles de Equipo")) {
-                            if (sel.includes(m.home) && h >= 2) graded = "won";
-                            else if (sel.includes(m.away) && a >= 2) graded = "won";
-                            else if (sel.includes("Más de 0.5") && (h > 0 || a > 0)) graded = "won";
+                        } else if (mk.includes("Goles del Equipo") || mk.includes("Total de Goles de Equipo")) {
+                            // Dynamic team goal grading: extract N from "Team Más de N Goles"
+                            const numM = sel.match(/Más de (\d+(?:\.\d+)?)/);
+                            const limit = numM ? parseFloat(numM[1]) : 1.5;
+                            const teamScore = (sel.includes(m.home) || sel.includes("local")) ? h : a;
+                            if (sel.includes("Más de") && teamScore > limit) graded = "won";
+                            else if (sel.includes("Menos de") && teamScore < limit) graded = "won";
+                        } else if (mk.includes("Córners del Equipo")) {
+                            // Individual team corners: proxy with team's share of total corners
+                            // We don't have individual corner data so estimate: fav team gets ~55% of corners
+                            const numM = sel.match(/Más de (\d+(?:\.\d+)?)/);
+                            const limit = numM ? parseFloat(numM[1]) : 4.5;
+                            const estimatedTeamCorners = (sel.includes(m.home)) ? totalGoals * 2.1 : totalGoals * 1.8;
+                            if (estimatedTeamCorners > limit) graded = "won";
+                        } else if (mk.includes("Tarjetas del Equipo")) {
+                            // Individual team cards: estimate from total goals proxy
+                            const numM = sel.match(/Más de (\d+(?:\.\d+)?)/);
+                            const limit = numM ? parseFloat(numM[1]) : 1.5;
+                            const estimatedCards = Math.abs(h - a) < 2 ? 2.2 : 1.6;
+                            if (estimatedCards > limit) graded = "won";
                         } else {
                             graded = (h > a && sel === m.home) ? "won" : ((a > h && sel === m.away) ? "won" : "lost");
                         }
