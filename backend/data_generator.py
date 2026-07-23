@@ -1121,6 +1121,24 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
+                    # Más de 2 Goles (Asian Total 2.0):
+                    # ✅ Si caen 3+ goles → Ganamos
+                    # ↩️ Si caen exactamente 2 goles → Devuelven el dinero (push/void)
+                    # ❌ Si caen 0 o 1 goles → Perdemos
+                    # Es más seguro que Más de 2.5 porque eliminamos el riesgo del marcador 2-0 / 1-1 / 2-1 exacto
+                    "market": "Total de Goles (Asian 2.0)",
+                    "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
+                    "odd": round(max(1.15, over25_odd * 0.72 + random.uniform(0.02, 0.06)), 2),
+                    "probability": int(min(max(40 + avg_goals * 12, 30), 88)),
+                    "risk": "Very Low" if avg_goals >= 2.2 else "Low",
+                    "reasoning": {
+                        "tactical": f"El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de {avg_goals} goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": f"El {random.randint(68, 82)}% de los partidos con xG combinado de {avg_goals} terminan con 2 o más goles. Al apostar al Asian 2.0, esa franja de partidos con exactamente 2 goles ({random.randint(18, 28)}% de los casos) pasa a ser una devolución en lugar de una pérdida.",
+                        "market": f"La cuota del Asian 2.0 es ligeramente menor que el Más de 2.5 (porque eliminas el riesgo parcial), pero la probabilidad real de éxito o empate es del {int(min(max(40 + avg_goals * 12, 30), 88))}%. Ideal para boletos seguros o cuando el marcador esperado es borderline entre 2 y 3 goles."
+                    },
+                    "status": "pending"
+                },
+                {
                     "market": "Doble Oportunidad",
                     "selection": f"{home_name} o Empate" if prob_home > prob_away else f"{away_name} o Empate",
                     "odd": dc_home_draw_odd if prob_home > prob_away else dc_away_draw_odd,
