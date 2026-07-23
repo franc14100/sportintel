@@ -389,9 +389,34 @@ document.addEventListener("DOMContentLoaded", () => {
     let appData = null;           // Loaded from GitHub Pages via /api/data
     let selectedMatch = null;     // The match the user clicked on
     let currentSportFilter = "all"; // Active sport filter for matches list
+    let currentMatchStatusFilter = "all"; // Active status filter for matches list (all, pre, in, post)
     let matchSearchQuery = "";    // Search box value for matches
     let currentMarketCat = "all"; // Active market category filter
     let marketSearchVal = "";     // Market search box value
+
+    // --- Time Sorting Helper (Earliest Match First) ---
+    function parseTimeToMinutes(timeStr) {
+        if (!timeStr || typeof timeStr !== 'string') return 9999;
+        const parts = timeStr.split(':');
+        if (parts.length >= 2) {
+            const hh = parseInt(parts[0], 10);
+            const mm = parseInt(parts[1], 10);
+            if (!isNaN(hh) && !isNaN(mm)) {
+                return hh * 60 + mm;
+            }
+        }
+        return 9999;
+    }
+
+    function sortMatchesByTimeAscending(matches) {
+        if (!Array.isArray(matches)) return [];
+        return matches.slice().sort((a, b) => {
+            const tA = parseTimeToMinutes(a.time);
+            const tB = parseTimeToMinutes(b.time);
+            if (tA !== tB) return tA - tB;
+            return (a.home || '').localeCompare(b.home || '');
+        });
+    }
 
     // Matches Elements
     const filterBtns = document.querySelectorAll(".filter-btn");
@@ -1082,9 +1107,10 @@ document.addEventListener("DOMContentLoaded", () => {
             renderTicket(ticket3, "3", "purple");
         }
 
-        // Key Matches of the Day grid
+        // Key Matches of the Day grid (sorted by time ascending)
         let matchesGridHtml = "";
-        appData.matches.slice(0, 4).forEach(match => {
+        const sortedDashboardMatches = sortMatchesByTimeAscending(appData.matches);
+        sortedDashboardMatches.slice(0, 6).forEach(match => {
             const bestPick = match.picks[0];
             const homeInitials = match.home.split(" ").map(w => w[0]).join("").substring(0, 3).toUpperCase();
             const awayInitials = match.away.split(" ").map(w => w[0]).join("").substring(0, 3).toUpperCase();
@@ -1408,26 +1434,38 @@ document.addEventListener("DOMContentLoaded", () => {
     window.renderChart = renderChart;
 
     // --- Matches List Panel Controller ---
-    filterBtns.forEach(btn => {
+    const matchSportBtns = document.querySelectorAll(".match-sport-filter");
+    matchSportBtns.forEach(btn => {
         btn.addEventListener("click", () => {
-            filterBtns.forEach(b => b.classList.remove("active"));
+            matchSportBtns.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
             currentSportFilter = btn.getAttribute("data-sport");
             populateMatchesList();
         });
     });
 
+    const matchStatusBtns = document.querySelectorAll(".match-status-filter");
+    matchStatusBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            matchStatusBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentMatchStatusFilter = btn.getAttribute("data-status");
+            populateMatchesList();
+        });
+    });
+
     function populateMatchesList() {
-        if (!appData) return;
+        if (!appData || !appData.matches) return;
         
         let listHtml = "";
         const filteredMatches = appData.matches.filter(m => {
             const matchesSport = currentSportFilter === "all" || m.sport === currentSportFilter;
+            const matchesStatus = currentMatchStatusFilter === "all" || m.status === currentMatchStatusFilter;
             const matchesSearch = !matchSearchQuery || 
                                   m.home.toLowerCase().includes(matchSearchQuery) || 
                                   m.away.toLowerCase().includes(matchSearchQuery) || 
                                   m.league.toLowerCase().includes(matchSearchQuery);
-            return matchesSport && matchesSearch;
+            return matchesSport && matchesStatus && matchesSearch;
         });
         
         if (filteredMatches.length === 0) {
@@ -1435,17 +1473,27 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        filteredMatches.forEach(match => {
+        // Sort chronologically ascending by match time!
+        const sortedMatches = sortMatchesByTimeAscending(filteredMatches);
+
+        sortedMatches.forEach(match => {
             const isSelected = selectedMatch && selectedMatch.id === match.id ? "selected" : "";
             let sportIcon = '<i class="fa-solid fa-soccer-ball"></i>';
             if (match.sport === "Basketball") sportIcon = '<i class="fa-solid fa-basketball"></i>';
-            if (match.sport === "Tennis") sportIcon = '<i class="fa-solid fa-baseball"></i>';
+            if (match.sport === "Tennis") sportIcon = '<i class="fa-solid fa-table-tennis-paddle-ball"></i>';
             
+            let statusTag = '';
+            if (match.status === 'in') {
+                statusTag = ' <span style="color:#ef4444; font-weight:800; font-size:0.65rem;"><i class="fa-solid fa-circle"></i> EN VIVO</span>';
+            } else if (match.status === 'post') {
+                statusTag = ' <span style="color:var(--text-muted); font-size:0.65rem;"><i class="fa-solid fa-flag-checkered"></i> FINAL</span>';
+            }
+
             listHtml += `
                 <div class="match-list-item ${isSelected}" data-match-id="${match.id}">
                     <div class="item-meta">
-                        <span>${sportIcon} ${match.league}</span>
-                        <span>${match.time}</span>
+                        <span>${sportIcon} ${match.league}${statusTag}</span>
+                        <span style="font-weight:700;"><i class="fa-regular fa-clock"></i> ${match.time}</span>
                     </div>
                     <div class="item-teams">
                         <div class="item-team">
@@ -4614,6 +4662,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Predictions & Scores Tab Rendering
     // ==========================================================================
     let currentPredSportFilter = "all";
+    let currentPredStatusFilter = "all";
 
     function renderPredictionsTab() {
         if (!appData || !appData.matches) return;
@@ -4622,16 +4671,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!grid) return;
 
         const filteredMatches = appData.matches.filter(m => {
-            if (currentPredSportFilter === "all") return true;
-            return m.sport === currentPredSportFilter;
+            const matchesSport = currentPredSportFilter === "all" || m.sport === currentPredSportFilter;
+            const matchesStatus = currentPredStatusFilter === "all" || m.status === currentPredStatusFilter;
+            return matchesSport && matchesStatus;
         });
+
+        // Sort chronologically ascending by match time!
+        const sortedMatches = sortMatchesByTimeAscending(filteredMatches);
 
         let html = "";
         let totalPicks = 0;
         let wonPicks = 0;
         let lostPicks = 0;
 
-        filteredMatches.forEach(match => {
+        sortedMatches.forEach(match => {
             // Determine match status label and colors
             let statusBadgeHtml = "";
             let scoreHtml = "";
@@ -4891,6 +4944,16 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".pred-sport-filter").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
             currentPredSportFilter = btn.getAttribute("data-sport");
+            renderPredictionsTab();
+        });
+    });
+
+    // Bind status filters for Predictions tab (Por Jugar, En Vivo, Finalizados)
+    document.querySelectorAll(".pred-status-filter").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".pred-status-filter").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentPredStatusFilter = btn.getAttribute("data-status");
             renderPredictionsTab();
         });
     });
