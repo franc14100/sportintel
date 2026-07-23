@@ -2128,7 +2128,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const ticketHtml = `
-                <div class="ticket-option-wrapper" style="margin-bottom: 10px;">
+                <div class="ticket-option-wrapper" style="min-width: 320px; flex: 0 0 auto; margin-bottom: 10px;">
                     <div class="ticket-option-title" style="color: ${optionColors[index]}; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">
                         ${optionTitles[index]}
                     </div>
