@@ -1326,6 +1326,101 @@ def generate_daily_sports_data():
             "picks": picks
         })
 
+        # --- Auto-grade individual match picks for finished matches ---
+        current_match_entry = matches_data[-1]
+        if current_match_entry.get("status") == "post" and \
+           current_match_entry.get("home_score") is not None and \
+           current_match_entry.get("away_score") is not None:
+            h_sc = current_match_entry["home_score"]
+            a_sc = current_match_entry["away_score"]
+            h_nm = current_match_entry["home"]
+            a_nm = current_match_entry["away"]
+            try:
+                h_f = float(h_sc)
+                a_f = float(a_sc)
+                total_goals = h_f + a_f
+                result_str = f"{int(h_f)}-{int(a_f)}"
+            except Exception:
+                h_f = a_f = total_goals = 0
+                result_str = "N/D"
+
+            for pk in current_match_entry.get("picks", []):
+                if pk.get("status") not in ("won", "lost"):
+                    mk = pk.get("market", "")
+                    sel = pk.get("selection", "").strip()
+                    graded = "lost"
+                    try:
+                        if "Resultado Final" in mk or "Ganador" in mk:
+                            if sel == h_nm and h_f > a_f: graded = "won"
+                            elif sel == a_nm and a_f > h_f: graded = "won"
+                            elif sel == "Empate" and h_f == a_f: graded = "won"
+                        elif "Doble Oportunidad" in mk:
+                            if "o Empate" in sel:
+                                team = sel.replace("o Empate", "").strip()
+                                if team == h_nm and h_f >= a_f: graded = "won"
+                                elif team == a_nm and a_f >= h_f: graded = "won"
+                            elif " o " in sel:
+                                if h_f != a_f: graded = "won"
+                        elif "Más/Menos" in mk or "Over/Under" in mk:
+                            limit = 2.5
+                            for lv in ["1.5", "2.5", "3.5", "4.5"]:
+                                if lv in mk: limit = float(lv)
+                            if "Más" in sel or "Over" in sel:
+                                if total_goals > limit: graded = "won"
+                            elif "Menos" in sel or "Under" in sel:
+                                if total_goals < limit: graded = "won"
+                        elif "Ambos Equipos Anotan" in mk or "BTTS" in mk:
+                            if sel in ("Sí", "Yes") and h_f > 0 and a_f > 0: graded = "won"
+                            elif sel in ("No") and (h_f == 0 or a_f == 0): graded = "won"
+                    except Exception as ge:
+                        print(f"[Grade] Error en pick: {ge}")
+                    pk["status"] = graded
+
+                    # Build post-match analysis explanation
+                    if graded == "won":
+                        pk["post_analysis"] = {
+                            "result": result_str,
+                            "verdict": "✅ Predicción correcta",
+                            "explanation": f"El resultado final fue {h_nm} {result_str} {a_nm}. La selección '{sel}' en el mercado '{mk}' se cumplió exactamente como proyectó la IA.",
+                            "lesson": f"El análisis de forma reciente y estadísticas H2H funcionaron correctamente para este tipo de partido. Continuar priorizando este mercado en condiciones similares."
+                        }
+                    else:
+                        # Build specific failure explanation per market type
+                        if "Resultado Final" in mk or "Ganador" in mk:
+                            if h_f == a_f:
+                                fail_reason = f"El partido terminó en Empate ({result_str}), pero la IA predijo la victoria de {sel}. Los empates son difíciles de anticipar cuando hay una diferencia de ratings entre equipos."
+                                lesson = "En partidos con diferencial de rating moderado (<8 puntos), considerar Doble Oportunidad en lugar de Resultado Final para tener cobertura ante el empate."
+                            elif sel == h_nm:
+                                fail_reason = f"El partido terminó {result_str} a favor del visitante {a_nm}, contrario a la predicción de victoria local para {h_nm}."
+                                lesson = "El equipo visitante sorprendió. Revisar el rendimiento visitante reciente antes de apostar solo al local. La ventaja de campo no fue suficiente factor en este partido."
+                            else:
+                                fail_reason = f"El partido terminó {result_str} a favor del local {h_nm}, contrario a la predicción de victoria visitante para {sel}."
+                                lesson = "El local aprovechó su ventaja de campo. En próximas ocasiones con equipos locales fuertes, priorizar Doble Oportunidad local en lugar de victoria visitante directa."
+                        elif "Doble Oportunidad" in mk:
+                            fail_reason = f"El resultado {result_str} no cubrió la cobertura doble seleccionada ({sel}). Esto indica un resultado inesperado que invirtió el escenario cubierto."
+                            lesson = "La Doble Oportunidad falló, lo cual es poco frecuente. Analizar si el equipo tenía lesiones clave o contexto motivacional diferente al esperado."
+                        elif "Ambos Equipos Anotan" in mk:
+                            if sel == "Sí":
+                                fail_reason = f"El marcador final fue {result_str}. Uno o ambos equipos no anotaron, contrario a la predicción BTTS Sí."
+                                lesson = "Para BTTS Sí, verificar que ambos equipos tengan mínimo 1.0 xG promedio en los últimos 5 partidos y que ninguno lleve más de 2 partidos sin marcar."
+                            else:
+                                fail_reason = f"Ambos equipos anotaron ({result_str}), contrario a la predicción BTTS No."
+                                lesson = "Para BTTS No, asegurarse de que al menos uno de los equipos tenga una defensa con less de 0.8 goles concedidos por partido en las últimas 5 fechas."
+                        elif "Más/Menos" in mk:
+                            fail_reason = f"El total de goles/puntos fue {int(total_goals)} ({result_str}). La selección '{sel}' no se cumplió."
+                            lesson = f"Para mercados de totales, contrastar el promedio de goles de los últimos 5 partidos de ambos equipos antes de decidir el límite. Considerar el contexto (partido decisivo = menos riesgo = menos goles)."
+                        else:
+                            fail_reason = f"La selección '{sel}' en el mercado '{mk}' no se cumplió. Resultado final: {result_str}."
+                            lesson = "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
+
+                        pk["post_analysis"] = {
+                            "result": result_str,
+                            "verdict": "❌ Predicción incorrecta",
+                            "explanation": fail_reason,
+                            "lesson": lesson
+                        }
+
+
     # Guardar en JSON estructurado
     output_dir = os.path.dirname(os.path.abspath(__file__))
     frontend_dir = os.path.join(os.path.dirname(output_dir), "frontend")
