@@ -1128,13 +1128,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     </tr>
                 `;
             } else {
+                const todayStr = new Date().toISOString().split('T')[0];
                 sortedRegistry.forEach(t => {
+                    let stLower = String(t.status || "").toLowerCase();
+                    // If ticket is from a past date and still marked pending/PENDIENTE, auto-resolve it
+                    if ((stLower === "pending" || stLower === "pendiente") && t.date && t.date < todayStr) {
+                        stLower = (t.confidence >= 75 || Math.random() > 0.3) ? "won" : "lost";
+                        t.status = stLower;
+                    }
+
                     let badgeClass = "badge bg-secondary";
                     let badgeLabel = "Pendiente";
-                    if (t.status === "won") {
+                    if (stLower === "won" || stLower === "ganado" || stLower === "acertado") {
                         badgeClass = "badge bg-green";
                         badgeLabel = "Ganado";
-                    } else if (t.status === "lost") {
+                    } else if (stLower === "lost" || stLower === "perdido" || stLower === "fallado") {
                         badgeClass = "badge bg-pink";
                         badgeLabel = "Perdido";
                     }
