@@ -20335,52 +20335,65 @@
     },
     "star_ticket": {
         "type": "Combinado",
+        "locked": true,
+        "ticket_ref": "84774910925",
         "selections": [
             {
                 "match": "FC Lugano vs Dukagjini",
                 "sport": "Football",
+                "league": "UEFA Conference League",
                 "market": "Resultado Final (1X2)",
-                "pick": "FC Lugano",
-                "odd": 1.15,
-                "reasoning": "La formación 4-2-3-1 de FC Lugano (favorito) tiene una ventaja estructural sobre el esquema 3-5-2 de Dukagjini (rival). El equipo favorito presiona alto con efectividad demostrada en sus últimos 4 partidos combinados. Los 2 baja(s) clave en Dukagjini debilitan notablemente su línea defensiva y el mediocampo de control. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes."
+                "pick": "FC Lugano (1X2: G1)",
+                "odd": 1.186,
+                "status": "pending",
+                "reasoning": "Apuesta confirmada por el usuario - Boleto #84774910925"
             },
             {
-                "match": "FK Liepaja vs Austria Vienna",
+                "match": "HNK Hajduk Split vs Pafos",
                 "sport": "Football",
-                "market": "Córners (Saques de Esquina)",
-                "pick": "Más de 8.5 Córners",
-                "odd": 1.6,
-                "reasoning": "Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina."
+                "league": "UEFA Europa League",
+                "market": "Saques de Esquina (Corners)",
+                "pick": "Total Saques de Esquina: Total mas de 7.5",
+                "odd": 1.36,
+                "status": "pending",
+                "reasoning": "Apuesta confirmada por el usuario - Boleto #84774910925"
             }
         ],
-        "total_odd": 1.84,
+        "total_odd": 1.613,
         "confidence": 85,
-        "reasoning": "Recomendamos esta Combinada de Bajo Riesgo (Cuota total: @1.84). Combinamos estas dos selecciones porque sus cuotas individuales son bajas para apostar por separado (@1.15 y @1.60), pero juntas forman una cuota segura con una probabilidad conjunta muy favorable de 85%."
+        "reasoning": "Boleto real apostado por el usuario el 23/07/2026 - Boleto #84774910925. Combinada: FC Lugano (G1) + Hajduk Split vs Pafos mas de 7.5 corners. Stake: 5 USD. Ganancia posible: 8.06 USD.",
+        "recommendation_stake": 5.0
     },
     "star_ticket_1": {
         "type": "Combinado",
+        "locked": true,
+        "ticket_ref": "84774910925",
         "selections": [
             {
                 "match": "FC Lugano vs Dukagjini",
                 "sport": "Football",
+                "league": "UEFA Conference League",
                 "market": "Resultado Final (1X2)",
-                "pick": "FC Lugano",
-                "odd": 1.15,
-                "reasoning": "La formación 4-2-3-1 de FC Lugano (favorito) tiene una ventaja estructural sobre el esquema 3-5-2 de Dukagjini (rival). El equipo favorito presiona alto con efectividad demostrada en sus últimos 4 partidos combinados. Los 2 baja(s) clave en Dukagjini debilitan notablemente su línea defensiva y el mediocampo de control. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes."
+                "pick": "FC Lugano (1X2: G1)",
+                "odd": 1.186,
+                "status": "pending",
+                "reasoning": "Apuesta confirmada por el usuario - Boleto #84774910925"
             },
             {
-                "match": "FK Liepaja vs Austria Vienna",
+                "match": "HNK Hajduk Split vs Pafos",
                 "sport": "Football",
-                "market": "Córners (Saques de Esquina)",
-                "pick": "Más de 8.5 Córners",
-                "odd": 1.6,
-                "reasoning": "Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina."
+                "league": "UEFA Europa League",
+                "market": "Saques de Esquina (Corners)",
+                "pick": "Total Saques de Esquina: Total mas de 7.5",
+                "odd": 1.36,
+                "status": "pending",
+                "reasoning": "Apuesta confirmada por el usuario - Boleto #84774910925"
             }
         ],
-        "total_odd": 1.84,
+        "total_odd": 1.613,
         "confidence": 85,
-        "reasoning": "Recomendamos esta Combinada de Bajo Riesgo (Cuota total: @1.84). Combinamos estas dos selecciones porque sus cuotas individuales son bajas para apostar por separado (@1.15 y @1.60), pero juntas forman una cuota segura con una probabilidad conjunta muy favorable de 85%.",
-        "recommendation_stake": 4.7
+        "reasoning": "Boleto real apostado por el usuario el 23/07/2026 - Boleto #84774910925. Combinada: FC Lugano (G1) + Hajduk Split vs Pafos mas de 7.5 corners. Stake: 5 USD. Ganancia posible: 8.06 USD.",
+        "recommendation_stake": 5.0
     },
     "star_ticket_2": {
         "type": "Combinado",
