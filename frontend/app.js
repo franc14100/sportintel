@@ -2001,9 +2001,12 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
+        const ticketEmptyState = document.getElementById("ticket-empty-state");
+        const ticketsMultiContainer = document.getElementById("tickets-multi-container");
+
         if (availablePicks.length === 0) {
-            alert("No se encontraron selecciones en el mercado que cumplan con los filtros seleccionados.");
-            ticketEmptyState.classList.remove("hidden");
+            alert("No se encontraron selecciones en el mercado que cumplan con los filtros.");
+            if (ticketEmptyState) ticketEmptyState.classList.remove("hidden");
             return;
         }
 
@@ -2013,14 +2016,17 @@ document.addEventListener("DOMContentLoaded", () => {
             availablePicks.sort((a, b) => b.probability - a.probability);
             const TOLERANCE = 0.15;
             
-            // Option 1: Safest Greedy
-            currentTicketOptions.push(buildGreedyTargetTicket(availablePicks, targetOdd, TOLERANCE, 5, []));
+            // Op1: Greedy
+            const op1 = buildGreedyTargetTicket(availablePicks, targetOdd, TOLERANCE, 5, []);
+            currentTicketOptions.push(op1);
             
-            // Option 2: Exclude the absolute safest pick to force a different path
-            currentTicketOptions.push(buildGreedyTargetTicket(availablePicks, targetOdd, TOLERANCE, 5, [availablePicks[0]]));
+            // Op2: Exclude all from Op1
+            const op2 = buildGreedyTargetTicket(availablePicks, targetOdd, TOLERANCE, 5, op1.picks);
+            currentTicketOptions.push(op2);
             
-            // Option 3: Allow more picks (up to 8) to spread risk
-            currentTicketOptions.push(buildGreedyTargetTicket(availablePicks, targetOdd, TOLERANCE, 8, currentTicketOptions[0] ? currentTicketOptions[0].picks : []));
+            // Op3: Exclude all from Op1 and Op2, allow more picks
+            const op3 = buildGreedyTargetTicket(availablePicks, targetOdd, TOLERANCE, 8, [...op1.picks, ...op2.picks]);
+            currentTicketOptions.push(op3);
             
         } else {
             let filteredPicks = [];
@@ -2032,46 +2038,27 @@ document.addEventListener("DOMContentLoaded", () => {
             filteredPicks.sort((a, b) => b.probability - a.probability);
             
             const count1 = Math.min(filteredPicks.length, riskVal === 1 ? 2 : (riskVal === 2 ? 3 : 4));
-            currentTicketOptions.push({ picks: filteredPicks.slice(0, count1) });
+            const op1Picks = filteredPicks.slice(0, count1);
+            currentTicketOptions.push({ picks: op1Picks });
             
-            if (filteredPicks.length > count1) {
-                currentTicketOptions.push({ picks: filteredPicks.slice(1, count1 + 1) });
-            } else {
-                currentTicketOptions.push({ picks: filteredPicks.slice(0, count1) });
-            }
+            const pool2 = filteredPicks.filter(p => !op1Picks.includes(p));
+            const op2Picks = pool2.slice(0, count1);
+            currentTicketOptions.push({ picks: op2Picks.length > 0 ? op2Picks : op1Picks });
             
-            const count3 = Math.min(filteredPicks.length, count1 + 1);
-            currentTicketOptions.push({ picks: filteredPicks.slice(0, count3) });
+            const pool3 = pool2.filter(p => !op2Picks.includes(p));
+            const count3 = Math.min(pool3.length, count1 + 1);
+            const op3Picks = pool3.slice(0, count3);
+            currentTicketOptions.push({ picks: op3Picks.length > 0 ? op3Picks : op1Picks });
         }
 
-        const tabs = document.querySelectorAll('.ticket-tab');
-        tabs.forEach(tab => {
-            tab.onclick = (e) => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tabs.forEach(t => {
-                    t.style.fontWeight = 'normal';
-                    t.style.borderBottom = 'none';
-                    t.style.color = 'var(--text-muted)';
-                });
-                const t = e.target;
-                t.classList.add('active');
-                t.style.fontWeight = 'bold';
-                t.style.borderBottom = '2px solid var(--accent-cyan)';
-                t.style.color = 'var(--accent-cyan)';
-                
-                renderTicketOption(parseInt(t.dataset.option), stake, riskVal);
-            };
-        });
-
-        ticketMainContent.classList.remove("hidden");
-        document.querySelector('.ticket-tab[data-option="0"]').click();
+        renderAllTickets(stake, riskVal);
     }
 
     function buildGreedyTargetTicket(availablePicks, targetOdd, tolerance, maxPicks, excludedPicks) {
         let selected = [];
         let currentOdd = 1.0;
         let pool = availablePicks.filter(p => !excludedPicks.includes(p));
-        if (pool.length === 0) pool = availablePicks;
+        if (pool.length === 0) pool = availablePicks; // Fallback if no picks left
         
         const singleMatch = pool.find(p => Math.abs(p.odd - targetOdd) <= tolerance);
         if (singleMatch) return { picks: [singleMatch] };
@@ -2088,72 +2075,113 @@ document.addEventListener("DOMContentLoaded", () => {
         return { picks: selected };
     }
 
-    function renderTicketOption(index, stake, riskVal) {
-        if(!currentTicketOptions || !currentTicketOptions[index]) return;
-        const selectedPicks = currentTicketOptions[index].picks;
+    function renderAllTickets(stake, riskVal) {
+        const container = document.getElementById("tickets-multi-container");
+        container.innerHTML = ""; // Clear existing
+        container.classList.remove("hidden");
         
-        let accumulatedOdd = 1.0;
-        let sumConfidence = 0;
-        let eventsHtml = "";
+        const optionTitles = [
+            "<i class='fa-solid fa-shield-check'></i> Opción 1: Más Segura",
+            "<i class='fa-solid fa-scale-balanced'></i> Opción 2: Alternativa",
+            "<i class='fa-solid fa-fire'></i> Opción 3: Diferente"
+        ];
+        const optionColors = ["var(--accent-green)", "var(--accent-cyan)", "var(--accent-orange)"];
 
-        selectedPicks.forEach(pick => {
-            accumulatedOdd *= pick.odd;
-            sumConfidence += pick.probability;
+        currentTicketOptions.forEach((option, index) => {
+            const selectedPicks = option.picks;
             
-            eventsHtml += `
-                <div class="ticket-event-row">
-                    <div class="ticket-event-meta">
-                        <span>${pick.leagueName} (${pick.sportName === 'Football' ? 'Fútbol' : 'NBA'})</span>
-                        <span class="ticket-event-odd">@${pick.odd.toFixed(2)}</span>
+            let accumulatedOdd = 1.0;
+            let sumConfidence = 0;
+            let eventsHtml = "";
+
+            selectedPicks.forEach(pick => {
+                accumulatedOdd *= pick.odd;
+                sumConfidence += pick.probability;
+                
+                eventsHtml += `
+                    <div class="ticket-event-row">
+                        <div class="ticket-event-meta">
+                            <span>${pick.leagueName} (${pick.sportName === 'Football' ? 'Fútbol' : 'NBA'})</span>
+                            <span class="ticket-event-odd">@${pick.odd.toFixed(2)}</span>
+                        </div>
+                        <div class="ticket-event-selection">
+                            <span class="ticket-event-pick-lbl">${pick.matchName}</span>
+                            <span class="ticket-event-pick-val">${pick.selection}</span>
+                        </div>
                     </div>
-                    <div class="ticket-event-selection">
-                        <span class="ticket-event-pick-lbl">${pick.matchName}</span>
-                        <span class="ticket-event-pick-val">${pick.selection}</span>
+                `;
+            });
+
+            const totalOdd = accumulatedOdd;
+            const avgConfidence = selectedPicks.length > 0 ? Math.round(sumConfidence / selectedPicks.length) : 0;
+            const potentialPayout = stake * totalOdd;
+
+            let riskLabelText = "Bajo";
+            let riskBadgeClass = "badge bg-green";
+            if (riskVal === 2) {
+                riskLabelText = "Medio";
+                riskBadgeClass = "badge bg-amber";
+            } else if (riskVal === 3) {
+                riskLabelText = "Alto";
+                riskBadgeClass = "badge bg-pink";
+            }
+
+            const ticketHtml = `
+                <div class="ticket-option-wrapper" style="margin-bottom: 10px;">
+                    <div class="ticket-option-title" style="color: ${optionColors[index]}; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">
+                        ${optionTitles[index]}
+                    </div>
+                    <div class="generated-ticket" id="ticket-option-${index}">
+                        <div class="ticket-glow-border"></div>
+                        <div class="ticket-header">
+                            <div class="ticket-brand">
+                                <i class="fa-solid fa-brain-circuit"></i>
+                                <span>SportIntel AI Ticket</span>
+                            </div>
+                            <div class="ticket-id">#TK-${Math.floor(100000 + Math.random() * 900000)}</div>
+                        </div>
+                        
+                        <div class="ticket-subheader">
+                            <div class="meta-item">
+                                <span class="lbl">Riesgo</span>
+                                <span class="val ${riskBadgeClass}">${riskLabelText}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="lbl">Confianza</span>
+                                <span class="val">${avgConfidence}%</span>
+                            </div>
+                        </div>
+
+                        <div class="ticket-events-list">
+                            ${eventsHtml}
+                        </div>
+
+                        <div class="ticket-summary">
+                            <div class="summary-row">
+                                <span>Inversión (Stake) Sugerida</span>
+                                <span>$${stake.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Cuota Total</span>
+                                <span class="highlight-odd">${totalOdd.toFixed(2)}</span>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="summary-row payout-row">
+                                <span>Ganancia Potencial</span>
+                                <span class="highlight-payout">$${potentialPayout.toFixed(2)}</span>
+                            </div>
+                        </div>
+
+                        <div class="ticket-actions">
+                            <button class="btn btn-secondary btn-full-width" onclick="alert('Funcionalidad de descarga en desarrollo')">
+                                <i class="fa-solid fa-download"></i> Descargar Imagen del Boleto
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
+            container.innerHTML += ticketHtml;
         });
-
-        const totalOdd = accumulatedOdd;
-        const avgConfidence = selectedPicks.length > 0 ? Math.round(sumConfidence / selectedPicks.length) : 0;
-        const potentialPayout = stake * totalOdd;
-
-        lblTicketId.textContent = `#TK-${Math.floor(100000 + Math.random() * 900000)}`;
-        
-        let riskLabelText = "Bajo";
-        let riskBadgeClass = "badge bg-green";
-        if (riskVal === 2) {
-            riskLabelText = "Medio";
-            riskBadgeClass = "badge bg-amber";
-        } else if (riskVal === 3) {
-            riskLabelText = "Alto";
-            riskBadgeClass = "badge bg-pink";
-        }
-
-        ticketRiskBadge.textContent = riskLabelText;
-        ticketRiskBadge.className = `val ${riskBadgeClass}`;
-        ticketConfidenceVal.textContent = `${avgConfidence}%`;
-        
-        ticketEventsContainer.innerHTML = eventsHtml;
-        ticketStakeDisplay.textContent = `$${stake.toFixed(2)}`;
-        ticketTotalOddDisplay.textContent = totalOdd.toFixed(2);
-        ticketPayoutDisplay.textContent = `$${potentialPayout.toFixed(2)}`;
-
-        btnExportTicket.onclick = () => {
-            const originalText = btnExportTicket.innerHTML;
-            btnExportTicket.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generando comprobante...`;
-            
-            setTimeout(() => {
-                btnExportTicket.innerHTML = `<i class="fa-solid fa-check"></i> Comprobante Guardado`;
-                btnExportTicket.classList.add("btn-success");
-                
-                setTimeout(() => {
-                    btnExportTicket.innerHTML = originalText;
-                    btnExportTicket.classList.remove("btn-success");
-                    alert("Se ha simulado la exportación del boleto digital. En un entorno de producción, esto generaría un archivo PDF o PNG para descargar.");
-                }, 1500);
-            }, 1000);
-        };
     }
 
     // --- News, Gossip & Injuries View Controller ---
