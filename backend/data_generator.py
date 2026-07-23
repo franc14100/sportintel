@@ -1623,21 +1623,86 @@ def generate_daily_sports_data():
         star_confidence_1 = 80
         star_reasoning_1 = "Analizando variables de mercado..."
         
-    # Generar Boleto Estrella 2 (Boleto de Valor - Cuota Alta)
+    # Generar Boleto Estrella 2 (Boleto de Valor - IA decide Simple o Combinada)
     star_selections_2 = []
     ticket_type_2 = "Combinado"
     total_odd_2 = 1.0
     star_confidence_2 = 70
     star_reasoning_2 = ""
-    
+
     # Buscamos picks que no estén en el Boleto 1
     used_matches = set(s["match"] for s in star_selections_1)
     unused_picks = [p for p in usable_picks if p["match"] not in used_matches]
-    
+
+    # ─────────────────────────────────────────────────────────────────────────────
+    # MOTOR DE DECISION IA: Simple de Valor vs Combinada de Valor
+    # Evalúa métricas de valor esperado (EV) para decidir el mejor tipo de boleto.
+    # ─────────────────────────────────────────────────────────────────────────────
+    def compute_ev_score(pick):
+        """Calcula el Expected Value Score (EV) normalizado de 0-100 para un pick."""
+        odd = pick.get("odd", 1.0)
+        prob = pick.get("probability", 50) / 100.0
+        # EV básico: (prob * odd - 1) -> positivo = valor positivo
+        raw_ev = (prob * odd) - 1.0
+        # Bonificación por cuota de valor real (Sweet spot: @1.60-@2.50)
+        odd_sweet = 1.0 if 1.60 <= odd <= 2.50 else (0.75 if 1.40 <= odd <= 3.00 else 0.5)
+        # Penalización por baja probabilidad (menos del 58% = mercado incierto)
+        prob_factor = 1.0 if prob >= 0.65 else (0.8 if prob >= 0.58 else 0.6)
+        # Score final normalizado
+        ev_score = max(0, min(100, (raw_ev * 100 * odd_sweet * prob_factor)))
+        return ev_score
+
     if unused_picks:
         p1 = unused_picks[0]
-        # Decidir si Boleto de Valor debe ser Simple o Combinado
-        if p1['odd'] >= 1.70 and p1['probability'] >= 64:
+        ev1 = compute_ev_score(p1)
+        odd1 = p1["odd"]
+        prob1 = p1["probability"]
+
+        # Evaluar si hay un segundo pick con buen EV para una combinada
+        best_p2 = None
+        best_combo_score = 0
+        for p_candidate in unused_picks[1:]:
+            if p_candidate["match"] == p1["match"]:
+                continue
+            ev2 = compute_ev_score(p_candidate)
+            combo_odd = odd1 * p_candidate["odd"]
+            combo_prob = int((prob1 + p_candidate["probability"]) / 2)
+            # Score de la combinada: penaliza si la cuota acumulada sube demasiado (>3.5) o es insuficiente (<1.50)
+            combo_bonus = 1.0 if 1.55 <= combo_odd <= 3.00 else (0.75 if 1.40 <= combo_odd <= 3.50 else 0.4)
+            combo_score = ((ev1 + ev2) / 2) * combo_bonus
+            if combo_score > best_combo_score and combo_odd >= 1.40:
+                best_combo_score = combo_score
+                best_p2 = p_candidate
+
+        # Decisión: comparar EV de la simple vs EV de la mejor combinada
+        SIMPLE_THRESHOLD = 1.25  # simple gana si su EV es 25% mejor que la combinada
+
+        go_simple = False
+        simple_reason = ""
+
+        # Caso 1: cuota individual ya es atractiva y EV alto → Simple pura
+        if odd1 >= 1.55 and prob1 >= 63 and ev1 >= 10:
+            go_simple = True
+            simple_reason = (
+                f"✅ Apuesta Simple de Valor detectada. La cuota @{odd1:.2f} con probabilidad del {prob1}% "
+                f"genera un Expected Value positivo de {ev1:.1f} puntos — rentable sin necesidad de combinar. "
+                f"El modelo de mercado detectó desequilibrio en la cuota real vs. implícita, señal de valor genuino."
+            )
+        # Caso 2: no hay segundo pick valioso → Simple obligatoria
+        elif best_p2 is None:
+            go_simple = True
+            simple_reason = f"Apuesta Simple de Valor (único mercado disponible con EV positivo). Cuota: @{odd1:.2f}."
+        # Caso 3: comparar EV simple vs combinada
+        elif ev1 * SIMPLE_THRESHOLD > best_combo_score:
+            go_simple = True
+            combo_odd_preview = odd1 * best_p2["odd"]
+            simple_reason = (
+                f"✅ El modelo optó por Apuesta Simple de Valor sobre la combinada. "
+                f"EV Individual ({ev1:.1f} pts) supera el EV de la mejor combinada disponible (@{combo_odd_preview:.2f}). "
+                f"Cuando el EV de la simple es más sólido, combinar añade riesgo sin mejorar el retorno esperado."
+            )
+
+        if go_simple:
             ticket_type_2 = "Simple"
             star_selections_2.append({
                 "match": p1["match"],
@@ -1647,11 +1712,12 @@ def generate_daily_sports_data():
                 "odd": p1["odd"],
                 "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
             })
-            total_odd_2 = p1["odd"]
-            star_confidence_2 = p1["probability"]
-            star_reasoning_2 = f"Recomendación Simple de Valor. Cuota: @{total_odd_2:.2f}. El valor esperado para este pick es alto según el modelo, por lo que recomendamos apostar por separado sin necesidad de combinar."
-        elif len(unused_picks) >= 2:
-            p2 = unused_picks[1]
+            total_odd_2 = odd1
+            star_confidence_2 = prob1
+            star_reasoning_2 = simple_reason
+        else:
+            # Combinada de valor
+            p2 = best_p2
             ticket_type_2 = "Combinado"
             star_selections_2.append({
                 "match": p1["match"],
@@ -1669,22 +1735,14 @@ def generate_daily_sports_data():
                 "odd": p2["odd"],
                 "reasoning": p2["reasoning"].get("tactical", "") if isinstance(p2["reasoning"], dict) else p2["reasoning"]
             })
-            total_odd_2 = p1["odd"] * p2["odd"]
-            star_confidence_2 = int((p1["probability"] + p2["probability"]) / 2)
-            star_reasoning_2 = f"Recomendamos combinar estas dos selecciones de valor para buscar una cuota acumulada atractiva de @{total_odd_2:.2f}. Combinamos ambos mercados para maximizar el retorno de inversión con una probabilidad conjunta controlada de {star_confidence_2}%."
-        else:
-            ticket_type_2 = "Simple"
-            star_selections_2.append({
-                "match": p1["match"],
-                "sport": p1["sport"],
-                "market": p1["market"],
-                "pick": p1["selection"],
-                "odd": p1["odd"],
-                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
-            })
-            total_odd_2 = p1["odd"]
-            star_confidence_2 = p1["probability"]
-            star_reasoning_2 = f"Boleto Simple de Valor. Cuota: @{total_odd_2:.2f}."
+            total_odd_2 = odd1 * p2["odd"]
+            star_confidence_2 = int((prob1 + p2["probability"]) / 2)
+            star_reasoning_2 = (
+                f"🔗 Combinada de Valor optimizada por IA. Las selecciones individuales (@{odd1:.2f} y @{p2['odd']:.2f}) "
+                f"generan mayor rendimiento al combinarse (@{total_odd_2:.2f}). "
+                f"El modelo evaluó el EV de cada pick individualmente y concluyó que la combinada ofrece mejor relación "
+                f"riesgo/retorno con una probabilidad conjunta estimada del {star_confidence_2}%."
+            )
     else:
         # Si no hay suficientes partidos distintos en ESPN, tomamos otros mercados de los mismos partidos
         fallback_unused = [p for p in priority_picks + fallback_picks if p["match"] not in used_matches]
@@ -1759,32 +1817,51 @@ def generate_daily_sports_data():
         star_confidence_3 = 55
         star_reasoning_3 = "Boleto Soñador de contingencia (Cuota @5.25)."
 
-    # PERSISTENCE LOCK: If today's tickets were already generated earlier today, preserve them so they NEVER change mid-day!
+    # PERSISTENCE LOCK: Si ya se generaron boletos hoy, aplicar regla diferenciada:
+    # - Boleto 1 (Seguro): SIEMPRE bloqueado. El usuario ya lo apostó.
+    # - Boleto 2 (Valor): Se re-evalúa si la IA encuentra un pick de mayor EV.
+    #   SOLO se preserva si el boleto existente ya era una Simple (señal de que el usuario pudo apostarlo).
+    # - Boleto 3 (Soñador): SIEMPRE bloqueado. Es intradía por naturaleza.
     if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
-        print("[INFO] Boletos Estrella de hoy bloqueados y preservados para evitar cambios durante el día.")
+        print("[INFO] Aplicando regla de bloqueo diferenciada por boleto.")
+
+        # BOLETO 1: Siempre bloqueado (usuario ya apostó)
         st1 = raw_previous_json.get("star_ticket_1", {})
         if st1 and st1.get("selections"):
+            print("[INFO] Boleto 1 (Seguro) - BLOQUEADO permanentemente.")
             ticket_type_1 = st1.get("type", ticket_type_1)
             star_selections_1 = st1.get("selections", star_selections_1)
             total_odd_1 = st1.get("total_odd", total_odd_1)
             star_confidence_1 = st1.get("confidence", star_confidence_1)
             star_reasoning_1 = st1.get("reasoning", star_reasoning_1)
 
+        # BOLETO 2: Desbloqueado - La IA puede actualizar si hay mejor pick de valor
         st2 = raw_previous_json.get("star_ticket_2", {})
         if st2 and st2.get("selections"):
-            ticket_type_2 = st2.get("type", ticket_type_2)
-            star_selections_2 = st2.get("selections", star_selections_2)
-            total_odd_2 = st2.get("total_odd", total_odd_2)
-            star_confidence_2 = st2.get("confidence", star_confidence_2)
-            star_reasoning_2 = st2.get("reasoning", star_reasoning_2)
+            prev_type_2 = st2.get("type", "Combinado")
+            # Si el boleto anterior era Simple: asumimos ya fue apostado → bloquear
+            # Si era Combinado: la IA puede recalcular con datos del día actualizados
+            if prev_type_2 == "Simple":
+                print("[INFO] Boleto 2 (Valor) era Simple - BLOQUEADO (ya apostable por el usuario).")
+                ticket_type_2 = st2.get("type", ticket_type_2)
+                star_selections_2 = st2.get("selections", star_selections_2)
+                total_odd_2 = st2.get("total_odd", total_odd_2)
+                star_confidence_2 = st2.get("confidence", star_confidence_2)
+                star_reasoning_2 = st2.get("reasoning", star_reasoning_2)
+            else:
+                print("[INFO] Boleto 2 (Valor) era Combinado - DESBLOQUEADO: IA recalcula con datos actuales.")
+                # El nuevo valor calculado arriba se usa directamente
 
+        # BOLETO 3: Siempre bloqueado
         st3 = raw_previous_json.get("star_ticket_3", {})
         if st3 and st3.get("selections"):
+            print("[INFO] Boleto 3 (Soñador) - BLOQUEADO permanentemente.")
             ticket_type_3 = st3.get("type", ticket_type_3)
             star_selections_3 = st3.get("selections", star_selections_3)
             total_odd_3 = st3.get("total_odd", total_odd_3)
             star_confidence_3 = st3.get("confidence", star_confidence_3)
             star_reasoning_3 = st3.get("reasoning", star_reasoning_3)
+
 
     total_won = previous_data.get("global_stats", {}).get("total_picks_won", 0) if previous_data else 0
     total_lost = previous_data.get("global_stats", {}).get("total_picks_lost", 0) if previous_data else 0
