@@ -3326,7 +3326,13 @@
                         "statistical": "Promedio acumulado de FK Liepaja (6 córners) y Austria Vienna (6 córners) proyecta un total de 13 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "pending"
+                    "status": "won",
+                    "post_analysis": {
+                        "result": "9 Córners (6-3)",
+                        "verdict": "✅ Predicción correcta (Verificada Manualmente)",
+                        "explanation": "El partido registró 9 saques de esquina (6 del local, 3 del visitante), superando la línea de Más de 8.5 Córners. Resultado verificado mediante fuentes externas por el usuario.",
+                        "lesson": "La IA acertó la proyección de alto volumen de córners, aunque los goles no acompañaran el ritmo."
+                    }
                 },
                 {
                     "market": "Tarjetas Amarillas",
@@ -20480,7 +20486,7 @@
                     "pick": "Más de 8.5 Córners",
                     "odd": 1.6,
                     "reasoning": "Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina.",
-                    "status": "pending"
+                    "status": "won"
                 }
             ],
             "total_odd": 1.84,
