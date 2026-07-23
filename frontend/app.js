@@ -4589,7 +4589,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     let graded = "lost";
 
                     try {
-                        if (mk.includes("Resultado Final") || mk.includes("Ganador")) {
+                        // Asian Total 2.0 (Más de 2 Goles) — push/void at exactly 2 goals
+                        if (mk.includes("Asian 2.0") || mk.includes("Asian Total") || (mk.includes("Total de Goles") && sel.includes("Asian 2.0"))) {
+                            if (totalGoals > 2) graded = "won";
+                            else if (totalGoals === 2) graded = "voided"; // push — money returned
+                            else graded = "lost";
+                        } else if (mk.includes("Resultado Final") || mk.includes("Ganador")) {
                             if (sel === m.home && h > a) graded = "won";
                             else if (sel === m.away && a > h) graded = "won";
                             else if (sel === "Empate" && h === a) graded = "won";
@@ -4627,6 +4632,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     } catch(e) { graded = "lost"; }
 
+
                     pk.status = graded;
 
                     if (graded === "won") {
@@ -4637,11 +4643,16 @@ document.addEventListener("DOMContentLoaded", () => {
                             lesson: "El análisis estadístico proyectó correctamente el alto volumen del encuentro."
                         };
                     } else if (graded === "voided") {
+                        const isAsian20 = mk.includes("Asian 2.0") || mk.includes("Asian Total") || sel.includes("Asian 2.0");
                         pk.post_analysis = {
                             result: scoreStr,
-                            verdict: "🔄 Apuesta Reembolsada (Empate)",
-                            explanation: `El encuentro concluyó ${scoreStr}. En el mercado Empate No Apuesta, la apuesta se anula sin pérdida de capital.`,
-                            lesson: "El mercado DNB cumplió su función de cobertura para proteger el capital ante empates."
+                            verdict: isAsian20 ? "↩️ Apuesta Devuelta (Push Asian 2.0)" : "🔄 Apuesta Reembolsada (Empate)",
+                            explanation: isAsian20
+                                ? `El partido terminó ${scoreStr} con exactamente 2 goles. En el mercado Asian Total 2.0, un marcador de 2 goles exactos anula la apuesta y devuelve el capital completo. No es una pérdida.`
+                                : `El encuentro concluyó ${scoreStr}. En el mercado Empate No Apuesta, la apuesta se anula sin pérdida de capital.`,
+                            lesson: isAsian20
+                                ? "El Asian 2.0 funcionó como red de seguridad. Si hubieras apostado al Más de 2.5 Goles, habrías perdido con este resultado."
+                                : "El mercado DNB cumplió su función de cobertura para proteger el capital ante empates."
                         };
                     } else {
                         let failReason = `El encuentro concluyó ${scoreStr} (${intOrVal(totalGoals)} puntos/goles totales). La selección '${sel}' no se cumplió.`;
