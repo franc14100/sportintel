@@ -1776,52 +1776,79 @@ def generate_daily_sports_data():
         return ev_score
 
     if unused_picks:
-        p1 = unused_picks[0]
-        ev1 = compute_ev_score(p1)
-        odd1 = p1["odd"]
-        prob1 = p1["probability"]
+        # 1. Encontrar el MEJOR pick individual por EV puro en toda la lista
+        best_simple_pick = None
+        best_simple_ev = -1
+        for p in unused_picks:
+            ev = compute_ev_score(p)
+            if ev > best_simple_ev:
+                best_simple_ev = ev
+                best_simple_pick = p
 
-        # Evaluar si hay un segundo pick con buen EV para una combinada
-        best_p2 = None
-        best_combo_score = 0
-        for p_candidate in unused_picks[1:]:
-            if p_candidate["match"] == p1["match"]:
-                continue
-            ev2 = compute_ev_score(p_candidate)
-            combo_odd = odd1 * p_candidate["odd"]
-            combo_prob = int((prob1 + p_candidate["probability"]) / 2)
-            # Score de la combinada: penaliza si la cuota acumulada sube demasiado (>3.5) o es insuficiente (<1.50)
-            combo_bonus = 1.0 if 1.55 <= combo_odd <= 3.00 else (0.75 if 1.40 <= combo_odd <= 3.50 else 0.4)
-            combo_score = ((ev1 + ev2) / 2) * combo_bonus
-            if combo_score > best_combo_score and combo_odd >= 1.40:
-                best_combo_score = combo_score
-                best_p2 = p_candidate
+        if best_simple_pick is None:
+            best_simple_pick = unused_picks[0]
+            best_simple_ev = compute_ev_score(best_simple_pick)
 
-        # Decisión: comparar EV de la simple vs EV de la mejor combinada
-        SIMPLE_THRESHOLD = 1.25  # simple gana si su EV es 25% mejor que la combinada
+        # 2. Encontrar la MEJOR combinada posible evaluando todos los pares
+        best_combo_score = -1
+        best_combo_p1 = None
+        best_combo_p2 = None
+        for i, pa in enumerate(unused_picks):
+            for pb in unused_picks[i+1:]:
+                if pa["match"] == pb["match"]: 
+                    continue
+                
+                ev_a = compute_ev_score(pa)
+                ev_b = compute_ev_score(pb)
+                combo_odd = pa["odd"] * pb["odd"]
+                combo_prob = int((pa["probability"] + pb["probability"]) / 2)
+                
+                # Bonus si la combinada cae en el sweet spot de cuotas, penaliza combinadas basura
+                combo_bonus = 1.0 if 1.55 <= combo_odd <= 3.00 else (0.75 if 1.40 <= combo_odd <= 3.50 else 0.4)
+                combo_score = ((ev_a + ev_b) / 2) * combo_bonus
+                
+                if combo_score > best_combo_score and combo_odd >= 1.40:
+                    best_combo_score = combo_score
+                    best_combo_p1 = pa
+                    best_combo_p2 = pb
 
+        # 3. Decisión: Simple vs Combinada
+        SIMPLE_THRESHOLD = 1.15  # simple gana si su EV es 15% mejor que la combinada
         go_simple = False
         simple_reason = ""
 
-        # Caso 1: cuota individual ya es atractiva y EV alto → Simple pura
-        if odd1 >= 1.55 and prob1 >= 63 and ev1 >= 10:
+        p1 = best_simple_pick
+        odd1 = p1["odd"]
+        prob1 = p1["probability"]
+        ev1 = best_simple_ev
+
+        # Caso 1: cuota individual ya es muy fuerte (@1.75+) y tiene buen EV → Simple pura
+        # (Esto previene arruinar un gran pick individual combinándolo con basura de @1.16)
+        if odd1 >= 1.75 and ev1 >= 5:
+            go_simple = True
+            simple_reason = (
+                f"✅ Apuesta Simple de Gran Valor detectada. La cuota @{odd1:.2f} por sí sola ya ofrece "
+                f"un excelente retorno esperado para el riesgo asumido ({prob1}% prob). "
+                f"Combinarla con otro evento solo añadiría un punto de fallo innecesario."
+            )
+        # Caso 2: cuota atractiva + muy segura
+        elif odd1 >= 1.55 and prob1 >= 63 and ev1 >= 10:
             go_simple = True
             simple_reason = (
                 f"✅ Apuesta Simple de Valor detectada. La cuota @{odd1:.2f} con probabilidad del {prob1}% "
-                f"genera un Expected Value positivo de {ev1:.1f} puntos — rentable sin necesidad de combinar. "
-                f"El modelo de mercado detectó desequilibrio en la cuota real vs. implícita, señal de valor genuino."
+                f"genera un Expected Value positivo de {ev1:.1f} puntos — rentable sin necesidad de combinar."
             )
-        # Caso 2: no hay segundo pick valioso → Simple obligatoria
-        elif best_p2 is None:
+        # Caso 3: no hay combos válidos
+        elif best_combo_p1 is None:
             go_simple = True
-            simple_reason = f"Apuesta Simple de Valor (único mercado disponible con EV positivo). Cuota: @{odd1:.2f}."
-        # Caso 3: comparar EV simple vs combinada
+            simple_reason = f"Apuesta Simple de Valor. Cuota: @{odd1:.2f}."
+        # Caso 4: el EV de la simple supera a la mejor combinada
         elif ev1 * SIMPLE_THRESHOLD > best_combo_score:
             go_simple = True
-            combo_odd_preview = odd1 * best_p2["odd"]
+            combo_odd_preview = best_combo_p1["odd"] * best_combo_p2["odd"]
             simple_reason = (
                 f"✅ El modelo optó por Apuesta Simple de Valor sobre la combinada. "
-                f"EV Individual ({ev1:.1f} pts) supera el EV de la mejor combinada disponible (@{combo_odd_preview:.2f}). "
+                f"Su EV Individual supera el EV de la mejor combinada disponible (@{combo_odd_preview:.2f}). "
                 f"Cuando el EV de la simple es más sólido, combinar añade riesgo sin mejorar el retorno esperado."
             )
 
@@ -1840,7 +1867,8 @@ def generate_daily_sports_data():
             star_reasoning_2 = simple_reason
         else:
             # Combinada de valor
-            p2 = best_p2
+            p1 = best_combo_p1
+            p2 = best_combo_p2
             ticket_type_2 = "Combinado"
             star_selections_2.append({
                 "match": p1["match"],
@@ -1858,13 +1886,13 @@ def generate_daily_sports_data():
                 "odd": p2["odd"],
                 "reasoning": p2["reasoning"].get("tactical", "") if isinstance(p2["reasoning"], dict) else p2["reasoning"]
             })
-            total_odd_2 = odd1 * p2["odd"]
-            star_confidence_2 = int((prob1 + p2["probability"]) / 2)
+            total_odd_2 = p1["odd"] * p2["odd"]
+            star_confidence_2 = int((p1["probability"] + p2["probability"]) / 2)
             star_reasoning_2 = (
-                f"🔗 Combinada de Valor optimizada por IA. Las selecciones individuales (@{odd1:.2f} y @{p2['odd']:.2f}) "
+                f"🔗 Combinada de Valor optimizada por IA. Las selecciones individuales (@{p1['odd']:.2f} y @{p2['odd']:.2f}) "
                 f"generan mayor rendimiento al combinarse (@{total_odd_2:.2f}). "
-                f"El modelo evaluó el EV de cada pick individualmente y concluyó que la combinada ofrece mejor relación "
-                f"riesgo/retorno con una probabilidad conjunta estimada del {star_confidence_2}%."
+                f"El modelo evaluó el EV de cada pick individualmente y concluyó que la combinada ofrece "
+                f"mejor relación riesgo/retorno con una probabilidad conjunta estimada del {star_confidence_2}%."
             )
     else:
         # Si no hay suficientes partidos distintos en ESPN, tomamos otros mercados de los mismos partidos
