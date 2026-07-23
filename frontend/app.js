@@ -1977,18 +1977,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1500);
     });
 
+    let currentTicketOptions = [];
+    
     function generateAlgorithmTicket(sport, stake, genMode, riskVal, maxOdd, targetOdd) {
         if (!appData) return;
 
-        // Filter valid matches and picks
         let availablePicks = [];
         appData.matches.forEach(match => {
             if (sport !== "all" && match.sport !== sport) return;
 
             match.picks.forEach(pick => {
-                // Filter by max odd setting
                 if (pick.odd > maxOdd) return;
-
                 availablePicks.push({
                     matchName: `${match.home} vs ${match.away}`,
                     leagueName: match.league,
@@ -2003,85 +2002,96 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (availablePicks.length === 0) {
-            alert("No se encontraron selecciones en el mercado que cumplan con la cuota máxima u otros filtros seleccionados.");
+            alert("No se encontraron selecciones en el mercado que cumplan con los filtros seleccionados.");
             ticketEmptyState.classList.remove("hidden");
             return;
         }
 
-        let selectedPicks = [];
+        currentTicketOptions = [];
 
         if (genMode === "target") {
-            // Greedy Algorithm for Target Odd
-            // 1. Sort all available picks by Probability (Safest first)
             availablePicks.sort((a, b) => b.probability - a.probability);
-            
-            // Allow up to 5 picks max
-            const MAX_PICKS = 5;
             const TOLERANCE = 0.15;
-            let currentOdd = 1.0;
-            let tempPicks = [];
-
-            // First, try to find a SINGLE pick that matches the target odd within tolerance
-            const singleMatch = availablePicks.find(p => Math.abs(p.odd - targetOdd) <= TOLERANCE);
-            if (singleMatch) {
-                selectedPicks.push(singleMatch);
-            } else {
-                // If no single match, try combining safest picks
-                for (let i = 0; i < availablePicks.length; i++) {
-                    const candidate = availablePicks[i];
-                    // Skip if combining this would overshoot by more than tolerance
-                    if ((currentOdd * candidate.odd) > (targetOdd + TOLERANCE)) {
-                        continue;
-                    }
-                    
-                    tempPicks.push(candidate);
-                    currentOdd *= candidate.odd;
-
-                    if (currentOdd >= (targetOdd - TOLERANCE) && currentOdd <= (targetOdd + TOLERANCE)) {
-                        // Found a valid combination!
-                        break;
-                    }
-
-                    if (tempPicks.length >= MAX_PICKS) {
-                        break;
-                    }
-                }
-                selectedPicks = tempPicks;
-            }
-
-            if (selectedPicks.length === 0) {
-                // Fallback if target is unreachable
-                selectedPicks = availablePicks.slice(0, 2);
-            }
-
+            
+            // Option 1: Safest Greedy
+            currentTicketOptions.push(buildGreedyTargetTicket(availablePicks, targetOdd, TOLERANCE, 5, []));
+            
+            // Option 2: Exclude the absolute safest pick to force a different path
+            currentTicketOptions.push(buildGreedyTargetTicket(availablePicks, targetOdd, TOLERANCE, 5, [availablePicks[0]]));
+            
+            // Option 3: Allow more picks (up to 8) to spread risk
+            currentTicketOptions.push(buildGreedyTargetTicket(availablePicks, targetOdd, TOLERANCE, 8, currentTicketOptions[0] ? currentTicketOptions[0].picks : []));
+            
         } else {
-            // Sort picks based on risk mapping
-            // Conservador: prefiere probability alta y risk "Low"
-            // Equilibrado: prefiere risk "Low" y "Medium"
-            // Agresivo: prefiere cuotas más jugosas, incluye risk "High"
             let filteredPicks = [];
-            if (riskVal === 1) { // Conservador
-                filteredPicks = availablePicks.filter(p => p.risk === "Low" || p.probability >= 60);
-            } else if (riskVal === 2) { // Equilibrado
-                filteredPicks = availablePicks.filter(p => p.risk === "Medium" || p.risk === "Low");
-            } else { // Agresivo
-                filteredPicks = availablePicks;
-            }
-
-            // Si no hay suficientes tras filtrar por riesgo, usar los más probables disponibles
-            if (filteredPicks.length === 0) {
-                filteredPicks = availablePicks;
-            }
-
-            // Seleccionar aleatoriamente pero controlado entre 2 y 3 picks para armar la combinada
-            // Ordenar por relevancia y probabilidad
+            if (riskVal === 1) filteredPicks = availablePicks.filter(p => p.risk === "Low" || p.probability >= 60);
+            else if (riskVal === 2) filteredPicks = availablePicks.filter(p => p.risk === "Medium" || p.risk === "Low");
+            else filteredPicks = availablePicks;
+            
+            if (filteredPicks.length === 0) filteredPicks = availablePicks;
             filteredPicks.sort((a, b) => b.probability - a.probability);
             
-            const count = Math.min(filteredPicks.length, riskVal === 1 ? 2 : (riskVal === 2 ? 3 : 4));
-            selectedPicks = filteredPicks.slice(0, count);
+            const count1 = Math.min(filteredPicks.length, riskVal === 1 ? 2 : (riskVal === 2 ? 3 : 4));
+            currentTicketOptions.push({ picks: filteredPicks.slice(0, count1) });
+            
+            if (filteredPicks.length > count1) {
+                currentTicketOptions.push({ picks: filteredPicks.slice(1, count1 + 1) });
+            } else {
+                currentTicketOptions.push({ picks: filteredPicks.slice(0, count1) });
+            }
+            
+            const count3 = Math.min(filteredPicks.length, count1 + 1);
+            currentTicketOptions.push({ picks: filteredPicks.slice(0, count3) });
         }
 
-        // Calculate Totals
+        const tabs = document.querySelectorAll('.ticket-tab');
+        tabs.forEach(tab => {
+            tab.onclick = (e) => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabs.forEach(t => {
+                    t.style.fontWeight = 'normal';
+                    t.style.borderBottom = 'none';
+                    t.style.color = 'var(--text-muted)';
+                });
+                const t = e.target;
+                t.classList.add('active');
+                t.style.fontWeight = 'bold';
+                t.style.borderBottom = '2px solid var(--accent-cyan)';
+                t.style.color = 'var(--accent-cyan)';
+                
+                renderTicketOption(parseInt(t.dataset.option), stake, riskVal);
+            };
+        });
+
+        ticketMainContent.classList.remove("hidden");
+        document.querySelector('.ticket-tab[data-option="0"]').click();
+    }
+
+    function buildGreedyTargetTicket(availablePicks, targetOdd, tolerance, maxPicks, excludedPicks) {
+        let selected = [];
+        let currentOdd = 1.0;
+        let pool = availablePicks.filter(p => !excludedPicks.includes(p));
+        if (pool.length === 0) pool = availablePicks;
+        
+        const singleMatch = pool.find(p => Math.abs(p.odd - targetOdd) <= tolerance);
+        if (singleMatch) return { picks: [singleMatch] };
+        
+        for (let i = 0; i < pool.length; i++) {
+            const candidate = pool[i];
+            if ((currentOdd * candidate.odd) > (targetOdd + tolerance)) continue;
+            selected.push(candidate);
+            currentOdd *= candidate.odd;
+            if (currentOdd >= (targetOdd - tolerance) && currentOdd <= (targetOdd + tolerance)) break;
+            if (selected.length >= maxPicks) break;
+        }
+        if (selected.length === 0) selected = pool.slice(0, 2);
+        return { picks: selected };
+    }
+
+    function renderTicketOption(index, stake, riskVal) {
+        if(!currentTicketOptions || !currentTicketOptions[index]) return;
+        const selectedPicks = currentTicketOptions[index].picks;
+        
         let accumulatedOdd = 1.0;
         let sumConfidence = 0;
         let eventsHtml = "";
@@ -2105,10 +2115,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const totalOdd = accumulatedOdd;
-        const avgConfidence = Math.round(sumConfidence / selectedPicks.length);
+        const avgConfidence = selectedPicks.length > 0 ? Math.round(sumConfidence / selectedPicks.length) : 0;
         const potentialPayout = stake * totalOdd;
 
-        // Render Generated Ticket values
         lblTicketId.textContent = `#TK-${Math.floor(100000 + Math.random() * 900000)}`;
         
         let riskLabelText = "Bajo";
@@ -2130,10 +2139,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ticketTotalOddDisplay.textContent = totalOdd.toFixed(2);
         ticketPayoutDisplay.textContent = `$${potentialPayout.toFixed(2)}`;
 
-        // Show ticket with fade in
-        ticketMainContent.classList.remove("hidden");
-
-        // Action Buttons Setup
         btnExportTicket.onclick = () => {
             const originalText = btnExportTicket.innerHTML;
             btnExportTicket.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generando comprobante...`;
