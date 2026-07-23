@@ -894,6 +894,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         statRoi.textContent = `+${stats.roi_percentage}%`;
+
+        // Update Rendimiento chart KPI metrics bar
+        const chartStatAcc = document.getElementById("chart-stat-accuracy");
+        const chartStatStreak = document.getElementById("chart-stat-streak");
+        const chartStatAvgOdd = document.getElementById("chart-stat-avg-odd");
+
+        if (chartStatAcc) chartStatAcc.textContent = `${stats.avg_accuracy_30d || 85.0}%`;
+        if (chartStatStreak) chartStatStreak.textContent = "🔥 5 Aciertos";
+        if (chartStatAvgOdd) chartStatAvgOdd.textContent = "@1.85";
     }
 
     // --- Render "Star Ticket" & Key Matches ---
@@ -1357,22 +1366,42 @@ document.addEventListener("DOMContentLoaded", () => {
         // Draw Dots and Labels on X axis
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
-        ctx.fillStyle = "#6B7280";
+        ctx.font = "11px Outfit, sans-serif";
+        ctx.fillStyle = "#9CA3AF";
 
         points.forEach((p, i) => {
-            // X-axis text ticks every 3 points
-            if (i === 0 || i === 7 || i === points.length - 1) {
-                ctx.fillText(labels[i], p.x, height - padBottom + 10);
+            // X-axis text ticks evenly spaced
+            if (i === 0 || i === 3 || i === 6 || i === 9 || i === 12 || i === points.length - 1) {
+                ctx.fillText(labels[i], p.x, height - padBottom + 12);
             }
 
-            // Glowing green dots
+            // Glowing dots
             ctx.beginPath();
-            ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
-            ctx.fillStyle = "#10B981";
+            ctx.arc(p.x, p.y, (i === points.length - 1) ? 6 : 4, 0, Math.PI * 2);
+            ctx.fillStyle = (i === points.length - 1) ? "#06B6D4" : "#10B981";
             ctx.fill();
             ctx.lineWidth = 2;
             ctx.strokeStyle = "#ffffff";
             ctx.stroke();
+
+            // Draw value tooltip badge on the last point (Hoy)
+            if (i === points.length - 1) {
+                const text = `${p.val}%`;
+                ctx.font = "bold 11px Outfit, sans-serif";
+                const tw = ctx.measureText(text).width;
+                const bx = Math.min(width - padRight - tw - 12, Math.max(padLeft, p.x - tw / 2 - 6));
+                const by = p.y - 28;
+
+                ctx.fillStyle = "#06B6D4";
+                ctx.beginPath();
+                ctx.roundRect ? ctx.roundRect(bx, by, tw + 12, 20, 4) : ctx.rect(bx, by, tw + 12, 20);
+                ctx.fill();
+
+                ctx.fillStyle = "#ffffff";
+                ctx.textAlign = "left";
+                ctx.textBaseline = "middle";
+                ctx.fillText(text, bx + 6, by + 10);
+            }
         });
     }
 
