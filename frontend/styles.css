@@ -635,11 +635,13 @@ h1, h2, h3, h4, h5, h6 {
 /* Performance Chart Card */
 .chart-card {
     height: 100%;
+    min-height: 520px;
 }
 
 .chart-container {
     position: relative;
-    height: 280px;
+    height: 380px;
+    min-height: 320px;
     width: 100%;
 }
 
