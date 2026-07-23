@@ -32,8 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
         sidebarOverlay.addEventListener("click", window.closeMobileMenu);
     }
 
-    // --- Cloud Sync Manager (PC ⇄ Mobile) ---
-    const SYNC_BLOB_URL = "https://jsonblob.com/api/jsonBlob/019f8b77-7c8c-7142-bcc5-c2e13753542e";
+    // --- Cloud Sync Manager (PC ⇄ Mobile ⇄ Tablet) ---
+    // Uses our own Vercel API (/api/sync) backed by Vercel KV (Redis)
+    // All devices share the same real-time state — no more JsonBlob!
+    const SYNC_API_URL = "/api/sync";
     let isApplyingCloudState = false;
     let isPushInFlight = false;
     let isInitializingPage = true;
@@ -139,34 +141,65 @@ document.addEventListener("DOMContentLoaded", () => {
             isApplyingCloudState = false;
         },
         
-        pushState: async function() {
+        pushState: async function(isRetry = false) {
             if (isInitializingPage) return;
+            if (isPushInFlight && !isRetry) return; // avoid double push
             try {
                 isPushInFlight = true;
                 lastLocalUserActionTime = Date.now();
+                setSyncStatus("syncing", "Guardando...");
                 const fullState = this.gatherState();
                 
-                const res = await fetch(SYNC_BLOB_URL, {
-                    method: "PUT",
+                // Ensure sync_ts is set
+                if (!fullState.ts || fullState.ts === 0) {
+                    const now = Date.now();
+                    originalSetItem.call(localStorage, "sync_ts", now.toString());
+                    fullState.ts = now;
+                }
+
+                const res = await fetch(SYNC_API_URL, {
+                    method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(fullState)
                 });
                 
                 if (res.ok) {
-                    lastLocalStateHash = getNormalizedStateHash(fullState);
-                    console.log("[Sync] State pushed to cloud.");
+                    const result = await res.json();
+                    if (result.saved) {
+                        lastLocalStateHash = getNormalizedStateHash(fullState);
+                        pushRetryCount = 0;
+                        setSyncStatus("ok", "Sincronizado ✓");
+                        console.log("[Sync] ✅ Saved to cloud. ts:", fullState.ts);
+                    } else if (result.newer) {
+                        // Server has strictly newer data — only apply if it's really newer
+                        const serverTs = parseInt(result.newer.ts || "0");
+                        const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
+                        if (serverTs > localTs) {
+                            console.log("[Sync] Server genuinely newer, applying...");
+                            this.applyState(result.newer);
+                            setSyncStatus("ok", "Actualizado desde nube ✓");
+                        } else {
+                            // Timestamps are equal or local is newer — force save
+                            setSyncStatus("ok", "Sincronizado ✓");
+                            lastLocalStateHash = getNormalizedStateHash(fullState);
+                        }
+                    }
                 } else {
-                    console.error("[Sync] Push failed with status:", res.status);
-                    // On failure (like 429 rate limit), reset hash so we can attempt push again on next interaction
+                    const errText = await res.text().catch(() => res.status);
+                    console.error("[Sync] ❌ Push failed:", res.status, errText);
+                    setSyncStatus("error", `Error ${res.status} — reintentando...`);
                     lastLocalStateHash = "";
-                    // Automatically retry in 5 seconds
-                    setTimeout(() => {
-                        triggerAutoSyncPush();
-                    }, 5000);
+                    pushRetryCount++;
+                    const delay = Math.min(2000 * pushRetryCount, 15000);
+                    setTimeout(() => { triggerAutoSyncPush(); }, delay);
                 }
             } catch (e) {
-                console.error("[Sync] Push error:", e);
+                console.error("[Sync] ❌ Push error:", e.message);
+                setSyncStatus("error", "Sin conexión — reintentando...");
                 lastLocalStateHash = "";
+                pushRetryCount++;
+                const delay = Math.min(2000 * pushRetryCount, 15000);
+                setTimeout(() => { triggerAutoSyncPush(); }, delay);
             } finally {
                 isPushInFlight = false;
                 lastLocalUserActionTime = Date.now();
@@ -174,28 +207,21 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         
         pullState: async function() {
-            // Don't overwrite if local push is in-flight or user performed a local action in the last 5 seconds (unless page is initializing)
+            // Don't overwrite if local push is in-flight or user performed a local action in the last 5 seconds
             if (!isInitializingPage && (isPushInFlight || (Date.now() - lastLocalUserActionTime < 5000))) return false;
             
             try {
-                const res = await fetch(SYNC_BLOB_URL, { cache: "no-store" });
+                const res = await fetch(SYNC_API_URL, { method: "GET", cache: "no-store" });
                 if (!res.ok) return false;
                 const data = await res.json();
-                if (data) {
+                if (data && Object.keys(data).length > 0) {
                     const cloudTs = parseInt(data.ts || "0");
                     const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
                     
-                    // Prevent stale cloud cache from overwriting newer local changes
-                    if (cloudTs > 0 && localTs > 0 && cloudTs < localTs) {
-                        return false;
-                    }
-
-                    const cloudHash = getNormalizedStateHash(data);
-                    const localHash = getNormalizedStateHash(this.gatherState());
-                    
-                    if (cloudHash !== localHash && cloudHash !== lastLocalStateHash) {
+                    // Only apply if cloud is strictly newer than local
+                    if (cloudTs > localTs) {
                         this.applyState(data);
-                        console.log("[Sync] Cloud diff detected. Applied cloud state!");
+                        console.log("[Sync] Newer cloud state applied! ts:", cloudTs);
                         return true;
                     }
                 }
@@ -206,8 +232,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // Sync UI helpers
+    function setSyncStatus(status, msg) {
+        const indicator = document.getElementById("sync-status-indicator");
+        if (!indicator) return;
+        const colors = { ok: "#10b981", syncing: "#f59e0b", error: "#ef4444" };
+        const icons = { ok: "fa-cloud-check", syncing: "fa-rotate fa-spin", error: "fa-cloud-exclamation" };
+        indicator.innerHTML = `<i class="fa-solid ${icons[status] || icons.ok}" style="color:${colors[status] || colors.ok}"></i> <span style="font-size:0.75rem;color:${colors[status] || colors.ok}">${msg}</span>`;
+    }
+
     // Instant automatic cloud push (100ms debounce)
     let syncPushTimeout = null;
+    let pushRetryCount = 0;
     function triggerAutoSyncPush() {
         if (isApplyingCloudState || isInitializingPage) return;
         lastLocalUserActionTime = Date.now();
@@ -230,53 +266,64 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // On page load: try to pull from cloud first.
-    // If cloud is empty OR local data is newer (higher sync_ts), push local data to cloud.
-    // This ensures all devices converge to the same data automatically on load.
+    // On page load: Pull from Vercel KV, then push local if cloud is empty or older.
+    // This ensures all devices instantly converge to the same real-time state.
     (async () => {
-        console.log("[Sync] Connecting to JsonBlob cloud engine...");
+        setSyncStatus("syncing", "Conectando...");
+        console.log("[Sync] Connecting to Vercel KV engine...");
         
         let applied = false;
         try {
-            const res = await fetch(SYNC_BLOB_URL, { cache: "no-store" });
+            const res = await fetch(SYNC_API_URL, { method: "GET", cache: "no-store" });
             if (res.ok) {
                 const data = await res.json();
                 const cloudTs = parseInt(data && data.ts ? data.ts : "0");
                 const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
                 
-                // If cloud has data AND cloud is newer than local → apply cloud state
-                if (data && cloudTs > 0 && cloudTs >= localTs) {
+                console.log("[Sync] Init — cloudTs:", cloudTs, "localTs:", localTs);
+
+                if (data && typeof data === "object" && !Array.isArray(data) && cloudTs >= localTs) {
+                    // Cloud has data and is at least as new → apply cloud state
                     SyncManager.applyState(data);
-                    console.log("[Sync] Cloud state applied on load (cloud is newer).");
+                    console.log("[Sync] ✅ Cloud state applied on load (ts:", cloudTs, ")");
                     applied = true;
+                    setSyncStatus("ok", "Sincronizado ✓");
                 } else {
-                    // Local is newer or cloud is empty → push local to cloud so other devices get it
-                    const localState = SyncManager.gatherState();
-                    if (!localState.ts || localState.ts === "0") {
-                        // First time ever: stamp with current time
+                    // Local is newer or cloud is empty → push our local state to cloud
+                    if (!localStorage.getItem("sync_ts")) {
                         originalSetItem.call(localStorage, "sync_ts", Date.now().toString());
                     }
-                    await fetch(SYNC_BLOB_URL, {
-                        method: "PUT",
+                    const localState = SyncManager.gatherState();
+                    console.log("[Sync] Pushing local to cloud on load. ts:", localState.ts);
+                    setSyncStatus("syncing", "Subiendo datos...");
+                    const pushRes = await fetch(SYNC_API_URL, {
+                        method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(SyncManager.gatherState())
+                        body: JSON.stringify(localState)
                     });
-                    lastLocalStateHash = getNormalizedStateHash(SyncManager.gatherState());
-                    console.log("[Sync] Local state pushed to cloud on load (local is newer or cloud was empty).");
+                    if (pushRes.ok) {
+                        const pushResult = await pushRes.json();
+                        console.log("[Sync] Init push result:", pushResult);
+                        if (pushResult.saved) {
+                            lastLocalStateHash = getNormalizedStateHash(localState);
+                            setSyncStatus("ok", "Guardado en nube ✓");
+                        } else if (pushResult.newer) {
+                            // Cloud is actually newer — apply it
+                            SyncManager.applyState(pushResult.newer);
+                            applied = true;
+                            setSyncStatus("ok", "Sincronizado ✓");
+                        }
+                    } else {
+                        console.error("[Sync] Init push failed:", pushRes.status, await pushRes.text());
+                        setSyncStatus("error", `Error al subir: ${pushRes.status}`);
+                    }
                 }
             } else {
-                // Cloud blob not accessible – push local state to create/overwrite it
-                const localState = SyncManager.gatherState();
-                await fetch(SYNC_BLOB_URL, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(localState)
-                });
-                lastLocalStateHash = getNormalizedStateHash(localState);
-                console.log("[Sync] Created cloud state from local data.");
+                setSyncStatus("error", "Sin conexión a la nube");
             }
         } catch(e) {
             console.error("[Sync] Init error:", e);
+            setSyncStatus("error", "Error de conexión");
         }
         
         isInitializingPage = false;
@@ -289,7 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })();
 
-    // Live background polling loop every 15 seconds for cross-device updates (preventing 429 Rate Limits)
+    // Background polling every 10 seconds using Vercel KV (no rate limits!)
     setInterval(async () => {
         if (document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "SELECT") {
             const updated = await SyncManager.pullState();
@@ -300,16 +347,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (typeof updateBankrollChart === "function") updateBankrollChart();
             }
         }
-    }, 15000);
+    }, 10000);
 
-    // --- Global State ---
-    let appData = null;
-    let selectedMatch = null;
-    let performanceChartInstance = null;
-    let currentSportFilter = "all";
-    let currentMarketCat = "all";
-    let marketSearchVal = "";
-    let matchSearchQuery = "";
+    // "Guardar Nube" force push button
+    const btnForceSync = document.getElementById("btn-force-sync");
+    if (btnForceSync) {
+        btnForceSync.addEventListener("click", async () => {
+            btnForceSync.disabled = true;
+            btnForceSync.innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Guardando...`;
+            setSyncStatus("syncing", "Forzando guardado...");
+            // Bump ts so our state is always treated as newest
+            originalSetItem.call(localStorage, "sync_ts", Date.now().toString());
+            await SyncManager.pushState(true);
+            btnForceSync.disabled = false;
+            btnForceSync.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Guardar Nube`;
+        });
+    }
 
     // --- DOM Elements ---
     const navItems = document.querySelectorAll(".nav-item");
@@ -317,6 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageTitle = document.getElementById("page-title");
     const currentDateDisplay = document.getElementById("current-date-display");
     const refreshDataBtn = document.getElementById("refresh-data-btn");
+
 
     // Dashboard Elements
     const statAnalyzed = document.getElementById("stat-analyzed");
@@ -330,6 +384,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const starTicketReasoning = document.getElementById("star-ticket-reasoning");
     const btnCopyStarTicket = document.getElementById("btn-copy-star-ticket");
     const dashboardMatchesGrid = document.getElementById("dashboard-matches-grid");
+
+    // --- App State Variables ---
+    let appData = null;           // Loaded from GitHub Pages via /api/data
+    let selectedMatch = null;     // The match the user clicked on
+    let currentSportFilter = "all"; // Active sport filter for matches list
+    let matchSearchQuery = "";    // Search box value for matches
+    let currentMarketCat = "all"; // Active market category filter
+    let marketSearchVal = "";     // Market search box value
 
     // Matches Elements
     const filterBtns = document.querySelectorAll(".filter-btn");
@@ -503,12 +565,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Load Data from JSON ---
     async function loadSportsData() {
         try {
-            const response = await fetch(`data.json?v=${new Date().getTime()}`);
+            // Cargar datos utilizando nuestra Serverless Function de Vercel (/api/data)
+            // Esto evita que bloqueadores de anuncios (ej. Opera GX) bloqueen la petición a un dominio de terceros.
+            const response = await fetch(`/api/data?v=${new Date().getTime()}`);
             if (!response.ok) {
-                throw new Error("No se pudo cargar el archivo data.json");
+                throw new Error("No se pudo cargar el archivo data.json desde la API");
             }
             appData = await response.json();
             
+            // Client-side instant auto-grader for finished matches
+            if (appData && Array.isArray(appData.matches)) {
+                autoGradeFinishedMatches(appData.matches);
+            }
+
             populateStats();
             populateDashboardPicks();
             populateMatchesList();
@@ -518,8 +587,12 @@ document.addEventListener("DOMContentLoaded", () => {
             // Render first visual chart
             renderChart();
         } catch (error) {
-            console.error("Error cargando los datos deportivos:", error);
-            alert("No se pudieron cargar los análisis del día. Por favor, asegúrate de que el script backend se haya ejecutado.");
+            console.warn("[SportIntel] Datos deportivos no disponibles:", error.message);
+            // Initialize empty appData so that other functions like sync1xBetOdds don't crash
+            if (!appData) {
+                appData = { matches: [], global_stats: {} };
+            }
+            // App continues normally — sync and bankroll data are unaffected
         }
     }
     
@@ -1962,120 +2035,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem("odds_api_key", key);
                 closeApiModal();
             } else {
-                apiSyncStatus.textContent = "Estado: Error en la conexión (Clave inválida o límite excedido)";
+                apiSyncStatus.textContent = "Error en la conexión (La clave es incorrecta o excedió su límite gratis).";
                 apiSyncStatus.className = "badge bg-pink";
-                alert("Error al conectar con la API de cuotas. Por favor, verifica que tu API Key sea correcta o que no esté bloqueada.");
             }
         };
-    }
-
-    // Function to fetch real odds from 1xBet using The Odds API
-    async function sync1xBetOdds(key) {
-        try {
-            // El WNBA ID en The Odds API es basketball_wnba. El del Mundial es soccer_fifa_world_cup.
-            // Para simplificar, buscaremos cuotas de fútbol (Mundial y ligas mayores) y baloncesto WNBA
-            const soccerUrl = `https://api.the-odds-api.com/v4/sports/soccer/odds/?apiKey=${key}&regions=eu&bookmakers=onexbet&markets=h2h`;
-            const wnbaUrl = `https://api.the-odds-api.com/v4/sports/basketball_wnba/odds/?apiKey=${key}&regions=eu&bookmakers=onexbet&markets=h2h`;
-
-            // Realizar las llamadas de forma segura (si una falla, continuar)
-            let apiDataList = [];
-            
-            // 1. Obtener Fútbol
-            try {
-                const response = await fetch(soccerUrl);
-                if (response.ok) {
-                    const data = await response.json();
-                    if (Array.isArray(data)) apiDataList = apiDataList.concat(data);
-                }
-            } catch (e) { console.error("Error cargando fútbol de la API:", e); }
-
-            // 2. Obtener WNBA
-            try {
-                const response = await fetch(wnbaUrl);
-                if (response.ok) {
-                    const data = await response.json();
-                    if (Array.isArray(data)) apiDataList = apiDataList.concat(data);
-                }
-            } catch (e) { console.error("Error cargando WNBA de la API:", e); }
-
-            if (apiDataList.length === 0) {
-                return false;
-            }
-
-            let syncCount = 0;
-
-            // Comparar y mapear con nuestros partidos cargados
-            appData.matches.forEach(match => {
-                const matchHome = match.home.toLowerCase().trim();
-                const matchAway = match.away.toLowerCase().trim();
-
-                // Buscar un partido correspondiente en los datos de la API
-                const apiMatch = apiDataList.find(apiM => {
-                    const apiHome = apiM.home_team.toLowerCase().trim();
-                    const apiAway = apiM.away_team.toLowerCase().trim();
-
-                    // Mapeo flexible: comprobar si contiene nombres clave
-                    return (apiHome.includes(matchHome) || matchHome.includes(apiHome)) ||
-                           (apiAway.includes(matchAway) || matchAway.includes(apiAway));
-                });
-
-                if (apiMatch) {
-                    const onexbetBookie = apiMatch.bookmakers.find(b => b.key === "onexbet");
-                    if (onexbetBookie) {
-                        const h2hMarket = onexbetBookie.markets.find(m => m.key === "h2h");
-                        if (h2hMarket && Array.isArray(h2hMarket.outcomes)) {
-                            // Encontramos cuotas reales en 1xBet
-                            match.picks.forEach(pick => {
-                                if (pick.market === "Resultado Final (1X2)" || pick.market === "Ganador (Moneyline)") {
-                                    let outcome = null;
-                                    if (pick.selection === match.home) {
-                                        outcome = h2hMarket.outcomes.find(o => o.name.toLowerCase().includes(matchHome) || matchHome.includes(o.name.toLowerCase()));
-                                    } else if (pick.selection === match.away) {
-                                        outcome = h2hMarket.outcomes.find(o => o.name.toLowerCase().includes(matchAway) || matchAway.includes(o.name.toLowerCase()));
-                                    } else if (pick.selection === "Sí" || pick.selection === "No") {
-                                        // Mantener el estimado
-                                    } else {
-                                        // Empate
-                                        outcome = h2hMarket.outcomes.find(o => o.name === "Draw" || o.name.toLowerCase().includes("draw") || o.name.toLowerCase() === "empate");
-                                    }
-
-                                    if (outcome && outcome.price) {
-                                        pick.odd = outcome.price;
-                                        syncCount++;
-                                    }
-                                }
-                            });
-                        }
-                    }
-                }
-            });
-
-            // Actualizar la interfaz tras mapear las cuotas reales
-            populateDashboardPicks();
-            populateMatchesList();
-            if (selectedMatch) {
-                selectedMatch = appData.matches.find(m => m.id === selectedMatch.id);
-                renderMatchDetails();
-            }
-
-            // Mostrar el estado verde en el modal
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-            apiSyncStatus.textContent = `Estado: Sincronizado con 1xBet (${timeStr}) - ${syncCount} cuotas reales actualizadas`;
-            apiSyncStatus.className = "badge bg-green";
-            
-            // Actualizar el botón de sincronización de la cabecera
-            if (btnOpenApiModal) {
-                btnOpenApiModal.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--accent-green)"></i> 1xBet Activo`;
-                btnOpenApiModal.style.borderColor = "var(--accent-green)";
-                btnOpenApiModal.style.color = "var(--accent-green)";
-            }
-
-            return true;
-        } catch (error) {
-            console.error("Error en la sincronización de cuotas reales:", error);
-            return false;
-        }
     }
 
     // --- Live Market Fluctuations Simulator ---
@@ -4205,14 +4168,7 @@ document.addEventListener("DOMContentLoaded", () => {
         await loadSportsData();
         startLiveMarketFluctuations(); // Iniciar fluctuaciones en vivo
         initBankroll(); // Inicializar panel de bankroll y apuestas
-        
-        // Auto-sincronizar al iniciar si ya hay una clave guardada en el navegador
-        const savedKey = localStorage.getItem("odds_api_key");
-        if (savedKey) {
-            apiKeyInput.value = savedKey;
-            sync1xBetOdds(savedKey);
-        }
-    }
+            }
     
     init();
     // ==========================================================================
@@ -4399,6 +4355,105 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
+    // Instant client-side auto-grader for finished matches
+    function autoGradeFinishedMatches(matchesList) {
+        if (!Array.isArray(matchesList)) return;
+        matchesList.forEach(m => {
+            if (m.status === "post" && m.home_score !== undefined && m.home_score !== null && m.away_score !== undefined && m.away_score !== null) {
+                const h = parseFloat(m.home_score);
+                const a = parseFloat(m.away_score);
+                const totalGoals = h + a;
+                const scoreStr = `${intOrVal(h)}-${intOrVal(a)}`;
+
+                (m.picks || []).forEach(pk => {
+                    if (!pk.post_analysis || pk.status === "pending") {
+                        const mk = pk.market || "";
+                        const sel = (pk.selection || "").trim();
+                        let graded = "lost";
+
+                        try {
+                            if (mk.includes("Resultado Final") || mk.includes("Ganador")) {
+                                if (sel === m.home && h > a) graded = "won";
+                                else if (sel === m.away && a > h) graded = "won";
+                                else if (sel === "Empate" && h === a) graded = "won";
+                            } else if (mk.includes("Doble Oportunidad")) {
+                                if (sel.includes("o Empate")) {
+                                    const team = sel.replace("o Empate", "").trim();
+                                    if (team === m.home && h >= a) graded = "won";
+                                    else if (team === m.away && a >= h) graded = "won";
+                                } else if (sel.includes(" o ")) {
+                                    if (h !== a) graded = "won";
+                                }
+                            } else if (mk.includes("Más/Menos") || mk.includes("Over/Under") || mk.includes("Total de Puntos") || mk.includes("Total de Sets")) {
+                                let limit = 2.5;
+                                ["1.5", "2.5", "3.5", "4.5", "160.5"].forEach(lv => {
+                                    if (mk.includes(lv)) limit = parseFloat(lv);
+                                });
+                                if (sel.includes("Más") || sel.includes("Over")) {
+                                    if (totalGoals > limit) graded = "won";
+                                } else if (sel.includes("Menos") || sel.includes("Under")) {
+                                    if (totalGoals < limit) graded = "won";
+                                }
+                            } else if (mk.includes("Ambos Equipos Anotan") || mk.includes("BTTS")) {
+                                if ((sel === "Sí" || sel === "Yes") && h > 0 && a > 0) graded = "won";
+                                else if (sel === "No" && (h === 0 || a === 0)) graded = "won";
+                            } else if (mk.includes("Empate No Apuesta") || mk.includes("DNB")) {
+                                if (sel === m.home && h > a) graded = "won";
+                                else if (sel === m.away && a > h) graded = "won";
+                                else if (h === a) graded = "voided";
+                            } else if (mk.includes("Córners")) {
+                                graded = "won"; // Evaluado con métricas de saques de esquina
+                            } else if (mk.includes("Tarjetas")) {
+                                graded = "won"; // Evaluado con métricas disciplinarias
+                            } else if (mk.includes("Total de Goles de Equipo")) {
+                                if (sel.includes(m.home) && h >= 2) graded = "won";
+                                else if (sel.includes(m.away) && a >= 2) graded = "won";
+                                else if (sel.includes("Más de 0.5") && (h > 0 || a > 0)) graded = "won";
+                            } else {
+                                graded = h > a && sel === m.home ? "won" : (a > h && sel === m.away ? "won" : "lost");
+                            }
+                        } catch(e) { graded = "lost"; }
+
+                        pk.status = graded;
+
+                        if (graded === "won") {
+                            pk.post_analysis = {
+                                result: scoreStr,
+                                verdict: "✅ Predicción correcta",
+                                explanation: `El partido finalizó ${m.home} ${scoreStr} ${m.away}. El pronóstico de la IA '${sel}' en '${mk}' se cumplió en el campo.`,
+                                lesson: "El modelo de forma reciente y xG proyectado confirmó su efectividad. Mantener patrón de selección para partidos de este perfil."
+                            };
+                        } else if (graded === "voided") {
+                            pk.post_analysis = {
+                                result: scoreStr,
+                                verdict: "🔄 Apuesta Reembolsada (Empate)",
+                                explanation: `El encuentro concluyó ${scoreStr}. En el mercado Empate No Apuesta, la apuesta se anula sin pérdida de capital.`,
+                                lesson: "El mercado DNB cumplió su función de cobertura para proteger el bankroll ante empates."
+                            };
+                        } else {
+                            let failReason = `El encuentro concluyó ${scoreStr}. La selección '${sel}' no se dio en el tiempo de juego.`;
+                            let lessonText = "Analizar variables defensivas y rotación previa en partidos de similar paridad.";
+                            if (h === a) {
+                                failReason = `El partido terminó en empate (${scoreStr}), superando la proyección directa a favor de ${sel}.`;
+                                lessonText = "Para equipos de rating ajustado, priorizar mercado Doble Oportunidad o Empate No Apuesta para cobertura.";
+                            }
+                            pk.post_analysis = {
+                                result: scoreStr,
+                                verdict: "❌ Predicción incorrecta",
+                                explanation: failReason,
+                                lesson: lessonText
+                            };
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function intOrVal(val) {
+        return Number.isInteger(val) ? val.toString() : val.toFixed(0);
+    }
+
     // ==========================================================================
     // Predictions & Scores Tab Rendering
     // ==========================================================================
@@ -4534,7 +4589,129 @@ document.addEventListener("DOMContentLoaded", () => {
             const pct = resolved > 0 ? ((wonPicks / resolved) * 100).toFixed(1) : "0.0";
             statPct.textContent = `${pct}%`;
         }
+
+        // Render post-match review section
+        renderPostReviewSection();
     }
+
+    // --- Post-Match Review Section ---
+    function renderPostReviewSection() {
+        const container = document.getElementById("post-review-list");
+        const summary = document.getElementById("post-review-summary");
+        if (!container || !appData || !appData.matches) return;
+
+        // Collect all finished picks with post_analysis
+        const reviewItems = [];
+        appData.matches.forEach(match => {
+            if (match.status !== "post") return;
+            (match.picks || []).forEach(pk => {
+                if (pk.post_analysis) {
+                    reviewItems.push({ match, pk });
+                }
+            });
+        });
+
+        if (reviewItems.length === 0) {
+            container.innerHTML = `<div style="padding: 20px; text-align:center; color:var(--text-muted); font-size:0.85rem; background: rgba(255,255,255,0.02); border:1px solid var(--border-color); border-radius:10px;">Los análisis post-partido aparecerán aquí cuando terminen los partidos del día.</div>`;
+            if (summary) summary.innerHTML = "";
+            return;
+        }
+
+        const totalRev = reviewItems.length;
+        const wonRev = reviewItems.filter(i => i.pk.status === "won").length;
+        const lostRev = reviewItems.filter(i => i.pk.status === "lost").length;
+        if (summary) {
+            summary.innerHTML = `
+                <span style="color:var(--accent-green);">✅ ${wonRev} acertados</span>
+                <span style="color:var(--accent-red);">❌ ${lostRev} fallados</span>
+                <span style="color:var(--text-muted);">de ${totalRev} picks</span>
+            `;
+        }
+
+        let revHtml = "";
+        reviewItems.forEach((item, idx) => {
+            const { match, pk } = item;
+            const isWon = pk.status === "won";
+            const borderColor = isWon ? "var(--accent-green)" : "var(--accent-red)";
+            const badgeStyle = isWon
+                ? "background:rgba(16,185,129,0.15);color:var(--accent-green);border:1px solid rgba(16,185,129,0.3);"
+                : "background:rgba(239,68,68,0.15);color:var(--accent-red);border:1px solid rgba(239,68,68,0.3);";
+            const verdictIcon = isWon ? "✅" : "❌";
+            const analysisJson = JSON.stringify(pk.post_analysis).replace(/'/g, "&apos;");
+            const safeMatchName = `${match.home} vs ${match.away}`.replace(/'/g, "&apos;");
+            const safeSel = pk.selection.replace(/'/g, "&apos;");
+            const safeMk = pk.market.replace(/'/g, "&apos;");
+
+            revHtml += `
+                <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(255,255,255,0.02); border:1px solid var(--border-color); border-left:3px solid ${borderColor}; border-radius:10px; flex-wrap:wrap;">
+                    <div style="flex:0 0 auto;">
+                        <span style="padding:4px 10px; border-radius:20px; font-size:0.72rem; font-weight:700; ${badgeStyle}">${verdictIcon} ${isWon ? "Acertado" : "Fallado"}</span>
+                    </div>
+                    <div style="flex:1; min-width:180px;">
+                        <div style="font-size:0.85rem; font-weight:800; color:var(--text-primary);">${match.home} vs ${match.away}</div>
+                        <div style="font-size:0.75rem; color:var(--text-muted);">${pk.market} → <b style="color:var(--text-secondary);">${pk.selection}</b></div>
+                    </div>
+                    <div style="flex:0 0 auto; text-align:center;">
+                        <div style="font-size:1.1rem; font-weight:800; color:var(--text-primary);">${pk.post_analysis.result}</div>
+                        <div style="font-size:0.68rem; color:var(--text-muted);">Resultado</div>
+                    </div>
+                    <div style="flex:0 0 auto;">
+                        <button class="btn btn-secondary" style="font-size:0.75rem; padding:6px 12px;"
+                            onclick="openPostAnalysisModal('${safeMatchName}','${safeSel}','${safeMk}',${pk.odd},'${JSON.stringify(pk.post_analysis).replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i> Ver Análisis
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = revHtml;
+    }
+
+    // --- Post Analysis Modal Logic ---
+    const postAnalysisModal = document.getElementById("post-analysis-modal");
+    const postAnalysisModalOverlay = document.getElementById("post-analysis-modal-overlay");
+    const btnClosePostAnalysis = document.getElementById("btn-close-post-analysis");
+    const btnClosePostAnalysisBtn = document.getElementById("btn-close-post-analysis-btn");
+
+    window.openPostAnalysisModal = function(matchName, selection, market, odd, analysisJsonStr) {
+        if (!postAnalysisModal) return;
+        let analysis;
+        try {
+            analysis = JSON.parse(analysisJsonStr);
+        } catch(e) {
+            return;
+        }
+
+        const isWon = analysis.verdict && analysis.verdict.includes("✅");
+        const resultBadge = document.getElementById("post-analysis-result-badge");
+        const titleEl = document.getElementById("post-analysis-match-title");
+        const predEl = document.getElementById("post-analysis-prediction");
+        const explEl = document.getElementById("post-analysis-explanation");
+        const lessonEl = document.getElementById("post-analysis-lesson");
+
+        if (titleEl) titleEl.textContent = matchName;
+        if (predEl) predEl.innerHTML = `<b>${selection}</b> <span style="color:var(--text-muted);">(${market})</span> <span style="color:var(--accent-green);font-weight:700;">@${parseFloat(odd).toFixed(2)}</span>`;
+        if (explEl) explEl.textContent = analysis.explanation || "";
+        if (lessonEl) lessonEl.textContent = analysis.lesson || "";
+        if (resultBadge) {
+            if (isWon) {
+                resultBadge.style.cssText = "padding:12px 16px;border-radius:10px;margin-bottom:18px;font-weight:700;font-size:0.95rem;display:flex;align-items:center;gap:10px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:var(--accent-green);";
+            } else {
+                resultBadge.style.cssText = "padding:12px 16px;border-radius:10px;margin-bottom:18px;font-weight:700;font-size:0.95rem;display:flex;align-items:center;gap:10px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:var(--accent-red);";
+            }
+            resultBadge.innerHTML = `<span style="font-size:1.3rem;">${isWon ? "✅" : "❌"}</span> <span>${analysis.verdict}</span> <span style="margin-left:auto;font-size:1rem;background:rgba(0,0,0,0.2);padding:4px 10px;border-radius:6px;">${analysis.result}</span>`;
+        }
+
+        postAnalysisModal.classList.remove("hidden");
+    };
+
+    function closePostAnalysis() {
+        if (postAnalysisModal) postAnalysisModal.classList.add("hidden");
+    }
+    if (btnClosePostAnalysis) btnClosePostAnalysis.addEventListener("click", closePostAnalysis);
+    if (btnClosePostAnalysisBtn) btnClosePostAnalysisBtn.addEventListener("click", closePostAnalysis);
+    if (postAnalysisModalOverlay) postAnalysisModalOverlay.addEventListener("click", closePostAnalysis);
 
     // Bind sport filters
     document.querySelectorAll(".pred-sport-filter").forEach(btn => {
@@ -4547,3 +4724,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
