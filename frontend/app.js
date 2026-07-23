@@ -1959,7 +1959,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Hide previous output & show loader
         ticketEmptyState.classList.add("hidden");
-        ticketMainContent.classList.add("hidden");
+        const multiContainer = document.getElementById("tickets-multi-container");
+        if (multiContainer) multiContainer.classList.add("hidden");
         ticketLoadingState.classList.remove("hidden");
 
         // Read form inputs
