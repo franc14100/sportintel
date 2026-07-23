@@ -1817,80 +1817,33 @@ def generate_daily_sports_data():
         star_confidence_3 = 55
         star_reasoning_3 = "Boleto Soñador de contingencia (Cuota @5.25)."
 
-    # PERSISTENCE LOCK: Si ya se generaron boletos hoy, aplicar regla diferenciada:
-    # - Boleto 1 (Seguro): SIEMPRE bloqueado. El usuario ya lo apostó.
-    # - Boleto 2 (Valor): Se re-evalúa si la IA encuentra un pick de mayor EV.
-    #   SOLO se preserva si el boleto existente ya era una Simple (señal de que el usuario pudo apostarlo).
-    # - Boleto 3 (Soñador): SIEMPRE bloqueado. Es intradía por naturaleza.
-
-    # ─────────────────────────────────────────────────────────────────────────────
-    # BOLETO 1 HARDCODED: Boleto real apostado por el usuario el 23/07/2026
-    # Boleto #84774910925 - NO MODIFICAR NUNCA
-    # FC Lugano (G1) @1.186 + Hajduk vs Pafos Corners >7.5 @1.36
-    # ─────────────────────────────────────────────────────────────────────────────
-    ticket_type_1 = "Combinado"
-    star_selections_1 = [
-        {
-            "match": "FC Lugano vs Dukagjini",
-            "sport": "Football",
-            "league": "UEFA Conference League",
-            "market": "Resultado Final (1X2)",
-            "pick": "FC Lugano (1X2: G1)",
-            "odd": 1.186,
-            "status": "pending",
-            "reasoning": "Apuesta confirmada por el usuario - Boleto #84774910925"
-        },
-        {
-            "match": "HNK Hajduk Split vs Pafos",
-            "sport": "Football",
-            "league": "UEFA Europa League",
-            "market": "Saques de Esquina (Corners)",
-            "pick": "Total Saques de Esquina: Total mas de 7.5",
-            "odd": 1.36,
-            "status": "pending",
-            "reasoning": "Apuesta confirmada por el usuario - Boleto #84774910925"
-        }
-    ]
-    total_odd_1 = round(1.186 * 1.36, 3)
-    star_confidence_1 = 85
-    star_reasoning_1 = ("Boleto real apostado por el usuario el 23/07/2026 — Boleto #84774910925. "
-                        "Combinada: FC Lugano (G1) @1.186 + HNK Hajduk Split vs Pafos mas de 7.5 corners @1.36. "
-                        "Stake: 5 USD. Ganancia posible: 8.06 USD.")
-
+    # PERSISTENCE LOCK: Una vez generados los boletos del día, se bloquean hasta el día siguiente.
+    # La IA elige libremente en la primera corrida de cada día (Simple o Combinada según EV).
+    # En corridas posteriores del mismo día, se preservan exactamente los boletos ya elegidos.
     if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
-        print("[INFO] Aplicando regla de bloqueo diferenciada por boleto.")
+        print("[INFO] Boletos del día ya generados — aplicando bloqueo diario en todos los boletos.")
 
-        # BOLETO 1: Hardcoded real - ya fue apostado, nunca cambia
         st1 = raw_previous_json.get("star_ticket_1", {})
         if st1 and st1.get("selections"):
-            print("[INFO] Boleto 1 (Seguro) - BLOQUEADO permanentemente.")
+            print("[INFO] Boleto 1 bloqueado para hoy.")
             ticket_type_1 = st1.get("type", ticket_type_1)
             star_selections_1 = st1.get("selections", star_selections_1)
             total_odd_1 = st1.get("total_odd", total_odd_1)
             star_confidence_1 = st1.get("confidence", star_confidence_1)
             star_reasoning_1 = st1.get("reasoning", star_reasoning_1)
 
-        # BOLETO 2: Desbloqueado - La IA puede actualizar si hay mejor pick de valor
         st2 = raw_previous_json.get("star_ticket_2", {})
         if st2 and st2.get("selections"):
-            prev_type_2 = st2.get("type", "Combinado")
-            # Si el boleto anterior era Simple: asumimos ya fue apostado → bloquear
-            # Si era Combinado: la IA puede recalcular con datos del día actualizados
-            if prev_type_2 == "Simple":
-                print("[INFO] Boleto 2 (Valor) era Simple - BLOQUEADO (ya apostable por el usuario).")
-                ticket_type_2 = st2.get("type", ticket_type_2)
-                star_selections_2 = st2.get("selections", star_selections_2)
-                total_odd_2 = st2.get("total_odd", total_odd_2)
-                star_confidence_2 = st2.get("confidence", star_confidence_2)
-                star_reasoning_2 = st2.get("reasoning", star_reasoning_2)
-            else:
-                print("[INFO] Boleto 2 (Valor) era Combinado - DESBLOQUEADO: IA recalcula con datos actuales.")
-                # El nuevo valor calculado arriba se usa directamente
+            print("[INFO] Boleto 2 bloqueado para hoy.")
+            ticket_type_2 = st2.get("type", ticket_type_2)
+            star_selections_2 = st2.get("selections", star_selections_2)
+            total_odd_2 = st2.get("total_odd", total_odd_2)
+            star_confidence_2 = st2.get("confidence", star_confidence_2)
+            star_reasoning_2 = st2.get("reasoning", star_reasoning_2)
 
-        # BOLETO 3: Siempre bloqueado
         st3 = raw_previous_json.get("star_ticket_3", {})
         if st3 and st3.get("selections"):
-            print("[INFO] Boleto 3 (Soñador) - BLOQUEADO permanentemente.")
+            print("[INFO] Boleto 3 bloqueado para hoy.")
             ticket_type_3 = st3.get("type", ticket_type_3)
             star_selections_3 = st3.get("selections", star_selections_3)
             total_odd_3 = st3.get("total_odd", total_odd_3)
