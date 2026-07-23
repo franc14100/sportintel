@@ -4629,6 +4629,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         let revHtml = "";
+        window.currentReviewStore = reviewItems;
+
         reviewItems.forEach((item, idx) => {
             const { match, pk } = item;
             const isWon = pk.status === "won";
@@ -4637,10 +4639,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? "background:rgba(16,185,129,0.15);color:var(--accent-green);border:1px solid rgba(16,185,129,0.3);"
                 : "background:rgba(239,68,68,0.15);color:var(--accent-red);border:1px solid rgba(239,68,68,0.3);";
             const verdictIcon = isWon ? "✅" : "❌";
-            const analysisJson = JSON.stringify(pk.post_analysis).replace(/'/g, "&apos;");
-            const safeMatchName = `${match.home} vs ${match.away}`.replace(/'/g, "&apos;");
-            const safeSel = pk.selection.replace(/'/g, "&apos;");
-            const safeMk = pk.market.replace(/'/g, "&apos;");
 
             revHtml += `
                 <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(255,255,255,0.02); border:1px solid var(--border-color); border-left:3px solid ${borderColor}; border-radius:10px; flex-wrap:wrap;">
@@ -4652,12 +4650,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div style="font-size:0.75rem; color:var(--text-muted);">${pk.market} → <b style="color:var(--text-secondary);">${pk.selection}</b></div>
                     </div>
                     <div style="flex:0 0 auto; text-align:center;">
-                        <div style="font-size:1.1rem; font-weight:800; color:var(--text-primary);">${pk.post_analysis.result}</div>
+                        <div style="font-size:1.1rem; font-weight:800; color:var(--text-primary);">${pk.post_analysis ? pk.post_analysis.result : (match.home_score + '-' + match.away_score)}</div>
                         <div style="font-size:0.68rem; color:var(--text-muted);">Resultado</div>
                     </div>
                     <div style="flex:0 0 auto;">
-                        <button class="btn btn-secondary" style="font-size:0.75rem; padding:6px 12px;"
-                            onclick="openPostAnalysisModal('${safeMatchName}','${safeSel}','${safeMk}',${pk.odd},'${JSON.stringify(pk.post_analysis).replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')">
+                        <button class="btn btn-secondary btn-post-review" data-idx="${idx}" style="font-size:0.75rem; padding:6px 12px; cursor:pointer;">
                             <i class="fa-solid fa-magnifying-glass-chart"></i> Ver Análisis
                         </button>
                     </div>
@@ -4666,6 +4663,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         container.innerHTML = revHtml;
+
+        // Attach event listeners cleanly
+        container.querySelectorAll(".btn-post-review").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const idx = parseInt(btn.getAttribute("data-idx"));
+                const item = window.currentReviewStore ? window.currentReviewStore[idx] : null;
+                if (item) openPostAnalysisModalDirect(item);
+            });
+        });
     }
 
     // --- Post Analysis Modal Logic ---
@@ -4674,24 +4680,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnClosePostAnalysis = document.getElementById("btn-close-post-analysis");
     const btnClosePostAnalysisBtn = document.getElementById("btn-close-post-analysis-btn");
 
-    window.openPostAnalysisModal = function(matchName, selection, market, odd, analysisJsonStr) {
-        if (!postAnalysisModal) return;
-        let analysis;
-        try {
-            analysis = JSON.parse(analysisJsonStr);
-        } catch(e) {
-            return;
-        }
+    function openPostAnalysisModalDirect(item) {
+        if (!postAnalysisModal || !item) return;
+        const { match, pk } = item;
+        const analysis = pk.post_analysis || {
+            verdict: pk.status === "won" ? "✅ Predicción correcta" : "❌ Predicción incorrecta",
+            result: `${match.home_score}-${match.away_score}`,
+            explanation: `El partido ${match.home} vs ${match.away} finalizó ${match.home_score}-${match.away_score}. Selección: ${pk.selection} (${pk.market}).`,
+            lesson: "Continuar monitoreando las variables defensivas y xG del encuentro."
+        };
 
-        const isWon = analysis.verdict && analysis.verdict.includes("✅");
+        const isWon = pk.status === "won" || (analysis.verdict && analysis.verdict.includes("✅"));
         const resultBadge = document.getElementById("post-analysis-result-badge");
         const titleEl = document.getElementById("post-analysis-match-title");
         const predEl = document.getElementById("post-analysis-prediction");
         const explEl = document.getElementById("post-analysis-explanation");
         const lessonEl = document.getElementById("post-analysis-lesson");
 
-        if (titleEl) titleEl.textContent = matchName;
-        if (predEl) predEl.innerHTML = `<b>${selection}</b> <span style="color:var(--text-muted);">(${market})</span> <span style="color:var(--accent-green);font-weight:700;">@${parseFloat(odd).toFixed(2)}</span>`;
+        if (titleEl) titleEl.textContent = `${match.home} vs ${match.away}`;
+        if (predEl) predEl.innerHTML = `<b>${pk.selection}</b> <span style="color:var(--text-muted);">(${pk.market})</span> <span style="color:var(--accent-green);font-weight:700;">@${parseFloat(pk.odd || 1.5).toFixed(2)}</span>`;
         if (explEl) explEl.textContent = analysis.explanation || "";
         if (lessonEl) lessonEl.textContent = analysis.lesson || "";
         if (resultBadge) {
@@ -4704,6 +4711,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         postAnalysisModal.classList.remove("hidden");
+    }
+
+    window.openPostAnalysisModal = function(matchName, selection, market, odd, analysisJsonStr) {
+        let analysis;
+        try { analysis = JSON.parse(analysisJsonStr); } catch(e) { analysis = {}; }
+        openPostAnalysisModalDirect({
+            match: { home: matchName.split(" vs ")[0] || "", away: matchName.split(" vs ")[1] || "" },
+            pk: { selection, market, odd, post_analysis: analysis }
+        });
     };
 
     function closePostAnalysis() {
