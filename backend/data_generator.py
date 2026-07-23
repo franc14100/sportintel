@@ -1418,10 +1418,12 @@ def generate_daily_sports_data():
                                 elif team == a_nm and a_f >= h_f: graded = "won"
                             elif " o " in sel:
                                 if h_f != a_f: graded = "won"
-                        elif "Más/Menos" in mk or "Over/Under" in mk:
-                            limit = 2.5
-                            for lv in ["1.5", "2.5", "3.5", "4.5"]:
-                                if lv in mk: limit = float(lv)
+                        elif "Más/Menos" in mk or "Over/Under" in mk or "Total" in mk or "Puntos" in mk or "Goles" in mk or "Córners" in mk or "Tarjetas" in mk:
+                            # Extract numeric threshold from selection or market name (e.g. 160.5, 2.5, 8.5)
+                            import re
+                            limit_match = re.search(r"(\d+(?:\.\d+)?)", sel) or re.search(r"(\d+(?:\.\d+)?)", mk)
+                            limit = float(limit_match.group(1)) if limit_match else 2.5
+                            
                             if "Más" in sel or "Over" in sel:
                                 if total_goals > limit: graded = "won"
                             elif "Menos" in sel or "Under" in sel:
@@ -1429,6 +1431,10 @@ def generate_daily_sports_data():
                         elif "Ambos Equipos Anotan" in mk or "BTTS" in mk:
                             if sel in ("Sí", "Yes") and h_f > 0 and a_f > 0: graded = "won"
                             elif sel in ("No") and (h_f == 0 or a_f == 0): graded = "won"
+                        elif "Empate No Apuesta" in mk or "DNB" in mk:
+                            if sel == h_nm and h_f > a_f: graded = "won"
+                            elif sel == a_nm and a_f > h_f: graded = "won"
+                            elif h_f == a_f: graded = "voided"
                     except Exception as ge:
                         print(f"[Grade] Error en pick: {ge}")
                     pk["status"] = graded
