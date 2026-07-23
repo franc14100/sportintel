@@ -22,6 +22,17 @@ def fetch_live_matches():
         ("Ligue 1", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard"),
         ("UEFA Champions League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard"),
         ("UEFA Europa League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa/scoreboard"),
+        ("UEFA Conference League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa.conference/scoreboard"),
+        ("Eredivisie", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.1/scoreboard"),
+        ("Primeira Liga Portugal", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/por.1/scoreboard"),
+        ("Süper Lig Turquía", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/tur.1/scoreboard"),
+        ("Pro League Bélgica", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/bel.1/scoreboard"),
+        ("Premiership Escocia", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/sco.1/scoreboard"),
+        ("Superleague Grecia", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/gre.1/scoreboard"),
+        ("Bundesliga Austria", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/aut.1/scoreboard"),
+        ("Super League Suiza", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/sui.1/scoreboard"),
+        ("Ekstraklasa Polonia", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/pol.1/scoreboard"),
+        ("Superliga Dinamarca", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/scoreboard"),
         ("Liga Pro Ecuador", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/ecu.1/scoreboard"),
         ("Liga Argentina", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard"),
         ("Liga Colombiana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/col.1/scoreboard"),
@@ -29,12 +40,19 @@ def fetch_live_matches():
         ("Liga Chilena", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/chi.1/scoreboard"),
         ("Liga Peruana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/per.1/scoreboard"),
         ("Liga Uruguaya", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/scoreboard"),
+        ("Liga Boliviana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/bol.1/scoreboard"),
+        ("Liga Paraguaya", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/par.1/scoreboard"),
+        ("Liga Venezolana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/ven.1/scoreboard"),
+        ("Saudi Pro League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/sau.1/scoreboard"),
+        ("J1 League Japón", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.1/scoreboard"),
+        ("K League Corea", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/kor.1/scoreboard"),
         ("Liga MX", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/scoreboard"),
         ("MLS", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard"),
         ("Copa Libertadores", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.libertadores/scoreboard"),
         ("Copa Sudamericana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.sudamericana/scoreboard"),
         ("WNBA", "Basketball", "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard"),
         ("NBA", "Basketball", "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"),
+        ("NCAA Basketball", "Basketball", "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard"),
         ("Tenis ATP/WTA", "Tennis", "https://site.api.espn.com/apis/site/v2/sports/tennis/all/scoreboard")
     ]
     
@@ -1124,6 +1142,45 @@ def generate_daily_sports_data():
                         "tactical": f"El Hándicap Asiático {ah_val} a favor de {ah_fav} elimina el empate del ecuación y exige una victoria por al menos {'2 goles' if ah_val == '-1.5' else '1 gol'}. La diferencia táctica y la calidad del plantel de {ah_fav} justifica esta apuesta de alto valor.",
                         "statistical": f"{ah_fav} ha ganado por más de 1 gol en {random.randint(2, 4)} de sus últimos 5 partidos como favorito. Con un rating y volumen de juego superior, la probabilidad de cubrir el handicap {ah_val} es estadísticamente viable.",
                         "market": f"La cuota @{round(ah_odd, 2)} para el hándicap asiático {ah_val} de {ah_fav} es superior al 'justo' calculado por el modelo. Este mercado está siendo ignorado por el público general, creando una oportunidad de valor para inversores informados."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Total de Goles de Equipo",
+                    "selection": f"{winner_name} Más de 1.5 Goles" if max(prob_home, prob_away) > 60 else f"{home_name} Más de 0.5 Goles",
+                    "odd": round(random.uniform(1.45, 1.95), 2),
+                    "probability": int(max(prob_home, prob_away) * 0.95),
+                    "risk": "Low" if max(prob_home, prob_away) > 65 else "Medium",
+                    "reasoning": {
+                        "tactical": f"{winner_name} genera un volumen alto de ataques por las bandas y transiciones rápidas. La zaga rival ha concedido al menos 1 gol en 4 de sus últimos 5 encuentros.",
+                        "statistical": f"xG de {winner_name} se sitúa en {round(random.uniform(1.5, 2.3), 1)} goles esperados. El modelo proyecta una eficacia alta frente a marcos desprotegidos.",
+                        "market": f"Mercado de goles de equipo individual con excelente liquidez y menor varianza que el resultado exacto."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Córners (Saques de Esquina)",
+                    "selection": "Más de 8.5 Córners" if avg_goals >= 2.3 else "Más de 7.5 Córners",
+                    "odd": round(random.uniform(1.60, 1.90), 2),
+                    "probability": random.randint(68, 84),
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": f"Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina.",
+                        "statistical": f"Promedio acumulado de {home_name} ({random.randint(4, 7)} córners) y {away_name} ({random.randint(3, 6)} córners) proyecta un total de {random.randint(9, 13)} saques de esquina.",
+                        "market": f"Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Tarjetas Amarillas",
+                    "selection": "Más de 3.5 Tarjetas Amarillas" if abs(prob_home - prob_away) < 15 else "Menos de 4.5 Tarjetas Amarillas",
+                    "odd": round(random.uniform(1.55, 1.85), 2),
+                    "probability": random.randint(65, 82),
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": f"Intensidad de juego proyectada {'alta debido a la paridad y presión del partido' if abs(prob_home - prob_away) < 15 else 'moderada por el dominio claro del favorito'}. Faltas tácticas en zona media asegurarán el cumplimiento de la línea.",
+                        "statistical": f"Promedio del árbitro designado: {round(random.uniform(3.8, 5.2), 1)} tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
+                        "market": f"Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
                     "status": "pending"
                 },
