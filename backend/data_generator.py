@@ -1568,7 +1568,10 @@ def generate_daily_sports_data():
                                 elif team == a_nm and a_f >= h_f: graded = "won"
                             elif " o " in sel:
                                 if h_f != a_f: graded = "won"
-                        elif "Más/Menos" in mk or "Over/Under" in mk or "Total" in mk or "Puntos" in mk or "Goles" in mk or "Córners" in mk or "Tarjetas" in mk:
+                        elif "Córners" in mk or "Tarjetas" in mk or "Saques de Esquina" in mk:
+                            # We don't scrape corner or card data, only goals. So leave as pending for manual verification.
+                            graded = "pending"
+                        elif "Más/Menos" in mk or "Over/Under" in mk or "Total" in mk or "Puntos" in mk or "Goles" in mk:
                             # Extract numeric threshold from selection or market name (e.g. 160.5, 2.5, 8.5)
                             import re
                             limit_match = re.search(r"(\d+(?:\.\d+)?)", sel) or re.search(r"(\d+(?:\.\d+)?)", mk)
@@ -1590,12 +1593,21 @@ def generate_daily_sports_data():
                     pk["status"] = graded
 
                     # Build post-match analysis explanation
-                    if graded == "won":
+                    if graded == "pending":
+                        pass
+                    elif graded == "won":
                         pk["post_analysis"] = {
                             "result": result_str,
                             "verdict": "✅ Predicción correcta",
                             "explanation": f"El resultado final fue {h_nm} {result_str} {a_nm}. La selección '{sel}' en el mercado '{mk}' se cumplió exactamente como proyectó la IA.",
                             "lesson": f"El análisis de forma reciente y estadísticas H2H funcionaron correctamente para este tipo de partido. Continuar priorizando este mercado en condiciones similares."
+                        }
+                    elif graded == "voided":
+                        pk["post_analysis"] = {
+                            "result": result_str,
+                            "verdict": "🔄 Apuesta Reembolsada (Empate)",
+                            "explanation": f"El resultado final fue {result_str}. El mercado '{mk}' ofrece protección ante empates.",
+                            "lesson": "Selección inteligente de mercado. La protección de devolución salvó el capital en un partido ajustado."
                         }
                     else:
                         # Build specific failure explanation per market type
