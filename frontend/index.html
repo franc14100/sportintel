@@ -363,11 +363,21 @@
                 </div>
 
                 <!-- Filters -->
-                <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                    <button class="filter-btn active pred-sport-filter" data-sport="all" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;">Todos</button>
-                    <button class="filter-btn pred-sport-filter" data-sport="Football" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
-                    <button class="filter-btn pred-sport-filter" data-sport="Basketball" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-basketball"></i> Basket</button>
-                    <button class="filter-btn pred-sport-filter" data-sport="Tennis" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Tenis</button>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; background: rgba(255,255,255,0.02); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-color);">
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px;"><i class="fa-solid fa-trophy"></i> Deporte:</span>
+                        <button class="filter-btn active pred-sport-filter" data-sport="all" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;">Todos</button>
+                        <button class="filter-btn pred-sport-filter" data-sport="Football" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
+                        <button class="filter-btn pred-sport-filter" data-sport="Basketball" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-basketball"></i> Basket</button>
+                        <button class="filter-btn pred-sport-filter" data-sport="Tennis" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Tenis</button>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px;"><i class="fa-solid fa-signal"></i> Estado del Partido:</span>
+                        <button class="filter-btn active pred-status-filter" data-status="all" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;">Todos</button>
+                        <button class="filter-btn pred-status-filter" data-status="pre" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-clock"></i> Por Jugar</button>
+                        <button class="filter-btn pred-status-filter" data-status="in" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; color: #ef4444;"><i class="fa-solid fa-circle"></i> En Vivo</button>
+                        <button class="filter-btn pred-status-filter" data-status="post" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-flag-checkered"></i> Finalizados</button>
+                    </div>
                 </div>
 
                 <!-- Grid of Match Predictions -->
@@ -398,11 +408,19 @@
                 <div class="matches-layout">
                     <!-- Left: Matches List -->
                     <div class="matches-list-panel">
-                        <div class="filter-bar">
-                            <button class="filter-btn active" data-sport="all">Todos</button>
-                            <button class="filter-btn" data-sport="Football"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
-                            <button class="filter-btn" data-sport="Basketball"><i class="fa-solid fa-basketball"></i> Basket</button>
-                            <button class="filter-btn" data-sport="Tennis"><i class="fa-solid fa-baseball"></i> Tenis</button>
+                        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+                            <div class="filter-bar">
+                                <button class="filter-btn active match-sport-filter" data-sport="all">Todos</button>
+                                <button class="filter-btn match-sport-filter" data-sport="Football"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
+                                <button class="filter-btn match-sport-filter" data-sport="Basketball"><i class="fa-solid fa-basketball"></i> Basket</button>
+                                <button class="filter-btn match-sport-filter" data-sport="Tennis"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Tenis</button>
+                            </div>
+                            <div class="filter-bar">
+                                <button class="filter-btn active match-status-filter" data-status="all">Todos</button>
+                                <button class="filter-btn match-status-filter" data-status="pre"><i class="fa-solid fa-clock"></i> Por Jugar</button>
+                                <button class="filter-btn match-status-filter" data-status="in" style="color:#ef4444;"><i class="fa-solid fa-circle"></i> En Vivo</button>
+                                <button class="filter-btn match-status-filter" data-status="post"><i class="fa-solid fa-flag-checkered"></i> Finalizados</button>
+                            </div>
                         </div>
                         <div class="match-search-panel" style="margin-bottom: 12px;">
                             <input type="text" id="match-search-input" placeholder="🔍 Buscar equipos o ligas (ej: España, Sun, MLS)..." class="form-input" style="font-size: 0.82rem; padding: 8px 12px;">
