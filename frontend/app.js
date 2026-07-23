@@ -4366,84 +4366,78 @@ document.addEventListener("DOMContentLoaded", () => {
                 const scoreStr = `${intOrVal(h)}-${intOrVal(a)}`;
 
                 (m.picks || []).forEach(pk => {
-                    if (!pk.post_analysis || pk.status === "pending") {
-                        const mk = pk.market || "";
-                        const sel = (pk.selection || "").trim();
-                        let graded = "lost";
+                    const mk = pk.market || "";
+                    const sel = (pk.selection || "").trim();
+                    let graded = "lost";
 
-                        try {
-                            if (mk.includes("Resultado Final") || mk.includes("Ganador")) {
-                                if (sel === m.home && h > a) graded = "won";
-                                else if (sel === m.away && a > h) graded = "won";
-                                else if (sel === "Empate" && h === a) graded = "won";
-                            } else if (mk.includes("Doble Oportunidad")) {
-                                if (sel.includes("o Empate")) {
-                                    const team = sel.replace("o Empate", "").trim();
-                                    if (team === m.home && h >= a) graded = "won";
-                                    else if (team === m.away && a >= h) graded = "won";
-                                } else if (sel.includes(" o ")) {
-                                    if (h !== a) graded = "won";
-                                }
-                            } else if (mk.includes("Más/Menos") || mk.includes("Over/Under") || mk.includes("Total de Puntos") || mk.includes("Total de Sets")) {
-                                let limit = 2.5;
-                                ["1.5", "2.5", "3.5", "4.5", "160.5"].forEach(lv => {
-                                    if (mk.includes(lv)) limit = parseFloat(lv);
-                                });
-                                if (sel.includes("Más") || sel.includes("Over")) {
-                                    if (totalGoals > limit) graded = "won";
-                                } else if (sel.includes("Menos") || sel.includes("Under")) {
-                                    if (totalGoals < limit) graded = "won";
-                                }
-                            } else if (mk.includes("Ambos Equipos Anotan") || mk.includes("BTTS")) {
-                                if ((sel === "Sí" || sel === "Yes") && h > 0 && a > 0) graded = "won";
-                                else if (sel === "No" && (h === 0 || a === 0)) graded = "won";
-                            } else if (mk.includes("Empate No Apuesta") || mk.includes("DNB")) {
-                                if (sel === m.home && h > a) graded = "won";
-                                else if (sel === m.away && a > h) graded = "won";
-                                else if (h === a) graded = "voided";
-                            } else if (mk.includes("Córners")) {
-                                graded = "won"; // Evaluado con métricas de saques de esquina
-                            } else if (mk.includes("Tarjetas")) {
-                                graded = "won"; // Evaluado con métricas disciplinarias
-                            } else if (mk.includes("Total de Goles de Equipo")) {
-                                if (sel.includes(m.home) && h >= 2) graded = "won";
-                                else if (sel.includes(m.away) && a >= 2) graded = "won";
-                                else if (sel.includes("Más de 0.5") && (h > 0 || a > 0)) graded = "won";
-                            } else {
-                                graded = h > a && sel === m.home ? "won" : (a > h && sel === m.away ? "won" : "lost");
+                    try {
+                        if (mk.includes("Resultado Final") || mk.includes("Ganador")) {
+                            if (sel === m.home && h > a) graded = "won";
+                            else if (sel === m.away && a > h) graded = "won";
+                            else if (sel === "Empate" && h === a) graded = "won";
+                        } else if (mk.includes("Doble Oportunidad")) {
+                            if (sel.includes("o Empate")) {
+                                const team = sel.replace("o Empate", "").trim();
+                                if (team === m.home && h >= a) graded = "won";
+                                else if (team === m.away && a >= h) graded = "won";
+                            } else if (sel.includes(" o ")) {
+                                if (h !== a) graded = "won";
                             }
-                        } catch(e) { graded = "lost"; }
-
-                        pk.status = graded;
-
-                        if (graded === "won") {
-                            pk.post_analysis = {
-                                result: scoreStr,
-                                verdict: "✅ Predicción correcta",
-                                explanation: `El partido finalizó ${m.home} ${scoreStr} ${m.away}. El pronóstico de la IA '${sel}' en '${mk}' se cumplió en el campo.`,
-                                lesson: "El modelo de forma reciente y xG proyectado confirmó su efectividad. Mantener patrón de selección para partidos de este perfil."
-                            };
-                        } else if (graded === "voided") {
-                            pk.post_analysis = {
-                                result: scoreStr,
-                                verdict: "🔄 Apuesta Reembolsada (Empate)",
-                                explanation: `El encuentro concluyó ${scoreStr}. En el mercado Empate No Apuesta, la apuesta se anula sin pérdida de capital.`,
-                                lesson: "El mercado DNB cumplió su función de cobertura para proteger el bankroll ante empates."
-                            };
+                        } else if (mk.includes("Más/Menos") || mk.includes("Over/Under") || mk.includes("Total") || mk.includes("Puntos") || mk.includes("Sets") || mk.includes("Goles") || mk.includes("Córners") || mk.includes("Tarjetas")) {
+                            // Extract numeric threshold dynamically from selection or market name
+                            const numMatch = sel.match(/(\d+(?:\.\d+)?)/) || mk.match(/(\d+(?:\.\d+)?)/);
+                            const limit = numMatch ? parseFloat(numMatch[1]) : 2.5;
+                            
+                            if (sel.includes("Más") || sel.includes("Over")) {
+                                if (totalGoals > limit) graded = "won";
+                            } else if (sel.includes("Menos") || sel.includes("Under")) {
+                                if (totalGoals < limit) graded = "won";
+                            }
+                        } else if (mk.includes("Ambos Equipos Anotan") || mk.includes("BTTS")) {
+                            if ((sel === "Sí" || sel === "Yes") && h > 0 && a > 0) graded = "won";
+                            else if (sel === "No" && (h === 0 || a === 0)) graded = "won";
+                        } else if (mk.includes("Empate No Apuesta") || mk.includes("DNB")) {
+                            if (sel === m.home && h > a) graded = "won";
+                            else if (sel === m.away && a > h) graded = "won";
+                            else if (h === a) graded = "voided";
+                        } else if (mk.includes("Total de Goles de Equipo")) {
+                            if (sel.includes(m.home) && h >= 2) graded = "won";
+                            else if (sel.includes(m.away) && a >= 2) graded = "won";
+                            else if (sel.includes("Más de 0.5") && (h > 0 || a > 0)) graded = "won";
                         } else {
-                            let failReason = `El encuentro concluyó ${scoreStr}. La selección '${sel}' no se dio en el tiempo de juego.`;
-                            let lessonText = "Analizar variables defensivas y rotación previa en partidos de similar paridad.";
-                            if (h === a) {
-                                failReason = `El partido terminó en empate (${scoreStr}), superando la proyección directa a favor de ${sel}.`;
-                                lessonText = "Para equipos de rating ajustado, priorizar mercado Doble Oportunidad o Empate No Apuesta para cobertura.";
-                            }
-                            pk.post_analysis = {
-                                result: scoreStr,
-                                verdict: "❌ Predicción incorrecta",
-                                explanation: failReason,
-                                lesson: lessonText
-                            };
+                            graded = (h > a && sel === m.home) ? "won" : ((a > h && sel === m.away) ? "won" : "lost");
                         }
+                    } catch(e) { graded = "lost"; }
+
+                    pk.status = graded;
+
+                    if (graded === "won") {
+                        pk.post_analysis = {
+                            result: scoreStr,
+                            verdict: "✅ Predicción correcta",
+                            explanation: `El partido finalizó ${m.home} ${scoreStr} ${m.away}. El marcador acumuló ${intOrVal(totalGoals)} puntos/goles, superando la línea de ${sel} en el mercado '${mk}'.`,
+                            lesson: "El análisis estadístico proyectó correctamente el alto volumen del encuentro."
+                        };
+                    } else if (graded === "voided") {
+                        pk.post_analysis = {
+                            result: scoreStr,
+                            verdict: "🔄 Apuesta Reembolsada (Empate)",
+                            explanation: `El encuentro concluyó ${scoreStr}. En el mercado Empate No Apuesta, la apuesta se anula sin pérdida de capital.`,
+                            lesson: "El mercado DNB cumplió su función de cobertura para proteger el capital ante empates."
+                        };
+                    } else {
+                        let failReason = `El encuentro concluyó ${scoreStr} (${intOrVal(totalGoals)} puntos/goles totales). La selección '${sel}' no se cumplió.`;
+                        let lessonText = "Ajustar margen defensivo y volumen de posesiones esperadas en modelos de este deporte.";
+                        if (h === a) {
+                            failReason = `El partido terminó en empate (${scoreStr}), superando la proyección directa a favor de ${sel}.`;
+                            lessonText = "Para partidos de paridad alta, priorizar mercados con cobertura doble (Doble Oportunidad o DNB).";
+                        }
+                        pk.post_analysis = {
+                            result: scoreStr,
+                            verdict: "❌ Predicción incorrecta",
+                            explanation: failReason,
+                            lesson: lessonText
+                        };
                     }
                 });
             }
