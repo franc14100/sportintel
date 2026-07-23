@@ -624,23 +624,56 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="label-with-value">
-                                        <label class="form-label">Perfil de Riesgo</label>
-                                        <span id="risk-value-display" class="badge bg-green">Conservador</span>
-                                    </div>
-                                    <input type="range" id="input-risk" class="form-range" min="1" max="3" value="1" step="1">
-                                    <div class="range-labels">
-                                        <span>Conservador</span>
-                                        <span>Equilibrado</span>
-                                        <span>Agresivo</span>
+                                    <label class="form-label">Modo de Generación</label>
+                                    <div class="sport-select-grid" style="grid-template-columns: 1fr 1fr;">
+                                        <label class="sport-option">
+                                            <input type="radio" name="gen-mode" value="profile" checked>
+                                            <div class="sport-box" style="padding: 10px;">
+                                                <i class="fa-solid fa-sliders"></i>
+                                                <span style="font-size: 0.75rem;">Por Perfil</span>
+                                            </div>
+                                        </label>
+                                        <label class="sport-option">
+                                            <input type="radio" name="gen-mode" value="target">
+                                            <div class="sport-box" style="padding: 10px;">
+                                                <i class="fa-solid fa-bullseye"></i>
+                                                <span style="font-size: 0.75rem;">Cuota Objetivo</span>
+                                            </div>
+                                        </label>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Filtrar por Cuota Máxima Evento</label>
-                                    <div class="range-odds-container">
-                                        <input type="range" id="input-max-odd" class="form-range" min="1.3" max="5.0" value="2.5" step="0.1">
-                                        <div class="odds-val"><span id="odd-max-display">2.50</span></div>
+                                <!-- Target Odd Mode -->
+                                <div class="form-group" id="group-target-mode" style="display: none; padding: 15px; border-radius: 8px; background: rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.2);">
+                                    <div class="label-with-value">
+                                        <label class="form-label" style="color: var(--accent-cyan);">Cuota Final Deseada</label>
+                                        <span id="target-odd-display" class="badge" style="background: var(--accent-cyan); color: var(--bg-dark);">1.80</span>
+                                    </div>
+                                    <input type="range" id="input-target-odd" class="form-range" min="1.1" max="10.0" value="1.8" step="0.1">
+                                    <div class="slider-hint" style="color: var(--text-muted); margin-top: 8px;">La IA agrupará picks (parlay) hasta rozar esta cuota (±0.15).</div>
+                                </div>
+
+                                <!-- Profile Mode -->
+                                <div id="group-profile-mode">
+                                    <div class="form-group">
+                                        <div class="label-with-value">
+                                            <label class="form-label">Perfil de Riesgo</label>
+                                            <span id="risk-value-display" class="badge bg-green">Conservador</span>
+                                        </div>
+                                        <input type="range" id="input-risk" class="form-range" min="1" max="3" value="1" step="1">
+                                        <div class="range-labels">
+                                            <span>Conservador</span>
+                                            <span>Equilibrado</span>
+                                            <span>Agresivo</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Filtrar por Cuota Máxima Evento</label>
+                                        <div class="range-odds-container">
+                                            <input type="range" id="input-max-odd" class="form-range" min="1.3" max="5.0" value="2.5" step="0.1">
+                                            <div class="odds-val"><span id="odd-max-display">2.50</span></div>
+                                        </div>
                                     </div>
                                 </div>
 
