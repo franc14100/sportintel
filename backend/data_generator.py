@@ -1732,6 +1732,33 @@ def generate_daily_sports_data():
         star_confidence_3 = 55
         star_reasoning_3 = "Boleto Soñador de contingencia (Cuota @5.25)."
 
+    # PERSISTENCE LOCK: If today's tickets were already generated earlier today, preserve them so they NEVER change mid-day!
+    if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
+        print("[INFO] Boletos Estrella de hoy bloqueados y preservados para evitar cambios durante el día.")
+        st1 = raw_previous_json.get("star_ticket_1", {})
+        if st1 and st1.get("selections"):
+            ticket_type_1 = st1.get("type", ticket_type_1)
+            star_selections_1 = st1.get("selections", star_selections_1)
+            total_odd_1 = st1.get("total_odd", total_odd_1)
+            star_confidence_1 = st1.get("confidence", star_confidence_1)
+            star_reasoning_1 = st1.get("reasoning", star_reasoning_1)
+
+        st2 = raw_previous_json.get("star_ticket_2", {})
+        if st2 and st2.get("selections"):
+            ticket_type_2 = st2.get("type", ticket_type_2)
+            star_selections_2 = st2.get("selections", star_selections_2)
+            total_odd_2 = st2.get("total_odd", total_odd_2)
+            star_confidence_2 = st2.get("confidence", star_confidence_2)
+            star_reasoning_2 = st2.get("reasoning", star_reasoning_2)
+
+        st3 = raw_previous_json.get("star_ticket_3", {})
+        if st3 and st3.get("selections"):
+            ticket_type_3 = st3.get("type", ticket_type_3)
+            star_selections_3 = st3.get("selections", star_selections_3)
+            total_odd_3 = st3.get("total_odd", total_odd_3)
+            star_confidence_3 = st3.get("confidence", star_confidence_3)
+            star_reasoning_3 = st3.get("reasoning", star_reasoning_3)
+
     total_won = previous_data.get("global_stats", {}).get("total_picks_won", 0) if previous_data else 0
     total_lost = previous_data.get("global_stats", {}).get("total_picks_lost", 0) if previous_data else 0
     
@@ -1879,10 +1906,11 @@ def generate_daily_sports_data():
         "status": "pending"
     }
 
-    # Evitar duplicados del mismo día
-    historical_registry = [t for t in historical_registry if t.get("date") != date_str]
-    historical_registry.append(new_ticket_1)
-    historical_registry.append(new_ticket_2)
+    # Evitar duplicados del mismo día: conservar boletos de hoy si ya existían para mantener fijos los IDs y selecciones
+    today_tickets_exist = any(t.get("date") == date_str for t in historical_registry)
+    if not today_tickets_exist:
+        historical_registry.append(new_ticket_1)
+        historical_registry.append(new_ticket_2)
     
     # Mantener el registro compacto (últimos 30 boletos recomendados)
     historical_registry = historical_registry[-30:]
