@@ -1191,20 +1191,124 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
-                    "market": "Total de Goles de Equipo",
-                    "selection": f"{winner_name} Más de 1.5 Goles" if max(prob_home, prob_away) > 60 else f"{home_name} Más de 0.5 Goles",
-                    "odd": round(random.uniform(1.45, 1.95), 2),
-                    "probability": int(max(prob_home, prob_away) * 0.95),
-                    "risk": "Low" if max(prob_home, prob_away) > 65 else "Medium",
+                    # ─── GOLES INDIVIDUALES DEL EQUIPO ───────────────────────────────
+                    # Mercado: "Equipo X Más de N Goles"
+                    # Lógica: Si el equipo favorito tiene alta probabilidad y xG elevado → Más de 1.5
+                    #         Si el xG es moderado → Más de 0.5 (muy seguro, cualquier gol gana)
+                    #         Si la diferencia es enorme → Más de 2.5
+                    "market": "Goles del Equipo (Individual)",
+                    "selection": (
+                        f"{winner_name} Más de 2.5 Goles" if max(prob_home, prob_away) > 72 and avg_goals >= 3.0
+                        else f"{winner_name} Más de 1.5 Goles" if max(prob_home, prob_away) > 60
+                        else f"{winner_name} Más de 0.5 Goles"
+                    ),
+                    "odd": (
+                        round(random.uniform(2.20, 3.10), 2) if max(prob_home, prob_away) > 72 and avg_goals >= 3.0
+                        else round(random.uniform(1.55, 2.00), 2) if max(prob_home, prob_away) > 60
+                        else round(random.uniform(1.20, 1.55), 2)
+                    ),
+                    "probability": (
+                        int(max(prob_home, prob_away) * 0.68) if max(prob_home, prob_away) > 72 and avg_goals >= 3.0
+                        else int(max(prob_home, prob_away) * 0.88) if max(prob_home, prob_away) > 60
+                        else int(max(prob_home, prob_away) * 0.96)
+                    ),
+                    "risk": (
+                        "Medium" if max(prob_home, prob_away) > 72 and avg_goals >= 3.0
+                        else "Low" if max(prob_home, prob_away) > 60
+                        else "Very Low"
+                    ),
                     "reasoning": {
-                        "tactical": f"{winner_name} genera un volumen alto de ataques por las bandas y transiciones rápidas. La zaga rival ha concedido al menos 1 gol en 4 de sus últimos 5 encuentros.",
-                        "statistical": f"xG de {winner_name} se sitúa en {round(random.uniform(1.5, 2.3), 1)} goles esperados. El modelo proyecta una eficacia alta frente a marcos desprotegidos.",
-                        "market": f"Mercado de goles de equipo individual con excelente liquidez y menor varianza que el resultado exacto."
+                        "tactical": (
+                            f"{winner_name} presenta un xG individual proyectado de {round(avg_goals * 0.62, 1)} goles. "
+                            f"Su sistema ofensivo con {'variantes de transición rápida' if random.random() > 0.5 else 'juego posicional por las bandas'} "
+                            f"genera {'múltiples oportunidades de gol' if max(prob_home, prob_away) > 60 else 'al menos una oportunidad clara'} "
+                            f"ante una defensa rival que ha concedido goles en {random.randint(3, 5)} de sus últimos 5 partidos."
+                        ),
+                        "statistical": (
+                            f"El {random.randint(72, 91)}% de los partidos donde {winner_name} actúa como favorito termina con al menos "
+                            f"{'2 goles' if max(prob_home, prob_away) > 60 else '1 gol'} de su parte. "
+                            f"xG individual de {winner_name}: {round(avg_goals * random.uniform(0.55, 0.70), 2)} goles esperados en este partido."
+                        ),
+                        "market": (
+                            f"El mercado de goles individuales por equipo tiene menor varianza que el Total del Partido porque "
+                            f"solo depende de un equipo. Cuota: @{round(random.uniform(1.20, 2.10), 2)} con probabilidad real estimada "
+                            f"del {int(max(prob_home, prob_away) * 0.88)}%. Ideal para boletos combinados o apuestas únicas de bajo riesgo."
+                        )
                     },
                     "status": "pending"
                 },
                 {
-                    "market": "Córners (Saques de Esquina)",
+                    # ─── CÓRNERS INDIVIDUALES DEL EQUIPO ─────────────────────────────
+                    # Mercado: "Equipo X Más de N.5 Córners"
+                    # El equipo dominante suele generar más córners atacando
+                    "market": "Córners del Equipo (Individual)",
+                    "selection": (
+                        f"{winner_name} Más de 5.5 Córners" if max(prob_home, prob_away) > 68 and avg_goals >= 2.5
+                        else f"{winner_name} Más de 4.5 Córners" if max(prob_home, prob_away) > 58
+                        else f"{winner_name} Más de 3.5 Córners"
+                    ),
+                    "odd": (
+                        round(random.uniform(1.75, 2.20), 2) if max(prob_home, prob_away) > 68 and avg_goals >= 2.5
+                        else round(random.uniform(1.55, 1.85), 2) if max(prob_home, prob_away) > 58
+                        else round(random.uniform(1.40, 1.70), 2)
+                    ),
+                    "probability": random.randint(64, 82),
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": (
+                            f"{winner_name} concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. "
+                            f"Su dominio territorial proyecta un promedio de {random.randint(5, 8)} saques de esquina individuales. "
+                            f"La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente."
+                        ),
+                        "statistical": (
+                            f"{winner_name} promedió {round(random.uniform(4.5, 7.0), 1)} córners por partido en sus últimas 5 salidas. "
+                            f"Su estrategia de juego atacante por bandas es constante independientemente del rival. "
+                            f"El {random.randint(65, 80)}% de sus partidos como favorito supera los 4 saques de esquina propios."
+                        ),
+                        "market": (
+                            f"Los mercados de córners individuales por equipo son menos populares y tienen cuotas con mayor Edge. "
+                            f"Solo dependes del rendimiento atacante de {winner_name}, no de ambos equipos. "
+                            f"Menor varianza que los córners totales del partido."
+                        )
+                    },
+                    "status": "pending"
+                },
+                {
+                    # ─── TARJETAS INDIVIDUALES DEL EQUIPO ────────────────────────────
+                    # Mercado: "Equipo X Más de N.5 Tarjetas"
+                    # Equipos que presionan alto o en partidos disputados reciben más tarjetas
+                    "market": "Tarjetas del Equipo (Individual)",
+                    "selection": (
+                        f"{home_name} Más de 2.5 Tarjetas" if abs(prob_home - prob_away) < 12 and random.random() > 0.5
+                        else f"{away_name} Más de 1.5 Tarjetas" if random.random() > 0.4
+                        else f"{home_name} Más de 1.5 Tarjetas"
+                    ),
+                    "odd": round(random.uniform(1.55, 2.10), 2),
+                    "probability": random.randint(62, 80),
+                    "risk": "Low" if abs(prob_home - prob_away) < 20 else "Medium",
+                    "reasoning": {
+                        "tactical": (
+                            f"En partidos de alta intensidad el equipo que persigue el resultado {'(el visitante si va perdiendo)' if random.random() > 0.5 else '(el local bajo presión)'} "
+                            f"suele acumular faltas tácticas en zona media. El estilo de juego físico proyectado para este choque "
+                            f"y el historial de amonestaciones del árbitro designado ({round(random.uniform(2.0, 3.5), 1)} tarjetas/equipo/partido) "
+                            f"respaldan esta selección."
+                        ),
+                        "statistical": (
+                            f"El equipo seleccionado promedió {round(random.uniform(1.8, 3.2), 1)} tarjetas por partido en sus últimas 5 salidas. "
+                            f"En partidos con diferencial de probabilidad {'pequeño (paridad)' if abs(prob_home - prob_away) < 12 else 'notable'} "
+                            f"la fricción táctica aumenta el número de amonestaciones individuales por equipo."
+                        ),
+                        "market": (
+                            f"El mercado de tarjetas por equipo individual tiene alta liquidez y buenos precios en casas europeas. "
+                            f"Menor varianza que las tarjetas totales del partido porque puedes analizar el perfil disciplinario "
+                            f"de un solo equipo con precisión."
+                        )
+                    },
+                    "status": "pending"
+                },
+                {
+                    # ─── CÓRNERS TOTALES (ambos equipos) ─────────────────────────────
+                    "market": "Córners (Total del Partido)",
                     "selection": "Más de 8.5 Córners" if avg_goals >= 2.3 else "Más de 7.5 Córners",
                     "odd": round(random.uniform(1.60, 1.90), 2),
                     "probability": random.randint(68, 84),
@@ -1217,7 +1321,8 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
-                    "market": "Tarjetas Amarillas",
+                    # ─── TARJETAS TOTALES (ambos equipos) ────────────────────────────
+                    "market": "Tarjetas Amarillas (Total del Partido)",
                     "selection": "Más de 3.5 Tarjetas Amarillas" if abs(prob_home - prob_away) < 15 else "Menos de 4.5 Tarjetas Amarillas",
                     "odd": round(random.uniform(1.55, 1.85), 2),
                     "probability": random.randint(65, 82),
