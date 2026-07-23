@@ -2903,6 +2903,61 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (bankrollWinrateVal) bankrollWinrateVal.textContent = `${winrate.toFixed(1)}%`;
 
+        // Dynamic Projections Logic (Monthly Recalibration Model)
+        let activeDays = 1;
+        if (userBets.length > 0 && userBets[0].date) {
+            const firstDate = new Date(userBets[0].date);
+            const diffTime = Math.abs(new Date() - firstDate);
+            activeDays = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+        }
+        
+        let monthlyRoi = 0;
+        if (netProfit > 0 && startingBankroll > 0) {
+            const totalRoi = netProfit / startingBankroll;
+            monthlyRoi = totalRoi * (30 / activeDays);
+        }
+        // Cap monthly ROI projection between 0 and 1.5 (150% max) to avoid astronomical fake numbers
+        monthlyRoi = Math.max(0, Math.min(1.5, monthlyRoi));
+
+        const pEndMonthEl = document.getElementById("proj-end-month");
+        const pEndMonthProfEl = document.getElementById("proj-end-month-profit");
+        const p3mEl = document.getElementById("proj-3-months");
+        const p3mProfEl = document.getElementById("proj-3-months-profit");
+        const p6mEl = document.getElementById("proj-6-months");
+        const p6mProfEl = document.getElementById("proj-6-months-profit");
+        const p1yEl = document.getElementById("proj-1-year");
+        const p1yProfEl = document.getElementById("proj-1-year-profit");
+
+        if (pEndMonthEl && monthlyRoi > 0) {
+            const now = new Date();
+            const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+            const daysToEndMonth = Math.max(0, Math.floor((endOfMonth - now) / (1000 * 60 * 60 * 24)));
+            
+            // End of month is just linear portion of this month's ROI based on current equity
+            const endMonthVal = currentBalance + (currentBalance * monthlyRoi * (daysToEndMonth / 30));
+            pEndMonthEl.textContent = `$${endMonthVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            pEndMonthProfEl.textContent = `+$${(endMonthVal - currentBalance).toFixed(2)} extra`;
+
+            // For months ahead, use stepped compound formula: Balance * (1 + monthlyRoi)^months
+            const m3Val = endMonthVal * Math.pow(1 + monthlyRoi, 2); 
+            p3mEl.textContent = `$${m3Val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            p3mProfEl.textContent = `+$${(m3Val - currentBalance).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+
+            const m6Val = endMonthVal * Math.pow(1 + monthlyRoi, 5); 
+            p6mEl.textContent = `$${m6Val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            p6mProfEl.textContent = `+$${(m6Val - currentBalance).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+
+            const y1Val = endMonthVal * Math.pow(1 + monthlyRoi, 11);
+            p1yEl.textContent = `$${y1Val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            p1yProfEl.textContent = `+$${(y1Val - currentBalance).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+        } else if (pEndMonthEl) {
+            pEndMonthEl.textContent = "--";
+            pEndMonthProfEl.textContent = "Requiere ROI positivo";
+            if (p3mEl) p3mEl.textContent = "--";
+            if (p6mEl) p6mEl.textContent = "--";
+            if (p1yEl) p1yEl.textContent = "--";
+        }
+
         if (resolvedBetsCount > 0) {
             const displayWinrate = `${winrate.toFixed(1)}%`;
             if (statAccuracy) statAccuracy.textContent = displayWinrate;
