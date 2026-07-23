@@ -2105,7 +2105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const totalOdd = accumulatedOdd;
-        const avgConfidence = Math.round(sumConfidence / count);
+        const avgConfidence = Math.round(sumConfidence / selectedPicks.length);
         const potentialPayout = stake * totalOdd;
 
         // Render Generated Ticket values
