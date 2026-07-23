@@ -266,18 +266,17 @@
                     </div>
 
                     <!-- Column 2: Performance Chart & AI Stats -->
-                    <div class="card chart-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="card chart-card" style="align-self: start; display: flex; flex-direction: column;">
                         <div class="card-header">
                             <h3>Rendimiento del Analista IA</h3>
                             <span class="sub">Tasa de acierto acumulada (%) y métricas de modelo</span>
                         </div>
-                        <div class="card-body" style="display: flex; flex-direction: column; gap: 15px; flex: 1;">
+                        <div class="card-body" style="display: flex; flex-direction: column; gap: 15px;">
                             <div class="chart-container" style="height: 220px; min-height: 180px; width: 100%;">
                                 <canvas id="performance-chart"></canvas>
                             </div>
-                            
                             <!-- AI Performance KPI Metrics Bar -->
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border-color);">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; padding-top: 10px; border-top: 1px solid var(--border-color);">
                                 <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; text-align: center;">
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Efectividad</div>
                                     <div style="font-size: 1.25rem; font-weight: 800; color: var(--accent-green); margin-top: 2px;" id="chart-stat-accuracy">85.0%</div>
