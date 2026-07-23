@@ -1234,6 +1234,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const labels = ["Día -14", "Día -13", "Día -12", "Día -11", "Día -10", "Día -9", "Día -8", "Día -7", "Día -6", "Día -5", "Día -4", "Día -3", "Día -2", "Día -1", "Hoy"];
         const dataValues = [72, 74, 73, 75, 77, 76, 78, 80, 79, 81, 83, 82, 84, 85, Math.max(75, Math.min(95, Math.round(baseAccuracy)))];
 
+        // Compute dynamic Y axis range (tight fit around data)
+        const dMin = Math.min(...dataValues);
+        const dMax = Math.max(...dataValues);
+        const dPad = Math.max(3, Math.ceil((dMax - dMin) * 0.2));
+        const yAxisMin = Math.max(0, Math.floor((dMin - dPad) / 5) * 5);
+        const yAxisMax = Math.min(100, Math.ceil((dMax + dPad) / 5) * 5);
+        const yStep = (yAxisMax - yAxisMin) <= 20 ? 5 : 10;
+
         // 1. Try rendering with Chart.js if library loaded
         if (typeof Chart !== "undefined") {
             try {
@@ -1242,7 +1250,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     window.performanceChartInstance.destroy();
                 }
 
-                const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+                const gradient = ctx.createLinearGradient(0, 0, 0, 200);
                 gradient.addColorStop(0, 'rgba(6, 182, 212, 0.4)');
                 gradient.addColorStop(0.5, 'rgba(16, 185, 129, 0.15)');
                 gradient.addColorStop(1, 'rgba(8, 11, 17, 0.0)');
@@ -1290,13 +1298,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ticks: { color: "#6B7280", font: { family: "Outfit", size: 10 } }
                             },
                             y: {
-                                min: 50,
-                                max: 100,
-                                grid: { color: "rgba(255, 255, 255, 0.03)" },
+                                min: yAxisMin,
+                                max: yAxisMax,
+                                grid: { color: "rgba(255, 255, 255, 0.04)" },
                                 ticks: {
                                     color: "#6B7280",
                                     font: { family: "Outfit", size: 10 },
-                                    stepSize: 10,
+                                    stepSize: yStep,
                                     callback: function(value) { return value + "%"; }
                                 }
                             }
@@ -1335,8 +1343,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const graphW = width - padLeft - padRight;
         const graphH = height - padTop - padBottom;
 
-        const minY = 50;
-        const maxY = 100;
+        const minY = yAxisMin;
+        const maxY = yAxisMax;
 
         // Draw horizontal grid lines and Y-axis labels
         ctx.textAlign = "right";
@@ -1346,7 +1354,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
         ctx.lineWidth = 1;
 
-        for (let yVal = minY; yVal <= maxY; yVal += 10) {
+        for (let yVal = minY; yVal <= maxY; yVal += yStep) {
             const yPos = padTop + graphH - ((yVal - minY) / (maxY - minY)) * graphH;
             ctx.fillText(yVal + "%", padLeft - 8, yPos);
             ctx.beginPath();
