@@ -502,13 +502,7 @@
                         "statistical": "Promedio acumulado de FK Qarabag (5 córners) y CSKA Sofia (4 córners) proyecta un total de 9 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "0-0",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 8.5 Córners' en el mercado 'Córners (Saques de Esquina)' no se cumplió. Resultado final: 0-0.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Tarjetas Amarillas",
@@ -521,13 +515,7 @@
                         "statistical": "Promedio del árbitro designado: 4.1 tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
                         "market": "Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "0-0",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 3.5 Tarjetas Amarillas' en el mercado 'Tarjetas Amarillas' no se cumplió. Resultado final: 0-0.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 }
             ]
         },
@@ -2827,13 +2815,7 @@
                         "statistical": "Promedio del árbitro designado: 5.1 tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
                         "market": "Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "2-0",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 3.5 Tarjetas Amarillas' en el mercado 'Tarjetas Amarillas' no se cumplió. Resultado final: 2-0.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Córners (Saques de Esquina)",
@@ -2846,13 +2828,7 @@
                         "statistical": "Promedio acumulado de KF Malisheva (6 córners) y Hibernian (6 córners) proyecta un total de 12 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "2-0",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 7.5 Córners' en el mercado 'Córners (Saques de Esquina)' no se cumplió. Resultado final: 2-0.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Ambos Equipos Anotan",
@@ -3088,13 +3064,7 @@
                         "statistical": "Promedio del árbitro designado: 4.3 tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
                         "market": "Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
-                    "status": "won",
-                    "post_analysis": {
-                        "result": "1-1",
-                        "verdict": "✅ Predicción correcta",
-                        "explanation": "El resultado final fue Alashkert FC 1-1 CFR Cluj-Napoca. La selección 'Menos de 4.5 Tarjetas Amarillas' en el mercado 'Tarjetas Amarillas' se cumplió exactamente como proyectó la IA.",
-                        "lesson": "El análisis de forma reciente y estadísticas H2H funcionaron correctamente para este tipo de partido. Continuar priorizando este mercado en condiciones similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Más/Menos 2.5 Goles",
@@ -3356,13 +3326,7 @@
                         "statistical": "Promedio acumulado de FK Liepaja (6 córners) y Austria Vienna (6 córners) proyecta un total de 13 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "0-2",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 7.5 Córners' en el mercado 'Córners (Saques de Esquina)' no se cumplió. Resultado final: 0-2.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Tarjetas Amarillas",
@@ -3375,13 +3339,7 @@
                         "statistical": "Promedio del árbitro designado: 4.9 tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
                         "market": "Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "0-2",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 3.5 Tarjetas Amarillas' en el mercado 'Tarjetas Amarillas' no se cumplió. Resultado final: 0-2.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Doble Oportunidad",
@@ -3645,13 +3603,7 @@
                         "statistical": "Promedio acumulado de Panevezys (6 córners) y Tobol Kostanay (4 córners) proyecta un total de 11 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "1-1",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 8.5 Córners' en el mercado 'Córners (Saques de Esquina)' no se cumplió. Resultado final: 1-1.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Tarjetas Amarillas",
@@ -3664,13 +3616,7 @@
                         "statistical": "Promedio del árbitro designado: 3.9 tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
                         "market": "Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "1-1",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 3.5 Tarjetas Amarillas' en el mercado 'Tarjetas Amarillas' no se cumplió. Resultado final: 1-1.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Más/Menos 2.5 Goles",
@@ -3907,13 +3853,7 @@
                         "statistical": "Promedio acumulado de Debrecen (7 córners) y Pyunik (6 córners) proyecta un total de 11 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "1-0",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 8.5 Córners' en el mercado 'Córners (Saques de Esquina)' no se cumplió. Resultado final: 1-0.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Doble Oportunidad",
@@ -4183,13 +4123,7 @@
                         "statistical": "Promedio acumulado de Dila Gori (7 córners) y Apollon Limassol (3 córners) proyecta un total de 10 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "0-4",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 8.5 Córners' en el mercado 'Córners (Saques de Esquina)' no se cumplió. Resultado final: 0-4.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Más/Menos 2.5 Goles",
@@ -4457,13 +4391,7 @@
                         "statistical": "Promedio acumulado de Flora (7 córners) y The New Saints (3 córners) proyecta un total de 13 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "1-0",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 7.5 Córners' en el mercado 'Córners (Saques de Esquina)' no se cumplió. Resultado final: 1-0.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Doble Oportunidad",
@@ -4495,13 +4423,7 @@
                         "statistical": "Promedio del árbitro designado: 4.5 tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
                         "market": "Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
-                    "status": "won",
-                    "post_analysis": {
-                        "result": "1-0",
-                        "verdict": "✅ Predicción correcta",
-                        "explanation": "El resultado final fue Flora 1-0 The New Saints. La selección 'Menos de 4.5 Tarjetas Amarillas' en el mercado 'Tarjetas Amarillas' se cumplió exactamente como proyectó la IA.",
-                        "lesson": "El análisis de forma reciente y estadísticas H2H funcionaron correctamente para este tipo de partido. Continuar priorizando este mercado en condiciones similares."
-                    }
+                    "status": "pending"
                 }
             ]
         },
@@ -4737,13 +4659,7 @@
                         "statistical": "Promedio del árbitro designado: 5.1 tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
                         "market": "Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
-                    "status": "won",
-                    "post_analysis": {
-                        "result": "5-0",
-                        "verdict": "✅ Predicción correcta",
-                        "explanation": "El resultado final fue HJK Helsinki 5-0 Coleraine. La selección 'Más de 3.5 Tarjetas Amarillas' en el mercado 'Tarjetas Amarillas' se cumplió exactamente como proyectó la IA.",
-                        "lesson": "El análisis de forma reciente y estadísticas H2H funcionaron correctamente para este tipo de partido. Continuar priorizando este mercado en condiciones similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Córners (Saques de Esquina)",
@@ -4756,13 +4672,7 @@
                         "statistical": "Promedio acumulado de HJK Helsinki (4 córners) y Coleraine (3 córners) proyecta un total de 12 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "5-0",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 8.5 Córners' en el mercado 'Córners (Saques de Esquina)' no se cumplió. Resultado final: 5-0.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Ambos Equipos Anotan",
@@ -5017,13 +4927,7 @@
                         "statistical": "Promedio acumulado de Paide Linnameeskond (4 córners) y Zira FK (6 córners) proyecta un total de 11 saques de esquina.",
                         "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "1-0",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 8.5 Córners' en el mercado 'Córners (Saques de Esquina)' no se cumplió. Resultado final: 1-0.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Tarjetas Amarillas",
@@ -5036,13 +4940,7 @@
                         "statistical": "Promedio del árbitro designado: 4.0 tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
                         "market": "Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
-                    "status": "lost",
-                    "post_analysis": {
-                        "result": "1-0",
-                        "verdict": "❌ Predicción incorrecta",
-                        "explanation": "La selección 'Más de 3.5 Tarjetas Amarillas' en el mercado 'Tarjetas Amarillas' no se cumplió. Resultado final: 1-0.",
-                        "lesson": "Revisar el razonamiento estadístico para este tipo de mercado en futuros análisis similares."
-                    }
+                    "status": "pending"
                 },
                 {
                     "market": "Ambos Equipos Anotan",
