@@ -455,6 +455,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const riskValueDisplay = document.getElementById("risk-value-display");
     const inputMaxOdd = document.getElementById("input-max-odd");
     const oddMaxDisplay = document.getElementById("odd-max-display");
+    
+    const groupTargetMode = document.getElementById("group-target-mode");
+    const groupProfileMode = document.getElementById("group-profile-mode");
+    const inputTargetOdd = document.getElementById("input-target-odd");
+    const targetOddDisplay = document.getElementById("target-odd-display");
+
     const ticketEmptyState = document.getElementById("ticket-empty-state");
     const ticketLoadingState = document.getElementById("ticket-loading-state");
     const ticketMainContent = document.getElementById("ticket-main-content");
@@ -1929,6 +1935,25 @@ document.addEventListener("DOMContentLoaded", () => {
         oddMaxDisplay.textContent = parseFloat(e.target.value).toFixed(2);
     });
 
+    if (inputTargetOdd) {
+        inputTargetOdd.addEventListener("input", (e) => {
+            targetOddDisplay.textContent = parseFloat(e.target.value).toFixed(2);
+        });
+    }
+
+    const genModeRadios = document.querySelectorAll("input[name='gen-mode']");
+    genModeRadios.forEach(radio => {
+        radio.addEventListener("change", (e) => {
+            if (e.target.value === "target") {
+                if(groupTargetMode) groupTargetMode.style.display = "block";
+                if(groupProfileMode) groupProfileMode.style.display = "none";
+            } else {
+                if(groupTargetMode) groupTargetMode.style.display = "none";
+                if(groupProfileMode) groupProfileMode.style.display = "block";
+            }
+        });
+    });
+
     betGeneratorForm.addEventListener("submit", (e) => {
         e.preventDefault();
         
@@ -1939,18 +1964,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Read form inputs
         const selectedSport = document.querySelector("input[name='gen-sport']:checked").value;
+        const genMode = document.querySelector("input[name='gen-mode']:checked").value;
         const stake = parseFloat(document.getElementById("input-stake").value);
         const riskLevel = parseInt(inputRisk.value);
         const maxOddAllowed = parseFloat(inputMaxOdd.value);
+        const targetOddVal = parseFloat(inputTargetOdd ? inputTargetOdd.value : 1.8);
 
         // Simulate advanced AI parsing calculation
         setTimeout(() => {
             ticketLoadingState.classList.add("hidden");
-            generateAlgorithmTicket(selectedSport, stake, riskLevel, maxOddAllowed);
+            generateAlgorithmTicket(selectedSport, stake, genMode, riskLevel, maxOddAllowed, targetOddVal);
         }, 1500);
     });
 
-    function generateAlgorithmTicket(sport, stake, riskVal, maxOdd) {
+    function generateAlgorithmTicket(sport, stake, genMode, riskVal, maxOdd, targetOdd) {
         if (!appData) return;
 
         // Filter valid matches and picks
@@ -1981,30 +2008,78 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Sort picks based on risk mapping
-        // Conservador: prefiere probability alta y risk "Low"
-        // Equilibrado: prefiere risk "Low" y "Medium"
-        // Agresivo: prefiere cuotas más jugosas, incluye risk "High"
-        let filteredPicks = [];
-        if (riskVal === 1) { // Conservador
-            filteredPicks = availablePicks.filter(p => p.risk === "Low" || p.probability >= 60);
-        } else if (riskVal === 2) { // Equilibrado
-            filteredPicks = availablePicks.filter(p => p.risk === "Medium" || p.risk === "Low");
-        } else { // Agresivo
-            filteredPicks = availablePicks;
-        }
+        let selectedPicks = [];
 
-        // Si no hay suficientes tras filtrar por riesgo, usar los más probables disponibles
-        if (filteredPicks.length === 0) {
-            filteredPicks = availablePicks;
-        }
+        if (genMode === "target") {
+            // Greedy Algorithm for Target Odd
+            // 1. Sort all available picks by Probability (Safest first)
+            availablePicks.sort((a, b) => b.probability - a.probability);
+            
+            // Allow up to 5 picks max
+            const MAX_PICKS = 5;
+            const TOLERANCE = 0.15;
+            let currentOdd = 1.0;
+            let tempPicks = [];
 
-        // Seleccionar aleatoriamente pero controlado entre 2 y 3 picks para armar la combinada
-        // Ordenar por relevancia y probabilidad
-        filteredPicks.sort((a, b) => b.probability - a.probability);
-        
-        const count = Math.min(filteredPicks.length, riskVal === 1 ? 2 : (riskVal === 2 ? 3 : 4));
-        const selectedPicks = filteredPicks.slice(0, count);
+            // First, try to find a SINGLE pick that matches the target odd within tolerance
+            const singleMatch = availablePicks.find(p => Math.abs(p.odd - targetOdd) <= TOLERANCE);
+            if (singleMatch) {
+                selectedPicks.push(singleMatch);
+            } else {
+                // If no single match, try combining safest picks
+                for (let i = 0; i < availablePicks.length; i++) {
+                    const candidate = availablePicks[i];
+                    // Skip if combining this would overshoot by more than tolerance
+                    if ((currentOdd * candidate.odd) > (targetOdd + TOLERANCE)) {
+                        continue;
+                    }
+                    
+                    tempPicks.push(candidate);
+                    currentOdd *= candidate.odd;
+
+                    if (currentOdd >= (targetOdd - TOLERANCE) && currentOdd <= (targetOdd + TOLERANCE)) {
+                        // Found a valid combination!
+                        break;
+                    }
+
+                    if (tempPicks.length >= MAX_PICKS) {
+                        break;
+                    }
+                }
+                selectedPicks = tempPicks;
+            }
+
+            if (selectedPicks.length === 0) {
+                // Fallback if target is unreachable
+                selectedPicks = availablePicks.slice(0, 2);
+            }
+
+        } else {
+            // Sort picks based on risk mapping
+            // Conservador: prefiere probability alta y risk "Low"
+            // Equilibrado: prefiere risk "Low" y "Medium"
+            // Agresivo: prefiere cuotas más jugosas, incluye risk "High"
+            let filteredPicks = [];
+            if (riskVal === 1) { // Conservador
+                filteredPicks = availablePicks.filter(p => p.risk === "Low" || p.probability >= 60);
+            } else if (riskVal === 2) { // Equilibrado
+                filteredPicks = availablePicks.filter(p => p.risk === "Medium" || p.risk === "Low");
+            } else { // Agresivo
+                filteredPicks = availablePicks;
+            }
+
+            // Si no hay suficientes tras filtrar por riesgo, usar los más probables disponibles
+            if (filteredPicks.length === 0) {
+                filteredPicks = availablePicks;
+            }
+
+            // Seleccionar aleatoriamente pero controlado entre 2 y 3 picks para armar la combinada
+            // Ordenar por relevancia y probabilidad
+            filteredPicks.sort((a, b) => b.probability - a.probability);
+            
+            const count = Math.min(filteredPicks.length, riskVal === 1 ? 2 : (riskVal === 2 ? 3 : 4));
+            selectedPicks = filteredPicks.slice(0, count);
+        }
 
         // Calculate Totals
         let accumulatedOdd = 1.0;
