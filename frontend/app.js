@@ -4683,6 +4683,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let totalPicks = 0;
         let wonPicks = 0;
         let lostPicks = 0;
+        let totalInvested = 0;
+        let totalReturned = 0;
 
         sortedMatches.forEach(match => {
             // Determine match status label and colors
@@ -4709,13 +4711,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (mainPick) {
                 totalPicks++;
-                if (mainPick.status === "won" || mainPick.status === "Acertado") wonPicks++;
-                else if (mainPick.status === "lost" || mainPick.status === "Fallado") lostPicks++;
+                const isWon = mainPick.status === "won" || mainPick.status === "Acertado";
+                const isLost = mainPick.status === "lost" || mainPick.status === "Fallado";
+                const odd = parseFloat(mainPick.odd) || 1.0;
+
+                if (isWon) {
+                    wonPicks++;
+                    totalInvested += 10;
+                    totalReturned += (10 * odd);
+                } else if (isLost) {
+                    lostPicks++;
+                    totalInvested += 10;
+                }
 
                 let statusPickBadge = "";
-                if (mainPick.status === "won" || mainPick.status === "Acertado") {
+                if (isWon) {
                     statusPickBadge = `<span class="badge bg-green" style="background: rgba(16,185,129,0.15); color: var(--accent-green); border:1px solid rgba(16,185,129,0.3); font-size:0.68rem; font-weight:700;"><i class="fa-solid fa-circle-check"></i> Acertado</span>`;
-                } else if (mainPick.status === "lost" || mainPick.status === "Fallado") {
+                } else if (isLost) {
                     statusPickBadge = `<span class="badge bg-red" style="background: rgba(239,68,68,0.15); color: var(--accent-red); border:1px solid rgba(239,68,68,0.3); font-size:0.68rem; font-weight:700;"><i class="fa-solid fa-circle-xmark"></i> Fallado</span>`;
                 } else {
                     statusPickBadge = `<span class="badge bg-yellow" style="background: rgba(245,158,11,0.15); color: #f59e0b; border:1px solid rgba(245,158,11,0.3); font-size:0.68rem; font-weight:700;"><i class="fa-solid fa-hourglass-half"></i> Pendiente</span>`;
@@ -4797,6 +4809,30 @@ document.addEventListener("DOMContentLoaded", () => {
             const resolved = wonPicks + lostPicks;
             const pct = resolved > 0 ? ((wonPicks / resolved) * 100).toFixed(1) : "0.0";
             statPct.textContent = `${pct}%`;
+        }
+
+        // Update $10 USD Bankroll Exercise Simulation
+        const simInvestedEl = document.getElementById("sim-stat-invested");
+        const simReturnedEl = document.getElementById("sim-stat-returned");
+        const simProfitEl = document.getElementById("sim-stat-profit");
+        const simRoiEl = document.getElementById("sim-stat-roi");
+
+        const netProfit = totalReturned - totalInvested;
+        const roiVal = totalInvested > 0 ? ((netProfit / totalInvested) * 100).toFixed(1) : "0.0";
+
+        if (simInvestedEl) simInvestedEl.textContent = `$${totalInvested.toFixed(2)}`;
+        if (simReturnedEl) simReturnedEl.textContent = `$${totalReturned.toFixed(2)}`;
+        if (simProfitEl) {
+            const prefix = netProfit >= 0 ? "+$" : "-$";
+            const color = netProfit >= 0 ? "var(--accent-green)" : "var(--accent-red)";
+            simProfitEl.style.color = color;
+            simProfitEl.textContent = `${prefix}${Math.abs(netProfit).toFixed(2)}`;
+        }
+        if (simRoiEl) {
+            const prefix = netProfit >= 0 ? "+" : "";
+            const color = netProfit >= 0 ? "var(--accent-cyan)" : "var(--accent-red)";
+            simRoiEl.style.color = color;
+            simRoiEl.textContent = `${prefix}${roiVal}%`;
         }
 
         // Render post-match review section
