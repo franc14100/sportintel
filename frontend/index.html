@@ -701,62 +701,8 @@
                             </div>
 
                             <!-- Generated Ticket Content -->
-                            <div class="generated-ticket hidden" id="ticket-main-content">
-                                <div class="ticket-options-tabs" style="display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">
-                                    <button class="ticket-tab active" data-option="0" style="background: none; border: none; color: var(--accent-cyan); font-weight: bold; border-bottom: 2px solid var(--accent-cyan); cursor: pointer; padding: 5px 10px;">Opción 1</button>
-                                    <button class="ticket-tab" data-option="1" style="background: none; border: none; color: var(--text-muted); font-weight: normal; cursor: pointer; padding: 5px 10px;">Opción 2</button>
-                                    <button class="ticket-tab" data-option="2" style="background: none; border: none; color: var(--text-muted); font-weight: normal; cursor: pointer; padding: 5px 10px;">Opción 3</button>
-                                </div>
-                                <div class="ticket-glow-border"></div>
-                                <div class="ticket-header">
-                                    <div class="ticket-brand">
-                                        <i class="fa-solid fa-brain-circuit"></i>
-                                        <span>SportIntel AI Ticket</span>
-                                    </div>
-                                    <div class="ticket-id" id="lbl-ticket-id">#TK-837482</div>
-                                </div>
-                                
-                                <div class="ticket-subheader">
-                                    <div class="meta-item">
-                                        <span class="lbl">Riesgo</span>
-                                        <span class="val badge" id="ticket-risk-badge">Bajo</span>
-                                    </div>
-                                    <div class="meta-item">
-                                        <span class="lbl">Confianza</span>
-                                        <span class="val" id="ticket-confidence-val">85%</span>
-                                    </div>
-                                </div>
-
-                                <div class="ticket-events-list" id="ticket-events-container">
-                                    <!-- Dinámico -->
-                                </div>
-
-                                <div class="ticket-summary">
-                                    <div class="summary-row">
-                                        <span>Inversión (Stake)</span>
-                                        <span id="ticket-stake-display">$100.00</span>
-                                    </div>
-                                    <div class="summary-row">
-                                        <span>Cuota Total</span>
-                                        <span id="ticket-total-odd-display" class="highlight-odd">3.45</span>
-                                    </div>
-                                    <div class="divider"></div>
-                                    <div class="summary-row payout-row">
-                                        <span>Ganancia Potencial</span>
-                                        <span id="ticket-payout-display" class="highlight-payout">$345.00</span>
-                                    </div>
-                                </div>
-
-                                <div class="ticket-barcode-section">
-                                    <div class="barcode"></div>
-                                    <div class="barcode-number">SportIntel Algorithmic System 2.0</div>
-                                </div>
-
-                                <div class="ticket-actions">
-                                    <button class="btn btn-secondary btn-full-width" id="btn-export-ticket">
-                                        <i class="fa-solid fa-download"></i> Descargar Imagen del Boleto
-                                    </button>
-                                </div>
+                            <div id="tickets-multi-container" class="hidden" style="display: flex; flex-direction: column; gap: 30px; width: 100%;">
+                                <!-- Tickets injected dynamically -->
                             </div>
                         </div>
                     </div>
