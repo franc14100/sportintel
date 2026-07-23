@@ -4606,7 +4606,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             } else if (sel.includes(" o ")) {
                                 if (h !== a) graded = "won";
                             }
-                        } else if (mk.includes("Más/Menos") || mk.includes("Over/Under") || mk.includes("Total") || mk.includes("Puntos") || mk.includes("Sets") || mk.includes("Goles") || mk.includes("Córners") || mk.includes("Tarjetas")) {
+                        } else if (mk.includes("Más/Menos") || mk.includes("Over/Under") || mk.includes("Total") || mk.includes("Puntos") || mk.includes("Sets") || mk.includes("Goles") || mk.includes("Total de Goles")) {
                             // Extract numeric threshold dynamically from selection or market name
                             const numMatch = sel.match(/(\d+(?:\.\d+)?)/) || mk.match(/(\d+(?:\.\d+)?)/);
                             const limit = numMatch ? parseFloat(numMatch[1]) : 2.5;
@@ -4616,6 +4616,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             } else if (sel.includes("Menos") || sel.includes("Under")) {
                                 if (totalGoals < limit) graded = "won";
                             }
+                        } else if (mk.includes("Córners") || mk.includes("Saques de Esquina") || mk.includes("Tarjetas")) {
+                            // No tenemos datos de córners ni tarjetas desde el scraper (solo tenemos goles), 
+                            // por lo que no podemos calificar esto automáticamente.
+                            graded = "pending";
                         } else if (mk.includes("Ambos Equipos Anotan") || mk.includes("BTTS")) {
                             if ((sel === "Sí" || sel === "Yes") && h > 0 && a > 0) graded = "won";
                             else if (sel === "No" && (h === 0 || a === 0)) graded = "won";
@@ -4630,19 +4634,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             const teamScore = (sel.includes(m.home) || sel.includes("local")) ? h : a;
                             if (sel.includes("Más de") && teamScore > limit) graded = "won";
                             else if (sel.includes("Menos de") && teamScore < limit) graded = "won";
-                        } else if (mk.includes("Córners del Equipo")) {
-                            // Individual team corners: proxy with team's share of total corners
-                            // We don't have individual corner data so estimate: fav team gets ~55% of corners
-                            const numM = sel.match(/Más de (\d+(?:\.\d+)?)/);
-                            const limit = numM ? parseFloat(numM[1]) : 4.5;
-                            const estimatedTeamCorners = (sel.includes(m.home)) ? totalGoals * 2.1 : totalGoals * 1.8;
-                            if (estimatedTeamCorners > limit) graded = "won";
-                        } else if (mk.includes("Tarjetas del Equipo")) {
-                            // Individual team cards: estimate from total goals proxy
-                            const numM = sel.match(/Más de (\d+(?:\.\d+)?)/);
-                            const limit = numM ? parseFloat(numM[1]) : 1.5;
-                            const estimatedCards = Math.abs(h - a) < 2 ? 2.2 : 1.6;
-                            if (estimatedCards > limit) graded = "won";
+                        } else if (mk.includes("Córners del Equipo") || mk.includes("Tarjetas del Equipo")) {
+                            graded = "pending";
                         } else {
                             graded = (h > a && sel === m.home) ? "won" : ((a > h && sel === m.away) ? "won" : "lost");
                         }
