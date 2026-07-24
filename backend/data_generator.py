@@ -359,7 +359,7 @@ def fetch_live_matches():
 
 def fetch_odds_api_matches():
     """Obtiene partidos y cuotas REALES desde The Odds API (the-odds-api.com)."""
-    ODDS_API_KEY = 'bfa84e5857fdd5caa98e683c7b0a7e62'
+    ODDS_API_KEY = '269d7c2dc437dcbb4c535c8a7debeca8'
     
     SPORTS = [
         ('soccer_argentina_primera_division', 'Football', 'Primera División - Argentina'),
