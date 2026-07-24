@@ -2178,10 +2178,8 @@ def generate_daily_sports_data():
         ev = (confidence / 100.0) * odd
         ev_multiplier = max(0.8, min(1.5, ev))
         raw_stake = (safe_margin / 5.5) * ev_multiplier
-        if ticket_type == 1:
+        if ticket_type in [1, 2]:
             return round(max(1.0, min(10.0, raw_stake)), 1)
-        elif ticket_type == 2:
-            return round(max(1.0, min(8.0, raw_stake)), 1)
         else:
             return round(max(0.5, min(2.5, raw_stake * 0.3)), 1)
 
