@@ -1125,10 +1125,9 @@ def generate_daily_sports_data():
                     # ✅ Si caen 3+ goles → Ganamos
                     # ↩️ Si caen exactamente 2 goles → Devuelven el dinero (push/void)
                     # ❌ Si caen 0 o 1 goles → Perdemos
-                    # Es más seguro que Más de 2.5 porque eliminamos el riesgo del marcador 2-0 / 1-1 / 2-1 exacto
                     "market": "Total de Goles (Asian 2.0)",
                     "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
-                    "odd": round(max(1.15, over25_odd * 0.72 + random.uniform(0.02, 0.06)), 2),
+                    "odd": round(max(1.20, min(1.48, over25_odd * 0.757)), 2),
                     "probability": int(min(max(40 + avg_goals * 12, 30), 88)),
                     "risk": "Very Low" if avg_goals >= 2.2 else "Low",
                     "reasoning": {
@@ -1988,10 +1987,8 @@ def generate_daily_sports_data():
         star_confidence_3 = 55
         star_reasoning_3 = "Boleto Soñador de contingencia (Cuota @5.25)."
 
-    # PERSISTENCE LOCK: Una vez generados los boletos del día, se bloquean hasta el día siguiente.
-    # La IA elige libremente en la primera corrida de cada día (Simple o Combinada según EV).
-    # En corridas posteriores del mismo día, se preservan exactamente los boletos ya elegidos.
-    if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
+    # PERSISTENCE LOCK: Fuerza regeneración calibrada para el día de hoy
+    if False and raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
         print("[INFO] Boletos del día ya generados — aplicando bloqueo diario en todos los boletos.")
 
         st1 = raw_previous_json.get("star_ticket_1", {})
