@@ -1679,8 +1679,10 @@ def generate_daily_sports_data():
     fallback_picks = sorted(fallback_picks, key=lambda x: x['probability'], reverse=True)
     
     usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
-    # Filter out picks with odds < 1.15 to avoid useless selections like @1.01 or @1.05
-    usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.15]
+    # Filter out low odd traps (< 1.20) and low-confidence picks (< 62%)
+    usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.20 and p.get('probability', 0) >= 62]
+    # Re-sort strictly by highest probability and value
+    usable_picks = sorted(usable_picks, key=lambda x: (x.get('probability', 0), x.get('odd', 0)), reverse=True)
     
     # Generar Boleto Estrella 1 (Boleto Seguro)
     star_selections_1 = []
