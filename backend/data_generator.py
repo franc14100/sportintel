@@ -378,7 +378,7 @@ def fetch_odds_api_matches():
         ('soccer_fifa_world_cup',             'Football', 'FIFA World Cup 2026'),
         ('soccer_england_efl_cup',            'Football', 'EFL Cup'),
         ('basketball_wnba',                   'Basketball', 'WNBA'),
-        ('baseball_mlb',                      'Basketball', 'MLB'),
+        ('baseball_mlb',                      'Baseball', 'MLB')
     ]
     
     ctx = ssl.create_default_context()
@@ -1284,41 +1284,6 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
-                    # ─── TARJETAS INDIVIDUALES DEL EQUIPO ────────────────────────────
-                    # Mercado: "Equipo X Más de N.5 Tarjetas"
-                    "market": "Tarjetas del Equipo (Individual)",
-                    "selection": (
-                        f"{home_name} Más de 2.5 Tarjetas" if abs(prob_home - prob_away) < 12 and random.random() > 0.5
-                        else f"{away_name} Más de 1.5 Tarjetas" if random.random() > 0.4
-                        else f"{home_name} Más de 1.5 Tarjetas"
-                    ),
-                    "odd": (
-                        round(random.uniform(1.85, 2.15), 2) if abs(prob_home - prob_away) < 12 and random.random() > 0.5
-                        else round(random.uniform(1.26, 1.36), 2)
-                    ),
-                    "probability": random.randint(68, 84),
-                    "risk": "Low" if abs(prob_home - prob_away) < 20 else "Medium",
-                    "reasoning": {
-                        "tactical": (
-                            f"En partidos de alta intensidad el equipo que persigue el resultado {'(el visitante si va perdiendo)' if random.random() > 0.5 else '(el local bajo presión)'} "
-                            f"suele acumular faltas tácticas en zona media. El estilo de juego físico proyectado para este choque "
-                            f"y el historial de amonestaciones del árbitro designado ({round(random.uniform(2.0, 3.5), 1)} tarjetas/equipo/partido) "
-                            f"respaldan esta selección."
-                        ),
-                        "statistical": (
-                            f"El equipo seleccionado promedió {round(random.uniform(1.8, 3.2), 1)} tarjetas por partido en sus últimas 5 salidas. "
-                            f"En partidos con diferencial de probabilidad {'pequeño (paridad)' if abs(prob_home - prob_away) < 12 else 'notable'} "
-                            f"la fricción táctica aumenta el número de amonestaciones individuales por equipo."
-                        ),
-                        "market": (
-                            f"El mercado de tarjetas por equipo individual tiene alta liquidez y buenos precios en casas europeas. "
-                            f"Menor varianza que las tarjetas totales del partido porque puedes analizar el perfil disciplinario "
-                            f"de un solo equipo con precisión."
-                        )
-                    },
-                    "status": "pending"
-                },
-                {
                     # ─── CÓRNERS TOTALES (ambos equipos) ─────────────────────────────
                     "market": "Córners (Total del Partido)",
                     "selection": "Más de 8.5 Córners" if avg_goals >= 2.3 else "Más de 7.5 Córners",
@@ -1329,20 +1294,6 @@ def generate_daily_sports_data():
                         "tactical": f"Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina.",
                         "statistical": f"Promedio acumulado de {home_name} ({random.randint(4, 7)} córners) y {away_name} ({random.randint(3, 6)} córners) proyecta un total de {random.randint(9, 13)} saques de esquina.",
                         "market": f"Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
-                    },
-                    "status": "pending"
-                },
-                {
-                    # ─── TARJETAS TOTALES (ambos equipos) ────────────────────────────
-                    "market": "Tarjetas Amarillas (Total del Partido)",
-                    "selection": "Más de 3.5 Tarjetas Amarillas" if abs(prob_home - prob_away) < 15 else "Menos de 4.5 Tarjetas Amarillas",
-                    "odd": round(random.uniform(1.55, 1.85), 2),
-                    "probability": random.randint(65, 82),
-                    "risk": "Low",
-                    "reasoning": {
-                        "tactical": f"Intensidad de juego proyectada {'alta debido a la paridad y presión del partido' if abs(prob_home - prob_away) < 15 else 'moderada por el dominio claro del favorito'}. Faltas tácticas en zona media asegurarán el cumplimiento de la línea.",
-                        "statistical": f"Promedio del árbitro designado: {round(random.uniform(3.8, 5.2), 1)} tarjetas por partido. Historial del choque H2H muestra un ritmo cortado de juego.",
-                        "market": f"Línea de amonestaciones sólida respaldada por patrones históricos de faltas tácticas."
                     },
                     "status": "pending"
                 },
