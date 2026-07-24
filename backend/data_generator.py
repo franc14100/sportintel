@@ -1693,8 +1693,8 @@ def generate_daily_sports_data():
     
     if usable_picks:
         best_pick = usable_picks[0]
-        # Decidir si ir a Simple o Combinado
-        if best_pick['odd'] >= 1.40 and best_pick['probability'] >= 72:
+        # Decidir si ir a Simple o Combinado (Solo Apuesta Simple si la cuota individual es >= 1.65)
+        if best_pick['odd'] >= 1.65 and best_pick['probability'] >= 72:
             ticket_type_1 = "Simple"
             star_selections_1.append({
                 "match": best_pick["match"],
@@ -1709,11 +1709,16 @@ def generate_daily_sports_data():
             r_text = best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
             star_reasoning_1 = f"Recomendación de Apuesta Simple Segura. Hemos seleccionado un único evento fuerte con cuota de valor de @{total_odd_1:.2f} y una probabilidad muy alta del {best_pick['probability']}%. No es necesario correr el riesgo de combinarlo con otro evento."
         else:
-            # Buscar un segundo pick para formar una combinada
+            # Buscar un segundo pick para formar una combinada de cuota atractiva (Sweet spot @1.65 - @1.95)
             second_pick = None
             for p in usable_picks[1:]:
                 if p["match"] != best_pick["match"]:
-                    if best_pick["odd"] * p["odd"] >= 1.50:
+                    if 1.60 <= (best_pick["odd"] * p["odd"]) <= 2.10:
+                        second_pick = p
+                        break
+            if not second_pick:
+                for p in usable_picks[1:]:
+                    if p["match"] != best_pick["match"]:
                         second_pick = p
                         break
             if not second_pick:
