@@ -4804,6 +4804,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     pk.status = graded;
 
+                    if (graded === "pending") {
+                        return;
+                    }
+
                     if (graded === "won") {
                         pk.post_analysis = {
                             result: scoreStr,
