@@ -1693,8 +1693,8 @@ def generate_daily_sports_data():
     usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
     # Filter out low odd traps (< 1.20) and low-confidence picks (< 62%)
     usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.20 and p.get('probability', 0) >= 62]
-    # Re-sort strictly by highest probability and value
-    usable_picks = sorted(usable_picks, key=lambda x: (x.get('probability', 0), x.get('odd', 0)), reverse=True)
+    # Rank picks dynamically by Expected Value score (probability * odd) and probability
+    usable_picks = sorted(usable_picks, key=lambda x: ((x.get('probability', 0) / 100.0) * x.get('odd', 1.0), x.get('probability', 0)), reverse=True)
     
     # Generar Boleto Estrella 1 (Boleto Seguro)
     star_selections_1 = []
@@ -1999,8 +1999,8 @@ def generate_daily_sports_data():
         star_confidence_3 = 55
         star_reasoning_3 = "Boleto Soñador de contingencia (Cuota @5.25)."
 
-    # PERSISTENCE LOCK: Fuerza regeneración calibrada para el día de hoy
-    if False and raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
+    # PERSISTENCE LOCK: Una vez generados los boletos del día, se bloquean hasta el día siguiente.
+    if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
         print("[INFO] Boletos del día ya generados — aplicando bloqueo diario en todos los boletos.")
 
         st1 = raw_previous_json.get("star_ticket_1", {})
