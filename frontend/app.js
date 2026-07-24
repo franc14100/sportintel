@@ -875,34 +875,30 @@ document.addEventListener("DOMContentLoaded", () => {
     // Helper para descargar datos frescos de la API de contenidos de GitHub burlando el cache del CDN al 100%
     async function reloadFromRaw() {
         const token = localStorage.getItem("github_token");
-        if (!token) return false;
-        try {
-            const res = await fetch("https://api.github.com/repos/franc14100/sportintel/contents/frontend/data.json", {
-                headers: {
-                    "Authorization": `token ${token}`,
-                    "Accept": "application/vnd.github.v3+json",
-                    "Cache-Control": "no-cache",
-                    "Pragma": "no-cache"
-                }
-            });
-            if (res.ok) {
-                const fileData = await res.json();
-                const base64Content = fileData.content.replace(/\s/g, '');
-                const decodedText = decodeURIComponent(escape(atob(base64Content)));
-                appData = JSON.parse(decodedText);
-                
-                populateStats();
-                renderBets();
-                renderEscaleraTab();
-                updateBankrollChart();
-                console.log("[Sync] Live data updated directly from GitHub Contents API (Bypassing CDN Cache).");
-                return true;
+    try {
+        const timestamp = new Date().getTime();
+        const res = await fetch(`/data.json?t=${timestamp}`, {
+            headers: {
+                "Cache-Control": "no-cache",
+                "Pragma": "no-cache"
             }
-        } catch (e) {
-            console.error("Error al descargar desde GitHub Contents API:", e);
+        });
+        
+        if (res.ok) {
+            appData = await res.json();
+            
+            populateStats();
+            renderBets();
+            renderEscaleraTab();
+            updateBankrollChart();
+            console.log("[Sync] Live data updated directly (Bypassing Cache via timestamp).");
+            return true;
         }
-        return false;
+    } catch (e) {
+        console.error("Error al descargar data.json:", e);
     }
+    return false;
+}
 
     // --- Populate Dashboard Statistics ---
     function populateStats() {
