@@ -2182,7 +2182,7 @@ def generate_daily_sports_data():
         "selections": [dict(s, status="pending") for s in star_selections_1],
         "total_odd": round(total_odd_1, 2),
         "confidence": star_confidence_1,
-        "recommendation_stake": round(max(1.0, min(5.0, (star_confidence_1 / 18.0))), 1),
+        "recommendation_stake": round(max(1.0, min(10.0, (star_confidence_1 / 8.5))), 1),
         "status": "pending"
     }
     
@@ -2194,7 +2194,7 @@ def generate_daily_sports_data():
         "selections": [dict(s, status="pending") for s in star_selections_2],
         "total_odd": round(total_odd_2, 2),
         "confidence": star_confidence_2,
-        "recommendation_stake": round(max(1.0, min(3.0, (star_confidence_2 / 32.0))), 1),
+        "recommendation_stake": round(max(1.0, min(5.0, (star_confidence_2 / 14.0))), 1),
         "status": "pending"
     }
 
@@ -2230,7 +2230,7 @@ def generate_daily_sports_data():
             "total_odd": round(total_odd_1, 2),
             "confidence": star_confidence_1,
             "reasoning": star_reasoning_1,
-            "recommendation_stake": round(max(1.0, min(5.0, (star_confidence_1 / 18.0))), 1)
+            "recommendation_stake": round(max(1.0, min(10.0, (star_confidence_1 / 8.5))), 1)
         },
         "star_ticket_2": {
             "type": ticket_type_2,
@@ -2238,7 +2238,7 @@ def generate_daily_sports_data():
             "total_odd": round(total_odd_2, 2),
             "confidence": star_confidence_2,
             "reasoning": star_reasoning_2,
-            "recommendation_stake": round(max(1.0, min(3.0, (star_confidence_2 / 32.0))), 1)
+            "recommendation_stake": round(max(1.0, min(5.0, (star_confidence_2 / 14.0))), 1)
         },
         "star_ticket_3": {
             "type": ticket_type_3,
@@ -2246,7 +2246,7 @@ def generate_daily_sports_data():
             "total_odd": round(total_odd_3, 2),
             "confidence": star_confidence_3,
             "reasoning": star_reasoning_3,
-            "recommendation_stake": 1.0
+            "recommendation_stake": 1.5
         },
         "historical_tickets_registry": historical_registry,
         "starting_bankroll": 53.67,
