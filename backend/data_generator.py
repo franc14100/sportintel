@@ -2173,6 +2173,18 @@ def generate_daily_sports_data():
             if all_selections_graded or (ticket.get("date") and ticket.get("date") != date_str):
                 ticket["status"] = "won" if ticket_won else "lost"
 
+    def calculate_dynamic_stake(confidence, odd, ticket_type):
+        safe_margin = max(0, confidence - 40)
+        ev = (confidence / 100.0) * odd
+        ev_multiplier = max(0.8, min(1.5, ev))
+        raw_stake = (safe_margin / 5.5) * ev_multiplier
+        if ticket_type == 1:
+            return round(max(1.0, min(10.0, raw_stake)), 1)
+        elif ticket_type == 2:
+            return round(max(1.0, min(8.0, raw_stake)), 1)
+        else:
+            return round(max(0.5, min(2.5, raw_stake * 0.3)), 1)
+
     # Generar IDs y agregar los boletos de hoy al registro como "pending"
     # Boleto Estrella 1 (Seguro)
     new_ticket_1 = {
@@ -2182,7 +2194,7 @@ def generate_daily_sports_data():
         "selections": [dict(s, status="pending") for s in star_selections_1],
         "total_odd": round(total_odd_1, 2),
         "confidence": star_confidence_1,
-        "recommendation_stake": round(max(1.0, min(10.0, (star_confidence_1 / 8.5))), 1),
+        "recommendation_stake": calculate_dynamic_stake(star_confidence_1, total_odd_1, 1),
         "status": "pending"
     }
     
@@ -2194,7 +2206,7 @@ def generate_daily_sports_data():
         "selections": [dict(s, status="pending") for s in star_selections_2],
         "total_odd": round(total_odd_2, 2),
         "confidence": star_confidence_2,
-        "recommendation_stake": round(max(1.0, min(5.0, (star_confidence_2 / 14.0))), 1),
+        "recommendation_stake": calculate_dynamic_stake(star_confidence_2, total_odd_2, 2),
         "status": "pending"
     }
 
@@ -2230,7 +2242,7 @@ def generate_daily_sports_data():
             "total_odd": round(total_odd_1, 2),
             "confidence": star_confidence_1,
             "reasoning": star_reasoning_1,
-            "recommendation_stake": round(max(1.0, min(10.0, (star_confidence_1 / 8.5))), 1)
+            "recommendation_stake": calculate_dynamic_stake(star_confidence_1, total_odd_1, 1)
         },
         "star_ticket_2": {
             "type": ticket_type_2,
@@ -2238,7 +2250,7 @@ def generate_daily_sports_data():
             "total_odd": round(total_odd_2, 2),
             "confidence": star_confidence_2,
             "reasoning": star_reasoning_2,
-            "recommendation_stake": round(max(1.0, min(5.0, (star_confidence_2 / 14.0))), 1)
+            "recommendation_stake": calculate_dynamic_stake(star_confidence_2, total_odd_2, 2)
         },
         "star_ticket_3": {
             "type": ticket_type_3,
@@ -2246,7 +2258,7 @@ def generate_daily_sports_data():
             "total_odd": round(total_odd_3, 2),
             "confidence": star_confidence_3,
             "reasoning": star_reasoning_3,
-            "recommendation_stake": 1.5
+            "recommendation_stake": calculate_dynamic_stake(star_confidence_3, total_odd_3, 3)
         },
         "historical_tickets_registry": historical_registry,
         "starting_bankroll": 53.67,
