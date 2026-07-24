@@ -2002,8 +2002,8 @@ def generate_daily_sports_data():
         star_confidence_3 = 55
         star_reasoning_3 = "Boleto Soñador de contingencia (Cuota @5.25)."
 
-    # PERSISTENCE LOCK: Fuerza regeneración calibrada para eliminar tarjetas de los boletos sugeridos
-    if False and raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
+    # PERSISTENCE LOCK: Bloquear boletos del día
+    if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
         print("[INFO] Boletos del día ya generados — aplicando bloqueo diario en todos los boletos.")
 
         st1 = raw_previous_json.get("star_ticket_1", {})
