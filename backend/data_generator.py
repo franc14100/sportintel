@@ -1240,7 +1240,6 @@ def generate_daily_sports_data():
                 {
                     # ─── CÓRNERS INDIVIDUALES DEL EQUIPO ─────────────────────────────
                     # Mercado: "Equipo X Más de N.5 Córners"
-                    # El equipo dominante suele generar más córners atacando
                     "market": "Córners del Equipo (Individual)",
                     "selection": (
                         f"{winner_name} Más de 5.5 Córners" if max(prob_home, prob_away) > 68 and avg_goals >= 2.5
@@ -1248,9 +1247,9 @@ def generate_daily_sports_data():
                         else f"{winner_name} Más de 3.5 Córners"
                     ),
                     "odd": (
-                        round(random.uniform(1.75, 2.20), 2) if max(prob_home, prob_away) > 68 and avg_goals >= 2.5
-                        else round(random.uniform(1.55, 1.85), 2) if max(prob_home, prob_away) > 58
-                        else round(random.uniform(1.40, 1.70), 2)
+                        round(random.uniform(1.90, 2.25), 2) if max(prob_home, prob_away) > 68 and avg_goals >= 2.5
+                        else round(random.uniform(1.55, 1.78), 2) if max(prob_home, prob_away) > 58
+                        else round(random.uniform(1.28, 1.42), 2)
                     ),
                     "probability": random.randint(64, 82),
                     "risk": "Low",
@@ -1276,15 +1275,17 @@ def generate_daily_sports_data():
                 {
                     # ─── TARJETAS INDIVIDUALES DEL EQUIPO ────────────────────────────
                     # Mercado: "Equipo X Más de N.5 Tarjetas"
-                    # Equipos que presionan alto o en partidos disputados reciben más tarjetas
                     "market": "Tarjetas del Equipo (Individual)",
                     "selection": (
                         f"{home_name} Más de 2.5 Tarjetas" if abs(prob_home - prob_away) < 12 and random.random() > 0.5
                         else f"{away_name} Más de 1.5 Tarjetas" if random.random() > 0.4
                         else f"{home_name} Más de 1.5 Tarjetas"
                     ),
-                    "odd": round(random.uniform(1.55, 2.10), 2),
-                    "probability": random.randint(62, 80),
+                    "odd": (
+                        round(random.uniform(1.85, 2.15), 2) if abs(prob_home - prob_away) < 12 and random.random() > 0.5
+                        else round(random.uniform(1.26, 1.36), 2)
+                    ),
+                    "probability": random.randint(68, 84),
                     "risk": "Low" if abs(prob_home - prob_away) < 20 else "Medium",
                     "reasoning": {
                         "tactical": (
@@ -2019,6 +2020,23 @@ def generate_daily_sports_data():
             total_odd_3 = st3.get("total_odd", total_odd_3)
             star_confidence_3 = st3.get("confidence", star_confidence_3)
             star_reasoning_3 = st3.get("reasoning", star_reasoning_3)
+
+        # Safeguard: recalculate total_odd if <= 1.05
+        if total_odd_1 <= 1.05 and star_selections_1:
+            tot = 1.0
+            for sel in star_selections_1:
+                tot *= sel.get("odd", 1.0)
+            total_odd_1 = tot
+        if total_odd_2 <= 1.05 and star_selections_2:
+            tot = 1.0
+            for sel in star_selections_2:
+                tot *= sel.get("odd", 1.0)
+            total_odd_2 = tot
+        if total_odd_3 <= 1.05 and star_selections_3:
+            tot = 1.0
+            for sel in star_selections_3:
+                tot *= sel.get("odd", 1.0)
+            total_odd_3 = tot
 
 
     total_won = previous_data.get("global_stats", {}).get("total_picks_won", 0) if previous_data else 0
