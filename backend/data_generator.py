@@ -404,12 +404,12 @@ def fetch_odds_api_matches():
                     dt_obj = dt_obj - timedelta(hours=5)  # Ecuador time (UTC-5)
                     time_display = dt_obj.strftime("%H:%M")
                     match_date = dt_obj.date()
-                except Exception:
-                    time_display = "TBD"
-                    match_date = today
+                except Exception as err:
+                    print(f"Failed to parse date: {commence}, error: {err}")
+                    continue
 
-                # Only include today + next 2 days
-                if (match_date - today).days > 2:
+                # Filter: Only include matches that are played TODAY (in UTC-5)
+                if match_date != today:
                     continue
 
                 home_team = ev.get('home_team', 'Local')
