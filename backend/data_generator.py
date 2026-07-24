@@ -1681,6 +1681,9 @@ def generate_daily_sports_data():
                 "probability": p['probability'],
                 "reasoning": p['reasoning']
             }
+            if 'Tarjeta' in p['market']:
+                continue
+                
             if sport in ['Football', 'Tennis']:
                 priority_picks.append(pick_info)
             else:
@@ -1691,8 +1694,8 @@ def generate_daily_sports_data():
     fallback_picks = sorted(fallback_picks, key=lambda x: x['probability'], reverse=True)
     
     usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
-    # Filter out low odd traps (< 1.20) and low-confidence picks (< 62%)
-    usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.20 and p.get('probability', 0) >= 62]
+    # Filter out low odd traps (< 1.20), low-confidence picks (< 62%), and 'Tarjetas' markets which are often unavailable
+    usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.20 and p.get('probability', 0) >= 62 and 'Tarjeta' not in p.get('market', '')]
     # Rank picks dynamically by Expected Value score (probability * odd) and probability
     usable_picks = sorted(usable_picks, key=lambda x: ((x.get('probability', 0) / 100.0) * x.get('odd', 1.0), x.get('probability', 0)), reverse=True)
     
@@ -1999,8 +2002,8 @@ def generate_daily_sports_data():
         star_confidence_3 = 55
         star_reasoning_3 = "Boleto Soñador de contingencia (Cuota @5.25)."
 
-    # PERSISTENCE LOCK: Una vez generados los boletos del día, se bloquean hasta el día siguiente.
-    if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
+    # PERSISTENCE LOCK: Fuerza regeneración calibrada para eliminar tarjetas de los boletos sugeridos
+    if False and raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
         print("[INFO] Boletos del día ya generados — aplicando bloqueo diario en todos los boletos.")
 
         st1 = raw_previous_json.get("star_ticket_1", {})
