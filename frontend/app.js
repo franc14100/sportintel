@@ -4766,6 +4766,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             } else if (sel.includes(" o ")) {
                                 if (h !== a) graded = "won";
                             }
+                        } else if (mk.includes("Córners") || mk.includes("Saques de Esquina") || mk.includes("Tarjetas")) {
+                            // No tenemos datos de córners ni tarjetas desde el scraper (solo tenemos goles), 
+                            // por lo que no podemos calificar esto automáticamente.
+                            graded = "pending";
                         } else if (mk.includes("Más/Menos") || mk.includes("Over/Under") || mk.includes("Total") || mk.includes("Puntos") || mk.includes("Sets") || mk.includes("Goles") || mk.includes("Total de Goles")) {
                             // Extract numeric threshold dynamically from selection or market name
                             const numMatch = sel.match(/(\d+(?:\.\d+)?)/) || mk.match(/(\d+(?:\.\d+)?)/);
@@ -4776,10 +4780,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             } else if (sel.includes("Menos") || sel.includes("Under")) {
                                 if (totalGoals < limit) graded = "won";
                             }
-                        } else if (mk.includes("Córners") || mk.includes("Saques de Esquina") || mk.includes("Tarjetas")) {
-                            // No tenemos datos de córners ni tarjetas desde el scraper (solo tenemos goles), 
-                            // por lo que no podemos calificar esto automáticamente.
-                            graded = "pending";
                         } else if (mk.includes("Ambos Equipos Anotan") || mk.includes("BTTS")) {
                             if ((sel === "Sí" || sel === "Yes") && h > 0 && a > 0) graded = "won";
                             else if (sel === "No" && (h === 0 || a === 0)) graded = "won";
