@@ -1067,9 +1067,21 @@ def generate_daily_sports_data():
             dc_away_draw_odd = round((odd_away * odd_draw) / (odd_away + odd_draw), 2) if odd_away and odd_draw else 1.50
             dc_both_odd = round((odd_home * odd_away) / (odd_home + odd_away), 2) if odd_home and odd_away else 1.70
 
-            # Over/Under 2.5 - use real odds if available
-            over25_odd = real_odds.get('total_over') or round(random.uniform(1.65, 2.20), 2)
-            under25_odd = real_odds.get('total_under') or round(random.uniform(1.65, 2.20), 2)
+            # Over/Under lines based on real bookmaker baseline or xG
+            ou_baseline = real_odds.get('over_under_line', 2.5 if avg_goals < 3.0 else 3.5)
+            over_odd_real = real_odds.get('over_odd')
+            
+            if ou_baseline >= 3.5:
+                over25_odd = over_odd_real or round(random.uniform(1.32, 1.42), 2)
+                asian20_odd = 1.08
+            elif ou_baseline <= 1.5:
+                over25_odd = over_odd_real or round(random.uniform(2.10, 2.60), 2)
+                asian20_odd = 1.82
+            else:
+                over25_odd = over_odd_real or round(random.uniform(1.72, 1.88), 2)
+                asian20_odd = round(max(1.25, min(1.36, over25_odd * 0.757)), 2)
+                
+            under25_odd = real_odds.get('under_odd') or round(100.0 / max(10, (100 - (100.0 / max(1.1, over25_odd)))), 2)
             over25_sel = "Más de 2.5 Goles" if avg_goals >= 2.5 else "Menos de 2.5 Goles"
             over25_actual_odd = over25_odd if avg_goals >= 2.5 else under25_odd
 
@@ -1127,7 +1139,7 @@ def generate_daily_sports_data():
                     # ❌ Si caen 0 o 1 goles → Perdemos
                     "market": "Total de Goles (Asian 2.0)",
                     "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
-                    "odd": round(max(1.20, min(1.48, over25_odd * 0.757)), 2),
+                    "odd": asian20_odd,
                     "probability": int(min(max(40 + avg_goals * 12, 30), 88)),
                     "risk": "Very Low" if avg_goals >= 2.2 else "Low",
                     "reasoning": {
