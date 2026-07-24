@@ -1,3 +1,13 @@
+
+def frac_to_decimal(frac_str):
+    try:
+        if "/" in str(frac_str):
+            num, den = str(frac_str).split("/")
+            return round((float(num) / float(den)) + 1.0, 2)
+        return round(float(frac_str), 2)
+    except Exception:
+        return 1.50
+
 import os
 import json
 import random
