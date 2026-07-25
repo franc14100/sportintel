@@ -318,13 +318,10 @@ def generate_daily_sports_data():
     if not live_matches:
         print("[INFO] Usando datos de respaldo porque no hay partidos filtrados.")
         err_str = " | ".join(fetch_errors) if fetch_errors else "NO SE ENCONTRARON PARTIDOS"
-        live_matches = [
-            {"home": "Team A", "away": "Team B", "sport": "Football", "league": err_str, "status": "pre", "home_color": "#1F2937", "home_accent": "#3B82F6", "away_color": "#1F2937", "away_accent": "#EF4444", "time": "15:00", "home_score": 0, "away_score": 0, "real_odds": {'h2h_home': 1.5, 'h2h_draw': 3.0, 'h2h_away': 4.5}},
-            {"home": "Real Madrid", "away": "FC Barcelona", "sport": "Football", "league": err_str, "status": "pre", "home_color": "#1F2937", "home_accent": "#3B82F6", "away_color": "#1F2937", "away_accent": "#EF4444", "time": "16:30", "home_score": 0, "away_score": 0, "real_odds": {'h2h_home': 2.1, 'h2h_draw': 3.2, 'h2h_away': 3.1}},
-            {"home": "Los Angeles Lakers", "away": "Miami Heat", "sport": "Basketball", "league": err_str, "status": "in", "home_color": "#F59E0B", "home_accent": "#FCD34D", "away_color": "#8B5CF6", "away_accent": "#C4B5FD", "time": "20:00", "home_score": None, "away_score": None, "real_odds": {'h2h_home': 1.8, 'h2h_away': 2.0}},
-            {"home": "Rafael Nadal", "away": "Novak Djokovic", "sport": "Tennis", "league": err_str, "status": "pre", "home_color": "#84CC16", "home_accent": "#A3E635", "away_color": "#10B981", "away_accent": "#34D399", "time": "10:00", "home_score": 0, "away_score": 0, "real_odds": {'h2h_home': 1.9, 'h2h_away': 1.9}},
-            {"home": "España", "away": "Bélgica", "sport": "Football", "league": err_str, "status": "pre", "home_color": "#1F2937", "home_accent": "#3B82F6", "away_color": "#1F2937", "away_accent": "#EF4444", "time": "12:00", "home_score": 0, "away_score": 0, "real_odds": {'h2h_home': 1.4, 'h2h_draw': 4.0, 'h2h_away': 6.5}}
-        ]
+        print(f"[CRITICAL ERROR] {err_str}")
+        import sys
+        sys.exit(1)
+        
     print(f"[INFO] Total partidos reales (Fútbol, Basket, Tenis): {len(live_matches)} partidos")
     
     # Si no hay partidos en vivo (ej. día sin partidos programados en la API de ESPN)
