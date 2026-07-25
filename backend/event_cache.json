@@ -13950,5 +13950,493 @@
     "time": "05:15",
     "status": "finished",
     "sport": "Football"
+  },
+  "15260852": {
+    "homeTeam": "Kristiansund BK",
+    "awayTeam": "IK Start",
+    "league": "Eliteserien",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16304060": {
+    "homeTeam": "Grêmio Anápolis",
+    "awayTeam": "Morrinhos",
+    "league": "Goiano, Divisão de Acesso",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16315680": {
+    "homeTeam": "São Paulo U20",
+    "awayTeam": "Santos U20",
+    "league": "U20 Paulista, Feminino",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276339": {
+    "homeTeam": "Club Comunicaciones",
+    "awayTeam": "Real Pilar",
+    "league": "Primera B",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276342": {
+    "homeTeam": "CSD Flandria",
+    "awayTeam": "Excursionistas",
+    "league": "Primera B",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16357243": {
+    "homeTeam": "Bolton Wanderers",
+    "awayTeam": "Everton",
+    "league": "Club Friendly Games",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16427268": {
+    "homeTeam": "BVSC-Zugló",
+    "awayTeam": "Kazincbarcikai SC",
+    "league": "NB II",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16264528": {
+    "homeTeam": "Ayr United",
+    "awayTeam": "Alloa Athletic",
+    "league": "League Cup, Group G",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16557340": {
+    "homeTeam": "Pécsi MFC",
+    "awayTeam": "Dunaharaszti MTK",
+    "league": "NB III Dél-Nyugat",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16332162": {
+    "homeTeam": "Hereford FC",
+    "awayTeam": "Solihull Moors",
+    "league": "Club Friendly Games",
+    "time": "08:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384719": {
+    "homeTeam": "OFK Baník Lehota pod Vtáčnikom",
+    "awayTeam": "FK Pohronie",
+    "league": "2. Liga",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384710": {
+    "homeTeam": "MŠK Považská Bystrica",
+    "awayTeam": "Inter Bratislava",
+    "league": "2. Liga",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15285515": {
+    "homeTeam": "New York Cosmos",
+    "awayTeam": "AC Boise",
+    "league": "USL, League One",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15285518": {
+    "homeTeam": "Chattanooga Red Wolves SC",
+    "awayTeam": "One Knoxville SC",
+    "league": "USL, League One",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15709008": {
+    "homeTeam": "Perth Azzurri SC",
+    "awayTeam": "Subiaco AFC",
+    "league": "Western Australia NPL, Women",
+    "time": "02:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15553487": {
+    "homeTeam": "Paysandu",
+    "awayTeam": "Atlético Piauiense",
+    "league": "Brasileiro A2, Women",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16304059": {
+    "homeTeam": "Tupy-GO",
+    "awayTeam": "Trindade",
+    "league": "Goiano, Divisão de Acesso",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16293568": {
+    "homeTeam": "Stade Rennais",
+    "awayTeam": "Club Brugge KV",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15285514": {
+    "homeTeam": "Corpus Christi FC",
+    "awayTeam": "Greenville Triumph SC",
+    "league": "USL, League One",
+    "time": "19:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16421094": {
+    "homeTeam": "Deportivo Malacateco",
+    "awayTeam": "Cobán Imperial",
+    "league": "Liga Guate Banrural, Apertura",
+    "time": "20:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15285511": {
+    "homeTeam": "AV Alta FC",
+    "awayTeam": "Westchester SC",
+    "league": "USL, League One",
+    "time": "22:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15431619": {
+    "homeTeam": "Heidelberg United FC U23",
+    "awayTeam": "Caroline Springs George Cross U23",
+    "league": "NPL Victoria U23",
+    "time": "00:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15171612": {
+    "homeTeam": "Orlando City SC",
+    "awayTeam": "Nashville SC",
+    "league": "MLS",
+    "time": "18:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15986497": {
+    "homeTeam": "Dalvík Reynir",
+    "awayTeam": "Víkingur Ólafsvík",
+    "league": "Iceland 2. deild",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15285743": {
+    "homeTeam": "Brooklyn FC",
+    "awayTeam": "San Antonio FC",
+    "league": "USL Championship",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16597290": {
+    "homeTeam": "Ravenna",
+    "awayTeam": "K-Sport Montecchio Gallo",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16557337": {
+    "homeTeam": "Iváncsa KSE",
+    "awayTeam": "Szekszárdi UFC",
+    "league": "NB III Dél-Nyugat",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16204215": {
+    "homeTeam": "Nõmme Kalju U21",
+    "awayTeam": "Flora Tallinn U21",
+    "league": "Esiliiga",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276806": {
+    "homeTeam": "Leones de Rosario FC",
+    "awayTeam": "Central Córdoba de Rosario",
+    "league": "Primera C",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15238829": {
+    "homeTeam": "Longford Town",
+    "awayTeam": "Wexford FC",
+    "league": "First Division",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16362856": {
+    "homeTeam": "FC Killas",
+    "awayTeam": "Alianza Lima",
+    "league": "Liga Femenina, Women, Clausura",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15403929": {
+    "homeTeam": "Paju Frontier FC",
+    "awayTeam": "Ansan Greeners FC",
+    "league": "K-League 2",
+    "time": "05:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16316952": {
+    "homeTeam": "Lech Poznań",
+    "awayTeam": "KS Cracovia",
+    "league": "Ekstraklasa",
+    "time": "13:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16264470": {
+    "homeTeam": "Arbroath",
+    "awayTeam": "Stirling Albion",
+    "league": "League Cup, Group B",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15373611": {
+    "homeTeam": "Wollongong Wolves U20",
+    "awayTeam": "Blacktown City FC U20",
+    "league": "NSW U20 Premier League",
+    "time": "22:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16621435": {
+    "homeTeam": "CD San Antonio U19",
+    "awayTeam": "Academia de Balompié Boliviano U19",
+    "league": "Liga Nacional Sub-19",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16621434": {
+    "homeTeam": "CD Totora Real Oruro U19",
+    "awayTeam": "CD Real Tomayapo U19",
+    "league": "Liga Nacional Sub-19",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15171613": {
+    "homeTeam": "Philadelphia Union",
+    "awayTeam": "Seattle Sounders FC",
+    "league": "MLS",
+    "time": "18:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15171615": {
+    "homeTeam": "Minnesota United",
+    "awayTeam": "Vancouver Whitecaps",
+    "league": "MLS",
+    "time": "19:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16595196": {
+    "homeTeam": "Naesby",
+    "awayTeam": "Middelfart",
+    "league": "Club Friendly Games",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16595458": {
+    "homeTeam": "BKS Chemik Bydgoszcz",
+    "awayTeam": "OKS Stomil Olsztyn",
+    "league": "Club Friendly Games",
+    "time": "05:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16595511": {
+    "homeTeam": "Brønshøj BK",
+    "awayTeam": "HIK",
+    "league": "Club Friendly Games",
+    "time": "06:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16222612": {
+    "homeTeam": "Legião FC U20",
+    "awayTeam": "Samambaia FC U20",
+    "league": "U20 Brasiliense, Grupo A",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16485280": {
+    "homeTeam": "Athletic Club",
+    "awayTeam": "Eibar",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16543691": {
+    "homeTeam": "Atlético de Rafaela",
+    "awayTeam": "Nueva Chicago",
+    "league": "Primera B Nacional",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15640277": {
+    "homeTeam": "Canberra Juventus",
+    "awayTeam": "Monaro Panthers",
+    "league": "Capital NPL 1",
+    "time": "01:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16303106": {
+    "homeTeam": "Cuba U20",
+    "awayTeam": "El Salvador U20",
+    "league": "U20 CONCACAF Championship, Group A",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421107": {
+    "homeTeam": "Carolina Core FC",
+    "awayTeam": "Chicago Fire FC II",
+    "league": "MLS Next Pro",
+    "time": "18:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15442508": {
+    "homeTeam": "UMF Afturelding",
+    "awayTeam": "Grótta",
+    "league": "Iceland 1. deild",
+    "time": "09:00",
+    "status": "postponed",
+    "sport": "Football"
+  },
+  "16384025": {
+    "homeTeam": "Wiener Viktoria",
+    "awayTeam": "ESV Parndorf",
+    "league": "OFB Cup",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16574313": {
+    "homeTeam": "Termálfürdő FC Tiszaújváros",
+    "awayTeam": "Ózd-Sajóvölgye",
+    "league": "NB III Észak-Kelet",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16427641": {
+    "homeTeam": "FC Nagykanizsa",
+    "awayTeam": "Diósgyőri VTK",
+    "league": "NB II",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16274080": {
+    "homeTeam": "Leeds United",
+    "awayTeam": "Wrexham",
+    "league": "Club Friendly Games",
+    "time": "18:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16598227": {
+    "homeTeam": "Albirex Niigata",
+    "awayTeam": "Montedio Yamagata",
+    "league": "Club Friendly Games",
+    "time": "05:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15254077": {
+    "homeTeam": "Norrköping DFK",
+    "awayTeam": "Hammarby IF",
+    "league": "Damallsvenskan",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16595058": {
+    "homeTeam": "Mallorca",
+    "awayTeam": "Al-Fateh",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15709124": {
+    "homeTeam": "Nação Araquari",
+    "awayTeam": "Hercílio Luz FC",
+    "league": "Catarinense, Série B",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16604330": {
+    "homeTeam": "Estoril Praia",
+    "awayTeam": "Torreense",
+    "league": "Club Friendly Games",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16557335": {
+    "homeTeam": "Ferencvárosi TC II",
+    "awayTeam": "Dunaújváros FC",
+    "league": "NB III Dél-Nyugat",
+    "time": "10:30",
+    "status": "postponed",
+    "sport": "Football"
+  },
+  "16477414": {
+    "homeTeam": "Pollok FC",
+    "awayTeam": "Troon FC",
+    "league": "Lowland League, West",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16455894": {
+    "homeTeam": "Salford City",
+    "awayTeam": "Dundee United",
+    "league": "Club Friendly Games",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
   }
 }

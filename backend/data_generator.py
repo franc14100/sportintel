@@ -22,7 +22,7 @@ import urllib.request
 import json
 from datetime import datetime, timedelta
 
-RAPIDAPI_KEY = os.environ.get("RAPIDAPI_KEY", "0fc0ba8109mshc0a96d4fddda16ep197aeajsncc7e2400156e")
+RAPIDAPI_KEY = os.environ.get("RAPIDAPI_KEY") if os.environ.get("RAPIDAPI_KEY") else "0fc0ba8109mshc0a96d4fddda16ep197aeajsncc7e2400156e"
 HEADERS = {
     'x-rapidapi-host': 'sportapi7.p.rapidapi.com',
     'x-rapidapi-key': RAPIDAPI_KEY
