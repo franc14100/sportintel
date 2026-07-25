@@ -14814,5 +14814,93 @@
     "time": "10:30",
     "status": "inprogress",
     "sport": "Football"
+  },
+  "16542700": {
+    "homeTeam": "PEC Zwolle",
+    "awayTeam": "AEK Athens",
+    "league": "Club Friendly Games",
+    "time": "08:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16617634": {
+    "homeTeam": "Omonia Aradippou",
+    "awayTeam": "Karmiotissa Polemidion",
+    "league": "Club Friendly Games",
+    "time": "10:30",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16627230": {
+    "homeTeam": "Villa Don Bosco U20",
+    "awayTeam": "CA Lugano U20",
+    "league": "Torneo Juvenil Superliga",
+    "time": "07:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16619580": {
+    "homeTeam": "Göztepe",
+    "awayTeam": "NK Rudeš",
+    "league": "Club Friendly Games",
+    "time": "07:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16456396": {
+    "homeTeam": "Morocco U20",
+    "awayTeam": "Sevilla U20",
+    "league": "COTIF Tournament, Group A",
+    "time": "15:45",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15632828": {
+    "homeTeam": "Vancouver Rise FC",
+    "awayTeam": "Halifax Tides FC",
+    "league": "Northern Super League, Regular Season",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16252123": {
+    "homeTeam": "Porto Foot Ball U20",
+    "awayTeam": "Referência FC U20",
+    "league": "U20 Paulista, Grupo 3",
+    "time": "08:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16627235": {
+    "homeTeam": "Mighty Mukuru Wanderers",
+    "awayTeam": "Masters Security",
+    "league": "Malawi Super League",
+    "time": "07:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16621437": {
+    "homeTeam": "Club Aurora U19",
+    "awayTeam": "Club Always Ready U19",
+    "league": "Liga Nacional Sub-19",
+    "time": "08:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16612393": {
+    "homeTeam": "Central Español",
+    "awayTeam": "Cerro Largo",
+    "league": "Liga AUF Uruguaya, Intermedio, Serie A",
+    "time": "13:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16612662": {
+    "homeTeam": "Prisons FC",
+    "awayTeam": "Slingerz FC",
+    "league": "CFU Club Shield",
+    "time": "14:30",
+    "status": "inprogress",
+    "sport": "Football"
   }
 }

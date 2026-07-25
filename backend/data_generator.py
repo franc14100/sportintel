@@ -994,11 +994,15 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
+                    # BTTS: usar la cuota real de la API como fuente de verdad
+                    # Si btts_yes < btts_no → la API dice que es más probable que AMBOS anoten
+                    # Si btts_no < btts_yes → la API dice que es más probable que NO anoten los dos
                     "market": "Ambos Equipos Anotan",
-                    "selection": btts_selection,
-                    "odd": (real_odds.get('btts_yes') if btts_selection == "Sí" else real_odds.get('btts_no')) or round(random.uniform(1.65, 2.15), 2),
-                    "probability": btts_prob,
-                    "risk": "Medium",
+                    "selection": ("Sí" if (real_odds.get('btts_yes', 99) <= real_odds.get('btts_no', 99)) else "No") if (real_odds.get('btts_yes') and real_odds.get('btts_no')) else btts_selection,
+                    "odd": min(real_odds.get('btts_yes', 99), real_odds.get('btts_no', 99)) if (real_odds.get('btts_yes') and real_odds.get('btts_no')) else ((real_odds.get('btts_yes') if btts_selection == "Sí" else real_odds.get('btts_no')) or round(random.uniform(1.65, 2.15), 2)),
+                    # Probabilidad real derivada de la cuota de la API: prob = 1 / odd
+                    "probability": int(100 / min(real_odds.get('btts_yes', 100/btts_prob), real_odds.get('btts_no', 100/btts_prob))) if (real_odds.get('btts_yes') and real_odds.get('btts_no')) else btts_prob,
+                    "risk": "Low" if min(real_odds.get('btts_yes', 99), real_odds.get('btts_no', 99)) < 1.55 else "Medium",
                     "reasoning": reasoning_btts,
                     "status": "pending"
                 },
@@ -1016,19 +1020,21 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
-                    # Más de 2 Goles (Asian Total 2.0):
-                    # ✅ Si caen 3+ goles → Ganamos
-                    # ↩️ Si caen exactamente 2 goles → Devuelven el dinero (push/void)
-                    # ❌ Si caen 0 o 1 goles → Perdemos
+                    # Asian 2.0: Solo incluir si la API confirma que over_2.5 es razonable (cuota <= 2.30)
+                    # Si under_2.5 < 1.55, significa que las casas creen firmemente en partido de pocos goles
+                    # → NO recomendar Over de goles en ese caso
                     "market": "Total de Goles (Asian 2.0)",
                     "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
                     "odd": asian20_odd,
-                    "probability": int(min(max(40 + avg_goals * 12, 30), 88)),
-                    "risk": "Very Low" if avg_goals >= 2.2 else "Low",
+                    # Probabilidad REAL basada en cuota de la API: si over_2.5=3.4, prob real es solo 29%, no 80%
+                    "probability": int(100 / real_over25) if real_over25 and real_over25 <= 3.0 else int(min(max(40 + avg_goals * 10, 25), 75)),
+                    # Válido para boletos SOLO cuando over_2.5 <= 2.30 (la API lo ve como razonablemente probable)
+                    "valid_for_ticket": bool(real_over25 and real_over25 <= 2.30),
+                    "risk": "Low" if (real_over25 and real_over25 <= 1.80) else ("Medium" if (real_over25 and real_over25 <= 2.30) else "High"),
                     "reasoning": {
                         "tactical": f"El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de {avg_goals} goles para este partido respalda que terminará con 2+ anotaciones.",
-                        "statistical": f"El {random.randint(68, 82)}% de los partidos con xG combinado de {avg_goals} terminan con 2 o más goles. Al apostar al Asian 2.0, esa franja de partidos con exactamente 2 goles ({random.randint(18, 28)}% de los casos) pasa a ser una devolución en lugar de una pérdida.",
-                        "market": f"La cuota del Asian 2.0 es ligeramente menor que el Más de 2.5 (porque eliminas el riesgo parcial), pero la probabilidad real de éxito o empate es del {int(min(max(40 + avg_goals * 12, 30), 88))}%. Ideal para boletos seguros o cuando el marcador esperado es borderline entre 2 y 3 goles."
+                        "statistical": f"La API indica Over 2.5 a @{real_over25 or round(over25_actual_odd,2)}. {'Las casas de apuestas confirman alta probabilidad de al menos 3 goles.' if real_over25 and real_over25 <= 2.0 else 'Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.'}",
+                        "market": f"La cuota del Asian 2.0 @{asian20_odd} tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
                     },
                     "status": "pending"
                 },
@@ -1514,7 +1520,8 @@ def generate_daily_sports_data():
                 "selection": p['selection'],
                 "odd": p['odd'],
                 "probability": p['probability'],
-                "reasoning": p['reasoning']
+                "reasoning": p['reasoning'],
+                "valid_for_ticket": p.get('valid_for_ticket', True)  # False = la API indica baja probabilidad
             }
             if 'Tarjeta' in p['market']:
                 continue
@@ -1529,19 +1536,26 @@ def generate_daily_sports_data():
     fallback_picks = sorted(fallback_picks, key=lambda x: x['probability'], reverse=True)
     
     usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
-    # Filter out low odd traps (< 1.20), low-confidence picks (< 62%), and unavailable markets
-    usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.08 and p.get('probability', 0) >= 60 and 'Tarjeta' not in p.get('market', '')]
+    # --- FILTROS BASADOS EN CUOTAS REALES DE LA API ---
+    # 1. Descartar picks con cuota muy baja, confianza baja, o cuota demasiado alta (arriesgada), o mercados no disponibles
+    #    MAX ODD de 2.70: cuota > 2.70 implica probabilidad real < 37% = pick de alto riesgo, no apto para boleto estrella
+    usable_picks = [p for p in usable_picks if 1.08 <= p.get('odd', 0) <= 2.70 and p.get('probability', 0) >= 60 and 'Tarjeta' not in p.get('market', '')]
 
-    # Priorizar picks con cuotas DIRECTAS de la API (más confiables) sobre mercados calculados internamente
+    # 2. Descartar Asian 2.0 que la API marca como poco probable (over_2.5 > 2.30)
+    #    Esto evita recomendar Over de goles cuando las casas de apuestas lo ven como improbable
+    usable_picks = [p for p in usable_picks if not ('Asian 2.0' in p.get('market','') and p.get('valid_for_ticket') == False)]
+
+    # 3. Para BTTS, descartar si la cuota del lado recomendado es > 2.20 (poco probable según API)
+    usable_picks = [p for p in usable_picks if not ('Ambos Equipos Anotan' in p.get('market','') and p.get('odd', 0) > 2.20)]
+
+    # 4. Priorizar picks con cuotas DIRECTAS de la API sobre mercados calculados internamente
     DIRECT_API_MARKETS = ['Resultado Final', '1X2', 'Ambos Equipos Anotan', 'Más/Menos Goles',
                           'Doble Oportunidad', 'Empate No Apuesta', 'DNB', 'Córners (Total']
-    SYNTHETIC_MARKETS = ['Asian 2.0', 'Total de Goles (Asian', 'Método de Clasificación',
-                         'Córners del Equipo', 'Primer Tiempo']
-    
+
     def is_direct_api_market(pick):
         mkt = pick.get('market', '')
         return any(dm in mkt for dm in DIRECT_API_MARKETS)
-    
+
     direct_api_picks = [p for p in usable_picks if is_direct_api_market(p)]
     synthetic_picks = [p for p in usable_picks if not is_direct_api_market(p)]
     # Usar picks directos de API primero; si no hay suficientes, complementar con sintéticos
