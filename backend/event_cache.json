@@ -14438,5 +14438,133 @@
     "time": "09:00",
     "status": "notstarted",
     "sport": "Football"
+  },
+  "15285755": {
+    "homeTeam": "Phoenix Rising FC",
+    "awayTeam": "Hartford Athletic",
+    "league": "USL Championship",
+    "time": "02:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15368444": {
+    "homeTeam": "Bulls FC Academy",
+    "awayTeam": "Gladesville Ravens",
+    "league": "NSW NPL Women's",
+    "time": "04:50",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16317904": {
+    "homeTeam": "Sporting FC",
+    "awayTeam": "LD Alajuelense",
+    "league": "Primera División, Apertura",
+    "time": "02:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15272472": {
+    "homeTeam": "IK Sirius",
+    "awayTeam": "IFK Göteborg",
+    "league": "Allsvenskan",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15171607": {
+    "homeTeam": "New England Revolution",
+    "awayTeam": "Atlanta United",
+    "league": "MLS",
+    "time": "23:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16357235": {
+    "homeTeam": "Bromley",
+    "awayTeam": "Crystal Palace",
+    "league": "Club Friendly Games",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16571623": {
+    "homeTeam": "Resende",
+    "awayTeam": "Americano",
+    "league": "Carioca, Serie A2, Taca Santos Dumont, Playoffs",
+    "time": "20:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16316953": {
+    "homeTeam": "Górnik Zabrze",
+    "awayTeam": "Śląsk Wrocław",
+    "league": "Ekstraklasa",
+    "time": "15:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15635660": {
+    "homeTeam": "FC Tobol",
+    "awayTeam": "Atyrau",
+    "league": "Premier League",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276336": {
+    "homeTeam": "Camioneros",
+    "awayTeam": "San Martin de Burzaco",
+    "league": "Primera B",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15542517": {
+    "homeTeam": "Yangpyeong FC",
+    "awayTeam": "Busan Transportation Corporation",
+    "league": "K3 League",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16317421": {
+    "homeTeam": "Hobro",
+    "awayTeam": "Aarhus Fremad",
+    "league": "Betinia Liga",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16475887": {
+    "homeTeam": "Internacional Fútbol Club de Palmira",
+    "awayTeam": "Orsomarso SC",
+    "league": "Liga Femenina",
+    "time": "21:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16264452": {
+    "homeTeam": "Queen's Park FC",
+    "awayTeam": "Queen of The South",
+    "league": "League Cup, Group A",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16439089": {
+    "homeTeam": "Ba Football Association",
+    "awayTeam": "Lautoka FC",
+    "league": "Extra Premier League",
+    "time": "03:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16604329": {
+    "homeTeam": "PAOK",
+    "awayTeam": "Neftchi Baku PFC",
+    "league": "UEFA Champions League, Women, Qualification",
+    "time": "15:30",
+    "status": "notstarted",
+    "sport": "Football"
   }
 }
