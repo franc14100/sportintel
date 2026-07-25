@@ -6,7 +6,7 @@ module.exports = async function handler(req, res) {
     if (req.method === "OPTIONS") return res.status(200).end();
 
     try {
-        const rawUrl = `https://raw.githubusercontent.com/franc14100/sportintel/main/frontend/data.json?t=${Date.now()}`;
+        const rawUrl = `https://franc14100.github.io/sportintel/data.json?t=${Date.now()}`;
         const fetchRes = await fetch(rawUrl, {
             headers: {
                 "Cache-Control": "no-cache, no-store, must-revalidate",

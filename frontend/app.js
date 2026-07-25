@@ -896,7 +896,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const token = localStorage.getItem("github_token");
     try {
         const timestamp = new Date().getTime();
-        const res = await fetch(`/data.json?t=${timestamp}`, {
+        const res = await fetch(`/api/data?t=${timestamp}`, {
             headers: {
                 "Cache-Control": "no-cache",
                 "Pragma": "no-cache"
