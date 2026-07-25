@@ -1529,8 +1529,23 @@ def generate_daily_sports_data():
     fallback_picks = sorted(fallback_picks, key=lambda x: x['probability'], reverse=True)
     
     usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
-    # Filter out low odd traps (< 1.20), low-confidence picks (< 62%), and 'Tarjetas' markets which are often unavailable
+    # Filter out low odd traps (< 1.20), low-confidence picks (< 62%), and unavailable markets
     usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.08 and p.get('probability', 0) >= 60 and 'Tarjeta' not in p.get('market', '')]
+
+    # Priorizar picks con cuotas DIRECTAS de la API (más confiables) sobre mercados calculados internamente
+    DIRECT_API_MARKETS = ['Resultado Final', '1X2', 'Ambos Equipos Anotan', 'Más/Menos Goles',
+                          'Doble Oportunidad', 'Empate No Apuesta', 'DNB', 'Córners (Total']
+    SYNTHETIC_MARKETS = ['Asian 2.0', 'Total de Goles (Asian', 'Método de Clasificación',
+                         'Córners del Equipo', 'Primer Tiempo']
+    
+    def is_direct_api_market(pick):
+        mkt = pick.get('market', '')
+        return any(dm in mkt for dm in DIRECT_API_MARKETS)
+    
+    direct_api_picks = [p for p in usable_picks if is_direct_api_market(p)]
+    synthetic_picks = [p for p in usable_picks if not is_direct_api_market(p)]
+    # Usar picks directos de API primero; si no hay suficientes, complementar con sintéticos
+    usable_picks = direct_api_picks + synthetic_picks
     
     # --- FILTRO MATEMÁTICO PARA AUMENTAR PRECISIÓN ---
     # Si la cuota es >= 1.50, exigimos que esté jugando un equipo élite (Rating >= 85) para mantener probabilidad alta (Stake 10).
@@ -1853,75 +1868,77 @@ def generate_daily_sports_data():
         star_reasoning_3 = "Boleto Soñador de contingencia (Cuota @5.25)."
 
     # PERSISTENCE LOCK: Bloquear boletos del día
+    # Solo bloquea si TODOS los picks del boleto siguen teniendo datos reales válidos
+    def validate_and_refresh_ticket(st_sels, current_matches):
+        """
+        Validates that all picks in a locked ticket still exist in current match data.
+        If found, refreshes the odd from the real API. Returns (valid, refreshed_selections, total_odd).
+        """
+        if not st_sels:
+            return False, [], 1.0
+        refreshed = []
+        for sel in st_sels:
+            m_name = sel.get("match", "")
+            m_market = sel.get("market", "")
+            found_pick = None
+            for md in current_matches:
+                if f"{md['home']} vs {md['away']}" == m_name:
+                    for pk in md.get("picks", []):
+                        if pk.get("market") == m_market:
+                            found_pick = pk
+                            break
+                    break
+            if found_pick is None:
+                # Pick no encontrado en datos actuales — boleto inválido, regenerar
+                print(f"[INFO] Pick '{m_name} | {m_market}' ya no existe en datos actuales. Regenerando boleto.")
+                return False, [], 1.0
+            # Actualizar con cuota real actual
+            refreshed_sel = dict(sel)
+            refreshed_sel["odd"] = found_pick.get("odd", sel.get("odd", 1.0))
+            refreshed_sel["pick"] = found_pick.get("selection", sel.get("pick", ""))
+            refreshed.append(refreshed_sel)
+        # Calcular cuota total real
+        total = round(1.0, 2)
+        for s in refreshed:
+            total = round(total * s.get("odd", 1.0), 2)
+        return True, refreshed, total
+
     if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
-        print("[INFO] Boletos del día ya generados — aplicando bloqueo diario en todos los boletos.")
+        print("[INFO] Boletos del día ya generados — validando picks con datos actuales...")
 
         st1 = raw_previous_json.get("star_ticket_1", {})
-        if st1 and st1.get("selections"):
-            print("[INFO] Boleto 1 bloqueado para hoy.")
+        valid1, fresh_sels1, fresh_odd1 = validate_and_refresh_ticket(st1.get("selections", []), matches_data)
+        if valid1:
+            print("[INFO] Boleto 1 bloqueado para hoy (cuotas actualizadas).")
             ticket_type_1 = st1.get("type", ticket_type_1)
-            star_selections_1 = st1.get("selections", star_selections_1)
-            total_odd_1 = st1.get("total_odd", total_odd_1)
+            star_selections_1 = fresh_sels1
+            total_odd_1 = fresh_odd1
             star_confidence_1 = st1.get("confidence", star_confidence_1)
             star_reasoning_1 = st1.get("reasoning", star_reasoning_1)
+        else:
+            print("[INFO] Boleto 1 regenerado (pick anterior inválido).")
 
         st2 = raw_previous_json.get("star_ticket_2", {})
-        if st2 and st2.get("selections"):
-            print("[INFO] Boleto 2 bloqueado para hoy.")
+        valid2, fresh_sels2, fresh_odd2 = validate_and_refresh_ticket(st2.get("selections", []), matches_data)
+        if valid2:
+            print("[INFO] Boleto 2 bloqueado para hoy (cuotas actualizadas).")
             ticket_type_2 = st2.get("type", ticket_type_2)
-            star_selections_2 = st2.get("selections", star_selections_2)
-            total_odd_2 = st2.get("total_odd", total_odd_2)
+            star_selections_2 = fresh_sels2
+            total_odd_2 = fresh_odd2
             star_confidence_2 = st2.get("confidence", star_confidence_2)
             star_reasoning_2 = st2.get("reasoning", star_reasoning_2)
+        else:
+            print("[INFO] Boleto 2 regenerado (pick anterior inválido).")
 
         st3 = raw_previous_json.get("star_ticket_3", {})
-        if st3 and st3.get("selections"):
-            print("[INFO] Boleto 3 bloqueado para hoy.")
+        valid3, fresh_sels3, fresh_odd3 = validate_and_refresh_ticket(st3.get("selections", []), matches_data)
+        if valid3:
+            print("[INFO] Boleto 3 bloqueado para hoy (cuotas actualizadas).")
             ticket_type_3 = st3.get("type", ticket_type_3)
-            star_selections_3 = st3.get("selections", star_selections_3)
-            total_odd_3 = st3.get("total_odd", total_odd_3)
+            star_selections_3 = fresh_sels3
+            total_odd_3 = fresh_odd3
             star_confidence_3 = st3.get("confidence", star_confidence_3)
             star_reasoning_3 = st3.get("reasoning", star_reasoning_3)
-
-        # Refresh selections and odds in locked tickets to reflect updated real odds
-        for st_sels in [star_selections_1, star_selections_2, star_selections_3]:
-            for sel in st_sels:
-                m_name = sel.get("match")
-                m_market = sel.get("market")
-                for md in matches_data:
-                    if f"{md['home']} vs {md['away']}" == m_name:
-                        for pk in md.get("picks", []):
-                            if pk.get("market") == m_market:
-                                sel["pick"] = pk.get("selection")
-                                sel["odd"] = pk.get("odd")
-
-        # Recalculate total odds for updated tickets
-        if star_selections_1:
-            tot = 1.0
-            for sel in star_selections_1: tot *= sel.get("odd", 1.0)
-            total_odd_1 = round(tot, 2)
-        if star_selections_2:
-            tot = 1.0
-            for sel in star_selections_2: tot *= sel.get("odd", 1.0)
-            total_odd_2 = round(tot, 2)
-        if star_selections_3:
-            tot = 1.0
-            for sel in star_selections_3: tot *= sel.get("odd", 1.0)
-            total_odd_3 = round(tot, 2)
-            tot = 1.0
-            for sel in star_selections_1:
-                tot *= sel.get("odd", 1.0)
-            total_odd_1 = tot
-        if total_odd_2 <= 1.05 and star_selections_2:
-            tot = 1.0
-            for sel in star_selections_2:
-                tot *= sel.get("odd", 1.0)
-            total_odd_2 = tot
-        if total_odd_3 <= 1.05 and star_selections_3:
-            tot = 1.0
-            for sel in star_selections_3:
-                tot *= sel.get("odd", 1.0)
-            total_odd_3 = tot
 
 
     total_won = previous_data.get("global_stats", {}).get("total_picks_won", 0) if previous_data else 0
