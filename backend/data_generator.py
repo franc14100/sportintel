@@ -15,474 +15,173 @@ import urllib.request
 import ssl
 from datetime import datetime, timedelta
 
-def fetch_live_matches():
-    """Busca partidos reales de ESPN API sin llaves de acceso."""
-    # Evitar fallos de certificados SSL en entornos locales de Windows
-    ctx = ssl.create_default_context()
-    ctx.check_hostname = False
-    ctx.verify_mode = ssl.CERT_NONE
+import os
+import urllib.request
+import json
+from datetime import datetime, timedelta
 
-    urls = [
-        ("Fútbol General", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard"),
-        ("FIFA World Cup", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard"),
-        ("Premier League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard"),
-        ("La Liga", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard"),
-        ("Serie A", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard"),
-        ("Bundesliga", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard"),
-        ("Ligue 1", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard"),
-        ("UEFA Champions League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard"),
-        ("UEFA Europa League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa/scoreboard"),
-        ("UEFA Conference League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa.conference/scoreboard"),
-        ("Eredivisie", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/ned.1/scoreboard"),
-        ("Primeira Liga Portugal", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/por.1/scoreboard"),
-        ("Süper Lig Turquía", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/tur.1/scoreboard"),
-        ("Pro League Bélgica", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/bel.1/scoreboard"),
-        ("Premiership Escocia", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/sco.1/scoreboard"),
-        ("Superleague Grecia", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/gre.1/scoreboard"),
-        ("Bundesliga Austria", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/aut.1/scoreboard"),
-        ("Super League Suiza", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/sui.1/scoreboard"),
-        ("Ekstraklasa Polonia", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/pol.1/scoreboard"),
-        ("Superliga Dinamarca", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/den.1/scoreboard"),
-        ("Liga Pro Ecuador", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/ecu.1/scoreboard"),
-        ("Liga Argentina", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard"),
-        ("Liga Colombiana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/col.1/scoreboard"),
-        ("Brasileirao", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/bra.1/scoreboard"),
-        ("Liga Chilena", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/chi.1/scoreboard"),
-        ("Liga Peruana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/per.1/scoreboard"),
-        ("Liga Uruguaya", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/scoreboard"),
-        ("Liga Boliviana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/bol.1/scoreboard"),
-        ("Liga Paraguaya", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/par.1/scoreboard"),
-        ("Liga Venezolana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/ven.1/scoreboard"),
-        ("Saudi Pro League", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/sau.1/scoreboard"),
-        ("J1 League Japón", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/jpn.1/scoreboard"),
-        ("K League Corea", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/kor.1/scoreboard"),
-        ("Liga MX", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/scoreboard"),
-        ("MLS", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard"),
-        ("Copa Libertadores", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.libertadores/scoreboard"),
-        ("Copa Sudamericana", "Football", "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.sudamericana/scoreboard"),
-        ("WNBA", "Basketball", "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard"),
-        ("NBA", "Basketball", "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"),
-        ("NCAA Basketball", "Basketball", "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard"),
-        ("Tenis ATP/WTA", "Tennis", "https://site.api.espn.com/apis/site/v2/sports/tennis/all/scoreboard")
-    ]
-    
+RAPIDAPI_KEY = os.environ.get("RAPIDAPI_KEY", "0fc0ba8109mshc0a96d4fddda16ep197aeajsncc7e2400156e")
+HEADERS = {
+    'x-rapidapi-host': 'sportapi7.p.rapidapi.com',
+    'x-rapidapi-key': RAPIDAPI_KEY
+}
+
+def load_cache():
+    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
+    if os.path.exists(cache_path):
+        with open(cache_path, 'r', encoding='utf-8') as f:
+            try:
+                return json.load(f)
+            except:
+                return {}
+    return {}
+
+def save_cache(cache):
+    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
+    with open(cache_path, 'w', encoding='utf-8') as f:
+        json.dump(cache, f, ensure_ascii=False, indent=2)
+
+def fetch_live_matches():
+    """Busca partidos usando SportAPI7 y la Memoria Caché para Fútbol, Basket y Tenis."""
     fetched_matches = []
     
-    for league_name, sport, url in urls:
-        try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req, context=ctx, timeout=8) as response:
-                data = json.loads(response.read().decode('utf-8'))
-                events = data.get("events", [])
-                
-                if sport == "Tennis":
-                    for event in events:
-                        groupings = event.get("groupings", [])
-                        for grouping in groupings:
-                            division_name = grouping.get("grouping", {}).get("displayName", "Singles")
-                            comps = grouping.get("competitions", [])
-                            for comp in comps:
-                                competitors = comp.get("competitors", [])
-                                home_team = None
-                                away_team = None
-                                for competitor in competitors:
-                                    role = competitor.get("homeAway")
-                                    athlete_data = competitor.get("athlete", {})
-                                    t_name = athlete_data.get("displayName")
-                                    if not t_name:
-                                        t_name = athlete_data.get("fullName", "Tenista")
-                                    
-                                    team_info = {
-                                        "name": t_name,
-                                        "color": "#84CC16" if role == "home" else "#10B981",
-                                        "accent": "#A3E635" if role == "home" else "#34D399"
-                                    }
-                                    sc = competitor.get("score")
-                                    if role == "home":
-                                        home_team = team_info
-                                        home_score = sc
-                                    else:
-                                        away_team = team_info
-                                        away_score = sc
-                                        
-                                if not home_team or not away_team or home_team["name"] == "TBD" or away_team["name"] == "TBD" or home_team["name"] == away_team["name"]:
-                                    continue
-                                    
-                                status_state = event.get("status", {}).get("type", {}).get("state", "")
-                                if status_state not in ["pre", "in", "post"]:
-                                    continue
-                                    
-                                # Parse tennis score from notes if main score is 0/empty
-                                notes = comp.get("notes", [])
-                                if notes and isinstance(notes, list):
-                                    note_text = notes[0].get("text", "")
-                                    import re
-                                    m_bt = re.search(r"^(.*?)(?:\s*\([A-Z]{3}\))?\s+(?:bt|beat|def\.|def)\s+(.*?)(?:\s*\([A-Z]{3}\))?\s+([\d\-\s\(\)]+)", note_text, re.IGNORECASE)
-                                    if m_bt:
-                                        w_name = m_bt.group(1).strip()
-                                        l_name = m_bt.group(2).strip()
-                                        sets_part = m_bt.group(3).strip()
-                                        set_scores = re.findall(r"(\d+)-(\d+)", sets_part)
-                                        w_sets = max(len(set_scores), 2)
-                                        l_sets = sum(1 for s in set_scores if int(s[1]) > int(s[0]))
-                                        
-                                        if w_name.lower() in home_team["name"].lower() or home_team["name"].lower() in w_name.lower():
-                                            home_score = str(w_sets)
-                                            away_score = str(l_sets)
-                                        elif w_name.lower() in away_team["name"].lower() or away_team["name"].lower() in w_name.lower():
-                                            home_score = str(l_sets)
-                                            away_score = str(w_sets)
-
-                                # Fallback for finished tennis matches if scores still 0
-                                if status_state == "post" and (not home_score or str(home_score) == "0") and (not away_score or str(away_score) == "0"):
-                                    # Set realistic 2-0 / 2-1 set scores for finished tennis
-                                    home_score = "2"
-                                    away_score = "0"
-
-                                dt_str = comp.get("date", "")
-                                if not dt_str: continue
-                                
-                                # Filter by date: only today's or early tomorrow UTC matches
-                                today_str = datetime.now().strftime("%Y-%m-%d")
-                                tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
-                                is_today_match = False
-                                if dt_str.startswith(today_str):
-                                    is_today_match = True
-                                elif dt_str.startswith(tomorrow):
-                                    try:
-                                        hr = int(dt_str.split("T")[1][:2])
-                                        if hr < 10: is_today_match = True
-                                    except: pass
-                                
-                                if not is_today_match: continue
-                                
-                                time_display = "12:00"
-                                if "T" in dt_str:
-                                    try:
-                                        clean_dt = dt_str.replace("Z", "")
-                                        # Handle cases with milliseconds e.g. .000Z
-                                        if "." in clean_dt: clean_dt = clean_dt.split(".")[0]
-                                        # sometimes missing seconds
-                                        if clean_dt.count(":") == 1: clean_dt += ":00"
-                                        dt_obj = datetime.strptime(clean_dt, "%Y-%m-%dT%H:%M:%S")
-                                        dt_obj = dt_obj - timedelta(hours=5) # Ecuador time
-                                        time_display = dt_obj.strftime("%H:%M")
-                                    except Exception as e:
-                                        time_part = dt_str.split("T")[1]
-                                        time_display = time_part[:5]
-                                    
-                                fetched_matches.append({
-                                    "home": home_team["name"],
-                                    "away": away_team["name"],
-                                    "home_color": home_team["color"],
-                                    "home_accent": home_team["accent"],
-                                    "away_color": away_team["color"],
-                                    "away_accent": away_team["accent"],
-                                    "league": f"Tennis - {event.get('shortName', 'ATP/WTA')} ({division_name})",
-                                    "sport": "Tennis",
-                                    "time": time_display,
-                                    "stadium": event.get("venue", {}).get("fullName", "Cancha Central"),
-                                    "status": status_state,
-                                    "home_score": home_score,
-                                    "away_score": away_score
-                                })
-                else:
-                    for event in events:
-                        comps = event.get("competitions") or [{}]
-                        comp = comps[0] if comps else {}
-                        if not comp: comp = {}
-                        competitors = comp.get("competitors") or []
-                        
-                        home_team = None
-                        away_team = None
-                        
-                        for competitor in competitors:
-                            if not competitor: continue
-                            role = competitor.get("homeAway")
-                            team_data = competitor.get("team") or {}
-                            t_name = team_data.get("displayName") or team_data.get("name") or "TBD"
-                            
-                            t_color = team_data.get("color", "")
-                            t_color = f"#{t_color}" if t_color else "#FFFFFF"
-                            
-                            t_accent = team_data.get("alternateColor", "")
-                            t_accent = f"#{t_accent}" if t_accent else "#CCCCCC"
-                            
-                            if len(t_color) > 7: t_color = t_color[:7]
-                            if len(t_accent) > 7: t_accent = t_accent[:7]
-                            
-                            team_info = {
-                                "name": t_name,
-                                "color": t_color,
-                                "accent": t_accent,
-                                "form": competitor.get("form") or ""
-                            }
-                            
-                            sc = competitor.get("score")
-                            if role == "home":
-                                home_team = team_info
-                                home_score = sc
-                            else:
-                                away_team = team_info
-                                away_score = sc
-                                
-                        if not home_team or not away_team or home_team["name"] == "TBD" or away_team["name"] == "TBD" or home_team["name"] == away_team["name"]:
-                            continue
-                            
-                        status = event.get("status") or {}
-                        status_type = status.get("type") or {}
-                        status_state = status_type.get("state", "")
-                        
-                        if status_state not in ["pre", "in", "post"]:
-                            continue
-                            
-                        dt_str = event.get("date", "")
-                        if not dt_str: continue
-                        
-                        today_str = datetime.now().strftime("%Y-%m-%d")
-                        tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
-                        is_today_match = False
-                        if dt_str.startswith(today_str):
-                            is_today_match = True
-                        elif dt_str.startswith(tomorrow):
-                            try:
-                                hr = int(dt_str.split("T")[1][:2])
-                                if hr < 10: is_today_match = True
-                            except: pass
-                        
-                        if not is_today_match: continue
-                        
-                        time_display = "19:00"
-                        if "T" in dt_str:
-                            try:
-                                clean_dt = dt_str.replace("Z", "")
-                                if "." in clean_dt: clean_dt = clean_dt.split(".")[0]
-                                if clean_dt.count(":") == 1: clean_dt += ":00"
-                                dt_obj = datetime.strptime(clean_dt, "%Y-%m-%dT%H:%M:%S")
-                                dt_obj = dt_obj - timedelta(hours=5) # Ecuador time
-                                time_display = dt_obj.strftime("%H:%M")
-                            except Exception as e:
-                                time_part = dt_str.split("T")[1]
-                                time_display = time_part[:5]
-                            
-                        # Check notes or format to detect if it is a cup/knockout match
-                        is_cup = False
-                        notes = comp.get("notes") or []
-                        notes_text = " ".join([n.get("text", "").lower() for n in notes if n]) if notes else ""
-                        if any(kw in notes_text for kw in ["leg", "aggregate", "tied", "elimina", "clasific", "round of", "quarter", "semi", "final", "knockout"]):
-                            is_cup = True
-                        
-                        # Also check the league name
-                        league_lower = league_name.lower()
-                        if any(kw in league_lower for kw in ["cup", "copa", "champions league", "europa league", "libertadores", "sudamericana", "world cup", "mundial"]):
-                            is_cup = True
-
-                        # Parse real odds from DraftKings/ESPN
-                        real_odds = {}
-                        odds_list = comp.get("odds", [])
-                        if odds_list and isinstance(odds_list[0], dict):
-                            first_odd = odds_list[0]
-                            moneyline = first_odd.get("moneyline")
-                            
-                            def american_to_decimal(val_str):
-                                if not val_str: return None
-                                try:
-                                    val = int(val_str)
-                                    if val > 0:
-                                        return round((val / 100.0) + 1.0, 2)
-                                    elif val < 0:
-                                        return round((100.0 / abs(val)) + 1.0, 2)
-                                    else:
-                                        return 1.0
-                                except:
-                                    return None
-                            
-                            if moneyline:
-                                home_section = moneyline.get("home")
-                                away_section = moneyline.get("away")
-                                draw_section = moneyline.get("draw")
-                                
-                                h = home_section.get("close", {}).get("odds") or home_section.get("open", {}).get("odds") if home_section else None
-                                a = away_section.get("close", {}).get("odds") or away_section.get("open", {}).get("odds") if away_section else None
-                                d = draw_section.get("close", {}).get("odds") or draw_section.get("open", {}).get("odds") if draw_section else None
-                                
-                                dec_h = american_to_decimal(h)
-                                dec_a = american_to_decimal(a)
-                                dec_d = american_to_decimal(d)
-                                
-                                if dec_h: real_odds['h2h_home'] = dec_h
-                                if dec_a: real_odds['h2h_away'] = dec_a
-                                if dec_d: real_odds['h2h_draw'] = dec_d
-                                
-                            # Parse total over/under
-                            total = first_odd.get("total")
-                            if total:
-                                over_section = total.get("over")
-                                under_section = total.get("under")
-                                o = over_section.get("close", {}).get("odds") or over_section.get("open", {}).get("odds") if over_section else None
-                                u = under_section.get("close", {}).get("odds") or under_section.get("open", {}).get("odds") if under_section else None
-                                dec_o = american_to_decimal(o)
-                                dec_u = american_to_decimal(u)
-                                if dec_o: real_odds['total_over'] = dec_o
-                                if dec_u: real_odds['total_under'] = dec_u
-
-                        venue = comp.get("venue", {}).get("fullName", "Estadio Deportivo")
-                        
-                        fetched_matches.append({
-                            "home": home_team["name"],
-                            "away": away_team["name"],
-                            "home_color": home_team["color"],
-                            "home_accent": home_team["accent"],
-                            "away_color": away_team["color"],
-                            "away_accent": away_team["accent"],
-                            "league": f"{league_name} - {event.get('shortName', '')}" if event.get('shortName') else league_name,
-                            "sport": sport,
-                            "time": time_display,
-                            "stadium": venue,
-                            "status": status_state,
-                            "home_score": home_score,
-                            "away_score": away_score,
-                            "is_cup": is_cup,
-                            "home_form_raw": home_team.get("form", ""),
-                            "away_form_raw": away_team.get("form", ""),
-                            "real_odds": real_odds
-                        })
-        except Exception as e:
-            import traceback
-            print(f"[Aviso] No se pudo conectar al endpoint de {league_name}: {e}")
-            traceback.print_exc()
-            
-    # Deduplicate matches, keeping the one with the more specific league name (e.g. MLS instead of Fútbol Mundial)
-    deduped = {}
-    for m in fetched_matches:
-        key = f"{m['home'].lower().strip()}_{m['away'].lower().strip()}"
-        if key not in deduped:
-            deduped[key] = m
-        else:
-            existing_league = deduped[key]['league'].lower()
-            new_league = m['league'].lower()
-            if 'fútbol mundial' in existing_league and 'fútbol mundial' not in new_league:
-                deduped[key] = m
-
-    return list(deduped.values())
-
-
-def fetch_odds_api_matches():
-    """Obtiene partidos y cuotas REALES desde The Odds API (the-odds-api.com)."""
-    ODDS_API_KEY = '269d7c2dc437dcbb4c535c8a7debeca8'
-    
-    SPORTS = [
-        ('soccer_argentina_primera_division', 'Football', 'Primera División - Argentina'),
-        ('soccer_brazil_campeonato',          'Football', 'Brasileirao Serie A'),
-        ('soccer_brazil_serie_b',             'Football', 'Brasileirao Serie B'),
-        ('soccer_chile_campeonato',           'Football', 'Primera División - Chile'),
-        ('soccer_conmebol_copa_libertadores', 'Football', 'Copa Libertadores'),
-        ('soccer_conmebol_copa_sudamericana', 'Football', 'Copa Sudamericana'),
-        ('soccer_mexico_ligamx',              'Football', 'Liga MX'),
-        ('soccer_epl',                        'Football', 'Premier League'),
-        ('soccer_spain_la_liga',              'Football', 'La Liga'),
-        ('soccer_germany_bundesliga',         'Football', 'Bundesliga'),
-        ('soccer_italy_serie_a',              'Football', 'Serie A'),
-        ('soccer_france_ligue_one',           'Football', 'Ligue 1'),
-        ('soccer_usa_mls',                    'Football', 'MLS'),
-        ('soccer_fifa_world_cup',             'Football', 'FIFA World Cup 2026'),
-        ('soccer_england_efl_cup',            'Football', 'EFL Cup'),
-        ('basketball_wnba',                   'Basketball', 'WNBA'),
-        ('baseball_mlb',                      'Baseball', 'MLB')
+    ALLOWED_LEAGUES = [
+        "Premier League", "LaLiga", "Serie A", "Bundesliga", "Ligue 1", 
+        "UEFA Champions League", "UEFA Europa League", "Copa America", 
+        "Eurocopa", "World Cup", "Liga Profesional de Fútbol", 
+        "Brasileirão", "Major League Soccer", "Liga MX",
+        "Copa Libertadores", "Copa Sudamericana", "Primera A",
+        "Liga 1", "Primera División", "Liga Pro", "LigaPro", "Copa Ecuador",
+        "Copa do Brasil", "Copa Colombia", "Copa Argentina", "Copa Chile",
+        "NBA", "WNBA", "NCAA", "Euroleague", "Liga Basquet", "Liga Nacional de Baloncesto", "Baloncesto",
+        "ATP", "WTA", "US Open", "Wimbledon", "Roland Garros", "Australian Open"
     ]
     
-    ctx = ssl.create_default_context()
-    ctx.check_hostname = False
-    ctx.verify_mode = ssl.CERT_NONE
+    today = datetime.now().strftime("%Y-%m-%d")
+    cache = load_cache()
+    new_events_found = 0
     
-    from datetime import timezone
-    today = datetime.now(timezone.utc).date()
+    sports_to_fetch = ["football", "basketball", "tennis"]
     
-    matches = []
-    for sport_key, sport_type, league_display in SPORTS:
-        url = (f'https://api.the-odds-api.com/v4/sports/{sport_key}/odds/'
-               f'?apiKey={ODDS_API_KEY}&regions=eu&markets=h2h,totals&oddsFormat=decimal')
+    for api_sport in sports_to_fetch:
+        odds_url = f"https://sportapi7.p.rapidapi.com/api/v1/sport/{api_sport}/odds/1/{today}"
+        print(f"[INFO] Fetching cuotas de {api_sport} de SportAPI7 para {today}...")
+        req = urllib.request.Request(odds_url, headers=HEADERS)
+        
         try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req, context=ctx, timeout=10) as r:
-                events = json.loads(r.read())
-            for ev in events:
-                # Parse commence time
-                commence = ev.get('commence_time', '')
-                try:
-                    dt_obj = datetime.strptime(commence, "%Y-%m-%dT%H:%M:%SZ")
-                    dt_obj = dt_obj - timedelta(hours=5)  # Ecuador time (UTC-5)
-                    time_display = dt_obj.strftime("%H:%M")
-                    match_date = dt_obj.date()
-                except Exception as err:
-                    print(f"Failed to parse date: {commence}, error: {err}")
-                    continue
-
-                # Filter: Only include matches that are played TODAY (in UTC-5)
-                if match_date != today:
-                    continue
-
-                home_team = ev.get('home_team', 'Local')
-                away_team = ev.get('away_team', 'Visitante')
-                
-                # Extract real odds from bookmakers (prefer 1xBet, else first available)
-                h2h_home = h2h_away = h2h_draw = None
-                total_over = total_under = None
-                bookmaker_name = None
-                
-                bookmakers = ev.get('bookmakers', [])
-                preferred = next((b for b in bookmakers if '1xbet' in b.get('key','').lower()), None)
-                bm = preferred or (bookmakers[0] if bookmakers else None)
-                if bm:
-                    bookmaker_name = bm.get('title', '')
-                    for mkt in bm.get('markets', []):
-                        if mkt['key'] == 'h2h':
-                            for outcome in mkt.get('outcomes', []):
-                                if outcome['name'] == home_team:
-                                    h2h_home = outcome['price']
-                                elif outcome['name'] == away_team:
-                                    h2h_away = outcome['price']
-                                elif outcome['name'] == 'Draw':
-                                    h2h_draw = outcome['price']
-                        elif mkt['key'] == 'totals':
-                            for outcome in mkt.get('outcomes', []):
-                                if outcome['name'] == 'Over':
-                                    total_over = outcome['price']
-                                elif outcome['name'] == 'Under':
-                                    total_under = outcome['price']
-                
-                if h2h_home is None and h2h_away is None:
-                    continue  # Skip matches without odds
-
-                matches.append({
-                    'home': home_team,
-                    'away': away_team,
-                    'home_color': '#1a56db',
-                    'home_accent': '#1e429f',
-                    'away_color': '#c81e1e',
-                    'away_accent': '#9b1c1c',
-                    'league': league_display,
-                    'sport': sport_type,
-                    'time': time_display,
-                    'stadium': 'Estadio Principal',
-                    'status': 'pre',
-                    'home_score': None,
-                    'away_score': None,
-                    # Real odds from bookmakers
-                    'real_odds': {
-                        'h2h_home': h2h_home,
-                        'h2h_away': h2h_away,
-                        'h2h_draw': h2h_draw,
-                        'total_over': total_over,
-                        'total_under': total_under,
-                        'bookmaker': bookmaker_name or 'Market'
-                    }
-                })
+            with urllib.request.urlopen(req, timeout=15) as response:
+                data = json.loads(response.read().decode('utf-8'))
+                odds_dict = data.get("odds", {})
+                print(f"[INFO] {api_sport}: Encontrados {len(odds_dict)} eventos con cuotas.")
         except Exception as e:
-            print(f'[Odds API] {sport_key}: {e}')
-    
-    print(f'[INFO] The Odds API: {len(matches)} partidos con cuotas reales obtenidos.')
-    return matches
+            print(f"[Error] Falló la petición de cuotas para {api_sport}: {e}")
+            continue
+
+        for eid, odd_data in odds_dict.items():
+            if eid in cache:
+                event_info = cache[eid]
+            else:
+                event_url = f"https://sportapi7.p.rapidapi.com/api/v1/event/{eid}"
+                ereq = urllib.request.Request(event_url, headers=HEADERS)
+                try:
+                    with urllib.request.urlopen(ereq, timeout=10) as eresponse:
+                        edata = json.loads(eresponse.read().decode('utf-8'))
+                        e_obj = edata.get("event", {})
+                        
+                        home = e_obj.get("homeTeam", {}).get("name")
+                        away = e_obj.get("awayTeam", {}).get("name")
+                        league = e_obj.get("tournament", {}).get("name", "Unknown")
+                        status = e_obj.get("status", {}).get("type", "notstarted")
+                        
+                        start_ts = e_obj.get("startTimestamp")
+                        if start_ts:
+                            dt = datetime.fromtimestamp(start_ts)
+                            time_display = dt.strftime("%H:%M")
+                        else:
+                            time_display = "19:00"
+                        
+                        if home and away:
+                            event_info = {
+                                "homeTeam": home,
+                                "awayTeam": away,
+                                "league": league,
+                                "time": time_display,
+                                "status": status,
+                                "sport": api_sport.capitalize()
+                            }
+                            cache[eid] = event_info
+                            new_events_found += 1
+                        else:
+                            continue
+                except Exception as e:
+                    continue
+
+            is_allowed = False
+            # Allow all tennis matches if they are ATP or WTA or if user wants all of them.
+            # Usually tennis has hundreds of matches, so we filter by ATP/WTA.
+            if event_info["sport"] == "Tennis":
+                if "ATP" in event_info["league"] or "WTA" in event_info["league"] or "Open" in event_info["league"]:
+                    is_allowed = True
+            else:
+                for al in ALLOWED_LEAGUES:
+                    if al.lower() in event_info["league"].lower():
+                        is_allowed = True
+                        break
+                    
+            if not is_allowed:
+                continue
+                
+            real_odds = {}
+            choices = odd_data.get("choices", [])
+            for choice in choices:
+                name = choice.get("name")
+                frac = choice.get("fractionalValue")
+                if not frac:
+                    continue
+                try:
+                    num, den = str(frac).split("/")
+                    decimal_odd = round((float(num) / float(den)) + 1.0, 2)
+                    if name == "1": real_odds['h2h_home'] = decimal_odd
+                    elif name == "X": real_odds['h2h_draw'] = decimal_odd
+                    elif name == "2": real_odds['h2h_away'] = decimal_odd
+                except:
+                    pass
+
+            api_status = event_info.get("status", "notstarted")
+            if api_status == "inprogress": st = "in"
+            elif api_status == "finished": st = "post"
+            else: st = "pre"
+            
+            h_col, h_acc, a_col, a_acc = "#1F2937", "#3B82F6", "#1F2937", "#EF4444"
+            if event_info["sport"] == "Tennis":
+                h_col, h_acc, a_col, a_acc = "#84CC16", "#A3E635", "#10B981", "#34D399"
+            elif event_info["sport"] == "Basketball":
+                h_col, h_acc, a_col, a_acc = "#F59E0B", "#FCD34D", "#8B5CF6", "#C4B5FD"
+
+            fetched_matches.append({
+                "home": event_info["homeTeam"],
+                "away": event_info["awayTeam"],
+                "home_color": h_col,
+                "home_accent": h_acc,
+                "away_color": a_col,
+                "away_accent": a_acc,
+                "league": event_info["league"],
+                "sport": event_info["sport"],
+                "time": event_info["time"],
+                "stadium": "Cancha Principal",
+                "status": st,
+                "home_score": 0 if st == "pre" else None,
+                "away_score": 0 if st == "pre" else None,
+                "is_cup": False,
+                "home_form_raw": "",
+                "away_form_raw": "",
+                "real_odds": real_odds
+            })
+
+    if new_events_found > 0:
+        save_cache(cache)
+        
+    return fetched_matches
 
 
 TEAM_RATINGS = {
@@ -607,29 +306,9 @@ def generate_daily_sports_data():
     print("[INFO] Conectando a internet para buscar partidos reales...")
     espn_matches = fetch_live_matches()
     
-    # Fetch real odds from The Odds API and merge with ESPN data
-    try:
-        odds_matches = fetch_odds_api_matches()
-    except Exception as e:
-        print(f"[Aviso] No se pudo conectar a The Odds API: {e}")
-        odds_matches = []
-    
-    # Merge: use ESPN for live/finished matches, add Odds API for coverage
-    # Build a set of team name pairs from ESPN to avoid duplication
-    espn_pairs = set()
-    for m in espn_matches:
-        key = f"{m['home'].lower().strip()}_{m['away'].lower().strip()}"
-        espn_pairs.add(key)
-    
-    # Only add Odds API matches that aren't already in ESPN
-    extra_odds = []
-    for m in odds_matches:
-        key = f"{m['home'].lower().strip()}_{m['away'].lower().strip()}"
-        if key not in espn_pairs:
-            extra_odds.append(m)
-    
-    live_matches = espn_matches + extra_odds
-    print(f"[INFO] Total combinado: {len(espn_matches)} ESPN + {len(extra_odds)} Odds API = {len(live_matches)} partidos")
+    # Filtrar estrictamente solo Fútbol, Basketball y Tenis
+    live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Basketball', 'Tennis']]
+    print(f"[INFO] Total partidos reales (Fútbol, Basket, Tenis): {len(live_matches)} partidos")
     
     # Si no hay partidos en vivo (ej. día sin partidos programados en la API de ESPN)
     # se usan partidos reales de la Copa del Mundo 2026 y WNBA como fallback dinámico
@@ -1657,6 +1336,21 @@ def generate_daily_sports_data():
     usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
     # Filter out low odd traps (< 1.20), low-confidence picks (< 62%), and 'Tarjetas' markets which are often unavailable
     usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.20 and p.get('probability', 0) >= 62 and 'Tarjeta' not in p.get('market', '')]
+    
+    # --- FILTRO MATEMÁTICO PARA AUMENTAR PRECISIÓN ---
+    # Si la cuota es >= 1.50, exigimos que esté jugando un equipo élite (Rating >= 85) para mantener probabilidad alta (Stake 10).
+    # Si no, limitamos artificialmente su probabilidad máxima a 74%, evitando que la IA lo considere "Boleto Seguro" (Stake 10).
+    for p in usable_picks:
+        if p.get('odd', 0) >= 1.50:
+            teams = p.get('match', '').split(' vs ')
+            max_rating = 0
+            if len(teams) == 2:
+                for t, r in TEAM_RATINGS.items():
+                    if t.lower() in teams[0].lower() or t.lower() in teams[1].lower():
+                        max_rating = max(max_rating, r)
+            if max_rating < 85:
+                p['probability'] = min(p['probability'], 74)
+    # -------------------------------------------------
     # Rank picks dynamically by Expected Value score (probability * odd) and probability
     usable_picks = sorted(usable_picks, key=lambda x: ((x.get('probability', 0) / 100.0) * x.get('odd', 1.0), x.get('probability', 0)), reverse=True)
     

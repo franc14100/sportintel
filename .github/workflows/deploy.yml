@@ -6,7 +6,7 @@ on:
     paths-ignore:
       - 'frontend/data.json'
   schedule:
-    - cron: '*/10 * * * *' # Cada 10 minutos
+    - cron: '*/30 * * * *' # Cada 30 minutos
   workflow_dispatch: # Permite correrlo manualmente con un botón
 
 permissions:
@@ -36,7 +36,12 @@ jobs:
         with:
           python-version: '3.10'
           
+      - name: Instalar Dependencias
+        run: pip install requests
+          
       - name: Buscar Partidos en Vivo (Ejecutando IA)
+        env:
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
         run: |
           python backend/data_generator.py
           
@@ -44,8 +49,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add frontend/data.json
-          git commit -m "Auto-update match data" || exit 0
+          git add frontend/data.json backend/event_cache.json
+          git commit -m "Auto-update match data & cache" || exit 0
           git push || echo "No changes to push or push failed"
           
       - name: Configurar GitHub Pages
