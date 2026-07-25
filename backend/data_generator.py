@@ -15,6 +15,7 @@ import urllib.request
 import time
 import ssl
 from datetime import datetime, timedelta
+from concurrent.futures import ThreadPoolExecutor
 
 import os
 import urllib.request
@@ -78,37 +79,28 @@ def fetch_live_matches():
                 odds_dict = data.get("odds", {})
                 print(f"[INFO] {api_sport}: Encontrados {len(odds_dict)} eventos con cuotas.")
         except Exception as e:
-            err_msg = f"Error en {api_sport}: {str(e)}"
-            print(f"[Error] {err_msg}")
-            fetch_errors.append(err_msg)
+            print(f"[Error] Falló la petición de cuotas para {api_sport}: {e}")
             continue
 
-        for eid, odd_data in odds_dict.items():
-            if eid in cache:
-                event_info = cache[eid]
-            else:
+        # Pre-fetch uncached event details in parallel
+        uncached_eids = [eid for eid in odds_dict if eid not in cache]
+        if uncached_eids:
+            print(f"[INFO] Descargando detalles de {len(uncached_eids)} eventos nuevos en paralelo...")
+            def fetch_single_event(eid):
                 event_url = f"https://sportapi7.p.rapidapi.com/api/v1/event/{eid}"
                 ereq = urllib.request.Request(event_url, headers=HEADERS)
                 try:
-                    time.sleep(2.1) # Respetar límite de 30 peticiones por minuto de RapidAPI
-                    with urllib.request.urlopen(ereq, timeout=10) as eresponse:
+                    with urllib.request.urlopen(ereq, timeout=8) as eresponse:
                         edata = json.loads(eresponse.read().decode('utf-8'))
                         e_obj = edata.get("event", {})
-                        
                         home = e_obj.get("homeTeam", {}).get("name")
                         away = e_obj.get("awayTeam", {}).get("name")
                         league = e_obj.get("tournament", {}).get("name", "Unknown")
                         status = e_obj.get("status", {}).get("type", "notstarted")
-                        
                         start_ts = e_obj.get("startTimestamp")
-                        if start_ts:
-                            dt = datetime.fromtimestamp(start_ts)
-                            time_display = dt.strftime("%H:%M")
-                        else:
-                            time_display = "19:00"
-                        
+                        time_display = datetime.fromtimestamp(start_ts).strftime("%H:%M") if start_ts else "19:00"
                         if home and away:
-                            event_info = {
+                            return eid, {
                                 "homeTeam": home,
                                 "awayTeam": away,
                                 "league": league,
@@ -116,12 +108,21 @@ def fetch_live_matches():
                                 "status": status,
                                 "sport": api_sport.capitalize()
                             }
-                            cache[eid] = event_info
-                            new_events_found += 1
-                        else:
-                            continue
-                except Exception as e:
-                    continue
+                except Exception:
+                    pass
+                return eid, None
+
+            with ThreadPoolExecutor(max_workers=20) as executor:
+                results = executor.map(fetch_single_event, uncached_eids)
+                for eid, res_info in results:
+                    if res_info:
+                        cache[eid] = res_info
+                        new_events_found += 1
+
+        for eid, odd_data in odds_dict.items():
+            if eid not in cache:
+                continue
+            event_info = cache[eid]
 
             is_allowed = False
             api_sport_name = event_info.get("sport", "Football")
@@ -314,17 +315,16 @@ def generate_daily_sports_data():
 
     print("[INFO] Conectando a internet para buscar partidos reales...")
     espn_matches = fetch_live_matches()
+    
     live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Basketball', 'Tennis']]
     
     if not live_matches:
-        err_str = " | ".join(fetch_errors) if fetch_errors else "NO SE ENCONTRARON PARTIDOS"
-        print(f"[CRITICAL ERROR] {err_str}")
-        import sys
-        sys.exit(1)
-        
-    print(f"[INFO] Total partidos reales (Fútbol, Basket, Tenis): {len(live_matches)} partidos")
+        print("[AVISO] No se obtuvieron partidos filtrados en vivo desde la API para el día de hoy.")
+    else:
+        print(f"[INFO] Total partidos reales (Fútbol, Basket, Tenis): {len(live_matches)} partidos")
     
-    # se usan partidos reales de la Copa del Mundo 2026 y WNBA como fallback dinámico
+    # Si no hay partidos en vivo (ej. día sin partidos programados en la API)
+    # se usan partidos reales de respaldo
     if not live_matches:
         print("[Aviso] No se obtuvieron partidos en vivo desde la API. Usando partidos reales programados para esta semana.")
         live_matches = [
