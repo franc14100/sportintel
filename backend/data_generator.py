@@ -955,14 +955,14 @@ def generate_daily_sports_data():
                     # Mercado: "Equipo X Más de N.5 Córners"
                     "market": "Córners del Equipo (Individual)",
                     "selection": (
-                        f"{winner_name} Más de 5.5 Córners" if max(prob_home, prob_away) > 68 and avg_goals >= 2.5
+                        f"{winner_name} Más de 3.5 Córners" if max(prob_home, prob_away) > 68
                         else f"{winner_name} Más de 4.5 Córners" if max(prob_home, prob_away) > 58
                         else f"{winner_name} Más de 3.5 Córners"
                     ),
                     "odd": (
-                        round(random.uniform(1.90, 2.25), 2) if max(prob_home, prob_away) > 68 and avg_goals >= 2.5
-                        else round(random.uniform(1.55, 1.78), 2) if max(prob_home, prob_away) > 58
-                        else round(random.uniform(1.28, 1.42), 2)
+                        round(random.uniform(1.09, 1.18), 2) if max(prob_home, prob_away) > 68
+                        else round(random.uniform(1.30, 1.45), 2) if max(prob_home, prob_away) > 58
+                        else round(random.uniform(1.18, 1.28), 2)
                     ),
                     "probability": random.randint(64, 82),
                     "risk": "Low",
@@ -1348,7 +1348,7 @@ def generate_daily_sports_data():
     
     usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
     # Filter out low odd traps (< 1.20), low-confidence picks (< 62%), and 'Tarjetas' markets which are often unavailable
-    usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.20 and p.get('probability', 0) >= 62 and 'Tarjeta' not in p.get('market', '')]
+    usable_picks = [p for p in usable_picks if p.get('odd', 0) >= 1.08 and p.get('probability', 0) >= 60 and 'Tarjeta' not in p.get('market', '')]
     
     # --- FILTRO MATEMÁTICO PARA AUMENTAR PRECISIÓN ---
     # Si la cuota es >= 1.50, exigimos que esté jugando un equipo élite (Rating >= 85) para mantener probabilidad alta (Stake 10).
@@ -1701,8 +1701,31 @@ def generate_daily_sports_data():
             star_confidence_3 = st3.get("confidence", star_confidence_3)
             star_reasoning_3 = st3.get("reasoning", star_reasoning_3)
 
-        # Safeguard: recalculate total_odd if <= 1.05
-        if total_odd_1 <= 1.05 and star_selections_1:
+        # Refresh selections and odds in locked tickets to reflect updated real odds
+        for st_sels in [star_selections_1, star_selections_2, star_selections_3]:
+            for sel in st_sels:
+                m_name = sel.get("match")
+                m_market = sel.get("market")
+                for md in matches_data:
+                    if f"{md['home']} vs {md['away']}" == m_name:
+                        for pk in md.get("picks", []):
+                            if pk.get("market") == m_market:
+                                sel["pick"] = pk.get("selection")
+                                sel["odd"] = pk.get("odd")
+
+        # Recalculate total odds for updated tickets
+        if star_selections_1:
+            tot = 1.0
+            for sel in star_selections_1: tot *= sel.get("odd", 1.0)
+            total_odd_1 = round(tot, 2)
+        if star_selections_2:
+            tot = 1.0
+            for sel in star_selections_2: tot *= sel.get("odd", 1.0)
+            total_odd_2 = round(tot, 2)
+        if star_selections_3:
+            tot = 1.0
+            for sel in star_selections_3: tot *= sel.get("odd", 1.0)
+            total_odd_3 = round(tot, 2)
             tot = 1.0
             for sel in star_selections_1:
                 tot *= sel.get("odd", 1.0)
