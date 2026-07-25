@@ -64,6 +64,7 @@ def fetch_live_matches():
     new_events_found = 0
     
     sports_to_fetch = ["football", "basketball", "tennis"]
+    fetch_errors = []
     
     for api_sport in sports_to_fetch:
         odds_url = f"https://sportapi7.p.rapidapi.com/api/v1/sport/{api_sport}/odds/1/{today}"
@@ -76,7 +77,9 @@ def fetch_live_matches():
                 odds_dict = data.get("odds", {})
                 print(f"[INFO] {api_sport}: Encontrados {len(odds_dict)} eventos con cuotas.")
         except Exception as e:
-            print(f"[Error] Falló la petición de cuotas para {api_sport}: {e}")
+            err_msg = f"Error en {api_sport}: {str(e)}"
+            print(f"[Error] {err_msg}")
+            fetch_errors.append(err_msg)
             continue
 
         for eid, odd_data in odds_dict.items():
@@ -310,8 +313,18 @@ def generate_daily_sports_data():
     print("[INFO] Conectando a internet para buscar partidos reales...")
     espn_matches = fetch_live_matches()
     
-    # Filtrar estrictamente solo Fútbol, Basketball y Tenis
     live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Basketball', 'Tennis']]
+    
+    if not live_matches:
+        print("[INFO] Usando datos de respaldo porque no hay partidos filtrados.")
+        err_str = " | ".join(fetch_errors) if fetch_errors else "NO SE ENCONTRARON PARTIDOS"
+        live_matches = [
+            {"home": "Team A", "away": "Team B", "sport": "Football", "league": err_str, "status": "pre", "home_color": "#1F2937", "home_accent": "#3B82F6", "away_color": "#1F2937", "away_accent": "#EF4444", "time": "15:00", "home_score": 0, "away_score": 0, "real_odds": {'h2h_home': 1.5, 'h2h_draw': 3.0, 'h2h_away': 4.5}},
+            {"home": "Real Madrid", "away": "FC Barcelona", "sport": "Football", "league": err_str, "status": "pre", "home_color": "#1F2937", "home_accent": "#3B82F6", "away_color": "#1F2937", "away_accent": "#EF4444", "time": "16:30", "home_score": 0, "away_score": 0, "real_odds": {'h2h_home': 2.1, 'h2h_draw': 3.2, 'h2h_away': 3.1}},
+            {"home": "Los Angeles Lakers", "away": "Miami Heat", "sport": "Basketball", "league": err_str, "status": "in", "home_color": "#F59E0B", "home_accent": "#FCD34D", "away_color": "#8B5CF6", "away_accent": "#C4B5FD", "time": "20:00", "home_score": None, "away_score": None, "real_odds": {'h2h_home': 1.8, 'h2h_away': 2.0}},
+            {"home": "Rafael Nadal", "away": "Novak Djokovic", "sport": "Tennis", "league": err_str, "status": "pre", "home_color": "#84CC16", "home_accent": "#A3E635", "away_color": "#10B981", "away_accent": "#34D399", "time": "10:00", "home_score": 0, "away_score": 0, "real_odds": {'h2h_home': 1.9, 'h2h_away': 1.9}},
+            {"home": "España", "away": "Bélgica", "sport": "Football", "league": err_str, "status": "pre", "home_color": "#1F2937", "home_accent": "#3B82F6", "away_color": "#1F2937", "away_accent": "#EF4444", "time": "12:00", "home_score": 0, "away_score": 0, "real_odds": {'h2h_home': 1.4, 'h2h_draw': 4.0, 'h2h_away': 6.5}}
+        ]
     print(f"[INFO] Total partidos reales (Fútbol, Basket, Tenis): {len(live_matches)} partidos")
     
     # Si no hay partidos en vivo (ej. día sin partidos programados en la API de ESPN)
