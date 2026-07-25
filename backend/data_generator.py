@@ -12,6 +12,7 @@ import os
 import json
 import random
 import urllib.request
+import time
 import ssl
 from datetime import datetime, timedelta
 
@@ -63,7 +64,7 @@ def fetch_live_matches():
     cache = load_cache()
     new_events_found = 0
     
-    sports_to_fetch = ["football", "basketball", "tennis"]
+    sports_to_fetch = ["football"]
     fetch_errors = []
     
     for api_sport in sports_to_fetch:
@@ -89,6 +90,7 @@ def fetch_live_matches():
                 event_url = f"https://sportapi7.p.rapidapi.com/api/v1/event/{eid}"
                 ereq = urllib.request.Request(event_url, headers=HEADERS)
                 try:
+                    time.sleep(2.1) # Respetar límite de 30 peticiones por minuto de RapidAPI
                     with urllib.request.urlopen(ereq, timeout=10) as eresponse:
                         edata = json.loads(eresponse.read().decode('utf-8'))
                         e_obj = edata.get("event", {})
