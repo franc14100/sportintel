@@ -2397,61 +2397,11 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    // --- Live Market Fluctuations Simulator ---
+    // --- Live Market Fluctuations Simulator (DISABLED - we use real API odds) ---
     function startLiveMarketFluctuations() {
-        setInterval(() => {
-            if (!appData || !appData.matches) return;
-            
-            let anyChanged = false;
-            
-            appData.matches.forEach(match => {
-                match.picks.forEach(pick => {
-                    // 25% de probabilidad de fluctuación en cada intervalo de 10s
-                    if (Math.random() < 0.25) {
-                        const oldOdd = pick.odd;
-                        // España no fluctúa demasiado para mantener la coherencia del reporte
-                        const maxChange = (match.home === "Spain" || match.away === "Spain") ? 0.02 : 0.05;
-                        const change = (Math.random() - 0.5) * maxChange;
-                        const newOdd = parseFloat(Math.max(1.05, oldOdd + change).toFixed(2));
-                        
-                        if (newOdd !== oldOdd) {
-                            pick.odd = newOdd;
-                            anyChanged = true;
-                            
-                            // Buscar elementos visuales y flashearlos
-                            flashOddElements(match.id, pick.market, oldOdd, newOdd);
-                        }
-                    }
-                });
-            });
-            
-            if (anyChanged) {
-                // Recalcular la cuota acumulada del Star Ticket
-                let starOdd = 1.0;
-                appData.star_ticket.selections.forEach(sel => {
-                    const matchedM = appData.matches.find(m => m.picks.some(p => sel.match.includes(m.home) && p.market === sel.market));
-                    if (matchedM) {
-                        const matchedP = matchedM.picks.find(p => p.market === sel.market);
-                        if (matchedP) {
-                            sel.odd = matchedP.odd;
-                            starOdd *= matchedP.odd;
-                        }
-                    }
-                });
-                appData.star_ticket.total_odd = parseFloat(starOdd.toFixed(2));
-                
-                // Actualizar la cuota acumulada del Star Ticket en el DOM
-                const totalOddEl = document.querySelector(".total-odd-val");
-                if (totalOddEl) {
-                    totalOddEl.textContent = appData.star_ticket.total_odd.toFixed(2);
-                }
-
-                // Refrescar y actualizar la cuadrícula de los +1000 mercados de 1xBet si el panel está visible
-                if (selectedMatch) {
-                    render1xBetMarkets();
-                }
-            }
-        }, 10000);
+        // Fluctuations disabled: we now use 100% real bookmaker odds from the API.
+        // Random simulation was corrupting the displayed odds and total_odd values.
+        return;
     }
     
     function flashOddElements(matchId, market, oldVal, newVal) {

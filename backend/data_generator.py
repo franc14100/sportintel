@@ -120,7 +120,9 @@ def fetch_live_matches():
                         new_events_found += 1
 
         # 1. Filtrar eids permitidos (excluyendo ligas juveniles, femeninas y reservas)
-        EXCLUDED_KEYWORDS = ["u19", "u20", "u21", "u23", "youth", "reserve", "women", "femenil", "femenina", "sub-19", "sub-20", "sub-21", "sub-23"]
+        EXCLUDED_PATTERNS = ["u19", "u20", "u21", "u23", "youth", "reserve", "women", "femenil", "femenina",
+                             "sub-19", "sub-20", "sub-21", "sub-23", "sub19", "sub20", "sub21", "sub23",
+                             "under-19", "under-20", "under-21", "under-23"]
         allowed_entries = []
 
         for eid, odd_data in odds_dict.items():
@@ -129,8 +131,10 @@ def fetch_live_matches():
             event_info = cache[eid]
             lg_lower = event_info.get("league", "").lower()
             
-            # Excluir juveniles/reservas
-            if any(ex in lg_lower for ex in EXCLUDED_KEYWORDS):
+            # Excluir juveniles/reservas — check word boundaries to catch "Liga MX U21", "Liga 1 U20", etc.
+            import re
+            is_youth = any(re.search(r'\b' + re.escape(ex) + r'\b', lg_lower) for ex in EXCLUDED_PATTERNS)
+            if is_youth:
                 continue
 
             is_allowed = False
