@@ -16,75 +16,63 @@
             "status": "pre",
             "home_score": null,
             "away_score": null,
-            "home_form": "W-D-W-W-W",
-            "away_form": "D-W-W-L-D",
+            "home_form": "L-W-D-L-W",
+            "away_form": "L-W-D-L-W",
             "home_injuries": [
                 {
-                    "player": "Williams",
+                    "player": "Jackson",
                     "type": "Fractura de dedo",
-                    "status": "Out",
-                    "days_out": 3
-                },
-                {
-                    "player": "Palmer",
-                    "type": "Gripe",
                     "status": "Out",
                     "days_out": 8
                 },
                 {
-                    "player": "Pérez",
-                    "type": "Lesión muscular en el muslo",
+                    "player": "Bernard",
+                    "type": "Molestias en la rodilla",
+                    "status": "Out",
+                    "days_out": 8
+                },
+                {
+                    "player": "Hall",
+                    "type": "Gripe",
                     "status": "Doubtful",
                     "days_out": 0
                 }
             ],
             "away_injuries": [
                 {
-                    "player": "Aspas",
-                    "type": "Esguince de tobillo",
-                    "status": "Doubtful",
-                    "days_out": 0
-                },
-                {
-                    "player": "Martínez",
-                    "type": "Molestias en la rodilla",
+                    "player": "Olmo",
+                    "type": "Fatiga muscular",
                     "status": "Out",
-                    "days_out": 4
-                },
-                {
-                    "player": "Mbappé",
-                    "type": "Molestias en la rodilla",
-                    "status": "Doubtful",
-                    "days_out": 0
+                    "days_out": 2
                 }
             ],
             "rumors": [
                 {
-                    "headline": "El plantel de Belgium sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
-                    "credibility": 4,
+                    "headline": "Tensiones en el vestuario de Belgium tras las declaraciones de su estrella en redes sociales.",
+                    "credibility": 3,
                     "sentiment": "Positive",
-                    "source": "Diario Marca"
+                    "source": "Sky Sports"
                 },
                 {
-                    "headline": "La prensa reporta que Spain cambiará su portero titular para dar rodaje en este partido clave.",
-                    "credibility": 5,
+                    "headline": "El analista táctico afirma que Spain explotará la banda izquierda de su rival debido a su lentitud.",
+                    "credibility": 2,
                     "sentiment": "Negative",
-                    "source": "Diario Marca"
+                    "source": "Tennis Magazine"
                 }
             ],
             "lineups": {
                 "home": {
-                    "formation": "4-2-3-1",
+                    "formation": "3-5-2",
                     "players": [
                         {
-                            "name": "Carvajal",
+                            "name": "Green",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 8
                         },
                         {
-                            "name": "Durand",
+                            "name": "Álvarez",
                             "number": 2,
                             "pos": "LD",
                             "x": 15,
@@ -98,180 +86,173 @@
                             "y": 18
                         },
                         {
-                            "name": "González",
+                            "name": "Bernard",
                             "number": 5,
                             "pos": "DFC",
                             "x": 62,
                             "y": 18
                         },
                         {
-                            "name": "Roberts",
-                            "number": 3,
-                            "pos": "LI",
-                            "x": 85,
-                            "y": 20
+                            "name": "Jackson",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
                         },
                         {
-                            "name": "Palmer",
+                            "name": "Wood",
                             "number": 8,
                             "pos": "MCD",
                             "x": 60,
                             "y": 28
                         },
                         {
-                            "name": "Johnson",
+                            "name": "Dembele",
                             "number": 10,
                             "pos": "MCO",
                             "x": 50,
                             "y": 36
                         },
                         {
-                            "name": "Pérez",
+                            "name": "Richard",
                             "number": 7,
                             "pos": "ED",
                             "x": 20,
+                            "y": 36
+                        },
+                        {
+                            "name": "Martin",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
                             "y": 36
                         }
                     ]
                 },
                 "away": {
-                    "formation": "4-3-3",
+                    "formation": "4-2-3-1",
                     "players": [
                         {
-                            "name": "Ramos",
+                            "name": "Hall",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 92
                         },
                         {
-                            "name": "Williams",
+                            "name": "Durand",
                             "number": 2,
                             "pos": "LD",
                             "x": 85,
                             "y": 80
                         },
                         {
-                            "name": "Wood",
+                            "name": "Johnson",
                             "number": 4,
                             "pos": "DFC",
                             "x": 62,
                             "y": 82
                         },
                         {
-                            "name": "Davies",
+                            "name": "Yamal",
                             "number": 5,
                             "pos": "DFC",
                             "x": 38,
                             "y": 82
                         },
                         {
-                            "name": "Evans",
+                            "name": "Clarke",
                             "number": 6,
-                            "pos": "MC",
-                            "x": 70,
-                            "y": 68
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
                         },
                         {
-                            "name": "David",
+                            "name": "Fournier",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Carvajal",
                             "number": 10,
-                            "pos": "MC",
-                            "x": 30,
-                            "y": 68
-                        },
-                        {
-                            "name": "Mbappé",
-                            "number": 7,
-                            "pos": "ED",
-                            "x": 80,
-                            "y": 58
-                        },
-                        {
-                            "name": "Thompson",
-                            "number": 9,
-                            "pos": "DC",
+                            "pos": "MCO",
                             "x": 50,
-                            "y": 55
-                        },
-                        {
-                            "name": "Aspas",
-                            "number": 11,
-                            "pos": "EI",
-                            "x": 20,
-                            "y": 58
+                            "y": 64
                         }
                     ]
                 }
             },
             "h2h": {
-                "home_wins": 2,
-                "away_wins": 1,
+                "home_wins": 4,
+                "away_wins": 4,
                 "draws": 2,
                 "last_results": [
                     {
-                        "date": "2026-03-23",
-                        "score": "2 - 2",
-                        "winner": "Draw"
+                        "date": "2025-08-11",
+                        "score": "2 - 1",
+                        "winner": "Spain"
                     },
                     {
-                        "date": "2025-10-13",
+                        "date": "2026-03-30",
+                        "score": "1 - 0",
+                        "winner": "Spain"
+                    },
+                    {
+                        "date": "2025-07-25",
                         "score": "0 - 2",
                         "winner": "Belgium"
                     },
                     {
-                        "date": "2025-12-26",
-                        "score": "2 - 0",
-                        "winner": "Spain"
-                    },
-                    {
-                        "date": "2026-05-11",
+                        "date": "2025-09-24",
                         "score": "0 - 1",
                         "winner": "Belgium"
                     },
                     {
-                        "date": "2026-03-07",
-                        "score": "1 - 3",
-                        "winner": "Belgium"
+                        "date": "2026-05-02",
+                        "score": "2 - 2",
+                        "winner": "Draw"
                     }
                 ]
             },
             "picks": [
                 {
+                    "market": "Córners (Total del Partido)",
+                    "selection": "Más de 7.5 Córners",
+                    "odd": 1.8,
+                    "probability": 82,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina.",
+                        "statistical": "Promedio acumulado de Spain (7 córners) y Belgium (4 córners) proyecta un total de 13 saques de esquina.",
+                        "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
+                    },
+                    "status": "pending"
+                },
+                {
                     "market": "Doble Oportunidad",
                     "selection": "Spain o Empate",
-                    "odd": 1.12,
-                    "probability": 88,
+                    "odd": 1.23,
+                    "probability": 81,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Spain hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 88%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
-                        "market": "La cuota @1.12 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 81%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.23 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
                     },
                     "status": "pending"
                 },
                 {
                     "market": "Empate No Apuesta (DNB)",
                     "selection": "Spain",
-                    "odd": 1.16,
-                    "probability": 86,
+                    "odd": 1.3,
+                    "probability": 76,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Spain como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-                        "statistical": "La probabilidad de empate en este compromiso es de solo 18% según el modelo. El 65% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
-                        "market": "@1.16 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
-                    },
-                    "status": "pending"
-                },
-                {
-                    "market": "Córners (Total del Partido)",
-                    "selection": "Más de 8.5 Córners",
-                    "odd": 1.89,
-                    "probability": 84,
-                    "risk": "Low",
-                    "reasoning": {
-                        "tactical": "Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina.",
-                        "statistical": "Promedio acumulado de Spain (7 córners) y Belgium (5 córners) proyecta un total de 11 saques de esquina.",
-                        "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 20% según el modelo. El 77% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.3 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
                     },
                     "status": "pending"
                 }
@@ -293,24 +274,42 @@
             "home_score": null,
             "away_score": null,
             "home_form": "W-W-D-W-L",
-            "away_form": "L-W-D-L-W",
+            "away_form": "W-W-L-W-W",
             "home_injuries": [
                 {
-                    "player": "Walker",
-                    "type": "Molestias en la rodilla",
+                    "player": "Tchouameni",
+                    "type": "Fractura de dedo",
                     "status": "Doubtful",
                     "days_out": 0
+                },
+                {
+                    "player": "Fernández",
+                    "type": "Fractura de dedo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Leroy",
+                    "type": "Esguince de tobillo",
+                    "status": "Out",
+                    "days_out": 10
                 }
             ],
             "away_injuries": [
                 {
-                    "player": "González",
-                    "type": "Gripe",
+                    "player": "Durand",
+                    "type": "Molestias en la rodilla",
                     "status": "Out",
-                    "days_out": 3
+                    "days_out": 2
                 },
                 {
-                    "player": "White",
+                    "player": "Brown",
+                    "type": "Molestias en la rodilla",
+                    "status": "Out",
+                    "days_out": 10
+                },
+                {
+                    "player": "Saka",
                     "type": "Fatiga muscular",
                     "status": "Out",
                     "days_out": 8
@@ -318,41 +317,48 @@
             ],
             "rumors": [
                 {
-                    "headline": "El analista táctico afirma que Norway explotará la banda izquierda de su rival debido a su lentitud.",
-                    "credibility": 3,
-                    "sentiment": "Neutral",
-                    "source": "Tennis Magazine"
+                    "headline": "El plantel de England sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
+                    "credibility": 4,
+                    "sentiment": "Positive",
+                    "source": "Sky Sports"
                 },
                 {
-                    "headline": "El plantel de England sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
-                    "credibility": 5,
+                    "headline": "El analista táctico afirma que Norway explotará la banda izquierda de su rival debido a su lentitud.",
+                    "credibility": 4,
                     "sentiment": "Positive",
-                    "source": "Sports Network"
+                    "source": "Sky Sports"
                 }
             ],
             "lineups": {
                 "home": {
-                    "formation": "4-2-3-1",
+                    "formation": "3-5-2",
                     "players": [
                         {
-                            "name": "Pérez",
+                            "name": "Martin",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 8
                         },
                         {
-                            "name": "Ramos",
+                            "name": "Morata",
                             "number": 2,
                             "pos": "LD",
                             "x": 15,
                             "y": 20
                         },
                         {
-                            "name": "Ruiz",
+                            "name": "Tchouameni",
                             "number": 4,
                             "pos": "DFC",
                             "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Olmo",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
                             "y": 18
                         },
                         {
@@ -363,7 +369,7 @@
                             "y": 20
                         },
                         {
-                            "name": "Walker",
+                            "name": "Flores",
                             "number": 6,
                             "pos": "MCD",
                             "x": 40,
@@ -371,88 +377,95 @@
                         },
                         {
                             "name": "Bernard",
-                            "number": 8,
-                            "pos": "MCD",
-                            "x": 60,
-                            "y": 28
-                        },
-                        {
-                            "name": "Clarke",
                             "number": 10,
                             "pos": "MCO",
                             "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Rice",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
                             "y": 36
                         }
                     ]
                 },
                 "away": {
-                    "formation": "4-3-3",
+                    "formation": "3-5-2",
                     "players": [
                         {
-                            "name": "Roberts",
+                            "name": "Michel",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 92
                         },
                         {
-                            "name": "Smith",
+                            "name": "Wood",
                             "number": 2,
                             "pos": "LD",
                             "x": 85,
                             "y": 80
                         },
                         {
-                            "name": "Brown",
+                            "name": "Roberts",
                             "number": 4,
                             "pos": "DFC",
                             "x": 62,
                             "y": 82
                         },
                         {
-                            "name": "Jones",
+                            "name": "Ramos",
                             "number": 5,
                             "pos": "DFC",
                             "x": 38,
                             "y": 82
                         },
                         {
-                            "name": "Thomas",
+                            "name": "Saka",
                             "number": 3,
                             "pos": "LI",
                             "x": 15,
                             "y": 80
                         },
                         {
-                            "name": "White",
+                            "name": "Aspas",
                             "number": 6,
-                            "pos": "MC",
-                            "x": 70,
-                            "y": 68
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
                         },
                         {
-                            "name": "Petit",
+                            "name": "Evans",
                             "number": 8,
                             "pos": "MCD",
-                            "x": 50,
-                            "y": 70
+                            "x": 40,
+                            "y": 72
                         },
                         {
-                            "name": "González",
+                            "name": "Brown",
                             "number": 10,
-                            "pos": "MC",
-                            "x": 30,
-                            "y": 68
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 64
                         },
                         {
-                            "name": "Bellingham",
+                            "name": "Roux",
                             "number": 7,
                             "pos": "ED",
                             "x": 80,
-                            "y": 58
+                            "y": 64
                         },
                         {
-                            "name": "Camavinga",
+                            "name": "Fournier",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        },
+                        {
+                            "name": "Durand",
                             "number": 9,
                             "pos": "DC",
                             "x": 50,
@@ -462,34 +475,34 @@
                 }
             },
             "h2h": {
-                "home_wins": 4,
-                "away_wins": 4,
+                "home_wins": 1,
+                "away_wins": 3,
                 "draws": 0,
                 "last_results": [
                     {
-                        "date": "2026-02-12",
-                        "score": "3 - 0",
-                        "winner": "Norway"
-                    },
-                    {
-                        "date": "2025-11-22",
-                        "score": "3 - 0",
-                        "winner": "Norway"
-                    },
-                    {
-                        "date": "2026-04-17",
-                        "score": "3 - 1",
-                        "winner": "Norway"
-                    },
-                    {
-                        "date": "2026-04-28",
+                        "date": "2026-05-12",
                         "score": "1 - 3",
                         "winner": "England"
                     },
                     {
-                        "date": "2025-08-28",
+                        "date": "2026-02-01",
                         "score": "3 - 3",
                         "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-09-21",
+                        "score": "3 - 2",
+                        "winner": "Norway"
+                    },
+                    {
+                        "date": "2025-07-12",
+                        "score": "1 - 0",
+                        "winner": "Norway"
+                    },
+                    {
+                        "date": "2025-10-31",
+                        "score": "2 - 1",
+                        "winner": "Norway"
                     }
                 ]
             },
@@ -498,38 +511,38 @@
                     "market": "Total de Goles (Asian 2.0)",
                     "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
                     "odd": 1.08,
-                    "probability": 88,
+                    "probability": 85,
                     "risk": "Very Low",
                     "reasoning": {
-                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 4.0 goles para este partido respalda que terminará con 2+ anotaciones.",
-                        "statistical": "El 79% de los partidos con xG combinado de 4.0 terminan con 2 o más goles. Al apostar al Asian 2.0, esa franja de partidos con exactamente 2 goles (18% de los casos) pasa a ser una devolución en lugar de una pérdida.",
-                        "market": "La cuota del Asian 2.0 es ligeramente menor que el Más de 2.5 (porque eliminas el riesgo parcial), pero la probabilidad real de éxito o empate es del 88%. Ideal para boletos seguros o cuando el marcador esperado es borderline entre 2 y 3 goles."
+                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 3.8 goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": "El 81% de los partidos con xG combinado de 3.8 terminan con 2 o más goles. Al apostar al Asian 2.0, esa franja de partidos con exactamente 2 goles (24% de los casos) pasa a ser una devolución en lugar de una pérdida.",
+                        "market": "La cuota del Asian 2.0 es ligeramente menor que el Más de 2.5 (porque eliminas el riesgo parcial), pero la probabilidad real de éxito o empate es del 85%. Ideal para boletos seguros o cuando el marcador esperado es borderline entre 2 y 3 goles."
                     },
                     "status": "pending"
                 },
                 {
-                    "market": "Córners del Equipo (Individual)",
-                    "selection": "England Más de 3.5 Córners",
-                    "odd": 1.33,
-                    "probability": 82,
+                    "market": "Doble Oportunidad",
+                    "selection": "England o Empate",
+                    "odd": 1.17,
+                    "probability": 85,
                     "risk": "Low",
                     "reasoning": {
-                        "tactical": "England concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. Su dominio territorial proyecta un promedio de 7 saques de esquina individuales. La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente.",
-                        "statistical": "England promedió 5.8 córners por partido en sus últimas 5 salidas. Su estrategia de juego atacante por bandas es constante independientemente del rival. El 74% de sus partidos como favorito supera los 4 saques de esquina propios.",
-                        "market": "Los mercados de córners individuales por equipo son menos populares y tienen cuotas con mayor Edge. Solo dependes del rendimiento atacante de England, no de ambos equipos. Menor varianza que los córners totales del partido."
+                        "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de England hace casi imposible un resultado diferente al cubierto por esta apuesta.",
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 85%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.17 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
                     },
                     "status": "pending"
                 },
                 {
-                    "market": "Córners (Total del Partido)",
-                    "selection": "Más de 8.5 Córners",
-                    "odd": 1.68,
-                    "probability": 82,
+                    "market": "Empate No Apuesta (DNB)",
+                    "selection": "England",
+                    "odd": 1.23,
+                    "probability": 81,
                     "risk": "Low",
                     "reasoning": {
-                        "tactical": "Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina.",
-                        "statistical": "Promedio acumulado de Norway (5 córners) y England (6 córners) proyecta un total de 9 saques de esquina.",
-                        "market": "Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
+                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con England como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 19% según el modelo. El 79% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.23 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
                     },
                     "status": "pending"
                 }
@@ -550,121 +563,116 @@
             "status": "pre",
             "home_score": null,
             "away_score": null,
-            "home_form": "W-W-D-W-L",
-            "away_form": "W-W-D-W-L",
+            "home_form": "D-W-W-L-D",
+            "away_form": "W-W-L-W-W",
             "home_injuries": [
                 {
-                    "player": "Carvajal",
-                    "type": "Fatiga muscular",
-                    "status": "Doubtful",
-                    "days_out": 0
+                    "player": "Saka",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 6
                 },
                 {
-                    "player": "Petit",
-                    "type": "Molestias en la rodilla",
-                    "status": "Doubtful",
-                    "days_out": 0
-                },
-                {
-                    "player": "Ruiz",
-                    "type": "Esguince de tobillo",
-                    "status": "Doubtful",
-                    "days_out": 0
+                    "player": "Pedri",
+                    "type": "Fractura de dedo",
+                    "status": "Out",
+                    "days_out": 4
                 }
             ],
             "away_injuries": [
                 {
-                    "player": "Martin",
-                    "type": "Esguince de tobillo",
-                    "status": "Out",
-                    "days_out": 7
-                },
-                {
-                    "player": "White",
-                    "type": "Fractura de dedo",
-                    "status": "Out",
-                    "days_out": 10
-                },
-                {
-                    "player": "Williams",
+                    "player": "Rodríguez",
                     "type": "Lesión muscular en el muslo",
                     "status": "Out",
-                    "days_out": 2
+                    "days_out": 5
+                },
+                {
+                    "player": "Petit",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Doubtful",
+                    "days_out": 0
                 }
             ],
             "rumors": [
                 {
-                    "headline": "La prensa reporta que Argentina cambiará su portero titular para dar rodaje en este partido clave.",
-                    "credibility": 5,
-                    "sentiment": "Negative",
-                    "source": "ESPN Deportes"
-                },
-                {
-                    "headline": "El plantel de Switzerland sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
+                    "headline": "El analista táctico afirma que Argentina explotará la banda izquierda de su rival debido a su lentitud.",
                     "credibility": 2,
                     "sentiment": "Neutral",
+                    "source": "Sports Network"
+                },
+                {
+                    "headline": "Tensiones en el vestuario de Switzerland tras las declaraciones de su estrella en redes sociales.",
+                    "credibility": 5,
+                    "sentiment": "Positive",
                     "source": "Sky Sports"
                 }
             ],
             "lineups": {
                 "home": {
-                    "formation": "3-5-2",
+                    "formation": "4-3-3",
                     "players": [
                         {
-                            "name": "Fournier",
+                            "name": "Bellingham",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 8
                         },
                         {
-                            "name": "Richard",
+                            "name": "Johnson",
                             "number": 2,
                             "pos": "LD",
                             "x": 15,
                             "y": 20
                         },
                         {
-                            "name": "Petit",
+                            "name": "Wood",
                             "number": 4,
                             "pos": "DFC",
                             "x": 38,
                             "y": 18
                         },
                         {
-                            "name": "Nico",
-                            "number": 5,
-                            "pos": "DFC",
-                            "x": 62,
-                            "y": 18
-                        },
-                        {
-                            "name": "Moreau",
+                            "name": "Morata",
                             "number": 3,
                             "pos": "LI",
                             "x": 85,
                             "y": 20
                         },
                         {
-                            "name": "Thomas",
-                            "number": 8,
-                            "pos": "MCD",
-                            "x": 60,
-                            "y": 28
+                            "name": "Gavi",
+                            "number": 6,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 32
                         },
                         {
-                            "name": "Kane",
+                            "name": "Laurent",
+                            "number": 10,
+                            "pos": "MC",
+                            "x": 70,
+                            "y": 32
+                        },
+                        {
+                            "name": "Olmo",
                             "number": 7,
                             "pos": "ED",
                             "x": 20,
-                            "y": 36
+                            "y": 42
                         },
                         {
-                            "name": "Ruiz",
+                            "name": "Álvarez",
                             "number": 9,
                             "pos": "DC",
                             "x": 50,
                             "y": 45
+                        },
+                        {
+                            "name": "Durand",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 42
                         }
                     ]
                 },
@@ -672,100 +680,93 @@
                     "formation": "4-2-3-1",
                     "players": [
                         {
-                            "name": "Gómez",
+                            "name": "Ramos",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 92
                         },
                         {
-                            "name": "Bellingham",
+                            "name": "Bertrand",
                             "number": 2,
                             "pos": "LD",
                             "x": 85,
                             "y": 80
                         },
                         {
-                            "name": "Carvajal",
+                            "name": "Taylor",
                             "number": 4,
                             "pos": "DFC",
                             "x": 62,
                             "y": 82
                         },
                         {
-                            "name": "Williams",
+                            "name": "Martin",
                             "number": 5,
                             "pos": "DFC",
                             "x": 38,
                             "y": 82
                         },
                         {
-                            "name": "Lefevre",
+                            "name": "Griezmann",
                             "number": 3,
                             "pos": "LI",
                             "x": 15,
                             "y": 80
                         },
                         {
-                            "name": "Morata",
+                            "name": "Rodríguez",
                             "number": 6,
                             "pos": "MCD",
                             "x": 60,
                             "y": 72
                         },
                         {
-                            "name": "Pedri",
+                            "name": "Williams",
                             "number": 10,
                             "pos": "MCO",
                             "x": 50,
                             "y": 64
                         },
                         {
-                            "name": "Camavinga",
+                            "name": "Torres",
                             "number": 11,
                             "pos": "EI",
                             "x": 20,
                             "y": 64
-                        },
-                        {
-                            "name": "Simon",
-                            "number": 9,
-                            "pos": "DC",
-                            "x": 50,
-                            "y": 55
                         }
                     ]
                 }
             },
             "h2h": {
-                "home_wins": 2,
-                "away_wins": 3,
-                "draws": 0,
+                "home_wins": 1,
+                "away_wins": 1,
+                "draws": 1,
                 "last_results": [
                     {
-                        "date": "2025-09-17",
-                        "score": "3 - 0",
-                        "winner": "Argentina"
-                    },
-                    {
-                        "date": "2025-11-08",
-                        "score": "1 - 0",
-                        "winner": "Argentina"
-                    },
-                    {
-                        "date": "2025-11-28",
-                        "score": "1 - 0",
-                        "winner": "Argentina"
-                    },
-                    {
-                        "date": "2025-10-29",
-                        "score": "3 - 0",
-                        "winner": "Argentina"
-                    },
-                    {
-                        "date": "2025-12-23",
+                        "date": "2026-03-21",
                         "score": "0 - 1",
                         "winner": "Switzerland"
+                    },
+                    {
+                        "date": "2026-05-26",
+                        "score": "1 - 1",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-10-04",
+                        "score": "0 - 3",
+                        "winner": "Switzerland"
+                    },
+                    {
+                        "date": "2025-07-21",
+                        "score": "0 - 3",
+                        "winner": "Switzerland"
+                    },
+                    {
+                        "date": "2025-11-04",
+                        "score": "1 - 0",
+                        "winner": "Argentina"
                     }
                 ]
             },
@@ -773,39 +774,39 @@
                 {
                     "market": "Doble Oportunidad",
                     "selection": "Argentina o Empate",
-                    "odd": 1.18,
-                    "probability": 84,
+                    "odd": 1.26,
+                    "probability": 79,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Argentina hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 84%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
-                        "market": "La cuota @1.18 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
-                    },
-                    "status": "pending"
-                },
-                {
-                    "market": "Empate No Apuesta (DNB)",
-                    "selection": "Argentina",
-                    "odd": 1.24,
-                    "probability": 81,
-                    "risk": "Low",
-                    "reasoning": {
-                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Argentina como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-                        "statistical": "La probabilidad de empate en este compromiso es de solo 19% según el modelo. El 77% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
-                        "market": "@1.24 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 79%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.26 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
                     },
                     "status": "pending"
                 },
                 {
                     "market": "Córners del Equipo (Individual)",
                     "selection": "Argentina Más de 4.5 Córners",
-                    "odd": 1.57,
+                    "odd": 1.68,
                     "probability": 77,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "Argentina concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. Su dominio territorial proyecta un promedio de 8 saques de esquina individuales. La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente.",
-                        "statistical": "Argentina promedió 5.8 córners por partido en sus últimas 5 salidas. Su estrategia de juego atacante por bandas es constante independientemente del rival. El 71% de sus partidos como favorito supera los 4 saques de esquina propios.",
+                        "statistical": "Argentina promedió 6.6 córners por partido en sus últimas 5 salidas. Su estrategia de juego atacante por bandas es constante independientemente del rival. El 74% de sus partidos como favorito supera los 4 saques de esquina propios.",
                         "market": "Los mercados de córners individuales por equipo son menos populares y tienen cuotas con mayor Edge. Solo dependes del rendimiento atacante de Argentina, no de ambos equipos. Menor varianza que los córners totales del partido."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Empate No Apuesta (DNB)",
+                    "selection": "Argentina",
+                    "odd": 1.34,
+                    "probability": 74,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Argentina como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 20% según el modelo. El 70% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.34 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
                     },
                     "status": "pending"
                 }
@@ -827,46 +828,52 @@
             "home_score": null,
             "away_score": null,
             "home_form": "W-W-D-W-L",
-            "away_form": "W-W-D-W-L",
+            "away_form": "W-D-W-W-W",
             "home_injuries": [
                 {
-                    "player": "Towns",
-                    "type": "Lesión muscular en el muslo",
-                    "status": "Out",
-                    "days_out": 9
-                },
-                {
-                    "player": "Brunson",
-                    "type": "Fatiga muscular",
+                    "player": "Adebayo",
+                    "type": "Molestias en la rodilla",
                     "status": "Doubtful",
                     "days_out": 0
                 },
                 {
-                    "player": "Durant",
-                    "type": "Fractura de dedo",
+                    "player": "Butler",
+                    "type": "Fatiga muscular",
+                    "status": "Out",
+                    "days_out": 3
+                },
+                {
+                    "player": "Towns",
+                    "type": "Fatiga muscular",
                     "status": "Doubtful",
                     "days_out": 0
                 }
             ],
             "away_injuries": [
                 {
-                    "player": "James",
-                    "type": "Esguince de tobillo",
+                    "player": "Embiid",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Antetokounmpo",
+                    "type": "Gripe",
                     "status": "Doubtful",
                     "days_out": 0
                 }
             ],
             "rumors": [
                 {
-                    "headline": "Reporte de estadísticas: GS Valkyries viene con un récord excelente jugando como visitante esta temporada.",
+                    "headline": "El entrenador de Connecticut Sun declaró que planea limitar los minutos de sus jugadoras principales.",
                     "credibility": 3,
                     "sentiment": "Positive",
-                    "source": "Sports Network"
+                    "source": "Diario Marca"
                 },
                 {
-                    "headline": "La pivot estrella de Connecticut Sun entrenó con protección especial y se le vio incómoda en los tiros libres.",
-                    "credibility": 4,
-                    "sentiment": "Neutral",
+                    "headline": "Reporte de estadísticas: GS Valkyries viene con un récord excelente jugando como visitante esta temporada.",
+                    "credibility": 3,
+                    "sentiment": "Negative",
                     "source": "Diario Marca"
                 }
             ],
@@ -875,35 +882,35 @@
                     "formation": "5 Titular",
                     "players": [
                         {
-                            "name": "Edwards",
+                            "name": "Siakam",
                             "number": 30,
                             "pos": "B",
                             "x": 50,
                             "y": 15
                         },
                         {
-                            "name": "Jokic",
+                            "name": "Butler",
                             "number": 11,
                             "pos": "E",
                             "x": 30,
                             "y": 25
                         },
                         {
-                            "name": "Maxey",
+                            "name": "Towns",
                             "number": 23,
                             "pos": "A",
                             "x": 70,
                             "y": 25
                         },
                         {
-                            "name": "Brown",
+                            "name": "Vassell",
                             "number": 3,
                             "pos": "AP",
                             "x": 40,
                             "y": 38
                         },
                         {
-                            "name": "Edwards",
+                            "name": "Tatum",
                             "number": 21,
                             "pos": "P",
                             "x": 60,
@@ -915,35 +922,35 @@
                     "formation": "5 Titular",
                     "players": [
                         {
-                            "name": "Maxey",
+                            "name": "Davis",
                             "number": 0,
                             "pos": "B",
                             "x": 50,
                             "y": 85
                         },
                         {
-                            "name": "Haliburton",
+                            "name": "Maxey",
                             "number": 7,
                             "pos": "E",
                             "x": 70,
                             "y": 75
                         },
                         {
-                            "name": "Curry",
+                            "name": "Towns",
                             "number": 10,
                             "pos": "A",
                             "x": 30,
                             "y": 75
                         },
                         {
-                            "name": "Curry",
+                            "name": "Murray",
                             "number": 34,
                             "pos": "AP",
                             "x": 60,
                             "y": 62
                         },
                         {
-                            "name": "Siakam",
+                            "name": "Maxey",
                             "number": 14,
                             "pos": "P",
                             "x": 40,
@@ -953,51 +960,38 @@
                 }
             },
             "h2h": {
-                "home_wins": 3,
-                "away_wins": 2,
+                "home_wins": 4,
+                "away_wins": 1,
                 "draws": 0,
                 "last_results": [
                     {
-                        "date": "2026-02-22",
-                        "score": "90 - 98",
+                        "date": "2025-10-29",
+                        "score": "94 - 105",
                         "winner": "GS Valkyries"
                     },
                     {
-                        "date": "2025-07-05",
-                        "score": "112 - 84",
+                        "date": "2026-03-02",
+                        "score": "105 - 96",
                         "winner": "Connecticut Sun"
                     },
                     {
-                        "date": "2025-10-22",
-                        "score": "94 - 95",
-                        "winner": "GS Valkyries"
-                    },
-                    {
-                        "date": "2026-03-21",
-                        "score": "76 - 96",
-                        "winner": "GS Valkyries"
-                    },
-                    {
-                        "date": "2026-05-25",
-                        "score": "99 - 96",
+                        "date": "2025-08-25",
+                        "score": "98 - 93",
                         "winner": "Connecticut Sun"
+                    },
+                    {
+                        "date": "2026-05-02",
+                        "score": "101 - 82",
+                        "winner": "Connecticut Sun"
+                    },
+                    {
+                        "date": "2025-11-16",
+                        "score": "77 - 92",
+                        "winner": "GS Valkyries"
                     }
                 ]
             },
             "picks": [
-                {
-                    "market": "Total de Puntos",
-                    "selection": "Más de 160.5 Puntos",
-                    "odd": 1.77,
-                    "probability": 63,
-                    "risk": "Medium",
-                    "reasoning": {
-                        "tactical": "El ritmo de juego (PACE) proyectado para este partido es de 96 posesiones por cuarto. Los sistemas ofensivos de ambos equipos generan 117 puntos promedio en sus últimas 5 salidas, lo que presiona la línea de totales hacia el Over.",
-                        "statistical": "Con las bajas de ambos equipos, el PACE puede caer 6 puntos por partido. El modelo proyecta un total entre 158 y 172 puntos en base al rendimiento ofensivo actual, con un 67% de confianza estadística.",
-                        "market": "El 'Más de 160.5 Puntos' acumula 74% del volumen de apuestas sharps según el monitoreo de líneas. Rumor que impacta el estado anímico: 'La pivot estrella de Connecticut Sun entrenó con protección especial y se le vio incómoda en los tiros libres.'. Factor Caos estimado: 67%."
-                    },
-                    "status": "pending"
-                },
                 {
                     "market": "Ganador (Moneyline)",
                     "selection": "Connecticut Sun",
@@ -1005,9 +999,22 @@
                     "probability": 62,
                     "risk": "Medium",
                     "reasoning": {
-                        "tactical": "Connecticut Sun ejecuta un sistema ofensivo de alta eficiencia que explota las debilidades defensivas de GS Valkyries en el perímetro y la zona pintada. Con 1 baja(s) confirmadas en el rival, su rotación queda comprometida para los cuartos finales donde se deciden los partidos.",
+                        "tactical": "Connecticut Sun ejecuta un sistema ofensivo de alta eficiencia que explota las debilidades defensivas de GS Valkyries en el perímetro y la zona pintada. Con 2 baja(s) confirmadas en el rival, su rotación queda comprometida para los cuartos finales donde se deciden los partidos.",
                         "statistical": "Con una racha actual de W-W-D-W-L, el modelo de proyección estadística (PER, TS%) indica una ventaja del 62% de probabilidad de victoria para Connecticut Sun. Las bajas totales impactarán el ritmo del partido, inclinando la balanza.",
-                        "market": "Las líneas de moneyline para este partido muestran movimiento hacia Connecticut Sun en las últimas 4 horas. Reporte interno filtrado: 'Reporte de estadísticas: GS Valkyries viene con un récord excelente jugando como visitante esta temporada.'. El factor sorpresa (varianza) se estimó en 67%, dentro del rango controlable por el modelo. El value bet es positivo según el cálculo actuarial."
+                        "market": "Las líneas de moneyline para este partido muestran movimiento hacia Connecticut Sun en las últimas 4 horas. Reporte interno filtrado: 'El entrenador de Connecticut Sun declaró que planea limitar los minutos de sus jugadoras principales.'. El factor sorpresa (varianza) se estimó en 69%, dentro del rango controlable por el modelo. El value bet es positivo según el cálculo actuarial."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Total de Puntos",
+                    "selection": "Más de 160.5 Puntos",
+                    "odd": 1.81,
+                    "probability": 62,
+                    "risk": "Medium",
+                    "reasoning": {
+                        "tactical": "El ritmo de juego (PACE) proyectado para este partido es de 101 posesiones por cuarto. Los sistemas ofensivos de ambos equipos generan 108 puntos promedio en sus últimas 5 salidas, lo que presiona la línea de totales hacia el Over.",
+                        "statistical": "Con las bajas de ambos equipos, el PACE puede caer 2 puntos por partido. El modelo proyecta un total entre 161 y 166 puntos en base al rendimiento ofensivo actual, con un 67% de confianza estadística.",
+                        "market": "El 'Más de 160.5 Puntos' acumula 72% del volumen de apuestas sharps según el monitoreo de líneas. Rumor que impacta el estado anímico: 'Reporte de estadísticas: GS Valkyries viene con un récord excelente jugando como visitante esta temporada.'. Factor Caos estimado: 69%."
                     },
                     "status": "pending"
                 }
@@ -1028,48 +1035,48 @@
             "status": "pre",
             "home_score": null,
             "away_score": null,
-            "home_form": "W-W-D-W-L",
-            "away_form": "L-W-D-L-W",
+            "home_form": "W-W-L-W-W",
+            "away_form": "W-W-D-W-L",
             "home_injuries": [
                 {
-                    "player": "Doncic",
+                    "player": "Curry",
                     "type": "Esguince de tobillo",
-                    "status": "Doubtful",
-                    "days_out": 0
+                    "status": "Out",
+                    "days_out": 7
                 }
             ],
             "away_injuries": [
                 {
-                    "player": "Green",
-                    "type": "Fractura de dedo",
+                    "player": "Butler",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Lillard",
+                    "type": "Molestias en la rodilla",
                     "status": "Out",
                     "days_out": 3
                 },
                 {
-                    "player": "Irving",
-                    "type": "Fatiga muscular",
+                    "player": "Edwards",
+                    "type": "Gripe",
                     "status": "Out",
-                    "days_out": 5
-                },
-                {
-                    "player": "Randle",
-                    "type": "Fractura de dedo",
-                    "status": "Doubtful",
-                    "days_out": 0
+                    "days_out": 6
                 }
             ],
             "rumors": [
                 {
-                    "headline": "Reporte de estadísticas: Chicago Sky viene con un récord excelente jugando como visitante esta temporada.",
-                    "credibility": 4,
+                    "headline": "La pivot estrella de Los Angeles Sparks entrenó con protección especial y se le vio incómoda en los tiros libres.",
+                    "credibility": 3,
                     "sentiment": "Neutral",
-                    "source": "Sky Sports"
+                    "source": "Tennis Magazine"
                 },
                 {
-                    "headline": "La pivot estrella de Los Angeles Sparks entrenó con protección especial y se le vio incómoda en los tiros libres.",
+                    "headline": "Reporte de estadísticas: Chicago Sky viene con un récord excelente jugando como visitante esta temporada.",
                     "credibility": 4,
-                    "sentiment": "Neutral",
-                    "source": "Sky Sports"
+                    "sentiment": "Positive",
+                    "source": "ESPN Deportes"
                 }
             ],
             "lineups": {
@@ -1077,35 +1084,35 @@
                     "formation": "5 Titular",
                     "players": [
                         {
-                            "name": "Haliburton",
+                            "name": "Siakam",
                             "number": 30,
                             "pos": "B",
                             "x": 50,
                             "y": 15
                         },
                         {
-                            "name": "Maxey",
+                            "name": "Siakam",
                             "number": 11,
                             "pos": "E",
                             "x": 30,
                             "y": 25
                         },
                         {
-                            "name": "Green",
+                            "name": "Adebayo",
                             "number": 23,
                             "pos": "A",
                             "x": 70,
                             "y": 25
                         },
                         {
-                            "name": "Brunson",
+                            "name": "Maxey",
                             "number": 3,
                             "pos": "AP",
                             "x": 40,
                             "y": 38
                         },
                         {
-                            "name": "Green",
+                            "name": "Lillard",
                             "number": 21,
                             "pos": "P",
                             "x": 60,
@@ -1117,35 +1124,35 @@
                     "formation": "5 Titular",
                     "players": [
                         {
-                            "name": "Randle",
+                            "name": "Curry",
                             "number": 0,
                             "pos": "B",
                             "x": 50,
                             "y": 85
                         },
                         {
-                            "name": "Doncic",
+                            "name": "Edwards",
                             "number": 7,
                             "pos": "E",
                             "x": 70,
                             "y": 75
                         },
                         {
-                            "name": "Tatum",
+                            "name": "Towns",
                             "number": 10,
                             "pos": "A",
                             "x": 30,
                             "y": 75
                         },
                         {
-                            "name": "Jokic",
+                            "name": "Tatum",
                             "number": 34,
                             "pos": "AP",
                             "x": 60,
                             "y": 62
                         },
                         {
-                            "name": "Adebayo",
+                            "name": "Booker",
                             "number": 14,
                             "pos": "P",
                             "x": 40,
@@ -1155,33 +1162,33 @@
                 }
             },
             "h2h": {
-                "home_wins": 1,
-                "away_wins": 4,
+                "home_wins": 4,
+                "away_wins": 3,
                 "draws": 0,
                 "last_results": [
                     {
-                        "date": "2025-11-03",
-                        "score": "85 - 92",
+                        "date": "2026-01-01",
+                        "score": "101 - 96",
+                        "winner": "Los Angeles Sparks"
+                    },
+                    {
+                        "date": "2025-07-12",
+                        "score": "93 - 83",
+                        "winner": "Los Angeles Sparks"
+                    },
+                    {
+                        "date": "2025-08-04",
+                        "score": "79 - 110",
                         "winner": "Chicago Sky"
                     },
                     {
-                        "date": "2025-12-10",
-                        "score": "105 - 83",
+                        "date": "2026-04-09",
+                        "score": "90 - 78",
                         "winner": "Los Angeles Sparks"
                     },
                     {
-                        "date": "2025-12-27",
-                        "score": "95 - 91",
-                        "winner": "Los Angeles Sparks"
-                    },
-                    {
-                        "date": "2025-07-11",
-                        "score": "97 - 88",
-                        "winner": "Los Angeles Sparks"
-                    },
-                    {
-                        "date": "2026-05-19",
-                        "score": "80 - 90",
+                        "date": "2025-07-17",
+                        "score": "101 - 106",
                         "winner": "Chicago Sky"
                     }
                 ]
@@ -1190,13 +1197,13 @@
                 {
                     "market": "Total de Puntos",
                     "selection": "Más de 160.5 Puntos",
-                    "odd": 1.77,
-                    "probability": 56,
+                    "odd": 1.97,
+                    "probability": 57,
                     "risk": "Medium",
                     "reasoning": {
-                        "tactical": "El ritmo de juego (PACE) proyectado para este partido es de 106 posesiones por cuarto. Los sistemas ofensivos de ambos equipos generan 101 puntos promedio en sus últimas 5 salidas, lo que presiona la línea de totales hacia el Over.",
-                        "statistical": "Con las bajas de ambos equipos, el PACE puede caer 2 puntos por partido. El modelo proyecta un total entre 164 y 174 puntos en base al rendimiento ofensivo actual, con un 67% de confianza estadística.",
-                        "market": "El 'Más de 160.5 Puntos' acumula 72% del volumen de apuestas sharps según el monitoreo de líneas. Rumor que impacta el estado anímico: 'La pivot estrella de Los Angeles Sparks entrenó con protección especial y se le vio incómoda en los tiros libres.'. Factor Caos estimado: 81%."
+                        "tactical": "El ritmo de juego (PACE) proyectado para este partido es de 103 posesiones por cuarto. Los sistemas ofensivos de ambos equipos generan 101 puntos promedio en sus últimas 5 salidas, lo que presiona la línea de totales hacia el Over.",
+                        "statistical": "Con las bajas de ambos equipos, el PACE puede caer 3 puntos por partido. El modelo proyecta un total entre 158 y 166 puntos en base al rendimiento ofensivo actual, con un 67% de confianza estadística.",
+                        "market": "El 'Más de 160.5 Puntos' acumula 55% del volumen de apuestas sharps según el monitoreo de líneas. Rumor que impacta el estado anímico: 'Reporte de estadísticas: Chicago Sky viene con un récord excelente jugando como visitante esta temporada.'. Factor Caos estimado: 22%."
                     },
                     "status": "pending"
                 },
@@ -1208,8 +1215,8 @@
                     "risk": "Medium",
                     "reasoning": {
                         "tactical": "Chicago Sky ejecuta un sistema ofensivo de alta eficiencia que explota las debilidades defensivas de Los Angeles Sparks en el perímetro y la zona pintada. Con 1 baja(s) confirmadas en el rival, su rotación queda comprometida para los cuartos finales donde se deciden los partidos.",
-                        "statistical": "Con una racha actual de L-W-D-L-W, el modelo de proyección estadística (PER, TS%) indica una ventaja del 51% de probabilidad de victoria para Chicago Sky. Las bajas totales impactarán el ritmo del partido, inclinando la balanza.",
-                        "market": "Las líneas de moneyline para este partido muestran movimiento hacia Chicago Sky en las últimas 4 horas. Reporte interno filtrado: 'Reporte de estadísticas: Chicago Sky viene con un récord excelente jugando como visitante esta temporada.'. El factor sorpresa (varianza) se estimó en 81%, dentro del rango controlable por el modelo. El value bet es positivo según el cálculo actuarial."
+                        "statistical": "Con una racha actual de W-W-D-W-L, el modelo de proyección estadística (PER, TS%) indica una ventaja del 51% de probabilidad de victoria para Chicago Sky. Las bajas totales impactarán el ritmo del partido, inclinando la balanza.",
+                        "market": "Las líneas de moneyline para este partido muestran movimiento hacia Chicago Sky en las últimas 4 horas. Reporte interno filtrado: 'La pivot estrella de Los Angeles Sparks entrenó con protección especial y se le vio incómoda en los tiros libres.'. El factor sorpresa (varianza) se estimó en 22%, dentro del rango controlable por el modelo. El value bet es positivo según el cálculo actuarial."
                     },
                     "status": "pending"
                 }
