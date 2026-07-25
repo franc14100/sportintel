@@ -14734,5 +14734,77 @@
     "time": "11:00",
     "status": "notstarted",
     "sport": "Football"
+  },
+  "15385988": {
+    "homeTeam": "FK Jerv",
+    "awayTeam": "Lysekloster IL",
+    "league": "2nd Division, Group 1",
+    "time": "12:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16450604": {
+    "homeTeam": "Southend United",
+    "awayTeam": "Leyton Orient",
+    "league": "Club Friendly Games",
+    "time": "14:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16595494": {
+    "homeTeam": "NK Slaven Belupo",
+    "awayTeam": "NK Sesvete",
+    "league": "Club Friendly Games",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16594359": {
+    "homeTeam": "Śląsk Wrocław",
+    "awayTeam": "Sparta Prague",
+    "league": "Women Club Friendly Games",
+    "time": "14:30",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16626509": {
+    "homeTeam": "FC Concordia Basel",
+    "awayTeam": "Basel II U21",
+    "league": "Switzerland Friendly Games",
+    "time": "12:55",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16627114": {
+    "homeTeam": "Gala FC",
+    "awayTeam": "Shao Jiang SC",
+    "league": "Elite League",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16446997": {
+    "homeTeam": "Stevenage",
+    "awayTeam": "Millwall",
+    "league": "Club Friendly Games",
+    "time": "14:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16350093": {
+    "homeTeam": "Virginia U.S.C.",
+    "awayTeam": "I.N. San Juan FC",
+    "league": "Copa Simón Bolívar - Cuadrangular de Clasificación Santa Cruz",
+    "time": "14:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16626535": {
+    "homeTeam": "Schaffhausen",
+    "awayTeam": "FC St Gallen II U21",
+    "league": "Club Friendly Games",
+    "time": "13:30",
+    "status": "inprogress",
+    "sport": "Football"
   }
 }
