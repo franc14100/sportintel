@@ -615,13 +615,44 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Load Data from JSON ---
     async function loadSportsData() {
         try {
-            // Cargar datos utilizando nuestra Serverless Function de Vercel (/api/data)
-            // Esto evita que bloqueadores de anuncios (ej. Opera GX) bloqueen la petición a un dominio de terceros.
-            const response = await fetch(`/api/data?v=${new Date().getTime()}`);
-            if (!response.ok) {
-                throw new Error("No se pudo cargar el archivo data.json desde la API");
+            let response = await fetch(`/api/data?v=${new Date().getTime()}`);
+            let fetchedData = null;
+            if (response.ok) {
+                fetchedData = await response.json();
             }
-            appData = await response.json();
+            
+            // If /api/data failed or returned fewer than 10 matches (stale fallback data), try GitHub Pages directly
+            if (!fetchedData || !fetchedData.matches || fetchedData.matches.length < 10) {
+                try {
+                    const ghResponse = await fetch(`https://franc14100.github.io/sportintel/data.json?v=${new Date().getTime()}`);
+                    if (ghResponse.ok) {
+                        const ghData = await ghResponse.json();
+                        if (ghData && ghData.matches && ghData.matches.length > (fetchedData?.matches?.length || 0)) {
+                            fetchedData = ghData;
+                        }
+                    }
+                } catch (e) {
+                    console.warn("[SportIntel] Fallback to GitHub Pages failed:", e);
+                }
+            }
+
+            // Fallback to local /data.json if needed
+            if (!fetchedData || !fetchedData.matches || fetchedData.matches.length < 10) {
+                try {
+                    const localRes = await fetch(`/data.json?v=${new Date().getTime()}`);
+                    if (localRes.ok) {
+                        const localData = await localRes.json();
+                        if (localData && localData.matches && localData.matches.length > (fetchedData?.matches?.length || 0)) {
+                            fetchedData = localData;
+                        }
+                    }
+                } catch (e) {}
+            }
+
+            if (!fetchedData) {
+                throw new Error("No se pudo cargar el archivo data.json desde ninguna fuente");
+            }
+            appData = fetchedData;
             
             // Client-side instant auto-grader for finished matches
             if (appData && Array.isArray(appData.matches)) {
