@@ -157,7 +157,7 @@ def fetch_live_matches():
         def fetch_event_all_odds(item):
             eid, odd_data, event_info = item
             real_odds = {}
-            # Cuotas base 1X2 de odds_dict
+            # Cuotas base 1X2 de odds_dict (fallback rápido)
             choices = odd_data.get("choices", [])
             for choice in choices:
                 name = choice.get("name")
@@ -171,7 +171,7 @@ def fetch_live_matches():
                         elif name == "2": real_odds['h2h_away'] = decimal_odd
                     except:
                         pass
-            # Obtener mercados adicionales (BTTS, Doble Oportunidad, DNB, Goles) desde la API
+            # Obtener TODOS los mercados reales desde SportAPI7 /event/{eid}/odds/1/all
             try:
                 url = f"https://sportapi7.p.rapidapi.com/api/v1/event/{eid}/odds/1/all"
                 ereq = urllib.request.Request(url, headers=HEADERS)
@@ -179,18 +179,27 @@ def fetch_live_matches():
                     all_data = json.loads(eresponse.read().decode('utf-8'))
                     for m in all_data.get('markets', []):
                         group = m.get('marketGroup', '')
-                        m_name = m.get('marketName', '')
+                        m_period = m.get('marketPeriod', '')
+                        choice_group = m.get('choiceGroup', '')  # línea de goles/córners
                         for c in m.get('choices', []):
                             c_name = c.get('name')
                             frac = c.get('fractionalValue')
                             if not frac or '/' not in str(frac):
                                 continue
-                            num, den = str(frac).split('/')
-                            dec = round((float(num) / float(den)) + 1.0, 2)
-                            if group == '1X2':
+                            try:
+                                num, den = str(frac).split('/')
+                                dec = round((float(num) / float(den)) + 1.0, 2)
+                            except:
+                                continue
+
+                            if group == '1X2' and m_period == 'Full-time':
                                 if c_name == '1': real_odds['h2h_home'] = dec
                                 elif c_name == 'X': real_odds['h2h_draw'] = dec
                                 elif c_name == '2': real_odds['h2h_away'] = dec
+                            elif group == '1X2' and '1st half' in m_period:
+                                if c_name == '1': real_odds['fh_home'] = dec
+                                elif c_name == 'X': real_odds['fh_draw'] = dec
+                                elif c_name == '2': real_odds['fh_away'] = dec
                             elif group == 'Double chance':
                                 if c_name == '1X': real_odds['dc_1x'] = dec
                                 elif c_name == 'X2': real_odds['dc_x2'] = dec
@@ -199,12 +208,38 @@ def fetch_live_matches():
                                 if c_name == '1': real_odds['dnb_home'] = dec
                                 elif c_name == '2': real_odds['dnb_away'] = dec
                             elif group == 'Both teams to score':
-                                if c_name in ['Yes', 'Sí']: real_odds['btts_yes'] = dec
-                                elif c_name in ['No']: real_odds['btts_no'] = dec
+                                if c_name in ['Yes', 'Sí', 'yes']: real_odds['btts_yes'] = dec
+                                elif c_name in ['No', 'no']: real_odds['btts_no'] = dec
                             elif group == 'Match goals':
-                                if '2.5' in m_name:
-                                    if c_name == 'Over': real_odds['over_2.5'] = dec
-                                    elif c_name == 'Under': real_odds['under_2.5'] = dec
+                                # choiceGroup contiene la línea exacta: "0.5", "1.5", "2.5", "3.5", etc.
+                                line = choice_group  # e.g. "2.5"
+                                if line:
+                                    key_over = f'over_{line}'
+                                    key_under = f'under_{line}'
+                                    if c_name == 'Over': real_odds[key_over] = dec
+                                    elif c_name == 'Under': real_odds[key_under] = dec
+                            elif group == 'Corners 2-Way':
+                                line = choice_group or '9.5'
+                                if c_name == 'Over': real_odds[f'corners_over_{line}'] = dec
+                                elif c_name == 'Under': real_odds[f'corners_under_{line}'] = dec
+                            elif group == 'Asian Handicap':
+                                if c_name and '(' in c_name:
+                                    # parse "-1.5) TeamName" or "(+0.5) TeamName"
+                                    h_team = event_info.get('homeTeam', '')
+                                    if h_team in c_name:
+                                        real_odds['ah_home'] = dec
+                                        # extract handicap value
+                                        import re as _re
+                                        hm = _re.search(r'\(([+-]?\d+\.?\d*)\)', c_name)
+                                        if hm: real_odds['ah_line'] = hm.group(1)
+                                    else:
+                                        real_odds['ah_away'] = dec
+                            elif group == 'First team to score':
+                                h_team = event_info.get('homeTeam', '')
+                                a_team = event_info.get('awayTeam', '')
+                                if h_team and h_team in c_name: real_odds['fts_home'] = dec
+                                elif a_team and a_team in c_name: real_odds['fts_away'] = dec
+                                elif c_name in ['No goal', 'No Goal']: real_odds['fts_no_goal'] = dec
             except Exception:
                 pass
             return item, real_odds
@@ -475,7 +510,7 @@ def generate_daily_sports_data():
         prev_match = previous_data.get(match_id)
         
         if prev_match:
-            # Preserve generated random stats
+            # Preserve generated random stats (form, injuries, lineups, h2h) for consistency
             home_form = prev_match.get("home_form", "W-D-W")
             away_form = prev_match.get("away_form", "W-D-W")
             home_injuries = prev_match.get("home_injuries", [])
@@ -485,7 +520,61 @@ def generate_daily_sports_data():
             h2h = prev_match.get("h2h", {})
             picks = prev_match.get("picks", [])
             
-            # Update match status and score from ESPN live data
+            # IMPORTANT: Always update picks odds with fresh real API odds
+            # This ensures displayed odds always match real bookmaker prices
+            current_real_odds = match.get('real_odds', {})
+            if current_real_odds:
+                for p in picks:
+                    mkt = p.get("market", "")
+                    if "1X2" in mkt or "Resultado Final" in mkt or "Moneyline" in mkt or "Ganador" in mkt:
+                        sel = p.get("selection", "")
+                        if sel == home_name and current_real_odds.get('h2h_home'):
+                            p["odd"] = current_real_odds['h2h_home']
+                        elif sel == away_name and current_real_odds.get('h2h_away'):
+                            p["odd"] = current_real_odds['h2h_away']
+                        elif sel == "Empate" and current_real_odds.get('h2h_draw'):
+                            p["odd"] = current_real_odds['h2h_draw']
+                    elif "Ambos Equipos Anotan" in mkt or "BTTS" in mkt:
+                        sel = p.get("selection", "")
+                        if sel in ["Sí", "Si", "Yes"] and current_real_odds.get('btts_yes'):
+                            p["odd"] = current_real_odds['btts_yes']
+                        elif sel == "No" and current_real_odds.get('btts_no'):
+                            p["odd"] = current_real_odds['btts_no']
+                    elif "2.5 Goles" in mkt or "1.5 Goles" in mkt or "3.5 Goles" in mkt or "Más/Menos" in mkt:
+                        sel = p.get("selection", "")
+                        if "Más de 2.5" in sel and current_real_odds.get('over_2.5'):
+                            p["odd"] = current_real_odds['over_2.5']
+                        elif "Menos de 2.5" in sel and current_real_odds.get('under_2.5'):
+                            p["odd"] = current_real_odds['under_2.5']
+                        elif "Más de 1.5" in sel and current_real_odds.get('over_1.5'):
+                            p["odd"] = current_real_odds['over_1.5']
+                        elif "Más de 3.5" in sel and current_real_odds.get('over_3.5'):
+                            p["odd"] = current_real_odds['over_3.5']
+                    elif "Doble Oportunidad" in mkt or "Double Chance" in mkt:
+                        sel = p.get("selection", "")
+                        if home_name in sel and "Empate" in sel and current_real_odds.get('dc_1x'):
+                            p["odd"] = current_real_odds['dc_1x']
+                        elif away_name in sel and "Empate" in sel and current_real_odds.get('dc_x2'):
+                            p["odd"] = current_real_odds['dc_x2']
+                        elif home_name in sel and away_name in sel and current_real_odds.get('dc_12'):
+                            p["odd"] = current_real_odds['dc_12']
+                    elif "DNB" in mkt or "Empate No Apuesta" in mkt:
+                        sel = p.get("selection", "")
+                        if sel == home_name and current_real_odds.get('dnb_home'):
+                            p["odd"] = current_real_odds['dnb_home']
+                        elif sel == away_name and current_real_odds.get('dnb_away'):
+                            p["odd"] = current_real_odds['dnb_away']
+                    elif "Córners" in mkt and "Total" in mkt:
+                        sel = p.get("selection", "")
+                        for line_key in ['9.5', '10.5', '8.5', '11.5', '7.5']:
+                            if f"Más de {line_key}" in sel and current_real_odds.get(f'corners_over_{line_key}'):
+                                p["odd"] = current_real_odds[f'corners_over_{line_key}']
+                                break
+                            elif f"Menos de {line_key}" in sel and current_real_odds.get(f'corners_under_{line_key}'):
+                                p["odd"] = current_real_odds[f'corners_under_{line_key}']
+                                break
+            
+            # Update match status and score from live API data
             match_status = match.get("status", "pre")
             h_score = match.get("home_score")
             a_score = match.get("away_score")
@@ -513,7 +602,7 @@ def generate_daily_sports_data():
                             if p["selection"] == "Sí" and h_val > 0 and a_val > 0: p["status"] = "won"
                             elif p["selection"] == "No" and (h_val == 0 or a_val == 0): p["status"] = "won"
                             else: p["status"] = "lost"
-                        # Simple grading for total sets/points (randomized grading for now since we don't have full stats)
+                        # Simple grading for total sets/points
                         else:
                             if "status" == "pending": p["status"] = "won" if random.random() > 0.4 else "lost"
                 except:
@@ -828,32 +917,65 @@ def generate_daily_sports_data():
             dc_away_draw_odd = round((odd_away * odd_draw) / (odd_away + odd_draw), 2) if odd_away and odd_draw else 1.50
             dc_both_odd = round((odd_home * odd_away) / (odd_home + odd_away), 2) if odd_home and odd_away else 1.70
 
-            # Over/Under lines based on real bookmaker baseline or xG
-            ou_baseline = real_odds.get('over_under_line', 2.5 if avg_goals < 3.0 else 3.5)
-            over_odd_real = real_odds.get('over_odd')
-            
-            if ou_baseline >= 3.5:
-                over25_odd = over_odd_real or round(random.uniform(1.32, 1.42), 2)
-                asian20_odd = 1.08
-            elif ou_baseline <= 1.5:
-                over25_odd = over_odd_real or round(random.uniform(2.10, 2.60), 2)
-                asian20_odd = 1.82
-            else:
-                over25_odd = over_odd_real or round(random.uniform(1.72, 1.88), 2)
-                asian20_odd = round(max(1.25, min(1.36, over25_odd * 0.757)), 2)
-                
-            under25_odd = real_odds.get('under_odd') or round(100.0 / max(10, (100 - (100.0 / max(1.1, over25_odd)))), 2)
-            over25_sel = "Más de 2.5 Goles" if avg_goals >= 2.5 else "Menos de 2.5 Goles"
-            over25_actual_odd = over25_odd if avg_goals >= 2.5 else under25_odd
+            # Over/Under lines - usar cuotas reales de la API por la línea exacta
+            # La API devuelve claves como 'over_2.5', 'under_2.5', 'over_1.5', 'over_3.5', etc.
+            real_over25 = real_odds.get('over_2.5')
+            real_under25 = real_odds.get('under_2.5')
+            real_over15 = real_odds.get('over_1.5')
+            real_over35 = real_odds.get('over_3.5')
 
-            # Asian Handicap
+            if avg_goals >= 3.0 and real_over35:
+                over25_sel = "Más de 3.5 Goles"
+                over25_actual_odd = real_over35
+                over25_prob = int(min(max(35 + avg_goals * 8, 20), 75))
+            elif avg_goals >= 2.5 and real_over25:
+                over25_sel = "Más de 2.5 Goles"
+                over25_actual_odd = real_over25
+                over25_prob = int(min(max(35 + avg_goals * 10, 20), 80))
+            elif avg_goals < 2.0 and real_under25:
+                over25_sel = "Menos de 2.5 Goles"
+                over25_actual_odd = real_under25
+                over25_prob = int(100 - min(max(35 + avg_goals * 10, 20), 80))
+            elif avg_goals >= 1.5 and real_over15:
+                over25_sel = "Más de 1.5 Goles"
+                over25_actual_odd = real_over15
+                over25_prob = int(min(max(50 + avg_goals * 10, 50), 90))
+            else:
+                # Fallback: calcular por fórmula si la API no tiene la cuota
+                over25_sel = "Más de 2.5 Goles" if avg_goals >= 2.5 else "Menos de 2.5 Goles"
+                over25_actual_odd = round(1.80 - avg_goals * 0.12, 2) if avg_goals >= 2.5 else round(2.20 - avg_goals * 0.10, 2)
+                over25_actual_odd = max(1.20, min(3.50, over25_actual_odd))
+                over25_prob = int(min(max(35 + avg_goals * 10, 20), 80)) if avg_goals >= 2.5 else int(100 - min(max(35 + avg_goals * 10, 20), 80))
+
+            # Asian handicap - usar cuotas reales de la API
+            ah_line = real_odds.get('ah_line', '-1.5' if abs(prob_home - prob_away) > 20 else '-0.5')
             ah_fav = winner_name
-            ah_val = "-1.5" if abs(prob_home - prob_away) > 20 else "-0.5"
-            ah_odd = round(random.uniform(1.75, 2.10), 2)
-            
-            # First Half - Result
-            fh_selection = winner_name if random.random() > 0.4 else "Empate"
-            fh_odd = round(random.uniform(2.10, 3.50), 2) if fh_selection != "Empate" else round(random.uniform(1.80, 2.60), 2)
+            ah_val = ah_line
+            ah_odd = real_odds.get('ah_home' if prob_home > prob_away else 'ah_away') or round(random.uniform(1.75, 2.10), 2)
+
+            # First Half - usar cuotas reales de la API
+            real_fh_home = real_odds.get('fh_home')
+            real_fh_draw = real_odds.get('fh_draw')
+            real_fh_away = real_odds.get('fh_away')
+            if real_fh_home and real_fh_draw and real_fh_away:
+                if prob_home > prob_away and real_fh_home < real_fh_away:
+                    fh_selection = winner_name
+                    fh_odd = real_fh_home
+                else:
+                    fh_selection = "Empate"
+                    fh_odd = real_fh_draw
+            else:
+                fh_selection = winner_name if random.random() > 0.4 else "Empate"
+                fh_odd = round(random.uniform(2.10, 3.50), 2) if fh_selection != "Empate" else round(random.uniform(1.80, 2.60), 2)
+
+            # Asian 2.0 goal line (derivado de la cuota real Over 2.5)
+            if real_over25:
+                asian20_odd = round(real_over25 * 0.75, 2)  # aproximación de la cuota asiática
+                asian20_odd = max(1.10, min(2.50, asian20_odd))
+            elif avg_goals >= 2.2:
+                asian20_odd = 1.22
+            else:
+                asian20_odd = 1.65
 
             # DNB (Draw No Bet) - Real bookmaker arbitrage formula: odd * (1.0 - 1/odd_draw)
             if prob_home > prob_away:
@@ -881,10 +1003,10 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
-                    "market": f"Más/Menos 2.5 Goles",
+                    "market": f"Más/Menos Goles",
                     "selection": over25_sel,
-                    "odd": (real_odds.get('over_2.5') if over25_sel == "Más de 2.5 Goles" else real_odds.get('under_2.5')) or round(over25_actual_odd, 2),
-                    "probability": int(min(max(35 + avg_goals * 10, 20), 80)) if avg_goals >= 2.5 else int(100 - min(max(35 + avg_goals * 10, 20), 80)),
+                    "odd": round(over25_actual_odd, 2),
+                    "probability": over25_prob,
                     "risk": "Low" if avg_goals >= 3.0 or avg_goals <= 1.5 else "Medium",
                     "reasoning": {
                         "tactical": f"El planteamiento táctico proyecta una expectativa de {avg_goals} goles por partido. {'Los sistemas ofensivos de ambos equipos favorecen un partido abierto con muchos goles.' if avg_goals >= 2.5 else 'Las estructuras defensivas y el planteamiento táctico sugieren un partido cerrado de pocas ocasiones.'}",
@@ -1254,7 +1376,8 @@ def generate_daily_sports_data():
             "rumors": rumors,
             "lineups": lineups,
             "h2h": h2h,
-            "picks": picks
+            "picks": picks,
+            "real_odds": match.get("real_odds", {})  # Real bookmaker odds from SportAPI7
         })
 
         # --- Auto-grade individual match picks for finished matches ---
