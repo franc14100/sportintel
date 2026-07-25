@@ -117,9 +117,8 @@ def fetch_live_matches():
                     continue
 
             is_allowed = False
-            # Allow all tennis matches if they are ATP or WTA or if user wants all of them.
-            # Usually tennis has hundreds of matches, so we filter by ATP/WTA.
-            if event_info["sport"] == "Tennis":
+            api_sport_name = event_info.get("sport", "Football")
+            if api_sport_name == "Tennis":
                 if "ATP" in event_info["league"] or "WTA" in event_info["league"] or "Open" in event_info["league"]:
                     is_allowed = True
             else:
@@ -153,9 +152,9 @@ def fetch_live_matches():
             else: st = "pre"
             
             h_col, h_acc, a_col, a_acc = "#1F2937", "#3B82F6", "#1F2937", "#EF4444"
-            if event_info["sport"] == "Tennis":
+            if event_info.get("sport") == "Tennis":
                 h_col, h_acc, a_col, a_acc = "#84CC16", "#A3E635", "#10B981", "#34D399"
-            elif event_info["sport"] == "Basketball":
+            elif event_info.get("sport") == "Basketball":
                 h_col, h_acc, a_col, a_acc = "#F59E0B", "#FCD34D", "#8B5CF6", "#C4B5FD"
 
             fetched_matches.append({
@@ -166,7 +165,7 @@ def fetch_live_matches():
                 "away_color": a_col,
                 "away_accent": a_acc,
                 "league": event_info["league"],
-                "sport": event_info["sport"],
+                "sport": event_info.get("sport", "Football"),
                 "time": event_info["time"],
                 "stadium": "Cancha Principal",
                 "status": st,
