@@ -14574,5 +14574,165 @@
     "time": "07:00",
     "status": "inprogress",
     "sport": "Football"
+  },
+  "16506154": {
+    "homeTeam": "Chiba",
+    "awayTeam": "Must IPO",
+    "league": "Elite League",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16447008": {
+    "homeTeam": "Wealdstone",
+    "awayTeam": "Milton Keynes Dons",
+    "league": "Club Friendly Games",
+    "time": "14:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16437822": {
+    "homeTeam": "Probiy Horodenka",
+    "awayTeam": "Inhulets Petrove",
+    "league": "Persha Liga",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389518": {
+    "homeTeam": "Fyllingsdalen",
+    "awayTeam": "Asane Fotball 2",
+    "league": "3rd Division, Group 3",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389886": {
+    "homeTeam": "Skjetten",
+    "awayTeam": "Bossekop",
+    "league": "3rd Division, Group 5",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389517": {
+    "homeTeam": "Os TF",
+    "awayTeam": "Varegg",
+    "league": "3rd Division, Group 3",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16332168": {
+    "homeTeam": "Woking",
+    "awayTeam": "Reading",
+    "league": "Club Friendly Games",
+    "time": "14:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16584304": {
+    "homeTeam": "Club 1° de Marzo",
+    "awayTeam": "12 de Octubre de Itauguá",
+    "league": "Primera División B",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16332167": {
+    "homeTeam": "Sutton United",
+    "awayTeam": "Horsham FC",
+    "league": "Club Friendly Games",
+    "time": "14:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16337212": {
+    "homeTeam": "Queen's Park LFC",
+    "awayTeam": "Spartans WFC",
+    "league": "Premier League Cup, Women",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16405774": {
+    "homeTeam": "Trento",
+    "awayTeam": "Sassuolo",
+    "league": "Club Friendly Games",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16461254": {
+    "homeTeam": "Nelson Suburbs FC",
+    "awayTeam": "Auckland United FC",
+    "league": "Chatham Cup",
+    "time": "01:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16595092": {
+    "homeTeam": "Gimnàstic de Tarragona",
+    "awayTeam": "FC Andorra",
+    "league": "Club Friendly Games",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16322590": {
+    "homeTeam": "Weston Super Mare",
+    "awayTeam": "Exeter City",
+    "league": "Club Friendly Games",
+    "time": "14:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "15388835": {
+    "homeTeam": "SK Trygg/Lade",
+    "awayTeam": "Eidsvold Turn",
+    "league": "2nd Division, Group 2",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15905080": {
+    "homeTeam": "Kamuzu Barracks",
+    "awayTeam": "Malawi Armed Forces FC",
+    "league": "Malawi Super League",
+    "time": "12:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16303174": {
+    "homeTeam": "CA Linense",
+    "awayTeam": "Marília",
+    "league": "Copa Paulista, Group 1",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16303149": {
+    "homeTeam": "Juventus-SP",
+    "awayTeam": "Paulista",
+    "league": "Copa Paulista, Group 3",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16303162": {
+    "homeTeam": "EC Santo André",
+    "awayTeam": "São Caetano U23",
+    "league": "Copa Paulista, Group 4",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15385993": {
+    "homeTeam": "Kvik Halden",
+    "awayTeam": "Træff",
+    "league": "2nd Division, Group 1",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
   }
 }
