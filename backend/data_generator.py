@@ -119,10 +119,19 @@ def fetch_live_matches():
                         cache[eid] = res_info
                         new_events_found += 1
 
+        # 1. Filtrar eids permitidos (excluyendo ligas juveniles, femeninas y reservas)
+        EXCLUDED_KEYWORDS = ["u19", "u20", "u21", "u23", "youth", "reserve", "women", "femenil", "femenina", "sub-19", "sub-20", "sub-21", "sub-23"]
+        allowed_entries = []
+
         for eid, odd_data in odds_dict.items():
             if eid not in cache:
                 continue
             event_info = cache[eid]
+            lg_lower = event_info.get("league", "").lower()
+            
+            # Excluir juveniles/reservas
+            if any(ex in lg_lower for ex in EXCLUDED_KEYWORDS):
+                continue
 
             is_allowed = False
             api_sport_name = event_info.get("sport", "Football")
@@ -131,29 +140,75 @@ def fetch_live_matches():
                     is_allowed = True
             else:
                 for al in ALLOWED_LEAGUES:
-                    if al.lower() in event_info["league"].lower():
+                    if al.lower() in lg_lower:
                         is_allowed = True
                         break
                     
-            if not is_allowed:
-                continue
-                
+            if is_allowed:
+                allowed_entries.append((eid, odd_data, event_info))
+
+        print(f"[INFO] {api_sport}: {len(allowed_entries)} partidos de ligas principales seleccionados. Descargando cuotas completas...")
+
+        # 2. Descargar cuotas reales completas (all-odds) en paralelo
+        def fetch_event_all_odds(item):
+            eid, odd_data, event_info = item
             real_odds = {}
+            # Cuotas base 1X2 de odds_dict
             choices = odd_data.get("choices", [])
             for choice in choices:
                 name = choice.get("name")
                 frac = choice.get("fractionalValue")
-                if not frac:
-                    continue
-                try:
-                    num, den = str(frac).split("/")
-                    decimal_odd = round((float(num) / float(den)) + 1.0, 2)
-                    if name == "1": real_odds['h2h_home'] = decimal_odd
-                    elif name == "X": real_odds['h2h_draw'] = decimal_odd
-                    elif name == "2": real_odds['h2h_away'] = decimal_odd
-                except:
-                    pass
+                if frac and "/" in str(frac):
+                    try:
+                        num, den = str(frac).split("/")
+                        decimal_odd = round((float(num) / float(den)) + 1.0, 2)
+                        if name == "1": real_odds['h2h_home'] = decimal_odd
+                        elif name == "X": real_odds['h2h_draw'] = decimal_odd
+                        elif name == "2": real_odds['h2h_away'] = decimal_odd
+                    except:
+                        pass
+            # Obtener mercados adicionales (BTTS, Doble Oportunidad, DNB, Goles) desde la API
+            try:
+                url = f"https://sportapi7.p.rapidapi.com/api/v1/event/{eid}/odds/1/all"
+                ereq = urllib.request.Request(url, headers=HEADERS)
+                with urllib.request.urlopen(ereq, timeout=6) as eresponse:
+                    all_data = json.loads(eresponse.read().decode('utf-8'))
+                    for m in all_data.get('markets', []):
+                        group = m.get('marketGroup', '')
+                        m_name = m.get('marketName', '')
+                        for c in m.get('choices', []):
+                            c_name = c.get('name')
+                            frac = c.get('fractionalValue')
+                            if not frac or '/' not in str(frac):
+                                continue
+                            num, den = str(frac).split('/')
+                            dec = round((float(num) / float(den)) + 1.0, 2)
+                            if group == '1X2':
+                                if c_name == '1': real_odds['h2h_home'] = dec
+                                elif c_name == 'X': real_odds['h2h_draw'] = dec
+                                elif c_name == '2': real_odds['h2h_away'] = dec
+                            elif group == 'Double chance':
+                                if c_name == '1X': real_odds['dc_1x'] = dec
+                                elif c_name == 'X2': real_odds['dc_x2'] = dec
+                                elif c_name == '12': real_odds['dc_12'] = dec
+                            elif group == 'Draw no bet':
+                                if c_name == '1': real_odds['dnb_home'] = dec
+                                elif c_name == '2': real_odds['dnb_away'] = dec
+                            elif group == 'Both teams to score':
+                                if c_name in ['Yes', 'Sí']: real_odds['btts_yes'] = dec
+                                elif c_name in ['No']: real_odds['btts_no'] = dec
+                            elif group == 'Match goals':
+                                if '2.5' in m_name:
+                                    if c_name == 'Over': real_odds['over_2.5'] = dec
+                                    elif c_name == 'Under': real_odds['under_2.5'] = dec
+            except Exception:
+                pass
+            return item, real_odds
 
+        with ThreadPoolExecutor(max_workers=20) as executor:
+            all_odds_results = list(executor.map(fetch_event_all_odds, allowed_entries))
+
+        for (eid, odd_data, event_info), real_odds in all_odds_results:
             api_status = event_info.get("status", "notstarted")
             if api_status == "inprogress": st = "in"
             elif api_status == "finished": st = "post"
@@ -815,7 +870,7 @@ def generate_daily_sports_data():
                 {
                     "market": "Ambos Equipos Anotan",
                     "selection": btts_selection,
-                    "odd": round(random.uniform(1.6, 2.3), 2),
+                    "odd": (real_odds.get('btts_yes') if btts_selection == "Sí" else real_odds.get('btts_no')) or round(random.uniform(1.65, 2.15), 2),
                     "probability": btts_prob,
                     "risk": "Medium",
                     "reasoning": reasoning_btts,
@@ -824,7 +879,7 @@ def generate_daily_sports_data():
                 {
                     "market": f"Más/Menos 2.5 Goles",
                     "selection": over25_sel,
-                    "odd": round(over25_actual_odd, 2),
+                    "odd": (real_odds.get('over_2.5') if over25_sel == "Más de 2.5 Goles" else real_odds.get('under_2.5')) or round(over25_actual_odd, 2),
                     "probability": int(min(max(35 + avg_goals * 10, 20), 80)) if avg_goals >= 2.5 else int(100 - min(max(35 + avg_goals * 10, 20), 80)),
                     "risk": "Low" if avg_goals >= 3.0 or avg_goals <= 1.5 else "Medium",
                     "reasoning": {
@@ -854,7 +909,7 @@ def generate_daily_sports_data():
                 {
                     "market": "Doble Oportunidad",
                     "selection": f"{home_name} o Empate" if prob_home > prob_away else f"{away_name} o Empate",
-                    "odd": dc_home_draw_odd if prob_home > prob_away else dc_away_draw_odd,
+                    "odd": (real_odds.get('dc_1x') if prob_home > prob_away else real_odds.get('dc_x2')) or (dc_home_draw_odd if prob_home > prob_away else dc_away_draw_odd),
                     "probability": int(prob_home + prob_draw) if prob_home > prob_away else int(prob_away + prob_draw),
                     "risk": "Low",
                     "reasoning": {
@@ -867,7 +922,7 @@ def generate_daily_sports_data():
                 {
                     "market": "Empate No Apuesta (DNB)",
                     "selection": winner_name,
-                    "odd": round(dnb_odd, 2),
+                    "odd": (real_odds.get('dnb_home') if prob_home > prob_away else real_odds.get('dnb_away')) or round(dnb_odd, 2),
                     "probability": int(max(prob_home, prob_away) / max(prob_home + prob_away, 1) * 100),
                     "risk": "Low",
                     "reasoning": {
