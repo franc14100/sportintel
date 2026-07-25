@@ -151,6 +151,9 @@ def fetch_live_matches():
             elif api_status == "finished": st = "post"
             else: st = "pre"
             
+            if st == "post":
+                continue
+            
             h_col, h_acc, a_col, a_acc = "#1F2937", "#3B82F6", "#1F2937", "#EF4444"
             if event_info.get("sport") == "Tennis":
                 h_col, h_acc, a_col, a_acc = "#84CC16", "#A3E635", "#10B981", "#34D399"

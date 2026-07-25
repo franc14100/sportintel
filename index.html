@@ -13,7 +13,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0.0">
 </head>
 <body>
     <div class="app-container">
@@ -33,6 +33,10 @@
                 <button class="nav-item active" data-tab="dashboard" id="nav-dashboard">
                     <i class="fa-solid fa-chart-line"></i>
                     <span>Dashboard</span>
+                </button>
+                <button class="nav-item" data-tab="predictions" id="nav-predictions">
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                    <span>Predicciones</span>
                 </button>
                 <button class="nav-item" data-tab="matches" id="nav-matches">
                     <i class="fa-solid fa-gamepad"></i>
@@ -90,14 +94,23 @@
                         <span class="pulse-dot"></span>
                         <span class="status-text">Mercado Actualizado</span>
                     </div>
+                    <!-- Sync Status Indicator -->
+                    <div id="sync-status-indicator" style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;min-width:140px;">
+                        <i class="fa-solid fa-cloud fa-spin" style="color:#f59e0b"></i>
+                        <span style="font-size:0.75rem;color:#f59e0b">Conectando...</span>
+                    </div>
+                    <button class="btn btn-secondary" id="btn-force-sync" title="Forzar guardado en la nube" style="border-color:#10b981;color:#10b981;padding:6px 12px;">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Guardar Nube
+                    </button>
                     <button class="btn btn-primary" id="btn-open-custom-bet-modal" style="background: var(--accent-pink); border-color: var(--accent-pink); box-shadow: var(--shadow-pink);">
                         <i class="fa-solid fa-wand-magic-sparkles"></i> Analizar Mi Apuesta
                     </button>
                     <button class="btn btn-secondary" id="refresh-data-btn">
                         <i class="fa-solid fa-arrows-rotate"></i> Actualizar Análisis
                     </button>
-                    <button class="btn btn-secondary" id="btn-open-api-modal" style="border-color: var(--accent-amber); color: var(--accent-amber);">
-                        <i class="fa-solid fa-key"></i> Sincronizar 1xBet
+
+                    <button class="btn btn-secondary" id="btn-open-sync-modal" style="border-color: var(--accent-cyan); color: var(--accent-cyan); margin-left: 8px;">
+                        <i class="fa-solid fa-cloud"></i> Enlace en la Nube
                     </button>
                 </div>
             </header>
@@ -129,46 +142,153 @@
                 </div>
 
                 <div class="dashboard-layout">
-                    <!-- Column 1: Star Ticket -->
-                    <div class="card star-ticket-card">
-                        <div class="card-header">
-                            <span class="badge badge-star"><i class="fa-solid fa-star"></i> RECOMENDACIÓN PREMIUM</span>
-                            <h3>Boleto Estrella del Día</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="ticket-container" id="star-ticket-details">
-                                <!-- Dinámico -->
+                    <!-- Column 1: Star Tickets -->
+                    <div style="display: flex; flex-direction: column; gap: 20px; flex: 1.2;">
+                        <!-- Ticket 1: Seguro -->
+                        <div class="card star-ticket-card" id="star-ticket-card-1" style="border-left: 5px solid var(--accent-green); margin-bottom: 0;">
+                            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 10px;">
+                                <div>
+                                    <span class="badge bg-green" style="font-size:0.65rem; background: rgba(16,185,129,0.15); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.3);"><i class="fa-solid fa-shield-check"></i> BOLETO ESTRELLA 1: SEGURO</span>
+                                    <h3 id="star-ticket-title-1" style="margin-top: 5px; font-size: 1.05rem; font-weight:800; color:var(--text-primary);">Boleto Seguro del Día</h3>
+                                </div>
+                                <span id="star-ticket-stake-rec-1" class="badge bg-green" style="font-size:0.75rem; font-weight:800; background:rgba(16,185,129,0.15); color:var(--accent-green);">Stake: 4%</span>
                             </div>
-                            <div class="ticket-footer-info">
-                                <div class="confidence-box">
-                                    <div class="confidence-header">
-                                        <span>Nivel de Confianza</span>
-                                        <span id="star-ticket-confidence">0%</span>
-                                    </div>
-                                    <div class="progress-bar-bg">
-                                        <div class="progress-bar-fill" id="star-ticket-progress" style="width: 0%"></div>
-                                    </div>
+                            <div class="card-body" style="padding-top: 15px;">
+                                <div class="ticket-container" id="star-ticket-details-1">
+                                    <!-- Dinámico -->
                                 </div>
-                                <div class="analysis-reasoning">
-                                    <h4><i class="fa-solid fa-brain"></i> Análisis Técnico del Boleto</h4>
-                                    <p id="star-ticket-reasoning">Analizando variables del mercado...</p>
+                                <div class="ticket-footer-info" style="margin-top: 15px;">
+                                    <div class="confidence-box" style="margin-bottom: 12px;">
+                                        <div class="confidence-header" style="display:flex; justify-content:space-between; font-size: 0.75rem; margin-bottom: 4px;">
+                                            <span>Nivel de Confianza</span>
+                                            <span id="star-ticket-confidence-1" style="font-weight:700; color: var(--accent-green);">0%</span>
+                                        </div>
+                                        <div class="progress-bar-bg" style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow:hidden;">
+                                            <div class="progress-bar-fill" id="star-ticket-progress-1" style="width: 0%; height:100%; background: var(--accent-green);"></div>
+                                        </div>
+                                    </div>
+                                    <div style="background: rgba(16, 185, 129, 0.05); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 4px; margin-bottom: 12px; font-size: 0.75rem; color: var(--text-secondary);">
+                                        <i class="fa-solid fa-sack-dollar" style="color:var(--accent-green)"></i> Recomendación de Inversión: <b style="color:var(--text-primary);">Apostar <span id="star-ticket-stake-percent-1">4.0%</span> de tu Banca (<span id="star-ticket-stake-cash-1">$0.00</span>)</b>
+                                    </div>
+                                    <div class="analysis-reasoning" style="margin-bottom: 15px;">
+                                        <h4 style="font-size:0.8rem; color: var(--accent-green); margin-bottom: 6px; font-weight:700;"><i class="fa-solid fa-brain"></i> Análisis Técnico del Boleto</h4>
+                                        <p id="star-ticket-reasoning-1" style="font-size:0.78rem; line-height:1.4; color:var(--text-secondary); margin:0;">Analizando...</p>
+                                    </div>
+                                    <button class="btn btn-primary btn-full-width" id="btn-copy-star-ticket-1" style="background: var(--accent-green); border-color: var(--accent-green); font-size:0.75rem; padding: 8px; font-weight:700;">
+                                        <i class="fa-regular fa-copy"></i> Copiar Selecciones del Boleto
+                                    </button>
+                                    <button class="btn btn-secondary btn-full-width" id="btn-register-star-ticket-1" style="margin-top: 8px; border-color: var(--accent-green); color: var(--accent-green); font-size:0.75rem; padding: 8px; font-weight:700;">
+                                        <i class="fa-solid fa-bookmark"></i> 📌 Registrar en Mi Historial y Banca
+                                    </button>
                                 </div>
-                                <button class="btn btn-primary btn-full-width" id="btn-copy-star-ticket">
-                                    <i class="fa-regular fa-copy"></i> Copiar Selecciones del Boleto
-                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Ticket 2: Valor -->
+                        <div class="card star-ticket-card" id="star-ticket-card-2" style="border-left: 5px solid var(--accent-cyan); margin-bottom: 0;">
+                            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 10px;">
+                                <div>
+                                    <span class="badge bg-cyan" style="font-size:0.65rem; background: rgba(6,182,212,0.15); color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.3);"><i class="fa-solid fa-chart-line"></i> BOLETO ESTRELLA 2: DE VALOR</span>
+                                    <h3 id="star-ticket-title-2" style="margin-top: 5px; font-size: 1.05rem; font-weight:800; color:var(--text-primary);">Boleto de Valor (Cuota Alta)</h3>
+                                </div>
+                                <span id="star-ticket-stake-rec-2" class="badge bg-cyan" style="font-size:0.75rem; font-weight:800; background:rgba(6,182,212,0.15); color:var(--accent-cyan);">Stake: 2%</span>
+                            </div>
+                            <div class="card-body" style="padding-top: 15px;">
+                                <div class="ticket-container" id="star-ticket-details-2">
+                                    <!-- Dinámico -->
+                                </div>
+                                <div class="ticket-footer-info" style="margin-top: 15px;">
+                                    <div class="confidence-box" style="margin-bottom: 12px;">
+                                        <div class="confidence-header" style="display:flex; justify-content:space-between; font-size: 0.75rem; margin-bottom: 4px;">
+                                            <span>Nivel de Confianza</span>
+                                            <span id="star-ticket-confidence-2" style="font-weight:700; color: var(--accent-cyan);">0%</span>
+                                        </div>
+                                        <div class="progress-bar-bg" style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow:hidden;">
+                                            <div class="progress-bar-fill" id="star-ticket-progress-2" style="width: 0%; height:100%; background: var(--accent-cyan);"></div>
+                                        </div>
+                                    </div>
+                                    <div style="background: rgba(6, 182, 212, 0.05); border-left: 3px solid var(--accent-cyan); padding: 8px 12px; border-radius: 4px; margin-bottom: 12px; font-size: 0.75rem; color: var(--text-secondary);">
+                                        <i class="fa-solid fa-sack-dollar" style="color:var(--accent-cyan)"></i> Recomendación de Inversión: <b style="color:var(--text-primary);">Apostar <span id="star-ticket-stake-percent-2">2.0%</span> de tu Banca (<span id="star-ticket-stake-cash-2">$0.00</span>)</b>
+                                    </div>
+                                    <div class="analysis-reasoning" style="margin-bottom: 15px;">
+                                        <h4 style="font-size:0.8rem; color: var(--accent-cyan); margin-bottom: 6px; font-weight:700;"><i class="fa-solid fa-brain"></i> Análisis Técnico del Boleto</h4>
+                                        <p id="star-ticket-reasoning-2" style="font-size:0.78rem; line-height:1.4; color:var(--text-secondary); margin:0;">Analizando...</p>
+                                    </div>
+                                    <button class="btn btn-primary btn-full-width" id="btn-copy-star-ticket-2" style="background: var(--accent-cyan); border-color: var(--accent-cyan); font-size:0.75rem; padding: 8px; font-weight:700;">
+                                        <i class="fa-regular fa-copy"></i> Copiar Selecciones del Boleto
+                                    </button>
+                                    <button class="btn btn-secondary btn-full-width" id="btn-register-star-ticket-2" style="margin-top: 8px; border-color: var(--accent-cyan); color: var(--accent-cyan); font-size:0.75rem; padding: 8px; font-weight:700;">
+                                        <i class="fa-solid fa-bookmark"></i> 📌 Registrar en Mi Historial y Banca
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ticket 3: Soñadora -->
+                        <div class="card star-ticket-card" id="star-ticket-card-3" style="border-left: 5px solid #a855f7; margin-bottom: 0;">
+                            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 10px;">
+                                <div>
+                                    <span class="badge" style="font-size:0.65rem; background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3);"><i class="fa-solid fa-rocket"></i> BOLETO ESTRELLA 3: SOÑADORA (@5.00+)</span>
+                                    <h3 id="star-ticket-title-3" style="margin-top: 5px; font-size: 1.05rem; font-weight:800; color:var(--text-primary);">Apuesta Soñadora del Dólar</h3>
+                                </div>
+                                <span id="star-ticket-stake-rec-3" class="badge" style="font-size:0.75rem; font-weight:800; background:rgba(168, 85, 247, 0.15); color:#a855f7;">Stake: $1.00</span>
+                            </div>
+                            <div class="card-body" style="padding-top: 15px;">
+                                <div class="ticket-container" id="star-ticket-details-3">
+                                    <!-- Dinámico -->
+                                </div>
+                                <div class="ticket-footer-info" style="margin-top: 15px;">
+                                    <div class="confidence-box" style="margin-bottom: 12px;">
+                                        <div class="confidence-header" style="display:flex; justify-content:space-between; font-size: 0.75rem; margin-bottom: 4px;">
+                                            <span>Nivel de Confianza</span>
+                                            <span id="star-ticket-confidence-3" style="font-weight:700; color: #a855f7;">0%</span>
+                                        </div>
+                                        <div class="progress-bar-bg" style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow:hidden;">
+                                            <div class="progress-bar-fill" id="star-ticket-progress-3" style="width: 0%; height:100%; background: #a855f7;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="background: rgba(168, 85, 247, 0.05); border-left: 3px solid #a855f7; padding: 8px 12px; border-radius: 4px; margin-bottom: 12px; font-size: 0.75rem; color: var(--text-secondary);">
+                                        <i class="fa-solid fa-coins" style="color:#a855f7"></i> Recomendación de Inversión: <b style="color:var(--text-primary);">Apostar <span id="star-ticket-stake-percent-3">$1.00 Fijo</span> (<span id="star-ticket-stake-cash-3">$1.00</span>) para multiplicar x<span id="star-ticket-multiplier-3">5.0</span></b>
+                                    </div>
+                                    <div class="analysis-reasoning" style="margin-bottom: 15px;">
+                                        <h4 style="font-size:0.8rem; color: #a855f7; margin-bottom: 6px; font-weight:700;"><i class="fa-solid fa-brain"></i> Estrategia de Apuesta Soñadora</h4>
+                                        <p id="star-ticket-reasoning-3" style="font-size:0.78rem; line-height:1.4; color:var(--text-secondary); margin:0;">Analizando...</p>
+                                    </div>
+                                    <button class="btn btn-primary btn-full-width" id="btn-copy-star-ticket-3" style="background: #a855f7; border-color: #a855f7; font-size:0.75rem; padding: 8px; font-weight:700;">
+                                        <i class="fa-regular fa-copy"></i> Copiar Selecciones de la Apuesta Soñadora
+                                    </button>
+                                    <button class="btn btn-secondary btn-full-width" id="btn-register-star-ticket-3" style="margin-top: 8px; border-color: #a855f7; color: #a855f7; font-size:0.75rem; padding: 8px; font-weight:700;">
+                                        <i class="fa-solid fa-bookmark"></i> 📌 Registrar en Mi Historial y Banca
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Column 2: Performance Chart -->
-                    <div class="card chart-card">
+                    <!-- Column 2: Performance Chart & AI Stats -->
+                    <div class="card chart-card" style="align-self: start; display: flex; flex-direction: column;">
                         <div class="card-header">
                             <h3>Rendimiento del Analista IA</h3>
-                            <span class="sub">Tasa de acierto acumulada (%)</span>
+                            <span class="sub">Tasa de acierto acumulada (%) y métricas de modelo</span>
                         </div>
-                        <div class="card-body">
-                            <div class="chart-container">
+                        <div class="card-body" style="display: flex; flex-direction: column; gap: 15px;">
+                            <div class="chart-container" style="height: 220px; min-height: 180px; width: 100%;">
                                 <canvas id="performance-chart"></canvas>
+                            </div>
+                            <!-- AI Performance KPI Metrics Bar -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; padding-top: 10px; border-top: 1px solid var(--border-color);">
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; text-align: center;">
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Efectividad</div>
+                                    <div style="font-size: 1.25rem; font-weight: 800; color: var(--accent-green); margin-top: 2px;" id="chart-stat-accuracy">85.0%</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; text-align: center;">
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Racha Actual</div>
+                                    <div style="font-size: 1.25rem; font-weight: 800; color: var(--accent-cyan); margin-top: 2px;" id="chart-stat-streak">🔥 5 Aciertos</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; text-align: center;">
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Cuota Promedio</div>
+                                    <div style="font-size: 1.25rem; font-weight: 800; color: #8B5CF6; margin-top: 2px;" id="chart-stat-avg-odd">@1.85</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -181,6 +301,139 @@
                         <!-- Dinámico -->
                     </div>
                 </div>
+                <!-- Registro Histórico de Boletos de la IA -->
+                <div class="highlight-section" style="margin-top: 30px;">
+                    <h3 class="section-title"><i class="fa-solid fa-clock-rotate-left"></i> Registro Histórico y Eficacia de Boletos de la IA</h3>
+                    <div class="card" style="padding: 20px; border-top: 3px solid var(--accent-cyan);">
+                        <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px;">
+                            Aquí puedes auditar y verificar la eficacia de todos los boletos recomendados generados por la Inteligencia Artificial. Los resultados se actualizan automáticamente al raspar los marcadores de ESPN.
+                        </div>
+                        <div class="table-container" style="max-height: 350px; overflow-y: auto;">
+                            <table class="injuries-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 12px 10px; text-align: left; font-size: 0.75rem;">Fecha / ID</th>
+                                        <th style="padding: 12px 10px; text-align: left; font-size: 0.75rem;">Tipo de Recomendación</th>
+                                        <th style="padding: 12px 10px; text-align: left; font-size: 0.75rem;">Selecciones y Cuotas</th>
+                                        <th style="padding: 12px 10px; text-align: center; font-size: 0.75rem;">Cuota Total</th>
+                                        <th style="padding: 12px 10px; text-align: center; font-size: 0.75rem;">Confianza / Stake</th>
+                                        <th style="padding: 12px 10px; text-align: center; font-size: 0.75rem;">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historical-tickets-registry-body">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.8rem;">
+                                            No hay registros históricos disponibles. Generando...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Predictions & Scores Tab -->
+            <section id="predictions" class="tab-content">
+                <div class="predictions-header" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-primary);"><i class="fa-solid fa-square-poll-vertical" style="color: var(--accent-green);"></i> Predicciones y Marcadores</h2>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Sigue en vivo los partidos del día, marcadores oficiales de ESPN y el resultado de nuestros pronósticos.</p>
+                    </div>
+                    <!-- Performance Stats Card -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 18px; display: flex; gap: 20px; align-items: center;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Totales</div>
+                            <div id="pred-stat-total" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary);">0</div>
+                        </div>
+                        <div style="text-align: center; border-left: 1px solid var(--border-color); padding-left: 15px;">
+                            <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-green); font-weight: 700;">Ganados</div>
+                            <div id="pred-stat-won" style="font-size: 1.25rem; font-weight: 800; color: var(--accent-green);">0</div>
+                        </div>
+                        <div style="text-align: center; border-left: 1px solid var(--border-color); padding-left: 15px;">
+                            <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-red); font-weight: 700;">Perdidos</div>
+                            <div id="pred-stat-lost" style="font-size: 1.25rem; font-weight: 800; color: var(--accent-red);">0</div>
+                        </div>
+                        <div style="text-align: center; border-left: 1px solid var(--border-color); padding-left: 15px;">
+                            <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-cyan); font-weight: 700;">Efectividad</div>
+                            <div id="pred-stat-pct" style="font-size: 1.25rem; font-weight: 800; color: var(--accent-cyan);">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bankroll Exercise ($10 USD Flat Stake Simulation) -->
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 182, 212, 0.08)); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+                    <div style="display: flex; align-items: center; gap: 14px; min-width: 260px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #10b981, #06b6d4); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #fff; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--text-primary);">Ejercicio de Bankroll ($10 USD / Apuesta)</h4>
+                                <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.65rem; font-weight: 700; text-transform: uppercase;">Simulación Real</span>
+                            </div>
+                            <p style="font-size: 0.76rem; color: var(--text-muted); margin-top: 2px;">Si hubieras apostado <b>$10.00 USD</b> a cada pronóstico oficial finalizado hoy:</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                        <div style="background: rgba(0,0,0,0.3); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center; min-width: 95px;">
+                            <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Invertido ($10x)</div>
+                            <div id="sim-stat-invested" style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin-top: 2px;">$0.00</div>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center; min-width: 105px;">
+                            <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Cobrado Total</div>
+                            <div id="sim-stat-returned" style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin-top: 2px;">$0.00</div>
+                        </div>
+                        <div style="background: rgba(16, 185, 129, 0.12); padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3); text-align: center; min-width: 115px;">
+                            <div style="font-size: 0.65rem; color: var(--accent-green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Ganancia Neta</div>
+                            <div id="sim-stat-profit" style="font-size: 1.1rem; font-weight: 800; color: var(--accent-green); margin-top: 2px;">$+0.00</div>
+                        </div>
+                        <div style="background: rgba(6, 182, 212, 0.12); padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(6, 182, 212, 0.3); text-align: center; min-width: 90px;">
+                            <div style="font-size: 0.65rem; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">ROI Real</div>
+                            <div id="sim-stat-roi" style="font-size: 1.1rem; font-weight: 800; color: var(--accent-cyan); margin-top: 2px;">0.0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; background: rgba(255,255,255,0.02); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-color);">
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px;"><i class="fa-solid fa-trophy"></i> Deporte:</span>
+                        <button class="filter-btn active pred-sport-filter" data-sport="all" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;">Todos</button>
+                        <button class="filter-btn pred-sport-filter" data-sport="Football" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
+                        <button class="filter-btn pred-sport-filter" data-sport="Basketball" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-basketball"></i> Basket</button>
+                        <button class="filter-btn pred-sport-filter" data-sport="Tennis" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Tenis</button>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px;"><i class="fa-solid fa-signal"></i> Estado del Partido:</span>
+                        <button class="filter-btn active pred-status-filter" data-status="all" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;">Todos</button>
+                        <button class="filter-btn pred-status-filter" data-status="pre" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-clock"></i> Por Jugar</button>
+                        <button class="filter-btn pred-status-filter" data-status="in" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; color: #ef4444;"><i class="fa-solid fa-circle"></i> En Vivo</button>
+                        <button class="filter-btn pred-status-filter" data-status="post" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-flag-checkered"></i> Finalizados</button>
+                    </div>
+                </div>
+
+                <!-- Grid of Match Predictions -->
+                <div id="predictions-grid" class="predictions-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 15px;">
+                    <!-- Dynamic Loading -->
+                </div>
+
+                <!-- Post-Match Review Section -->
+                <div style="margin-top: 32px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 18px;">
+                        <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-magnifying-glass-chart" style="color: #fff; font-size: 0.9rem;"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1rem; font-weight: 800; color: var(--text-primary);">Revisión Post-Partido</h3>
+                            <p style="font-size: 0.75rem; color: var(--text-muted);">Resultados reales vs predicciones de la IA — partidos terminados hoy</p>
+                        </div>
+                        <div id="post-review-summary" style="margin-left: auto; display: flex; gap: 12px; font-size: 0.8rem; font-weight: 700;"></div>
+                    </div>
+                    <div id="post-review-list" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Dynamic -->
+                    </div>
+                </div>
             </section>
 
             <!-- Matches Tab -->
@@ -188,11 +441,19 @@
                 <div class="matches-layout">
                     <!-- Left: Matches List -->
                     <div class="matches-list-panel">
-                        <div class="filter-bar">
-                            <button class="filter-btn active" data-sport="all">Todos</button>
-                            <button class="filter-btn" data-sport="Football"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
-                            <button class="filter-btn" data-sport="Basketball"><i class="fa-solid fa-basketball"></i> Basket</button>
-                            <button class="filter-btn" data-sport="Tennis"><i class="fa-solid fa-baseball"></i> Tenis</button>
+                        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+                            <div class="filter-bar">
+                                <button class="filter-btn active match-sport-filter" data-sport="all">Todos</button>
+                                <button class="filter-btn match-sport-filter" data-sport="Football"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
+                                <button class="filter-btn match-sport-filter" data-sport="Basketball"><i class="fa-solid fa-basketball"></i> Basket</button>
+                                <button class="filter-btn match-sport-filter" data-sport="Tennis"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Tenis</button>
+                            </div>
+                            <div class="filter-bar">
+                                <button class="filter-btn active match-status-filter" data-status="all">Todos</button>
+                                <button class="filter-btn match-status-filter" data-status="pre"><i class="fa-solid fa-clock"></i> Por Jugar</button>
+                                <button class="filter-btn match-status-filter" data-status="in" style="color:#ef4444;"><i class="fa-solid fa-circle"></i> En Vivo</button>
+                                <button class="filter-btn match-status-filter" data-status="post"><i class="fa-solid fa-flag-checkered"></i> Finalizados</button>
+                            </div>
                         </div>
                         <div class="match-search-panel" style="margin-bottom: 12px;">
                             <input type="text" id="match-search-input" placeholder="🔍 Buscar equipos o ligas (ej: España, Sun, MLS)..." class="form-input" style="font-size: 0.82rem; padding: 8px 12px;">
@@ -363,23 +624,56 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="label-with-value">
-                                        <label class="form-label">Perfil de Riesgo</label>
-                                        <span id="risk-value-display" class="badge bg-green">Conservador</span>
-                                    </div>
-                                    <input type="range" id="input-risk" class="form-range" min="1" max="3" value="1" step="1">
-                                    <div class="range-labels">
-                                        <span>Conservador</span>
-                                        <span>Equilibrado</span>
-                                        <span>Agresivo</span>
+                                    <label class="form-label">Modo de Generación</label>
+                                    <div class="sport-select-grid" style="grid-template-columns: 1fr 1fr;">
+                                        <label class="sport-option">
+                                            <input type="radio" name="gen-mode" value="profile" checked>
+                                            <div class="sport-box" style="padding: 10px;">
+                                                <i class="fa-solid fa-sliders"></i>
+                                                <span style="font-size: 0.75rem;">Por Perfil</span>
+                                            </div>
+                                        </label>
+                                        <label class="sport-option">
+                                            <input type="radio" name="gen-mode" value="target">
+                                            <div class="sport-box" style="padding: 10px;">
+                                                <i class="fa-solid fa-bullseye"></i>
+                                                <span style="font-size: 0.75rem;">Cuota Objetivo</span>
+                                            </div>
+                                        </label>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Filtrar por Cuota Máxima Evento</label>
-                                    <div class="range-odds-container">
-                                        <input type="range" id="input-max-odd" class="form-range" min="1.3" max="5.0" value="2.5" step="0.1">
-                                        <div class="odds-val"><span id="odd-max-display">2.50</span></div>
+                                <!-- Target Odd Mode -->
+                                <div class="form-group" id="group-target-mode" style="display: none; padding: 15px; border-radius: 8px; background: rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.2);">
+                                    <div class="label-with-value">
+                                        <label class="form-label" style="color: var(--accent-cyan);">Cuota Final Deseada</label>
+                                        <span id="target-odd-display" class="badge" style="background: var(--accent-cyan); color: var(--bg-dark);">1.80</span>
+                                    </div>
+                                    <input type="range" id="input-target-odd" class="form-range" min="1.1" max="10.0" value="1.8" step="0.1">
+                                    <div class="slider-hint" style="color: var(--text-muted); margin-top: 8px;">La IA agrupará picks (parlay) hasta rozar esta cuota (±0.15).</div>
+                                </div>
+
+                                <!-- Profile Mode -->
+                                <div id="group-profile-mode">
+                                    <div class="form-group">
+                                        <div class="label-with-value">
+                                            <label class="form-label">Perfil de Riesgo</label>
+                                            <span id="risk-value-display" class="badge bg-green">Conservador</span>
+                                        </div>
+                                        <input type="range" id="input-risk" class="form-range" min="1" max="3" value="1" step="1">
+                                        <div class="range-labels">
+                                            <span>Conservador</span>
+                                            <span>Equilibrado</span>
+                                            <span>Agresivo</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Filtrar por Cuota Máxima Evento</label>
+                                        <div class="range-odds-container">
+                                            <input type="range" id="input-max-odd" class="form-range" min="1.3" max="5.0" value="2.5" step="0.1">
+                                            <div class="odds-val"><span id="odd-max-display">2.50</span></div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -407,57 +701,8 @@
                             </div>
 
                             <!-- Generated Ticket Content -->
-                            <div class="generated-ticket hidden" id="ticket-main-content">
-                                <div class="ticket-glow-border"></div>
-                                <div class="ticket-header">
-                                    <div class="ticket-brand">
-                                        <i class="fa-solid fa-brain-circuit"></i>
-                                        <span>SportIntel AI Ticket</span>
-                                    </div>
-                                    <div class="ticket-id" id="lbl-ticket-id">#TK-837482</div>
-                                </div>
-                                
-                                <div class="ticket-subheader">
-                                    <div class="meta-item">
-                                        <span class="lbl">Riesgo</span>
-                                        <span class="val badge" id="ticket-risk-badge">Bajo</span>
-                                    </div>
-                                    <div class="meta-item">
-                                        <span class="lbl">Confianza</span>
-                                        <span class="val" id="ticket-confidence-val">85%</span>
-                                    </div>
-                                </div>
-
-                                <div class="ticket-events-list" id="ticket-events-container">
-                                    <!-- Dinámico -->
-                                </div>
-
-                                <div class="ticket-summary">
-                                    <div class="summary-row">
-                                        <span>Inversión (Stake)</span>
-                                        <span id="ticket-stake-display">$100.00</span>
-                                    </div>
-                                    <div class="summary-row">
-                                        <span>Cuota Total</span>
-                                        <span id="ticket-total-odd-display" class="highlight-odd">3.45</span>
-                                    </div>
-                                    <div class="divider"></div>
-                                    <div class="summary-row payout-row">
-                                        <span>Ganancia Potencial</span>
-                                        <span id="ticket-payout-display" class="highlight-payout">$345.00</span>
-                                    </div>
-                                </div>
-
-                                <div class="ticket-barcode-section">
-                                    <div class="barcode"></div>
-                                    <div class="barcode-number">SportIntel Algorithmic System 2.0</div>
-                                </div>
-
-                                <div class="ticket-actions">
-                                    <button class="btn btn-secondary btn-full-width" id="btn-export-ticket">
-                                        <i class="fa-solid fa-download"></i> Descargar Imagen del Boleto
-                                    </button>
-                                </div>
+                            <div id="tickets-multi-container" class="hidden" style="display: flex; flex-direction: row; gap: 25px; width: 100%; overflow-x: auto; padding-bottom: 15px;">
+                                <!-- Tickets injected dynamically -->
                             </div>
                         </div>
                     </div>
@@ -511,10 +756,11 @@
             <section id="bankroll" class="tab-content">
                 <!-- Summary Metrics Cards -->
                 <div class="metrics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 24px;">
-                    <div class="stat-card">
+                    <div class="stat-card" style="border: 1px solid var(--accent-green);">
                         <div class="card-icon green"><i class="fa-solid fa-wallet"></i></div>
-                        <div class="card-value" id="bankroll-balance-val">$1,000.00</div>
-                        <div class="card-label">Bankroll Total</div>
+                        <div class="card-value" id="bankroll-available-val" style="color: var(--accent-green); font-size: 1.6rem;">$38.87</div>
+                        <div class="card-label">Saldo Disponible (1xBet)</div>
+                        <div id="bankroll-balance-sub" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">Patrimonio: $62.89 | En juego: $24.02</div>
                     </div>
                     <div class="stat-card">
                         <div class="card-icon cyan"><i class="fa-solid fa-percent"></i></div>
@@ -530,6 +776,36 @@
                         <div class="card-icon pink"><i class="fa-solid fa-chart-pie"></i></div>
                         <div class="card-value" id="bankroll-winrate-val">0.0%</div>
                         <div class="card-label">Tasa de Acierto (Win Rate)</div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Projections Panel -->
+                <div class="card" style="margin-bottom: 24px; padding: 24px; border-left: 4px solid var(--accent-cyan); background: linear-gradient(to right, rgba(6, 182, 212, 0.05), transparent);">
+                    <div class="card-header" style="padding-bottom: 12px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color);">
+                        <h3 style="color: var(--accent-cyan);"><i class="fa-solid fa-rocket"></i> Proyección Inteligente de Bankroll</h3>
+                        <p class="sub">Metas auto-ajustables en tiempo real basadas en tu tendencia y crecimiento compuesto</p>
+                    </div>
+                    <div class="card-body" style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 150px; background: var(--bg-dark); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">Meta a Fin de Mes</div>
+                            <div id="proj-end-month" style="font-size: 1.2rem; font-weight: 800; color: var(--text-primary);">--</div>
+                            <div id="proj-end-month-profit" style="font-size: 0.7rem; color: var(--accent-green);">--</div>
+                        </div>
+                        <div style="flex: 1; min-width: 150px; background: var(--bg-dark); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">A 3 Meses</div>
+                            <div id="proj-3-months" style="font-size: 1.2rem; font-weight: 800; color: var(--text-primary);">--</div>
+                            <div id="proj-3-months-profit" style="font-size: 0.7rem; color: var(--accent-green);">--</div>
+                        </div>
+                        <div style="flex: 1; min-width: 150px; background: var(--bg-dark); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">A 6 Meses</div>
+                            <div id="proj-6-months" style="font-size: 1.2rem; font-weight: 800; color: var(--text-primary);">--</div>
+                            <div id="proj-6-months-profit" style="font-size: 0.7rem; color: var(--accent-green);">--</div>
+                        </div>
+                        <div style="flex: 1; min-width: 150px; background: var(--bg-dark); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">Proyección Anual</div>
+                            <div id="proj-1-year" style="font-size: 1.2rem; font-weight: 800; color: var(--accent-green);">--</div>
+                            <div id="proj-1-year-profit" style="font-size: 0.7rem; color: var(--text-muted);">--</div>
+                        </div>
                     </div>
                 </div>
 
@@ -597,11 +873,17 @@
                     <div class="card" style="overflow: hidden;">
                         <div class="card-header" style="padding-bottom: 12px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                             <h3>📋 Registro de Apuestas</h3>
-                            <div style="display: flex; gap: 8px; align-items: center;">
-                                <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px;">
-                                    <span style="font-size: 0.7rem; color: var(--text-muted);">Capital Inicial:</span>
-                                    <input type="number" id="input-starting-bankroll" value="1000" min="10" style="width: 75px; background: none; border: none; color: var(--accent-green); font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; text-align: right; outline: none; padding: 0;">
+                            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
+                                <div style="display: flex; align-items: center; gap: 6px; background: rgba(6, 182, 212, 0.05); border: 1px solid var(--accent-cyan); padding: 4px 8px; border-radius: 6px;">
+                                    <span style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: 700;">Ajustar Saldo 1xBet ($):</span>
+                                    <input type="number" id="input-1xbet-balance" value="38.87" step="0.01" style="width: 80px; background: none; border: none; color: var(--accent-green); font-family: var(--font-display); font-weight: 800; font-size: 0.8rem; text-align: center; outline: none; padding: 0;">
                                 </div>
+                                <button class="btn btn-secondary" id="btn-export-data" style="padding: 4px 10px; font-size: 0.72rem; border-color: var(--accent-blue); color: var(--accent-blue); cursor: pointer;" title="Copiar datos para el celular">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i> Exportar
+                                </button>
+                                <button class="btn btn-secondary" id="btn-import-data" style="padding: 4px 10px; font-size: 0.72rem; border-color: var(--accent-purple); color: var(--accent-purple); cursor: pointer;" title="Pegar datos del PC">
+                                    <i class="fa-solid fa-cloud-arrow-down"></i> Importar
+                                </button>
                                 <button class="btn btn-secondary" id="btn-clear-bets" style="padding: 4px 10px; font-size: 0.72rem; border-color: var(--accent-pink); color: var(--accent-pink); cursor: pointer;">
                                     <i class="fa-solid fa-trash-can"></i> Limpiar Historial
                                 </button>
@@ -636,7 +918,7 @@
                 <div class="metrics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 24px;">
                     <div class="stat-card">
                         <div class="card-icon green" style="background: rgba(16, 185, 129, 0.1);"><i class="fa-solid fa-calendar-day"></i></div>
-                        <div class="card-value" id="escalera-day-val">Día 1 / 30</div>
+                        <div class="card-value" id="escalera-day-val">Día 1 / 7</div>
                         <div class="card-label">Progreso del Reto</div>
                     </div>
                     <div class="stat-card">
@@ -651,20 +933,25 @@
                     </div>
                     <div class="stat-card">
                         <div class="card-icon pink" style="background: rgba(239, 68, 68, 0.1);"><i class="fa-solid fa-trophy"></i></div>
-                        <div class="card-value" id="escalera-goal-val">$26,200.00</div>
-                        <div class="card-label">Meta Final (Día 30)</div>
+                        <div class="card-value" id="escalera-goal-val">$56.29</div>
+                        <div class="card-label">Meta Final (Día 7)</div>
+                    </div>
+                    <div class="stat-card" style="border: 1px dashed var(--accent-green);">
+                        <div class="card-icon green" style="background: rgba(16, 185, 129, 0.1);"><i class="fa-solid fa-vault"></i></div>
+                        <div class="card-value" id="escalera-saved-val">$0.00</div>
+                        <div class="card-label">Bolsillo Seguro (Asegurado)</div>
                     </div>
                 </div>
 
                 <!-- Horizontal Step Visualizer -->
                 <div class="card" style="margin-bottom: 24px; padding: 20px;">
                     <div class="card-header" style="padding-bottom: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color);">
-                        <h3>🧗 Mapa del Reto Escalera (30 Días)</h3>
-                        <p class="sub">Cada círculo representa un día. ¡Completa los 30 seguidos sin perder para ganar el reto!</p>
+                        <h3>🧗 Mapa del Reto Escalera (7 Días - Semanal)</h3>
+                        <p class="sub">Cada círculo representa un día. ¡Completa los 7 seguidos sin perder para ganar el reto!</p>
                     </div>
                     <div class="card-body">
                         <div id="escalera-steps-container" style="display: flex; gap: 10px; overflow-x: auto; padding: 12px 6px; scrollbar-width: thin;">
-                            <!-- Dinámico: 30 círculos de progreso -->
+                            <!-- Dinámico: 7 círculos de progreso -->
                         </div>
                     </div>
                 </div>
@@ -707,8 +994,17 @@
                                 </div>
                                 <div class="form-group" style="margin-bottom: 0;">
                                     <label class="form-label" style="font-size: 0.75rem;">Objetivo (Días)</label>
-                                    <input type="number" id="input-escalera-target-days" value="30" min="3" max="50" class="form-input" style="font-size: 0.8rem; padding: 6px 10px;">
+                                    <input type="number" id="input-escalera-target-days" value="7" min="3" max="50" class="form-input" style="font-size: 0.8rem; padding: 6px 10px;">
                                 </div>
+                            </div>
+                            <div class="form-group" style="margin-top: 15px; margin-bottom: 15px;">
+                                <label class="form-label" style="font-size: 0.75rem; color: var(--accent-green);"><i class="fa-solid fa-shield-heart"></i> Escudo de Protección de Capital</label>
+                                <select id="select-escalera-protection" class="form-input" style="font-size: 0.8rem; padding: 6px 10px; background: var(--bg-card); color: var(--text-primary); border-color: var(--border-color);">
+                                    <option value="none">Sin Protección (Arriesgar Todo)</option>
+                                    <option value="withdraw_initial" selected>Retirar Inversión Inicial (Cero Riesgo al Duplicar)</option>
+                                    <option value="save_50_profit">Asegurar 50% de la Ganancia Diaria (Crecimiento Conservador)</option>
+                                    <option value="save_20_profit">Asegurar 20% de la Ganancia Diaria (Crecimiento Moderado)</option>
+                                </select>
                             </div>
                             <div class="card-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
                                 <div class="form-group" style="margin-bottom: 0;">
@@ -722,15 +1018,28 @@
                             </div>
                         </div>
 
+
+
                         <!-- Current Run History -->
                         <div class="card" style="flex: 1; overflow: hidden;">
                             <div class="card-header" style="padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                                 <h3>📜 Historial del Reto Actual</h3>
-                                <button class="btn btn-secondary" id="btn-clear-escalera-history" style="padding: 2px 8px; font-size: 0.68rem; border-color: var(--text-muted); color: var(--text-muted); cursor: pointer;">
-                                    Reiniciar
-                                </button>
+                                <div>
+                                    <button class="btn btn-secondary" id="btn-add-past-escalera-day" style="padding: 4px 10px; font-size: 0.75rem; border-color: var(--accent-cyan); color: var(--accent-cyan); font-weight: 700; cursor: pointer; margin-right: 6px;">
+                                        <i class="fa-solid fa-plus"></i> + Añadir Día Pasado
+                                    </button>
+                                    <button class="btn btn-secondary" id="btn-clear-escalera-history" style="padding: 4px 10px; font-size: 0.75rem; border-color: var(--text-muted); color: var(--text-muted); cursor: pointer;">
+                                        Reiniciar
+                                    </button>
+                                </div>
                             </div>
-                            <div class="card-body" style="padding: 0;">
+                            <div class="card-body" style="padding: 12px;">
+                                <div style="padding: 10px 14px; background: rgba(6, 182, 212, 0.08); border-radius: 8px; border: 1px solid var(--accent-cyan); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan);"><i class="fa-solid fa-clock-rotate-left"></i> ¿Quieres registrar días pasados que ya ganaste?</span>
+                                    <button class="btn btn-primary" id="btn-add-past-escalera-day-big" style="background: var(--accent-cyan); color: #000; border-color: var(--accent-cyan); font-weight: 800; font-size: 0.8rem; padding: 6px 14px; cursor: pointer; border-radius: 6px;">
+                                        <i class="fa-solid fa-plus"></i> Registrar Día Pasado
+                                    </button>
+                                </div>
                                 <div class="table-container" style="max-height: 250px; overflow-y: auto;">
                                     <table class="injuries-table" style="width: 100%; border-collapse: collapse;">
                                         <thead>
@@ -818,39 +1127,6 @@
         </div>
     </div>
 
-    <!-- API Key Modal for 1xBet Sync -->
-    <div class="modal hidden" id="api-modal">
-        <div class="modal-overlay" id="api-modal-overlay"></div>
-        <div class="modal-card">
-            <button class="modal-close" id="btn-close-api-modal"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <i class="fa-solid fa-key modal-player-avatar" style="color: var(--accent-amber); font-size: 2.2rem; display: flex; align-items: center; justify-content: center;"></i>
-                <div>
-                    <h3>Sincronizar Cuotas 1xBet</h3>
-                    <p>Cuotas en tiempo real por API</p>
-                </div>
-            </div>
-            <div class="modal-body" style="padding-top: 10px;">
-                <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
-                    Para sincronizar de manera exacta con 1xBet, conéctate a la API de cuotas gratuitas de <b>The Odds API</b>:
-                </p>
-                <ol style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 15px; margin-bottom: 15px; line-height: 1.6;">
-                    <li>Regístrate gratis en <a href="https://the-odds-api.com" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">the-odds-api.com</a> (toma 10 segundos).</li>
-                    <li>Copia la clave (API Key) recibida en tu correo.</li>
-                    <li>Pégala a continuación para sincronizar las cuotas de 1xBet:</li>
-                </ol>
-                <div class="form-group" style="margin-bottom: 12px;">
-                    <input type="text" id="api-key-input" class="form-input" placeholder="Pega aquí tu API Key (ej: a73f...)" style="font-family: monospace; font-size: 0.85rem; padding: 10px 14px;">
-                </div>
-                <div id="api-sync-status" class="badge" style="display: block; text-align: center; padding: 8px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.02); text-transform: none; font-size: 0.75rem;">
-                    Estado: Desconectado (Usando cuotas estimadas)
-                </div>
-                <button class="btn btn-primary btn-full-width" id="btn-save-api-key">
-                    <i class="fa-solid fa-floppy-disk"></i> Guardar y Sincronizar
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- Gemini API Key Modal -->
     <div class="modal hidden" id="gemini-api-modal">
@@ -924,7 +1200,151 @@
         </div>
     </div>
 
+    <!-- GitHub Token Configuration Modal (Actualizador en Vivo) -->
+    <div class="modal hidden" id="github-api-modal">
+        <div class="modal-overlay" id="github-api-modal-overlay"></div>
+        <div class="modal-card" style="width: 420px;">
+            <button class="modal-close" id="btn-close-github-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-brands fa-github modal-player-avatar" style="color: var(--accent-cyan); font-size: 2.2rem; display: flex; align-items: center; justify-content: center; background: rgba(6,182,212,0.1);"></i>
+                <div>
+                    <h3>Actualización en Tiempo Real</h3>
+                    <p>Configura tu Token de GitHub para forzar el análisis</p>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-top: 10px;">
+                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px;">
+                    Para ejecutar el algoritmo de IA y descargar los partidos del día en vivo directamente de ESPN, ingresa tu GitHub Personal Access Token (PAT):
+                </p>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" style="font-size: 0.75rem;">GitHub PAT Token</label>
+                    <input type="password" id="input-github-api-key" class="form-input" placeholder="Pegar ghp_..." style="font-size: 0.85rem; padding: 10px 14px; letter-spacing: 2px;">
+                </div>
+                
+                <div style="background: rgba(6,182,212,0.06); border: 1px solid rgba(6,182,212,0.2); border-radius: 8px; padding: 12px; margin-bottom: 20px;">
+                    <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Tu Token de Enlace:</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <code id="github-pat-display" style="font-size: 0.75rem; color: var(--accent-cyan); font-family: monospace; word-break: break-all;">Cargando...</code>
+                        <button class="btn btn-secondary" id="btn-copy-github-pat-helper" style="padding: 2px 8px; font-size: 0.65rem; border-color: var(--accent-cyan); color: var(--accent-cyan); cursor: pointer; flex-shrink: 0; margin-left: 8px;">
+                            Copiar
+                        </button>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-full-width" id="btn-save-github-key">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar Token y Sincronizar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cloud Sync Configuration Modal -->
+    <div class="modal hidden" id="sync-modal">
+        <div class="modal-overlay" id="sync-modal-overlay"></div>
+        <div class="modal-card" style="width: 420px;">
+            <button class="modal-close" id="btn-close-sync-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header" style="text-align: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+                <i class="fa-solid fa-cloud" style="color: var(--accent-cyan); font-size: 2.2rem; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; text-align: center;"></i>
+                <h3>Enlace en la Nube (PC ⇄ Móvil)</h3>
+                <p class="sub" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Vincule su computadora con su iPhone o Android de forma instantánea para compartir apuestas y progreso.</p>
+            </div>
+            <div class="modal-body" id="sync-container" style="padding-top: 15px; display: flex; flex-direction: column; gap: 15px;">
+                <!-- Dynamically loaded from app.js renderSyncPanel -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Ticket to History & Bankroll Modal -->
+    <div class="modal hidden" id="register-ticket-modal">
+        <div class="modal-overlay" id="register-ticket-modal-overlay"></div>
+        <div class="modal-card" style="width: 440px;">
+            <button class="modal-close" id="btn-close-register-ticket-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header" style="text-align: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+                <i class="fa-solid fa-bookmark" style="color: var(--accent-green); font-size: 2.2rem; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;"></i>
+                <h3 id="register-modal-title">Registrar Apuesta en Historial</h3>
+                <p class="sub" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Añada esta apuesta a su banca e historial personal para llevar el seguimiento en tiempo real.</p>
+            </div>
+            <div class="modal-body" style="padding-top: 15px; display: flex; flex-direction: column; gap: 12px;">
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Partido / Eventos (Editar)</label>
+                    <input type="text" id="input-register-match" class="form-input" placeholder="Ej: Clyde vs Annan + Fenerbahce vs Gornik" style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary); padding: 8px 12px;">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Mercado / Pronósticos (Editar)</label>
+                    <input type="text" id="input-register-market" class="form-input" placeholder="Ej: Más de 2.5 + G1" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); padding: 8px 12px;">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div class="form-group">
+                        <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Cuota Real (@ Editar)</label>
+                        <input type="number" id="input-register-odd" step="0.01" class="form-input" style="font-size: 1rem; font-weight: 800; font-family: var(--font-display); text-align: center; color: var(--accent-amber); padding: 8px 12px;">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Monto Apostado ($ USD)</label>
+                        <input type="number" id="input-register-stake" step="0.5" class="form-input" style="font-size: 1rem; font-weight: 800; font-family: var(--font-display); text-align: center; color: var(--accent-green); padding: 8px 12px;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Estado de la Apuesta</label>
+                    <select id="select-register-status" class="form-input" style="font-size: 0.85rem; font-weight: 700; padding: 8px 12px; background: rgba(0,0,0,0.3); color: var(--text-primary);">
+                        <option value="pending">⏳ Pendiente (Por jugar)</option>
+                        <option value="won">✅ Ganada (Acertada)</option>
+                        <option value="lost">❌ Perdida (Fallada)</option>
+                        <option value="voided">🔄 Anulada / Reembolsada</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary btn-full-width" id="btn-confirm-register-ticket" style="background: var(--accent-green); border-color: var(--accent-green); font-weight: 800; font-size: 0.9rem; padding: 10px;">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar en Mi Historial y Banca
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post-Match Analysis Modal -->
+    <div class="modal hidden" id="post-analysis-modal">
+        <div class="modal-overlay" id="post-analysis-modal-overlay"></div>
+        <div class="modal-card" style="width: 520px; max-width: 95vw;">
+            <button class="modal-close" id="btn-close-post-analysis"><i class="fa-solid fa-xmark"></i></button>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #ef4444, #b91c1c); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🔍</div>
+                <div>
+                    <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary);">Análisis Post-Partido</h3>
+                    <p id="post-analysis-match-title" style="font-size: 0.8rem; color: var(--text-muted);"></p>
+                </div>
+            </div>
+
+            <!-- Result Badge -->
+            <div id="post-analysis-result-badge" style="padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;"></div>
+
+            <!-- What the AI predicted -->
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; margin-bottom: 14px;">
+                <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px;">🎯 Predicción de la IA</div>
+                <div id="post-analysis-prediction" style="font-size: 0.9rem; color: var(--text-primary);"></div>
+            </div>
+
+            <!-- Explanation -->
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; margin-bottom: 14px;">
+                <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px;">📋 ¿Qué pasó?</div>
+                <div id="post-analysis-explanation" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;"></div>
+            </div>
+
+            <!-- Lesson Learned -->
+            <div style="background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6,182,212,0.3); border-radius: 10px; padding: 14px; margin-bottom: 18px;">
+                <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-cyan); font-weight: 700; margin-bottom: 8px;">💡 Lección Aprendida</div>
+                <div id="post-analysis-lesson" style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;"></div>
+            </div>
+
+            <button class="btn btn-secondary btn-full-width" id="btn-close-post-analysis-btn" style="font-size: 0.9rem;">
+                <i class="fa-solid fa-check"></i> Entendido
+            </button>
+        </div>
+    </div>
+
     <!-- Custom JS -->
-    <script src="app.js"></script>
+    <script src="app.js?v=2.1.0"></script>
 </body>
 </html>

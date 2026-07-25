@@ -408,6 +408,25 @@ document.addEventListener("DOMContentLoaded", () => {
         return 9999;
     }
 
+    function getDynamicMatchStatus(m) {
+        if (!m || !m.status) return "pre";
+        let status = m.status;
+        if (status === "pre" && m.time && m.time.includes(":")) {
+            const now = new Date();
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const parts = m.time.split(":");
+            const matchHours = parseInt(parts[0], 10);
+            const matchMinutes = parseInt(parts[1], 10);
+            
+            // Si la hora del partido ya pasó respecto a la hora actual, lo marcamos como En Vivo
+            if (matchHours < currentHours || (matchHours === currentHours && matchMinutes <= currentMinutes)) {
+                status = "in"; 
+            }
+        }
+        return status;
+    }
+
     function sortMatchesByTimeAscending(matches) {
         if (!Array.isArray(matches)) return [];
         return matches.slice().sort((a, b) => {
@@ -1470,7 +1489,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let listHtml = "";
         const filteredMatches = appData.matches.filter(m => {
             const matchesSport = currentSportFilter === "all" || m.sport === currentSportFilter;
-            const matchesStatus = currentMatchStatusFilter === "all" || m.status === currentMatchStatusFilter;
+            const matchesStatus = currentMatchStatusFilter === "all" || getDynamicMatchStatus(m) === currentMatchStatusFilter;
             const matchesSearch = !matchSearchQuery || 
                                   m.home.toLowerCase().includes(matchSearchQuery) || 
                                   m.away.toLowerCase().includes(matchSearchQuery) || 
@@ -4864,7 +4883,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const filteredMatches = appData.matches.filter(m => {
             const matchesSport = currentPredSportFilter === "all" || m.sport === currentPredSportFilter;
-            const matchesStatus = currentPredStatusFilter === "all" || m.status === currentPredStatusFilter;
+            const matchesStatus = currentPredStatusFilter === "all" || getDynamicMatchStatus(m) === currentPredStatusFilter;
             return matchesSport && matchesStatus;
         });
 
