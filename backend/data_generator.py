@@ -57,7 +57,9 @@ def fetch_live_matches():
         "ATP", "WTA", "US Open", "Wimbledon", "Roland Garros", "Australian Open"
     ]
     
-    today = datetime.now().strftime("%Y-%m-%d")
+    # Usar hora de Ecuador/Colombia (UTC-5)
+    ecuador_time = datetime.utcnow() - timedelta(hours=5)
+    today = ecuador_time.strftime("%Y-%m-%d")
     cache = load_cache()
     new_events_found = 0
     
