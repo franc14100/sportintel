@@ -314,11 +314,9 @@ def generate_daily_sports_data():
 
     print("[INFO] Conectando a internet para buscar partidos reales...")
     espn_matches = fetch_live_matches()
-    
     live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Basketball', 'Tennis']]
     
     if not live_matches:
-        print("[INFO] Usando datos de respaldo porque no hay partidos filtrados.")
         err_str = " | ".join(fetch_errors) if fetch_errors else "NO SE ENCONTRARON PARTIDOS"
         print(f"[CRITICAL ERROR] {err_str}")
         import sys
@@ -326,7 +324,6 @@ def generate_daily_sports_data():
         
     print(f"[INFO] Total partidos reales (Fútbol, Basket, Tenis): {len(live_matches)} partidos")
     
-    # Si no hay partidos en vivo (ej. día sin partidos programados en la API de ESPN)
     # se usan partidos reales de la Copa del Mundo 2026 y WNBA como fallback dinámico
     if not live_matches:
         print("[Aviso] No se obtuvieron partidos en vivo desde la API. Usando partidos reales programados para esta semana.")
