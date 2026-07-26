@@ -2290,7 +2290,7 @@ def generate_daily_sports_data():
     
     # Seleccionar 3 a 4 picks de alta probabilidad de partidos distintos para construir una cuota acumulada >= 5.00
     dream_candidates = []
-    dream_used_matches = set()
+    dream_used_matches = set(s["match"] for s in star_selections_1) | set(s["match"] for s in star_selections_2) | set(s["match"] for s in star_selections_3)
     
     for p in priority_picks + fallback_picks:
         if p["match"] not in dream_used_matches and p.get("odd", 0) >= 1.25 and p.get("probability", 0) >= 55:

@@ -17544,5 +17544,14 @@
     "start_ts": 1785096000,
     "status": "notstarted",
     "sport": "Football"
+  },
+  "16602185": {
+    "homeTeam": "CA Wanderers Durazno",
+    "awayTeam": "Sportivo Barracas Dolores",
+    "league": "Playoffs",
+    "time": "15:00",
+    "start_ts": 1785096000,
+    "status": "notstarted",
+    "sport": "Football"
   }
 }
