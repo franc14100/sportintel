@@ -1164,11 +1164,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const ticket1 = appData.star_ticket_1 || appData.star_ticket;
         const ticket2 = appData.star_ticket_2 || appData.star_ticket;
         const ticket3 = appData.star_ticket_3;
+        const ticket4 = appData.star_ticket_4;
 
         renderTicket(ticket1, "1", "green");
         renderTicket(ticket2, "2", "cyan");
         if (ticket3) {
-            renderTicket(ticket3, "3", "purple");
+            renderTicket(ticket3, "3", "orange");
+        }
+        if (ticket4) {
+            renderTicket(ticket4, "4", "purple");
         }
 
         // Key Matches of the Day grid (sorted by time ascending)
@@ -3371,6 +3375,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         excludeSelections(appData.star_ticket_1);
         excludeSelections(appData.star_ticket_2);
+        excludeSelections(appData.star_ticket_3);
         excludeSelections(appData.star_ticket);
 
         let allPicks = [];
