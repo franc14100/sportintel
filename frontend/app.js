@@ -183,15 +183,26 @@ document.addEventListener("DOMContentLoaded", () => {
                             setSyncStatus("ok", "Sincronizado ✓");
                             lastLocalStateHash = getNormalizedStateHash(fullState);
                         }
+                    } else if (result.saved === false) {
+                        // Server returned 200 but couldn't save to remote storage
+                        // Data is safe in localStorage — show warning not error
+                        lastLocalStateHash = getNormalizedStateHash(fullState);
+                        pushRetryCount = 0;
+                        setSyncStatus("ok", "Local ✓ (nube no disp.)");
+                        console.warn("[Sync] ⚠️ Saved locally, cloud unavailable:", result.warning);
+                    } else {
+                        // Unknown response — treat as ok to avoid retry loop
+                        lastLocalStateHash = getNormalizedStateHash(fullState);
+                        setSyncStatus("ok", "Sincronizado ✓");
                     }
                 } else {
-                    const errText = await res.text().catch(() => res.status);
+                    const errText = await res.text().catch(() => String(res.status));
                     console.error("[Sync] ❌ Push failed:", res.status, errText);
                     setSyncStatus("error", `Error ${res.status} — reintentando...`);
                     lastLocalStateHash = "";
                     pushRetryCount++;
-                    const delay = Math.min(2000 * pushRetryCount, 15000);
-                    setTimeout(() => { triggerAutoSyncPush(); }, delay);
+                    const delay = Math.min(3000 * Math.pow(2, pushRetryCount - 1), 30000); // exponential backoff
+                    if (pushRetryCount <= 3) setTimeout(() => { triggerAutoSyncPush(false, true); }, delay);
                 }
             } catch (e) {
                 console.error("[Sync] ❌ Push error:", e.message);

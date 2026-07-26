@@ -1741,24 +1741,26 @@ def generate_daily_sports_data():
 
     # ═══════════════════════════════════════════════════════════════════════
     # FILTROS DE SEGURIDAD — OBJETIVO: WIN RATE >= 80%
+    # Cuota mínima del BOLETO: @1.50 (vale la pena el riesgo)
+    # Cuota máxima individual por pick: @2.00 (no más alto que eso)
     # ═══════════════════════════════════════════════════════════════════════
     # REGLA 1: Solo picks con cuotas REALES de la API (valid_for_ticket=True)
     #          Picks sin datos de API = cuotas inventadas = NO entran al boleto
     usable_picks = [p for p in usable_picks if p.get('valid_for_ticket', True) is not False]
 
-    # REGLA 2: Cuota máxima @1.65 para boletos estrella
-    #          @1.65 = 60.6% probabilidad real según la casa de apuestas
-    #          Cuotas más altas (1.80, 2.00, 2.27...) tienen demasiado riesgo para el objetivo de 80% WR
-    usable_picks = [p for p in usable_picks if 1.10 <= p.get('odd', 0) <= 1.65]
+    # REGLA 2: Cuota individual entre @1.15 y @2.00
+    #          @2.00 es el límite razonable (50% prob). Más alto = demasiado riesgo.
+    #          El boleto TOTAL debe llegar a @1.50 mínimo (ver lógica de armado abajo)
+    usable_picks = [p for p in usable_picks if 1.15 <= p.get('odd', 0) <= 2.00]
 
-    # REGLA 3: Mínimo de probabilidad del 62% (equivale a cuota máxima ~1.61)
-    usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 62]
+    # REGLA 3: Probabilidad mínima del 55% (cuota <= @1.82 en la API)
+    usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 55]
 
-    # REGLA 4: Descartar mercados no disponibles o poco fiables en 1xBet
+    # REGLA 4: Descartar mercados poco fiables o sintéticos
     BANNED_MARKETS = ['Tarjeta', 'Córners del Equipo', 'Asian 2.0', 'Goles del Equipo', 'Resultado 1er Tiempo']
     usable_picks = [p for p in usable_picks if not any(bm in p.get('market', '') for bm in BANNED_MARKETS)]
 
-    # REGLA 5: Priorizar picks con cuotas DIRECTAS de la API sobre mercados calculados internamente
+    # REGLA 5: Priorizar picks con cuotas DIRECTAS de la API
     DIRECT_API_MARKETS = ['Más/Menos Goles', 'Ambos Equipos Anotan', 'Doble Oportunidad',
                           'Empate No Apuesta', 'Córners (Total', 'Resultado Final', 'Hándicap Asiático']
     def is_direct_api_market(pick):
@@ -1768,23 +1770,27 @@ def generate_daily_sports_data():
     synthetic_picks  = [p for p in usable_picks if not is_direct_api_market(p)]
     usable_picks = direct_api_picks + synthetic_picks
 
-    # REGLA 6: Ordenar por probabilidad descendente (el más probable primero)
+    # REGLA 6: Ordenar primero por probabilidad descendente (el más probable primero)
     usable_picks = sorted(usable_picks, key=lambda x: x.get('probability', 0), reverse=True)
     
     # ═══════════════════════════════════════════════════════════════════════
-    # BOLETO 1 — APUESTA SEGURA (objetivo: cuota ~1.20-1.65, WR > 80%)
+    # BOLETO 1 — APUESTA SEGURA
+    # Regla de cuota mínima del boleto: @1.50 (si no vale la pena el riesgo)
+    # Si el mejor pick es >= 1.50 → Simple
+    # Si el mejor pick es < 1.50 → Combinar picks para llegar al menos a @1.50
     # ═══════════════════════════════════════════════════════════════════════
     star_selections_1 = []
     ticket_type_1 = "Simple"
     total_odd_1 = 1.0
     star_confidence_1 = 85
     star_reasoning_1 = ""
+    MIN_TICKET_ODD = 1.50  # Cuota mínima del boleto para que valga la pena
 
     if usable_picks:
         best_pick = usable_picks[0]
-        # Estrategia: siempre Simple para el boleto 1 si la cuota >= 1.30
-        # Si la cuota es muy baja (<1.30), combinar con un segundo pick seguro
-        if best_pick['odd'] >= 1.30:
+
+        if best_pick['odd'] >= MIN_TICKET_ODD:
+            # El mejor pick ya vale la pena por sí solo → Simple
             ticket_type_1 = "Simple"
             star_selections_1.append({
                 "match": best_pick["match"],
@@ -1796,16 +1802,28 @@ def generate_daily_sports_data():
             })
             total_odd_1 = best_pick["odd"]
             star_confidence_1 = best_pick["probability"]
-            star_reasoning_1 = (f"✅ Apuesta Simple Segura de alta confianza. "
-                                f"La cuota @{total_odd_1:.2f} tiene una probabilidad real del {best_pick['probability']}% "
-                                f"según las cuotas de 1xBet. Solo un evento para maximizar el win rate.")
+            star_reasoning_1 = (f"✅ Apuesta Simple Segura. "
+                                f"Cuota @{total_odd_1:.2f} ({best_pick['probability']}% prob real según API 1xBet). "
+                                f"Un solo evento para maximizar el win rate.")
         else:
-            # Cuota muy baja: combinar con segundo pick para cuota total mínima 1.40
+            # Pick por debajo de @1.50 solo → Combinar para llegar a mínimo @1.50
+            # Buscar el combo que llegue más cercano a @1.60-@1.90 (sweet spot)
             second_pick = None
+            best_combo_odd = 0
             for p in usable_picks[1:]:
-                if p["match"] != best_pick["match"] and (best_pick['odd'] * p['odd']) >= 1.40:
-                    second_pick = p
-                    break
+                if p["match"] != best_pick["match"]:
+                    combo_odd = round(best_pick['odd'] * p['odd'], 2)
+                    # Preferir el combo que quede entre @1.50 y @2.00
+                    if MIN_TICKET_ODD <= combo_odd <= 2.00:
+                        if second_pick is None or combo_odd > best_combo_odd:
+                            second_pick = p
+                            best_combo_odd = combo_odd
+            # Si no hay combo entre 1.50-2.00, aceptar cualquiera que supere 1.50
+            if not second_pick:
+                for p in usable_picks[1:]:
+                    if p["match"] != best_pick["match"] and (best_pick['odd'] * p['odd']) >= MIN_TICKET_ODD:
+                        second_pick = p
+                        break
                 for p in usable_picks[1:]:
                     if p["match"] != best_pick["match"]:
                         second_pick = p
@@ -2020,7 +2038,62 @@ def generate_daily_sports_data():
             total_odd_2 = 1.85
             star_confidence_2 = 75
             star_reasoning_2 = "Boleto de valor de contingencia por escasez de partidos."
-            
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # ENFORCEMENT DE CUOTA MÍNIMA @1.50 EN AMBOS BOLETOS
+    # Si un boleto quedó con cuota total < @1.50, convertirlo en combinado
+    # buscando el segundo pick más seguro que eleve la cuota al mínimo.
+    # ═══════════════════════════════════════════════════════════════════════
+    def enforce_min_odd(selections, ticket_type, total_odd, confidence, reasoning, all_picks, used_matches_set):
+        if total_odd >= 1.50:
+            return selections, ticket_type, total_odd, confidence, reasoning
+        # La cuota está por debajo de 1.50 — buscar un pick adicional para combinarlo
+        if not selections:
+            return selections, ticket_type, total_odd, confidence, reasoning
+        current_odd = total_odd
+        # Excluir los partidos ya en este boleto + los usados en otros boletos
+        already_used = set(s['match'] for s in selections) | used_matches_set
+        complement = None
+        best_target = 0
+        for p in all_picks:
+            if p['match'] in already_used:
+                continue
+            combo = round(current_odd * p['odd'], 2)
+            if combo >= 1.50 and (complement is None or abs(combo - 1.65) < abs(best_target - 1.65)):
+                complement = p
+                best_target = combo
+        if complement:
+            ticket_type = 'Combinado'
+            new_total = round(current_odd * complement['odd'], 2)
+            selections.append({
+                'match': complement['match'],
+                'sport': complement['sport'],
+                'market': complement['market'],
+                'pick': complement['selection'],
+                'odd': complement['odd'],
+                'reasoning': complement['reasoning'].get('tactical', '') if isinstance(complement['reasoning'], dict) else complement['reasoning']
+            })
+            confidence = int((confidence + complement['probability']) / 2)
+            reasoning = (f"🔗 Combinado para cuota mínima @{new_total:.2f}. "
+                         f"Se añadió {complement['match']} ({complement['market']}) "
+                         f"para que el boleto supere el mínimo de valor de @1.50.")
+            return selections, ticket_type, new_total, confidence, reasoning
+        return selections, ticket_type, total_odd, confidence, reasoning
+
+    all_picks_for_upgrade = usable_picks  # ya filtrados y con valid_for_ticket=True
+
+    used_b1 = set(s['match'] for s in star_selections_1)
+    star_selections_1, ticket_type_1, total_odd_1, star_confidence_1, star_reasoning_1 = enforce_min_odd(
+        star_selections_1, ticket_type_1, total_odd_1, star_confidence_1, star_reasoning_1,
+        all_picks_for_upgrade, set()
+    )
+
+    used_b2 = set(s['match'] for s in star_selections_2) | used_b1
+    star_selections_2, ticket_type_2, total_odd_2, star_confidence_2, star_reasoning_2 = enforce_min_odd(
+        star_selections_2, ticket_type_2, total_odd_2, star_confidence_2, star_reasoning_2,
+        all_picks_for_upgrade, used_b1
+    )
+
     # Generar Boleto Estrella 3 (Apuesta Soñadora @5.00+ - El Reto del Dólar)
     star_selections_3 = []
     ticket_type_3 = "Combinado Soñador"
