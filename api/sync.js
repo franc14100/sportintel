@@ -6,127 +6,81 @@ module.exports = async function handler(req, res) {
     if (req.method === "OPTIONS") return res.status(200).end();
 
     const https = require("https");
-    const zlib = require("zlib");
+    const zlib  = require("zlib");
+    const BLOB  = "/api/jsonBlob/019f9ef2-63db-724c-8f16-cc0f13f487f7";
 
-    // Active blob ID — auto-recreates if missing
-    const BLOB_IDS = [
-        "019f9ef2-63db-724c-8f16-cc0f13f487f7",  // new blob (created 2026-07-26)
-        "019f96bc-688e-786f-b46d-7478b2b30aa1",  // old blob (may be gone)
-    ];
-    const BASE_URL = "jsonblob.com";
-    let BLOB_PATH = `/api/jsonBlob/${BLOB_IDS[0]}`;
-
-    function makeRequest(method, path, payload) {
-        return new Promise((resolve, reject) => {
-            const body = payload ? (typeof payload === 'string' ? payload : JSON.stringify(payload)) : null;
-            const options = {
-                hostname: BASE_URL,
-                port: 443,
-                path: path,
-                method: method,
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Cache-Control": "no-cache",
-                }
-            };
-            if (body) options.headers["Content-Length"] = Buffer.byteLength(body, 'utf8');
-
-            const request = https.request(options, (response) => {
-                let data = '';
-                response.on('data', (chunk) => data += chunk);
-                response.on('end', () => resolve({ statusCode: response.statusCode, data: data, headers: response.headers }));
-            });
-
-            request.on('error', (e) => reject(e));
-            request.setTimeout(8000, () => { request.destroy(new Error('timeout')); });
-            if (body) request.write(body);
-            request.end();
+    // Never rejects — always resolves (even on error/timeout)
+    function blobReq(method, body) {
+        return new Promise((resolve) => {
+            try {
+                const opts = {
+                    hostname: "jsonblob.com",
+                    port: 443,
+                    path: BLOB,
+                    method: method,
+                    headers: { "Content-Type": "application/json" }
+                };
+                const r = https.request(opts, (resp) => {
+                    let d = "";
+                    resp.on("data", (c) => (d += c));
+                    resp.on("end", () => resolve({ ok: resp.statusCode < 300, code: resp.statusCode, data: d }));
+                });
+                r.on("error", () => resolve({ ok: false, code: 0, data: "" }));
+                r.setTimeout(7000, () => { r.destroy(); resolve({ ok: false, code: 0, data: "timeout" }); });
+                if (body) r.write(body);
+                r.end();
+            } catch (e) {
+                resolve({ ok: false, code: 0, data: String(e.message) });
+            }
         });
-    }
-
-    async function createNewBlob(initialData) {
-        const result = await makeRequest("POST", "/api/jsonBlob", JSON.stringify(initialData || {}));
-        if (result.statusCode === 201 && result.headers.location) {
-            return result.headers.location; // e.g., /api/jsonBlob/NEW_ID
-        }
-        return null;
     }
 
     try {
         if (req.method === "GET") {
-            // Try primary blob first
-            const result = await makeRequest("GET", BLOB_PATH, null);
-            if (result.statusCode === 404) {
-                // Blob gone — return empty state, client will push to recreate
+            const result = await blobReq("GET", null);
+            if (!result.ok) return res.status(200).json({});
+            try {
+                const parsed = JSON.parse(result.data);
+                if (parsed && parsed._c && parsed.d) {
+                    const dec = zlib.inflateSync(Buffer.from(parsed.d, "base64")).toString();
+                    return res.status(200).json(JSON.parse(dec));
+                }
+                // Legacy uncompressed
+                if (parsed && parsed._isCompressed && parsed.data) {
+                    const dec = zlib.inflateSync(Buffer.from(parsed.data, "base64")).toString();
+                    return res.status(200).json(JSON.parse(dec));
+                }
+                return res.status(200).json(parsed || {});
+            } catch (e) {
                 return res.status(200).json({});
             }
-            if (result.statusCode >= 200 && result.statusCode < 300) {
+        }
+
+        if (req.method === "POST") {
+            const raw = req.body || {};
+            const stateObj = typeof raw === "string" ? JSON.parse(raw) : raw;
+
+            // Trim bet history to last 50 entries to stay under size limits
+            if (stateObj.escalera_apuestas) {
                 try {
-                    const parsed = JSON.parse(result.data);
-                    if (parsed && parsed._isCompressed && parsed.data) {
-                        const decoded = zlib.inflateSync(Buffer.from(parsed.data, 'base64')).toString();
-                        return res.status(200).json(JSON.parse(decoded));
-                    }
-                    return res.status(200).json(parsed);
-                } catch (e) {
-                    return res.status(200).json({});
-                }
+                    const arr = JSON.parse(stateObj.escalera_apuestas);
+                    if (Array.isArray(arr) && arr.length > 50)
+                        stateObj.escalera_apuestas = JSON.stringify(arr.slice(-50));
+                } catch (_) {}
             }
-            return res.status(200).json({});
+
+            const compressed = zlib.deflateSync(JSON.stringify(stateObj)).toString("base64");
+            const payload    = JSON.stringify({ _c: true, d: compressed });
+
+            const result = await blobReq("PUT", payload);
+            // Always return 200 — data is always safe in localStorage
+            return res.status(200).json(result.ok ? { saved: true } : { saved: false, w: result.code });
         }
-        else if (req.method === "POST") {
-            const state = req.body;
-            let stateObj = typeof state === 'string' ? JSON.parse(state) : state;
 
-            // Truncar historial si es muy largo (máximo 50 apuestas) para no superar límites
-            if (stateObj && stateObj.escalera_apuestas) {
-                try {
-                    const apuestas = JSON.parse(stateObj.escalera_apuestas);
-                    if (Array.isArray(apuestas) && apuestas.length > 50) {
-                        stateObj.escalera_apuestas = JSON.stringify(apuestas.slice(-50));
-                    }
-                } catch (e) {}
-            }
+        return res.status(405).json({ error: "Method not allowed" });
 
-            const jsonStr = JSON.stringify(stateObj);
-
-            // Comprimir para reducir tamaño
-            const compressedBase64 = zlib.deflateSync(jsonStr).toString('base64');
-            const payload = JSON.stringify({ _isCompressed: true, data: compressedBase64 });
-
-            // Intentar PUT al blob principal
-            let result = await makeRequest("PUT", BLOB_PATH, payload);
-
-            if (result.statusCode === 404) {
-                // El blob no existe — crear uno nuevo automáticamente
-                console.log("[Sync] Blob not found (404), creating new blob...");
-                const newPath = await createNewBlob({});
-                if (newPath) {
-                    BLOB_PATH = newPath;
-                    // Intentar de nuevo con el nuevo blob
-                    result = await makeRequest("PUT", BLOB_PATH, payload);
-                }
-            }
-
-            if (result.statusCode >= 200 && result.statusCode < 300) {
-                return res.status(200).json({ saved: true });
-            } else {
-                // Fallo al guardar — responder 200 con saved:false para no mostrar Error 500 al usuario
-                // Los datos están seguros en localStorage del navegador
-                console.error("[Sync] Failed to save:", result.statusCode, result.data.substring(0, 200));
-                return res.status(200).json({
-                    saved: false,
-                    warning: `Storage returned ${result.statusCode}`
-                });
-            }
-        }
-        else {
-            return res.status(405).json({ error: "Method not allowed" });
-        }
     } catch (err) {
-        console.error("[Sync] Error:", err.message);
-        // Siempre 200 para no mostrar "Error 500" al usuario
-        return res.status(200).json({ saved: false, warning: err.message });
+        // Safety net — never expose a 500 to the client
+        return res.status(200).json({ saved: false, w: String(err.message) });
     }
 };
