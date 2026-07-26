@@ -1756,16 +1756,17 @@ def generate_daily_sports_data():
     #          Picks sin datos de API = cuotas inventadas = NO entran al boleto
     usable_picks = [p for p in usable_picks if p.get('valid_for_ticket', True) is not False]
 
-    # REGLA 2: Cuota individual entre @1.15 y @2.00
-    #          @2.00 es el límite razonable (50% prob). Más alto = demasiado riesgo.
-    #          El boleto TOTAL debe llegar a @1.50 mínimo (ver lógica de armado abajo)
-    usable_picks = [p for p in usable_picks if 1.15 <= p.get('odd', 0) <= 2.00]
+    # REGLA 2: Cuota individual entre @1.10 y @1.65
+    #          Cuotas altas = mayor riesgo. Limite estricto @1.65 para boletos estrella.
+    usable_picks = [p for p in usable_picks if 1.10 <= p.get('odd', 0) <= 1.65]
 
-    # REGLA 3: Probabilidad mínima del 55% (cuota <= @1.82 en la API)
-    usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 55]
+    # REGLA 3: Probabilidad mínima del 72% — solo picks de alta certeza entran
+    usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 72]
 
-    # REGLA 4: Descartar mercados poco fiables o sintéticos
-    BANNED_MARKETS = ['Tarjeta', 'Córners del Equipo', 'Asian 2.0', 'Goles del Equipo', 'Resultado 1er Tiempo']
+    # REGLA 4: Descartar mercados poco fiables o sinteticos
+    BANNED_MARKETS = ['Tarjeta', 'Córners del Equipo', 'Asian 2.0', 'Goles del Equipo',
+                      'Resultado 1er Tiempo', 'Córners (Total', 'Individual Corners',
+                      'Handicap Asiático -', 'Primero en Anotar', 'Ganador del Partido']
     usable_picks = [p for p in usable_picks if not any(bm in p.get('market', '') for bm in BANNED_MARKETS)]
 
     # REGLA 5: Priorizar picks con cuotas DIRECTAS de la API
@@ -1778,8 +1779,24 @@ def generate_daily_sports_data():
     synthetic_picks  = [p for p in usable_picks if not is_direct_api_market(p)]
     usable_picks = direct_api_picks + synthetic_picks
 
-    # REGLA 6: Ordenar primero por probabilidad descendente (el más probable primero)
-    usable_picks = sorted(usable_picks, key=lambda x: x.get('probability', 0), reverse=True)
+    # REGLA 6: Ordenar por TIER de seguridad + probabilidad
+    # Tier 1 (m\u00e1s seguros): M\u00e1s de 0.5 Goles, M\u00e1s de 1.5 Goles con prob >= 80
+    # Tier 2: Doble Oportunidad con prob >= 78
+    # Tier 3: Resto de picks v\u00e1lidos
+    def pick_tier(p):
+        mkt = p.get('market', '')
+        prob = p.get('probability', 0)
+        if 'M\u00e1s/Menos' in mkt and 'Goles' in mkt and '0.5' in str(p.get('line','')) and prob >= 80:
+            return 0  # Tier 1 - m\u00e1ximo
+        if 'M\u00e1s/Menos' in mkt and 'Goles' in mkt and '1.5' in str(p.get('line','')) and prob >= 78:
+            return 1  # Tier 1b
+        if 'Doble Oportunidad' in mkt and prob >= 78:
+            return 2  # Tier 2
+        if 'Menos' in mkt and 'Goles' in mkt and prob >= 78:
+            return 3  # Under goals seguro
+        return 4  # Resto
+    usable_picks = sorted(usable_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
+
     
     # ═══════════════════════════════════════════════════════════════════════
     # BOLETO 1 — APUESTA SEGURA
