@@ -1019,15 +1019,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const headerTitle = document.querySelector(`#star-ticket-card-${suffix} h3`);
             if (headerTitle) {
                 const typeStr = isSimple ? "Simple" : "Combinado";
-                const badgeBg = suffix === "1" ? "rgba(16, 185, 129, 0.15)" : (suffix === "2" ? "rgba(6, 182, 212, 0.15)" : "rgba(168, 85, 247, 0.15)");
-                const badgeColor = suffix === "1" ? "var(--accent-green)" : (suffix === "2" ? "rgba(6, 182, 212, 0.15)" : "#a855f7");
-                const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : (suffix === "2" ? "rgba(6, 182, 212, 0.3)" : "rgba(168, 85, 247, 0.3)");
+                const badgeBg = suffix === "1" ? "rgba(16, 185, 129, 0.15)" : (suffix === "2" ? "rgba(6, 182, 212, 0.15)" : (suffix === "3" ? "rgba(249,115,22,0.15)" : "rgba(168, 85, 247, 0.15)"));
+                const badgeColor = suffix === "1" ? "var(--accent-green)" : (suffix === "2" ? "var(--accent-cyan)" : (suffix === "3" ? "var(--accent-orange)" : "#a855f7"));
+                const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : (suffix === "2" ? "rgba(6, 182, 212, 0.3)" : (suffix === "3" ? "rgba(249,115,22,0.3)" : "rgba(168, 85, 247, 0.3)"));
                 
-                const titlePrefix = suffix === "3" ? "Apuesta Soñadora del Dólar" : `Boleto Estrella ${suffix}`;
+                const titlePrefix = suffix === "4" ? "Apuesta Soñadora del Dólar" : `Boleto Estrella ${suffix}`;
                 headerTitle.innerHTML = `${titlePrefix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
             }
 
-            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : 1.0));
+            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : (suffix === "3" ? 2.0 : 1.0)));
 
             let selectionsHtml = "";
             const confidenceBox = document.querySelector(`#star-ticket-card-${suffix} .confidence-box`);
@@ -1038,9 +1038,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (confidenceBox) confidenceBox.style.display = "block";
             }
 
-            const activeColor = colorTheme === "green" ? "var(--accent-green)" : (colorTheme === "cyan" ? "var(--accent-cyan)" : "#a855f7");
-            const activeBg = colorTheme === "green" ? "rgba(16,185,129,0.15)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.15)" : "rgba(168,85,247,0.15)");
-            const activeBorder = colorTheme === "green" ? "rgba(16,185,129,0.3)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.3)" : "rgba(168,85,247,0.3)");
+            const activeColor = colorTheme === "green" ? "var(--accent-green)" : (colorTheme === "cyan" ? "var(--accent-cyan)" : (colorTheme === "orange" ? "var(--accent-orange)" : "#a855f7"));
+            const activeBg = colorTheme === "green" ? "rgba(16,185,129,0.15)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.15)" : (colorTheme === "orange" ? "rgba(249,115,22,0.15)" : "rgba(168,85,247,0.15)"));
+            const activeBorder = colorTheme === "green" ? "rgba(16,185,129,0.3)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.3)" : (colorTheme === "orange" ? "rgba(249,115,22,0.3)" : "rgba(168,85,247,0.3)"));
 
             ticket.selections.forEach((sel, index) => {
                 const selReasoningHtml = sel.reasoning ? `
@@ -1086,11 +1086,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (reasoning) reasoning.textContent = ticket.reasoning;
 
             // Stakes calculation
-            if (suffix === "3") {
+            if (suffix === "4") {
                 if (stakePercent) stakePercent.textContent = "$1.00 Fijo";
                 if (stakeBadge) stakeBadge.textContent = "Stake: $1.00";
                 if (stakeCash) stakeCash.textContent = "$1.00";
-                const multEl = document.getElementById("star-ticket-multiplier-3");
+                const multEl = document.getElementById("star-ticket-multiplier-4");
                 if (multEl) multEl.textContent = ticket.total_odd.toFixed(2);
             } else {
                 if (stakePercent) stakePercent.textContent = `${recStake}%`;
@@ -1102,7 +1102,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (btnCopy) {
-                if (suffix === "3") {
+                if (suffix === "4") {
                     btnCopy.innerHTML = `<i class="fa-solid fa-rocket"></i> Copiar Apuesta Soñadora (@${ticket.total_odd.toFixed(2)})`;
                 } else if (isSimple) {
                     btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar Apuesta Simple`;
@@ -1112,7 +1112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 btnCopy.onclick = () => {
                     let copyText = "";
-                    if (suffix === "3") {
+                    if (suffix === "4") {
                         copyText = `🚀 APUESTA SOÑADORA DEL DÓLAR (Cuota Total: @${ticket.total_odd.toFixed(2)}) - SportIntel AI\n`;
                         ticket.selections.forEach(s => {
                             copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: @${s.odd.toFixed(2)})\n`;

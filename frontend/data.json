@@ -29773,37 +29773,12 @@
     "type": "Combinado",
     "selections": [
       {
-        "match": "CS Cartaginés vs Inter San Carlos",
-        "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "CS Cartaginés o Empate",
-        "odd": 1.17,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de CS Cartaginés hace casi imposible un resultado diferente al cubierto por esta apuesta."
-      },
-      {
-        "match": "CA Cerro vs Racing de Montevideo",
-        "sport": "Football",
-        "market": "Más/Menos Goles",
-        "pick": "Más de 1.5 Goles",
-        "odd": 1.5,
-        "reasoning": "La cuota real de la API para 'Más de 1.5 Goles' es @1.5, lo que implica una probabilidad de mercado del 67%. Las casas de apuestas ven alta probabilidad de partido con muchos goles."
-      }
-    ],
-    "total_odd": 1.75,
-    "confidence": 78,
-    "reasoning": "Recomendamos esta Combinada de Bajo Riesgo (Cuota total: @1.75). Combinamos estas dos selecciones porque sus cuotas individuales son bajas para apostar por separado (@1.17 y @1.50), pero juntas forman una cuota segura con una probabilidad conjunta muy favorable de 78%.",
-    "recommendation_stake": 9.5
-  },
-  "star_ticket_2": {
-    "type": "Combinado",
-    "selections": [
-      {
-        "match": "Aucas vs Macará",
+        "match": "Aucas vs Macarä",
         "sport": "Football",
         "market": "Doble Oportunidad",
         "pick": "Aucas o Empate",
         "odd": 1.29,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Aucas hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas."
       },
       {
         "match": "Londrina vs Grêmio Novorizontino",
@@ -29811,13 +29786,38 @@
         "market": "Doble Oportunidad",
         "pick": "Grêmio Novorizontino o Empate",
         "odd": 1.29,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Grêmio Novorizontino hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "reasoning": "La ventaja táctica de Grêmio Novorizontino hace casi imposible un resultado diferente al cubierto por esta apuesta."
       }
     ],
-    "total_odd": 1.66,
+    "total_odd": 1.52,
     "confidence": 82,
-    "reasoning": "🔗 Combinado para cuota mínima @1.66. Se añadió Londrina vs Grêmio Novorizontino (Doble Oportunidad) para que el boleto supere el mínimo de valor de @1.50.",
-    "recommendation_stake": 10.0
+    "reasoning": "Combinada de Bajo Riesgo @1.52. Dos selecciones de Doble Oportunidad con alta probabilidad de éxito.",
+    "recommendation_stake": 4.0
+  },
+  "star_ticket_2": {
+    "type": "Combinado",
+    "selections": [
+      {
+        "match": "Orense SC vs Independiente del Valle",
+        "sport": "Football",
+        "market": "Doble Oportunidad",
+        "pick": "Independiente del Valle o Empate",
+        "odd": 1.18,
+        "reasoning": "La ventaja táctica de Independiente del Valle hace casi imposible un resultado diferente al cubierto por esta apuesta."
+      },
+      {
+        "match": "CD Fuerte San Francisco U20 vs C.D. Platense Zacatecoluca U20",
+        "sport": "Football",
+        "market": "Hándicap Asiático",
+        "pick": "C.D. Platense Zacatecoluca U20",
+        "odd": 1.38,
+        "reasoning": "Hándicap 2(0): Independiente del Valle / Hándicap 2(1+): C.D. Platense Zacatecoluca U20 o Empate"
+      }
+    ],
+    "total_odd": 1.62,
+    "confidence": 80,
+    "reasoning": "Combinada @1.62. Selecciones de Doble Oportunidad y Hándicap con alta probabilidad de éxito.",
+    "recommendation_stake": 3.0
   },
   "star_ticket_3": {
     "type": "Combinado",
