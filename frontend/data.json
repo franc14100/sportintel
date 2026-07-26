@@ -29773,7 +29773,7 @@
     "type": "Combinado",
     "selections": [
       {
-        "match": "Aucas vs Macarä",
+        "match": "Aucas vs Macará",
         "sport": "Football",
         "market": "Doble Oportunidad",
         "pick": "Aucas o Empate",
@@ -29816,33 +29816,33 @@
     ],
     "total_odd": 1.62,
     "confidence": 80,
-    "reasoning": "Combinada @1.62. Selecciones de Doble Oportunidad y Hándicap con alta probabilidad de éxito.",
+    "reasoning": "Combinada @1.62.",
     "recommendation_stake": 3.0
   },
   "star_ticket_3": {
     "type": "Combinado",
     "selections": [
       {
-        "match": "Recoleta FC vs Sportivo San Lorenzo",
+        "match": "Guaraní vs Sportivo Luqueño",
         "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "Recoleta FC o Empate",
-        "odd": 1.33,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Recoleta FC hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "market": "Más/Menos Goles",
+        "pick": "Menos de 3.5 Goles",
+        "odd": 1.22,
+        "reasoning": "La cuota real de la API para 'Menos de 3.5 Goles' es @1.22, lo que implica una probabilidad de mercado del 82%. Las casas de apuestas ven alta probabilidad de partido defensivo de pocos goles."
       },
       {
-        "match": "CD FAS U20 vs CD Municipal Limeño U20",
+        "match": "Melgar vs Club Sporting Cristal",
         "sport": "Football",
-        "market": "Empate No Apuesta (DNB)",
-        "pick": "CD FAS U20",
-        "odd": 1.24,
-        "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con CD FAS U20 como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición."
+        "market": "Más/Menos Goles",
+        "pick": "Más de 1.5 Goles",
+        "odd": 1.22,
+        "reasoning": "La cuota real de la API para 'Más de 1.5 Goles' es @1.22, lo que implica una probabilidad de mercado del 82%. Las casas de apuestas ven alta probabilidad de partido con muchos goles."
       }
     ],
-    "total_odd": 1.65,
-    "confidence": 74,
-    "reasoning": "🔗 Combinado para cuota mínima @1.65. Se añadió CD FAS U20 vs CD Municipal Limeño U20 (Empate No Apuesta (DNB)) para que el boleto supere el mínimo de valor de @1.50.",
-    "recommendation_stake": 2.3
+    "total_odd": 1.49,
+    "confidence": 78,
+    "reasoning": "Boleto Extra del Día @1.49. Picks distintos sin repetir ningún partido de los otros boletos.",
+    "recommendation_stake": 2.0
   },
   "star_ticket_4": {
     "type": "Combinado Soñador",
@@ -29854,14 +29854,6 @@
         "pick": "Olimpia o Empate",
         "odd": 1.25,
         "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Olimpia hace casi imposible un resultado diferente al cubierto por esta apuesta."
-      },
-      {
-        "match": "Guaraní vs Sportivo Luqueño",
-        "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "Guaraní o Empate",
-        "odd": 1.25,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Guaraní hace casi imposible un resultado diferente al cubierto por esta apuesta."
       },
       {
         "match": "Estudiantes de Río Cuarto vs Tigre",
@@ -29878,12 +29870,20 @@
         "pick": "Resende Más de 3.5 Córners",
         "odd": 1.26,
         "reasoning": "Resende concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. Su dominio territorial proyecta un promedio de 7 saques de esquina individuales. La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente."
+      },
+      {
+        "match": "CF Pachuca vs Querétaro FC",
+        "sport": "Football",
+        "market": "Córners del Equipo (Individual)",
+        "pick": "CF Pachuca Más de 4.5 Córners",
+        "odd": 1.35,
+        "reasoning": "CF Pachuca concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. Su dominio territorial proyecta un promedio de 6 saques de esquina individuales. La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente."
       }
     ],
-    "total_odd": 2.48,
-    "confidence": 50,
-    "reasoning": "Apuesta Sonadora del Dolar (Cuota Total: @2.48). Combinamos 4 selecciones de alta probabilidad para buscar multiplicar $1.00.",
-    "recommendation_stake": 0.8
+    "total_odd": 2.68,
+    "confidence": 60,
+    "reasoning": "Apuesta Soñadora del Dólar (Cuota Total: @2.68). Combinamos 4 selecciones únicas.",
+    "recommendation_stake": 1.0
   },
   "historical_tickets_registry": [
     {
