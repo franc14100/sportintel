@@ -1799,94 +1799,76 @@ def generate_daily_sports_data():
 
     
     # ═══════════════════════════════════════════════════════════════════════
-    # BOLETO 1 — APUESTA SEGURA
-    # Regla de cuota mínima del boleto: @1.50 (si no vale la pena el riesgo)
-    # Si el mejor pick es >= 1.50 → Simple
-    # Si el mejor pick es < 1.50 → Combinar picks para llegar al menos a @1.50
+    # BOLETO 1 — PRIORIDAD ABSOLUTA: PROBABILIDAD > CUOTA
+    # Regla: Simple si mejor pick >=85% prob.
+    # Combinado SOLO si pick1 >=82% Y pick2 >=82% (prob combinada >=67%).
+    # Cuota minima del boleto: @1.50 — si no se alcanza, igual va lo mas probable.
     # ═══════════════════════════════════════════════════════════════════════
     star_selections_1 = []
     ticket_type_1 = "Simple"
     total_odd_1 = 1.0
     star_confidence_1 = 85
     star_reasoning_1 = ""
-    MIN_TICKET_ODD = 1.50  # Cuota mínima del boleto para que valga la pena
+    MIN_TICKET_ODD = 1.50
+    SIMPLE_THRESHOLD = 85   # Si prob >= 85%, ir simple siempre
+    COMBO_THRESHOLD  = 82   # Solo combinar si AMBOS picks >= 82%
 
     if usable_picks:
         best_pick = usable_picks[0]
+        best_prob = best_pick.get('probability', 0)
 
-        if best_pick['odd'] >= MIN_TICKET_ODD:
-            # El mejor pick ya vale la pena por sí solo → Simple
+        # Caso 1: Pick con prob >=85% → Simple sin dudar
+        if best_prob >= SIMPLE_THRESHOLD:
             ticket_type_1 = "Simple"
             star_selections_1.append({
-                "match": best_pick["match"],
-                "sport": best_pick["sport"],
-                "market": best_pick["market"],
-                "pick": best_pick["selection"],
+                "match": best_pick["match"], "sport": best_pick["sport"],
+                "market": best_pick["market"], "pick": best_pick["selection"],
                 "odd": best_pick["odd"],
                 "reasoning": best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
             })
             total_odd_1 = best_pick["odd"]
-            star_confidence_1 = best_pick["probability"]
-            star_reasoning_1 = (f"✅ Apuesta Simple Segura. "
-                                f"Cuota @{total_odd_1:.2f} ({best_pick['probability']}% prob real según API 1xBet). "
-                                f"Un solo evento para maximizar el win rate.")
+            star_confidence_1 = best_prob
+            star_reasoning_1 = (f"Apuesta Simple — Probabilidad {best_prob}% segun la API. "
+                                f"Cuota @{total_odd_1:.2f}. Prioridad maxima: pick mas probable del dia.")
         else:
-            # Pick por debajo de @1.50 solo → Combinar para llegar a mínimo @1.50
-            # Buscar el combo que llegue más cercano a @1.60-@1.90 (sweet spot)
+            # Caso 2: Buscar un segundo pick con prob >=COMBO_THRESHOLD para combinar
             second_pick = None
-            best_combo_odd = 0
             for p in usable_picks[1:]:
-                if p["match"] != best_pick["match"]:
-                    combo_odd = round(best_pick['odd'] * p['odd'], 2)
-                    # Preferir el combo que quede entre @1.50 y @2.00
-                    if MIN_TICKET_ODD <= combo_odd <= 2.00:
-                        if second_pick is None or combo_odd > best_combo_odd:
-                            second_pick = p
-                            best_combo_odd = combo_odd
-            # Si no hay combo entre 1.50-2.00, aceptar cualquiera que supere 1.50
-            if not second_pick:
-                for p in usable_picks[1:]:
-                    if p["match"] != best_pick["match"] and (best_pick['odd'] * p['odd']) >= MIN_TICKET_ODD:
+                if p["match"] != best_pick["match"] and p.get('probability', 0) >= COMBO_THRESHOLD:
+                    combined_prob = (best_prob / 100) * (p['probability'] / 100) * 100
+                    if combined_prob >= 67:  # Probabilidad combinada minima 67%
                         second_pick = p
                         break
-                for p in usable_picks[1:]:
-                    if p["match"] != best_pick["match"]:
-                        second_pick = p
-                        break
-            if second_pick:
+
+            if second_pick and best_prob >= COMBO_THRESHOLD:
+                # Combinada de 2 picks de alta confianza
                 ticket_type_1 = "Combinado"
-                star_selections_1.append({
-                    "match": best_pick["match"],
-                    "sport": best_pick["sport"],
-                    "market": best_pick["market"],
-                    "pick": best_pick["selection"],
-                    "odd": best_pick["odd"],
-                    "reasoning": best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
-                })
-                star_selections_1.append({
-                    "match": second_pick["match"],
-                    "sport": second_pick["sport"],
-                    "market": second_pick["market"],
-                    "pick": second_pick["selection"],
-                    "odd": second_pick["odd"],
-                    "reasoning": second_pick["reasoning"].get("tactical", "") if isinstance(second_pick["reasoning"], dict) else second_pick["reasoning"]
-                })
-                total_odd_1 = best_pick["odd"] * second_pick["odd"]
-                star_confidence_1 = int((best_pick["probability"] + second_pick["probability"]) / 2)
-                star_reasoning_1 = f"Recomendamos esta Combinada de Bajo Riesgo (Cuota total: @{total_odd_1:.2f}). Combinamos estas dos selecciones porque sus cuotas individuales son bajas para apostar por separado (@{best_pick['odd']:.2f} y @{second_pick['odd']:.2f}), pero juntas forman una cuota segura con una probabilidad conjunta muy favorable de {star_confidence_1}%."
+                for pk in [best_pick, second_pick]:
+                    star_selections_1.append({
+                        "match": pk["match"], "sport": pk["sport"],
+                        "market": pk["market"], "pick": pk["selection"],
+                        "odd": pk["odd"],
+                        "reasoning": pk["reasoning"].get("tactical", "") if isinstance(pk["reasoning"], dict) else pk["reasoning"]
+                    })
+                total_odd_1 = round(best_pick["odd"] * second_pick["odd"], 2)
+                combined_prob = round((best_prob / 100) * (second_pick['probability'] / 100) * 100)
+                star_confidence_1 = combined_prob
+                star_reasoning_1 = (f"Combinada de Alto Valor @{total_odd_1:.2f}. "
+                                    f"Pick1: {best_prob}% prob | Pick2: {second_pick['probability']}% prob. "
+                                    f"Probabilidad conjunta real: ~{combined_prob}%. Solo combinamos cuando ambos picks superan el 82%.")
             else:
+                # Si no hay segundo pick de suficiente calidad → Simple con el mejor
                 ticket_type_1 = "Simple"
                 star_selections_1.append({
-                    "match": best_pick["match"],
-                    "sport": best_pick["sport"],
-                    "market": best_pick["market"],
-                    "pick": best_pick["selection"],
+                    "match": best_pick["match"], "sport": best_pick["sport"],
+                    "market": best_pick["market"], "pick": best_pick["selection"],
                     "odd": best_pick["odd"],
                     "reasoning": best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
                 })
                 total_odd_1 = best_pick["odd"]
-                star_confidence_1 = best_pick["probability"]
-                star_reasoning_1 = f"Boleto Simple de Seguridad. Cuota: @{total_odd_1:.2f}. Recomendamos apuesta individual directa."
+                star_confidence_1 = best_prob
+                star_reasoning_1 = (f"Apuesta Simple — No hay segundo pick de calidad suficiente (>=82%) para combinar. "
+                                    f"Priorizamos probabilidad ({best_prob}%) sobre cuota. @{total_odd_1:.2f}.")
     else:
         total_odd_1 = 1.50
         star_confidence_1 = 80
