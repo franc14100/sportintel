@@ -1763,10 +1763,10 @@ def generate_daily_sports_data():
     # REGLA 3: Probabilidad mínima del 72% — solo picks de alta certeza entran
     usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 72]
 
-    # REGLA 4: Descartar mercados poco fiables o sinteticos
-    BANNED_MARKETS = ['Tarjeta', 'Córners del Equipo', 'Asian 2.0', 'Goles del Equipo',
-                      'Resultado 1er Tiempo', 'Córners (Total', 'Individual Corners',
-                      'Handicap Asiático -', 'Primero en Anotar', 'Ganador del Partido']
+    # REGLA 4: Solo descartar mercados con cuotas inventadas (no reales de la API)
+    # El filtro de 72%+ probabilidad ya garantiza la calidad. Mas mercados = mas opciones.
+    BANNED_MARKETS = ['Tarjeta', 'Asian 2.0', 'Primero en Anotar',
+                      'Resultado 1er Tiempo', 'Goles del Equipo']
     usable_picks = [p for p in usable_picks if not any(bm in p.get('market', '') for bm in BANNED_MARKETS)]
 
     # REGLA 5: Priorizar picks con cuotas DIRECTAS de la API
