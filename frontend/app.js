@@ -199,10 +199,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     const errText = await res.text().catch(() => String(res.status));
                     console.error("[Sync] ❌ Push failed:", res.status, errText);
                     setSyncStatus("error", `Error ${res.status} — reintentando...`);
-                    lastLocalStateHash = "";
                     pushRetryCount++;
-                    const delay = Math.min(3000 * Math.pow(2, pushRetryCount - 1), 30000); // exponential backoff
-                    if (pushRetryCount <= 3) setTimeout(() => { triggerAutoSyncPush(false, true); }, delay);
+                    if (pushRetryCount <= 3) {
+                        const delay = Math.min(3000 * Math.pow(2, pushRetryCount - 1), 30000);
+                        setTimeout(() => { triggerAutoSyncPush(false, true); }, delay);
+                    }
                 }
             } catch (e) {
                 console.error("[Sync] ❌ Push error:", e.message);
