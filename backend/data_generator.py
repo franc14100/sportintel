@@ -2047,6 +2047,190 @@ def generate_daily_sports_data():
             star_confidence_2 = 75
             star_reasoning_2 = "Boleto de valor de contingencia por escasez de partidos."
 
+    # ENFORCEMENT DE CUOTA MÍNIMA @1.50 EN AMBOS BOLETOS
+    # Si un boleto quedó con cuota total < @1.50, convertirlo en combinado
+    # buscando el segundo pick más seguro que eleve la cuota al mínimo.
+    # ═══════════════════════════════════════════════════════════════════════
+    def enforce_min_odd(selections, ticket_type, total_odd, confidence, reasoning, all_picks, used_matches_set):
+        if total_odd >= 1.50:
+            return selections, ticket_type, total_odd, confidence, reasoning
+        # La cuota está por debajo de 1.50 — buscar un pick adicional para combinarlo
+        if not selections:
+            return selections, ticket_type, total_odd, confidence, reasoning
+        current_odd = total_odd
+        # Excluir los partidos ya en este boleto + los usados en otros boletos
+        already_used = set(s['match'] for s in selections) | used_matches_set
+        complement = None
+        best_target = 0
+        for p in all_picks:
+            if p['match'] in already_used:
+                continue
+            combo = round(current_odd * p['odd'], 2)
+            if combo >= 1.50 and (complement is None or abs(combo - 1.65) < abs(best_target - 1.65)):
+                complement = p
+                best_target = combo
+        if complement:
+            ticket_type = 'Combinado'
+            new_total = round(current_odd * complement['odd'], 2)
+            selections.append({
+                'match': complement['match'],
+                'sport': complement['sport'],
+                'market': complement['market'],
+                'pick': complement['selection'],
+                'odd': complement['odd'],
+                'reasoning': complement['reasoning'].get('tactical', '') if isinstance(complement['reasoning'], dict) else complement['reasoning']
+            })
+            confidence = int((confidence + complement['probability']) / 2)
+            reasoning = (f"🔗 Combinado para cuota mínima @{new_total:.2f}. "
+                         f"Se añadió {complement['match']} ({complement['market']}) "
+                         f"para que el boleto supere el mínimo de valor de @1.50.")
+            return selections, ticket_type, new_total, confidence, reasoning
+        return selections, ticket_type, total_odd, confidence, reasoning
+
+    all_picks_for_upgrade = usable_picks  # ya filtrados y con valid_for_ticket=True
+
+    used_b1 = set(s['match'] for s in star_selections_1)
+    star_selections_1, ticket_type_1, total_odd_1, star_confidence_1, star_reasoning_1 = enforce_min_odd(
+        star_selections_1, ticket_type_1, total_odd_1, star_confidence_1, star_reasoning_1,
+        all_picks_for_upgrade, set()
+    )
+
+    used_b2 = set(s['match'] for s in star_selections_2) | used_b1
+    star_selections_2, ticket_type_2, total_odd_2, star_confidence_2, star_reasoning_2 = enforce_min_odd(
+        star_selections_2, ticket_type_2, total_odd_2, star_confidence_2, star_reasoning_2,
+        all_picks_for_upgrade, used_b1
+    )
+
+
+
+    # Generar Boleto Estrella 4 (Apuesta Soñadora @5.00+ - El Reto del Dólar)
+    star_selections_4 = []
+    ticket_type_4 = "Combinado Soñador"
+    total_odd_4 = 1.0
+    star_confidence_4 = 60
+    star_reasoning_4 = ""
+    
+    # Seleccionar 3 a 4 picks de alta probabilidad de partidos distintos para construir una cuota acumulada >= 5.00
+    dream_candidates = []
+    # star_selections_3 se generará después del lock — usar lista vacía aquí y se actualizará post-generación
+    _pre_star3 = []  # placeholder, se reemplaza después de generar T3
+    dream_used_matches = set(s["match"] for s in star_selections_1) | set(s["match"] for s in star_selections_2) | set(s["match"] for s in _pre_star3)
+    
+    for p in priority_picks + fallback_picks:
+        if p["match"] not in dream_used_matches and p.get("odd", 0) >= 1.25 and p.get("probability", 0) >= 55:
+            dream_candidates.append(p)
+            dream_used_matches.add(p["match"])
+            
+    if len(dream_candidates) >= 3:
+        curr_odd = 1.0
+        selected_dream = []
+        for p in dream_candidates:
+            selected_dream.append(p)
+            curr_odd *= p["odd"]
+            if curr_odd >= 5.00 and len(selected_dream) >= 3:
+                break
+                
+        if curr_odd < 5.00 and len(dream_candidates) > len(selected_dream):
+            for p in dream_candidates[len(selected_dream):]:
+                selected_dream.append(p)
+                curr_odd *= p["odd"]
+                if curr_odd >= 5.00:
+                    break
+                    
+        for p in selected_dream:
+            star_selections_4.append({
+                "match": p["match"],
+                "sport": p["sport"],
+                "market": p["market"],
+                "pick": p["selection"],
+                "odd": p["odd"],
+                "reasoning": p["reasoning"].get("tactical", "") if isinstance(p["reasoning"], dict) else p["reasoning"]
+            })
+        total_odd_4 = curr_odd
+        avg_prob = sum(p["probability"] for p in selected_dream) / float(len(selected_dream))
+        star_confidence_4 = max(50, int(avg_prob * (0.85 ** (len(selected_dream) - 1))))
+        star_reasoning_4 = f"🚀 Apuesta Soñadora del Dólar (Cuota Total: @{total_odd_4:.2f}). Combinamos {len(selected_dream)} selecciones de alta probabilidad para buscar multiplicar $1.00 por @{total_odd_4:.2f}. Diseñado para arriesgar solo $1.00 de banca con un retorno exponencial altamente seguro."
+    else:
+        total_odd_4 = 5.25
+        star_confidence_4 = 55
+        star_reasoning_4 = "Boleto Soñador de contingencia (Cuota @5.25)."
+
+    # PERSISTENCE LOCK: Bloquear boletos del día
+    # Solo bloquea si TODOS los picks del boleto siguen teniendo datos reales válidos
+    def validate_and_refresh_ticket(st_sels, current_matches):
+        """
+        Validates that all picks in a locked ticket still exist in current match data.
+        If found, refreshes the odd from the real API. Returns (valid, refreshed_selections, total_odd).
+        """
+        if not st_sels:
+            return False, [], 1.0
+        refreshed = []
+        for sel in st_sels:
+            m_name = sel.get("match", "")
+            m_market = sel.get("market", "")
+            found_pick = None
+            for md in current_matches:
+                if f"{md['home']} vs {md['away']}" == m_name:
+                    for pk in md.get("picks", []):
+                        if pk.get("market") == m_market:
+                            found_pick = pk
+                            break
+                    break
+            if found_pick is None:
+                # Pick no encontrado en datos actuales — boleto inválido, regenerar
+                print(f"[INFO] Pick '{m_name} | {m_market}' ya no existe en datos actuales. Regenerando boleto.")
+                return False, [], 1.0
+            # Actualizar con cuota real actual
+            refreshed_sel = dict(sel)
+            refreshed_sel["odd"] = found_pick.get("odd", sel.get("odd", 1.0))
+            refreshed_sel["pick"] = found_pick.get("selection", sel.get("pick", ""))
+            refreshed.append(refreshed_sel)
+        # Calcular cuota total real
+        total = round(1.0, 2)
+        for s in refreshed:
+            total = round(total * s.get("odd", 1.0), 2)
+        return True, refreshed, total
+
+    if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
+        print("[INFO] Boletos del día ya generados — validando picks con datos actuales...")
+
+        st1 = raw_previous_json.get("star_ticket_1", {})
+        valid1, fresh_sels1, fresh_odd1 = validate_and_refresh_ticket(st1.get("selections", []), matches_data)
+        if valid1:
+            print("[INFO] Boleto 1 bloqueado para hoy (cuotas actualizadas).")
+            ticket_type_1 = st1.get("type", ticket_type_1)
+            star_selections_1 = fresh_sels1
+            total_odd_1 = fresh_odd1
+            star_confidence_1 = st1.get("confidence", star_confidence_1)
+            star_reasoning_1 = st1.get("reasoning", star_reasoning_1)
+        else:
+            print("[INFO] Boleto 1 regenerado (pick anterior inválido).")
+
+        st2 = raw_previous_json.get("star_ticket_2", {})
+        valid2, fresh_sels2, fresh_odd2 = validate_and_refresh_ticket(st2.get("selections", []), matches_data)
+        if valid2:
+            print("[INFO] Boleto 2 bloqueado para hoy (cuotas actualizadas).")
+            ticket_type_2 = st2.get("type", ticket_type_2)
+            star_selections_2 = fresh_sels2
+            total_odd_2 = fresh_odd2
+            star_confidence_2 = st2.get("confidence", star_confidence_2)
+            star_reasoning_2 = st2.get("reasoning", star_reasoning_2)
+        else:
+            print("[INFO] Boleto 2 regenerado (pick anterior inválido).")
+
+        st3 = raw_previous_json.get("star_ticket_4", {})
+        valid3, fresh_sels3, fresh_odd3 = validate_and_refresh_ticket(st3.get("selections", []), matches_data)
+        if valid3:
+            print("[INFO] Boleto 3 bloqueado para hoy (cuotas actualizadas).")
+            ticket_type_4 = st3.get("type", ticket_type_4)
+            star_selections_4 = fresh_sels3
+            total_odd_4 = fresh_odd3
+            star_confidence_4 = st3.get("confidence", star_confidence_4)
+            star_reasoning_4 = st3.get("reasoning", star_reasoning_4)
+
+
+
+    # === GENERAR BOLETO 3 DESPUÉS DEL LOCK (para leer T1 y T2 finales) ===
     # Generar Boleto Estrella 3 (Boleto de Valor - IA decide Simple o Combinada)
     star_selections_3 = []
     ticket_type_3 = "Combinado"
@@ -2220,189 +2404,21 @@ def generate_daily_sports_data():
             star_reasoning_3 = "Boleto de valor de contingencia por escasez de partidos."
 
     # ═══════════════════════════════════════════════════════════════════════
-    # ENFORCEMENT DE CUOTA MÍNIMA @1.50 EN AMBOS BOLETOS
-    # Si un boleto quedó con cuota total < @1.50, convertirlo en combinado
-    # buscando el segundo pick más seguro que eleve la cuota al mínimo.
-    # ═══════════════════════════════════════════════════════════════════════
-    def enforce_min_odd(selections, ticket_type, total_odd, confidence, reasoning, all_picks, used_matches_set):
-        if total_odd >= 1.50:
-            return selections, ticket_type, total_odd, confidence, reasoning
-        # La cuota está por debajo de 1.50 — buscar un pick adicional para combinarlo
-        if not selections:
-            return selections, ticket_type, total_odd, confidence, reasoning
-        current_odd = total_odd
-        # Excluir los partidos ya en este boleto + los usados en otros boletos
-        already_used = set(s['match'] for s in selections) | used_matches_set
-        complement = None
-        best_target = 0
-        for p in all_picks:
-            if p['match'] in already_used:
-                continue
-            combo = round(current_odd * p['odd'], 2)
-            if combo >= 1.50 and (complement is None or abs(combo - 1.65) < abs(best_target - 1.65)):
-                complement = p
-                best_target = combo
-        if complement:
-            ticket_type = 'Combinado'
-            new_total = round(current_odd * complement['odd'], 2)
-            selections.append({
-                'match': complement['match'],
-                'sport': complement['sport'],
-                'market': complement['market'],
-                'pick': complement['selection'],
-                'odd': complement['odd'],
-                'reasoning': complement['reasoning'].get('tactical', '') if isinstance(complement['reasoning'], dict) else complement['reasoning']
-            })
-            confidence = int((confidence + complement['probability']) / 2)
-            reasoning = (f"🔗 Combinado para cuota mínima @{new_total:.2f}. "
-                         f"Se añadió {complement['match']} ({complement['market']}) "
-                         f"para que el boleto supere el mínimo de valor de @1.50.")
-            return selections, ticket_type, new_total, confidence, reasoning
-        return selections, ticket_type, total_odd, confidence, reasoning
-
-    all_picks_for_upgrade = usable_picks  # ya filtrados y con valid_for_ticket=True
-
-    used_b1 = set(s['match'] for s in star_selections_1)
-    star_selections_1, ticket_type_1, total_odd_1, star_confidence_1, star_reasoning_1 = enforce_min_odd(
-        star_selections_1, ticket_type_1, total_odd_1, star_confidence_1, star_reasoning_1,
-        all_picks_for_upgrade, set()
-    )
-
-    used_b2 = set(s['match'] for s in star_selections_2) | used_b1
-    star_selections_2, ticket_type_2, total_odd_2, star_confidence_2, star_reasoning_2 = enforce_min_odd(
-        star_selections_2, ticket_type_2, total_odd_2, star_confidence_2, star_reasoning_2,
-        all_picks_for_upgrade, used_b1
-    )
-
-
     used_b3 = set(s['match'] for s in star_selections_3) | used_b2
     star_selections_3, ticket_type_3, total_odd_3, star_confidence_3, star_reasoning_3 = enforce_min_odd(
         star_selections_3, ticket_type_3, total_odd_3, star_confidence_3, star_reasoning_3,
         all_picks_for_upgrade, used_b2
     )
 
-    # Generar Boleto Estrella 4 (Apuesta Soñadora @5.00+ - El Reto del Dólar)
-    star_selections_4 = []
-    ticket_type_4 = "Combinado Soñador"
-    total_odd_4 = 1.0
-    star_confidence_4 = 60
-    star_reasoning_4 = ""
-    
-    # Seleccionar 3 a 4 picks de alta probabilidad de partidos distintos para construir una cuota acumulada >= 5.00
-    dream_candidates = []
-    dream_used_matches = set(s["match"] for s in star_selections_1) | set(s["match"] for s in star_selections_2) | set(s["match"] for s in star_selections_3)
-    
-    for p in priority_picks + fallback_picks:
-        if p["match"] not in dream_used_matches and p.get("odd", 0) >= 1.25 and p.get("probability", 0) >= 55:
-            dream_candidates.append(p)
-            dream_used_matches.add(p["match"])
-            
-    if len(dream_candidates) >= 3:
-        curr_odd = 1.0
-        selected_dream = []
-        for p in dream_candidates:
-            selected_dream.append(p)
-            curr_odd *= p["odd"]
-            if curr_odd >= 5.00 and len(selected_dream) >= 3:
-                break
-                
-        if curr_odd < 5.00 and len(dream_candidates) > len(selected_dream):
-            for p in dream_candidates[len(selected_dream):]:
-                selected_dream.append(p)
-                curr_odd *= p["odd"]
-                if curr_odd >= 5.00:
-                    break
-                    
-        for p in selected_dream:
-            star_selections_4.append({
-                "match": p["match"],
-                "sport": p["sport"],
-                "market": p["market"],
-                "pick": p["selection"],
-                "odd": p["odd"],
-                "reasoning": p["reasoning"].get("tactical", "") if isinstance(p["reasoning"], dict) else p["reasoning"]
-            })
-        total_odd_4 = curr_odd
-        avg_prob = sum(p["probability"] for p in selected_dream) / float(len(selected_dream))
-        star_confidence_4 = max(50, int(avg_prob * (0.85 ** (len(selected_dream) - 1))))
-        star_reasoning_4 = f"🚀 Apuesta Soñadora del Dólar (Cuota Total: @{total_odd_4:.2f}). Combinamos {len(selected_dream)} selecciones de alta probabilidad para buscar multiplicar $1.00 por @{total_odd_4:.2f}. Diseñado para arriesgar solo $1.00 de banca con un retorno exponencial altamente seguro."
-    else:
-        total_odd_4 = 5.25
-        star_confidence_4 = 55
-        star_reasoning_4 = "Boleto Soñador de contingencia (Cuota @5.25)."
-
-    # PERSISTENCE LOCK: Bloquear boletos del día
-    # Solo bloquea si TODOS los picks del boleto siguen teniendo datos reales válidos
-    def validate_and_refresh_ticket(st_sels, current_matches):
-        """
-        Validates that all picks in a locked ticket still exist in current match data.
-        If found, refreshes the odd from the real API. Returns (valid, refreshed_selections, total_odd).
-        """
-        if not st_sels:
-            return False, [], 1.0
-        refreshed = []
-        for sel in st_sels:
-            m_name = sel.get("match", "")
-            m_market = sel.get("market", "")
-            found_pick = None
-            for md in current_matches:
-                if f"{md['home']} vs {md['away']}" == m_name:
-                    for pk in md.get("picks", []):
-                        if pk.get("market") == m_market:
-                            found_pick = pk
-                            break
-                    break
-            if found_pick is None:
-                # Pick no encontrado en datos actuales — boleto inválido, regenerar
-                print(f"[INFO] Pick '{m_name} | {m_market}' ya no existe en datos actuales. Regenerando boleto.")
-                return False, [], 1.0
-            # Actualizar con cuota real actual
-            refreshed_sel = dict(sel)
-            refreshed_sel["odd"] = found_pick.get("odd", sel.get("odd", 1.0))
-            refreshed_sel["pick"] = found_pick.get("selection", sel.get("pick", ""))
-            refreshed.append(refreshed_sel)
-        # Calcular cuota total real
-        total = round(1.0, 2)
-        for s in refreshed:
-            total = round(total * s.get("odd", 1.0), 2)
-        return True, refreshed, total
-
-    if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
-        print("[INFO] Boletos del día ya generados — validando picks con datos actuales...")
-
-        st1 = raw_previous_json.get("star_ticket_1", {})
-        valid1, fresh_sels1, fresh_odd1 = validate_and_refresh_ticket(st1.get("selections", []), matches_data)
-        if valid1:
-            print("[INFO] Boleto 1 bloqueado para hoy (cuotas actualizadas).")
-            ticket_type_1 = st1.get("type", ticket_type_1)
-            star_selections_1 = fresh_sels1
-            total_odd_1 = fresh_odd1
-            star_confidence_1 = st1.get("confidence", star_confidence_1)
-            star_reasoning_1 = st1.get("reasoning", star_reasoning_1)
-        else:
-            print("[INFO] Boleto 1 regenerado (pick anterior inválido).")
-
-        st2 = raw_previous_json.get("star_ticket_2", {})
-        valid2, fresh_sels2, fresh_odd2 = validate_and_refresh_ticket(st2.get("selections", []), matches_data)
-        if valid2:
-            print("[INFO] Boleto 2 bloqueado para hoy (cuotas actualizadas).")
-            ticket_type_2 = st2.get("type", ticket_type_2)
-            star_selections_2 = fresh_sels2
-            total_odd_2 = fresh_odd2
-            star_confidence_2 = st2.get("confidence", star_confidence_2)
-            star_reasoning_2 = st2.get("reasoning", star_reasoning_2)
-        else:
-            print("[INFO] Boleto 2 regenerado (pick anterior inválido).")
-
-        st3 = raw_previous_json.get("star_ticket_4", {})
-        valid3, fresh_sels3, fresh_odd3 = validate_and_refresh_ticket(st3.get("selections", []), matches_data)
-        if valid3:
-            print("[INFO] Boleto 3 bloqueado para hoy (cuotas actualizadas).")
-            ticket_type_4 = st3.get("type", ticket_type_4)
-            star_selections_4 = fresh_sels3
-            total_odd_4 = fresh_odd3
-            star_confidence_4 = st3.get("confidence", star_confidence_4)
-            star_reasoning_4 = st3.get("reasoning", star_reasoning_4)
+    # Post-gen: eliminar los partidos del Boleto 3 del pool de la Soñadora (T4)
+    # ya que star_selections_3 ahora está completo con datos finales
+    t3_matches_final = set(s['match'] for s in star_selections_3)
+    star_selections_4 = [s for s in star_selections_4 if s['match'] not in t3_matches_final]
+    # Recalcular cuota total de T4 en caso de que se haya eliminado alguna selección
+    if star_selections_4:
+        total_odd_4 = round(1.0, 2)
+        for s in star_selections_4:
+            total_odd_4 = round(total_odd_4 * s.get('odd', 1.0), 2)
 
 
     total_won = previous_data.get("global_stats", {}).get("total_picks_won", 0) if previous_data else 0
