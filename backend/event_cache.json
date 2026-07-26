@@ -14902,5 +14902,2597 @@
     "time": "14:30",
     "status": "inprogress",
     "sport": "Football"
+  },
+  "15265840": {
+    "homeTeam": "Strømmen IF",
+    "awayTeam": "Odds BK",
+    "league": "1st Division",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16448911": {
+    "homeTeam": "Mohammedan SC",
+    "awayTeam": "Baghpat FC",
+    "league": "Durand Cup, Group B",
+    "time": "08:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421114": {
+    "homeTeam": "Tacoma Defiance",
+    "awayTeam": "Colorado Rapids 2",
+    "league": "MLS Next Pro",
+    "time": "21:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16337213": {
+    "homeTeam": "St Johnstone Wfc",
+    "awayTeam": "Livingston Wfc",
+    "league": "Premier League Cup, Women",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16366591": {
+    "homeTeam": "Puszcza Niepołomice",
+    "awayTeam": "Polonia Warszawa",
+    "league": "1. Liga",
+    "time": "12:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15526201": {
+    "homeTeam": "Londrina",
+    "awayTeam": "Grêmio Novorizontino",
+    "league": "Brasileirão Série B",
+    "time": "16:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16512725": {
+    "homeTeam": "Pachuca U21",
+    "awayTeam": "Queretaro U21",
+    "league": "U21 Liga MX, Apertura",
+    "time": "10:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16298622": {
+    "homeTeam": "Cherno More Varna",
+    "awayTeam": "FK Spartak Varna",
+    "league": "Parva Liga",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15481706": {
+    "homeTeam": "OLS Oulu",
+    "awayTeam": "KPV",
+    "league": "Ykkonen",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16422360": {
+    "homeTeam": "PPJ U21",
+    "awayTeam": "Atlantis FC U21",
+    "league": "Finland U21 League, Championship Round",
+    "time": "07:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467784": {
+    "homeTeam": "FC Chotěboř",
+    "awayTeam": "FK Velké Meziříčí",
+    "league": "MOL Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467786": {
+    "homeTeam": "FK Kozlovice",
+    "awayTeam": "FK Frydek Mistek",
+    "league": "MOL Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16595647": {
+    "homeTeam": "Victoria Rosport",
+    "awayTeam": "Marisca Mersch",
+    "league": "Club Friendly Games",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16403837": {
+    "homeTeam": "Sepsi OSK",
+    "awayTeam": "FC Universitatea Cluj",
+    "league": "Superliga",
+    "time": "09:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15635659": {
+    "homeTeam": "Yelimay Semey",
+    "awayTeam": "FC Kaysar",
+    "league": "Premier League",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16390191": {
+    "homeTeam": "AFC Ajax",
+    "awayTeam": "Burnley",
+    "league": "Club Friendly Games",
+    "time": "07:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15260856": {
+    "homeTeam": "Sandefjord Fotball",
+    "awayTeam": "Bodø/Glimt",
+    "league": "Eliteserien",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16446854": {
+    "homeTeam": "Rangers",
+    "awayTeam": "West Ham United",
+    "league": "Club Friendly Games",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15239125": {
+    "homeTeam": "Galway United",
+    "awayTeam": "DLR Waves",
+    "league": "Women's Premier Division",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "15969245": {
+    "homeTeam": "Rosenborg BK II",
+    "awayTeam": "Strindheim",
+    "league": "3rd Division, Group 2",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16598333": {
+    "homeTeam": "Feyenoord",
+    "awayTeam": "Rayo Vallecano",
+    "league": "Club Friendly Games",
+    "time": "07:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16477156": {
+    "homeTeam": "Herrera Fútbol Club",
+    "awayTeam": "Unión Coclé FC",
+    "league": "Liga Panamena de Futbol, Apertura",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275760": {
+    "homeTeam": "Club Atletico Colón",
+    "awayTeam": "Chaco For Ever",
+    "league": "Primera B Nacional",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16389621": {
+    "homeTeam": "Blooming",
+    "awayTeam": "The Strongest",
+    "league": "División Profesional",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15617710": {
+    "homeTeam": "Caxias",
+    "awayTeam": "Botafogo-PB",
+    "league": "Brasileirão Série C",
+    "time": "16:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275758": {
+    "homeTeam": "Racing de Córdoba",
+    "awayTeam": "San Telmo",
+    "league": "Primera B Nacional",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16566939": {
+    "homeTeam": "Sarmiento de Resistencia",
+    "awayTeam": "CA Sol de America de Formosa",
+    "league": "Torneo Federal A, Group 2",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15260855": {
+    "homeTeam": "Aalesunds FK",
+    "awayTeam": "Viking FK",
+    "league": "Eliteserien",
+    "time": "12:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16572905": {
+    "homeTeam": "Guillermo Brown",
+    "awayTeam": "CA Germinal",
+    "league": "Torneo Federal A, Group 4",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421110": {
+    "homeTeam": "Portland Timbers II",
+    "awayTeam": "Real Monarchs SLC",
+    "league": "MLS Next Pro",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16475893": {
+    "homeTeam": "Asociacion Deportivo Pasto",
+    "awayTeam": "Once Caldas SA",
+    "league": "Liga Femenina",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15272465": {
+    "homeTeam": "GAIS",
+    "awayTeam": "Halmstads BK",
+    "league": "Allsvenskan",
+    "time": "09:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421119": {
+    "homeTeam": "Atlanta United 2",
+    "awayTeam": "New York City FC II",
+    "league": "MLS Next Pro",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573969": {
+    "homeTeam": "Peerless SC",
+    "awayTeam": "United SC",
+    "league": "Calcutta Premier Division, Group B",
+    "time": "04:30",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15227366": {
+    "homeTeam": "Guaraní",
+    "awayTeam": "Sportivo Luqueño",
+    "league": "Primera División, Clausura",
+    "time": "16:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16523379": {
+    "homeTeam": "CSA",
+    "awayTeam": "São Luiz",
+    "league": "Brasileirão Série D, Knockout Stage",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15986359": {
+    "homeTeam": "PPJ/Lauttasaari",
+    "awayTeam": "HPS/2",
+    "league": "Kolmonen, Southern Group 2",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15426880": {
+    "homeTeam": "Fram Reykjavík",
+    "awayTeam": "FH Hafnarfjörður",
+    "league": "Efsta deild",
+    "time": "14:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16456082": {
+    "homeTeam": "Frosinone",
+    "awayTeam": "Ascoli",
+    "league": "Club Friendly Games",
+    "time": "11:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16462122": {
+    "homeTeam": "Sambenedettese",
+    "awayTeam": "US Avellino 1912",
+    "league": "Club Friendly Games",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16000500": {
+    "homeTeam": "GrIFK/Akatemia U23",
+    "awayTeam": "EPS/Reservi",
+    "league": "Kolmonen, Southern Group 1",
+    "time": "07:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15526199": {
+    "homeTeam": "São Bernardo",
+    "awayTeam": "Ceará",
+    "league": "Brasileirão Série B",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16525542": {
+    "homeTeam": "Gama",
+    "awayTeam": "América-RN",
+    "league": "Brasileirão Série D, Knockout Stage",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15526204": {
+    "homeTeam": "Criciúma",
+    "awayTeam": "Náutico",
+    "league": "Brasileirão Série B",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384028": {
+    "homeTeam": "SV Wienerberg 1921",
+    "awayTeam": "SK Rapid Wien",
+    "league": "OFB Cup",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16326397": {
+    "homeTeam": "FK Mačva Šabac",
+    "awayTeam": "FK Partizan",
+    "league": "Mozzart Bet Superliga",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15260857": {
+    "homeTeam": "Sarpsborg 08",
+    "awayTeam": "HamKam",
+    "league": "Eliteserien",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15502628": {
+    "homeTeam": "Delfín",
+    "awayTeam": "Leones del Norte",
+    "league": "LigaPro Serie A, Primera Etapa",
+    "time": "13:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276801": {
+    "homeTeam": "Juventud Unida San Miguel",
+    "awayTeam": "Defensores de Cambaceres",
+    "league": "Primera C",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16273100": {
+    "homeTeam": "FK Transinvest",
+    "awayTeam": "Džiugas Telšiai",
+    "league": "TOPLYGA",
+    "time": "10:45",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16558994": {
+    "homeTeam": "Gimnasia y Esgrima de Concepción del Uruguay",
+    "awayTeam": "El Linqueño",
+    "league": "Torneo Federal A, Group 1",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16317724": {
+    "homeTeam": "FK Sileks Kratovo",
+    "awayTeam": "Bashkimi 1947",
+    "league": "1. MFL",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16317723": {
+    "homeTeam": "KF Shkëndija",
+    "awayTeam": "FK Skopje",
+    "league": "1. MFL",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16585675": {
+    "homeTeam": "Sheriff Tiraspol",
+    "awayTeam": "FC Milsami Orhei",
+    "league": "Super Liga",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16585674": {
+    "homeTeam": "FC Real Sireti",
+    "awayTeam": "FC Petrocub Hîncesti",
+    "league": "Super Liga",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16593317": {
+    "homeTeam": "SSA FC",
+    "awayTeam": "Fluminense de Feira",
+    "league": "Baiano, Serie B, Playoffs",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276804": {
+    "homeTeam": "Club Luján",
+    "awayTeam": "Central Ballester",
+    "league": "Primera C",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16427270": {
+    "homeTeam": "Szentlőrinc SE",
+    "awayTeam": "Karcagi SC",
+    "league": "NB II",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16572903": {
+    "homeTeam": "Boca Unidos",
+    "awayTeam": "Juventud Antoniana",
+    "league": "Torneo Federal A, Group 2",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16572906": {
+    "homeTeam": "Huracán Las Heras",
+    "awayTeam": "Fundación Amigos Por El Deporte",
+    "league": "Torneo Federal A, Group 3",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421112": {
+    "homeTeam": "Connecticut United",
+    "awayTeam": "Columbus Crew 2",
+    "league": "MLS Next Pro",
+    "time": "17:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276805": {
+    "homeTeam": "General Lamadrid",
+    "awayTeam": "Claypole",
+    "league": "Primera C",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421115": {
+    "homeTeam": "Houston Dynamo 2",
+    "awayTeam": "Austin FC II",
+    "league": "MLS Next Pro",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421111": {
+    "homeTeam": "FC Cincinnati 2",
+    "awayTeam": "New England Revolution II",
+    "league": "MLS Next Pro",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16603552": {
+    "homeTeam": "Rubio Ñu",
+    "awayTeam": "Club Guaraní",
+    "league": "Campeonato Femenino",
+    "time": "15:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15635655": {
+    "homeTeam": "Caspiy Aktau",
+    "awayTeam": "FK Zhenys",
+    "league": "Premier League",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15502844": {
+    "homeTeam": "Atlético Ottawa",
+    "awayTeam": "Pacific FC",
+    "league": "Canadian Premier League",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16513973": {
+    "homeTeam": "Pachuca U19",
+    "awayTeam": "Querétaro Gallos Blancos U19",
+    "league": "Mexico U19 League, Apertura",
+    "time": "12:45",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16603553": {
+    "homeTeam": "CD Águila",
+    "awayTeam": "CD Luis Ángel Firpo",
+    "league": "Primera División, Apertura",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16612272": {
+    "homeTeam": "Inter Willemstad",
+    "awayTeam": "St. John's SC",
+    "league": "CFU Club Shield",
+    "time": "14:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16611750": {
+    "homeTeam": "CD 10 de Noviembre Wilstermann Cooperativas",
+    "awayTeam": "Highland Players",
+    "league": "Copa Simón Bolívar - Cuadrangular de Clasificación Potosí",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16525549": {
+    "homeTeam": "Valeriodoce EC",
+    "awayTeam": "Villa Nova AC",
+    "league": "Mineiro, Modulo II, Playoffs",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16612391": {
+    "homeTeam": "CA Cerro",
+    "awayTeam": "Racing de Montevideo",
+    "league": "Liga AUF Uruguaya, Intermedio, Serie A",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16522427": {
+    "homeTeam": "CD Tapatío",
+    "awayTeam": "Cruz Azul Hidalgo",
+    "league": "Liga de Expansion MX, Apertura",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421113": {
+    "homeTeam": "Orlando City B",
+    "awayTeam": "Huntsville City FC",
+    "league": "MLS Next Pro",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16613857": {
+    "homeTeam": "Defensor Sporting",
+    "awayTeam": "San Jacinto Keguay",
+    "league": "Primera Division, Women, Clausura",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16390656": {
+    "homeTeam": "Once Caldas",
+    "awayTeam": "Cúcuta Deportivo",
+    "league": "Liga DIMAYOR, Finalizacion",
+    "time": "20:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16614336": {
+    "homeTeam": "Rayon Sports FC",
+    "awayTeam": "KVZ FC",
+    "league": "CECAFA Clubs Cup, Group C",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16362855": {
+    "homeTeam": "Flamengo FBC",
+    "awayTeam": "Atlético Andahuaylas",
+    "league": "Liga Femenina, Women, Clausura",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16620071": {
+    "homeTeam": "Novara",
+    "awayTeam": "Inter U23",
+    "league": "Club Friendly Games",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16620397": {
+    "homeTeam": "Club FC Universitario",
+    "awayTeam": "Oriente Petrolero",
+    "league": "Liga Femenina - Fase de Grupos",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15235403": {
+    "homeTeam": "Grêmio",
+    "awayTeam": "Fluminense",
+    "league": "Brasileirão Betano",
+    "time": "16:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15235405": {
+    "homeTeam": "Palmeiras",
+    "awayTeam": "Atlético Mineiro",
+    "league": "Brasileirão Betano",
+    "time": "17:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16622015": {
+    "homeTeam": "Universidad De Panama",
+    "awayTeam": "Union Cocle FC B",
+    "league": "Liga Prom, Apertura",
+    "time": "09:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16622014": {
+    "homeTeam": "Arabe Unido U20",
+    "awayTeam": "Panama City FC",
+    "league": "Liga Prom, Apertura",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16622019": {
+    "homeTeam": "Flint City Bucks",
+    "awayTeam": "Ventura County Fusion",
+    "league": "USL League Two, Playoffs",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16333049": {
+    "homeTeam": "Henan U20",
+    "awayTeam": "Hubei Istar U20",
+    "league": "China Youth Football League, Second Stage, Group B",
+    "time": "03:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16620396": {
+    "homeTeam": "CD Exótico Premium",
+    "awayTeam": "Blooming",
+    "league": "Liga Femenina - Fase de Grupos",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "15275772": {
+    "homeTeam": "Gimnasia y Tiro de Salta",
+    "awayTeam": "Deportivo Maipú",
+    "league": "Primera B Nacional",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16557341": {
+    "homeTeam": "MTK Budapest FC II",
+    "awayTeam": "Budafoki MTE",
+    "league": "NB III Dél-Nyugat",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16595627": {
+    "homeTeam": "Un Kaerjeng 97",
+    "awayTeam": "F91 Dudelange",
+    "league": "Club Friendly Games",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16477157": {
+    "homeTeam": "Veraguas United FC",
+    "awayTeam": "CA Independiente de la Chorrera",
+    "league": "Liga Panamena de Futbol, Apertura",
+    "time": "18:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15439846": {
+    "homeTeam": "Deportes Concepción",
+    "awayTeam": "O'Higgins",
+    "league": "Liga de Primera",
+    "time": "19:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16624625": {
+    "homeTeam": "Cardoso Moreira FC",
+    "awayTeam": "SE Búzios",
+    "league": "Carioca, Série C - Mata-mata",
+    "time": "12:45",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16602454": {
+    "homeTeam": "Futuro FC",
+    "awayTeam": "CDSC Deportes Rancagua",
+    "league": "Tercera División A",
+    "time": "14:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16602457": {
+    "homeTeam": "CD Imperial Unido",
+    "awayTeam": "Comunal Cabrero",
+    "league": "Tercera División A",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573803": {
+    "homeTeam": "General Velasquez",
+    "awayTeam": "CD Trasandino de Los Andes",
+    "league": "Playoffs",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15431584": {
+    "homeTeam": "FC Bulleen Lions U23",
+    "awayTeam": "Langwarrin SC U23",
+    "league": "U23 Victoria Premier League 1",
+    "time": "03:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16281122": {
+    "homeTeam": "Comerciantes Unidos",
+    "awayTeam": "Alianza Lima",
+    "league": "Liga 1, Clausura",
+    "time": "15:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16627086": {
+    "homeTeam": "Delfines del Este FC",
+    "awayTeam": "Elite SC",
+    "league": "CFU Club Shield",
+    "time": "17:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16627000": {
+    "homeTeam": "PSMS Medan",
+    "awayTeam": "Port FC",
+    "league": "Indonesia President's Cup, Group B",
+    "time": "03:30",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16627006": {
+    "homeTeam": "Persebaya Surabaya",
+    "awayTeam": "Persija Jakarta",
+    "league": "Indonesia President's Cup, Group B",
+    "time": "07:30",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16584305": {
+    "homeTeam": "12 de Octubre de Santo Domingo",
+    "awayTeam": "Sport Colombia",
+    "league": "Primera División B",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16627093": {
+    "homeTeam": "BG Pathum United",
+    "awayTeam": "Buriram United",
+    "league": "Club Friendly Games",
+    "time": "06:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16335263": {
+    "homeTeam": "Hope Internacional",
+    "awayTeam": "Iraty",
+    "league": "Paranaense, 3 Divisao, Group A",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16335278": {
+    "homeTeam": "CA Cambé",
+    "awayTeam": "City London FC",
+    "league": "Paranaense, 3 Divisao, Group B",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16611748": {
+    "homeTeam": "Club Deportivo Mineros Potosí",
+    "awayTeam": "CD Río San Juan Humi",
+    "league": "Copa Simón Bolívar - Cuadrangular de Clasificación Potosí",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "15421116": {
+    "homeTeam": "Saint Louis City SC 2",
+    "awayTeam": "Vancouver Whitecaps FC II",
+    "league": "MLS Next Pro",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16246412": {
+    "homeTeam": "Indonesia",
+    "awayTeam": "Cambodia",
+    "league": "ASEAN Championship, Group A",
+    "time": "08:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15617706": {
+    "homeTeam": "Brusque",
+    "awayTeam": "Ituano",
+    "league": "Brasileirão Série C",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16408301": {
+    "homeTeam": "Sevilla",
+    "awayTeam": "AD Ceuta",
+    "league": "Club Friendly Games",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16557078": {
+    "homeTeam": "Szombathelyi Haladás",
+    "awayTeam": "FC Sopron",
+    "league": "NB III Észak-Nyugat",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16630933": {
+    "homeTeam": "SG Wattenscheid 09",
+    "awayTeam": "Ratingen 04/19",
+    "league": "Club Friendly Games",
+    "time": "07:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16598248": {
+    "homeTeam": "Borussia Dortmund II U23",
+    "awayTeam": "Jong FC Utrecht",
+    "league": "Club Friendly Games",
+    "time": "08:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16422358": {
+    "homeTeam": "TiPS U21",
+    "awayTeam": "FC Honka U21",
+    "league": "Finland U21 League, Championship Round",
+    "time": "05:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16333055": {
+    "homeTeam": "Ningbo FC U20",
+    "awayTeam": "Shanghai Port U20",
+    "league": "China Youth Football League, Second Stage, Group B",
+    "time": "06:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16264478": {
+    "homeTeam": "St. Mirren",
+    "awayTeam": "Dunfermline Athletic",
+    "league": "League Cup, Group C",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "15635662": {
+    "homeTeam": "Kairat Almaty",
+    "awayTeam": "FC Ordabasy",
+    "league": "Premier League",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16614946": {
+    "homeTeam": "Club Atlético Belgrano",
+    "awayTeam": "Satsaid",
+    "league": "Primera Division A, Women, Clausura",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "15272467": {
+    "homeTeam": "Malmö FF",
+    "awayTeam": "IF Elfsborg",
+    "league": "Allsvenskan",
+    "time": "09:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467778": {
+    "homeTeam": "FS Trebic",
+    "awayTeam": "TJ Sokol Tasovice",
+    "league": "MOL Cup",
+    "time": "09:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467791": {
+    "homeTeam": "Sokol Belotin",
+    "awayTeam": "Nový Jičín",
+    "league": "MOL Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15265838": {
+    "homeTeam": "Sogndal IL",
+    "awayTeam": "Ranheim IL",
+    "league": "1st Division",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467776": {
+    "homeTeam": "Bedrichov",
+    "awayTeam": "A.F.C. Humpolec",
+    "league": "MOL Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467780": {
+    "homeTeam": "SK Krumvir",
+    "awayTeam": "1 SC Znojmo FK",
+    "league": "MOL Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384041": {
+    "homeTeam": "SC Schwaz",
+    "awayTeam": "SPG Wallern/ASV St Marienkirchen",
+    "league": "OFB Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467800": {
+    "homeTeam": "SSK Bilovec",
+    "awayTeam": "Vítkovice",
+    "league": "MOL Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15265842": {
+    "homeTeam": "Åsane",
+    "awayTeam": "Egersund",
+    "league": "1st Division",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15265836": {
+    "homeTeam": "Moss FK",
+    "awayTeam": "Raufoss",
+    "league": "1st Division",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16278675": {
+    "homeTeam": "AC Horsens",
+    "awayTeam": "FC Nordsjælland",
+    "league": "Danish Superliga",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16378698": {
+    "homeTeam": "NK Bravo",
+    "awayTeam": "NK Nafta Lendava 1903",
+    "league": "PrvaLiga",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15546959": {
+    "homeTeam": "Saku Sporting Women",
+    "awayTeam": "Paide Linnameeskond",
+    "league": "Meistriliiga Women",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15728629": {
+    "homeTeam": "FS Metta",
+    "awayTeam": "Rigas FS",
+    "league": "Latvian Women's League",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15472542": {
+    "homeTeam": "FK Auda",
+    "awayTeam": "BFC Daugavpils",
+    "league": "Virsliga",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384020": {
+    "homeTeam": "Wiener SC",
+    "awayTeam": "FK Austria Wien",
+    "league": "OFB Cup",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16362805": {
+    "homeTeam": "Ayacucho",
+    "awayTeam": "Santos FC de Nazca",
+    "league": "Liga 2, Group B",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384242": {
+    "homeTeam": "Debreceni VSC",
+    "awayTeam": "Puskás Akadémia",
+    "league": "NB I",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16337214": {
+    "homeTeam": "Boroughmuir Thistle FC",
+    "awayTeam": "Kilmarnock LFC",
+    "league": "Premier League Cup, Women",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15416259": {
+    "homeTeam": "Rangers de Talca",
+    "awayTeam": "Deportes Copiapó",
+    "league": "Liga de Ascenso",
+    "time": "11:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15416257": {
+    "homeTeam": "Deportes Puerto Montt",
+    "awayTeam": "Club Deportes Antofagasta",
+    "league": "Liga de Ascenso",
+    "time": "11:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16427267": {
+    "homeTeam": "Soroksár SC",
+    "awayTeam": "Mezőkövesd Zsóry",
+    "league": "NB II",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16427464": {
+    "homeTeam": "Gyirmót Győr",
+    "awayTeam": "Aqvital FC Csákvár",
+    "league": "NB II",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389405": {
+    "homeTeam": "Algeria",
+    "awayTeam": "Senegal",
+    "league": "Women's Africa Cup of Nations, Group A",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16403838": {
+    "homeTeam": "FK Csíkszereda Miercurea Ciuc",
+    "awayTeam": "FCSB",
+    "league": "Superliga",
+    "time": "12:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16571349": {
+    "homeTeam": "Olimpo",
+    "awayTeam": "CYB Ramón Santamarina",
+    "league": "Torneo Federal A, Group 4",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16571276": {
+    "homeTeam": "Independiente de Chivilcoy",
+    "awayTeam": "Sportivo Las Parejas",
+    "league": "Torneo Federal A, Group 1",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16578152": {
+    "homeTeam": "San Martin de Mendoza",
+    "awayTeam": "CD Argentino Monte Maiz",
+    "league": "Torneo Federal A, Group 3",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16281121": {
+    "homeTeam": "Universidad Técnica de Cajamarca",
+    "awayTeam": "CD Moquegua",
+    "league": "Liga 1, Clausura",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16584936": {
+    "homeTeam": "Atenas Rio Cuarto",
+    "awayTeam": "Juventud Unida Universitario",
+    "league": "Torneo Federal A, Group 3",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275763": {
+    "homeTeam": "Los Andes",
+    "awayTeam": "Deportivo Madryn",
+    "league": "Primera B Nacional",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16572908": {
+    "homeTeam": "Sol de Mayo",
+    "awayTeam": "Villa Mitre",
+    "league": "Torneo Federal A, Group 4",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276345": {
+    "homeTeam": "Deportivo Laferrere",
+    "awayTeam": "Talleres Remedios de Escalada",
+    "league": "Primera B",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275769": {
+    "homeTeam": "Agropecuario Argentino",
+    "awayTeam": "San Martín de San Juan",
+    "league": "Primera B Nacional",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16411307": {
+    "homeTeam": "Palmeiras U20",
+    "awayTeam": "Red Bull Bragantino U20",
+    "league": "U20 Paulista, Grupo 3",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16431104": {
+    "homeTeam": "Atlético Tucumán",
+    "awayTeam": "Independiente Rivadavia",
+    "league": "Liga Profesional, Clausura",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16304061": {
+    "homeTeam": "Bom Jesus EC",
+    "awayTeam": "Goianésia",
+    "league": "Goiano, Divisão de Acesso",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15227368": {
+    "homeTeam": "Olimpia",
+    "awayTeam": "Libertad",
+    "league": "Primera División, Clausura",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16572904": {
+    "homeTeam": "Tucumán Central",
+    "awayTeam": "CA Sarmiento de la Banda",
+    "league": "Torneo Federal A, Group 2",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15617711": {
+    "homeTeam": "Ypiranga FC",
+    "awayTeam": "Barra FC",
+    "league": "Brasileirão Série C",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16410875": {
+    "homeTeam": "Ñublense",
+    "awayTeam": "Palestino",
+    "league": "Liga de Primera",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275774": {
+    "homeTeam": "Ferrocarril Midland",
+    "awayTeam": "Patronato",
+    "league": "Primera B Nacional",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16543692": {
+    "homeTeam": "Gimnasia Jujuy",
+    "awayTeam": "Güemes",
+    "league": "Primera B Nacional",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16475890": {
+    "homeTeam": "Independiente Santa Fé",
+    "awayTeam": "CD Real Santander",
+    "league": "Liga Femenina",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573971": {
+    "homeTeam": "Bolívar SC",
+    "awayTeam": "Mineros de Guayana",
+    "league": "Segunda Division, Central-East",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16304062": {
+    "homeTeam": "Crixás EC",
+    "awayTeam": "Rio Verde",
+    "league": "Goiano, Divisão de Acesso",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16390653": {
+    "homeTeam": "Internacional de Bogotá",
+    "awayTeam": "América de Cali",
+    "league": "Liga DIMAYOR, Finalizacion",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573972": {
+    "homeTeam": "Deportivo Miranda",
+    "awayTeam": "Aragua FC",
+    "league": "Segunda Division, Central-East",
+    "time": "14:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16523378": {
+    "homeTeam": "Ferroviário",
+    "awayTeam": "Goiatuba EC",
+    "league": "Brasileirão Série D, Knockout Stage",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573974": {
+    "homeTeam": "Dynamo Puerto FC",
+    "awayTeam": "Monagas SC",
+    "league": "Segunda Division, Central-East",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389404": {
+    "homeTeam": "Morocco",
+    "awayTeam": "Kenya",
+    "league": "Women's Africa Cup of Nations, Group A",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16303118": {
+    "homeTeam": "Panama U20",
+    "awayTeam": "Canada U20",
+    "league": "U20 CONCACAF Championship, Group C",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16362784": {
+    "homeTeam": "Asociación Deportiva Agropecuaria",
+    "awayTeam": "Pirata FC",
+    "league": "Liga 2, Group A",
+    "time": "15:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16390654": {
+    "homeTeam": "Rionegro Águilas Doradas",
+    "awayTeam": "Independiente Santa Fe",
+    "league": "Liga DIMAYOR, Finalizacion",
+    "time": "16:05",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16389620": {
+    "homeTeam": "Bolívar",
+    "awayTeam": "Real Potosí",
+    "league": "División Profesional",
+    "time": "16:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15416261": {
+    "homeTeam": "San Marcos de Arica",
+    "awayTeam": "Deportes Magallanes",
+    "league": "Liga de Ascenso",
+    "time": "16:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15353072": {
+    "homeTeam": "Audax Italiano",
+    "awayTeam": "Universidad de Chile",
+    "league": "Liga de Primera",
+    "time": "16:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16459644": {
+    "homeTeam": "Orsomarso SC",
+    "awayTeam": "Barranquilla FC",
+    "league": "Torneo DIMAYOR, Clausura",
+    "time": "17:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15385455": {
+    "homeTeam": "Washington Spirit",
+    "awayTeam": "Denver Summit FC",
+    "league": "NWSL",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15617712": {
+    "homeTeam": "Amazonas FC",
+    "awayTeam": "Paysandu SC",
+    "league": "Brasileirão Série C",
+    "time": "18:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16389619": {
+    "homeTeam": "Nacional Potosí",
+    "awayTeam": "CD Real Tomayapo",
+    "league": "División Profesional",
+    "time": "18:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16281120": {
+    "homeTeam": "Deportivo Garcilaso",
+    "awayTeam": "FC Cajamarca",
+    "league": "Liga 1, Clausura",
+    "time": "19:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16317941": {
+    "homeTeam": "CF Pachuca",
+    "awayTeam": "Querétaro FC",
+    "league": "Liga MX, Apertura",
+    "time": "20:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573976": {
+    "homeTeam": "Maharashtra State Police",
+    "awayTeam": "Techno Aryan",
+    "league": "Calcutta Premier Division, Group B",
+    "time": "04:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421922": {
+    "homeTeam": "Melbourne Victory Youth",
+    "awayTeam": "North Sunshine Eagles SC",
+    "league": "VPL 1",
+    "time": "04:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15842301": {
+    "homeTeam": "Qingdao Red Lions",
+    "awayTeam": "Beijing Institute of Technology",
+    "league": "Chinese League 2, North",
+    "time": "05:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15894507": {
+    "homeTeam": "FK Zhenys Astana",
+    "awayTeam": "Yelimay Semey",
+    "league": "Kazakhstan Super League Women",
+    "time": "06:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15894505": {
+    "homeTeam": "FC Ordabasy",
+    "awayTeam": "FC Kaysar",
+    "league": "Kazakhstan Super League Women",
+    "time": "08:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16632938": {
+    "homeTeam": "SKN St. Pölten II",
+    "awayTeam": "SV Donau",
+    "league": "Club Friendly Games",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16632937": {
+    "homeTeam": "Nihon University",
+    "awayTeam": "Nankatsu SC",
+    "league": "Japan Regional League",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16632933": {
+    "homeTeam": "Ryutsu Keizai Dragons Ryugasaki",
+    "awayTeam": "Toho Titanium",
+    "league": "Japan Regional League",
+    "time": "03:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16600025": {
+    "homeTeam": "Marbisu SC",
+    "awayTeam": "Lumshyiap SC",
+    "league": "SSA Second Division, Group A",
+    "time": "02:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16365175": {
+    "homeTeam": "FC Kariya",
+    "awayTeam": "FC ISE-SHIMA",
+    "league": "Tōkai Soccer League",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16571365": {
+    "homeTeam": "Levante UD",
+    "awayTeam": "Al-Qadsiah",
+    "league": "Club Friendly Games",
+    "time": "03:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16574329": {
+    "homeTeam": "Kisvárda FC II",
+    "awayTeam": "Mátészalkai MTK",
+    "league": "NB III Észak-Kelet",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16598336": {
+    "homeTeam": "Ostia Mare",
+    "awayTeam": "Benevento",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16634544": {
+    "homeTeam": "Mladost DG",
+    "awayTeam": "FK Lovćen",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15272799": {
+    "homeTeam": "HJK",
+    "awayTeam": "Turun Palloseura",
+    "league": "Veikkausliiga",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16575066": {
+    "homeTeam": "Újpest FC II",
+    "awayTeam": "BKV Előre SC",
+    "league": "NB III Dél-Kelet",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16378696": {
+    "homeTeam": "FC Koper",
+    "awayTeam": "Kalcer Radomlje",
+    "league": "PrvaLiga",
+    "time": "13:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16316889": {
+    "homeTeam": "Dukla Banská Bystrica",
+    "awayTeam": "ŠK Slovan Bratislava",
+    "league": "Niké Liga",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16613858": {
+    "homeTeam": "Nacional",
+    "awayTeam": "Peñarol",
+    "league": "Primera Division, Women, Clausura",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16604070": {
+    "homeTeam": "San Carlos",
+    "awayTeam": "CD Escorpiones Belen",
+    "league": "Primera División, Apertura",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16622017": {
+    "homeTeam": "CD Fuerte San Francisco U20",
+    "awayTeam": "C.D. Platense Zacatecoluca U20",
+    "league": "Primera División, Reserves, Apertura",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16557080": {
+    "homeTeam": "ETO Akadémia",
+    "awayTeam": "FC Tatabánya",
+    "league": "NB III Észak-Nyugat",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16252126": {
+    "homeTeam": "São Paulo U20",
+    "awayTeam": "Osasco Sporting U20",
+    "league": "U20 Paulista, Grupo 2",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15542519": {
+    "homeTeam": "Chuncheon Citizen",
+    "awayTeam": "Ulsan Citizen FC",
+    "league": "K3 League",
+    "time": "05:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15421914": {
+    "homeTeam": "FC Bulleen Lions",
+    "awayTeam": "Langwarrin SC",
+    "league": "VPL 1",
+    "time": "05:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16627088": {
+    "homeTeam": "Metropolitan FA San Juan",
+    "awayTeam": "North Leeward Predators",
+    "league": "CFU Club Shield",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16584303": {
+    "homeTeam": "Club Silvio Pettirossi FBC",
+    "awayTeam": "Sportivo Iteño",
+    "league": "Primera División B",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16627308": {
+    "homeTeam": "Argentino de Rosario",
+    "awayTeam": "Rosario Central",
+    "league": "Copa Santa Fe",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16628274": {
+    "homeTeam": "Sportivo Ameliano Reserve",
+    "awayTeam": "Nacional Asunción Reserve",
+    "league": "Primera División Reserve, Apertura",
+    "time": "06:30",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16619583": {
+    "homeTeam": "SC Verl",
+    "awayTeam": "Bremer SV",
+    "league": "Club Friendly Games",
+    "time": "07:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16357068": {
+    "homeTeam": "FC St. Gallen 1879",
+    "awayTeam": "FC Zürich",
+    "league": "Swiss Super League",
+    "time": "09:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16357159": {
+    "homeTeam": "FC Lugano",
+    "awayTeam": "FC Vaduz",
+    "league": "Swiss Super League",
+    "time": "09:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15546957": {
+    "homeTeam": "Viimsi JK Women",
+    "awayTeam": "FC Elva",
+    "league": "Meistriliiga Women",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16287283": {
+    "homeTeam": "KVK Tienen",
+    "awayTeam": "FC Averbode Testelt Okselaar",
+    "league": "Reeks D",
+    "time": "08:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "15432564": {
+    "homeTeam": "Corinthians",
+    "awayTeam": "Vitória",
+    "league": "Brasileirão Série A1, Women",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16404078": {
+    "homeTeam": "MKS Avia Świdnik",
+    "awayTeam": "Olimpia Grudziądz",
+    "league": "II Liga",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16316894": {
+    "homeTeam": "MFK Ružomberok",
+    "awayTeam": "DAC 1904",
+    "league": "Niké Liga",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16366593": {
+    "homeTeam": "Unia Skierniewice",
+    "awayTeam": "Stal Mielec",
+    "league": "1. Liga",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16326412": {
+    "homeTeam": "FK Crvena zvezda",
+    "awayTeam": "FK Vojvodina",
+    "league": "Mozzart Bet Superliga",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16326408": {
+    "homeTeam": "FK Mladost Lučani",
+    "awayTeam": "FK Novi Pazar",
+    "league": "Mozzart Bet Superliga",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275775": {
+    "homeTeam": "Quilmes Atlético Club",
+    "awayTeam": "Colegiales",
+    "league": "Primera B Nacional",
+    "time": "17:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16571362": {
+    "homeTeam": "Eintracht Frankfurt",
+    "awayTeam": "Trabzonspor",
+    "league": "Club Friendly Games",
+    "time": "08:30",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "15235429": {
+    "homeTeam": "Remo",
+    "awayTeam": "Vitória",
+    "league": "Brasileirão Betano",
+    "time": "17:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15502623": {
+    "homeTeam": "Orense SC",
+    "awayTeam": "Independiente del Valle",
+    "league": "LigaPro Serie A, Primera Etapa",
+    "time": "15:45",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15526200": {
+    "homeTeam": "América Mineiro",
+    "awayTeam": "Goiás",
+    "league": "Brasileirão Série B",
+    "time": "16:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15235408": {
+    "homeTeam": "Bahia",
+    "awayTeam": "Corinthians",
+    "league": "Brasileirão Betano",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16311588": {
+    "homeTeam": "Karlsruher SC",
+    "awayTeam": "Inter",
+    "league": "Club Friendly Games",
+    "time": "09:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15237985": {
+    "homeTeam": "Flamengo",
+    "awayTeam": "São Paulo",
+    "league": "Brasileirão Betano",
+    "time": "16:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15502621": {
+    "homeTeam": "Barcelona SC Guayaquil",
+    "awayTeam": "LDU",
+    "league": "LigaPro Serie A, Primera Etapa",
+    "time": "19:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16494864": {
+    "homeTeam": "AS Cannes",
+    "awayTeam": "AS Roma",
+    "league": "Club Friendly Games",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15635658": {
+    "homeTeam": "Astana",
+    "awayTeam": "Altay Oskemen",
+    "league": "Premier League",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16575064": {
+    "homeTeam": "Budapest Honvéd FC II",
+    "awayTeam": "Békéscsaba 1912 Előre",
+    "league": "NB III Dél-Kelet",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16422357": {
+    "homeTeam": "HJK U21",
+    "awayTeam": "JäPS U21",
+    "league": "Finland U21 League, Championship Round",
+    "time": "05:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16512726": {
+    "homeTeam": "Necaxa U21",
+    "awayTeam": "CF Monterrey U21",
+    "league": "U21 Liga MX, Apertura",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16337211": {
+    "homeTeam": "Motherwell LFC",
+    "awayTeam": "Montrose FC",
+    "league": "Premier League Cup, Women",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16316892": {
+    "homeTeam": "MŠK Žilina",
+    "awayTeam": "FC Košice",
+    "league": "Niké Liga",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15462262": {
+    "homeTeam": "FC Bunyodkor",
+    "awayTeam": "Pakhtakor Tashkent",
+    "league": "Super League",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15617521": {
+    "homeTeam": "Universidad de Concepcion",
+    "awayTeam": "Santiago Wanderers",
+    "league": "Primera Division, Women",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467773": {
+    "homeTeam": "Olympia Rajecko",
+    "awayTeam": "FC Žďas Žďár nad Sázavou",
+    "league": "MOL Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467793": {
+    "homeTeam": "TJ Bystřice",
+    "awayTeam": "1. BFK Frýdlant nad Ostravicí",
+    "league": "MOL Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16589028": {
+    "homeTeam": "FC Politehnica",
+    "awayTeam": "FC Zimbru Chişinău",
+    "league": "Super Liga",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16611062": {
+    "homeTeam": "Fénix",
+    "awayTeam": "Atenas de San Carlos",
+    "league": "Segunda Division",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15582357": {
+    "homeTeam": "Närpes Kraft",
+    "awayTeam": "FC Vaajakoski",
+    "league": "Kakkonen, Group C",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384074": {
+    "homeTeam": "FK Jablonec",
+    "awayTeam": "SK Sigma Olomouc",
+    "league": "Czech First League",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16613164": {
+    "homeTeam": "Deportivo Coopsol",
+    "awayTeam": "Universitario de Deportes Reserve",
+    "league": "Liga 3",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16552268": {
+    "homeTeam": "SSC Napoli",
+    "awayTeam": "Carrarese",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16513972": {
+    "homeTeam": "Necaxa U19",
+    "awayTeam": "CF Monterrey U19",
+    "league": "Mexico U19 League, Apertura",
+    "time": "12:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16602413": {
+    "homeTeam": "Chimbarongo FC",
+    "awayTeam": "Constitución Unido",
+    "league": "Tercera División A",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16597172": {
+    "homeTeam": "Deportivo Gomerano",
+    "awayTeam": "FC Santa Lucía Cotzumalguapa",
+    "league": "Primera División de Ascenso, Apertura, Group A",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16597175": {
+    "homeTeam": "Deportivo Achuapa",
+    "awayTeam": "Deportivo Fraijanes",
+    "league": "Primera División de Ascenso, Apertura, Group B",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16597173": {
+    "homeTeam": "CD Iztapa",
+    "awayTeam": "Huehuetecos FC",
+    "league": "Primera División de Ascenso, Apertura, Group A",
+    "time": "12:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16557595": {
+    "homeTeam": "Douglas Haig",
+    "awayTeam": "9 de Julio de Rafaela",
+    "league": "Torneo Federal A, Group 1",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16597178": {
+    "homeTeam": "Coatepeque FC",
+    "awayTeam": "Aguacatán FC",
+    "league": "Primera División de Ascenso, Apertura, Group A",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384236": {
+    "homeTeam": "Paksi FC",
+    "awayTeam": "Ferencváros TC",
+    "league": "NB I",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275764": {
+    "homeTeam": "All Boys",
+    "awayTeam": "Defensores de Belgrano",
+    "league": "Primera B Nacional",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16252127": {
+    "homeTeam": "Mirassol U20",
+    "awayTeam": "Ferroviária U20",
+    "league": "U20 Paulista, Grupo 1",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16526401": {
+    "homeTeam": "Grêmio Esportivo Brasil U20",
+    "awayTeam": "EC Pelotas U20",
+    "league": "U20 Gaúcho, Série A2, Playoffs",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15502625": {
+    "homeTeam": "Aucas",
+    "awayTeam": "Macará",
+    "league": "LigaPro Serie A, Primera Etapa",
+    "time": "13:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16298620": {
+    "homeTeam": "Lokomotiv Plovdiv",
+    "awayTeam": "FK Septemvri Sofia",
+    "league": "Parva Liga",
+    "time": "13:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16362796": {
+    "homeTeam": "Deportivo Binacional",
+    "awayTeam": "Bentín Tacna Heroica",
+    "league": "Liga 2, Group B",
+    "time": "13:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16316941": {
+    "homeTeam": "Wisła Kraków",
+    "awayTeam": "GKS Katowice",
+    "league": "Ekstraklasa",
+    "time": "13:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16316948": {
+    "homeTeam": "Widzew Łódź",
+    "awayTeam": "Motor Lublin",
+    "league": "Ekstraklasa",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16394028": {
+    "homeTeam": "Fancesa",
+    "awayTeam": "Atlético Sucre",
+    "league": "Copa Simón Bolívar - Cuadrangular de Clasificación Chuquisaca",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15931233": {
+    "homeTeam": "EC Campo Grande",
+    "awayTeam": "Aquidauanense",
+    "league": "Sul-Mato-Grossense, Série B",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16394071": {
+    "homeTeam": "Universitario de Tarija",
+    "awayTeam": "Chapaquito Nacional Senac",
+    "league": "Copa Simón Bolívar - Cuadrangular de Clasificación Tarija",
+    "time": "14:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15235416": {
+    "homeTeam": "Cruzeiro",
+    "awayTeam": "Botafogo",
+    "league": "Brasileirão Betano",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16110003": {
+    "homeTeam": "ÍA Akranes",
+    "awayTeam": "Stjarnan Garðabær",
+    "league": "Efsta deild",
+    "time": "14:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275762": {
+    "homeTeam": "Godoy Cruz",
+    "awayTeam": "Central Norte de Salta",
+    "league": "Primera B Nacional",
+    "time": "14:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16523377": {
+    "homeTeam": "ABC",
+    "awayTeam": "Luverdense",
+    "league": "Brasileirão Série D, Knockout Stage",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16523381": {
+    "homeTeam": "ASA",
+    "awayTeam": "Cianorte",
+    "league": "Brasileirão Série D, Knockout Stage",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16523380": {
+    "homeTeam": "Treze",
+    "awayTeam": "EC São José",
+    "league": "Brasileirão Série D, Knockout Stage",
+    "time": "15:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16456406": {
+    "homeTeam": "Valencia U20",
+    "awayTeam": "CD Castellón U20",
+    "league": "COTIF Tournament, Group B",
+    "time": "15:45",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15502845": {
+    "homeTeam": "Inter Toronto",
+    "awayTeam": "Forge FC",
+    "league": "Canadian Premier League",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15385522": {
+    "homeTeam": "San Diego Wave FC",
+    "awayTeam": "Seattle Reign FC",
+    "league": "NWSL",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16459565": {
+    "homeTeam": "Patriotas Boyacá",
+    "awayTeam": "Internacional de Palmira",
+    "league": "Torneo DIMAYOR, Clausura",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16603554": {
+    "homeTeam": "Fuerte San Francisco",
+    "awayTeam": "C.D. Platense Zacatecoluca",
+    "league": "Primera División, Apertura",
+    "time": "16:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16611143": {
+    "homeTeam": "Miramar Misiones",
+    "awayTeam": "La Luz",
+    "league": "Segunda Division",
+    "time": "17:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16431100": {
+    "homeTeam": "Deportivo Riestra",
+    "awayTeam": "Boca Juniors",
+    "league": "Liga Profesional, Clausura",
+    "time": "17:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16317935": {
+    "homeTeam": "Club Necaxa",
+    "awayTeam": "CF Monterrey",
+    "league": "Liga MX, Apertura",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16317801": {
+    "homeTeam": "Club América",
+    "awayTeam": "Tigres UANL",
+    "league": "Campeon de Campeones, Women",
+    "time": "19:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16303119": {
+    "homeTeam": "Honduras U20",
+    "awayTeam": "Jamaica U20",
+    "league": "U20 CONCACAF Championship, Group C",
+    "time": "20:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15388530": {
+    "homeTeam": "Angel City FC",
+    "awayTeam": "Racing Louisville",
+    "league": "NWSL",
+    "time": "20:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275759": {
+    "homeTeam": "San Miguel",
+    "awayTeam": "Acassuso",
+    "league": "Primera B Nacional",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16575060": {
+    "homeTeam": "ESMTK",
+    "awayTeam": "Monor SE",
+    "league": "NB III Dél-Kelet",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16246457": {
+    "homeTeam": "Singapore",
+    "awayTeam": "East Timor",
+    "league": "ASEAN Championship, Group A",
+    "time": "06:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16614400": {
+    "homeTeam": "Gor Mahia FC",
+    "awayTeam": "Vipers SC",
+    "league": "CECAFA Clubs Cup, Group A",
+    "time": "08:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16632934": {
+    "homeTeam": "Tokyo 23 FC",
+    "awayTeam": "Shibuya City FC",
+    "league": "Japan Regional League",
+    "time": "03:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15368446": {
+    "homeTeam": "Western City Rangers FC",
+    "awayTeam": "Illawarra Stingrays",
+    "league": "NSW NPL Women's",
+    "time": "02:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15368447": {
+    "homeTeam": "Sydney University SFC",
+    "awayTeam": "Northern Tigers",
+    "league": "NSW NPL Women's",
+    "time": "02:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16633938": {
+    "homeTeam": "University Of Johannesburg B",
+    "awayTeam": "Blue Raycon FC Women",
+    "league": "Sasol Womens League",
+    "time": "06:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384280": {
+    "homeTeam": "FC Hradec Králové",
+    "awayTeam": "FK Pardubice",
+    "league": "Czech First League",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16357245": {
+    "homeTeam": "Saku Sporting",
+    "awayTeam": "TJK Legion",
+    "league": "Cup",
+    "time": "07:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15750018": {
+    "homeTeam": "Mikkelin Palloilijat 2",
+    "awayTeam": "Edustus IPS",
+    "league": "Kolmonen, Eastern, Group 3",
+    "time": "07:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15265837": {
+    "homeTeam": "Sandnes Ulf",
+    "awayTeam": "Kongsvinger",
+    "league": "1st Division",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573973": {
+    "homeTeam": "San Martín Formosa",
+    "awayTeam": "CA Bartolome Mitre",
+    "league": "Torneo Federal A, Group 2",
+    "time": "13:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15260850": {
+    "homeTeam": "KFUM Oslo",
+    "awayTeam": "Molde FK",
+    "league": "Eliteserien",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16278672": {
+    "homeTeam": "FC København",
+    "awayTeam": "Lyngby",
+    "league": "Danish Superliga",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16390655": {
+    "homeTeam": "Alianza Valledupar FC",
+    "awayTeam": "Fortaleza FC",
+    "league": "Liga DIMAYOR, Finalizacion",
+    "time": "18:10",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16431098": {
+    "homeTeam": "Estudiantes de La Plata",
+    "awayTeam": "CA Independiente",
+    "league": "Liga Profesional, Clausura",
+    "time": "15:15",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573970": {
+    "homeTeam": "Wari Athletic Club",
+    "awayTeam": "Calcutta Police",
+    "league": "Calcutta Premier Division, Group B",
+    "time": "04:30",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16333063": {
+    "homeTeam": "Zhejiang FC U20",
+    "awayTeam": "Guangdong GZ-Power U20",
+    "league": "China Youth Football League, Second Stage, Group A",
+    "time": "06:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15271285": {
+    "homeTeam": "Norrby IF",
+    "awayTeam": "Östersunds FK",
+    "league": "Superettan",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467798": {
+    "homeTeam": "SK Sulko Zabreh",
+    "awayTeam": "SK Hranice",
+    "league": "MOL Cup",
+    "time": "10:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16575059": {
+    "homeTeam": "Meton-FC Dabas",
+    "awayTeam": "Szeged-Csanád Grosics Akadémia II",
+    "league": "NB III Dél-Kelet",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16574318": {
+    "homeTeam": "Tiszafüred VSE",
+    "awayTeam": "Debreceni EAC",
+    "league": "NB III Észak-Kelet",
+    "time": "10:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16404082": {
+    "homeTeam": "MKS Chojniczanka Chojnice",
+    "awayTeam": "GKS Tychy",
+    "league": "II Liga",
+    "time": "12:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16603549": {
+    "homeTeam": "Sportivo Trinidense",
+    "awayTeam": "Olimpia",
+    "league": "Campeonato Femenino",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275761": {
+    "homeTeam": "Deportivo Morón",
+    "awayTeam": "Club Ferro Carril Oeste",
+    "league": "Primera B Nacional",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467785": {
+    "homeTeam": "Tatran Ždírec n. D.",
+    "awayTeam": "FC Kurim",
+    "league": "MOL Cup",
+    "time": "03:30",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16634572": {
+    "homeTeam": "Sportivo Barracas U20",
+    "awayTeam": "Puerto Nuevo U20",
+    "league": "Torneo Juvenil Superliga",
+    "time": "07:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16634567": {
+    "homeTeam": "Guaraní Reserve",
+    "awayTeam": "Sportivo Luqueño Reserve",
+    "league": "Primera División Reserve, Apertura",
+    "time": "06:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16634561": {
+    "homeTeam": "Yadanarbon FC",
+    "awayTeam": "Ayeyawady United",
+    "league": "Myanmar Women’s Football League",
+    "time": "04:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15235410": {
+    "homeTeam": "Red Bull Bragantino",
+    "awayTeam": "Coritiba",
+    "league": "Brasileirão Betano",
+    "time": "16:30",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16413674": {
+    "homeTeam": "Al-Rissala SC Toura",
+    "awayTeam": "Al-Akhaa Al-Ahli",
+    "league": "Lebanese Second Division, Promotion Playoffs",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16384031": {
+    "homeTeam": "Leithaprodersdorf",
+    "awayTeam": "Admira Wacker",
+    "league": "OFB Cup",
+    "time": "11:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16546824": {
+    "homeTeam": "Deportivo Metalurgico",
+    "awayTeam": "Estrella de Berisso",
+    "league": "Torneo Promocional Amateur, Zona A",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16252128": {
+    "homeTeam": "Santos U20",
+    "awayTeam": "Portuguesa U20",
+    "league": "U20 Paulista, Grupo 1",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15432563": {
+    "homeTeam": "EC Juventude",
+    "awayTeam": "Ferroviária",
+    "league": "Brasileirão Série A1, Women",
+    "time": "13:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15275766": {
+    "homeTeam": "CA Mitre",
+    "awayTeam": "Almirante Brown",
+    "league": "Primera B Nacional",
+    "time": "14:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16420885": {
+    "homeTeam": "CD Suchitepéquez",
+    "awayTeam": "Comunicaciones FC",
+    "league": "Liga Guate Banrural, Apertura",
+    "time": "18:00",
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16632935": {
+    "homeTeam": "Edo All United",
+    "awayTeam": "Toin University of Yokohama FC",
+    "league": "Japan Regional League",
+    "time": "04:00",
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16634800": {
+    "homeTeam": "Al-Shabab",
+    "awayTeam": "Al-Nasr Dubai",
+    "league": "Club Friendly Games",
+    "time": "09:00",
+    "status": "inprogress",
+    "sport": "Football"
   }
 }

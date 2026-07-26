@@ -1738,59 +1738,53 @@ def generate_daily_sports_data():
     fallback_picks = sorted(fallback_picks, key=lambda x: x['probability'], reverse=True)
     
     usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
-    # --- FILTROS BASADOS EN CUOTAS REALES DE LA API ---
-    # 1. Descartar picks con cuota muy baja, confianza baja, o cuota demasiado alta (arriesgada), o mercados no disponibles
-    #    MAX ODD de 2.70: cuota > 2.70 implica probabilidad real < 37% = pick de alto riesgo, no apto para boleto estrella
-    usable_picks = [p for p in usable_picks if 1.08 <= p.get('odd', 0) <= 2.70 and p.get('probability', 0) >= 60 and 'Tarjeta' not in p.get('market', '')]
 
-    # 2. Descartar Asian 2.0 que la API marca como poco probable (over_2.5 > 2.30)
-    #    Esto evita recomendar Over de goles cuando las casas de apuestas lo ven como improbable
-    usable_picks = [p for p in usable_picks if not ('Asian 2.0' in p.get('market','') and p.get('valid_for_ticket') == False)]
+    # ═══════════════════════════════════════════════════════════════════════
+    # FILTROS DE SEGURIDAD — OBJETIVO: WIN RATE >= 80%
+    # ═══════════════════════════════════════════════════════════════════════
+    # REGLA 1: Solo picks con cuotas REALES de la API (valid_for_ticket=True)
+    #          Picks sin datos de API = cuotas inventadas = NO entran al boleto
+    usable_picks = [p for p in usable_picks if p.get('valid_for_ticket', True) is not False]
 
-    # 3. Para BTTS, descartar si la cuota del lado recomendado es > 2.20 (poco probable según API)
-    usable_picks = [p for p in usable_picks if not ('Ambos Equipos Anotan' in p.get('market','') and p.get('odd', 0) > 2.20)]
+    # REGLA 2: Cuota máxima @1.65 para boletos estrella
+    #          @1.65 = 60.6% probabilidad real según la casa de apuestas
+    #          Cuotas más altas (1.80, 2.00, 2.27...) tienen demasiado riesgo para el objetivo de 80% WR
+    usable_picks = [p for p in usable_picks if 1.10 <= p.get('odd', 0) <= 1.65]
 
-    # 4. Priorizar picks con cuotas DIRECTAS de la API sobre mercados calculados internamente
-    DIRECT_API_MARKETS = ['Resultado Final', '1X2', 'Ambos Equipos Anotan', 'Más/Menos Goles',
-                          'Doble Oportunidad', 'Empate No Apuesta', 'DNB', 'Córners (Total']
+    # REGLA 3: Mínimo de probabilidad del 62% (equivale a cuota máxima ~1.61)
+    usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 62]
 
+    # REGLA 4: Descartar mercados no disponibles o poco fiables en 1xBet
+    BANNED_MARKETS = ['Tarjeta', 'Córners del Equipo', 'Asian 2.0', 'Goles del Equipo', 'Resultado 1er Tiempo']
+    usable_picks = [p for p in usable_picks if not any(bm in p.get('market', '') for bm in BANNED_MARKETS)]
+
+    # REGLA 5: Priorizar picks con cuotas DIRECTAS de la API sobre mercados calculados internamente
+    DIRECT_API_MARKETS = ['Más/Menos Goles', 'Ambos Equipos Anotan', 'Doble Oportunidad',
+                          'Empate No Apuesta', 'Córners (Total', 'Resultado Final', 'Hándicap Asiático']
     def is_direct_api_market(pick):
-        mkt = pick.get('market', '')
-        return any(dm in mkt for dm in DIRECT_API_MARKETS)
+        return any(dm in pick.get('market', '') for dm in DIRECT_API_MARKETS)
 
     direct_api_picks = [p for p in usable_picks if is_direct_api_market(p)]
-    synthetic_picks = [p for p in usable_picks if not is_direct_api_market(p)]
-    # Usar picks directos de API primero; si no hay suficientes, complementar con sintéticos
+    synthetic_picks  = [p for p in usable_picks if not is_direct_api_market(p)]
     usable_picks = direct_api_picks + synthetic_picks
+
+    # REGLA 6: Ordenar por probabilidad descendente (el más probable primero)
+    usable_picks = sorted(usable_picks, key=lambda x: x.get('probability', 0), reverse=True)
     
-    # --- FILTRO MATEMÁTICO PARA AUMENTAR PRECISIÓN ---
-    # Si la cuota es >= 1.50, exigimos que esté jugando un equipo élite (Rating >= 85) para mantener probabilidad alta (Stake 10).
-    # Si no, limitamos artificialmente su probabilidad máxima a 74%, evitando que la IA lo considere "Boleto Seguro" (Stake 10).
-    for p in usable_picks:
-        if p.get('odd', 0) >= 1.50:
-            teams = p.get('match', '').split(' vs ')
-            max_rating = 0
-            if len(teams) == 2:
-                for t, r in TEAM_RATINGS.items():
-                    if t.lower() in teams[0].lower() or t.lower() in teams[1].lower():
-                        max_rating = max(max_rating, r)
-            if max_rating < 85:
-                p['probability'] = min(p['probability'], 74)
-    # -------------------------------------------------
-    # Rank picks dynamically by Expected Value score (probability * odd) and probability
-    usable_picks = sorted(usable_picks, key=lambda x: ((x.get('probability', 0) / 100.0) * x.get('odd', 1.0), x.get('probability', 0)), reverse=True)
-    
-    # Generar Boleto Estrella 1 (Boleto Seguro)
+    # ═══════════════════════════════════════════════════════════════════════
+    # BOLETO 1 — APUESTA SEGURA (objetivo: cuota ~1.20-1.65, WR > 80%)
+    # ═══════════════════════════════════════════════════════════════════════
     star_selections_1 = []
     ticket_type_1 = "Simple"
     total_odd_1 = 1.0
     star_confidence_1 = 85
     star_reasoning_1 = ""
-    
+
     if usable_picks:
         best_pick = usable_picks[0]
-        # Decidir si ir a Simple o Combinado (Solo Apuesta Simple si la cuota individual es >= 1.65)
-        if best_pick['odd'] >= 1.65 and best_pick['probability'] >= 72:
+        # Estrategia: siempre Simple para el boleto 1 si la cuota >= 1.30
+        # Si la cuota es muy baja (<1.30), combinar con un segundo pick seguro
+        if best_pick['odd'] >= 1.30:
             ticket_type_1 = "Simple"
             star_selections_1.append({
                 "match": best_pick["match"],
@@ -1802,22 +1796,16 @@ def generate_daily_sports_data():
             })
             total_odd_1 = best_pick["odd"]
             star_confidence_1 = best_pick["probability"]
-            r_text = best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
-            star_reasoning_1 = f"Recomendación de Apuesta Simple Segura. Hemos seleccionado un único evento fuerte con cuota de valor de @{total_odd_1:.2f} y una probabilidad muy alta del {best_pick['probability']}%. No es necesario correr el riesgo de combinarlo con otro evento."
+            star_reasoning_1 = (f"✅ Apuesta Simple Segura de alta confianza. "
+                                f"La cuota @{total_odd_1:.2f} tiene una probabilidad real del {best_pick['probability']}% "
+                                f"según las cuotas de 1xBet. Solo un evento para maximizar el win rate.")
         else:
-            # Buscar un segundo pick para formar una combinada de cuota atractiva (Sweet spot @1.65 - @1.95)
+            # Cuota muy baja: combinar con segundo pick para cuota total mínima 1.40
             second_pick = None
             for p in usable_picks[1:]:
-                if p["match"] != best_pick["match"]:
-                    if 1.60 <= (best_pick["odd"] * p["odd"]) <= 2.10:
-                        second_pick = p
-                        break
-            if not second_pick:
-                for p in usable_picks[1:]:
-                    if p["match"] != best_pick["match"]:
-                        second_pick = p
-                        break
-            if not second_pick:
+                if p["match"] != best_pick["match"] and (best_pick['odd'] * p['odd']) >= 1.40:
+                    second_pick = p
+                    break
                 for p in usable_picks[1:]:
                     if p["match"] != best_pick["match"]:
                         second_pick = p
