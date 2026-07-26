@@ -29823,66 +29823,66 @@
     "type": "Combinado",
     "selections": [
       {
-        "match": "Guaraní vs Sportivo Luqueño",
+        "match": "Vasco da Gama vs Mirassol",
         "sport": "Football",
-        "market": "Más/Menos Goles",
+        "market": "Menos de 3.5 Goles",
         "pick": "Menos de 3.5 Goles",
-        "odd": 1.22,
-        "reasoning": "La cuota real de la API para 'Menos de 3.5 Goles' es @1.22, lo que implica una probabilidad de mercado del 82%. Las casas de apuestas ven alta probabilidad de partido defensivo de pocos goles."
+        "odd": 1.29,
+        "reasoning": "Partido de baja puntuacion esperada. Alta probabilidad de menos de 3.5 goles."
       },
       {
-        "match": "Melgar vs Club Sporting Cristal",
+        "match": "Barcelona SC Guayaquil vs LDU",
         "sport": "Football",
-        "market": "Más/Menos Goles",
-        "pick": "Más de 1.5 Goles",
-        "odd": 1.22,
-        "reasoning": "La cuota real de la API para 'Más de 1.5 Goles' es @1.22, lo que implica una probabilidad de mercado del 82%. Las casas de apuestas ven alta probabilidad de partido con muchos goles."
+        "market": "Menos de 3.5 Goles",
+        "pick": "Menos de 3.5 Goles",
+        "odd": 1.29,
+        "reasoning": "Clasico ecuatoriano defensivo. Alta probabilidad de pocos goles."
       }
     ],
-    "total_odd": 1.49,
+    "total_odd": 1.66,
     "confidence": 78,
-    "reasoning": "Boleto Extra del Día @1.49. Picks distintos sin repetir ningún partido de los otros boletos.",
+    "reasoning": "Boleto Extra @1.66. Dos picks de Under Goals con alta probabilidad.",
     "recommendation_stake": 2.0
   },
   "star_ticket_4": {
-    "type": "Combinado Soñador",
+    "type": "Combinado Sonador",
     "selections": [
       {
-        "match": "Olimpia vs Libertad",
+        "match": "Tigres UANL vs Atletico San Luis",
         "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "Olimpia o Empate",
+        "market": "Mas de 1.5 Goles",
+        "pick": "Mas de 1.5 Goles",
         "odd": 1.25,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Olimpia hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "reasoning": "Partido ofensivo con alta probabilidad de al menos 2 goles."
       },
       {
-        "match": "Estudiantes de Río Cuarto vs Tigre",
+        "match": "Santos Laguna vs Atlas FC",
         "sport": "Football",
-        "market": "Córners del Equipo (Individual)",
-        "pick": "Tigre Más de 3.5 Córners",
-        "odd": 1.26,
-        "reasoning": "Tigre concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. Su dominio territorial proyecta un promedio de 7 saques de esquina individuales. La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente."
+        "market": "Mas de 1.5 Goles",
+        "pick": "Mas de 1.5 Goles",
+        "odd": 1.25,
+        "reasoning": "Partido de alta puntuacion esperada."
       },
       {
-        "match": "Resende vs Americano",
+        "match": "Deportivo Garcilaso vs FC Cajamarca",
         "sport": "Football",
-        "market": "Córners del Equipo (Individual)",
-        "pick": "Resende Más de 3.5 Córners",
-        "odd": 1.26,
-        "reasoning": "Resende concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. Su dominio territorial proyecta un promedio de 7 saques de esquina individuales. La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente."
+        "market": "Mas de 1.5 Goles",
+        "pick": "Mas de 1.5 Goles",
+        "odd": 1.29,
+        "reasoning": "Partido atacante con buena probabilidad de goles."
       },
       {
-        "match": "CF Pachuca vs Querétaro FC",
+        "match": "CA Lanus vs San Lorenzo",
         "sport": "Football",
-        "market": "Córners del Equipo (Individual)",
-        "pick": "CF Pachuca Más de 4.5 Córners",
-        "odd": 1.35,
-        "reasoning": "CF Pachuca concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. Su dominio territorial proyecta un promedio de 6 saques de esquina individuales. La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente."
+        "market": "Menos de 2.5 Goles",
+        "pick": "Menos de 2.5 Goles",
+        "odd": 1.33,
+        "reasoning": "Partido equilibrado con pocas anotaciones esperadas."
       }
     ],
     "total_odd": 2.68,
     "confidence": 60,
-    "reasoning": "Apuesta Soñadora del Dólar (Cuota Total: @2.68). Combinamos 4 selecciones únicas.",
+    "reasoning": "Apuesta Sonadora del Dolar @2.68. 4 picks futuros unicos.",
     "recommendation_stake": 1.0
   },
   "historical_tickets_registry": [
