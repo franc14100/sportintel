@@ -627,38 +627,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Load Data from JSON ---
     async function loadSportsData() {
         try {
+            // FUENTE UNICA: /api/data en Vercel (lee frontend/data.json fresco del servidor)
+            // Se elimino el fallback a GitHub Pages porque sobrescribia datos frescos con datos viejos
             let response = await fetch(`/api/data?v=${new Date().getTime()}`);
             let fetchedData = null;
             if (response.ok) {
                 fetchedData = await response.json();
             }
-            
-            // If /api/data failed or returned fewer than 10 matches (stale fallback data), try GitHub Pages directly
-            if (!fetchedData || !fetchedData.matches || fetchedData.matches.length < 10) {
-                try {
-                    const ghResponse = await fetch(`https://franc14100.github.io/sportintel/data.json?v=${new Date().getTime()}`);
-                    if (ghResponse.ok) {
-                        const ghData = await ghResponse.json();
-                        if (ghData && ghData.matches && ghData.matches.length > (fetchedData?.matches?.length || 0)) {
-                            fetchedData = ghData;
-                        }
-                    }
-                } catch (e) {
-                    console.warn("[SportIntel] Fallback to GitHub Pages failed:", e);
-                }
-            }
 
-            // Fallback to local /data.json if needed
-            if (!fetchedData || !fetchedData.matches || fetchedData.matches.length < 10) {
+            // Solo si /api/data falla completamente, intentar /data.json local
+            if (!fetchedData || !fetchedData.matches || fetchedData.matches.length < 1) {
                 try {
                     const localRes = await fetch(`/data.json?v=${new Date().getTime()}`);
                     if (localRes.ok) {
-                        const localData = await localRes.json();
-                        if (localData && localData.matches && localData.matches.length > (fetchedData?.matches?.length || 0)) {
-                            fetchedData = localData;
-                        }
+                        fetchedData = await localRes.json();
                     }
-                } catch (e) {}
+                } catch (e) { console.warn("[SportIntel] Local fallback failed:", e); }
             }
 
             if (!fetchedData) {
