@@ -18435,5 +18435,122 @@
     "start_ts": 1785144600,
     "status": "inprogress",
     "sport": "Football"
+  },
+  "15276802": {
+    "homeTeam": "Fénix",
+    "awayTeam": "Yupanqui",
+    "league": "Primera C",
+    "time": "18:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16621438": {
+    "homeTeam": "GV San José de Oruro U19",
+    "awayTeam": "Oriente Petrolero U19",
+    "league": "Liga Nacional Sub-19",
+    "time": "18:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276800": {
+    "homeTeam": "Sacachispas",
+    "awayTeam": "Leandro Nicéforo Alem",
+    "league": "Primera C",
+    "time": "18:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16603558": {
+    "homeTeam": "Club Dr. Benjamín Aceval",
+    "awayTeam": "Guaireña",
+    "league": "División Intermedia",
+    "time": "18:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16639869": {
+    "homeTeam": "Manauara EC U20",
+    "awayTeam": "São Raimundo-AM U20",
+    "league": "U20 Amazonense, Playoffs",
+    "time": "19:00",
+    "start_ts": 1785178800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15271277": {
+    "homeTeam": "Örebro SK",
+    "awayTeam": "IK Oddevold",
+    "league": "Superettan",
+    "time": "17:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15426879": {
+    "homeTeam": "Breidablik Kópavogur",
+    "awayTeam": "ÍBV Vestmannaeyjar",
+    "league": "Efsta deild",
+    "time": "18:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16303127": {
+    "homeTeam": "Grêmio Prudente",
+    "awayTeam": "Bandeirante EC",
+    "league": "Copa Paulista, Group 1",
+    "time": "22:30",
+    "start_ts": 1785191400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16637127": {
+    "homeTeam": "Cuiabá U20",
+    "awayTeam": "União Rondonópolis U20",
+    "league": "U20 Mato-Grossense, Grupo C",
+    "time": "22:00",
+    "start_ts": 1785189600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15526206": {
+    "homeTeam": "Clube De Regatas Brasil",
+    "awayTeam": "Vila Nova FC",
+    "league": "Brasileirão Série B",
+    "time": "22:30",
+    "start_ts": 1785191400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16482676": {
+    "homeTeam": "UNAN Managua",
+    "awayTeam": "Rancho Santana FC",
+    "league": "Primera Division, Apertura",
+    "time": "02:00",
+    "start_ts": 1785204000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16475888": {
+    "homeTeam": "CD La Equidad",
+    "awayTeam": "Fortaleza FC",
+    "league": "Liga Femenina",
+    "time": "19:00",
+    "start_ts": 1785178800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16032069": {
+    "homeTeam": "Ferroviário de Maputo",
+    "awayTeam": "Ferroviário de Lichinga",
+    "league": "Moçambola",
+    "time": "12:45",
+    "start_ts": 1785156300,
+    "status": "inprogress",
+    "sport": "Football"
   }
 }
