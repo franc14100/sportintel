@@ -29,7 +29,7 @@ HEADERS = {
 }
 
 def load_cache():
-    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
+    cache_path = "/tmp/event_cache.json"
     if os.path.exists(cache_path):
         with open(cache_path, 'r', encoding='utf-8') as f:
             try:
@@ -39,7 +39,7 @@ def load_cache():
     return {}
 
 def save_cache(cache):
-    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
+    cache_path = "/tmp/event_cache.json"
     with open(cache_path, 'w', encoding='utf-8') as f:
         json.dump(cache, f, ensure_ascii=False, indent=2)
 
