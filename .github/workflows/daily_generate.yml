@@ -1,0 +1,69 @@
+name: Daily Data Generation - 5AM Ecuador
+
+on:
+  schedule:
+    # 10:00 UTC = 5:00 AM Ecuador (UTC-5)
+    - cron: '0 10 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests python-dotenv
+
+      - name: Clear date to force fresh generation
+        run: |
+          python -c "
+          import json
+          with open('frontend/data.json', 'r', encoding='utf-8') as f:
+              d = json.load(f)
+          d['date'] = ''
+          with open('frontend/data.json', 'w', encoding='utf-8') as f:
+              json.dump(d, f, ensure_ascii=False, indent=2)
+          print('Date cleared for fresh generation')
+          "
+
+      - name: Run data generator
+        env:
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+          SPORT_API_KEY: ${{ secrets.SPORT_API_KEY }}
+        run: |
+          python backend/data_generator.py
+          echo "Generator completed"
+
+      - name: Show generated tickets
+        run: |
+          python -c "
+          import json
+          with open('frontend/data.json', 'r', encoding='utf-8') as f:
+              d = json.load(f)
+          print('Date:', d.get('date'))
+          print('Matches:', len(d.get('matches', [])))
+          for k in ['star_ticket_1','star_ticket_2','star_ticket_3','star_ticket_4']:
+              t = d.get(k, {})
+              if t:
+                  matches = [s['match'] for s in t.get('selections',[])]
+                  print(f'{k}: {matches} @{t.get(\"total_odd\",\"?\")} conf:{t.get(\"confidence\",\"?\")}%')
+          "
+
+      - name: Commit and push fresh data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "SportIntel Bot"
+          git add frontend/data.json
+          git diff --staged --quiet || git commit -m "Auto: Fresh data for $(date -u '+%Y-%m-%d') at 5AM Ecuador"
+          git push

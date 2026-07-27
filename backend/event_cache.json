@@ -17562,5 +17562,878 @@
     "start_ts": 1785157200,
     "status": "notstarted",
     "sport": "Football"
+  },
+  "16384949": {
+    "homeTeam": "FC ŠTK 1914 Šamorín",
+    "awayTeam": "OFK Dynamo Malženice",
+    "league": "2. Liga",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389407": {
+    "homeTeam": "Côte d'Ivoire",
+    "awayTeam": "Burkina Faso",
+    "league": "Women's Africa Cup of Nations, Group B",
+    "time": "15:00",
+    "start_ts": 1785182400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15472540": {
+    "homeTeam": "FK Tukums 2000",
+    "awayTeam": "RFS",
+    "league": "Virsliga",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15617707": {
+    "homeTeam": "Floresta",
+    "awayTeam": "Maringá FC",
+    "league": "Brasileirão Série C",
+    "time": "18:00",
+    "start_ts": 1785193200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15502622": {
+    "homeTeam": "Guayaquil City",
+    "awayTeam": "Universidad Católica del Ecuador",
+    "league": "LigaPro Serie A, Primera Etapa",
+    "time": "16:30",
+    "start_ts": 1785187800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15276803": {
+    "homeTeam": "Sportivo Barracas",
+    "awayTeam": "El Porvenir",
+    "league": "Primera C",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16575696": {
+    "homeTeam": "Patha Chakra",
+    "awayTeam": "East Bengal FC Reserves",
+    "league": "Calcutta Premier Division, Group A",
+    "time": "04:30",
+    "start_ts": 1785231000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16446361": {
+    "homeTeam": "SK Artis Brno",
+    "awayTeam": "Mladá Boleslav",
+    "league": "Czech First League",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15502627": {
+    "homeTeam": "Mushuc Runa SC",
+    "awayTeam": "Libertad",
+    "league": "LigaPro Serie A, Primera Etapa",
+    "time": "14:00",
+    "start_ts": 1785178800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16590734": {
+    "homeTeam": "Comercial-PI U20",
+    "awayTeam": "River-PI U20",
+    "league": "U20 Piauiense, Mata-mata",
+    "time": "14:00",
+    "start_ts": 1785178800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15390069": {
+    "homeTeam": "Sarpsborg 08 II",
+    "awayTeam": "Ørn-Horten",
+    "league": "3rd Division, Group 6",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15416262": {
+    "homeTeam": "Unión Española",
+    "awayTeam": "Deportes Recoleta",
+    "league": "Liga de Ascenso",
+    "time": "18:00",
+    "start_ts": 1785193200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16613163": {
+    "homeTeam": "Deportivo Lute",
+    "awayTeam": "Juventud Cautivo",
+    "league": "Liga 3",
+    "time": "11:30",
+    "start_ts": 1785169800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16456400": {
+    "homeTeam": "Sorriso EC U20",
+    "awayTeam": "Levante U20",
+    "league": "COTIF Tournament, Group A",
+    "time": "15:45",
+    "start_ts": 1785185100,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16614947": {
+    "homeTeam": "San Luis FC",
+    "awayTeam": "Newells Old Boys",
+    "league": "Primera Division A, Women, Clausura",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16614950": {
+    "homeTeam": "Unión de Santa Fe",
+    "awayTeam": "Gimnasia y Esgrima",
+    "league": "Primera Division A, Women, Clausura",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16621436": {
+    "homeTeam": "The Strongest U19",
+    "awayTeam": "Club FC Universitario U19",
+    "league": "Liga Nacional Sub-19",
+    "time": "14:00",
+    "start_ts": 1785178800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16621439": {
+    "homeTeam": "Real Potosí U19",
+    "awayTeam": "Bolívar U19",
+    "league": "Liga Nacional Sub-19",
+    "time": "10:30",
+    "start_ts": 1785166200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16621440": {
+    "homeTeam": "Club Independiente U19",
+    "awayTeam": "Guabirá U19",
+    "league": "Liga Nacional Sub-19",
+    "time": "09:00",
+    "start_ts": 1785160800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16622022": {
+    "homeTeam": "Deportivo Maldonado Reserve",
+    "awayTeam": "Progreso Reserve",
+    "league": "Tercera Division, Reserves",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16622025": {
+    "homeTeam": "Juventud de Las Piedras Reserve",
+    "awayTeam": "Central Español Reserve",
+    "league": "Tercera Division, Reserves",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16622024": {
+    "homeTeam": "Nacional Reserve",
+    "awayTeam": "Colon FC Reserve",
+    "league": "Tercera Division, Reserves",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16403825": {
+    "homeTeam": "CFR 1907 Cluj",
+    "awayTeam": "FC Voluntari",
+    "league": "Superliga",
+    "time": "10:30",
+    "start_ts": 1785166200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16278676": {
+    "homeTeam": "Randers FC",
+    "awayTeam": "Silkeborg IF",
+    "league": "Danish Superliga",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15271272": {
+    "homeTeam": "Östers IF",
+    "awayTeam": "Varbergs BoIS",
+    "league": "Superettan",
+    "time": "12:05",
+    "start_ts": 1785171900,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467296": {
+    "homeTeam": "Banfield Reserve",
+    "awayTeam": "Vélez Sarsfield Reserve",
+    "league": "Primera LPF, Reserves, Clausura, Group A",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16366590": {
+    "homeTeam": "Miedź Legnica",
+    "awayTeam": "Podbeskidzie Bielsko-Biała",
+    "league": "1. Liga",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15265839": {
+    "homeTeam": "Stabæk Fotball",
+    "awayTeam": "Hødd IL",
+    "league": "1st Division",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15462263": {
+    "homeTeam": "FC Andijon",
+    "awayTeam": "FC Buxoro",
+    "league": "Super League",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16403840": {
+    "homeTeam": "FC Botoșani",
+    "awayTeam": "FC Rapid București",
+    "league": "Superliga",
+    "time": "13:30",
+    "start_ts": 1785177000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15502620": {
+    "homeTeam": "Deportivo Cuenca",
+    "awayTeam": "Emelec",
+    "league": "LigaPro Serie A, Primera Etapa",
+    "time": "19:00",
+    "start_ts": 1785196800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16578022": {
+    "homeTeam": "Atlanta",
+    "awayTeam": "Almagro",
+    "league": "Primera B Nacional",
+    "time": "18:00",
+    "start_ts": 1785193200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15462268": {
+    "homeTeam": "Lokomotiv Tashkent",
+    "awayTeam": "FC Sogdiana Jizzakh",
+    "league": "Super League",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16288807": {
+    "homeTeam": "Lohjan Pallo",
+    "awayTeam": "Etelä-Espoon Pallo",
+    "league": "Kolmonen, Southern Group 1",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573975": {
+    "homeTeam": "Kalighat Sports Lovers",
+    "awayTeam": "Coal India Spa",
+    "league": "Calcutta Premier Division, Group B",
+    "time": "04:30",
+    "start_ts": 1785144600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15969244": {
+    "homeTeam": "Volda",
+    "awayTeam": "Ranheim 2",
+    "league": "3rd Division, Group 2",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389406": {
+    "homeTeam": "South Africa",
+    "awayTeam": "Tanzania",
+    "league": "Women's Africa Cup of Nations, Group B",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16154096": {
+    "homeTeam": "São Paulo",
+    "awayTeam": "Mirassol",
+    "league": "Paulista, Feminino",
+    "time": "17:00",
+    "start_ts": 1785189600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16467298": {
+    "homeTeam": "Talleres de Córdoba Reserve",
+    "awayTeam": "River Plate Reserve",
+    "league": "Primera LPF, Reserves, Clausura, Group A",
+    "time": "17:00",
+    "start_ts": 1785189600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16477158": {
+    "homeTeam": "Tauro FC",
+    "awayTeam": "Sporting San Miguelito",
+    "league": "Liga Panamena de Futbol, Apertura",
+    "time": "20:30",
+    "start_ts": 1785202200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16274081": {
+    "homeTeam": "Chelsea",
+    "awayTeam": "Western Sydney Wanderers",
+    "league": "Club Friendly Games",
+    "time": "04:45",
+    "start_ts": 1785231900,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16575698": {
+    "homeTeam": "BSS Sporting Club",
+    "awayTeam": "Railway FC",
+    "league": "Calcutta Premier Division, Group A",
+    "time": "04:30",
+    "start_ts": 1785231000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15390070": {
+    "homeTeam": "Lyn 1896 FK II",
+    "awayTeam": "Oppsal",
+    "league": "3rd Division, Group 6",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16249509": {
+    "homeTeam": "IFK Skovde FK",
+    "awayTeam": "Jönköpings Södra",
+    "league": "Svenska Cupen, Preliminary Round",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16459567": {
+    "homeTeam": "Atlético Cali",
+    "awayTeam": "Independiente Yumbo",
+    "league": "Torneo DIMAYOR, Clausura",
+    "time": "19:30",
+    "start_ts": 1785198600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16303113": {
+    "homeTeam": "Antigua and Barbuda U20",
+    "awayTeam": "Guatemala U20",
+    "league": "U20 CONCACAF Championship, Group B",
+    "time": "18:00",
+    "start_ts": 1785193200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16397699": {
+    "homeTeam": "CSKA Sofia",
+    "awayTeam": "Botev Plovdiv",
+    "league": "Parva Liga",
+    "time": "13:15",
+    "start_ts": 1785176100,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15426878": {
+    "homeTeam": "KA Akureyri",
+    "awayTeam": "Þór Akureyri",
+    "league": "Efsta deild",
+    "time": "14:15",
+    "start_ts": 1785179700,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16459556": {
+    "homeTeam": "Envigado FC",
+    "awayTeam": "Real Cundinamarca",
+    "league": "Torneo DIMAYOR, Clausura",
+    "time": "15:30",
+    "start_ts": 1785184200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15617703": {
+    "homeTeam": "Guarani",
+    "awayTeam": "Inter de Limeira",
+    "league": "Brasileirão Série C",
+    "time": "18:00",
+    "start_ts": 1785193200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16603559": {
+    "homeTeam": "12 de Junio de Villa Hayes",
+    "awayTeam": "Club 3 de Noviembre",
+    "league": "División Intermedia",
+    "time": "18:00",
+    "start_ts": 1785193200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16634577": {
+    "homeTeam": "Al-Riyadh",
+    "awayTeam": "Al-Gharafa",
+    "league": "Club Friendly Games",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16636281": {
+    "homeTeam": "Al-Sailiya",
+    "awayTeam": "Al-Sharjah",
+    "league": "Club Friendly Games",
+    "time": "10:30",
+    "start_ts": 1785166200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16558500": {
+    "homeTeam": "Durazno FC",
+    "awayTeam": "Deportivo LSM",
+    "league": "Torneo Final",
+    "time": "17:30",
+    "start_ts": 1785191400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15931181": {
+    "homeTeam": "EC Taveirópolis",
+    "awayTeam": "São Gabriel EC",
+    "league": "Sul-Mato-Grossense, Série B",
+    "time": "18:30",
+    "start_ts": 1785195000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16246420": {
+    "homeTeam": "Malaysia",
+    "awayTeam": "Laos",
+    "league": "ASEAN Championship, Group B",
+    "time": "08:00",
+    "start_ts": 1785243600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15260854": {
+    "homeTeam": "Rosenborg BK",
+    "awayTeam": "Fredrikstad FK",
+    "league": "Eliteserien",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16446360": {
+    "homeTeam": "Slezský FC Opava",
+    "awayTeam": "MFK Karviná",
+    "league": "FNL",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16316950": {
+    "homeTeam": "Zagłębie Lubin",
+    "awayTeam": "Piast Gliwice",
+    "league": "Ekstraklasa",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16000503": {
+    "homeTeam": "PPJ/Ruoholahti",
+    "awayTeam": "EIF/Akademi",
+    "league": "Kolmonen, Southern Group 1",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16273098": {
+    "homeTeam": "FC Hegelmann",
+    "awayTeam": "FK Žalgiris",
+    "league": "TOPLYGA",
+    "time": "10:45",
+    "start_ts": 1785167100,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389520": {
+    "homeTeam": "Vard Haugesund",
+    "awayTeam": "Sogndal IL II",
+    "league": "3rd Division, Group 3",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389703": {
+    "homeTeam": "Odds BK II",
+    "awayTeam": "Våg FK",
+    "league": "3rd Division, Group 4",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15472543": {
+    "homeTeam": "FK Grobiņa",
+    "awayTeam": "Ogre United",
+    "league": "Virsliga",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16246039": {
+    "homeTeam": "FC Nõmme United U21",
+    "awayTeam": "Viimsi JK",
+    "league": "Esiliiga",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15272468": {
+    "homeTeam": "BK Häcken",
+    "awayTeam": "AIK",
+    "league": "Allsvenskan",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389026": {
+    "homeTeam": "Ready",
+    "awayTeam": "Frigg",
+    "league": "3rd Division, Group 1",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389023": {
+    "homeTeam": "Lokomotiv Oslo",
+    "awayTeam": "KFUM Oslo II",
+    "league": "3rd Division, Group 1",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15254079": {
+    "homeTeam": "Vittsjö GIK",
+    "awayTeam": "Malmo FF",
+    "league": "Damallsvenskan",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389027": {
+    "homeTeam": "FK Union Carl Berner",
+    "awayTeam": "Asker",
+    "league": "3rd Division, Group 1",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16614413": {
+    "homeTeam": "Boca Juniors",
+    "awayTeam": "San Lorenzo",
+    "league": "Primera Division A, Women, Clausura",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16622023": {
+    "homeTeam": "River Plate Reserve",
+    "awayTeam": "Peñarol Reserve",
+    "league": "Tercera Division, Reserves",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16639840": {
+    "homeTeam": "Young Lionesses",
+    "awayTeam": "Zwekapin United",
+    "league": "Myanmar Women’s Football League",
+    "time": "04:00",
+    "start_ts": 1785229200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16494866": {
+    "homeTeam": "Galatasaray",
+    "awayTeam": "Venezia",
+    "league": "Club Friendly Games",
+    "time": "13:00",
+    "start_ts": 1785175200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16573977": {
+    "homeTeam": "Suruchi Sangha",
+    "awayTeam": "ASOS Rainbow AC",
+    "league": "Calcutta Premier Division, Group B",
+    "time": "04:30",
+    "start_ts": 1785144600,
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16636853": {
+    "homeTeam": "Neom SC",
+    "awayTeam": "Al-Arabi SC",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785171600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15657673": {
+    "homeTeam": "FK Metta",
+    "awayTeam": "FK Tukums 2000/Tss II",
+    "league": "1.Division",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16246424": {
+    "homeTeam": "Philippines",
+    "awayTeam": "Myanmar",
+    "league": "ASEAN Championship, Group B",
+    "time": "05:00",
+    "start_ts": 1785232800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16614949": {
+    "homeTeam": "Ferro Carril Oeste",
+    "awayTeam": "CA Talleres de Cordoba",
+    "league": "Primera Division A, Women, Clausura",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16354769": {
+    "homeTeam": "El Kanemi Warriors",
+    "awayTeam": "Ikorodu City",
+    "league": "Nigeria Federation Cup",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389519": {
+    "homeTeam": "Gneist",
+    "awayTeam": "SK Brann II",
+    "league": "3rd Division, Group 3",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15657672": {
+    "homeTeam": "Valmiera FC",
+    "awayTeam": "Riga FC II",
+    "league": "1.Division",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15462267": {
+    "homeTeam": "FC OKMK",
+    "awayTeam": "Mash Al Mubarek",
+    "league": "Super League",
+    "time": "10:00",
+    "start_ts": 1785164400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15432566": {
+    "homeTeam": "EC Bahia",
+    "awayTeam": "Botafogo",
+    "league": "Brasileirão Série A1, Women",
+    "time": "17:00",
+    "start_ts": 1785189600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16298651": {
+    "homeTeam": "FK Dunav Ruse",
+    "awayTeam": "Ludogorets",
+    "league": "Parva Liga",
+    "time": "11:00",
+    "start_ts": 1785168000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16384238": {
+    "homeTeam": "MTK Budapest",
+    "awayTeam": "Zalaegerszegi TE",
+    "league": "NB I",
+    "time": "12:30",
+    "start_ts": 1785173400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16477939": {
+    "homeTeam": "Atlético Goianiense",
+    "awayTeam": "Operário-PR",
+    "league": "Brasileirão Série B",
+    "time": "17:30",
+    "start_ts": 1785191400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15526205": {
+    "homeTeam": "Sport Recife",
+    "awayTeam": "Cuiabá",
+    "league": "Brasileirão Série B",
+    "time": "17:30",
+    "start_ts": 1785191400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16639610": {
+    "homeTeam": "Paro FC",
+    "awayTeam": "Thimphu FC",
+    "league": "Bhutan Premier League",
+    "time": "04:00",
+    "start_ts": 1785229200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16469415": {
+    "homeTeam": "Subiaco AFC",
+    "awayTeam": "Perth RedStar FC",
+    "league": "Western Australia NPL, Women",
+    "time": "06:30",
+    "start_ts": 1785238200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16639627": {
+    "homeTeam": "Sikkim Police",
+    "awayTeam": "Northerners FC",
+    "league": "Sikkim Premier League",
+    "time": "00:30",
+    "start_ts": 1785130200,
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16639650": {
+    "homeTeam": "Chanmari FC",
+    "awayTeam": "Dinthar FC",
+    "league": "Club Friendly Games",
+    "time": "00:30",
+    "start_ts": 1785130200,
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16389622": {
+    "homeTeam": "GV San José",
+    "awayTeam": "Club FC Universitario",
+    "league": "División Profesional",
+    "time": "14:00",
+    "start_ts": 1785178800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16640202": {
+    "homeTeam": "Saikhamakawn FC",
+    "awayTeam": "Mizoram Police FC",
+    "league": "Club Friendly Games",
+    "time": "03:15",
+    "start_ts": 1785140100,
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16303115": {
+    "homeTeam": "Costa Rica U20",
+    "awayTeam": "Mexico U20",
+    "league": "U20 CONCACAF Championship, Group B",
+    "time": "21:00",
+    "start_ts": 1785204000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16600026": {
+    "homeTeam": "Mawryngkneng SC",
+    "awayTeam": "Umphrup SC",
+    "league": "SSA Second Division, Group B",
+    "time": "05:30",
+    "start_ts": 1785234600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16632941": {
+    "homeTeam": "Police AC",
+    "awayTeam": "Techno Aryan",
+    "league": "Calcutta Premier Division",
+    "time": "04:30",
+    "start_ts": 1785144600,
+    "status": "inprogress",
+    "sport": "Football"
   }
 }
