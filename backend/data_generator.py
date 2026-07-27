@@ -138,10 +138,10 @@ def fetch_live_matches():
             if is_youth:
                 continue
                 
-            # Excluir partidos que ya empezaron hace ms de 1 hora o son del da anterior
+            # Excluir partidos que ya empezaron hace mas de 1 hora o son del dia anterior
             if "start_ts" in event_info and event_info["start_ts"]:
-                current_ts = datetime.utcnow().timestamp()
-                # Si el partido empez hace ms de 1 hora, excluirlo
+                current_ts = time.time()
+                # Si el partido empezo hace mas de 1 hora, excluirlo
                 if event_info["start_ts"] < (current_ts - 3600):
                     continue
 
@@ -256,9 +256,9 @@ def fetch_live_matches():
             all_odds_results = list(executor.map(fetch_event_all_odds, allowed_entries))
 
         for (eid, odd_data, event_info), real_odds in all_odds_results:
-            api_status = event_info.get("status", "notstarted")
-            if api_status == "inprogress": st = "in"
-            elif api_status == "finished": st = "post"
+            api_status = str(event_info.get("status", "notstarted")).lower()
+            if api_status in ["inprogress", "in progress", "live"]: st = "in"
+            elif api_status in ["finished", "ended", "closed", "completed", "postponed", "canceled", "cancelled"]: st = "post"
             else: st = "pre"
             
             if st == "post":
