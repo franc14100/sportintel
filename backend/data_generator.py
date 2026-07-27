@@ -2736,9 +2736,38 @@ def generate_daily_sports_data():
         ]
     }
 
+    # ── GUARDAR EN UPSTASH REDIS (VERCEL KV) ──
+    # Extraemos las credenciales que ya tienes configuradas en Vercel
+    kv_url = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_URL") or os.environ.get("KV_REST_API_URL")
+    kv_token = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_TOKEN") or os.environ.get("KV_REST_API_TOKEN")
+
+    if kv_url and kv_token:
+        print("[INFO] Subiendo datos a Upstash Redis...")
+        try:
+            # Quitamos el slash final si lo tiene y armamos la URL de guardado
+            base_url = kv_url.rstrip('/')
+            request_url = f"{base_url}/set/sportintel_data"
+            
+            # Convertimos el diccionario a texto JSON
+            json_data = json.dumps(payload, ensure_ascii=False)
+            
+            req = urllib.request.Request(request_url, data=json_data.encode('utf-8'), headers={
+                'Authorization': f'Bearer {kv_token}',
+                'Content-Type': 'application/json'
+            }, method='POST')
+            
+            with urllib.request.urlopen(req, timeout=10) as response:
+                print(f"[INFO] Éxito. Datos guardados en Redis. Respuesta: {response.read().decode('utf-8')}")
+        except Exception as e:
+            print(f"[ERROR] No se pudo guardar en Redis: {e}")
+    else:
+        print("[AVISO] Variables de Upstash no encontradas. Asegúrate de estar en Vercel.")
+
+    # Respaldo local (por si pruebas en tu computadora)
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(payload, f, ensure_ascii=False, indent=4)
-    print(f"Daily data successfully generated at {json_path}")
+    print(f"Respaldo local generado en {json_path}")
+
 
 if __name__ == "__main__":
     generate_daily_sports_data()
