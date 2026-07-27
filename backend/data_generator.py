@@ -145,7 +145,7 @@ def fetch_live_matches():
                 if event_info["start_ts"] < (current_ts - 3600):
                     continue
 
-            is_allowed = True
+            is_allowed = False 
             api_sport_name = event_info.get("sport", "Football")
             if api_sport_name == "Tennis":
                 if "ATP" in event_info["league"] or "WTA" in event_info["league"] or "Open" in event_info["league"]:
