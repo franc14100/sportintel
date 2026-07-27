@@ -1709,13 +1709,8 @@ def generate_daily_sports_data():
                         }
 
 
-    # Guardar en JSON estructurado
-    output_dir = os.path.dirname(os.path.abspath(__file__))
-    frontend_dir = os.path.join(os.path.dirname(output_dir), "frontend")
-    if not os.path.exists(frontend_dir):
-        os.makedirs(frontend_dir)
-        
-    json_path = os.path.join(frontend_dir, "data.json")
+    ## Guardar en JSON estructurado en carpeta temporal de Vercel
+    json_path = "/tmp/data.json"    
     
     # Armar boleto estrella premium de forma inteligente (Simple vs Combinado, priorizando Fútbol y Tenis)
     priority_picks = []
