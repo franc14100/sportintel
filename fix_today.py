@@ -5,11 +5,8 @@ with open('frontend/data.json', 'r', encoding='utf-8') as f:
     d = json.load(f)
 
 now_utc = datetime.now(timezone.utc)
-# Use strict minimum: 16:00 UTC (11:00 AM Ecuador) to avoid any ambiguity with yesterday's matches
 MIN_UTC = 16.0
 BANNED = ['Tarjeta', 'Asian 2.0', 'Primero en Anotar', 'Resultado 1er Tiempo', 'Goles del Equipo']
-
-print(f"UTC now: {now_utc.strftime('%H:%M')} — building tickets from matches after 16:00 UTC (11:00 EC)")
 
 future_picks = []
 for m in d.get('matches', []):
@@ -50,52 +47,58 @@ def tier(p):
     return 4
 
 future_picks.sort(key=lambda x: (tier(x), -x['probability']))
-print(f"Picks after 16:00 UTC: {len(future_picks)}")
-for p in future_picks[:8]:
-    print(f"  EC {p['time_ec']} | {p['match']} | {p['pick']} @{p['odd']} {p['probability']}%")
 
-def build_ticket(pool, used):
+# Force 2-pick combinados when both picks have high individual probability
+# Combined probability must be >= 75% (e.g. 91%*91% = 83%, 91%*87% = 79%, 87%*86% = 75%)
+def build_combo(pool, used, min_combo_prob=75):
     avail = [p for p in pool if p['match'] not in used]
     if not avail: return None
     best = avail[0]
     bp = best['probability']
-    if bp >= 85:
-        sels, t_odd, t_conf, t_type = [best], best['odd'], bp, 'Simple'
+    # Always try to pair to raise the odds, as long as combined prob >= min_combo_prob
+    second = None
+    for p in avail[1:]:
+        if p['match'] == best['match']: continue
+        combined = (bp/100) * (p['probability']/100) * 100
+        if combined >= min_combo_prob:
+            second = p
+            break
+    if second:
+        sels = [best, second]
+        t_odd = round(best['odd'] * second['odd'], 2)
+        t_conf = round((bp/100) * (second['probability']/100) * 100)
+        t_type = 'Combinado'
     else:
-        sec = next((p for p in avail[1:] if p['match'] != best['match']
-                    and p['probability'] >= 82
-                    and (bp/100)*(p['probability']/100)*100 >= 67), None)
-        if sec and bp >= 82:
-            sels = [best, sec]
-            t_odd = round(best['odd']*sec['odd'], 2)
-            t_conf = round((bp/100)*(sec['probability']/100)*100)
-            t_type = 'Combinado'
-        else:
-            sels, t_odd, t_conf, t_type = [best], best['odd'], bp, 'Simple'
+        # No suitable second pick — go simple
+        sels = [best]
+        t_odd = best['odd']
+        t_conf = bp
+        t_type = 'Simple'
     for s in sels: used.add(s['match'])
     return {
         'type': t_type,
         'selections': [{'match': s['match'],'sport':s['sport'],'market':s['market'],
                         'pick':s['pick'],'odd':s['odd'],'reasoning':s['reasoning']} for s in sels],
         'total_odd': round(t_odd, 2), 'confidence': t_conf,
-        'reasoning': f"{t_type} @{t_odd:.2f} — prob {t_conf}%. Partidos de hoy 27/07 despues de 11AM Ecuador.",
+        'reasoning': f"{t_type} @{t_odd:.2f} — prob conjunta {t_conf}%. Partidos de hoy 27/07 despues de 11AM EC.",
         'recommendation_stake': 4.0
     }
 
 used = set()
-t1 = build_ticket(future_picks, used)
-t2 = build_ticket(future_picks, used)
+t1 = build_combo(future_picks, used, min_combo_prob=78)
+t2 = build_combo(future_picks, used, min_combo_prob=75)
 if t2: t2['recommendation_stake'] = 3.0
-t3 = build_ticket(future_picks, used)
+t3 = build_combo(future_picks, used, min_combo_prob=70)
 if t3: t3['recommendation_stake'] = 2.0
 remaining = [p for p in future_picks if p['match'] not in used][:4]
-t4_odd = round(__import__('functools').reduce(lambda a,b: a*b, [p['odd'] for p in remaining], 1.0), 2) if remaining else 1.5
+t4_odd = 1.0
+for p in remaining: t4_odd *= p['odd']
 t4 = {
     'type': 'Combinado Sonador',
     'selections': [{'match':p['match'],'sport':p['sport'],'market':p['market'],
                     'pick':p['pick'],'odd':p['odd'],'reasoning':p['reasoning']} for p in remaining],
-    'total_odd': t4_odd, 'confidence': 55,
-    'reasoning': f"Sonadora @{t4_odd}. Picks nocturnos de hoy.", 'recommendation_stake': 1.0
+    'total_odd': round(t4_odd, 2), 'confidence': 55,
+    'reasoning': f"Sonadora @{round(t4_odd,2)}. Picks de tarde/noche 27/07.", 'recommendation_stake': 1.0
 }
 
 for k, t in [('star_ticket_1',t1),('star_ticket_2',t2),('star_ticket_3',t3),('star_ticket_4',t4)]:
@@ -104,13 +107,10 @@ for k, t in [('star_ticket_1',t1),('star_ticket_2',t2),('star_ticket_3',t3),('st
 with open('frontend/data.json', 'w', encoding='utf-8') as f:
     json.dump(d, f, ensure_ascii=False, indent=2)
 
-print("\n=== BOLETOS DEFINITIVOS ===")
+print("=== BOLETOS FINALES ===")
 for k in ['star_ticket_1','star_ticket_2','star_ticket_3','star_ticket_4']:
     t = d.get(k, {})
-    ec_times = []
+    print(f"\n{k} ({t.get('type')}) @{t.get('total_odd')} conf:{t.get('confidence')}%")
     for s in t.get('selections', []):
-        mp = next((p for p in future_picks if p['match']==s['match']), None)
-        ec_times.append(f"EC{mp['time_ec']}" if mp else "")
-    print(f"{k} ({t.get('type')}) @{t.get('total_odd')} conf:{t.get('confidence')}%")
-    for s, ec in zip(t.get('selections',[]), ec_times):
-        print(f"   {s['match']} {ec} @{s['odd']}")
+        mp = next((p for p in future_picks if p['match']==s['match']), {})
+        print(f"   EC {mp.get('time_ec','?')} | {s['match']} @{s['odd']} {mp.get('probability','?')}%")

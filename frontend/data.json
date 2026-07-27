@@ -17963,7 +17963,7 @@
     "reasoning": "🔗 Combinado para cuota mínima @1.58. Se añadió CSA vs São Luiz (Córners del Equipo (Individual)) para que el boleto supere el mínimo de valor de @1.50."
   },
   "star_ticket_1": {
-    "type": "Simple",
+    "type": "Combinado",
     "selections": [
       {
         "match": "Palmeiras vs Atlético Mineiro",
@@ -17972,16 +17972,7 @@
         "pick": "Palmeiras o Empate",
         "odd": 1.12,
         "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Palmeiras hace casi imposible un resultado diferente al cubierto por esta apuesta."
-      }
-    ],
-    "total_odd": 1.12,
-    "confidence": 91,
-    "reasoning": "Simple @1.12 — prob 91%. Partidos de hoy 27/07 despues de 11AM Ecuador.",
-    "recommendation_stake": 4.0
-  },
-  "star_ticket_2": {
-    "type": "Simple",
-    "selections": [
+      },
       {
         "match": "Red Bull Bragantino vs Coritiba",
         "sport": "Football",
@@ -17991,13 +17982,13 @@
         "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Red Bull Bragantino hace casi imposible un resultado diferente al cubierto por esta apuesta."
       }
     ],
-    "total_odd": 1.1,
-    "confidence": 91,
-    "reasoning": "Simple @1.10 — prob 91%. Partidos de hoy 27/07 despues de 11AM Ecuador.",
-    "recommendation_stake": 3.0
+    "total_odd": 1.23,
+    "confidence": 83,
+    "reasoning": "Combinado @1.23 — prob conjunta 83%. Partidos de hoy 27/07 despues de 11AM EC.",
+    "recommendation_stake": 4.0
   },
-  "star_ticket_3": {
-    "type": "Simple",
+  "star_ticket_2": {
+    "type": "Combinado",
     "selections": [
       {
         "match": "Guarani vs Inter de Limeira",
@@ -18006,16 +17997,7 @@
         "pick": "Guarani o Empate",
         "odd": 1.11,
         "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Guarani hace casi imposible un resultado diferente al cubierto por esta apuesta."
-      }
-    ],
-    "total_odd": 1.11,
-    "confidence": 90,
-    "reasoning": "Simple @1.11 — prob 90%. Partidos de hoy 27/07 despues de 11AM Ecuador.",
-    "recommendation_stake": 2.0
-  },
-  "star_ticket_4": {
-    "type": "Combinado Sonador",
-    "selections": [
+      },
       {
         "match": "CF Pachuca vs Querétaro FC",
         "sport": "Football",
@@ -18023,7 +18005,16 @@
         "pick": "CF Pachuca o Empate",
         "odd": 1.14,
         "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de CF Pachuca hace casi imposible un resultado diferente al cubierto por esta apuesta."
-      },
+      }
+    ],
+    "total_odd": 1.27,
+    "confidence": 78,
+    "reasoning": "Combinado @1.27 — prob conjunta 78%. Partidos de hoy 27/07 despues de 11AM EC.",
+    "recommendation_stake": 3.0
+  },
+  "star_ticket_3": {
+    "type": "Combinado",
+    "selections": [
       {
         "match": "Deportivo Garcilaso vs FC Cajamarca",
         "sport": "Football",
@@ -18039,7 +18030,16 @@
         "pick": "Caxias o Empate",
         "odd": 1.18,
         "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Caxias hace casi imposible un resultado diferente al cubierto por esta apuesta."
-      },
+      }
+    ],
+    "total_odd": 1.39,
+    "confidence": 72,
+    "reasoning": "Combinado @1.39 — prob conjunta 72%. Partidos de hoy 27/07 despues de 11AM EC.",
+    "recommendation_stake": 2.0
+  },
+  "star_ticket_4": {
+    "type": "Combinado Sonador",
+    "selections": [
       {
         "match": "Sport Recife vs Cuiabá",
         "sport": "Football",
@@ -18047,11 +18047,35 @@
         "pick": "Sport Recife o Empate",
         "odd": 1.18,
         "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Sport Recife hace casi imposible un resultado diferente al cubierto por esta apuesta."
+      },
+      {
+        "match": "Deportivo Riestra vs Boca Juniors",
+        "sport": "Football",
+        "market": "Doble Oportunidad",
+        "pick": "Boca Juniors o Empate",
+        "odd": 1.25,
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Boca Juniors hace casi imposible un resultado diferente al cubierto por esta apuesta."
+      },
+      {
+        "match": "Guaraní vs Sportivo Luqueño",
+        "sport": "Football",
+        "market": "Doble Oportunidad",
+        "pick": "Guaraní o Empate",
+        "odd": 1.25,
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Guaraní hace casi imposible un resultado diferente al cubierto por esta apuesta."
+      },
+      {
+        "match": "CSD Amatitlán vs Chichicasteco FC",
+        "sport": "Football",
+        "market": "Doble Oportunidad",
+        "pick": "CSD Amatitlán o Empate",
+        "odd": 1.25,
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de CSD Amatitlán hace casi imposible un resultado diferente al cubierto por esta apuesta."
       }
     ],
-    "total_odd": 1.87,
+    "total_odd": 2.3,
     "confidence": 55,
-    "reasoning": "Sonadora @1.87. Picks nocturnos de hoy.",
+    "reasoning": "Sonadora @2.3. Picks de tarde/noche 27/07.",
     "recommendation_stake": 1.0
   },
   "historical_tickets_registry": [
