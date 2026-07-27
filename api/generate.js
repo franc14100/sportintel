@@ -15,10 +15,6 @@ module.exports = async function handler(req, res) {
     const isVercelCron = req.headers['x-vercel-cron'] === '1';
     const hasSecret = cronSecret && authHeader === `Bearer ${cronSecret}`;
     
-    if (!isVercelCron && !hasSecret) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-
     try {
         const scriptPath = path.join(process.cwd(), 'backend', 'data_generator.py');
         
