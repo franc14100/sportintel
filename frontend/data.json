@@ -17963,120 +17963,96 @@
     "reasoning": "🔗 Combinado para cuota mínima @1.58. Se añadió CSA vs São Luiz (Córners del Equipo (Individual)) para que el boleto supere el mínimo de valor de @1.50."
   },
   "star_ticket_1": {
-    "type": "Combinado",
+    "type": "Simple",
     "selections": [
       {
-        "match": "Criciúma vs Náutico",
+        "match": "Palmeiras vs Atlético Mineiro",
         "sport": "Football",
         "market": "Doble Oportunidad",
-        "pick": "Criciúma o Empate",
+        "pick": "Palmeiras o Empate",
         "odd": 1.12,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Criciúma hace casi imposible un resultado diferente al cubierto por esta apuesta."
-      },
-      {
-        "match": "CSA vs São Luiz",
-        "sport": "Football",
-        "market": "Córners del Equipo (Individual)",
-        "pick": "CSA Más de 4.5 Córners",
-        "odd": 1.41,
-        "reasoning": "CSA concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. Su dominio territorial proyecta un promedio de 5 saques de esquina individuales. La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente."
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Palmeiras hace casi imposible un resultado diferente al cubierto por esta apuesta."
       }
     ],
-    "total_odd": 1.58,
-    "confidence": 82,
-    "reasoning": "🔗 Combinado para cuota mínima @1.58. Se añadió CSA vs São Luiz (Córners del Equipo (Individual)) para que el boleto supere el mínimo de valor de @1.50.",
-    "recommendation_stake": 9.9
+    "total_odd": 1.12,
+    "confidence": 91,
+    "reasoning": "Simple @1.12 — prob 91%. Partidos de hoy 27/07 despues de 11AM Ecuador.",
+    "recommendation_stake": 4.0
   },
   "star_ticket_2": {
-    "type": "Combinado",
+    "type": "Simple",
     "selections": [
       {
-        "match": "San Carlos vs CD Escorpiones Belen",
+        "match": "Red Bull Bragantino vs Coritiba",
         "sport": "Football",
         "market": "Doble Oportunidad",
-        "pick": "San Carlos o Empate",
-        "odd": 1.4,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de San Carlos hace casi imposible un resultado diferente al cubierto por esta apuesta."
-      },
-      {
-        "match": "Orense SC vs Independiente del Valle",
-        "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "Independiente del Valle o Empate",
-        "odd": 1.18,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Independiente del Valle hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "pick": "Red Bull Bragantino o Empate",
+        "odd": 1.1,
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Red Bull Bragantino hace casi imposible un resultado diferente al cubierto por esta apuesta."
       }
     ],
-    "total_odd": 1.65,
-    "confidence": 82,
-    "reasoning": "🔗 Combinado para cuota mínima @1.65. Se añadió Orense SC vs Independiente del Valle (Doble Oportunidad) para que el boleto supere el mínimo de valor de @1.50.",
-    "recommendation_stake": 10.0
+    "total_odd": 1.1,
+    "confidence": 91,
+    "reasoning": "Simple @1.10 — prob 91%. Partidos de hoy 27/07 despues de 11AM Ecuador.",
+    "recommendation_stake": 3.0
   },
   "star_ticket_3": {
-    "type": "Combinado",
+    "type": "Simple",
     "selections": [
       {
-        "match": "Universidad Técnica de Cajamarca vs CD Moquegua",
-        "sport": "Football",
-        "market": "Córners del Equipo (Individual)",
-        "pick": "Universidad Técnica de Cajamarca Más de 4.5 Córners",
-        "odd": 1.37,
-        "reasoning": "Universidad Técnica de Cajamarca concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. Su dominio territorial proyecta un promedio de 8 saques de esquina individuales. La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente."
-      },
-      {
-        "match": "Estudiantes de La Plata vs CA Independiente",
+        "match": "Guarani vs Inter de Limeira",
         "sport": "Football",
         "market": "Doble Oportunidad",
-        "pick": "Estudiantes de La Plata o Empate",
-        "odd": 1.21,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Estudiantes de La Plata hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "pick": "Guarani o Empate",
+        "odd": 1.11,
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Guarani hace casi imposible un resultado diferente al cubierto por esta apuesta."
       }
     ],
-    "total_odd": 1.66,
-    "confidence": 81,
-    "reasoning": "🔗 Combinado para cuota mínima @1.66. Se añadió Estudiantes de La Plata vs CA Independiente (Doble Oportunidad) para que el boleto supere el mínimo de valor de @1.50.",
-    "recommendation_stake": 2.5
+    "total_odd": 1.11,
+    "confidence": 90,
+    "reasoning": "Simple @1.11 — prob 90%. Partidos de hoy 27/07 despues de 11AM Ecuador.",
+    "recommendation_stake": 2.0
   },
   "star_ticket_4": {
-    "type": "Combinado Soñador",
+    "type": "Combinado Sonador",
     "selections": [
       {
-        "match": "Deportivo Riestra vs Boca Juniors",
+        "match": "CF Pachuca vs Querétaro FC",
         "sport": "Football",
         "market": "Doble Oportunidad",
-        "pick": "Boca Juniors o Empate",
-        "odd": 1.25,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Boca Juniors hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "pick": "CF Pachuca o Empate",
+        "odd": 1.14,
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de CF Pachuca hace casi imposible un resultado diferente al cubierto por esta apuesta."
       },
       {
-        "match": "Aucas vs Macará",
+        "match": "Deportivo Garcilaso vs FC Cajamarca",
         "sport": "Football",
         "market": "Doble Oportunidad",
-        "pick": "Aucas o Empate",
-        "odd": 1.29,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Aucas hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "pick": "Deportivo Garcilaso o Empate",
+        "odd": 1.18,
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Deportivo Garcilaso hace casi imposible un resultado diferente al cubierto por esta apuesta."
       },
       {
-        "match": "Olimpia vs Libertad",
+        "match": "Caxias vs Botafogo-PB",
         "sport": "Football",
         "market": "Doble Oportunidad",
-        "pick": "Olimpia o Empate",
-        "odd": 1.25,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Olimpia hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "pick": "Caxias o Empate",
+        "odd": 1.18,
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Caxias hace casi imposible un resultado diferente al cubierto por esta apuesta."
       },
       {
-        "match": "Guaraní vs Sportivo Luqueño",
+        "match": "Sport Recife vs Cuiabá",
         "sport": "Football",
         "market": "Doble Oportunidad",
-        "pick": "Guaraní o Empate",
-        "odd": 1.25,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Guaraní hace casi imposible un resultado diferente al cubierto por esta apuesta."
+        "pick": "Sport Recife o Empate",
+        "odd": 1.18,
+        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Sport Recife hace casi imposible un resultado diferente al cubierto por esta apuesta."
       }
     ],
-    "total_odd": 2.52,
-    "confidence": 50,
-    "reasoning": "🚀 Apuesta Soñadora del Dólar (Cuota Total: @5.24). Combinamos 7 selecciones de alta probabilidad para buscar multiplicar $1.00 por @5.24. Diseñado para arriesgar solo $1.00 de banca con un retorno exponencial altamente seguro.",
-    "recommendation_stake": 0.8
+    "total_odd": 1.87,
+    "confidence": 55,
+    "reasoning": "Sonadora @1.87. Picks nocturnos de hoy.",
+    "recommendation_stake": 1.0
   },
   "historical_tickets_registry": [
     {
