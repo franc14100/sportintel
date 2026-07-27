@@ -18552,5 +18552,59 @@
     "start_ts": 1785156300,
     "status": "inprogress",
     "sport": "Football"
+  },
+  "16448912": {
+    "homeTeam": "TRAU FC",
+    "awayTeam": "Neroca FC",
+    "league": "Durand Cup, Group D",
+    "time": "11:30",
+    "start_ts": 1785238200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16462345": {
+    "homeTeam": "FC Zürich",
+    "awayTeam": "SC Freiburg",
+    "league": "Women Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785240000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16642912": {
+    "homeTeam": "CF Intercity",
+    "awayTeam": "CDFB L’Eliana",
+    "league": "Women Club Friendly Games",
+    "time": "16:30",
+    "start_ts": 1785169800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16642962": {
+    "homeTeam": "Sikkim Brotherhood FC",
+    "awayTeam": "Howlers SC",
+    "league": "SFA \"A\" Division S-League 2026",
+    "time": "09:00",
+    "start_ts": 1785229200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16642947": {
+    "homeTeam": "Sang Mustang FC",
+    "awayTeam": "Sikkim Boys Club",
+    "league": "Sikkim Premier League",
+    "time": "05:30",
+    "start_ts": 1785216600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16642870": {
+    "homeTeam": "Nigeria U20",
+    "awayTeam": "Ghana U20",
+    "league": "U20 Friendly Games",
+    "time": "14:00",
+    "start_ts": 1785160800,
+    "status": "inprogress",
+    "sport": "Football"
   }
 }
