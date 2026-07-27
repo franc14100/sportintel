@@ -26,11 +26,12 @@ module.exports = async function handler(req, res) {
             return res.status(500).json({ error: 'Generator script not found' });
         }
 
-        // Run the Python generator
+        // Run the Python generator con hora de Ecuador
         const result = execSync(`python "${scriptPath}"`, {
             timeout: 120000, // 2 minutes max
             cwd: process.cwd(),
-            encoding: 'utf-8'
+            encoding: 'utf-8',
+            env: { ...process.env, TZ: 'America/Guayaquil' }
         });
 
         // Read the generated data to confirm success
