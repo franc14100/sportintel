@@ -147,9 +147,9 @@ def fetch_live_matches():
             if not event_info.get("start_ts"):
                 continue
             
-            # Excluir partidos que ya empezaron hace mas de 1 hora o son del dia anterior
+            # Excluir partidos de hace más de 24 horas (mantener jugados hoy para evaluación de aciertos/errores)
             current_ts = time.time()
-            if event_info["start_ts"] < (current_ts - 3600):
+            if event_info["start_ts"] < (current_ts - 86400):
                 continue
 
             is_allowed = True 
@@ -264,9 +264,7 @@ def fetch_live_matches():
             elif api_status in ["finished", "ended", "closed", "completed", "postponed", "canceled", "cancelled"]: st = "post"
             else: st = "pre"
             
-            if st == "post":
-                continue
-            
+            # Incluir partidos pre, in y post para auto-evaluación del algoritmo
             h_col, h_acc, a_col, a_acc = "#1F2937", "#3B82F6", "#1F2937", "#EF4444"
             if event_info.get("sport") == "Tennis":
                 h_col, h_acc, a_col, a_acc = "#84CC16", "#A3E635", "#10B981", "#34D399"
@@ -1711,6 +1709,23 @@ def generate_daily_sports_data():
                             "explanation": fail_reason,
                             "lesson": lesson
                         }
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # FILTRO TOP 30% MÁS SEGUROS (SOLICITADO POR EL USUARIO)
+    # ═══════════════════════════════════════════════════════════════════════
+    total_analyzed = len(matches_data)
+    for m in matches_data:
+        m['_safety_score'] = max((p.get('probability', 0) for p in m.get('picks', [])), default=0)
+    
+    # Ordenar por probabilidad/seguridad descendente
+    matches_data.sort(key=lambda x: x['_safety_score'], reverse=True)
+    
+    # Seleccionar el top 30% de los partidos más seguros (entre 15 y 45 partidos)
+    top_30_count = max(15, min(45, int(total_analyzed * 0.30))) if total_analyzed > 0 else len(matches_data)
+    matches_data = matches_data[:top_30_count]
+    
+    for m in matches_data:
+        m.pop('_safety_score', None)
 
 
     ## Guardar en JSON estructurado (en Vercel es /tmp, en GitHub Actions es local)
