@@ -168,8 +168,11 @@ def fetch_live_matches():
                 continue
             
             # Garantizar que el partido corresponda estrictamente a la fecha de 'today' en hora de Ecuador
+            # y que el horario sea desde las 08:00 en adelante.
             match_ecuador_time = datetime.fromtimestamp(event_info["start_ts"], timezone.utc) - timedelta(hours=5)
             if match_ecuador_time.strftime("%Y-%m-%d") != today:
+                continue
+            if match_ecuador_time.hour < 8:
                 continue
 
             is_allowed = True 
