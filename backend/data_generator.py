@@ -143,12 +143,14 @@ def fetch_live_matches():
             if is_youth:
                 continue
                 
+            # Excluir partidos sin hora programada
+            if not event_info.get("start_ts"):
+                continue
+            
             # Excluir partidos que ya empezaron hace mas de 1 hora o son del dia anterior
-            if "start_ts" in event_info and event_info["start_ts"]:
-                current_ts = time.time()
-                # Si el partido empezo hace mas de 1 hora, excluirlo
-                if event_info["start_ts"] < (current_ts - 3600):
-                    continue
+            current_ts = time.time()
+            if event_info["start_ts"] < (current_ts - 3600):
+                continue
 
             is_allowed = True 
             api_sport_name = event_info.get("sport", "Football")
@@ -2753,7 +2755,7 @@ def generate_daily_sports_data():
             request_url = f"{base_url}/set/sportintel_data"
             
             # Convertimos el diccionario a texto JSON
-            json_data = json.dumps(payload, ensure_ascii=False)
+            json_data = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
             
             req = urllib.request.Request(request_url, data=json_data.encode('utf-8'), headers={
                 'Authorization': f'Bearer {kv_token}',

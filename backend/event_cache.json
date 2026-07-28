@@ -20388,5 +20388,59 @@
     "start_ts": 1785284100,
     "status": "notstarted",
     "sport": "Football"
+  },
+  "16447010": {
+    "homeTeam": "Rochdale",
+    "awayTeam": "FC Halifax Town",
+    "league": "Club Friendly Games",
+    "time": "13:45",
+    "start_ts": 1785264300,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16431110": {
+    "homeTeam": "Banfield",
+    "awayTeam": "Sarmiento",
+    "league": "Liga Profesional, Clausura",
+    "time": "17:00",
+    "start_ts": 1785276000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16499040": {
+    "homeTeam": "Brindabella Blues U23",
+    "awayTeam": "Queanbeyan City U23",
+    "league": "NPL Capital U23",
+    "time": "02:30",
+    "start_ts": 1785310200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16646475": {
+    "homeTeam": "Argentino de Merlo Reserve",
+    "awayTeam": "UAI Urquiza Reserve",
+    "league": "Camp. De Reser De Primera Division B Metropolitana",
+    "time": "12:00",
+    "start_ts": 1785258000,
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16533308": {
+    "homeTeam": "Gimcheon Sangmu FC",
+    "awayTeam": "Suwon FC",
+    "league": "Korean Cup",
+    "time": "05:00",
+    "start_ts": 1785319200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16651048": {
+    "homeTeam": "Queens University",
+    "awayTeam": "Ballyclare Comrades",
+    "league": "Club Friendly Games",
+    "time": "13:00",
+    "start_ts": 1785261600,
+    "status": "inprogress",
+    "sport": "Football"
   }
 }
