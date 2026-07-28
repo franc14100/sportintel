@@ -296,7 +296,7 @@ def fetch_live_matches():
     if new_events_found > 0:
         save_cache(cache)
         
-    return fetched_matches, len(allowed_entries)
+    return fetched_matches, len(cache)
 
 
 def smart_pick_selector(real_odds, home_name, away_name):
@@ -605,9 +605,10 @@ def generate_daily_sports_data():
                         RATING_ADJUSTMENTS[away_t] = RATING_ADJUSTMENTS.get(away_t, 0) + 0.8
 
     print("[INFO] Conectando a internet para buscar partidos reales...")
-    espn_matches, total_analyzed = fetch_live_matches()
+    espn_matches, _ = fetch_live_matches()
     
     live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Basketball', 'Tennis']]
+    total_analyzed = len(live_matches)
     
     if not live_matches:
         print("[AVISO] No se obtuvieron partidos filtrados en vivo desde la API para el día de hoy.")
