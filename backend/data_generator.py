@@ -34,16 +34,36 @@ def get_cache_path():
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
 
 def load_cache():
+    kv_url = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_URL") or os.environ.get("KV_REST_API_URL")
+    kv_token = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_TOKEN") or os.environ.get("KV_REST_API_TOKEN")
+    if kv_url and kv_token:
+        try:
+            base_url = kv_url.rstrip('/')
+            req = urllib.request.Request(f"{base_url}/get/sportintel_cache", headers={'Authorization': f'Bearer {kv_token}'})
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                data = json.loads(resp.read().decode('utf-8'))
+                if data and data.get("result"):
+                    return json.loads(data["result"])
+        except:
+            pass
     cache_path = get_cache_path()
     if os.path.exists(cache_path):
         with open(cache_path, 'r', encoding='utf-8') as f:
-            try:
-                return json.load(f)
-            except:
-                pass
+            try: return json.load(f)
+            except: pass
     return {}
 
 def save_cache(cache):
+    kv_url = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_URL") or os.environ.get("KV_REST_API_URL")
+    kv_token = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_TOKEN") or os.environ.get("KV_REST_API_TOKEN")
+    if kv_url and kv_token:
+        try:
+            base_url = kv_url.rstrip('/')
+            json_data = json.dumps(cache, ensure_ascii=False, separators=(',', ':'))
+            req = urllib.request.Request(f"{base_url}/set/sportintel_cache", data=json_data.encode('utf-8'), headers={'Authorization': f'Bearer {kv_token}', 'Content-Type': 'application/json'}, method='POST')
+            urllib.request.urlopen(req, timeout=5)
+        except:
+            pass
     cache_path = get_cache_path()
     with open(cache_path, 'w', encoding='utf-8') as f:
         json.dump(cache, f, ensure_ascii=False, indent=2)
