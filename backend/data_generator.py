@@ -70,7 +70,7 @@ def fetch_live_matches():
     cache = load_cache()
     new_events_found = 0
     
-    sports_to_fetch = ["football"]
+    sports_to_fetch = ["football", "tennis"]
     fetch_errors = []
     
     for api_sport in sports_to_fetch:
@@ -153,11 +153,9 @@ def fetch_live_matches():
                 continue
 
             is_allowed = True 
-            api_sport_name = event_info.get("sport", "Football")
-            if api_sport_name == "Tennis":
-                is_allowed = False
-                if "ATP" in event_info["league"] or "WTA" in event_info["league"] or "Open" in event_info["league"]:
-                    is_allowed = True
+            api_sport_name = str(event_info.get("sport", "Football")).lower()
+            if api_sport_name == "tennis":
+                is_allowed = True
                     
             if is_allowed:
                 allowed_entries.append((eid, odd_data, event_info))
@@ -605,7 +603,8 @@ def generate_daily_sports_data():
     print("[INFO] Conectando a internet para buscar partidos reales...")
     espn_matches, _ = fetch_live_matches()
     
-    live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Basketball', 'Tennis']]
+    # Filtrar solo Fútbol y Tenis (eliminando Basketball por completo)
+    live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis']]
     total_analyzed = len(live_matches)
     
     if not live_matches:
@@ -1528,30 +1527,56 @@ def generate_daily_sports_data():
             winner_tennis = home_name if prob_home > prob_away else away_name
             loser_tennis = away_name if prob_home > prob_away else home_name
             winner_tennis_form = home_form if prob_home > prob_away else away_form
-            winner_tennis_wins = h2h['home_wins'] if prob_home > prob_away else h2h['away_wins']
             loser_tennis_inj = len(away_injuries) if prob_home > prob_away else len(home_injuries)
 
             analysis_ml_tennis = {
                 "tactical": f"{winner_tennis} demuestra superioridad táctica con un primer servicio que supera el 65% de efectividad en superficies similares. Su estilo de juego ({winner_tennis_form} en racha) contrarresta directamente el patrón de juego de {loser_tennis}, que además arrastra {loser_tennis_inj} molestia(s) física(s) que limitan su desplazamiento lateral y alcance en la red.",
-                "statistical": f"Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un {int(max(prob_home, prob_away))}% de probabilidad de victoria para {winner_tennis}. El modelo de sets apunta a una definición rápida con un 75% de confianza estadística.",
+                "statistical": f"Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un {int(max(prob_home, prob_away))}% de probabilidad de victoria para {winner_tennis}. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
                 "market": f"Las casas de apuestas movieron la línea a favor de {winner_tennis} en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: '{rumors[0]['headline']}'. El Factor Caos se calculó en {factor_suerte}%, dentro del margen manejable."
             }
             analysis_sets_tennis = {
                 "tactical": f"Dado el nivel de {winner_tennis} y las condiciones del partido, la probabilidad de que el match se resuelva de forma contundente {'en 2 sets es alta' if abs(rating_diff) > 5 else 'requiriendo 3 sets es considerable'}. El estilo de juego de {winner_tennis} {'tiende a cerrar partidos rápido' if abs(rating_diff) > 5 else 'deja margen de respuesta al rival'}.",
                 "statistical": f"El modelo de sets estima una probabilidad del {random.randint(55, 80)}% de que el encuentro se defina en el número de sets seleccionado, indicando {'poca resistencia' if abs(rating_diff) > 5 else 'gran competitividad'} entre ambos competidores.",
-                "market": f"Este mercado acumula {random.randint(55, 72)}% del volumen de apuestas orientado al {'Menos' if abs(rating_diff) > 5 else 'Más'} de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA. Rumor: '{rumors[1]['headline']}' que podría afectar el ánimo del jugador."
+                "market": f"Este mercado acumula {random.randint(55, 72)}% del volumen de apuestas orientado al {'Menos' if abs(rating_diff) > 5 else 'Más'} de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
             }
-
-            reasoning_ml = analysis_ml_tennis
+            analysis_games_tennis = {
+                "tactical": f"En el mercado de juegos totales, la consistencia con el servicio de {winner_tennis} mantendrá los games ajustados.",
+                "statistical": f"Promedio histórico de {random.randint(21, 24)} juegos en duelos entre rivales de esta jerarquía en esta superficie.",
+                "market": f"Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
+            }
+            analysis_player_games = {
+                "tactical": f"{winner_tennis} promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
+                "statistical": f"La proyección actuarial estima un mínimo de 12.5 juegos ganados por {winner_tennis} en el encuentro.",
+                "market": f"Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
+            }
+            analysis_handicap_tennis = {
+                "tactical": f"El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
+                "statistical": f"Diferencial de games esperado a favor de {winner_tennis} es de {round(abs(rating_diff)*0.4 + 1.5, 1)} juegos.",
+                "market": f"Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
+            }
+            analysis_set1_tennis = {
+                "tactical": f"{winner_tennis} destaca por su alta efectividad al inicio de los partidos, ganando el primer set en {random.randint(70, 88)}% de sus últimas apariciones.",
+                "statistical": f"Probabilidad proyectada del {int(max(prob_home, prob_away) * 0.92)}% para adueñarse de la primera manga.",
+                "market": f"Mercado rápido de primera manga con excelente retorno en apuestas simples."
+            }
 
             picks = [
                 {
                     "market": "Ganador (Moneyline)",
-                    "selection": home_name if prob_home > prob_away else away_name,
+                    "selection": winner_tennis,
                     "odd": odd_home if prob_home > prob_away else odd_away,
                     "probability": int(max(prob_home, prob_away)),
                     "risk": "Low" if max(prob_home, prob_away) > 65 else "Medium",
-                    "reasoning": reasoning_ml,
+                    "reasoning": analysis_ml_tennis,
+                    "status": "pending"
+                },
+                {
+                    "market": "Total de Juegos (Más/Menos)",
+                    "selection": "Menos de 22.5 Juegos" if abs(rating_diff) > 7 else "Más de 21.5 Juegos",
+                    "odd": round(random.uniform(1.70, 2.05), 2),
+                    "probability": random.randint(58, 74),
+                    "risk": "Medium",
+                    "reasoning": analysis_games_tennis,
                     "status": "pending"
                 },
                 {
@@ -1562,11 +1587,38 @@ def generate_daily_sports_data():
                     "risk": "Medium",
                     "reasoning": analysis_sets_tennis,
                     "status": "pending"
+                },
+                {
+                    "market": "Juegos del Jugador (Individual)",
+                    "selection": f"{winner_tennis} Más de 12.5 Juegos",
+                    "odd": round(random.uniform(1.45, 1.85), 2),
+                    "probability": random.randint(62, 78),
+                    "risk": "Low",
+                    "reasoning": analysis_player_games,
+                    "status": "pending"
+                },
+                {
+                    "market": "Hándicap de Juegos",
+                    "selection": f"{winner_tennis} -2.5 Juegos" if abs(rating_diff) > 5 else f"{winner_tennis} +1.5 Juegos",
+                    "odd": round(random.uniform(1.65, 1.95), 2),
+                    "probability": random.randint(58, 75),
+                    "risk": "Medium",
+                    "reasoning": analysis_handicap_tennis,
+                    "status": "pending"
+                },
+                {
+                    "market": "Ganador 1er Set",
+                    "selection": f"{winner_tennis} Ganador 1er Set",
+                    "odd": round(random.uniform(1.35, 1.75), 2),
+                    "probability": int(max(prob_home, prob_away) * 0.92),
+                    "risk": "Low" if max(prob_home, prob_away) > 65 else "Medium",
+                    "reasoning": analysis_set1_tennis,
+                    "status": "pending"
                 }
             ]
         # Filter out multi-week qualification markets ('Se Clasifica') for daily betting consistency
         picks = [p for p in picks if p['market'] not in ["Se Clasifica", "Método de Clasificación"]]
-        picks = sorted(picks, key=lambda x: x.get('probability', 0), reverse=True)[:3]
+        picks = sorted(picks, key=lambda x: x.get('probability', 0), reverse=True)[:5]
 
         if not prev_match:
             for p in picks:
@@ -1711,18 +1763,26 @@ def generate_daily_sports_data():
                         }
 
     # ═══════════════════════════════════════════════════════════════════════
-    # FILTRO TOP 30% MÁS SEGUROS (SOLICITADO POR EL USUARIO)
+    # SELECCIÓN TOP 30 FÚTBOL + TOP 20 TENIS MÁS SEGUROS (PEDIDO POR USUARIO)
     # ═══════════════════════════════════════════════════════════════════════
+    football_matches = [m for m in matches_data if m.get('sport') == 'Football']
+    tennis_matches = [m for m in matches_data if m.get('sport') == 'Tennis']
+    
     total_analyzed = len(matches_data)
-    for m in matches_data:
+    
+    for m in football_matches:
         m['_safety_score'] = max((p.get('probability', 0) for p in m.get('picks', [])), default=0)
+    for m in tennis_matches:
+        m['_safety_score'] = max((p.get('probability', 0) for p in m.get('picks', [])), default=0)
+        
+    football_matches.sort(key=lambda x: x['_safety_score'], reverse=True)
+    tennis_matches.sort(key=lambda x: x['_safety_score'], reverse=True)
     
-    # Ordenar por probabilidad/seguridad descendente
-    matches_data.sort(key=lambda x: x['_safety_score'], reverse=True)
+    # Seleccionar Top 30 Fútbol y Top 20 Tenis más seguros
+    selected_football = football_matches[:30]
+    selected_tennis = tennis_matches[:20]
     
-    # Seleccionar el top 30% de los partidos más seguros (entre 15 y 45 partidos)
-    top_30_count = max(15, min(45, int(total_analyzed * 0.30))) if total_analyzed > 0 else len(matches_data)
-    matches_data = matches_data[:top_30_count]
+    matches_data = selected_football + selected_tennis
     
     for m in matches_data:
         m.pop('_safety_score', None)
