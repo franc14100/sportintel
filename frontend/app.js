@@ -3087,7 +3087,7 @@ document.addEventListener("DOMContentLoaded", () => {
         pendingRegisterTicket = ticket;
         const currentCapital = parseFloat(localStorage.getItem("starting_bankroll")) || 1000;
 
-        let label = suffix === "3" ? "Apuesta Soñadora del Dólar" : (suffix === "1" ? "Boleto Estrella 1 (Seguro)" : "Boleto Estrella 2 (Valor)");
+        let label = suffix === "4" ? "Apuesta Soñadora del Dólar" : (suffix === "3" ? "Boleto Extra del Día" : (suffix === "1" ? "Boleto Estrella 1 (Seguro)" : "Boleto Estrella 2 (Valor)"));
         if (titleEl) titleEl.textContent = `Registrar ${label}`;
 
         let matchSummary = "";
@@ -3104,7 +3104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (oddInput) oddInput.value = ticket.total_odd.toFixed(2);
 
         const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : 1.0));
-        let defaultCash = suffix === "3" ? 1.0 : (currentCapital * recStake / 100);
+        let defaultCash = suffix === "4" ? 1.0 : (currentCapital * recStake / 100);
         if (stakeInput) stakeInput.value = defaultCash.toFixed(2);
         if (statusSelect) statusSelect.value = "pending";
 
