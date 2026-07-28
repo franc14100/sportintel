@@ -183,15 +183,27 @@ document.addEventListener("DOMContentLoaded", () => {
                             setSyncStatus("ok", "Sincronizado ✓");
                             lastLocalStateHash = getNormalizedStateHash(fullState);
                         }
+                    } else if (result.saved === false) {
+                        // Server returned 200 but couldn't save to remote storage
+                        // Data is safe in localStorage — show warning not error
+                        lastLocalStateHash = getNormalizedStateHash(fullState);
+                        pushRetryCount = 0;
+                        setSyncStatus("ok", "Local ✓ (nube no disp.)");
+                        console.warn("[Sync] ⚠️ Saved locally, cloud unavailable:", result.warning);
+                    } else {
+                        // Unknown response — treat as ok to avoid retry loop
+                        lastLocalStateHash = getNormalizedStateHash(fullState);
+                        setSyncStatus("ok", "Sincronizado ✓");
                     }
                 } else {
-                    const errText = await res.text().catch(() => res.status);
+                    const errText = await res.text().catch(() => String(res.status));
                     console.error("[Sync] ❌ Push failed:", res.status, errText);
                     setSyncStatus("error", `Error ${res.status} — reintentando...`);
-                    lastLocalStateHash = "";
                     pushRetryCount++;
-                    const delay = Math.min(2000 * pushRetryCount, 15000);
-                    setTimeout(() => { triggerAutoSyncPush(); }, delay);
+                    if (pushRetryCount <= 3) {
+                        const delay = Math.min(3000 * Math.pow(2, pushRetryCount - 1), 30000);
+                        setTimeout(() => { triggerAutoSyncPush(false, true); }, delay);
+                    }
                 }
             } catch (e) {
                 console.error("[Sync] ❌ Push error:", e.message);
@@ -419,15 +431,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const matchHours = parseInt(parts[0], 10);
             const matchMinutes = parseInt(parts[1], 10);
             
-            const matchTotalMinutes = matchHours * 60 + matchMinutes;
-            const currentTotalMinutes = currentHours * 60 + currentMinutes;
-            const diffMinutes = currentTotalMinutes - matchTotalMinutes;
-            
-            if (diffMinutes > 150) {
-                // Si pasaron más de 2.5 horas, el partido probablemente ya terminó
-                status = "post";
-            } else if (diffMinutes >= 0) {
-                // Si la hora ya pasó pero está dentro de las 2.5 horas, está En Vivo
+            // Si la hora del partido ya pasó respecto a la hora actual, lo marcamos como En Vivo
+            if (matchHours < currentHours || (matchHours === currentHours && matchMinutes <= currentMinutes)) {
                 status = "in"; 
             }
         }
@@ -622,20 +627,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Load Data from JSON ---
     async function loadSportsData() {
         try {
-            // Cargar datos utilizando nuestra Serverless Function de Vercel (/api/data)
-            // Esto evita que bloqueadores de anuncios (ej. Opera GX) bloqueen la petición a un dominio de terceros.
-            const response = await fetch(`/api/data?v=${new Date().getTime()}`);
-            if (!response.ok) {
-                throw new Error("No se pudo cargar el archivo data.json desde la API");
+            // FUENTE UNICA: /api/data en Vercel (lee frontend/data.json fresco del servidor)
+            // Se elimino el fallback a GitHub Pages porque sobrescribia datos frescos con datos viejos
+            let response = await fetch(`/api/data?v=${new Date().getTime()}`);
+            let fetchedData = null;
+            if (response.ok) {
+                fetchedData = await response.json();
             }
-            appData = await response.json();
-            
-            // Forzar actualización global de estados (pre, in, post) basados en la hora actual
-            if (appData && Array.isArray(appData.matches)) {
-                appData.matches.forEach(m => {
-                    m.status = getDynamicMatchStatus(m);
-                });
+
+            // Solo si /api/data falla completamente, intentar /data.json local
+            if (!fetchedData || !fetchedData.matches || fetchedData.matches.length < 1) {
+                try {
+                    const localRes = await fetch(`/data.json?v=${new Date().getTime()}`);
+                    if (localRes.ok) {
+                        fetchedData = await localRes.json();
+                    }
+                } catch (e) { console.warn("[SportIntel] Local fallback failed:", e); }
             }
+
+            if (!fetchedData) {
+                throw new Error("No se pudo cargar el archivo data.json desde ninguna fuente");
+            }
+            appData = fetchedData;
             
             // Client-side instant auto-grader for finished matches
             if (appData && Array.isArray(appData.matches)) {
@@ -910,7 +923,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const token = localStorage.getItem("github_token");
     try {
         const timestamp = new Date().getTime();
-        const res = await fetch(`/data.json?t=${timestamp}`, {
+        const res = await fetch(`/api/data?t=${timestamp}`, {
             headers: {
                 "Cache-Control": "no-cache",
                 "Pragma": "no-cache"
@@ -990,15 +1003,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const headerTitle = document.querySelector(`#star-ticket-card-${suffix} h3`);
             if (headerTitle) {
                 const typeStr = isSimple ? "Simple" : "Combinado";
-                const badgeBg = suffix === "1" ? "rgba(16, 185, 129, 0.15)" : (suffix === "2" ? "rgba(6, 182, 212, 0.15)" : "rgba(168, 85, 247, 0.15)");
-                const badgeColor = suffix === "1" ? "var(--accent-green)" : (suffix === "2" ? "rgba(6, 182, 212, 0.15)" : "#a855f7");
-                const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : (suffix === "2" ? "rgba(6, 182, 212, 0.3)" : "rgba(168, 85, 247, 0.3)");
+                const badgeBg = suffix === "1" ? "rgba(16, 185, 129, 0.15)" : (suffix === "2" ? "rgba(6, 182, 212, 0.15)" : (suffix === "3" ? "rgba(249,115,22,0.15)" : "rgba(168, 85, 247, 0.15)"));
+                const badgeColor = suffix === "1" ? "var(--accent-green)" : (suffix === "2" ? "var(--accent-cyan)" : (suffix === "3" ? "var(--accent-orange)" : "#a855f7"));
+                const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : (suffix === "2" ? "rgba(6, 182, 212, 0.3)" : (suffix === "3" ? "rgba(249,115,22,0.3)" : "rgba(168, 85, 247, 0.3)"));
                 
-                const titlePrefix = suffix === "3" ? "Apuesta Soñadora del Dólar" : `Boleto Estrella ${suffix}`;
+                const titlePrefix = suffix === "4" ? "Apuesta Soñadora del Dólar" : `Boleto Estrella ${suffix}`;
                 headerTitle.innerHTML = `${titlePrefix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
             }
 
-            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : 1.0));
+            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : (suffix === "3" ? 2.0 : 1.0)));
 
             let selectionsHtml = "";
             const confidenceBox = document.querySelector(`#star-ticket-card-${suffix} .confidence-box`);
@@ -1009,9 +1022,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (confidenceBox) confidenceBox.style.display = "block";
             }
 
-            const activeColor = colorTheme === "green" ? "var(--accent-green)" : (colorTheme === "cyan" ? "var(--accent-cyan)" : "#a855f7");
-            const activeBg = colorTheme === "green" ? "rgba(16,185,129,0.15)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.15)" : "rgba(168,85,247,0.15)");
-            const activeBorder = colorTheme === "green" ? "rgba(16,185,129,0.3)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.3)" : "rgba(168,85,247,0.3)");
+            const activeColor = colorTheme === "green" ? "var(--accent-green)" : (colorTheme === "cyan" ? "var(--accent-cyan)" : (colorTheme === "orange" ? "var(--accent-orange)" : "#a855f7"));
+            const activeBg = colorTheme === "green" ? "rgba(16,185,129,0.15)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.15)" : (colorTheme === "orange" ? "rgba(249,115,22,0.15)" : "rgba(168,85,247,0.15)"));
+            const activeBorder = colorTheme === "green" ? "rgba(16,185,129,0.3)" : (colorTheme === "cyan" ? "rgba(6,182,212,0.3)" : (colorTheme === "orange" ? "rgba(249,115,22,0.3)" : "rgba(168,85,247,0.3)"));
 
             ticket.selections.forEach((sel, index) => {
                 const selReasoningHtml = sel.reasoning ? `
@@ -1057,11 +1070,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (reasoning) reasoning.textContent = ticket.reasoning;
 
             // Stakes calculation
-            if (suffix === "3") {
+            if (suffix === "4") {
                 if (stakePercent) stakePercent.textContent = "$1.00 Fijo";
                 if (stakeBadge) stakeBadge.textContent = "Stake: $1.00";
                 if (stakeCash) stakeCash.textContent = "$1.00";
-                const multEl = document.getElementById("star-ticket-multiplier-3");
+                const multEl = document.getElementById("star-ticket-multiplier-4");
                 if (multEl) multEl.textContent = ticket.total_odd.toFixed(2);
             } else {
                 if (stakePercent) stakePercent.textContent = `${recStake}%`;
@@ -1073,7 +1086,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (btnCopy) {
-                if (suffix === "3") {
+                if (suffix === "4") {
                     btnCopy.innerHTML = `<i class="fa-solid fa-rocket"></i> Copiar Apuesta Soñadora (@${ticket.total_odd.toFixed(2)})`;
                 } else if (isSimple) {
                     btnCopy.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar Apuesta Simple`;
@@ -1083,7 +1096,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 btnCopy.onclick = () => {
                     let copyText = "";
-                    if (suffix === "3") {
+                    if (suffix === "4") {
                         copyText = `🚀 APUESTA SOÑADORA DEL DÓLAR (Cuota Total: @${ticket.total_odd.toFixed(2)}) - SportIntel AI\n`;
                         ticket.selections.forEach(s => {
                             copyText += `- ${s.match} | Pronóstico: ${s.pick} (Cuota: @${s.odd.toFixed(2)})\n`;
@@ -1135,11 +1148,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const ticket1 = appData.star_ticket_1 || appData.star_ticket;
         const ticket2 = appData.star_ticket_2 || appData.star_ticket;
         const ticket3 = appData.star_ticket_3;
+        const ticket4 = appData.star_ticket_4;
 
         renderTicket(ticket1, "1", "green");
         renderTicket(ticket2, "2", "cyan");
         if (ticket3) {
-            renderTicket(ticket3, "3", "purple");
+            renderTicket(ticket3, "3", "orange");
+        }
+        if (ticket4) {
+            renderTicket(ticket4, "4", "purple");
         }
 
         // Key Matches of the Day grid (sorted by time ascending)
@@ -2380,61 +2397,11 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    // --- Live Market Fluctuations Simulator ---
+    // --- Live Market Fluctuations Simulator (DISABLED - we use real API odds) ---
     function startLiveMarketFluctuations() {
-        setInterval(() => {
-            if (!appData || !appData.matches) return;
-            
-            let anyChanged = false;
-            
-            appData.matches.forEach(match => {
-                match.picks.forEach(pick => {
-                    // 25% de probabilidad de fluctuación en cada intervalo de 10s
-                    if (Math.random() < 0.25) {
-                        const oldOdd = pick.odd;
-                        // España no fluctúa demasiado para mantener la coherencia del reporte
-                        const maxChange = (match.home === "Spain" || match.away === "Spain") ? 0.02 : 0.05;
-                        const change = (Math.random() - 0.5) * maxChange;
-                        const newOdd = parseFloat(Math.max(1.05, oldOdd + change).toFixed(2));
-                        
-                        if (newOdd !== oldOdd) {
-                            pick.odd = newOdd;
-                            anyChanged = true;
-                            
-                            // Buscar elementos visuales y flashearlos
-                            flashOddElements(match.id, pick.market, oldOdd, newOdd);
-                        }
-                    }
-                });
-            });
-            
-            if (anyChanged) {
-                // Recalcular la cuota acumulada del Star Ticket
-                let starOdd = 1.0;
-                appData.star_ticket.selections.forEach(sel => {
-                    const matchedM = appData.matches.find(m => m.picks.some(p => sel.match.includes(m.home) && p.market === sel.market));
-                    if (matchedM) {
-                        const matchedP = matchedM.picks.find(p => p.market === sel.market);
-                        if (matchedP) {
-                            sel.odd = matchedP.odd;
-                            starOdd *= matchedP.odd;
-                        }
-                    }
-                });
-                appData.star_ticket.total_odd = parseFloat(starOdd.toFixed(2));
-                
-                // Actualizar la cuota acumulada del Star Ticket en el DOM
-                const totalOddEl = document.querySelector(".total-odd-val");
-                if (totalOddEl) {
-                    totalOddEl.textContent = appData.star_ticket.total_odd.toFixed(2);
-                }
-
-                // Refrescar y actualizar la cuadrícula de los +1000 mercados de 1xBet si el panel está visible
-                if (selectedMatch) {
-                    render1xBetMarkets();
-                }
-            }
-        }, 10000);
+        // Fluctuations disabled: we now use 100% real bookmaker odds from the API.
+        // Random simulation was corrupting the displayed odds and total_odd values.
+        return;
     }
     
     function flashOddElements(matchId, market, oldVal, newVal) {
@@ -3392,6 +3359,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         excludeSelections(appData.star_ticket_1);
         excludeSelections(appData.star_ticket_2);
+        excludeSelections(appData.star_ticket_3);
         excludeSelections(appData.star_ticket);
 
         let allPicks = [];
