@@ -28,8 +28,13 @@ HEADERS = {
     'x-rapidapi-key': RAPIDAPI_KEY
 }
 
+def get_cache_path():
+    if os.environ.get("VERCEL") == "1":
+        return "/tmp/event_cache.json"
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
+
 def load_cache():
-    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
+    cache_path = get_cache_path()
     if os.path.exists(cache_path):
         with open(cache_path, 'r', encoding='utf-8') as f:
             try:
@@ -39,7 +44,7 @@ def load_cache():
     return {}
 
 def save_cache(cache):
-    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
+    cache_path = get_cache_path()
     with open(cache_path, 'w', encoding='utf-8') as f:
         json.dump(cache, f, ensure_ascii=False, indent=2)
 
@@ -1705,12 +1710,16 @@ def generate_daily_sports_data():
                         }
 
 
-    ## Guardar en JSON estructurado local (necesario para GitHub Actions)
+    ## Guardar en JSON estructurado (en Vercel es /tmp, en GitHub Actions es local)
+    is_vercel = os.environ.get("VERCEL") == "1"
     output_dir = os.path.dirname(os.path.abspath(__file__))
     frontend_dir = os.path.join(os.path.dirname(output_dir), "frontend")
-    if not os.path.exists(frontend_dir):
-        os.makedirs(frontend_dir)
-    json_path = os.path.join(frontend_dir, "data.json")
+    if is_vercel:
+        json_path = "/tmp/data.json"
+    else:
+        if not os.path.exists(frontend_dir):
+            os.makedirs(frontend_dir)
+        json_path = os.path.join(frontend_dir, "data.json")
     
     # Armar boleto estrella premium de forma inteligente (Simple vs Combinado, priorizando Fútbol y Tenis)
     priority_picks = []
