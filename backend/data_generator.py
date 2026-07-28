@@ -29,17 +29,17 @@ HEADERS = {
 }
 
 def load_cache():
-    cache_path = "/tmp/event_cache.json"
+    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
     if os.path.exists(cache_path):
         with open(cache_path, 'r', encoding='utf-8') as f:
             try:
                 return json.load(f)
             except:
-                return {}
+                pass
     return {}
 
 def save_cache(cache):
-    cache_path = "/tmp/event_cache.json"
+    cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "event_cache.json")
     with open(cache_path, 'w', encoding='utf-8') as f:
         json.dump(cache, f, ensure_ascii=False, indent=2)
 
@@ -1709,8 +1709,12 @@ def generate_daily_sports_data():
                         }
 
 
-    ## Guardar en JSON estructurado en carpeta temporal de Vercel
-    json_path = "/tmp/data.json"    
+    ## Guardar en JSON estructurado local (necesario para GitHub Actions)
+    output_dir = os.path.dirname(os.path.abspath(__file__))
+    frontend_dir = os.path.join(os.path.dirname(output_dir), "frontend")
+    if not os.path.exists(frontend_dir):
+        os.makedirs(frontend_dir)
+    json_path = os.path.join(frontend_dir, "data.json")
     
     # Armar boleto estrella premium de forma inteligente (Simple vs Combinado, priorizando Fútbol y Tenis)
     priority_picks = []
