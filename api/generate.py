@@ -19,7 +19,7 @@ class handler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            self.wfile.write(b'{"success": true, "message": "Partidos de hoy actualizados en Upstash Redis!"}')
+            self.wfile.write(f'{{"success": True, "kv_url": "{os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_URL", "MISSING")}"}}'.encode('utf-8'))
         except Exception as e:
             # Capturar cualquier error para saber qué pasó
             self.send_response(500)

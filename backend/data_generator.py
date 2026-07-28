@@ -2766,6 +2766,7 @@ def generate_daily_sports_data():
                 print(f"[INFO] Éxito. Datos guardados en Redis. Respuesta: {response.read().decode('utf-8')}")
         except Exception as e:
             print(f"[ERROR] No se pudo guardar en Redis: {e}")
+            raise e
     else:
         print("[AVISO] Variables de Upstash no encontradas. Asegúrate de estar en Vercel.")
 
