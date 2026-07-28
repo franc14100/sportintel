@@ -5189,3 +5189,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
+    // Reiniciar Estadísticas e Historial de Boletos
+    document.getElementById("btn-reset-stats")?.addEventListener("click", async () => {
+        if (confirm("¿Estás seguro de que deseas reiniciar las estadísticas y el historial de boletos? El contador volverá a 0 para empezar limpio desde mañana.")) {
+            const btn = document.getElementById("btn-reset-stats");
+            try {
+                if (btn) {
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Reiniciando...';
+                }
+                
+                const res = await fetch("/api/data", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ action: "reset_stats" })
+                });
+                
+                if (window.appData) {
+                    window.appData.historical_tickets_registry = [];
+                    window.appData.global_stats = {
+                        total_picks_won: 0,
+                        total_picks_lost: 0,
+                        avg_accuracy_40d: 0,
+                        roi_percentage: 0
+                    };
+                }
+                localStorage.removeItem("historical_tickets_registry");
+                localStorage.removeItem("app_data");
+                
+                alert("¡Estadísticas e historial de boletos reiniciados con éxito! El sistema arrancará limpio desde cero.");
+                location.reload();
+            } catch (e) {
+                console.error("Error al reiniciar estadísticas:", e);
+                alert("Ocurrió un error al reiniciar las estadísticas.");
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-trash-can"></i> Reiniciar Estadísticas';
+                }
+            }
+        }
+    });
