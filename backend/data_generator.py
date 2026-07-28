@@ -2650,11 +2650,20 @@ def generate_daily_sports_data():
         safe_margin = max(0, confidence - 40)
         ev = (confidence / 100.0) * odd
         ev_multiplier = max(0.8, min(1.5, ev))
-        raw_stake = (safe_margin / 5.5) * ev_multiplier
-        if ticket_type in [1, 2]:
-            return round(max(1.0, min(10.0, raw_stake)), 1)
+        raw_stake = (safe_margin / 8.0) * ev_multiplier
+        
+        if ticket_type == 1:
+            # Boleto Seguro: 3% a 6%
+            return int(round(max(3.0, min(6.0, raw_stake))))
+        elif ticket_type == 2:
+            # Boleto Valor: 2% a 4%
+            return int(round(max(2.0, min(4.0, raw_stake * 0.7))))
+        elif ticket_type == 3:
+            # Boleto Extra: 1% a 2%
+            return int(round(max(1.0, min(2.0, raw_stake * 0.4))))
         else:
-            return round(max(0.5, min(2.5, raw_stake * 0.3)), 1)
+            # Boleto Soñadora: siempre 1% (o $1)
+            return 1
 
     # Generar IDs y agregar los boletos de hoy al registro como "pending"
     # Boleto Estrella 1 (Seguro)
