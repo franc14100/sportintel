@@ -294,7 +294,7 @@ def fetch_live_matches():
     if new_events_found > 0:
         save_cache(cache)
         
-    return fetched_matches
+    return fetched_matches, len(allowed_entries)
 
 
 def smart_pick_selector(real_odds, home_name, away_name):
@@ -603,7 +603,7 @@ def generate_daily_sports_data():
                         RATING_ADJUSTMENTS[away_t] = RATING_ADJUSTMENTS.get(away_t, 0) + 0.8
 
     print("[INFO] Conectando a internet para buscar partidos reales...")
-    espn_matches = fetch_live_matches()
+    espn_matches, total_analyzed = fetch_live_matches()
     
     live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Basketball', 'Tennis']]
     
@@ -2594,7 +2594,7 @@ def generate_daily_sports_data():
         "date": date_str,
         "matches": matches_data,
         "global_stats": {
-            "analyzed_today": len(matches_data),
+            "analyzed_today": total_analyzed,
             "avg_accuracy_40d": accuracy,
             "total_picks_won": total_won,
             "total_picks_lost": total_lost,
