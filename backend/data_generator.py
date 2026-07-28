@@ -14,13 +14,13 @@ import random
 import urllib.request
 import time
 import ssl
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from concurrent.futures import ThreadPoolExecutor
 
 import os
 import urllib.request
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 RAPIDAPI_KEY = os.environ.get("RAPIDAPI_KEY") if os.environ.get("RAPIDAPI_KEY") else "0fc0ba8109mshc0a96d4fddda16ep197aeajsncc7e2400156e"
 HEADERS = {
@@ -60,7 +60,7 @@ def fetch_live_matches():
     ]
     
     # Usar hora de Ecuador/Colombia (UTC-5)
-    ecuador_time = datetime.utcnow() - timedelta(hours=5)
+    ecuador_time = datetime.now(timezone.utc) - timedelta(hours=5)
     today = ecuador_time.strftime("%Y-%m-%d")
     cache = load_cache()
     new_events_found = 0
@@ -145,16 +145,12 @@ def fetch_live_matches():
                 if event_info["start_ts"] < (current_ts - 3600):
                     continue
 
-            is_allowed = False 
+            is_allowed = True 
             api_sport_name = event_info.get("sport", "Football")
             if api_sport_name == "Tennis":
+                is_allowed = False
                 if "ATP" in event_info["league"] or "WTA" in event_info["league"] or "Open" in event_info["league"]:
                     is_allowed = True
-            else:
-                for al in ALLOWED_LEAGUES:
-                    if al.lower() in lg_lower:
-                        is_allowed = True
-                        break
                     
             if is_allowed:
                 allowed_entries.append((eid, odd_data, event_info))
@@ -543,7 +539,7 @@ TEAM_RATINGS = {
 }
 
 def generate_daily_sports_data():
-    today = datetime.now()
+    today = datetime.now(timezone.utc) - timedelta(hours=5)
     date_str = today.strftime("%Y-%m-%d")
 
     # Load previous state to preserve picks, grade them, and keep history

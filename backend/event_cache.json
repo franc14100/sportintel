@@ -20136,5 +20136,257 @@
     "start_ts": 1785258000,
     "status": "inprogress",
     "sport": "Football"
+  },
+  "16326589": {
+    "homeTeam": "Aston Villa",
+    "awayTeam": "Real Sociedad",
+    "league": "Club Friendly Games",
+    "time": "13:30",
+    "start_ts": 1785263400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16462279": {
+    "homeTeam": "Apollon Limassol",
+    "awayTeam": "FC Dila Gori",
+    "league": "UEFA Conference League, Qualification",
+    "time": "12:00",
+    "start_ts": 1785258000,
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16350249": {
+    "homeTeam": "NK Celje",
+    "awayTeam": "KF Egnatia",
+    "league": "UEFA Champions League, Qualification",
+    "time": "13:15",
+    "start_ts": 1785262500,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16527687": {
+    "homeTeam": "Riga FC",
+    "awayTeam": "FK Vardar Skopje",
+    "league": "UEFA Conference League, Qualification",
+    "time": "12:00",
+    "start_ts": 1785258000,
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16622031": {
+    "homeTeam": "Oriental FC Reserve",
+    "awayTeam": "Montevideo City Torque Reserve",
+    "league": "Tercera Division, Reserves",
+    "time": "13:00",
+    "start_ts": 1785261600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16627014": {
+    "homeTeam": "Port FC",
+    "awayTeam": "Persija Jakarta",
+    "league": "Indonesia President's Cup, Group B",
+    "time": "03:30",
+    "start_ts": 1785313800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16309151": {
+    "homeTeam": "Fleetwood Town",
+    "awayTeam": "Bolton Wanderers",
+    "league": "Club Friendly Games",
+    "time": "13:00",
+    "start_ts": 1785261600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16322600": {
+    "homeTeam": "Newport County",
+    "awayTeam": "Reading",
+    "league": "Club Friendly Games",
+    "time": "13:30",
+    "start_ts": 1785263400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16269088": {
+    "homeTeam": "Fredrikstad FK U19",
+    "awayTeam": "Stabæk U19",
+    "league": "Nasjonal U19 CL, Knockout stage",
+    "time": "08:00",
+    "start_ts": 1785330000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16527337": {
+    "homeTeam": "Internacional U20",
+    "awayTeam": "Grêmio U20",
+    "league": "U20 Gaúcho, Feminino - Playoffs",
+    "time": "17:00",
+    "start_ts": 1785276000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15526207": {
+    "homeTeam": "Juventude",
+    "awayTeam": "Avaí",
+    "league": "Brasileirão Série B",
+    "time": "17:30",
+    "start_ts": 1785277800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16371822": {
+    "homeTeam": "Tonbridge Angels",
+    "awayTeam": "Eastbourne Borough FC",
+    "league": "Club Friendly Games",
+    "time": "13:45",
+    "start_ts": 1785264300,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16637267": {
+    "homeTeam": "Hyde United",
+    "awayTeam": "Atherton Collieries",
+    "league": "Club Friendly Games",
+    "time": "13:45",
+    "start_ts": 1785264300,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16533306": {
+    "homeTeam": "Gimhae City FC",
+    "awayTeam": "Seongnam FC",
+    "league": "Korean Cup",
+    "time": "06:00",
+    "start_ts": 1785322800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16640557": {
+    "homeTeam": "Bayer 04 Leverkusen",
+    "awayTeam": "KRC Genk",
+    "league": "Club Friendly Games",
+    "time": "08:00",
+    "start_ts": 1785330000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16589396": {
+    "homeTeam": "Nejmeh SC",
+    "awayTeam": "Al-Ahed",
+    "league": "Premier League, Championship round",
+    "time": "13:30",
+    "start_ts": 1785263400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16642367": {
+    "homeTeam": "Sparta Rotterdam",
+    "awayTeam": "Asteras Aktor",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785258000,
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16642994": {
+    "homeTeam": "Ilkeston Town FC",
+    "awayTeam": "Basford United",
+    "league": "Club Friendly Games",
+    "time": "13:45",
+    "start_ts": 1785264300,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16643952": {
+    "homeTeam": "Slingerz FC",
+    "awayTeam": "SV Robinhood",
+    "league": "CFU Club Shield",
+    "time": "15:00",
+    "start_ts": 1785268800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16154094": {
+    "homeTeam": "Red Bull Bragantino",
+    "awayTeam": "Santos",
+    "league": "Paulista, Feminino",
+    "time": "17:00",
+    "start_ts": 1785276000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16642993": {
+    "homeTeam": "Coleshill Town",
+    "awayTeam": "Shifnal Town",
+    "league": "Club Friendly Games",
+    "time": "13:45",
+    "start_ts": 1785264300,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16642992": {
+    "homeTeam": "Moyola Park AFC",
+    "awayTeam": "Limavady United",
+    "league": "Club Friendly Games",
+    "time": "13:30",
+    "start_ts": 1785263400,
+    "status": "canceled",
+    "sport": "Football"
+  },
+  "16644384": {
+    "homeTeam": "Marine AFC",
+    "awayTeam": "Warrington Town",
+    "league": "Club Friendly Games",
+    "time": "13:30",
+    "start_ts": 1785263400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16644887": {
+    "homeTeam": "Boldmere St Michaels",
+    "awayTeam": "Chasetown FC",
+    "league": "Club Friendly Games",
+    "time": "13:45",
+    "start_ts": 1785264300,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16644873": {
+    "homeTeam": "Dollingstown",
+    "awayTeam": "Linfield FC",
+    "league": "Club Friendly Games",
+    "time": "13:30",
+    "start_ts": 1785263400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16645035": {
+    "homeTeam": "Cavalry FC",
+    "awayTeam": "FC Supra Du Quebec",
+    "league": "Canadian Premier League",
+    "time": "18:00",
+    "start_ts": 1785279600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16462274": {
+    "homeTeam": "FC Drita",
+    "awayTeam": "Floriana FC",
+    "league": "UEFA Conference League, Qualification",
+    "time": "13:00",
+    "start_ts": 1785261600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16431102": {
+    "homeTeam": "Rosario Central",
+    "awayTeam": "Racing Club",
+    "league": "Liga Profesional, Clausura",
+    "time": "19:15",
+    "start_ts": 1785284100,
+    "status": "notstarted",
+    "sport": "Football"
   }
 }
