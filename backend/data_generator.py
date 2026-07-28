@@ -167,9 +167,9 @@ def fetch_live_matches():
             if not event_info.get("start_ts"):
                 continue
             
-            # Excluir partidos de hace más de 24 horas (mantener jugados hoy para evaluación de aciertos/errores)
-            current_ts = time.time()
-            if event_info["start_ts"] < (current_ts - 86400):
+            # Garantizar que el partido corresponda estrictamente a la fecha de 'today' en hora de Ecuador
+            match_ecuador_time = datetime.fromtimestamp(event_info["start_ts"], timezone.utc) - timedelta(hours=5)
+            if match_ecuador_time.strftime("%Y-%m-%d") != today:
                 continue
 
             is_allowed = True 
