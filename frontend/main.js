@@ -2989,16 +2989,23 @@ document.addEventListener("DOMContentLoaded", () => {
         let resolvedBetsCount = 0;
         let pendingStakes = 0;
 
+        // Helper: identify Boleto Soñador (excluded from win rate stats)
+        const isSoñador = (bet) => {
+            if (bet.is_dreamer) return true;
+            // Soñador = high-risk parlay with many teams and high odd
+            const teamCount = (bet.match || '').split(' + ').length;
+            return teamCount >= 4 && bet.odd >= 2.5;
+        };
+
         userBets.forEach(bet => {
             if (bet.status === "won") {
                 netProfit += (bet.stake * bet.odd) - bet.stake;
                 resolvedStakes += bet.stake;
-                wonBets++;
-                resolvedBetsCount++;
+                if (!isSoñador(bet)) { wonBets++; resolvedBetsCount++; }
             } else if (bet.status === "lost") {
                 netProfit -= bet.stake;
                 resolvedStakes += bet.stake;
-                resolvedBetsCount++;
+                if (!isSoñador(bet)) { resolvedBetsCount++; }
             } else if (bet.status === "pending") {
                 pendingStakes += bet.stake;
             }
