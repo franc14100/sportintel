@@ -158,9 +158,13 @@ def fetch_live_matches():
             event_info["sport"] = api_sport.capitalize()
             lg_lower = event_info.get("league", "").lower()
             
-            # Excluir juveniles/reservas
+            # Excluir juveniles/reservas (en Tenis permitir WTA Women)
             import re
-            is_youth = any(re.search(r'\b' + re.escape(ex) + r'\b', lg_lower) for ex in EXCLUDED_PATTERNS)
+            if api_sport.lower() == 'tennis':
+                tennis_excluded = ["u19", "u20", "u21", "sub-19", "sub-20", "sub-21", "junior"]
+                is_youth = any(re.search(r'\b' + re.escape(ex) + r'\b', lg_lower) for ex in tennis_excluded)
+            else:
+                is_youth = any(re.search(r'\b' + re.escape(ex) + r'\b', lg_lower) for ex in EXCLUDED_PATTERNS)
             if is_youth:
                 continue
                 
