@@ -2910,8 +2910,9 @@ def generate_daily_sports_data():
             base_url = kv_url.rstrip('/')
             request_url = f"{base_url}/set/sportintel_data"
             
-            # Convertimos el diccionario a texto JSON
-            json_data = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
+            # Convertimos el diccionario a texto JSON string válido para Upstash REST SET
+            raw_str = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
+            json_data = json.dumps(raw_str)
             
             req = urllib.request.Request(request_url, data=json_data.encode('utf-8'), headers={
                 'Authorization': f'Bearer {kv_token}',
