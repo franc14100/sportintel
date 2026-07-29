@@ -645,11 +645,38 @@ document.addEventListener("DOMContentLoaded", () => {
                 } catch (e) { console.warn("[SportIntel] Local fallback failed:", e); }
             }
 
-            if (!fetchedData) {
+                        if (!fetchedData) {
                 throw new Error("No se pudo cargar el archivo data.json desde ninguna fuente");
             }
             appData = fetchedData;
-            
+
+            // Auto-generar datos de HOY si los cargados corresponden a un día anterior
+            const nowTime = new Date();
+            const ecuadorNow = new Date(nowTime.getTime() - (5 * 60 * 60 * 1000));
+            const todayStr = ecuadorNow.toISOString().split("T")[0];
+
+            if (appData && appData.date && appData.date !== todayStr && !window._isAutoGeneratingToday) {
+                window._isAutoGeneratingToday = true;
+                console.log("[AutoGen] Detectados datos desactualizados. Generando pronósticos de hoy...");
+                try {
+                    setSyncStatus("syncing", "Generando hoy...");
+                    await fetch("/api/generate");
+                    const freshRes = await fetch("/api/data?v=" + new Date().getTime());
+                    if (freshRes.ok) {
+                        const freshData = await freshRes.json();
+                        if (freshData && freshData.date === todayStr) {
+                            appData = freshData;
+                            console.log("[AutoGen] ¡Pronósticos de hoy cargados con éxito!");
+                        }
+                    }
+                } catch (e) {
+                    console.error("[AutoGen] Error al auto-generar datos de hoy:", e);
+                } finally {
+                    window._isAutoGeneratingToday = false;
+                    setSyncStatus("ok", "Mercado Actualizado ✓");
+                }
+            }
+
             // Client-side instant auto-grader for finished matches
             if (appData && Array.isArray(appData.matches)) {
                 autoGradeFinishedMatches(appData.matches);
