@@ -108,7 +108,7 @@ def fetch_live_matches():
             continue
 
         # Pre-fetch uncached event details in parallel (max 40 per run to protect API quota)
-        uncached_eids = [eid for eid in odds_dict if eid not in cache][:40]
+        uncached_eids = [eid for eid in odds_dict if eid not in cache][:100]
         if uncached_eids:
             print(f"[INFO] Descargando detalles de {len(uncached_eids)} eventos nuevos en paralelo...")
             def fetch_single_event(eid):
@@ -184,7 +184,7 @@ def fetch_live_matches():
                 allowed_entries.append((eid, odd_data, event_info))
 
         # Limitar a máximo 35 partidos por deporte para no consumir cuotas en exceso
-        allowed_entries = allowed_entries[:35]
+        allowed_entries = allowed_entries[:35] if api_sport == "football" else allowed_entries[:25]
         print(f"[INFO] {api_sport}: {len(allowed_entries)} partidos de ligas principales seleccionados. Descargando cuotas completas...")
 
         # 2. Descargar cuotas reales completas (all-odds) en paralelo
