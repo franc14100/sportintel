@@ -56,7 +56,12 @@ module.exports = async function handler(req, res) {
             }
         }
 
-        // 2. Intentamos buscar la información fresca en la base de datos
+        // 2. Siempre leemos el archivo estático que tiene los partidos frescos de GitHub Actions
+        const dataPath = path.join(process.cwd(), 'frontend', 'data.json');
+        const raw = fs.readFileSync(dataPath, 'utf-8');
+        let data = JSON.parse(raw);
+
+        // 3. Intentamos buscar las ESTADISTICAS en la base de datos Upstash
         if (kvUrl && kvToken) {
             const baseUrl = kvUrl.replace(/\/$/, "");
             const response = await fetch(`${baseUrl}/get/sportintel_data`, {
@@ -68,20 +73,20 @@ module.exports = async function handler(req, res) {
             if (response.ok) {
                 const jsonRes = await response.json();
                 if (jsonRes.result) {
-                    // Upstash devuelve el JSON como string, así que lo convertimos a objeto
                     let parsedData = jsonRes.result;
                     while (typeof parsedData === 'string') {
                         try { parsedData = JSON.parse(parsedData); } catch (e) { break; }
                     }
-                    return res.status(200).json(parsedData);
+                    // Mezclamos las estadísticas de Upstash con los partidos de data.json
+                    data.global_stats = parsedData.global_stats || data.global_stats;
+                    data.historical_tickets_registry = parsedData.historical_tickets_registry || data.historical_tickets_registry;
+                    data.starting_bankroll = parsedData.starting_bankroll || data.starting_bankroll;
+                    data.user_bets = parsedData.user_bets || data.user_bets;
+                    data.escalera_current_run = parsedData.escalera_current_run || data.escalera_current_run;
                 }
             }
         }
 
-        // 3. Respaldo (Fallback): Si falla Redis o pruebas localmente, lee el archivo estático
-        const dataPath = path.join(process.cwd(), 'frontend', 'data.json');
-        const raw = fs.readFileSync(dataPath, 'utf-8');
-        const data = JSON.parse(raw);
         return res.status(200).json(data);
 
     } catch (err) {
