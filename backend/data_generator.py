@@ -2768,14 +2768,14 @@ def generate_daily_sports_data():
             "total_picks_lost": total_lost,
             "roi_percentage": round((total_won * 0.85) - (total_lost * 1.0), 2)
         },
-        "star_ticket": {
+        "star_ticket": raw_previous_json.get("star_ticket") if raw_previous_json and raw_previous_json.get("date") == date_str and raw_previous_json.get("star_ticket") else {
             "type": ticket_type_1,
             "selections": star_selections_1,
             "total_odd": round(total_odd_1, 2),
             "confidence": star_confidence_1,
             "reasoning": star_reasoning_1
         },
-        "star_ticket_1": {
+        "star_ticket_1": raw_previous_json.get("star_ticket_1") if raw_previous_json and raw_previous_json.get("date") == date_str and raw_previous_json.get("star_ticket_1") else {
             "type": ticket_type_1,
             "selections": star_selections_1,
             "total_odd": round(total_odd_1, 2),
@@ -2783,7 +2783,7 @@ def generate_daily_sports_data():
             "reasoning": star_reasoning_1,
             "recommendation_stake": calculate_dynamic_stake(star_confidence_1, total_odd_1, 1)
         },
-        "star_ticket_2": {
+        "star_ticket_2": raw_previous_json.get("star_ticket_2") if raw_previous_json and raw_previous_json.get("date") == date_str and raw_previous_json.get("star_ticket_2") else {
             "type": ticket_type_2,
             "selections": star_selections_2,
             "total_odd": round(total_odd_2, 2),
@@ -2791,7 +2791,7 @@ def generate_daily_sports_data():
             "reasoning": star_reasoning_2,
             "recommendation_stake": calculate_dynamic_stake(star_confidence_2, total_odd_2, 2)
         },
-        "star_ticket_3": {
+        "star_ticket_3": raw_previous_json.get("star_ticket_3") if raw_previous_json and raw_previous_json.get("date") == date_str and raw_previous_json.get("star_ticket_3") else {
             "type": ticket_type_3,
             "selections": star_selections_3,
             "total_odd": round(total_odd_3, 2),
@@ -2799,7 +2799,7 @@ def generate_daily_sports_data():
             "reasoning": star_reasoning_3,
             "recommendation_stake": calculate_dynamic_stake(star_confidence_3, total_odd_3, 3)
         },
-        "star_ticket_4": {
+        "star_ticket_4": raw_previous_json.get("star_ticket_4") if raw_previous_json and raw_previous_json.get("date") == date_str and raw_previous_json.get("star_ticket_4") else {
             "type": ticket_type_4,
             "selections": star_selections_4,
             "total_odd": round(total_odd_4, 2),
