@@ -71,7 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
             odd: parseFloat(b.odd || 1),
             stake: parseFloat(b.stake || 0),
             status: b.status || "pending",
-            date: b.date || ""
+            date: b.date || "",
+            deleted: b.deleted || false
         })).sort((a, b) => a.id - b.id);
 
         const cleanRun = run.map(r => ({
