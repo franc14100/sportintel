@@ -1808,6 +1808,13 @@ def generate_daily_sports_data():
     selected_football = football_matches[:30]
     selected_tennis = tennis_matches[:20]
     
+    # Garantizar SIEMPRE exactamente 50 partidos analizados hoy
+    total_cur = len(selected_football) + len(selected_tennis)
+    if total_cur < 50:
+        needed = 50 - total_cur
+        extra_football = football_matches[len(selected_football):len(selected_football) + needed]
+        selected_football.extend(extra_football)
+
     matches_data = selected_football + selected_tennis
     
     for m in matches_data:
