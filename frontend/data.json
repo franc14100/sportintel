@@ -13211,248 +13211,56 @@
   },
   "historical_tickets_registry": [
     {
-      "date": "2026-07-17",
-      "ticket_id": "TK-978064",
-      "name": "Boleto Seguro (Boleto 1)",
-      "selections": [
-        {
-          "match": "River Plate vs Aldosivi",
-          "sport": "Football",
-          "market": "Empate No Apuesta (DNB)",
-          "pick": "River Plate",
-          "odd": 1.19,
-          "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con River Plate como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
-          "status": "won"
-        },
-        {
-          "match": "Beijing Guoan vs Liaoning Tieren",
-          "sport": "Football",
-          "market": "Más/Menos 2.5 Goles",
-          "pick": "Más de 2.5 Goles",
-          "odd": 2.0,
-          "reasoning": "El planteamiento táctico proyecta una expectativa de 4.6 goles por partido. Los sistemas ofensivos de ambos equipos favorecen un partido abierto con muchos goles.",
-          "status": "won"
-        }
-      ],
-      "total_odd": 2.38,
-      "confidence": 82,
-      "recommendation_stake": 4.6,
-      "status": "won"
-    },
-    {
-      "date": "2026-07-17",
-      "ticket_id": "TK-776927",
-      "name": "Boleto de Valor (Boleto 2)",
-      "selections": [
-        {
-          "match": "FC Juarez vs Puebla",
-          "sport": "Football",
-          "market": "Doble Oportunidad",
-          "pick": "FC Juarez o Empate",
-          "odd": 1.18,
-          "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de FC Juarez hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-          "status": "won"
-        },
-        {
-          "match": "Nueva Chicago vs Agropecuario",
-          "sport": "Football",
-          "market": "Doble Oportunidad",
-          "pick": "Nueva Chicago o Empate",
-          "odd": 1.18,
-          "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Nueva Chicago hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-          "status": "won"
-        }
-      ],
-      "total_odd": 1.39,
-      "confidence": 84,
-      "recommendation_stake": 2.6,
-      "status": "won"
-    },
-    {
-      "date": "2026-07-21",
-      "ticket_id": "TK-331266",
-      "name": "Boleto Seguro (Boleto 1)",
-      "selections": [
-        {
-          "match": "Fenerbahce vs Gornik Zabrze",
-          "sport": "Football",
-          "market": "Resultado Final (1X2)",
-          "pick": "Fenerbahce",
-          "odd": 1.15,
-          "reasoning": "La formación 3-5-2 de Fenerbahce (favorito) tiene una ventaja estructural sobre el esquema 3-5-2 de Gornik Zabrze (rival). El equipo favorito presiona alto con efectividad demostrada en sus últimos 3 partidos combinados. Los 3 baja(s) clave en Gornik Zabrze debilitan notablemente su línea defensiva y el mediocampo de control. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-          "status": "won"
-        },
-        {
-          "match": "Deportivo Madryn vs Godoy Cruz Antonio Tomba",
-          "sport": "Football",
-          "market": "Más/Menos 2.5 Goles",
-          "pick": "Más de 2.5 Goles",
-          "odd": 2.03,
-          "reasoning": "El planteamiento táctico proyecta una expectativa de 4.6 goles por partido. Los sistemas ofensivos de ambos equipos favorecen un partido abierto con muchos goles.",
-          "status": "won"
-        }
-      ],
-      "total_odd": 2.33,
-      "confidence": 83,
-      "recommendation_stake": 4.6,
-      "status": "won"
-    },
-    {
-      "date": "2026-07-21",
-      "ticket_id": "TK-727928",
-      "name": "Boleto de Valor (Boleto 2)",
-      "selections": [
-        {
-          "match": "Clyde vs Annan Athletic",
-          "sport": "Football",
-          "market": "Doble Oportunidad",
-          "pick": "Clyde o Empate",
-          "odd": 1.15,
-          "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Clyde hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-          "status": "won"
-        },
-        {
-          "match": "Stranraer vs Edinburgh City",
-          "sport": "Football",
-          "market": "Doble Oportunidad",
-          "pick": "Stranraer o Empate",
-          "odd": 1.16,
-          "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Stranraer hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-          "status": "won"
-        }
-      ],
-      "total_odd": 1.33,
-      "confidence": 86,
-      "recommendation_stake": 2.7,
-      "status": "won"
-    },
-    {
-      "date": "2026-07-23",
-      "ticket_id": "TK-966698",
-      "name": "Boleto Seguro (Boleto 1)",
-      "selections": [
-        {
-          "match": "FC Lugano vs Dukagjini",
-          "sport": "Football",
-          "market": "Resultado Final (1X2)",
-          "pick": "FC Lugano",
-          "odd": 1.15,
-          "reasoning": "La formación 4-2-3-1 de FC Lugano (favorito) tiene una ventaja estructural sobre el esquema 3-5-2 de Dukagjini (rival). El equipo favorito presiona alto con efectividad demostrada en sus últimos 4 partidos combinados. Los 2 baja(s) clave en Dukagjini debilitan notablemente su línea defensiva y el mediocampo de control. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-          "status": "won"
-        },
-        {
-          "match": "FK Liepaja vs Austria Vienna",
-          "sport": "Football",
-          "market": "Córners (Saques de Esquina)",
-          "pick": "Más de 8.5 Córners",
-          "odd": 1.6,
-          "reasoning": "Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina.",
-          "status": "won"
-        }
-      ],
-      "total_odd": 1.84,
-      "confidence": 85,
-      "recommendation_stake": 4.7,
-      "status": "won"
-    },
-    {
-      "date": "2026-07-23",
-      "ticket_id": "TK-379653",
-      "name": "Boleto de Valor (Boleto 2)",
-      "selections": [
-        {
-          "match": "Paksi SE vs Panathinaikos",
-          "sport": "Football",
-          "market": "Doble Oportunidad",
-          "pick": "Panathinaikos o Empate",
-          "odd": 1.15,
-          "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Panathinaikos hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-          "status": "won"
-        },
-        {
-          "match": "Bolívar vs Grêmio",
-          "sport": "Football",
-          "market": "Doble Oportunidad",
-          "pick": "Bolívar o Empate",
-          "odd": 1.15,
-          "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Bolívar hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-          "status": "won"
-        }
-      ],
-      "total_odd": 1.32,
-      "confidence": 86,
-      "recommendation_stake": 2.7,
-      "status": "won"
-    },
-    {
-      "date": "2026-07-24",
-      "ticket_id": "TK-779841",
-      "name": "Boleto Seguro (Boleto 1)",
-      "selections": [
-        {
-          "match": "Colo Colo vs Deportes Limache",
-          "sport": "Football",
-          "market": "Total de Goles (Asian 2.0)",
-          "pick": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
-          "odd": 1.72,
-          "reasoning": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 4.0 goles para este partido respalda que terminará con 2+ anotaciones.",
-          "status": "won"
-        }
-      ],
-      "total_odd": 1.72,
-      "confidence": 88,
-      "recommendation_stake": 4.9,
-      "status": "won"
-    },
-    {
-      "date": "2026-07-24",
-      "ticket_id": "TK-938539",
-      "name": "Boleto de Valor (Boleto 2)",
-      "selections": [
-        {
-          "match": "Platense vs Unión (Santa Fe)",
-          "sport": "Football",
-          "market": "Tarjetas del Equipo (Individual)",
-          "pick": "Platense Más de 1.5 Tarjetas",
-          "odd": 2.06,
-          "reasoning": "En partidos de alta intensidad el equipo que persigue el resultado (el local bajo presión) suele acumular faltas tácticas en zona media. El estilo de juego físico proyectado para este choque y el historial de amonestaciones del árbitro designado (2.5 tarjetas/equipo/partido) respaldan esta selección.",
-          "status": "won"
-        }
-      ],
-      "total_odd": 2.06,
-      "confidence": 79,
-      "recommendation_stake": 2.5,
-      "status": "won"
-    },
-    {
       "date": "2026-07-29",
       "ticket_id": "TK-193813",
-      "name": "Boleto Seguro (Boleto 1)",
+      "name": "Boleto Estrella 1 - Seguro",
+      "type": "Combinado",
       "selections": [
         {
-          "match": "Instituto De Córdoba vs Club Atlético Platense",
+          "match": "Górnik Zabrze vs Fenerbahçe",
           "sport": "Football",
-          "market": "Doble Oportunidad",
-          "pick": "Instituto De Córdoba o Empate",
-          "odd": 1.2,
-          "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Instituto De Córdoba hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-          "status": "pending"
+          "market": "Córners del Equipo (Individual)",
+          "pick": "Fenerbahçe Más de 4.5 Córners",
+          "odd": 1.36
+        },
+        {
+          "match": "Arsenal de Sarandí Reserve vs Villa Dalmine Reserve",
+          "sport": "Football",
+          "market": "Córners del Equipo (Individual)",
+          "pick": "Arsenal de Sarandí Reserve Más de 4.5 Córners",
+          "odd": 1.33
         }
       ],
-      "total_odd": 1.2,
-      "confidence": 83,
-      "recommendation_stake": 7,
+      "total_odd": 1.79,
+      "confidence": 78,
+      "recommendation_stake": 4,
       "status": "pending"
     },
     {
       "date": "2026-07-29",
       "ticket_id": "TK-670264",
-      "name": "Boleto de Valor (Boleto 2)",
-      "selections": [],
-      "total_odd": 1.85,
+      "name": "Boleto Estrella 2 - Valor",
+      "type": "Combinado",
+      "selections": [
+        {
+          "match": "FK Kauno Žalgiris vs Klaksvíkar Ítróttarfelag",
+          "sport": "Football",
+          "market": "Doble Oportunidad",
+          "pick": "FK Kauno Žalgiris o Empate",
+          "odd": 1.18
+        },
+        {
+          "match": "Mirassol vs Remo",
+          "sport": "Football",
+          "market": "Córners del Equipo (Individual)",
+          "pick": "Mirassol Más de 4.5 Córners",
+          "odd": 1.29
+        }
+      ],
+      "total_odd": 1.5,
       "confidence": 75,
-      "recommendation_stake": 8,
-      "status": "won"
+      "recommendation_stake": 4,
+      "status": "pending"
     }
   ],
   "starting_bankroll": 53.67,
