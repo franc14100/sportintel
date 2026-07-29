@@ -155,6 +155,7 @@ def fetch_live_matches():
             if eid not in cache:
                 continue
             event_info = cache[eid]
+            event_info["sport"] = api_sport.capitalize()
             lg_lower = event_info.get("league", "").lower()
             
             # Excluir juveniles/reservas
