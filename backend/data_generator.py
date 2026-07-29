@@ -99,7 +99,7 @@ def fetch_live_matches():
         req = urllib.request.Request(odds_url, headers=HEADERS)
         
         try:
-            with urllib.request.urlopen(req, timeout=15) as response:
+            with urllib.request.urlopen(req, timeout=6) as response:
                 data = json.loads(response.read().decode('utf-8'))
                 odds_dict = data.get("odds", {})
                 print(f"[INFO] {api_sport}: Encontrados {len(odds_dict)} eventos con cuotas.")
@@ -108,14 +108,14 @@ def fetch_live_matches():
             continue
 
         # Pre-fetch uncached event details in parallel (max 40 per run to protect API quota)
-        uncached_eids = [eid for eid in odds_dict if eid not in cache][:100]
+        uncached_eids = [eid for eid in odds_dict if eid not in cache][:40 if api_sport == "football" else 30]
         if uncached_eids:
             print(f"[INFO] Descargando detalles de {len(uncached_eids)} eventos nuevos en paralelo...")
             def fetch_single_event(eid):
                 event_url = f"https://sportapi7.p.rapidapi.com/api/v1/event/{eid}"
                 ereq = urllib.request.Request(event_url, headers=HEADERS)
                 try:
-                    with urllib.request.urlopen(ereq, timeout=8) as eresponse:
+                    with urllib.request.urlopen(ereq, timeout=4) as eresponse:
                         edata = json.loads(eresponse.read().decode('utf-8'))
                         e_obj = edata.get("event", {})
                         home = e_obj.get("homeTeam", {}).get("name")
@@ -138,7 +138,7 @@ def fetch_live_matches():
                     pass
                 return eid, None
 
-            with ThreadPoolExecutor(max_workers=20) as executor:
+            with ThreadPoolExecutor(max_workers=30) as executor:
                 results = executor.map(fetch_single_event, uncached_eids)
                 for eid, res_info in results:
                     if res_info:
@@ -279,7 +279,7 @@ def fetch_live_matches():
                 pass
             return item, real_odds
 
-        with ThreadPoolExecutor(max_workers=20) as executor:
+        with ThreadPoolExecutor(max_workers=30) as executor:
             all_odds_results = list(executor.map(fetch_event_all_odds, allowed_entries))
 
         for (eid, odd_data, event_info), real_odds in all_odds_results:
