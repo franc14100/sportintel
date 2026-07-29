@@ -2924,14 +2924,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Render registered bets table
     function populateBetsTable() {
         if (!betsTableBody) return;
-        if (userBets.length === 0) {
+        
+        const visibleBets = userBets.filter(b => !b.deleted);
+        if (visibleBets.length === 0) {
             betsTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: var(--text-muted); background: rgba(255,255,255,0.01);">No has registrado apuestas todavía.</td></tr>`;
             return;
         }
 
         let rowsHtml = "";
         // Render in reverse chronological order (newest first)
-        [...userBets].reverse().forEach(bet => {
+        [...visibleBets].reverse().forEach(bet => {
             const potentialReturn = bet.stake * bet.odd;
             
             let statusSelect = `
@@ -2981,12 +2983,16 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.deleteBet = (id) => {
-        userBets = userBets.filter(b => b.id !== id);
-        lastLocalUserActionTime = Date.now();
-        localStorage.setItem("user_bets", JSON.stringify(userBets));
-        updateBankrollMetrics();
-        populateBetsTable();
-        updateBankrollChart();
+        let bet = userBets.find(b => b.id === id);
+        if (bet) {
+            bet.deleted = true;
+            lastLocalUserActionTime = Date.now();
+            localStorage.setItem("user_bets", JSON.stringify(userBets));
+            updateBankrollMetrics();
+            populateBetsTable();
+            updateBankrollChart();
+            if (typeof SyncManager !== 'undefined') SyncManager.pushState();
+        }
     };
 
     // Calculate ROI, Win Rate, and net bankroll balance
