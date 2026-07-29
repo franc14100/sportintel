@@ -3345,62 +3345,40 @@ document.addEventListener("DOMContentLoaded", () => {
     let safestPicks = [];
     let selectedEscaleraPickIndex = 0;
 
-    function getSafestPicksOfTheDay() {
+        function getSafestPicksOfTheDay() {
         if (!appData || !appData.matches) return [];
-        
-        // Excluir selecciones que ya estén en los Boletos Estrella de la portada
-        const excludedMatches = new Set();
-        const excludeSelections = (ticket) => {
-            if (ticket && ticket.selections) {
-                ticket.selections.forEach(s => {
-                    excludedMatches.add(s.match.toLowerCase().trim());
-                });
-            }
-        };
-        excludeSelections(appData.star_ticket_1);
-        excludeSelections(appData.star_ticket_2);
-        excludeSelections(appData.star_ticket_3);
-        excludeSelections(appData.star_ticket);
 
         let allPicks = [];
         appData.matches.forEach(match => {
-            const matchKey = `${match.home} vs ${match.away}`.toLowerCase().trim();
-            if (excludedMatches.has(matchKey)) {
-                return; // Omitir para que el Reto Escalera sea 100% distinto
-            }
             match.picks.forEach(pick => {
                 if (pick.market !== "Se Clasifica" && pick.market !== "Método de Clasificación") {
-                    allPicks.push({ match, pick });
+                    // Extract probability number safely
+                    let prob = 70;
+                    if (typeof pick.probability === 'number') {
+                        prob = pick.probability;
+                    } else if (typeof pick.probability === 'string') {
+                        prob = parseFloat(pick.probability) || 70;
+                    }
+                    allPicks.push({ match, pick: { ...pick, probability: prob } });
                 }
             });
         });
 
-        // Si no quedan picks después de filtrar, caemos en permitir todo (sin clasificatorios de largo plazo)
-        if (allPicks.length === 0) {
-            appData.matches.forEach(match => {
-                match.picks.forEach(pick => {
-                    if (pick.market !== "Se Clasifica" && pick.market !== "Método de Clasificación") {
-                        allPicks.push({ match, pick });
-                    }
-                });
-            });
-        }
-
-        let candidates = allPicks.filter(item => item.pick.odd >= 1.28 && item.pick.odd <= 1.65);
-        
+        // Reto Escalera sweet spot odds: @1.22 - @1.60
+        let candidates = allPicks.filter(item => item.pick.odd >= 1.22 && item.pick.odd <= 1.65);
         if (candidates.length < 3) {
-            candidates = allPicks.filter(item => item.pick.odd >= 1.20 && item.pick.odd <= 1.85);
+            candidates = allPicks.filter(item => item.pick.odd >= 1.18 && item.pick.odd <= 1.85);
         }
-
         if (candidates.length < 3) {
-            candidates = allPicks.filter(item => item.pick.odd > 1.05);
+            candidates = allPicks;
         }
 
+        // Prioridad absoluta a la probabilidad más alta (hacia 90%+)
         candidates.sort((a, b) => {
-            // Composite score: high probability + sweet spot odds (@1.30 to @1.48)
-            const scoreA = (a.pick.probability * 0.6) + (a.pick.odd >= 1.30 && a.pick.odd <= 1.48 ? 40 : (a.pick.odd >= 1.25 ? 20 : 0));
-            const scoreB = (b.pick.probability * 0.6) + (b.pick.odd >= 1.30 && b.pick.odd <= 1.48 ? 40 : (b.pick.odd >= 1.25 ? 20 : 0));
-            return scoreB - scoreA;
+            if (b.pick.probability !== a.pick.probability) {
+                return b.pick.probability - a.pick.probability;
+            }
+            return b.pick.odd - a.pick.odd;
         });
 
         let uniqueCandidates = [];
@@ -3410,15 +3388,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 seenMatches.add(c.match.id);
                 uniqueCandidates.push(c);
                 if (uniqueCandidates.length === 3) break;
-            }
-        }
-        
-        if (uniqueCandidates.length < 3) {
-            for (let c of candidates) {
-                if (!uniqueCandidates.includes(c)) {
-                    uniqueCandidates.push(c);
-                    if (uniqueCandidates.length === 3) break;
-                }
             }
         }
 
