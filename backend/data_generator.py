@@ -74,16 +74,22 @@ def fetch_live_matches():
     
     ALLOWED_LEAGUES = [
         "Premier League", "LaLiga", "Serie A", "Bundesliga", "Ligue 1", 
-        "UEFA Champions League", "UEFA Europa League", "Copa America", 
-        "Eurocopa", "World Cup", "Liga Profesional de Fútbol", 
-        "Brasileirão", "Major League Soccer", "Liga MX",
+        "UEFA Champions League", "Liga de Campeones", "Champions League",
+        "UEFA Europa League", "Europa League",
+        "UEFA Conference League", "Conference League", 
+        "Copa America", "Eurocopa", "World Cup", "Liga Profesional", 
+        "Brasileirao", "Major League Soccer", "Liga MX",
         "Copa Libertadores", "Copa Sudamericana", "Primera A",
-        "Liga 1", "Primera División", "Liga Pro", "LigaPro", "Copa Ecuador",
+        "Liga 1", "Primera Division", "Liga Pro", "LigaPro", "Copa Ecuador",
         "Copa do Brasil", "Copa Colombia", "Copa Argentina", "Copa Chile",
         "NBA", "WNBA", "NCAA", "Euroleague", "Liga Basquet", "Liga Nacional de Baloncesto", "Baloncesto",
         "ATP", "WTA", "US Open", "Wimbledon", "Roland Garros", "Australian Open"
     ]
     
+    import unicodedata
+    def strip_accents(s):
+        return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn').lower()
+        
     # Usar hora de Ecuador/Colombia (UTC-5)
     ecuador_time = datetime.now(timezone.utc) - timedelta(hours=5)
     today = ecuador_time.strftime("%Y-%m-%d")
@@ -107,8 +113,8 @@ def fetch_live_matches():
             print(f"[Error] Falló la petición de cuotas para {api_sport}: {e}")
             continue
 
-        # Pre-fetch uncached event details in parallel (max 40 per run to protect API quota)
-        uncached_eids = [eid for eid in odds_dict if eid not in cache][:40 if api_sport == "football" else 30]
+        # Pre-fetch uncached event details in parallel
+        uncached_eids = [eid for eid in odds_dict if eid not in cache]
         if uncached_eids:
             print(f"[INFO] Descargando detalles de {len(uncached_eids)} eventos nuevos en paralelo...")
             def fetch_single_event(eid):
@@ -156,7 +162,7 @@ def fetch_live_matches():
                 continue
             event_info = cache[eid]
             event_info["sport"] = api_sport.capitalize()
-            lg_lower = event_info.get("league", "").lower()
+            lg_lower = strip_accents(event_info.get("league", ""))
             
             # Excluir juveniles/reservas (en Tenis permitir WTA Women)
             import re
@@ -180,11 +186,16 @@ def fetch_live_matches():
             if match_ecuador_time.hour < 8:
                 continue
 
-            is_allowed = True 
+            is_allowed = False
             api_sport_name = str(event_info.get("sport", "Football")).lower()
             if api_sport_name == "tennis":
                 is_allowed = True
-                    
+            else:
+                for al in ALLOWED_LEAGUES:
+                    if strip_accents(al) in lg_lower:
+                        is_allowed = True
+                        break
+                        
             if is_allowed:
                 allowed_entries.append((eid, odd_data, event_info))
 
