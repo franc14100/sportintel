@@ -199,8 +199,6 @@ def fetch_live_matches():
             if is_allowed:
                 allowed_entries.append((eid, odd_data, event_info))
 
-        # Ya no limitamos a 35 partidos para que salgan todos los de ligas principales
-        # allowed_entries = allowed_entries[:35] if api_sport == "football" else allowed_entries[:25]
         print(f"[INFO] {api_sport}: {len(allowed_entries)} partidos de ligas principales seleccionados. Descargando cuotas completas...")
 
         # 2. Descargar cuotas reales completas (all-odds) en paralelo

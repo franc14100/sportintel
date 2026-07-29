@@ -16,8 +16,8 @@ module.exports = async function handler(req, res) {
         const baseUrl = kvUrl.replace(/\/$/, '');
 
         if (req.method === 'GET') {
-            const getRes = await fetch(${baseUrl}/get/sportintel_sync, {
-                headers: { 'Authorization': Bearer  }
+            const getRes = await fetch(`${baseUrl}/get/sportintel_sync`, {
+                headers: { 'Authorization': `Bearer ${kvToken}` }
             });
             if (getRes.ok) {
                 const jsonRes = await getRes.json();
@@ -44,10 +44,10 @@ module.exports = async function handler(req, res) {
                 } catch (_) {}
             }
 
-            const setRes = await fetch(${baseUrl}/set/sportintel_sync, {
+            const setRes = await fetch(`${baseUrl}/set/sportintel_sync`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': Bearer ,
+                    'Authorization': `Bearer ${kvToken}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(stateObj)
