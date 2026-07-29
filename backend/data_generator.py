@@ -82,8 +82,7 @@ def fetch_live_matches():
         "Copa Libertadores", "Copa Sudamericana", "Primera A",
         "Liga 1", "Primera Division", "Liga Pro", "LigaPro", "Copa Ecuador",
         "Copa do Brasil", "Copa Colombia", "Copa Argentina", "Copa Chile",
-        "NBA", "WNBA", "NCAA", "Euroleague", "Liga Basquet", "Liga Nacional de Baloncesto", "Baloncesto",
-        "ATP", "WTA", "US Open", "Wimbledon", "Roland Garros", "Australian Open"
+        "ATP", "WTA", "US Open", "Wimbledon", "Roland Garros", "Australian Open", "Challenger"
     ]
     
     import unicodedata
@@ -189,7 +188,9 @@ def fetch_live_matches():
             is_allowed = False
             api_sport_name = str(event_info.get("sport", "Football")).lower()
             if api_sport_name == "tennis":
-                is_allowed = True
+                allowed_tennis = ["atp", "wta", "wimbledon", "roland garros", "us open", "australian open", "challenger"]
+                if any(t in lg_lower for t in allowed_tennis):
+                    is_allowed = True
             else:
                 for al in ALLOWED_LEAGUES:
                     if strip_accents(al) in lg_lower:
