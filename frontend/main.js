@@ -2987,13 +2987,16 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.deleteBet = (id) => {
-        userBets = userBets.filter(b => b.id !== id);
-        lastLocalUserActionTime = Date.now();
-        localStorage.setItem("user_bets", JSON.stringify(userBets));
-        updateBankrollMetrics();
-        populateBetsTable();
-        updateBankrollChart();
-        if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true); // Force override sync
+        let bet = userBets.find(b => b.id === id);
+        if (bet) {
+            bet.deleted = true;
+            lastLocalUserActionTime = Date.now();
+            localStorage.setItem("user_bets", JSON.stringify(userBets));
+            updateBankrollMetrics();
+            populateBetsTable();
+            updateBankrollChart();
+            if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true); // Force override sync
+        }
     };
 
     // Calculate ROI, Win Rate, and net bankroll balance
@@ -3013,6 +3016,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         userBets.forEach(bet => {
+            if (bet.deleted) return;
             if (bet.status === "won") {
                 netProfit += (bet.stake * bet.odd) - bet.stake;
                 resolvedStakes += bet.stake;
