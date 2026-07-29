@@ -35,7 +35,42 @@ module.exports = async function handler(req, res) {
         if (req.method === 'POST') {
             const raw = req.body || {};
             const stateObj = typeof raw === 'string' ? JSON.parse(raw) : raw;
+            const incomingTs = parseInt(stateObj.ts || '0');
 
+            // --- PROTECCIÓN CLAVE: Leer datos actuales en nube antes de sobreescribir ---
+            const currentRes = await fetch(`${baseUrl}/get/sportintel_sync`, {
+                headers: { 'Authorization': `Bearer ${kvToken}` }
+            });
+
+            if (currentRes.ok) {
+                const currentJson = await currentRes.json();
+                if (currentJson.result) {
+                    let currentData = currentJson.result;
+                    while (typeof currentData === 'string') {
+                        try { currentData = JSON.parse(currentData); } catch (e) { break; }
+                    }
+                    const cloudTs = parseInt(currentData.ts || '0');
+
+                    // Si la nube tiene datos MÁS NUEVOS, rechazar escritura y devolver los datos actuales
+                    if (cloudTs > incomingTs) {
+                        console.log(`[Sync] Rejected: Cloud ts ${cloudTs} > Incoming ts ${incomingTs}`);
+                        return res.status(200).json({ newer: currentData });
+                    }
+
+                    // Si la nube tiene datos IGUALES O MÁS ANTIGUOS, fusionar: preservar apuestas antiguas
+                    if (currentData.ub && Array.isArray(currentData.ub) && stateObj.ub && Array.isArray(stateObj.ub)) {
+                        // Combinar apuestas sin duplicados (por id)
+                        const mergedBetsMap = {};
+                        [...currentData.ub, ...stateObj.ub].forEach(bet => {
+                            if (bet && bet.id) mergedBetsMap[bet.id] = bet;
+                        });
+                        stateObj.ub = Object.values(mergedBetsMap);
+                        stateObj.user_bets = JSON.stringify(stateObj.ub);
+                    }
+                }
+            }
+
+            // Truncar historial si es muy largo
             if (stateObj.eh) {
                 try {
                     const arr = typeof stateObj.eh === 'string' ? JSON.parse(stateObj.eh) : stateObj.eh;
