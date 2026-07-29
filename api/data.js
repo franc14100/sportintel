@@ -69,7 +69,10 @@ module.exports = async function handler(req, res) {
                 const jsonRes = await response.json();
                 if (jsonRes.result) {
                     // Upstash devuelve el JSON como string, así que lo convertimos a objeto
-                    const parsedData = typeof jsonRes.result === 'string' ? JSON.parse(jsonRes.result) : jsonRes.result;
+                    let parsedData = jsonRes.result;
+                    while (typeof parsedData === 'string') {
+                        try { parsedData = JSON.parse(parsedData); } catch (e) { break; }
+                    }
                     return res.status(200).json(parsedData);
                 }
             }
