@@ -1311,12 +1311,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const baseAccuracy = (appData && appData.global_stats && appData.global_stats.avg_accuracy_30d) ? appData.global_stats.avg_accuracy_30d : 85;
         const labels = ["Día -14", "Día -13", "Día -12", "Día -11", "Día -10", "Día -9", "Día -8", "Día -7", "Día -6", "Día -5", "Día -4", "Día -3", "Día -2", "Día -1", "Hoy"];
-        const dataValues = [72, 74, 73, 75, 77, 76, 78, 80, 79, 81, 83, 82, 84, 85, Math.max(75, Math.min(95, Math.round(baseAccuracy)))];
+        
+        // Return blank graph (no line) if there is no resolved history
+        const isFresh = appData && appData.global_stats && (appData.global_stats.total_picks_won || 0) === 0 && (appData.global_stats.total_picks_lost || 0) === 0;
+        const dataValues = isFresh ? Array(15).fill(null) : [72, 74, 73, 75, 77, 76, 78, 80, 79, 81, 83, 82, 84, 85, Math.max(75, Math.min(95, Math.round(baseAccuracy)))];
 
         // Compute dynamic Y axis range (tight fit around data)
-        const dMin = Math.min(...dataValues);
-        const dMax = Math.max(...dataValues);
-        const dPad = Math.max(3, Math.ceil((dMax - dMin) * 0.2));
+        const validData = dataValues.filter(v => v !== null);
+        const dMin = validData.length > 0 ? Math.min(...validData) : 60;
+        const dMax = validData.length > 0 ? Math.max(...validData) : 100;
+        const dPad = validData.length > 0 ? Math.max(3, Math.ceil((dMax - dMin) * 0.2)) : 0;
         const yAxisMin = Math.max(0, Math.floor((dMin - dPad) / 5) * 5);
         const yAxisMax = Math.min(100, Math.ceil((dMax + dPad) / 5) * 5);
         const yStep = (yAxisMax - yAxisMin) <= 20 ? 5 : 10;
@@ -1444,10 +1448,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Compute points coordinates
         const points = values.map((val, idx) => {
+            if (val === null) return null;
             const x = padLeft + (idx / (values.length - 1)) * graphW;
             const y = padTop + graphH - ((val - minY) / (maxY - minY)) * graphH;
             return { x, y, val };
-        });
+        }).filter(p => p !== null);
+
+        // If no points, just return (grid is drawn, no line)
+        if (points.length === 0) return;
 
         // Draw Gradient Fill under line
         const grad = ctx.createLinearGradient(0, padTop, 0, padTop + graphH);
