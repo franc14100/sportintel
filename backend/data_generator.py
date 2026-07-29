@@ -302,7 +302,7 @@ def fetch_live_matches():
                 "away_color": a_col,
                 "away_accent": a_acc,
                 "league": event_info["league"],
-                "sport": event_info.get("sport", "Football"),
+                "sport": str(event_info.get("sport", "Football")).capitalize(),
                 "time": event_info["time"],
                 "stadium": "Cancha Principal",
                 "status": st,
@@ -1790,8 +1790,8 @@ def generate_daily_sports_data():
     # ═══════════════════════════════════════════════════════════════════════
     # SELECCIÓN TOP 30 FÚTBOL + TOP 20 TENIS MÁS SEGUROS (PEDIDO POR USUARIO)
     # ═══════════════════════════════════════════════════════════════════════
-    football_matches = [m for m in matches_data if m.get('sport') == 'Football']
-    tennis_matches = [m for m in matches_data if m.get('sport') == 'Tennis']
+    football_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'football']
+    tennis_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'tennis']
     
     total_analyzed = len(matches_data)
     
