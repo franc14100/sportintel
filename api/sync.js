@@ -58,7 +58,7 @@ module.exports = async function handler(req, res) {
                     }
 
                     // Si la nube tiene datos IGUALES O MÁS ANTIGUOS, fusionar: preservar apuestas antiguas
-                    if (currentData.ub && Array.isArray(currentData.ub) && stateObj.ub && Array.isArray(stateObj.ub)) {
+                    if (!stateObj.force_override && currentData.ub && Array.isArray(currentData.ub) && stateObj.ub && Array.isArray(stateObj.ub)) {
                         // Combinar apuestas sin duplicados (por id)
                         const mergedBetsMap = {};
                         [...currentData.ub, ...stateObj.ub].forEach(bet => {

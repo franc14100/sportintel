@@ -141,8 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lastLocalStateHash = getNormalizedStateHash(s);
             isApplyingCloudState = false;
         },
-        
-        pushState: async function(isRetry = false) {
+        pushState: async function(isRetry = false, forceOverride = false) {
             if (isInitializingPage) return;
             if (isPushInFlight && !isRetry) return; // avoid double push
             try {
@@ -151,6 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 setSyncStatus("syncing", "Guardando...");
                 const fullState = this.gatherState();
                 
+                if (forceOverride) {
+                    fullState.force_override = true;
+                }
+
                 // Ensure sync_ts is set
                 if (!fullState.ts || fullState.ts === 0) {
                     const now = Date.now();
@@ -2984,16 +2987,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.deleteBet = (id) => {
-        let bet = userBets.find(b => b.id === id);
-        if (bet) {
-            bet.deleted = true;
-            lastLocalUserActionTime = Date.now();
-            localStorage.setItem("user_bets", JSON.stringify(userBets));
-            updateBankrollMetrics();
-            populateBetsTable();
-            updateBankrollChart();
-            if (typeof SyncManager !== 'undefined') SyncManager.pushState();
-        }
+        userBets = userBets.filter(b => b.id !== id);
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true); // Force override sync
     };
 
     // Calculate ROI, Win Rate, and net bankroll balance
