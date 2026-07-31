@@ -1,10 +1,14 @@
-const { kv } = require('@vercel/kv');
-
 export default async function handler(req, res) {
     try {
-        // Obtenemos todos los datos actuales
-        const currentData = await kv.get('sportintel_sync');
+        const kvUrl = process.env.UPSTASH_REDIS_REST_KV_REST_API_URL || process.env.KV_REST_API_URL;
+        const kvToken = process.env.UPSTASH_REDIS_REST_KV_REST_API_TOKEN || process.env.KV_REST_API_TOKEN;
+
+        if (!kvUrl || !kvToken) {
+            return res.status(200).json({ error: 'No Redis config' });
+        }
         
+        const baseUrl = kvUrl.replace(/\/$/, '');
+
         // Forzamos un reinicio completo
         const resetData = {
             sync_ts: "0",
@@ -13,11 +17,18 @@ export default async function handler(req, res) {
             escaleraState: {}
         };
         
-        await kv.set('sportintel_sync', resetData);
-        
+        const pushRes = await fetch(`${baseUrl}/set/sportintel_sync`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${kvToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(resetData)
+        });
+
         return res.status(200).json({ 
             message: "UPSTASH HAS BEEN NUKED AND RESET COMPLETELY.",
-            previousData: currentData
+            success: pushRes.ok
         });
     } catch (error) {
         console.error("Error reseteando KV:", error);
