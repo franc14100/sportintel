@@ -189,7 +189,12 @@ def fetch_live_matches():
             is_allowed = True
             
             # STRICT NEGATIVE FILTER: Exclude unpredictable non-competitive matches
-            forbidden_words = ["friendly", "amistoso", "qualifi", "clasific", "youth", "u21", "u20", "u19", "u18", "women", "femenino", "reserve", "reserva"]
+            if api_sport.lower() == 'tennis':
+                # Allow women (WTA) and qualifiers for tennis
+                forbidden_words = ["friendly", "amistoso", "youth", "u21", "u20", "u19", "u18", "reserve", "reserva"]
+            else:
+                forbidden_words = ["friendly", "amistoso", "qualifi", "clasific", "youth", "u21", "u20", "u19", "u18", "women", "femenino", "reserve", "reserva"]
+                
             if any(fw in lg_lower for fw in forbidden_words):
                 is_allowed = False
                         

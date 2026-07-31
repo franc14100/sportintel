@@ -1037,6 +1037,13 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Helper to render a single ticket
         const renderTicket = (ticket, suffix, colorTheme) => {
+            const cardEl = document.getElementById(`star-ticket-card-${suffix}`);
+            if (!ticket || !ticket.selections || ticket.selections.length === 0) {
+                if (cardEl) cardEl.style.display = "none";
+                return;
+            }
+            if (cardEl) cardEl.style.display = "";
+            
             const container = document.getElementById(`star-ticket-details-${suffix}`);
             const confidenceVal = document.getElementById(`star-ticket-confidence-${suffix}`);
             const progressFill = document.getElementById(`star-ticket-progress-${suffix}`);
@@ -1045,8 +1052,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const stakePercent = document.getElementById(`star-ticket-stake-percent-${suffix}`);
             const stakeCash = document.getElementById(`star-ticket-stake-cash-${suffix}`);
             const stakeBadge = document.getElementById(`star-ticket-stake-rec-${suffix}`);
-
-            if (!ticket) return;
 
             const isSimple = ticket.type === "Simple" || ticket.type === "simple";
 
@@ -2799,6 +2804,25 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             userBets = JSON.parse(savedBets);
         }
+
+        const recoveryBets = [
+            { id: 85040140221, match: "Jablonec - NK Varazdin + Nordsjaelland - GAIS", market: "Córners (Ind): Jablonec > 4.5 / Córners (Ind): Nordsjaelland > 4.5", odd: 1.549, stake: 4.0, status: "lost", date: "2026-07-30" },
+            { id: 85040371415, match: "Auda - FCSB + Ludogorets - Hapoel Tel Aviv", market: "Córners (Ind): FCSB > 4.5 / Córners (Ind): Ludogorets > 4.5", odd: 1.818, stake: 4.0, status: "lost", date: "2026-07-30" },
+            { id: 85041008103, match: "KRC Gent - LNZ + Independiente - Newell's Old Boys", market: "Córners (Ind): KRC Gent > 5.5 / Córners (Ind): Independiente > 4.5", odd: 1.835, stake: 4.0, status: "pending", date: "2026-07-30" }
+        ];
+        let hasRecovered = false;
+        recoveryBets.forEach(rb => {
+            if (!userBets.find(b => b.id === rb.id)) {
+                userBets.push(rb);
+                hasRecovered = true;
+            }
+        });
+        if (hasRecovered) {
+            localStorage.setItem("user_bets", JSON.stringify(userBets));
+            setTimeout(() => { SyncManager.pushState(); }, 2000);
+            console.log("[Recovery] Injected missing 3 bets from July 30.");
+        }
+
         
         populateMatchSelect();
         updateBankrollMetrics();
