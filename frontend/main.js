@@ -3196,6 +3196,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const activeTicket = (modal && modal._pendingTicket) ? modal._pendingTicket : pendingRegisterTicket;
                 if (!activeTicket) {
                     console.warn("No activeTicket found to register");
+                    alert("Error interno: No se detectó qué boleto intentar guardar. Intenta cerrar esta ventana y dar click en 'Registrar' nuevamente.");
                     return;
                 }
                 pendingRegisterTicket = activeTicket; // Sync back for rest of function
