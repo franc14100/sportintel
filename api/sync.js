@@ -20,10 +20,11 @@ export default async function handler(req, res) {
                     if (typeof parsedData === 'string') {
                         try { parsedData = JSON.parse(parsedData); } catch(e) {}
                     }
-                    return res.status(200).json({ result: parsedData });
+                    // Return the raw state object directly to match client expectations
+                    return res.status(200).json(parsedData);
                 }
             }
-            return res.status(200).json({ result: null });
+            return res.status(200).json({});
             
         } else if (req.method === 'POST') {
             const stateObj = req.body;
