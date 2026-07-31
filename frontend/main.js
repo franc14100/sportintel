@@ -381,17 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
 
     // Background polling every 10 seconds using Vercel KV (no rate limits!)
-    setInterval(async () => {
-        if (document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "SELECT") {
-            const updated = await SyncManager.pullState();
-            if (updated) {
-                if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
-                if (typeof populateBetsTable === "function") populateBetsTable();
-                if (typeof renderEscaleraTab === "function") renderEscaleraTab();
-                if (typeof updateBankrollChart === "function") updateBankrollChart();
-            }
-        }
-    }, 10000);
+    // Background pulling removed to prevent aggressive sync loops
 
     // "Guardar Nube" force push button
     const btnForceSync = document.getElementById("btn-force-sync");
