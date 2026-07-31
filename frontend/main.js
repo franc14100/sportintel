@@ -181,19 +181,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (result.saved) {
                         lastLocalStateHash = getNormalizedStateHash(fullState);
                         pushRetryCount = 0;
-                        setSyncStatus("ok", "Sincronizado ✓");
-                        console.log("[Sync] ✅ Saved to cloud. ts:", fullState.ts);
-                        // Server has strictly newer data — only apply if it's really newer
-                        const serverTs = parseInt(result.newer.ts || "0");
-                        const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
-                        if (serverTs > localTs) {
-                            console.log("[Sync] Server genuinely newer, applying...");
-                            this.applyState(result.newer);
-                            setSyncStatus("ok", "Actualizado desde nube ✓");
+                        setSyncStatus("ok", "Sincronizado ✔️");
+                        
+                        // Sync our local timestamp with the server's authoritative clock
+                        // This entirely eliminates clock skew bugs where the background sync pulls old state
+                        if (result.ts) {
+                            originalSetItem.call(localStorage, "sync_ts", result.ts.toString());
+                            console.log("[Sync] ✔️ Saved to cloud. Synced ts to:", result.ts);
                         } else {
-                            // Timestamps are equal or local is newer — force save
-                            setSyncStatus("ok", "Sincronizado ✓");
-                            lastLocalStateHash = getNormalizedStateHash(fullState);
+                            console.log("[Sync] ✔️ Saved to cloud. ts:", fullState.ts);
+                        }
+                        
+                        if (result.newer) {
+                            const serverTs = parseInt(result.newer.ts || "0");
+                            const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
+                            if (serverTs > localTs) {
+                                console.log("[Sync] Server genuinely newer, applying...");
+                                this.applyState(result.newer);
+                                setSyncStatus("ok", "Actualizado desde nube ✔️");
+                            }
                         }
                     } else if (result.saved === false) {
                         // Server returned 200 but couldn't save to remote storage
