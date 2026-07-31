@@ -998,8 +998,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Populate Dashboard Statistics ---
     function populateStats() {
         if (!appData) return;
-        const stats = appData.global_stats;
-        statAnalyzed.textContent = stats.analyzed_today;
+        const stats = appData.global_stats || {};
+        if (statAnalyzed) {
+            statAnalyzed.textContent = (appData.matches && appData.matches.length > 0) ? appData.matches.length : 50;
+        }
         
         // Calculate dynamic real winrate from userBets
         const resolvedBets = userBets.filter(b => b.status === "won" || b.status === "lost");

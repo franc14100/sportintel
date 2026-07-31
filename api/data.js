@@ -140,9 +140,15 @@ module.exports = async function handler(req, res) {
                     data.historical_tickets_registry = parsedData.historical_tickets_registry || data.historical_tickets_registry;
                     data.starting_bankroll = parsedData.starting_bankroll || data.starting_bankroll;
                     data.user_bets = parsedData.user_bets || data.user_bets;
-                    data.escalera_current_run = parsedData.escalera_current_run || data.escalera_current_run;
+                    if (data.global_stats) {
+                        data.global_stats.analyzed_today = (data.matches || []).length;
+                    }
                 }
             }
+        }
+
+        if (data.global_stats) {
+            data.global_stats.analyzed_today = (data.matches || []).length;
         }
 
         return res.status(200).json(data);
