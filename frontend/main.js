@@ -2929,6 +2929,16 @@ document.addEventListener("DOMContentLoaded", () => {
     function populateBetsTable() {
         if (!betsTableBody) return;
         
+        // Force sync from localStorage to guarantee UI is up to date
+        try {
+            const localBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+            if (Array.isArray(localBets)) {
+                userBets = localBets;
+            }
+        } catch (e) {
+            console.error("Error reading userBets from localStorage", e);
+        }
+
         const visibleBets = userBets.filter(b => !b.deleted);
         if (visibleBets.length === 0) {
             betsTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: var(--text-muted); background: rgba(255,255,255,0.01);">No has registrado apuestas todavía.</td></tr>`;
@@ -4128,7 +4138,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function populateEscaleraHistoryTable() {
         if (!escaleraHistoryTableBody) return;
-        const currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+        
+        let currentRun = [];
+        try {
+            currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+            window.escaleraCurrentRun = currentRun;
+        } catch (e) {
+            console.error(e);
+        }
 
         // Always sync current run to userBets for unified accuracy calculation
         syncEscaleraRunToUserBets();
