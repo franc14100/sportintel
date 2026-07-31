@@ -241,6 +241,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (data && Object.keys(data).length > 0) {
                     const cloudTs = parseInt((data && data.sync_ts) ? data.sync_ts : ((data && data.ts) ? data.ts : "0"));
                     const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
+                    const now = Date.now();
+                    
+                    // Self-healing for corrupted future timestamps
+                    if (cloudTs > now + 60000) {
+                        console.warn("[Sync] Detected corrupted future timestamp in cloud. Triggering force override to heal.");
+                        this.pushState(false, true);
+                        return false;
+                    }
                     
                     // Only apply if cloud is strictly newer than local
                     if (cloudTs > localTs) {
@@ -303,10 +311,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await res.json();
                 const cloudTs = parseInt((data && data.sync_ts) ? data.sync_ts : ((data && data.ts) ? data.ts : "0"));
                 const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
+                const now = Date.now();
                 
                 console.log("[Sync] Init — cloudTs:", cloudTs, "localTs:", localTs);
 
-                if (data && typeof data === "object" && !Array.isArray(data) && cloudTs >= localTs) {
+                // Self-healing for corrupted future timestamps
+                if (cloudTs > now + 60000) {
+                    console.warn("[Sync] Detected corrupted future timestamp on init. Forcing push to heal.");
+                    SyncManager.pushState(false, true);
+                    applied = false;
+                } else if (data && typeof data === "object" && !Array.isArray(data) && cloudTs >= localTs) {
                     // Cloud has data and is at least as new → apply cloud state
                     SyncManager.applyState(data);
                     console.log("[Sync] ✅ Cloud state applied on load (ts:", cloudTs, ")");
@@ -2959,7 +2973,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const potentialReturn = bet.stake * bet.odd;
             
             let statusSelect = `
-                <select class="form-input" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; background: rgba(8, 11, 17, 0.8); ${bet.status === 'won' ? 'color: var(--accent-green); border-color: var(--accent-green);' : bet.status === 'lost' ? 'color: var(--accent-pink); border-color: var(--accent-pink);' : 'color: var(--accent-amber); border-color: var(--accent-amber);'}" onchange="resolveBet(${bet.id}, this.value)">
+                <select class="form-input" autocomplete="off" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; background: rgba(8, 11, 17, 0.8); ${bet.status === 'won' ? 'color: var(--accent-green); border-color: var(--accent-green);' : bet.status === 'lost' ? 'color: var(--accent-pink); border-color: var(--accent-pink);' : 'color: var(--accent-amber); border-color: var(--accent-amber);'}" onchange="resolveBet(${bet.id}, this.value)">
                     <option value="pending" ${bet.status === 'pending' ? 'selected' : ''}>Pendiente</option>
                     <option value="won" ${bet.status === 'won' ? 'selected' : ''}>Ganada</option>
                     <option value="lost" ${bet.status === 'lost' ? 'selected' : ''}>Perdida</option>
