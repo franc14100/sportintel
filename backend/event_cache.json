@@ -46542,5 +46542,230 @@
     "start_ts": 1785521400,
     "status": "notstarted",
     "sport": "Tennis"
+  },
+  "16654517": {
+    "homeTeam": "Logroño United",
+    "awayTeam": "Real Sociedad",
+    "league": "Women Club Friendly Games",
+    "time": "17:00",
+    "start_ts": 1785517200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15238830": {
+    "homeTeam": "Athlone Town AFC",
+    "awayTeam": "University College Dublin",
+    "league": "First Division",
+    "time": "18:45",
+    "start_ts": 1785523500,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15882860": {
+    "homeTeam": "Derry City Women",
+    "awayTeam": "Glentoran Belfast United",
+    "league": "Northern Ireland Women's Premiership",
+    "time": "18:45",
+    "start_ts": 1785523500,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421924": {
+    "homeTeam": "North Sunshine Eagles SC",
+    "awayTeam": "Brunswick Juventus FC",
+    "league": "VPL 1",
+    "time": "05:00",
+    "start_ts": 1785560400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15271287": {
+    "homeTeam": "Varbergs BoIS",
+    "awayTeam": "Falkenbergs FF",
+    "league": "Superettan",
+    "time": "13:00",
+    "start_ts": 1785589200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16426995": {
+    "homeTeam": "Brabrand",
+    "awayTeam": "Skive",
+    "league": "CampoBet 2 Division",
+    "time": "12:00",
+    "start_ts": 1785585600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16429613": {
+    "homeTeam": "Błękitni Stargard",
+    "awayTeam": "KS Wda Świecie",
+    "league": "III Liga, Group 2",
+    "time": "13:00",
+    "start_ts": 1785589200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16461262": {
+    "homeTeam": "Cruzeiro U20",
+    "awayTeam": "América Mineiro U20",
+    "league": "U20 Mineiro, 1. Divisao, Championship Round",
+    "time": "18:00",
+    "start_ts": 1785520800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15393820": {
+    "homeTeam": "Logan Lightning",
+    "awayTeam": "North Lakes United",
+    "league": "Queensland Premier League 1, Women ",
+    "time": "07:00",
+    "start_ts": 1785567600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16482694": {
+    "homeTeam": "Diriangén FC",
+    "awayTeam": "UNAN Managua",
+    "league": "Primera Division, Apertura",
+    "time": "00:00",
+    "start_ts": 1785542400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16299964": {
+    "homeTeam": "Cheonan City FC",
+    "awayTeam": "Yongin City FC",
+    "league": "K-League 2",
+    "time": "10:30",
+    "start_ts": 1785580200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15388131": {
+    "homeTeam": "Redlands United",
+    "awayTeam": "Caboolture FC",
+    "league": "Queensland Premier League 1",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15373483": {
+    "homeTeam": "Sutherland Sharks U20",
+    "awayTeam": "Wollongong Wolves U20",
+    "league": "NSW U20 Premier League",
+    "time": "08:15",
+    "start_ts": 1785572100,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15458441": {
+    "homeTeam": "Ängelholms FF",
+    "awayTeam": "AFC Malmo",
+    "league": "Ettan, Sodra",
+    "time": "11:00",
+    "start_ts": 1785582000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16670084": {
+    "homeTeam": "Quorn FC",
+    "awayTeam": "Banbury United",
+    "league": "Club Friendly Games",
+    "time": "13:00",
+    "start_ts": 1785589200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16674663": {
+    "homeTeam": "Chertsey Town",
+    "awayTeam": "Westfield",
+    "league": "Club Friendly Games",
+    "time": "18:45",
+    "start_ts": 1785523500,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16676912": {
+    "homeTeam": "FC Portalban/Gletterens",
+    "awayTeam": "Yverdon Sport FC II",
+    "league": "Club Friendly Games",
+    "time": "18:00",
+    "start_ts": 1785520800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16412896": {
+    "homeTeam": "FC Kryvbas Kryvyi Rih",
+    "awayTeam": "Karpaty Lviv",
+    "league": "Premier League",
+    "time": "10:00",
+    "start_ts": 1785578400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16448667": {
+    "homeTeam": "Brickfield Rangers",
+    "awayTeam": "CPD Llanuwchllyn",
+    "league": "Cymru Championship, North",
+    "time": "13:30",
+    "start_ts": 1785591000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16677665": {
+    "homeTeam": "Paris 13 Atletico",
+    "awayTeam": "US Lusitanos Saint-Maur",
+    "league": "Club Friendly Games",
+    "time": "15:00",
+    "start_ts": 1785510000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16617306": {
+    "homeTeam": "Kampala City",
+    "awayTeam": "BUL FC",
+    "league": "Super 8",
+    "time": "13:00",
+    "start_ts": 1785589200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16677461": {
+    "homeTeam": "Žiga Šeško",
+    "awayTeam": "Matthias Ujvary",
+    "league": "ITF M15 Wels Men",
+    "time": "11:33",
+    "start_ts": 1785497631,
+    "status": "inprogress",
+    "sport": "Tennis"
+  },
+  "16678333": {
+    "homeTeam": "Cooper Johnson",
+    "awayTeam": "Joseph Phillips",
+    "league": "UTR PTT Auburn Men 01, 5-8 Playoff",
+    "time": "15:10",
+    "start_ts": 1785510600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16678834": {
+    "homeTeam": "Vergara del Puerto M A / Zeitune M",
+    "awayTeam": "Dreycopp I / Zarate C M",
+    "league": "ITF M15 Sao Paulo Men Doubles",
+    "time": "16:00",
+    "start_ts": 1785513600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16679047": {
+    "homeTeam": "Elizabeth Isyanov",
+    "awayTeam": "Ekaterina Ivanova",
+    "league": "UTR PTT Columbus Women 01, 1-4 Playoff",
+    "time": "17:00",
+    "start_ts": 1785517200,
+    "status": "notstarted",
+    "sport": "Tennis"
   }
 }
