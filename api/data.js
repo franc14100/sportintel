@@ -15,6 +15,63 @@ module.exports = async function handler(req, res) {
 
         if (req.method === "POST") {
             const body = req.body || {};
+            
+            // Endpoint para actualizar boletos históricos directamente
+            if (body.action === "update_tickets") {
+                if (kvUrl && kvToken) {
+                    const baseUrl = kvUrl.replace(/\/$/, "");
+                    const getRes = await fetch(`${baseUrl}/get/sportintel_data`, {
+                        headers: { 'Authorization': `Bearer ${kvToken}` }
+                    });
+                    let currentData = {};
+                    if (getRes.ok) {
+                        const jsonRes = await getRes.json();
+                        if (jsonRes.result) {
+                            let pd = jsonRes.result;
+                            while (typeof pd === 'string') { try { pd = JSON.parse(pd); } catch(e) { break; } }
+                            currentData = pd;
+                        }
+                    }
+                    
+                    // Si se proveen boletos nuevos para añadir
+                    if (body.new_tickets && Array.isArray(body.new_tickets)) {
+                        if (!currentData.historical_tickets_registry) currentData.historical_tickets_registry = [];
+                        body.new_tickets.forEach(nt => {
+                            // No duplicar por ticket_id
+                            const exists = currentData.historical_tickets_registry.some(t => t.ticket_id === nt.ticket_id);
+                            if (!exists) currentData.historical_tickets_registry.push(nt);
+                        });
+                    }
+                    
+                    // Si se proveen actualizaciones de estado por ticket_id
+                    if (body.status_updates && Array.isArray(body.status_updates)) {
+                        if (!currentData.historical_tickets_registry) currentData.historical_tickets_registry = [];
+                        body.status_updates.forEach(upd => {
+                            const ticket = currentData.historical_tickets_registry.find(t => t.ticket_id === upd.ticket_id);
+                            if (ticket) {
+                                ticket.status = upd.status;
+                                if (upd.selections_status) {
+                                    upd.selections_status.forEach((ss, idx) => {
+                                        if (ticket.selections[idx]) ticket.selections[idx].status = ss;
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    
+                    const setRes = await fetch(`${baseUrl}/set/sportintel_data`, {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${kvToken}`, 'Content-Type': 'application/json' },
+                        body: JSON.stringify(currentData)
+                    });
+                    
+                    if (setRes.ok) {
+                        return res.status(200).json({ success: true, message: "Boletos actualizados correctamente", count: (currentData.historical_tickets_registry || []).length });
+                    }
+                }
+                return res.status(500).json({ success: false, message: "Error al actualizar boletos" });
+            }
+            
             if (body.action === "reset_stats") {
                 if (kvUrl && kvToken) {
                     const baseUrl = kvUrl.replace(/\/$/, "");

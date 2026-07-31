@@ -3124,6 +3124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- Register Ticket to History & Bankroll Modal Handler ---
+    // FIXED: Store ticket directly on modal element to avoid overwrite when multiple modals are opened
     let pendingRegisterTicket = null;
 
     function openRegisterTicketModal(ticket, suffix) {
@@ -3137,7 +3138,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!modal || !ticket) return;
 
+        // Store on both the variable AND the modal element — this prevents the overwrite bug
+        // If the modal is already open for another ticket, warn the user
+        if (modal._pendingTicket && !modal.classList.contains("hidden")) {
+            if (!confirm(`⚠️ Ya hay un boleto en proceso de guardar.\n\n¿Descartar ese boleto y abrir este nuevo (Boleto ${suffix})?`)) {
+                return; // User chose to keep the existing modal open
+            }
+        }
+        
         pendingRegisterTicket = ticket;
+        modal._pendingTicket = ticket; // Store on element to survive variable overwrite
+        modal._pendingSuffix = suffix;
         const currentCapital = parseFloat(localStorage.getItem("starting_bankroll")) || 1000;
 
         let label = suffix === "4" ? "Apuesta Soñadora del Dólar" : (suffix === "3" ? "Boleto Extra del Día" : (suffix === "1" ? "Boleto Estrella 1 (Seguro)" : "Boleto Estrella 2 (Valor)"));
@@ -3179,7 +3190,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnConfirmRegister) {
         btnConfirmRegister.onclick = () => {
-            if (!pendingRegisterTicket) return;
+            const modal = document.getElementById("register-ticket-modal");
+            // Use modal element's stored ticket to prevent overwrite bug
+            const activeTicket = (modal && modal._pendingTicket) ? modal._pendingTicket : pendingRegisterTicket;
+            if (!activeTicket) return;
+            pendingRegisterTicket = activeTicket; // Sync back for rest of function
             const matchInput = document.getElementById("input-register-match");
             const marketInput = document.getElementById("input-register-market");
             const oddInput = document.getElementById("input-register-odd");
@@ -3260,8 +3275,11 @@ document.addEventListener("DOMContentLoaded", () => {
             updateBankrollChart();
             SyncManager.pushState();
 
+            // Clear the stored ticket on the modal to prevent stale data
+            if (modal) { modal._pendingTicket = null; modal._pendingSuffix = null; }
+            pendingRegisterTicket = null;
             closeRegisterModal();
-            alert("¡Apuesta registrada con éxito en tu Historial y Banca!");
+            alert("¡Apuesta registrada con éxito en tu Historial y Banca! ✅");
         };
     }
 
