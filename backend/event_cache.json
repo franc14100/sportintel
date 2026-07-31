@@ -46767,5 +46767,68 @@
     "start_ts": 1785517200,
     "status": "notstarted",
     "sport": "Tennis"
+  },
+  "15405033": {
+    "homeTeam": "Adelaide Victory",
+    "awayTeam": "Salisbury United",
+    "league": "South Australia State League 1",
+    "time": "05:30",
+    "start_ts": 1785562200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15546958": {
+    "homeTeam": "Paide Linnameeskond",
+    "awayTeam": "Harju JK Laagri",
+    "league": "Meistriliiga Women",
+    "time": "12:00",
+    "start_ts": 1785585600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16252143": {
+    "homeTeam": "Itapirense U20",
+    "awayTeam": "São Bento U20",
+    "league": "U20 Paulista, Grupo 1",
+    "time": "18:00",
+    "start_ts": 1785520800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16371839": {
+    "homeTeam": "Weston Super Mare",
+    "awayTeam": "Gloucester City",
+    "league": "Club Friendly Games",
+    "time": "18:45",
+    "start_ts": 1785523500,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16679378": {
+    "homeTeam": "Bastia",
+    "awayTeam": "Annecy FC",
+    "league": "Club Friendly Games",
+    "time": "15:30",
+    "start_ts": 1785511800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15421120": {
+    "homeTeam": "Ventura County FC",
+    "awayTeam": "North Texas SC",
+    "league": "MLS Next Pro",
+    "time": "02:00",
+    "start_ts": 1785549600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15552594": {
+    "homeTeam": "Shanghai Port",
+    "awayTeam": "Shandong Taishan",
+    "league": "Chinese Super League",
+    "time": "11:35",
+    "start_ts": 1785584100,
+    "status": "notstarted",
+    "sport": "Football"
   }
 }
