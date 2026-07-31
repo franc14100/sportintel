@@ -46830,5 +46830,284 @@
     "start_ts": 1785584100,
     "status": "notstarted",
     "sport": "Football"
+  },
+  "16448430": {
+    "homeTeam": "Treowen Stars",
+    "awayTeam": "Pontypridd United",
+    "league": "Cymru Championship, South",
+    "time": "13:30",
+    "start_ts": 1785591000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16448428": {
+    "homeTeam": "Llantwit Major",
+    "awayTeam": "Pure Swansea FC",
+    "league": "Cymru Championship, South",
+    "time": "13:30",
+    "start_ts": 1785591000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16448429": {
+    "homeTeam": "Pontardawe Town",
+    "awayTeam": "Caerphilly Athletic FC",
+    "league": "Cymru Championship, South",
+    "time": "13:30",
+    "start_ts": 1785591000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16607994": {
+    "homeTeam": "FC Metaloglobus București",
+    "awayTeam": "AFC Metalul Buzău",
+    "league": "Liga II",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16684483": {
+    "homeTeam": "Deportiva Minera",
+    "awayTeam": "Los Garres",
+    "league": "Club Friendly Games",
+    "time": "07:30",
+    "start_ts": 1785569400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16684428": {
+    "homeTeam": "FC Southern United Honiara",
+    "awayTeam": "SOSA FC",
+    "league": "Telekom S-League",
+    "time": "00:00",
+    "start_ts": 1785542400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16684366": {
+    "homeTeam": "Sliema Wanderers",
+    "awayTeam": "Zabbar Saint Patrick FC",
+    "league": "Club Friendly Games",
+    "time": "18:30",
+    "start_ts": 1785522600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16680227": {
+    "homeTeam": "Furia FC",
+    "awayTeam": "Los Troncos FC",
+    "league": "Kings World Cup Clubs",
+    "time": "19:00",
+    "start_ts": 1785524400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16510081": {
+    "homeTeam": "NK Croatia Zmijavci",
+    "awayTeam": "NK Hrvace",
+    "league": "Croatia Friendly Games",
+    "time": "17:00",
+    "start_ts": 1785517200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15385994": {
+    "homeTeam": "Pors Grenland",
+    "awayTeam": "Brattvåg",
+    "league": "2nd Division, Group 1",
+    "time": "11:00",
+    "start_ts": 1785582000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16404386": {
+    "homeTeam": "IFK Luleå",
+    "awayTeam": "IFK Östersund",
+    "league": "Division 2, Norrland, Championship Round",
+    "time": "11:00",
+    "start_ts": 1785582000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16607996": {
+    "homeTeam": "ACS FC Bacău",
+    "awayTeam": "CSL Ștefăneștii de Jos",
+    "league": "Liga II",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16494875": {
+    "homeTeam": "Indonesia XI",
+    "awayTeam": "Aston Villa",
+    "league": "Club Friendly Games",
+    "time": "12:30",
+    "start_ts": 1785587400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16434976": {
+    "homeTeam": "Haverfordwest County AFC",
+    "awayTeam": "Airbus UK Broughton",
+    "league": "Cymru Premier",
+    "time": "13:30",
+    "start_ts": 1785591000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16607930": {
+    "homeTeam": "ŠK Blava 1928",
+    "awayTeam": "MŠK Púchov",
+    "league": "Slovnaft Cup",
+    "time": "12:30",
+    "start_ts": 1785587400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16514150": {
+    "homeTeam": "FC Juárez U19",
+    "awayTeam": "Pumas UNAM U19",
+    "league": "Mexico U19 League, Apertura",
+    "time": "17:00",
+    "start_ts": 1785517200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15388839": {
+    "homeTeam": "Lørenskog IF",
+    "awayTeam": "Hønefoss BK",
+    "league": "2nd Division, Group 2",
+    "time": "12:00",
+    "start_ts": 1785585600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15385995": {
+    "homeTeam": "Sandviken",
+    "awayTeam": "Kvik Halden",
+    "league": "2nd Division, Group 1",
+    "time": "12:00",
+    "start_ts": 1785585600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16446851": {
+    "homeTeam": "1. FC Magdeburg",
+    "awayTeam": "West Ham United",
+    "league": "Club Friendly Games",
+    "time": "12:30",
+    "start_ts": 1785587400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16309127": {
+    "homeTeam": "Accrington Stanley",
+    "awayTeam": "Sheffield Wednesday",
+    "league": "Club Friendly Games",
+    "time": "11:30",
+    "start_ts": 1785583800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16683595": {
+    "homeTeam": "Daria Zelinskaya",
+    "awayTeam": "Victoria Milovanova",
+    "league": "ITF W15 Astana 3 Women",
+    "time": "07:00",
+    "start_ts": 1785567600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16683596": {
+    "homeTeam": "Eva Korysheva",
+    "awayTeam": "Edda Mamedova",
+    "league": "ITF W15 Astana 3 Women",
+    "time": "07:00",
+    "start_ts": 1785567600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16684097": {
+    "homeTeam": "Sagandykova A / Zelinskaya D",
+    "awayTeam": "Hosoki Y / Yoshioka K",
+    "league": "ITF W15 Astana 3 Women Doubles",
+    "time": "07:00",
+    "start_ts": 1785567600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16593430": {
+    "homeTeam": "Cervantes I / Molchanov D",
+    "awayTeam": "Neuchrist M / Poljak D",
+    "league": "Liberec, Czech Republic, Doubles",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16683922": {
+    "homeTeam": "Alja Senica",
+    "awayTeam": "Stefania Bojica",
+    "league": "ITF W15 Rogaška Slatina Women",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16684221": {
+    "homeTeam": "Oriana Gniewkowska",
+    "awayTeam": "Lucie Petruželova",
+    "league": "ITF W15 Bielsko Biala Women",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16684222": {
+    "homeTeam": "Emma Slavikova",
+    "awayTeam": "Sophia Ksandinov",
+    "league": "ITF W15 Bielsko Biala Women",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16683923": {
+    "homeTeam": "Eszter Méri",
+    "awayTeam": "Sara Mikača",
+    "league": "ITF W15 Rogaška Slatina Women",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16603204": {
+    "homeTeam": "Kenta Miyoshi",
+    "awayTeam": "Constantin Bittoun Kouzmine",
+    "league": "Samsun, Turkiye",
+    "time": "08:30",
+    "start_ts": 1785573000,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16593423": {
+    "homeTeam": "Jan Kumstat",
+    "awayTeam": "Sumit Nagal",
+    "league": "Liberec, Czech Republic",
+    "time": "09:10",
+    "start_ts": 1785575400,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16684223": {
+    "homeTeam": "Fukuda S / Mitsui S",
+    "awayTeam": "Rakhmatullayev D / Zhalgasbay D",
+    "league": "ITF M15 Astana Men Doubles",
+    "time": "11:00",
+    "start_ts": 1785582000,
+    "status": "notstarted",
+    "sport": "Tennis"
   }
 }
