@@ -2979,9 +2979,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div style="font-weight: 700; font-size: 0.8rem; color: var(--text-primary);">${bet.match}</div>
                         <div style="font-size: 0.72rem; color: var(--text-muted);">${bet.market}</div>
                     </td>
-                    <td style="padding: 10px 8px; text-align: center; font-family: var(--font-display); font-weight: 700; color: var(--accent-amber);">@${bet.odd.toFixed(2)}</td>
-                    <td style="padding: 10px 8px; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">$${bet.stake.toFixed(2)}</td>
-                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem;">$${potentialReturn.toFixed(2)}</td>
+                    <td style="padding: 10px 8px; text-align: center; font-family: var(--font-display); font-weight: 700; color: var(--accent-amber);">@${Number(bet.odd || 0).toFixed(2)}</td>
+                    <td style="padding: 10px 8px; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">$${Number(bet.stake || 0).toFixed(2)}</td>
+                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem;">$${Number(potentialReturn || 0).toFixed(2)}</td>
                     <td style="padding: 10px 8px; text-align: center;">${statusSelect}</td>
                     <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">${actionsHtml}</td>
                 </tr>
@@ -2991,11 +2991,20 @@ document.addEventListener("DOMContentLoaded", () => {
         betsTableBody.innerHTML = rowsHtml;
     }
 
-    // Global expose of delete and resolve functions so they can be clicked inline in the table
     window.resolveBet = (id, status) => {
-        const bet = userBets.find(b => b.id === id);
-        if (bet) {
-            bet.status = status;
+        let currentBets = [];
+        try {
+            currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+        } catch(e) {
+            currentBets = typeof userBets !== 'undefined' ? userBets : [];
+        }
+        if (!Array.isArray(currentBets)) currentBets = [];
+
+        const betIndex = currentBets.findIndex(b => b.id === id);
+        if (betIndex !== -1) {
+            currentBets[betIndex].status = status;
+            userBets = currentBets; // Update global reference
+            
             lastLocalUserActionTime = Date.now();
             localStorage.setItem("user_bets", JSON.stringify(userBets));
             updateBankrollMetrics();
@@ -3259,11 +3268,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     date: new Date().toISOString().split("T")[0]
                 };
 
-                // Safely get userBets
-                if (typeof userBets === 'undefined' || !Array.isArray(userBets)) {
-                    window.userBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+                // Always reload from localStorage right before saving to prevent multi-tab data loss
+                let currentBets = [];
+                try {
+                    currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+                } catch(e) {
+                    currentBets = typeof userBets !== 'undefined' ? userBets : [];
                 }
-                userBets.push(newBet);
+                if (!Array.isArray(currentBets)) currentBets = [];
+                
+                currentBets.push(newBet);
+                userBets = currentBets; // Update global reference
                 localStorage.setItem("user_bets", JSON.stringify(userBets));
 
                 // If registering a Reto Escalera ticket, update escaleraCurrentRun safely
