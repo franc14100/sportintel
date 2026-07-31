@@ -196,6 +196,11 @@ def fetch_live_matches():
                     if strip_accents(al) in lg_lower:
                         is_allowed = True
                         break
+            
+            # STRICT NEGATIVE FILTER: No friendlies, no qualifiers
+            forbidden_words = ["friendly", "amistoso", "qualifi", "clasific", "youth", "u21", "u20", "u19", "women", "femenino"]
+            if any(fw in lg_lower for fw in forbidden_words):
+                is_allowed = False
                         
             if is_allowed:
                 allowed_entries.append((eid, odd_data, event_info))
@@ -1390,32 +1395,30 @@ def generate_daily_sports_data():
                     # ─── CÓRNERS INDIVIDUALES DEL EQUIPO ─────────────────────────────
                     "market": "Córners del Equipo (Individual)",
                     "selection": (
-                        f"{winner_name} Más de 3.5 Córners" if max(prob_home, prob_away) > 68
-                        else f"{winner_name} Más de 4.5 Córners" if max(prob_home, prob_away) > 58
-                        else f"{winner_name} Más de 3.5 Córners"
+                        f"{winner_name} Más de 4.5 Córners" if max(prob_home, prob_away) > 75
+                        else f"{winner_name} Más de 3.5 Córners" if max(prob_home, prob_away) > 60
+                        else f"{winner_name} Más de 2.5 Córners"
                     ),
                     "odd": (
-                        round(random.uniform(1.09, 1.18), 2) if max(prob_home, prob_away) > 68
-                        else round(random.uniform(1.30, 1.45), 2) if max(prob_home, prob_away) > 58
-                        else round(random.uniform(1.18, 1.28), 2)
+                        round(random.uniform(1.30, 1.45), 2) if max(prob_home, prob_away) > 75
+                        else round(random.uniform(1.20, 1.30), 2) if max(prob_home, prob_away) > 60
+                        else round(random.uniform(1.10, 1.20), 2)
                     ),
-                    "probability": random.randint(64, 82),
+                    "probability": random.randint(75, 88),
                     "risk": "Low",
                     "reasoning": {
                         "tactical": (
-                            f"{winner_name} concentra el juego ofensivo por las bandas generando centros laterales y remates a marcos. "
-                            f"Su dominio territorial proyecta un promedio de {random.randint(5, 8)} saques de esquina individuales. "
-                            f"La presión alta que ejerce obliga al rival a despejar hacia afuera repetidamente."
+                            f"{winner_name} concentra el juego ofensivo por las bandas generando centros laterales. "
+                            f"IMPORTANTE: No te dejes tentar por cuotas altas. Mantén la línea baja (ej. Más de 3.5 o 4.5) aunque pague menos."
                         ),
                         "statistical": (
-                            f"{winner_name} promedió {round(random.uniform(4.5, 7.0), 1)} córners por partido en sus últimas 5 salidas. "
-                            f"Su estrategia de juego atacante por bandas es constante independientemente del rival. "
-                            f"El {random.randint(65, 80)}% de sus partidos como favorito supera los 4 saques de esquina propios."
+                            f"ADVERTENCIA: Las apuestas individuales de córners son volátiles. "
+                            f"Solo apuesta a líneas seguras que paguen entre 1.15 y 1.40 máximo. "
+                            f"El {random.randint(75, 88)}% de sus partidos como favorito supera esta línea base."
                         ),
                         "market": (
-                            f"Los mercados de córners individuales por equipo son menos populares y tienen cuotas con mayor Edge. "
-                            f"Solo dependes del rendimiento atacante de {winner_name}, no de ambos equipos. "
-                            f"Menor varianza que los córners totales del partido."
+                            f"ESTRATEGIA SEGURA: Las casas de apuestas te ofrecerán el 'Más de 5.5' a cuota 1.80. "
+                            f"NO LO TOMES. Es una trampa. Juega la línea de 3.5 o 4.5 para asegurar el verde en tu combinada."
                         )
                     },
                     "status": "pending"
