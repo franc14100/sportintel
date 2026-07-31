@@ -4639,9 +4639,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (typeof populateBetsTable === "function") populateBetsTable();
             if (typeof renderEscaleraTab === "function") renderEscaleraTab();
             if (typeof updateBankrollChart === "function") updateBankrollChart();
-        } else if (!SyncManager.getSyncId()) {
-            const autoPin = "sportintel-" + Math.random().toString(36).substring(2, 7);
-            SyncManager.setSyncId(autoPin);
             await SyncManager.pushState();
             console.log("[Sync] PIN automático creado y datos locales subidos a la Nube:", autoPin);
         } else {
