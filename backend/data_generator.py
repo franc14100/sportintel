@@ -185,20 +185,11 @@ def fetch_live_matches():
             if match_ecuador_time.hour < 8:
                 continue
 
-            is_allowed = False
-            api_sport_name = str(event_info.get("sport", "Football")).lower()
-            if api_sport_name == "tennis":
-                allowed_tennis = ["atp", "wta", "wimbledon", "roland garros", "us open", "australian open", "challenger"]
-                if any(t in lg_lower for t in allowed_tennis):
-                    is_allowed = True
-            else:
-                for al in ALLOWED_LEAGUES:
-                    if strip_accents(al) in lg_lower:
-                        is_allowed = True
-                        break
+            # ALLOW ALL OFFICIAL COMPETITIVE MATCHES (Football & Tennis)
+            is_allowed = True
             
-            # STRICT NEGATIVE FILTER: No friendlies, no qualifiers
-            forbidden_words = ["friendly", "amistoso", "qualifi", "clasific", "youth", "u21", "u20", "u19", "women", "femenino"]
+            # STRICT NEGATIVE FILTER: Exclude unpredictable non-competitive matches
+            forbidden_words = ["friendly", "amistoso", "qualifi", "clasific", "youth", "u21", "u20", "u19", "u18", "women", "femenino", "reserve", "reserva"]
             if any(fw in lg_lower for fw in forbidden_words):
                 is_allowed = False
                         
