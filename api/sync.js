@@ -52,7 +52,7 @@ module.exports = async function handler(req, res) {
                     const cloudTs = parseInt(currentData.sync_ts || currentData.ts || '0');
 
                     // Si la nube tiene datos MÁS NUEVOS, rechazar escritura y devolver los datos actuales
-                    if (cloudTs > incomingTs) {
+                    if (!stateObj.force_override && cloudTs > incomingTs) {
                         console.log(`[Sync] Rejected: Cloud ts ${cloudTs} > Incoming ts ${incomingTs}`);
                         return res.status(200).json({ newer: currentData });
                     }
