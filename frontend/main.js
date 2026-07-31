@@ -169,12 +169,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 if (res.ok) {
                     const result = await res.json();
+                    if (result.newer) {
+                        // The server had a newer state! 
+                        // We will NOT apply it immediately to prevent wiping out the user's just-saved ticket!
+                        // We will just let the local state remain the source of truth for now.
+                        console.warn("[Sync] Server returned newer state, but skipping applyState to prevent data loss.");
+                        isPushInFlight = false;
+                        setSyncStatus("ok", "Guardado localmente (Desincronizado)");
+                        return;
+                    }
                     if (result.saved) {
                         lastLocalStateHash = getNormalizedStateHash(fullState);
                         pushRetryCount = 0;
                         setSyncStatus("ok", "Sincronizado ✓");
                         console.log("[Sync] ✅ Saved to cloud. ts:", fullState.ts);
-                    } else if (result.newer) {
                         // Server has strictly newer data — only apply if it's really newer
                         const serverTs = parseInt(result.newer.ts || "0");
                         const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
@@ -231,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!res.ok) return false;
                 const data = await res.json();
                 if (data && Object.keys(data).length > 0) {
-                    const cloudTs = parseInt(data.ts || "0");
+                    const cloudTs = parseInt((data && data.sync_ts) ? data.sync_ts : ((data && data.ts) ? data.ts : "0"));
                     const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
                     
                     // Only apply if cloud is strictly newer than local
@@ -293,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const res = await fetch(SYNC_API_URL, { method: "GET", cache: "no-store" });
             if (res.ok) {
                 const data = await res.json();
-                const cloudTs = parseInt(data && data.ts ? data.ts : "0");
+                const cloudTs = parseInt((data && data.sync_ts) ? data.sync_ts : ((data && data.ts) ? data.ts : "0"));
                 const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
                 
                 console.log("[Sync] Init — cloudTs:", cloudTs, "localTs:", localTs);
@@ -324,10 +332,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             lastLocalStateHash = getNormalizedStateHash(localState);
                             setSyncStatus("ok", "Guardado en nube ✓");
                         } else if (pushResult.newer) {
-                            // Cloud is actually newer — apply it
-                            SyncManager.applyState(pushResult.newer);
-                            applied = true;
-                            setSyncStatus("ok", "Sincronizado ✓");
+                            // The server had a newer state! 
+                            // We will NOT apply it immediately to prevent wiping out the user's local state.
+                            console.warn("[Sync] Server returned newer state, but skipping applyState to prevent data loss.");
+                            setSyncStatus("ok", "Guardado localmente (Desincronizado)");
                         }
                     } else {
                         console.error("[Sync] Init push failed:", pushRes.status, await pushRes.text());
