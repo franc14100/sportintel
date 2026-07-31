@@ -3190,96 +3190,126 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnConfirmRegister) {
         btnConfirmRegister.onclick = () => {
-            const modal = document.getElementById("register-ticket-modal");
-            // Use modal element's stored ticket to prevent overwrite bug
-            const activeTicket = (modal && modal._pendingTicket) ? modal._pendingTicket : pendingRegisterTicket;
-            if (!activeTicket) return;
-            pendingRegisterTicket = activeTicket; // Sync back for rest of function
-            const matchInput = document.getElementById("input-register-match");
-            const marketInput = document.getElementById("input-register-market");
-            const oddInput = document.getElementById("input-register-odd");
-            const stakeInput = document.getElementById("input-register-stake");
-            const statusSelect = document.getElementById("select-register-status");
+            try {
+                const modal = document.getElementById("register-ticket-modal");
+                // Use modal element's stored ticket to prevent overwrite bug
+                const activeTicket = (modal && modal._pendingTicket) ? modal._pendingTicket : pendingRegisterTicket;
+                if (!activeTicket) {
+                    console.warn("No activeTicket found to register");
+                    return;
+                }
+                pendingRegisterTicket = activeTicket; // Sync back for rest of function
+                
+                const matchInput = document.getElementById("input-register-match");
+                const marketInput = document.getElementById("input-register-market");
+                const oddInput = document.getElementById("input-register-odd");
+                const stakeInput = document.getElementById("input-register-stake");
+                const statusSelect = document.getElementById("select-register-status");
 
-            let defaultMatchSummary = "";
-            pendingRegisterTicket.selections.forEach((s, idx) => {
-                defaultMatchSummary += `${idx > 0 ? " + " : ""}${s.match}`;
-            });
-            let defaultMarketSummary = "";
-            pendingRegisterTicket.selections.forEach((s, idx) => {
-                defaultMarketSummary += `${idx > 0 ? " / " : ""}${s.market}: ${s.pick}`;
-            });
-
-            const matchVal = (matchInput && matchInput.value.trim()) ? matchInput.value.trim() : defaultMatchSummary;
-            const marketVal = (marketInput && marketInput.value.trim()) ? marketInput.value.trim() : defaultMarketSummary;
-            const oddVal = parseFloat(oddInput ? oddInput.value : 0) || pendingRegisterTicket.total_odd;
-            const stakeVal = parseFloat(stakeInput ? stakeInput.value : 0) || 1.0;
-            const statusVal = statusSelect ? statusSelect.value : "pending";
-
-            const newBet = {
-                id: Date.now(),
-                match: matchVal,
-                market: marketVal,
-                odd: oddVal,
-                stake: stakeVal,
-                status: statusVal,
-                date: new Date().toISOString().split("T")[0]
-            };
-
-            userBets.push(newBet);
-            localStorage.setItem("user_bets", JSON.stringify(userBets));
-
-            // If registering a Reto Escalera ticket, update escaleraCurrentRun
-            if (pendingRegisterTicket.type && pendingRegisterTicket.type.includes("Reto Escalera")) {
-                const dayMatch = pendingRegisterTicket.type.match(/Día (\d+)/);
-                const dayNum = dayMatch ? parseInt(dayMatch[1]) : (escaleraCurrentRun.length + 1);
-
-                let existingRunItem = escaleraCurrentRun.find(r => r.day === dayNum);
-                const runStatus = statusVal === "won" ? "won" : (statusVal === "lost" ? "lost" : (statusVal === "voided" ? "voided" : "pending"));
-                const returnAmt = parseFloat((stakeVal * oddVal).toFixed(2));
-
-                if (!existingRunItem) {
-                    escaleraCurrentRun.push({
-                        day: dayNum,
-                        date: new Date().toISOString().split("T")[0],
-                        match: matchVal,
-                        selection: marketVal,
-                        odd: oddVal,
-                        stake: stakeVal,
-                        return: returnAmt,
-                        status: runStatus
+                let defaultMatchSummary = "";
+                if (pendingRegisterTicket.selections && Array.isArray(pendingRegisterTicket.selections)) {
+                    pendingRegisterTicket.selections.forEach((s, idx) => {
+                        defaultMatchSummary += `${idx > 0 ? " + " : ""}${s.match}`;
                     });
-                } else {
-                    existingRunItem.match = matchVal;
-                    existingRunItem.selection = marketVal;
-                    existingRunItem.odd = oddVal;
-                    existingRunItem.stake = stakeVal;
-                    existingRunItem.return = returnAmt;
-                    existingRunItem.status = runStatus;
+                } else if (pendingRegisterTicket.match) {
+                    defaultMatchSummary = pendingRegisterTicket.match;
+                }
+                
+                let defaultMarketSummary = "";
+                if (pendingRegisterTicket.selections && Array.isArray(pendingRegisterTicket.selections)) {
+                    pendingRegisterTicket.selections.forEach((s, idx) => {
+                        defaultMarketSummary += `${idx > 0 ? " / " : ""}${s.market}: ${s.pick || s.selection || ''}`;
+                    });
+                } else if (pendingRegisterTicket.market) {
+                    defaultMarketSummary = pendingRegisterTicket.market;
                 }
 
-                escaleraCurrentRun.sort((a, b) => a.day - b.day);
-                localStorage.setItem("escalera_current_run", JSON.stringify(escaleraCurrentRun));
+                const matchVal = (matchInput && matchInput.value.trim()) ? matchInput.value.trim() : defaultMatchSummary;
+                const marketVal = (marketInput && marketInput.value.trim()) ? marketInput.value.trim() : defaultMarketSummary;
+                const oddVal = parseFloat(oddInput ? oddInput.value : 0) || pendingRegisterTicket.total_odd || pendingRegisterTicket.odd || 1.0;
+                const stakeVal = parseFloat(stakeInput ? stakeInput.value : 0) || 1.0;
+                const statusVal = statusSelect ? statusSelect.value : "pending";
 
-                if (runStatus === "won") {
-                    escaleraCurrentDay = Math.max(escaleraCurrentDay, dayNum + 1);
-                    escaleraCurrentStake = returnAmt;
-                    localStorage.setItem("escalera_day", escaleraCurrentDay);
-                    localStorage.setItem("escalera_current_stake", escaleraCurrentStake);
+                const newBet = {
+                    id: Date.now(),
+                    match: matchVal,
+                    market: marketVal,
+                    odd: oddVal,
+                    stake: stakeVal,
+                    status: statusVal,
+                    date: new Date().toISOString().split("T")[0]
+                };
+
+                // Safely get userBets
+                if (typeof userBets === 'undefined' || !Array.isArray(userBets)) {
+                    window.userBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
                 }
-                renderEscaleraTab();
+                userBets.push(newBet);
+                localStorage.setItem("user_bets", JSON.stringify(userBets));
+
+                // If registering a Reto Escalera ticket, update escaleraCurrentRun safely
+                if (pendingRegisterTicket.type && pendingRegisterTicket.type.includes("Reto Escalera")) {
+                    let safeEscaleraRun = [];
+                    try { safeEscaleraRun = JSON.parse(localStorage.getItem("escalera_current_run")) || []; } catch(e){}
+                    
+                    const dayMatch = pendingRegisterTicket.type.match(/Día (\d+)/);
+                    const dayNum = dayMatch ? parseInt(dayMatch[1]) : (safeEscaleraRun.length + 1);
+
+                    let existingRunItem = safeEscaleraRun.find(r => r.day === dayNum);
+                    const runStatus = statusVal === "won" ? "won" : (statusVal === "lost" ? "lost" : (statusVal === "voided" ? "voided" : "pending"));
+                    const returnAmt = parseFloat((stakeVal * oddVal).toFixed(2));
+
+                    if (!existingRunItem) {
+                        safeEscaleraRun.push({
+                            day: dayNum,
+                            date: new Date().toISOString().split("T")[0],
+                            match: matchVal,
+                            selection: marketVal,
+                            odd: oddVal,
+                            stake: stakeVal,
+                            return: returnAmt,
+                            status: runStatus
+                        });
+                    } else {
+                        existingRunItem.match = matchVal;
+                        existingRunItem.selection = marketVal;
+                        existingRunItem.odd = oddVal;
+                        existingRunItem.stake = stakeVal;
+                        existingRunItem.return = returnAmt;
+                        existingRunItem.status = runStatus;
+                    }
+
+                    safeEscaleraRun.sort((a, b) => a.day - b.day);
+                    localStorage.setItem("escalera_current_run", JSON.stringify(safeEscaleraRun));
+                    window.escaleraCurrentRun = safeEscaleraRun; // Sync global
+
+                    if (runStatus === "won") {
+                        let currentEDay = parseInt(localStorage.getItem("escalera_day")) || 1;
+                        currentEDay = Math.max(currentEDay, dayNum + 1);
+                        localStorage.setItem("escalera_day", currentEDay);
+                        localStorage.setItem("escalera_current_stake", returnAmt);
+                        window.escaleraCurrentDay = currentEDay;
+                        window.escaleraCurrentStake = returnAmt;
+                    }
+                    if (typeof renderEscaleraTab === "function") renderEscaleraTab();
+                }
+
+                if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
+                if (typeof populateBetsTable === "function") populateBetsTable();
+                if (typeof updateBankrollChart === "function") updateBankrollChart();
+                if (typeof SyncManager !== "undefined" && SyncManager.pushState) SyncManager.pushState();
+
+                // Clear the stored ticket on the modal to prevent stale data
+                if (modal) { modal._pendingTicket = null; modal._pendingSuffix = null; }
+                pendingRegisterTicket = null;
+                
+                if (typeof closeRegisterModal === "function") closeRegisterModal();
+                alert("¡Apuesta registrada con éxito en tu Historial y Banca! ✅");
+                
+            } catch (err) {
+                console.error("Error saving ticket:", err);
+                alert("Hubo un error al guardar el boleto: " + err.message);
             }
-
-            updateBankrollMetrics();
-            populateBetsTable();
-            updateBankrollChart();
-            SyncManager.pushState();
-
-            // Clear the stored ticket on the modal to prevent stale data
-            if (modal) { modal._pendingTicket = null; modal._pendingSuffix = null; }
-            pendingRegisterTicket = null;
-            closeRegisterModal();
-            alert("¡Apuesta registrada con éxito en tu Historial y Banca! ✅");
         };
     }
 
