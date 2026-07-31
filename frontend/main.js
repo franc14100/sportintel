@@ -2961,7 +2961,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error reading userBets from localStorage", e);
         }
 
-        const visibleBets = userBets.filter(b => !b.deleted);
+        const visibleBets = userBets.filter(b => !b.deleted).sort((a, b) => a.id - b.id);
         if (visibleBets.length === 0) {
             betsTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: var(--text-muted); background: rgba(255,255,255,0.01);">No has registrado apuestas todavía.</td></tr>`;
             return;
@@ -2973,7 +2973,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const potentialReturn = bet.stake * bet.odd;
             
             let statusSelect = `
-                <select class="form-input" autocomplete="off" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; background: rgba(8, 11, 17, 0.8); ${bet.status === 'won' ? 'color: var(--accent-green); border-color: var(--accent-green);' : bet.status === 'lost' ? 'color: var(--accent-pink); border-color: var(--accent-pink);' : 'color: var(--accent-amber); border-color: var(--accent-amber);'}" onchange="resolveBet(${bet.id}, this.value)">
+                <select id="status-select-${bet.id}" class="form-input" autocomplete="off" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; background: rgba(8, 11, 17, 0.8); ${bet.status === 'won' ? 'color: var(--accent-green); border-color: var(--accent-green);' : bet.status === 'lost' ? 'color: var(--accent-pink); border-color: var(--accent-pink);' : 'color: var(--accent-amber); border-color: var(--accent-amber);'}" onchange="resolveBet(${bet.id}, this.value)">
                     <option value="pending" ${bet.status === 'pending' ? 'selected' : ''}>Pendiente</option>
                     <option value="won" ${bet.status === 'won' ? 'selected' : ''}>Ganada</option>
                     <option value="lost" ${bet.status === 'lost' ? 'selected' : ''}>Perdida</option>
