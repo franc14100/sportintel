@@ -284,8 +284,8 @@
             ],
             "real_odds": {
                 "h2h_home": 1.11,
-                "h2h_draw": 8.0,
-                "h2h_away": 15.0
+                "h2h_draw": 8,
+                "h2h_away": 15
             }
         },
         {
@@ -494,7 +494,7 @@
                 {
                     "market": "Doble Oportunidad",
                     "selection": "Eastern Suburbs o Empate",
-                    "odd": 1.0,
+                    "odd": 1,
                     "probability": 100,
                     "risk": "Low",
                     "reasoning": {
@@ -559,7 +559,7 @@
                 }
             ],
             "real_odds": {
-                "h2h_home": 9.0,
+                "h2h_home": 9,
                 "h2h_draw": 5.5,
                 "h2h_away": 1.22
             }
@@ -784,7 +784,7 @@
                 {
                     "market": "Doble Oportunidad",
                     "selection": "Wellington Olympic o Empate",
-                    "odd": 1.0,
+                    "odd": 1,
                     "probability": 100,
                     "risk": "Low",
                     "reasoning": {
@@ -851,7 +851,7 @@
             "real_odds": {
                 "h2h_home": 1.18,
                 "h2h_draw": 6.5,
-                "h2h_away": 9.0
+                "h2h_away": 9
             }
         },
         {
@@ -1080,7 +1080,7 @@
                 {
                     "market": "Doble Oportunidad",
                     "selection": "Vietnam o Empate",
-                    "odd": 1.0,
+                    "odd": 1,
                     "probability": 100,
                     "risk": "Low",
                     "reasoning": {
@@ -1146,8 +1146,8 @@
             ],
             "real_odds": {
                 "h2h_home": 1.14,
-                "h2h_draw": 8.0,
-                "h2h_away": 15.0
+                "h2h_draw": 8,
+                "h2h_away": 15
             }
         },
         {
@@ -1354,7 +1354,7 @@
                 {
                     "market": "Doble Oportunidad",
                     "selection": "AC Sparta Praha o Empate",
-                    "odd": 1.0,
+                    "odd": 1,
                     "probability": 100,
                     "risk": "Low",
                     "reasoning": {
@@ -1420,8 +1420,8 @@
             ],
             "real_odds": {
                 "h2h_home": 1.2,
-                "h2h_draw": 6.0,
-                "h2h_away": 11.0
+                "h2h_draw": 6,
+                "h2h_away": 11
             }
         },
         {
@@ -1697,7 +1697,7 @@
             "real_odds": {
                 "h2h_home": 1.2,
                 "h2h_draw": 6.25,
-                "h2h_away": 10.0
+                "h2h_away": 10
             }
         },
         {
@@ -1970,8 +1970,8 @@
             ],
             "real_odds": {
                 "h2h_home": 1.27,
-                "h2h_draw": 5.0,
-                "h2h_away": 8.0
+                "h2h_draw": 5,
+                "h2h_away": 8
             }
         },
         {
@@ -2261,7 +2261,7 @@
             "real_odds": {
                 "h2h_home": 1.33,
                 "h2h_draw": 4.5,
-                "h2h_away": 7.0
+                "h2h_away": 7
             }
         },
         {
@@ -2570,42 +2570,42 @@
             ],
             "real_odds": {
                 "h2h_home": 1.33,
-                "h2h_draw": 5.0,
+                "h2h_draw": 5,
                 "h2h_away": 6.25,
                 "dc_1x": 1.08,
                 "dc_x2": 2.88,
                 "dc_12": 1.11,
                 "fh_home": 1.73,
                 "fh_draw": 2.75,
-                "fh_away": 6.0,
+                "fh_away": 6,
                 "dnb_home": 1.14,
-                "dnb_away": 5.0,
+                "dnb_away": 5,
                 "btts_yes": 1.67,
                 "btts_no": 2.1,
-                "over_0.5": 1.0,
-                "under_0.5": 23.0,
+                "over_0.5": 1,
+                "under_0.5": 23,
                 "over_1.5": 1.11,
-                "under_1.5": 6.0,
+                "under_1.5": 6,
                 "over_2.5": 1.4,
                 "under_2.5": 2.75,
                 "over_3.5": 1.91,
                 "under_3.5": 1.8,
                 "over_4.5": 3.25,
                 "under_4.5": 1.33,
-                "over_5.5": 5.0,
+                "over_5.5": 5,
                 "under_5.5": 1.14,
                 "over_6.5": 8.5,
                 "under_6.5": 1.05,
-                "over_7.5": 12.0,
+                "over_7.5": 12,
                 "under_7.5": 1.02,
-                "over_8.5": 17.0,
-                "under_8.5": 1.0,
+                "over_8.5": 17,
+                "under_8.5": 1,
                 "ah_home": 1.9,
                 "ah_line": "-1.5",
                 "ah_away": 1.9,
                 "fts_home": 1.36,
-                "fts_no_goal": 23.0,
-                "fts_away": 3.0
+                "fts_no_goal": 23,
+                "fts_away": 3
             }
         },
         {
@@ -2914,7 +2914,7 @@
             "real_odds": {
                 "h2h_home": 1.3,
                 "h2h_draw": 5.5,
-                "h2h_away": 6.0
+                "h2h_away": 6
             }
         },
         {
@@ -3215,8 +3215,8 @@
             ],
             "real_odds": {
                 "h2h_home": 1.33,
-                "h2h_draw": 5.0,
-                "h2h_away": 6.0
+                "h2h_draw": 5,
+                "h2h_away": 6
             }
         },
         {
@@ -3774,7 +3774,7 @@
             "real_odds": {
                 "h2h_home": 1.36,
                 "h2h_draw": 4.75,
-                "h2h_away": 6.0
+                "h2h_away": 6
             }
         },
         {
@@ -5222,7 +5222,7 @@
             "real_odds": {
                 "h2h_home": 1.62,
                 "h2h_draw": 3.3,
-                "h2h_away": 5.0
+                "h2h_away": 5
             }
         },
         {
@@ -5498,7 +5498,7 @@
             ],
             "real_odds": {
                 "h2h_home": 1.7,
-                "h2h_draw": 3.0,
+                "h2h_draw": 3,
                 "h2h_away": 5.25
             }
         },
@@ -5803,38 +5803,38 @@
             "real_odds": {
                 "h2h_home": 1.53,
                 "h2h_draw": 3.75,
-                "h2h_away": 7.0,
+                "h2h_away": 7,
                 "dc_1x": 1.1,
                 "dc_x2": 2.38,
                 "dc_12": 1.25,
                 "fh_home": 2.1,
                 "fh_draw": 2.2,
-                "fh_away": 7.0,
+                "fh_away": 7,
                 "dnb_home": 1.17,
-                "dnb_away": 5.0,
+                "dnb_away": 5,
                 "btts_yes": 2.2,
                 "btts_no": 1.62,
                 "over_0.5": 1.07,
-                "under_0.5": 9.0,
+                "under_0.5": 9,
                 "over_1.5": 1.36,
-                "under_1.5": 3.0,
+                "under_1.5": 3,
                 "over_2.5": 2.15,
                 "under_2.5": 1.67,
                 "over_3.5": 3.75,
                 "under_3.5": 1.25,
-                "over_4.5": 9.0,
+                "over_4.5": 9,
                 "under_4.5": 1.07,
-                "over_5.5": 19.0,
+                "over_5.5": 19,
                 "under_5.5": 1.02,
-                "over_6.5": 41.0,
-                "under_6.5": 1.0,
+                "over_6.5": 41,
+                "under_6.5": 1,
                 "ah_home": 1.95,
                 "ah_line": "-1",
                 "ah_away": 1.85,
                 "corners_over_8.5": 1.73,
-                "corners_under_8.5": 2.0,
+                "corners_under_8.5": 2,
                 "fts_home": 1.44,
-                "fts_no_goal": 8.0,
+                "fts_no_goal": 8,
                 "fts_away": 3.25
             }
         },
@@ -6132,8 +6132,8 @@
             ],
             "real_odds": {
                 "h2h_home": 1.4,
-                "h2h_draw": 5.0,
-                "h2h_away": 5.0
+                "h2h_draw": 5,
+                "h2h_away": 5
             }
         },
         {
@@ -6431,7 +6431,7 @@
             "real_odds": {
                 "h2h_home": 1.62,
                 "h2h_draw": 3.4,
-                "h2h_away": 5.0
+                "h2h_away": 5
             }
         },
         {
@@ -8116,7 +8116,7 @@
             ],
             "real_odds": {
                 "h2h_home": 4.33,
-                "h2h_draw": 6.0,
+                "h2h_draw": 6,
                 "h2h_away": 1.4
             }
         },
@@ -8400,7 +8400,7 @@
             ],
             "real_odds": {
                 "h2h_home": 1.57,
-                "h2h_draw": 4.0,
+                "h2h_draw": 4,
                 "h2h_away": 5.25
             }
         },
@@ -9038,7 +9038,7 @@
                 }
             ],
             "real_odds": {
-                "h2h_home": 3.0,
+                "h2h_home": 3,
                 "h2h_away": 1.36
             }
         },
@@ -10717,7 +10717,7 @@
                 }
             ],
             "real_odds": {
-                "h2h_home": 2.0,
+                "h2h_home": 2,
                 "h2h_away": 1.73
             }
         },
@@ -11378,7 +11378,7 @@
                 {
                     "market": "Total de Sets (Más/Menos)",
                     "selection": "Menos de 2.5 Sets",
-                    "odd": 2.0,
+                    "odd": 2,
                     "probability": 58,
                     "risk": "Medium",
                     "reasoning": {
@@ -11685,7 +11685,7 @@
                 {
                     "market": "Total de Juegos (Más/Menos)",
                     "selection": "Más de 21.5 Juegos",
-                    "odd": 2.0,
+                    "odd": 2,
                     "probability": 65,
                     "risk": "Medium",
                     "reasoning": {
@@ -12049,13 +12049,13 @@
                 }
             ],
             "real_odds": {
-                "h2h_home": 2.0,
+                "h2h_home": 2,
                 "h2h_away": 1.73
             }
         }
     ],
     "global_stats": {
-        "analyzed_today": 181,
+        "analyzed_today": 50,
         "avg_accuracy_40d": 46,
         "total_picks_won": 36,
         "total_picks_lost": 42,
@@ -12527,7 +12527,7 @@
             "match": "Reto Escalera (Día 1) - Sheriff Tiraspol vs Aluminij",
             "market": "Doble Oportunidad - Sheriff o Empate",
             "odd": 1.21,
-            "stake": 5.0,
+            "stake": 5,
             "status": "won",
             "date": "2026-07-16"
         },
@@ -12545,7 +12545,7 @@
             "match": "Clyde vs Annan Athletic + Fenerbahce vs Gornik",
             "market": "Combinada Parley - Boleto #84703772889",
             "odd": 1.691,
-            "stake": 5.0,
+            "stake": 5,
             "status": "won",
             "date": "2026-07-20"
         },
@@ -12554,7 +12554,7 @@
             "match": "Apuesta Soñadora / Combinada",
             "market": "Resultado Final + Goles",
             "odd": 1.78,
-            "stake": 3.0,
+            "stake": 3,
             "status": "won",
             "date": "2026-07-20"
         },
@@ -12581,7 +12581,7 @@
             "match": "Apuesta Pendiente Control Bankroll",
             "market": "Mercado Seleccionado 1xBet",
             "odd": 1.3,
-            "stake": 6.0,
+            "stake": 6,
             "status": "pending",
             "date": "2026-07-21"
         }
@@ -12593,7 +12593,7 @@
             "match": "Sheriff Tiraspol vs Aluminij",
             "selection": "Sheriff o Empate",
             "odd": 1.21,
-            "stake": 5.0,
+            "stake": 5,
             "return": 6.05,
             "status": "won"
         },
