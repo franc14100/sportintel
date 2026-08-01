@@ -16,7 +16,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=7.0">
+    <link rel="stylesheet" href="styles.css?v=8.0">
 </head>
 <body>
     <div class="app-container">
@@ -49,6 +49,10 @@
                     <i class="fa-solid fa-ticket"></i>
                     <span>Generador de Boletos</span>
                 </button>
+                <button class="nav-item" data-tab="news" id="nav-news" style="display:none;">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span>Noticias y Lesionados</span>
+                </button>
                 <button class="nav-item" data-tab="bankroll" id="nav-bankroll">
                     <i class="fa-solid fa-wallet"></i>
                     <span>Mi Bankroll</span>
@@ -57,7 +61,21 @@
                     <i class="fa-solid fa-stairs"></i>
                     <span>Reto Escalera</span>
                 </button>
-            </nav></div>
+                <button class="nav-item" data-tab="aiassistant" id="nav-aiassistant" style="display:none;">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Asistente IA</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer" style="display:none;">
+                <div class="accuracy-badge">
+                    <div class="accuracy-circle">
+                        <span id="global-accuracy">74.6%</span>
+                    </div>
+                    <div class="accuracy-info">
+                        <span class="lbl">Tasa de Acierto</span>
+                        <span class="sub">Últimos 30 días</span>
+                    </div>
+                </div>
             </div>
         </aside>
 
@@ -1371,6 +1389,6 @@
             </button>
         </div>
     <!-- Custom JS -->
-    <script src="main.js?v=7.0"></script>
+    <script src="main.js?v=8.0"></script>
 </body>
 </html>

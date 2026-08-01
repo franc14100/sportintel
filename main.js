@@ -581,7 +581,8 @@ document.addEventListener("DOMContentLoaded", () => {
             tabContents.forEach(tc => tc.classList.remove("active"));
             
             item.classList.add("active");
-            document.getElementById(targetTab).classList.add("active");
+            const targetEl = document.getElementById(targetTab) || document.getElementById("tab-" + targetTab);
+            if (targetEl) targetEl.classList.add("active");
 
             // Close mobile menu
             closeMobileMenu();

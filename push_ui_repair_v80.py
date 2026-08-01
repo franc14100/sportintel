@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing 3 user requests: remove unused tabs, add basketball filters, and unlimit ESPN matches to 146+...")
-run('git commit -m "Remove Noticias and Asistente IA tabs, add Baloncesto filter button, and unlimit ESPN fetching to 140+ matches with v7.0 cache bump"')
+print("Committing UI repair & safe navigation guards with v8.0 cache buster...")
+run('git commit -m "Repair UI tab navigation structure, add null guards for tabs, and bump cache buster to v8.0"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
