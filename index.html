@@ -16,7 +16,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=6.0">
+    <link rel="stylesheet" href="styles.css?v=7.0">
 </head>
 <body>
     <div class="app-container">
@@ -49,10 +49,6 @@
                     <i class="fa-solid fa-ticket"></i>
                     <span>Generador de Boletos</span>
                 </button>
-                <button class="nav-item" data-tab="news" id="nav-news">
-                    <i class="fa-solid fa-newspaper"></i>
-                    <span>Noticias y Lesionados</span>
-                </button>
                 <button class="nav-item" data-tab="bankroll" id="nav-bankroll">
                     <i class="fa-solid fa-wallet"></i>
                     <span>Mi Bankroll</span>
@@ -61,21 +57,7 @@
                     <i class="fa-solid fa-stairs"></i>
                     <span>Reto Escalera</span>
                 </button>
-                <button class="nav-item" data-tab="aiassistant" id="nav-aiassistant">
-                    <i class="fa-solid fa-robot"></i>
-                    <span>Asistente IA</span>
-                </button>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="accuracy-badge">
-                    <div class="accuracy-circle">
-                        <span id="global-accuracy">74.6%</span>
-                    </div>
-                    <div class="accuracy-info">
-                        <span class="lbl">Tasa de Acierto</span>
-                        <span class="sub">Últimos 30 días</span>
-                    </div>
-                </div>
+            </nav></div>
             </div>
         </aside>
 
@@ -448,6 +430,7 @@
                         <button class="filter-btn active pred-sport-filter" data-sport="all" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;">Todos</button>
                         <button class="filter-btn pred-sport-filter" data-sport="Football" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
                         <button class="filter-btn pred-sport-filter" data-sport="Tennis" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Tenis</button>
+                        <button class="filter-btn pred-sport-filter" data-sport="Basketball" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-basketball"></i> Baloncesto</button>
                     </div>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                         <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px;"><i class="fa-solid fa-signal"></i> Estado del Partido:</span>
@@ -491,6 +474,7 @@
                                 <button class="filter-btn active match-sport-filter" data-sport="all">Todos</button>
                                 <button class="filter-btn match-sport-filter" data-sport="Football"><i class="fa-solid fa-soccer-ball"></i> Fútbol</button>
                                 <button class="filter-btn match-sport-filter" data-sport="Tennis"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Tenis</button>
+                                <button class="filter-btn match-sport-filter" data-sport="Basketball"><i class="fa-solid fa-basketball"></i> Baloncesto</button>
                             </div>
                             <div class="filter-bar">
                                 <button class="filter-btn active match-status-filter" data-status="all">Todos</button>
@@ -1387,6 +1371,6 @@
             </button>
         </div>
     <!-- Custom JS -->
-    <script src="main.js?v=6.0"></script>
+    <script src="main.js?v=7.0"></script>
 </body>
 </html>

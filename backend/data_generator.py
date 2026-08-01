@@ -601,7 +601,7 @@ def fetch_espn_fallback_matches():
     ]
     espn_matches = []
     for ep, sport in endpoints:
-        url = f"https://site.api.espn.com/apis/site/v2/sports/{ep}/scoreboard?dates={today_str}"
+        url = f"https://site.api.espn.com/apis/site/v2/sports/{ep}/scoreboard?dates={today_str}&limit=1000"
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
             with urllib.request.urlopen(req, timeout=8) as resp:

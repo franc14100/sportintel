@@ -15,7 +15,7 @@ def normalize_name(name):
     return re.sub(r'[^a-z0-9]', '', name).strip()
 
 def get_espn_data(sport_endpoint):
-    url = f'https://site.api.espn.com/apis/site/v2/sports/{sport_endpoint}/scoreboard'
+    url = f'https://site.api.espn.com/apis/site/v2/sports/{sport_endpoint}/scoreboard?limit=1000'
     try:
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req, timeout=10) as response:
