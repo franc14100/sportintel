@@ -586,6 +586,65 @@ TEAM_RATINGS = {
     "Elena Rybakina": 87
 }
 
+def fetch_espn_fallback_matches():
+    """Busca partidos usando la API pública y 100% GRATUITA de ESPN (0 costo de cuota)."""
+    ecuador_time = datetime.now(timezone.utc) - timedelta(hours=5)
+    today_str = ecuador_time.strftime("%Y%m%d")
+    
+    endpoints = [
+        ("soccer/all", "Football"),
+        ("tennis/atp", "Tennis"),
+        ("tennis/wta", "Tennis")
+    ]
+    espn_matches = []
+    for ep, sport in endpoints:
+        url = f"https://site.api.espn.com/apis/site/v2/sports/{ep}/scoreboard?dates={today_str}"
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                data = json.loads(resp.read().decode('utf-8'))
+                events = data.get("events", [])
+                for ev in events:
+                    comps = ev.get("competitions", [{}])[0]
+                    competitors = comps.get("competitors", [])
+                    if len(competitors) >= 2:
+                        h_name = competitors[0].get("team", {}).get("displayName") or competitors[0].get("athlete", {}).get("displayName")
+                        a_name = competitors[1].get("team", {}).get("displayName") or competitors[1].get("athlete", {}).get("displayName")
+                        league_name = ev.get("season", {}).get("slug") or comps.get("league", {}).get("name") or "Liga Profesional"
+                        
+                        start_date = comps.get("date", "")
+                        time_str = "15:00"
+                        if "T" in start_date:
+                            try:
+                                dt = datetime.fromisoformat(start_date.replace("Z", "+00:00")) - timedelta(hours=5)
+                                time_str = dt.strftime("%H:%M")
+                            except Exception:
+                                pass
+                        
+                        if h_name and a_name:
+                            espn_matches.append({
+                                "home": h_name,
+                                "away": a_name,
+                                "home_color": "#1F2937",
+                                "home_accent": "#3B82F6",
+                                "away_color": "#1F2937",
+                                "away_accent": "#EF4444",
+                                "league": league_name,
+                                "sport": sport,
+                                "time": time_str,
+                                "stadium": "Cancha Principal",
+                                "status": "pre",
+                                "home_score": 0,
+                                "away_score": 0,
+                                "is_cup": False,
+                                "home_form_raw": "W-D-W-W",
+                                "away_form_raw": "W-W-D-L",
+                                "real_odds": {}
+                            })
+        except Exception as e:
+            print(f"[ESPN Fallback] Error en {ep}: {e}")
+    return espn_matches
+
 def generate_daily_sports_data():
     today = datetime.now(timezone.utc) - timedelta(hours=5)
     date_str = today.strftime("%Y-%m-%d")
@@ -647,6 +706,9 @@ def generate_daily_sports_data():
 
     print("[INFO] Conectando a internet para buscar partidos reales...")
     espn_matches, _ = fetch_live_matches()
+    if not espn_matches:
+        print("[AVISO] Cuota de RapidAPI agotada o 0 partidos recibidos. Activando Motor de Respaldo ESPN 100% GRATUITO (0 costo de API)...")
+        espn_matches = fetch_espn_fallback_matches()
     
     # Filtrar solo Fútbol y Tenis (eliminando Basketball por completo)
     live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis']]

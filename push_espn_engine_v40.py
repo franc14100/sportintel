@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing v3.8 mock rejection & API data KV fix...")
-run('git commit -m "Eliminate mock fallback matches from Vercel KV and force data.json fallback with cache buster v3.8"')
+print("Committing ESPN Zero-Cost Fallback Engine...")
+run('git commit -m "Implement ESPN 100% Free Zero-Cost Fallback Engine for zero-cost match predictions when RapidAPI quota hits 100%"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
