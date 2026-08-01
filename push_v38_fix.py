@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing root sync and v3.5 cache bump...")
-run('git commit -m "Sync root main.js & index.html and bump script cache buster to v3.5 with anti-cache headers"')
+print("Committing v3.8 mock rejection & API data KV fix...")
+run('git commit -m "Eliminate mock fallback matches from Vercel KV and force data.json fallback with cache buster v3.8"')
 
 print("Fetching origin main...")
 run("git fetch origin main")

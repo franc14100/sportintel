@@ -135,13 +135,25 @@ module.exports = async function handler(req, res) {
                     while (typeof parsedData === 'string') {
                         try { parsedData = JSON.parse(parsedData); } catch (e) { break; }
                     }
-                    // Mezclamos las estadísticas de Upstash con los partidos de data.json
-                    data.global_stats = parsedData.global_stats || data.global_stats;
-                    data.historical_tickets_registry = parsedData.historical_tickets_registry || data.historical_tickets_registry;
-                    data.starting_bankroll = parsedData.starting_bankroll || data.starting_bankroll;
-                    data.user_bets = parsedData.user_bets || data.user_bets;
-                    if (data.global_stats) {
-                        data.global_stats.analyzed_today = (data.matches || []).length;
+                    // ÚNICAMENTE usar parsedData si corresponde al día de HOY y tiene partidos reales (> 5)
+                    const isKvFresh = parsedData && parsedData.date === data.date && Array.isArray(parsedData.matches) && parsedData.matches.length >= 5;
+                    if (isKvFresh) {
+                        data.global_stats = parsedData.global_stats || data.global_stats;
+                        data.historical_tickets_registry = parsedData.historical_tickets_registry || data.historical_tickets_registry;
+                        data.starting_bankroll = parsedData.starting_bankroll || data.starting_bankroll;
+                        data.user_bets = parsedData.user_bets || data.user_bets;
+                        if (parsedData.star_ticket_1) data.star_ticket_1 = parsedData.star_ticket_1;
+                        if (parsedData.star_ticket_2) data.star_ticket_2 = parsedData.star_ticket_2;
+                        if (parsedData.star_ticket_3) data.star_ticket_3 = parsedData.star_ticket_3;
+                        if (parsedData.star_ticket_4) data.star_ticket_4 = parsedData.star_ticket_4;
+                    } else {
+                        console.log("[Data API] Datos de KV obsoletos o corruptos. Ignorando KV y usando data.json fresco.");
+                        // Sobrescribir KV con los datos frescos de data.json para sanar el KV
+                        fetch(`${baseUrl}/set/sportintel_data`, {
+                            method: 'POST',
+                            headers: { 'Authorization': `Bearer ${kvToken}`, 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        }).catch(() => {});
                     }
                 }
             }

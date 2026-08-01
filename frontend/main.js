@@ -657,9 +657,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 fetchedData = await response.json();
             }
 
-            // Solo si /api/data falla completamente, intentar /data.json local
-            if (!fetchedData || !fetchedData.matches || fetchedData.matches.length < 1) {
+            // Si /api/data devuelve datos vacíos o los 3 partidos mock ficticios (Argentina/Spain), forzar /data.json fresco
+            const isMockData = fetchedData && fetchedData.matches && fetchedData.matches.length <= 3 && (fetchedData.matches[0]?.home === "Argentina" || fetchedData.matches[0]?.home === "Spain");
+            if (!fetchedData || !fetchedData.matches || fetchedData.matches.length < 5 || isMockData) {
                 try {
+                    console.warn("[SportIntel] Datos de /api/data incompletos o mock. Cargando /data.json fresco...");
                     const localRes = await fetch(`/data.json?v=${new Date().getTime()}`);
                     if (localRes.ok) {
                         fetchedData = await localRes.json();
