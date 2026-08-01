@@ -2658,17 +2658,22 @@ def generate_daily_sports_data():
                 ticket["status"] = "won" if ticket_won else "lost"
 
     def calculate_dynamic_stake(confidence, odd, ticket_type):
-        safe_margin = max(0, confidence - 40)
-        ev = (confidence / 100.0) * odd
-        ev_multiplier = max(0.8, min(1.5, ev))
-        
-        if ticket_type in [1, 2, 3]:
-            # Boletos 1 al 3: 1% a 8%
-            raw_stake = (safe_margin / 6.0) * ev_multiplier
-            return int(round(max(1.0, min(8.0, raw_stake))))
+        prob = confidence / 100.0
+        b = max(0.01, float(odd) - 1.0)
+        p = max(0.01, min(0.99, prob))
+        q = 1.0 - p
+        kelly_f = (b * p - q) / b
+        if ticket_type == 1:
+            fractional_kelly = max(0, kelly_f * 0.35) * 100
+            return round(max(3.5, min(5.0, fractional_kelly)), 1)
+        elif ticket_type == 2:
+            fractional_kelly = max(0, kelly_f * 0.25) * 100
+            return round(max(2.5, min(4.0, fractional_kelly)), 1)
+        elif ticket_type == 3:
+            fractional_kelly = max(0, kelly_f * 0.18) * 100
+            return round(max(1.5, min(3.0, fractional_kelly)), 1)
         else:
-            # Boleto Soñadora: siempre $1
-            return 1
+            return 1.0
 
     # Generar IDs y agregar los boletos de hoy al registro como "pending"
     # Boleto Estrella 1 (Seguro)

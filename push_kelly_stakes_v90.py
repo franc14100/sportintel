@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing UI repair & safe navigation guards with v8.0 cache buster...")
-run('git commit -m "Repair UI tab navigation structure, add null guards for tabs, and bump cache buster to v8.0"')
+print("Committing Fractional Kelly Criterion Stake Model with v9.0 cache buster...")
+run('git commit -m "Implement Fractional Kelly Criterion dynamic stake model (Boleto 1: 5.0%, Boleto 2: 4.0%, Boleto 3: 3.0%, Boleto 4: 1.0%) and bump cache buster to v9.0"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
