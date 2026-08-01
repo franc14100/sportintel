@@ -594,7 +594,10 @@ def fetch_espn_fallback_matches():
     endpoints = [
         ("soccer/all", "Football"),
         ("tennis/atp", "Tennis"),
-        ("tennis/wta", "Tennis")
+        ("tennis/wta", "Tennis"),
+        ("basketball/wnba", "Basketball"),
+        ("basketball/nba", "Basketball"),
+        ("basketball/mens-college-basketball", "Basketball")
     ]
     espn_matches = []
     for ep, sport in endpoints:
@@ -711,7 +714,7 @@ def generate_daily_sports_data():
         espn_matches = fetch_espn_fallback_matches()
     
     # Filtrar solo Fútbol y Tenis (eliminando Basketball por completo)
-    live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis']]
+    live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis', 'Basketball']]
     total_analyzed = len(live_matches)
     
     if not live_matches:
@@ -1902,7 +1905,7 @@ def generate_daily_sports_data():
             if 'Tarjeta' in p['market']:
                 continue
                 
-            if sport in ['Football', 'Tennis']:
+            if sport in ['Football', 'Tennis', 'Basketball']:
                 priority_picks.append(pick_info)
             else:
                 fallback_picks.append(pick_info)

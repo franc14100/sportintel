@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing unlimited ESPN match engine & v5.0 bump...")
-run('git commit -m "Remove match limits to display ALL 100+ real matches from free ESPN API and bump cache buster to v5.0"')
+print("Committing Basketball engine & v6.0 bump...")
+run('git commit -m "Enable Basketball (NBA, WNBA, College Basketball) via free ESPN API and bump cache buster to v6.0"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
