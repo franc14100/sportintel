@@ -2658,22 +2658,36 @@ def generate_daily_sports_data():
                 ticket["status"] = "won" if ticket_won else "lost"
 
     def calculate_dynamic_stake(confidence, odd, ticket_type):
-        prob = confidence / 100.0
-        b = max(0.01, float(odd) - 1.0)
-        p = max(0.01, min(0.99, prob))
-        q = 1.0 - p
-        kelly_f = (b * p - q) / b
-        if ticket_type == 1:
-            fractional_kelly = max(0, kelly_f * 0.35) * 100
-            return round(max(3.5, min(5.0, fractional_kelly)), 1)
-        elif ticket_type == 2:
-            fractional_kelly = max(0, kelly_f * 0.25) * 100
-            return round(max(2.5, min(4.0, fractional_kelly)), 1)
-        elif ticket_type == 3:
-            fractional_kelly = max(0, kelly_f * 0.18) * 100
-            return round(max(1.5, min(3.0, fractional_kelly)), 1)
-        else:
+        """
+        Stake Dinámico Escalonado según la Seguridad/Confianza real del Boleto:
+        - Boleto 4 (Soñadora): Siempre 1%
+        - Para Boletos 1, 2 y 3:
+          - Confianza >= 80% (Super Seguro) -> 8% (Si todos son súper seguros, ¡todos reciben 8%!)
+          - Confianza 75% - 79% (Alta Seguridad) -> 7%
+          - Confianza 70% - 74% (Seguridad Moderada) -> 6%
+          - Confianza 65% - 69% (Riesgo Medio) -> 5%
+          - Confianza 60% - 64% (Riesgo Controlado) -> 4%
+          - Confianza 55% - 59% (Riesgo Moderado-Alto) -> 3%
+          - Confianza < 55% (Riesgo Alto) -> 2%
+        """
+        if ticket_type == 4:
             return 1.0
+
+        conf = int(round(float(confidence)))
+        if conf >= 80:
+            return 8.0
+        elif conf >= 75:
+            return 7.0
+        elif conf >= 70:
+            return 6.0
+        elif conf >= 65:
+            return 5.0
+        elif conf >= 60:
+            return 4.0
+        elif conf >= 55:
+            return 3.0
+        else:
+            return 2.0
 
     # Generar IDs y agregar los boletos de hoy al registro como "pending"
     # Boleto Estrella 1 (Seguro)

@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing Fractional Kelly Criterion Stake Model with v9.0 cache buster...")
-run('git commit -m "Implement Fractional Kelly Criterion dynamic stake model (Boleto 1: 5.0%, Boleto 2: 4.0%, Boleto 3: 3.0%, Boleto 4: 1.0%) and bump cache buster to v9.0"')
+print("Committing Confidence-Based 8% Dynamic Stake Scale with v10.0 cache buster...")
+run('git commit -m "Implement confidence-proportional stake scale (8% for >=80% confidence, 7% for 75-79%, etc.) with v10.0 cache bump"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
