@@ -6,7 +6,7 @@ on:
     paths-ignore:
       - 'frontend/data.json'
   schedule:
-    - cron: '*/30 * * * *' # Cada 30 minutos
+    - cron: '0 11,15,19,23 * * *' # 4 veces al día (6AM, 10AM, 2PM, 6PM Ecuador)
   workflow_dispatch: # Permite correrlo manualmente con un botón
 
 permissions:

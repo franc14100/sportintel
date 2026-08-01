@@ -54309,5 +54309,392 @@
     "start_ts": 1785646800,
     "status": "notstarted",
     "sport": "Football"
+  },
+  "16648827": {
+    "homeTeam": "Atlético Oriente",
+    "awayTeam": "CD Imperial Unido",
+    "league": "Tercera División A",
+    "time": "15:00",
+    "start_ts": 1785614400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16648813": {
+    "homeTeam": "Quintero Unido FC",
+    "awayTeam": "Futuro FC",
+    "league": "Tercera División A",
+    "time": "16:00",
+    "start_ts": 1785618000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16679417": {
+    "homeTeam": "Carpi",
+    "awayTeam": "Pistoiese",
+    "league": "Club Friendly Games",
+    "time": "09:30",
+    "start_ts": 1785594600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16462305": {
+    "homeTeam": "Athlone Town FC",
+    "awayTeam": "Shamrock Rovers FC",
+    "league": "Women's FAI Cup",
+    "time": "09:30",
+    "start_ts": 1785594600,
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16674160": {
+    "homeTeam": "VVV-Venlo",
+    "awayTeam": "KAS Eupen",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "start_ts": 1785600000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16674226": {
+    "homeTeam": "CD Cinfães",
+    "awayTeam": "AD Marco 09",
+    "league": "Club Friendly Games",
+    "time": "13:00",
+    "start_ts": 1785607200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16689169": {
+    "homeTeam": "Ultimate Móstoles",
+    "awayTeam": "G3X FC",
+    "league": "Kings World Cup Clubs",
+    "time": "13:00",
+    "start_ts": 1785607200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15632839": {
+    "homeTeam": "Calgary Wild FC",
+    "awayTeam": "AFC Toronto",
+    "league": "Northern Super League, Regular Season",
+    "time": "15:00",
+    "start_ts": 1785614400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389523": {
+    "homeTeam": "Varegg",
+    "awayTeam": "Fana",
+    "league": "3rd Division, Group 3",
+    "time": "07:00",
+    "start_ts": 1785672000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16689168": {
+    "homeTeam": "Furia FC",
+    "awayTeam": "Alpak FC",
+    "league": "Kings World Cup Clubs",
+    "time": "12:00",
+    "start_ts": 1785603600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16303191": {
+    "homeTeam": "Luton Town",
+    "awayTeam": "Go Ahead Eagles",
+    "league": "Club Friendly Games",
+    "time": "07:00",
+    "start_ts": 1785672000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15266171": {
+    "homeTeam": "Grei",
+    "awayTeam": "IK Start",
+    "league": "1st Division, Women",
+    "time": "08:00",
+    "start_ts": 1785675600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16337220": {
+    "homeTeam": "Montrose FC",
+    "awayTeam": "Falkirk FC",
+    "league": "Premier League Cup, Women",
+    "time": "07:00",
+    "start_ts": 1785672000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16450611": {
+    "homeTeam": "Leyton Orient",
+    "awayTeam": "Royal Antwerp FC",
+    "league": "Club Friendly Games",
+    "time": "06:30",
+    "start_ts": 1785670200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16362390": {
+    "homeTeam": "Bnei Sakhnin",
+    "awayTeam": "Hapoel Haifa",
+    "league": "League Cup, Premier, Group A",
+    "time": "12:30",
+    "start_ts": 1785605400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16489903": {
+    "homeTeam": "Wolverhampton",
+    "awayTeam": "Real Racing Club",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "start_ts": 1785600000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16674121": {
+    "homeTeam": "Nancy",
+    "awayTeam": "Dijon",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "start_ts": 1785600000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16674554": {
+    "homeTeam": "AS Nestos Chrysoupolis",
+    "awayTeam": "APS Panthrakikos",
+    "league": "Club Friendly Games",
+    "time": "10:30",
+    "start_ts": 1785598200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16674181": {
+    "homeTeam": "CS Onhaye",
+    "awayTeam": "Tempo Overijse",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785603600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16677510": {
+    "homeTeam": "KVC Westerlo",
+    "awayTeam": "Samsunspor",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "start_ts": 1785600000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16686115": {
+    "homeTeam": "Real Avilés",
+    "awayTeam": "SD Ponferradina",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785603600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16693097": {
+    "homeTeam": "Stefan Adrian Andreescu",
+    "awayTeam": "Radu Mihai Papoe",
+    "league": "ITF M25 Pitesti Men",
+    "time": "04:00",
+    "start_ts": 1785661200,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16691996": {
+    "homeTeam": "Garcian A / Nagel A",
+    "awayTeam": "Freire Da Silva A / Ifi N",
+    "league": "ITF M15 Strasbourg Men Doubles",
+    "time": "07:00",
+    "start_ts": 1785585600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16693032": {
+    "homeTeam": "Petr Bar Biryukov",
+    "awayTeam": "Grigory Shebekin",
+    "league": "ITF M15 Astana Men",
+    "time": "01:00",
+    "start_ts": 1785650400,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16693096": {
+    "homeTeam": "Rebecca Munk Mortensen",
+    "awayTeam": "Ariana Geerlings Martinez",
+    "league": "ITF W15 Kursumlijska Banja 11 Women",
+    "time": "02:30",
+    "start_ts": 1785655800,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16693031": {
+    "homeTeam": "Edda Mamedova",
+    "awayTeam": "Victoria Milovanova",
+    "league": "ITF W15 Astana 3 Women",
+    "time": "02:30",
+    "start_ts": 1785655800,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16692441": {
+    "homeTeam": "Emma Slavikova",
+    "awayTeam": "Lucie Petruželova",
+    "league": "ITF W15 Bielsko Biala Women",
+    "time": "03:00",
+    "start_ts": 1785657600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16692443": {
+    "homeTeam": "Arthur Nagel",
+    "awayTeam": "Theo Papamalamis",
+    "league": "ITF M15 Strasbourg Men",
+    "time": "09:43",
+    "start_ts": 1785595427,
+    "status": "inprogress",
+    "sport": "Tennis"
+  },
+  "16337221": {
+    "homeTeam": "Spartans WFC",
+    "awayTeam": "Boroughmuir Thistle FC",
+    "league": "Premier League Cup, Women",
+    "time": "07:00",
+    "start_ts": 1785672000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16688976": {
+    "homeTeam": "Reus FC Reddis",
+    "awayTeam": "CE Manresa",
+    "league": "Club Friendly Games",
+    "time": "12:30",
+    "start_ts": 1785605400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16672636": {
+    "homeTeam": "USC Paredes",
+    "awayTeam": "Lusitânia Lourosa",
+    "league": "Club Friendly Games",
+    "time": "13:30",
+    "start_ts": 1785609000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16400207": {
+    "homeTeam": "SV Waldhof Mannheim",
+    "awayTeam": "Eintracht Frankfurt",
+    "league": "Club Friendly Games",
+    "time": "10:00",
+    "start_ts": 1785596400,
+    "status": "inprogress",
+    "sport": "Football"
+  },
+  "16570789": {
+    "homeTeam": "Empoli",
+    "awayTeam": "Spezia",
+    "league": "Club Friendly Games",
+    "time": "11:00",
+    "start_ts": 1785600000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16337218": {
+    "homeTeam": "Gartcairn FC Women",
+    "awayTeam": "Queen's Park LFC",
+    "league": "Premier League Cup, Women",
+    "time": "08:00",
+    "start_ts": 1785675600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16461276": {
+    "homeTeam": "Social FC U20",
+    "awayTeam": "Betim Futebol U20",
+    "league": "U20 Mineiro, 1. Divisao, Championship Round",
+    "time": "07:00",
+    "start_ts": 1785672000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15266169": {
+    "homeTeam": "Frigg Oslo FK",
+    "awayTeam": "Kolbotn",
+    "league": "1st Division, Women",
+    "time": "07:00",
+    "start_ts": 1785672000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16337217": {
+    "homeTeam": "Aberdeen LFC",
+    "awayTeam": "St Johnstone Wfc",
+    "league": "Premier League Cup, Women",
+    "time": "07:00",
+    "start_ts": 1785672000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16400335": {
+    "homeTeam": "Pau FC",
+    "awayTeam": "Real Unión Club",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785603600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15389709": {
+    "homeTeam": "Viking FK II",
+    "awayTeam": "FK Mandalskameratene",
+    "league": "3rd Division, Group 4",
+    "time": "07:00",
+    "start_ts": 1785672000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16429172": {
+    "homeTeam": "NK Široki Brijeg",
+    "awayTeam": "HNK Tomislav Tomislavgrad",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785603600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16692832": {
+    "homeTeam": "HSJ Davema",
+    "awayTeam": "Nacional Potosí",
+    "league": "Liga Femenina - Fase de Grupos",
+    "time": "12:00",
+    "start_ts": 1785603600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16362391": {
+    "homeTeam": "Ironi Dorot Tiberias",
+    "awayTeam": "Hapoel Ironi Kiryat Shmona",
+    "league": "League Cup, Premier, Group A",
+    "time": "12:30",
+    "start_ts": 1785605400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16481523": {
+    "homeTeam": "Berliner FC Dynamo",
+    "awayTeam": "BSG Chemie Leipzig",
+    "league": "Regionalliga Northeast",
+    "time": "09:00",
+    "start_ts": 1785592800,
+    "status": "inprogress",
+    "sport": "Football"
   }
 }

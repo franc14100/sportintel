@@ -107,13 +107,17 @@ def fetch_live_matches():
             with urllib.request.urlopen(req, timeout=6) as response:
                 data = json.loads(response.read().decode('utf-8'))
                 odds_dict = data.get("odds", {})
+                rem_req = response.headers.get("x-ratelimit-requests-remaining")
+                limit_req = response.headers.get("x-ratelimit-requests-limit")
+                if rem_req:
+                    print(f"[INFO] RapidAPI Quota: {rem_req} / {limit_req or '?'} solicitudes restantes en tu plan.")
                 print(f"[INFO] {api_sport}: Encontrados {len(odds_dict)} eventos con cuotas.")
         except Exception as e:
             print(f"[Error] Falló la petición de cuotas para {api_sport}: {e}")
             continue
 
         # Pre-fetch uncached event details in parallel
-        uncached_eids = [eid for eid in odds_dict if eid not in cache]
+        uncached_eids = [eid for eid in odds_dict if eid not in cache][:30]
         if uncached_eids:
             print(f"[INFO] Descargando detalles de {len(uncached_eids)} eventos nuevos en paralelo...")
             def fetch_single_event(eid):
@@ -2236,7 +2240,8 @@ def generate_daily_sports_data():
             m_name = sel.get("match", "")
             m_market = sel.get("market", "")
             if m_name in global_used_set or m_name in local_matches:
-                print(f"[INFO] Partido '{m_name}' ya usado en otro boleto. Invalidador activado.")
+                clean_name = m_name.encode("ascii", "ignore").decode("ascii")
+                print(f"[INFO] Partido '{clean_name}' ya usado en otro boleto. Invalidador activado.")
                 return False, [], 1.0
             found_pick = None
             for md in current_matches:
@@ -2247,7 +2252,8 @@ def generate_daily_sports_data():
                             break
                     break
             if found_pick is None:
-                print(f"[INFO] Pick '{m_name} | {m_market}' ya no existe en datos actuales. Regenerando boleto.")
+                clean_name = m_name.encode("ascii", "ignore").decode("ascii")
+                print(f"[INFO] Pick '{clean_name} | {m_market}' ya no existe en datos actuales. Regenerando boleto.")
                 return False, [], 1.0
             refreshed_sel = dict(sel)
             refreshed_sel["odd"] = found_pick.get("odd", sel.get("odd", 1.0))
