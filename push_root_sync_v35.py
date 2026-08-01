@@ -5,7 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-run('git commit -m "Clean pycache"')
+print("Committing root sync and v3.5 cache bump...")
+run('git commit -m "Sync root main.js & index.html and bump script cache buster to v3.5 with anti-cache headers"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
@@ -15,7 +16,7 @@ res = run("git rebase origin/main")
 print(res.stdout, res.stderr)
 
 if "CONFLICT" in res.stdout or "CONFLICT" in res.stderr:
-    print("Conflict detected, resolving...")
+    print("Resolving conflicts...")
     run("git checkout --ours frontend/data.json data.json backend/event_cache.json")
     run("git add -A")
     res2 = run("set GIT_EDITOR=true && git rebase --continue")

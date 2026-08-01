@@ -71,7 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
             odd: parseFloat(b.odd || 1),
             stake: parseFloat(b.stake || 0),
             status: b.status || "pending",
-            date: b.date || ""
+            date: b.date || "",
+            deleted: b.deleted || false
         })).sort((a, b) => a.id - b.id);
 
         const cleanRun = run.map(r => ({
@@ -140,8 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lastLocalStateHash = getNormalizedStateHash(s);
             isApplyingCloudState = false;
         },
-        
-        pushState: async function(isRetry = false) {
+        pushState: async function(isRetry = false, forceOverride = false) {
             if (isInitializingPage) return;
             if (isPushInFlight && !isRetry) return; // avoid double push
             try {
@@ -150,6 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 setSyncStatus("syncing", "Guardando...");
                 const fullState = this.gatherState();
                 
+                if (forceOverride) {
+                    fullState.force_override = true;
+                }
+
                 // Ensure sync_ts is set
                 if (!fullState.ts || fullState.ts === 0) {
                     const now = Date.now();
@@ -165,23 +169,37 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 if (res.ok) {
                     const result = await res.json();
+                    if (result.newer) {
+                        // The server had a newer state! 
+                        // We will NOT apply it immediately to prevent wiping out the user's just-saved ticket!
+                        // We will just let the local state remain the source of truth for now.
+                        console.warn("[Sync] Server returned newer state, but skipping applyState to prevent data loss.");
+                        isPushInFlight = false;
+                        setSyncStatus("ok", "Guardado localmente (Desincronizado)");
+                        return;
+                    }
                     if (result.saved) {
                         lastLocalStateHash = getNormalizedStateHash(fullState);
                         pushRetryCount = 0;
-                        setSyncStatus("ok", "Sincronizado ✓");
-                        console.log("[Sync] ✅ Saved to cloud. ts:", fullState.ts);
-                    } else if (result.newer) {
-                        // Server has strictly newer data — only apply if it's really newer
-                        const serverTs = parseInt(result.newer.ts || "0");
-                        const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
-                        if (serverTs > localTs) {
-                            console.log("[Sync] Server genuinely newer, applying...");
-                            this.applyState(result.newer);
-                            setSyncStatus("ok", "Actualizado desde nube ✓");
+                        setSyncStatus("ok", "Sincronizado ✔️");
+                        
+                        // Sync our local timestamp with the server's authoritative clock
+                        // This entirely eliminates clock skew bugs where the background sync pulls old state
+                        if (result.ts) {
+                            originalSetItem.call(localStorage, "sync_ts", result.ts.toString());
+                            console.log("[Sync] ✔️ Saved to cloud. Synced ts to:", result.ts);
                         } else {
-                            // Timestamps are equal or local is newer — force save
-                            setSyncStatus("ok", "Sincronizado ✓");
-                            lastLocalStateHash = getNormalizedStateHash(fullState);
+                            console.log("[Sync] ✔️ Saved to cloud. ts:", fullState.ts);
+                        }
+                        
+                        if (result.newer) {
+                            const serverTs = parseInt(result.newer.ts || "0");
+                            const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
+                            if (serverTs > localTs) {
+                                console.log("[Sync] Server genuinely newer, applying...");
+                                this.applyState(result.newer);
+                                setSyncStatus("ok", "Actualizado desde nube ✔️");
+                            }
                         }
                     } else if (result.saved === false) {
                         // Server returned 200 but couldn't save to remote storage
@@ -227,8 +245,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!res.ok) return false;
                 const data = await res.json();
                 if (data && Object.keys(data).length > 0) {
-                    const cloudTs = parseInt(data.ts || "0");
+                    const cloudTs = parseInt((data && data.sync_ts) ? data.sync_ts : ((data && data.ts) ? data.ts : "0"));
                     const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
+                    const now = Date.now();
+                    
+                    // Self-healing for corrupted future timestamps
+                    if (cloudTs > now + 60000) {
+                        console.warn("[Sync] Detected corrupted future timestamp in cloud. Triggering force override to heal.");
+                        this.pushState(false, true);
+                        return false;
+                    }
                     
                     // Only apply if cloud is strictly newer than local
                     if (cloudTs > localTs) {
@@ -289,12 +315,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const res = await fetch(SYNC_API_URL, { method: "GET", cache: "no-store" });
             if (res.ok) {
                 const data = await res.json();
-                const cloudTs = parseInt(data && data.ts ? data.ts : "0");
+                const cloudTs = parseInt((data && data.sync_ts) ? data.sync_ts : ((data && data.ts) ? data.ts : "0"));
                 const localTs = parseInt(localStorage.getItem("sync_ts") || "0");
+                const now = Date.now();
                 
                 console.log("[Sync] Init — cloudTs:", cloudTs, "localTs:", localTs);
 
-                if (data && typeof data === "object" && !Array.isArray(data) && cloudTs >= localTs) {
+                // Self-healing for corrupted future timestamps
+                if (cloudTs > now + 60000) {
+                    console.warn("[Sync] Detected corrupted future timestamp on init. Forcing push to heal.");
+                    SyncManager.pushState(false, true);
+                    applied = false;
+                } else if (data && typeof data === "object" && !Array.isArray(data) && cloudTs >= localTs) {
                     // Cloud has data and is at least as new → apply cloud state
                     SyncManager.applyState(data);
                     console.log("[Sync] ✅ Cloud state applied on load (ts:", cloudTs, ")");
@@ -320,10 +352,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             lastLocalStateHash = getNormalizedStateHash(localState);
                             setSyncStatus("ok", "Guardado en nube ✓");
                         } else if (pushResult.newer) {
-                            // Cloud is actually newer — apply it
-                            SyncManager.applyState(pushResult.newer);
-                            applied = true;
-                            setSyncStatus("ok", "Sincronizado ✓");
+                            // The server had a newer state! 
+                            // We will NOT apply it immediately to prevent wiping out the user's local state.
+                            console.warn("[Sync] Server returned newer state, but skipping applyState to prevent data loss.");
+                            setSyncStatus("ok", "Guardado localmente (Desincronizado)");
                         }
                     } else {
                         console.error("[Sync] Init push failed:", pushRes.status, await pushRes.text());
@@ -349,17 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
 
     // Background polling every 10 seconds using Vercel KV (no rate limits!)
-    setInterval(async () => {
-        if (document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "SELECT") {
-            const updated = await SyncManager.pullState();
-            if (updated) {
-                if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
-                if (typeof populateBetsTable === "function") populateBetsTable();
-                if (typeof renderEscaleraTab === "function") renderEscaleraTab();
-                if (typeof updateBankrollChart === "function") updateBankrollChart();
-            }
-        }
-    }, 10000);
+    // Background pulling removed to prevent aggressive sync loops
 
     // "Guardar Nube" force push button
     const btnForceSync = document.getElementById("btn-force-sync");
@@ -976,8 +998,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Populate Dashboard Statistics ---
     function populateStats() {
         if (!appData) return;
-        const stats = appData.global_stats;
-        statAnalyzed.textContent = stats.analyzed_today;
+        const stats = appData.global_stats || {};
+        if (statAnalyzed) {
+            statAnalyzed.textContent = (appData.matches && appData.matches.length > 0) ? appData.matches.length : 50;
+        }
         
         // Calculate dynamic real winrate from userBets
         const resolvedBets = userBets.filter(b => b.status === "won" || b.status === "lost");
@@ -995,14 +1019,54 @@ document.addEventListener("DOMContentLoaded", () => {
         
         statRoi.textContent = `+${stats.roi_percentage}%`;
 
-        // Update Rendimiento chart KPI metrics bar
+        // Calculate dynamic real stats from historical_tickets_registry
+        const reg = (appData && appData.historical_tickets_registry) ? appData.historical_tickets_registry : [];
+        const resTickets = reg.filter(t => {
+            const s = String(t.status || "").toLowerCase();
+            return s === "won" || s === "lost" || s === "ganado" || s === "perdido";
+        });
+
+        let displayAcc = (appData && appData.global_stats && (appData.global_stats.avg_accuracy_30d || appData.global_stats.avg_accuracy_40d)) ? (appData.global_stats.avg_accuracy_30d || appData.global_stats.avg_accuracy_40d) : 0;
+        let streakStr = "0 Aciertos";
+        let avgOddStr = "@1.85";
+
+        if (resTickets.length > 0) {
+            const wonT = resTickets.filter(t => {
+                const s = String(t.status || "").toLowerCase();
+                return s === "won" || s === "ganado";
+            }).length;
+            displayAcc = Math.round((wonT / resTickets.length) * 100);
+
+            // Compute streak starting from most recent ticket
+            const lastT = resTickets[resTickets.length - 1];
+            const lastSt = String(lastT.status || "").toLowerCase();
+            const isWon = (lastSt === "won" || lastSt === "ganado");
+            let strk = 0;
+            for (let i = resTickets.length - 1; i >= 0; i--) {
+                const st = String(resTickets[i].status || "").toLowerCase();
+                const curW = (st === "won" || st === "ganado");
+                if (curW === isWon) strk++;
+                else break;
+            }
+            streakStr = isWon ? `🔥 ${strk} Aciertos` : `❌ ${strk} Pérdidas`;
+
+            const validOdds = resTickets.map(t => parseFloat(t.total_odd || t.odd || 0)).filter(o => o > 1.0);
+            if (validOdds.length > 0) {
+                const avgO = validOdds.reduce((a, b) => a + b, 0) / validOdds.length;
+                avgOddStr = `@${avgO.toFixed(2)}`;
+            }
+        }
+
         const chartStatAcc = document.getElementById("chart-stat-accuracy");
         const chartStatStreak = document.getElementById("chart-stat-streak");
         const chartStatAvgOdd = document.getElementById("chart-stat-avg-odd");
 
-        if (chartStatAcc) chartStatAcc.textContent = `${stats.avg_accuracy_30d || 85.0}%`;
-        if (chartStatStreak) chartStatStreak.textContent = "🔥 5 Aciertos";
-        if (chartStatAvgOdd) chartStatAvgOdd.textContent = "@1.85";
+        if (chartStatAcc) chartStatAcc.textContent = `${displayAcc}%`;
+        if (chartStatStreak) chartStatStreak.textContent = streakStr;
+        if (chartStatAvgOdd) chartStatAvgOdd.textContent = avgOddStr;
+
+        if (statAccuracy) statAccuracy.textContent = `${displayAcc}%`;
+        if (globalAccuracyBadge) globalAccuracyBadge.textContent = `${displayAcc}%`;
     }
 
     // --- Render "Star Ticket" & Key Matches ---
@@ -1013,6 +1077,13 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Helper to render a single ticket
         const renderTicket = (ticket, suffix, colorTheme) => {
+            const cardEl = document.getElementById(`star-ticket-card-${suffix}`);
+            if (!ticket || !ticket.selections || ticket.selections.length === 0) {
+                if (cardEl) cardEl.style.display = "none";
+                return;
+            }
+            if (cardEl) cardEl.style.display = "";
+            
             const container = document.getElementById(`star-ticket-details-${suffix}`);
             const confidenceVal = document.getElementById(`star-ticket-confidence-${suffix}`);
             const progressFill = document.getElementById(`star-ticket-progress-${suffix}`);
@@ -1021,8 +1092,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const stakePercent = document.getElementById(`star-ticket-stake-percent-${suffix}`);
             const stakeCash = document.getElementById(`star-ticket-stake-cash-${suffix}`);
             const stakeBadge = document.getElementById(`star-ticket-stake-rec-${suffix}`);
-
-            if (!ticket) return;
 
             const isSimple = ticket.type === "Simple" || ticket.type === "simple";
 
@@ -1308,15 +1377,40 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderChart() {
         const canvas = document.getElementById("performance-chart");
         if (!canvas) return;
+        const reg = (appData && appData.historical_tickets_registry) ? appData.historical_tickets_registry : [];
+        const resTickets = reg.filter(t => {
+            const s = String(t.status || "").toLowerCase();
+            return s === "won" || s === "lost" || s === "ganado" || s === "perdido";
+        });
 
-        const baseAccuracy = (appData && appData.global_stats && appData.global_stats.avg_accuracy_30d) ? appData.global_stats.avg_accuracy_30d : 85;
         const labels = ["Día -14", "Día -13", "Día -12", "Día -11", "Día -10", "Día -9", "Día -8", "Día -7", "Día -6", "Día -5", "Día -4", "Día -3", "Día -2", "Día -1", "Hoy"];
-        const dataValues = [72, 74, 73, 75, 77, 76, 78, 80, 79, 81, 83, 82, 84, 85, Math.max(75, Math.min(95, Math.round(baseAccuracy)))];
+        let dataValues = [];
+
+        if (resTickets.length === 0) {
+            const baseAcc = (appData && appData.global_stats && (appData.global_stats.avg_accuracy_30d || appData.global_stats.avg_accuracy_40d)) ? (appData.global_stats.avg_accuracy_30d || appData.global_stats.avg_accuracy_40d) : 0;
+            dataValues = baseAcc > 0 ? Array(15).fill(Math.round(baseAcc)) : Array(15).fill(null);
+        } else {
+            const points = 15;
+            const historyCurve = [];
+            for (let i = 0; i < points; i++) {
+                const indexCutoff = Math.floor(((i + 1) / points) * resTickets.length);
+                const subList = resTickets.slice(0, Math.max(1, indexCutoff));
+                const subWon = subList.filter(t => {
+                    const s = String(t.status || "").toLowerCase();
+                    return s === "won" || s === "ganado";
+                }).length;
+                const subAcc = Math.round((subWon / subList.length) * 100);
+                historyCurve.push(subAcc);
+            }
+            dataValues = historyCurve;
+        }
+        
 
         // Compute dynamic Y axis range (tight fit around data)
-        const dMin = Math.min(...dataValues);
-        const dMax = Math.max(...dataValues);
-        const dPad = Math.max(3, Math.ceil((dMax - dMin) * 0.2));
+        const validData = dataValues.filter(v => v !== null);
+        const dMin = validData.length > 0 ? Math.min(...validData) : 60;
+        const dMax = validData.length > 0 ? Math.max(...validData) : 100;
+        const dPad = validData.length > 0 ? Math.max(3, Math.ceil((dMax - dMin) * 0.2)) : 0;
         const yAxisMin = Math.max(0, Math.floor((dMin - dPad) / 5) * 5);
         const yAxisMax = Math.min(100, Math.ceil((dMax + dPad) / 5) * 5);
         const yStep = (yAxisMax - yAxisMin) <= 20 ? 5 : 10;
@@ -1444,10 +1538,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Compute points coordinates
         const points = values.map((val, idx) => {
+            if (val === null) return null;
             const x = padLeft + (idx / (values.length - 1)) * graphW;
             const y = padTop + graphH - ((val - minY) / (maxY - minY)) * graphH;
             return { x, y, val };
-        });
+        }).filter(p => p !== null);
+
+        // If no points, just return (grid is drawn, no line)
+        if (points.length === 0) return;
 
         // Draw Gradient Fill under line
         const grad = ctx.createLinearGradient(0, padTop, 0, padTop + graphH);
@@ -2761,12 +2859,31 @@ document.addEventListener("DOMContentLoaded", () => {
         let savedBets = localStorage.getItem("user_bets");
         if (!savedBets) {
             // User's real bets data automatically pre-loaded as default on initial launch
-            userBets = [{"id":1784652695284,"match":"Reto Escalera (Día 1): Aluminij vs Sheriff Tiraspol","market":"Sheriff Tiraspol o Empate","odd":1.21,"stake":5,"status":"won","date":"2026-07-16"},{"id":1784652695285,"match":"Reto Escalera (Día 2): Alianza Lima vs Sport Huancayo","market":"Alianza Lima o Empate","odd":1.03,"stake":6.05,"status":"won","date":"2026-07-20"},{"id":1784653437721,"match":"Bolivar - Guabira","market":"Hándicap 1 (0) Bolivar - Guabira","odd":1.03,"stake":6.05,"status":"won","date":"2026-07-21"},{"id":1784653506063,"match":"NK Aluminij - Sheriff Tiraspol","market":"2X NK Aluminij - Sheriff Tiraspol","odd":1.21,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784653536600,"match":"Bolivar - Guabira","market":"Hándicap 1 (0) Bolivar - Guabira","odd":1.03,"stake":6.05,"status":"won","date":"2026-07-21"},{"id":1784653582991,"match":"Fluminense - Red Bull Bragantino","market":"1X Fluminense - Red Bull Bragantino","odd":1.235,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784653582997,"match":"Reto Escalera (Día 3): Fluminense - Red Bull Bragantino","market":"1X Fluminense - Red Bull Bragantino","odd":1.235,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784653635840,"match":"NJ-NY Gotham (F) - Seattle Reign (F)","market":"1X NJ-NY Gotham (F) - Seattle Reign (F)","odd":1.058,"stake":7.41,"status":"won","date":"2026-07-21"},{"id":1784653635847,"match":"Reto Escalera (Día 4): NJ-NY Gotham (F) - Seattle Reign (F)","market":"1X NJ-NY Gotham (F) - Seattle Reign (F)","odd":1.058,"stake":7.41,"status":"won","date":"2026-07-21"},{"id":1784653682511,"match":"Independiente del Valle - Emelec","market":"Hándicap 1 (0) Independiente del Valle - Emelec","odd":1.07,"stake":7.87,"status":"won","date":"2026-07-21"},{"id":1784653682520,"match":"Reto Escalera (Día 5): Independiente del Valle - Emelec","market":"Hándicap 1 (0) Independiente del Valle - Emelec","odd":1.07,"stake":7.87,"status":"won","date":"2026-07-21"},{"id":1784653946608,"match":"San Antonio Bulo Bulo - ABB","market":"1X San Antonio Bulo Bulo - ABB","odd":1.144,"stake":8.42,"status":"won","date":"2026-07-21"},{"id":1784653946616,"match":"Reto Escalera (Día 6): San Antonio Bulo Bulo - ABB","market":"1X San Antonio Bulo Bulo - ABB","odd":1.144,"stake":8.42,"status":"won","date":"2026-07-21"},{"id":1784654219950,"match":"Reto Escalera (Día 7): Ararat - Armenia - Shamrock Rovers","market":"Doble oportunidad: 1X","odd":1.336,"stake":9.6,"status":"pending","date":"2026-07-21"},{"id":1784654438054,"match":"Fenerbahce vs Gornik Zabrze + Clyde - Annan Athletic","market":"Resultado Final (1X2): Fenerbahce / Más/Menos 2.5 Goles: Más de 2.5 Goles","odd":1.692,"stake":5,"status":"pending","date":"2026-07-21"},{"id":1784654458974,"match":"FC Thun vs Dinamo Zagreb + Kilmarnock vs Hamilton Academical + Raith Rovers vs Peterhead + Atlético-MG vs Bahia + Ararat-Armenia vs Shamrock Rovers + Dunfermline Athletic vs Cove Rangers + Partick Thistle vs Stenhousemuir","market":"Doble Oportunidad: Dinamo Zagreb o Empate / Resultado Final (1X2): Kilmarnock / Resultado Final (1X2): Raith Rovers / Doble Oportunidad: Atlético-MG o Empate / Doble Oportunidad: Ararat-Armenia o Empate / Resultado Final (1X2): Dunfermline Athletic / Resultado Final (1X2): Partick Thistle","odd":4.47,"stake":1,"status":"pending","date":"2026-07-21"},{"id":1784654494254,"match":"Comerciantes Unidos - Alianza Lima","market":"Doble oportunidad: 2X","odd":1.2,"stake":8.42,"status":"pending","date":"2026-07-21"}];
+            userBets = [{"id":1784652695284,"match":"Reto Escalera (Día 1): Aluminij vs Sheriff Tiraspol","market":"Sheriff Tiraspol o Empate","odd":1.21,"stake":5,"status":"won","date":"2026-07-16"},{"id":1784652695285,"match":"Reto Escalera (Día 2): Alianza Lima vs Sport Huancayo","market":"Alianza Lima o Empate","odd":1.03,"stake":6.05,"status":"won","date":"2026-07-20"},{"id":1784653437721,"match":"Bolivar - Guabira","market":"Hándicap 1 (0) Bolivar - Guabira","odd":1.03,"stake":6.05,"status":"won","date":"2026-07-21"},{"id":1784653506063,"match":"NK Aluminij - Sheriff Tiraspol","market":"2X NK Aluminij - Sheriff Tiraspol","odd":1.21,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784653536600,"match":"Bolivar - Guabira","market":"Hándicap 1 (0) Bolivar - Guabira","odd":1.03,"stake":6.05,"status":"won","date":"2026-07-21"},{"id":1784653582991,"match":"Fluminense - Red Bull Bragantino","market":"1X Fluminense - Red Bull Bragantino","odd":1.235,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784653582997,"match":"Reto Escalera (Día 3): Fluminense - Red Bull Bragantino","market":"1X Fluminense - Red Bull Bragantino","odd":1.235,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784653635840,"match":"NJ-NY Gotham (F) - Seattle Reign (F)","market":"1X NJ-NY Gotham (F) - Seattle Reign (F)","odd":1.058,"stake":7.41,"status":"won","date":"2026-07-21"},{"id":1784653635847,"match":"Reto Escalera (Día 4): NJ-NY Gotham (F) - Seattle Reign (F)","market":"1X NJ-NY Gotham (F) - Seattle Reign (F)","odd":1.058,"stake":7.41,"status":"won","date":"2026-07-21"},{"id":1784653682511,"match":"Independiente del Valle - Emelec","market":"Hándicap 1 (0) Independiente del Valle - Emelec","odd":1.07,"stake":7.87,"status":"won","date":"2026-07-21"},{"id":1784653682520,"match":"Reto Escalera (Día 5): Independiente del Valle - Emelec","market":"Hándicap 1 (0) Independiente del Valle - Emelec","odd":1.07,"stake":7.87,"status":"won","date":"2026-07-21"},{"id":1784653946608,"match":"San Antonio Bulo Bulo - ABB","market":"1X San Antonio Bulo Bulo - ABB","odd":1.144,"stake":8.42,"status":"won","date":"2026-07-21"},{"id":1784653946616,"match":"Reto Escalera (Día 6): San Antonio Bulo Bulo - ABB","market":"1X San Antonio Bulo Bulo - ABB","odd":1.144,"stake":8.42,"status":"won","date":"2026-07-21"},{"id":1784654219950,"match":"Reto Escalera (Día 7): Ararat - Armenia - Shamrock Rovers","market":"Doble oportunidad: 1X","odd":1.336,"stake":9.6,"status":"won","date":"2026-07-21"},{"id":1784654438054,"match":"Fenerbahce vs Gornik Zabrze + Clyde - Annan Athletic","market":"Resultado Final (1X2): Fenerbahce / Más/Menos 2.5 Goles: Más de 2.5 Goles","odd":1.692,"stake":5,"status":"won","date":"2026-07-21"},{"id":1784654458974,"match":"FC Thun vs Dinamo Zagreb + Kilmarnock vs Hamilton Academical + Raith Rovers vs Peterhead + Atlético-MG vs Bahia + Ararat-Armenia vs Shamrock Rovers + Dunfermline Athletic vs Cove Rangers + Partick Thistle vs Stenhousemuir","market":"Doble Oportunidad: Dinamo Zagreb o Empate / Resultado Final (1X2): Kilmarnock / Resultado Final (1X2): Raith Rovers / Doble Oportunidad: Atlético-MG o Empate / Doble Oportunidad: Ararat-Armenia o Empate / Resultado Final (1X2): Dunfermline Athletic / Resultado Final (1X2): Partick Thistle","odd":4.47,"stake":1,"status":"won","date":"2026-07-21"},{"id":1784654494254,"match":"Comerciantes Unidos - Alianza Lima","market":"Doble oportunidad: 2X","odd":1.2,"stake":8.42,"status":"won","date":"2026-07-21"},{"id":1784671071043,"match":"Toluca vs Pumas UNAM + Universidad Católica (Quito) vs Barcelona SC","market":"Handicap 1(0): Toluca o Empate / Handicap 1(0): Universidad Católica (Quito) o Empate","odd":1.64,"stake":5,"status":"lost","date":"2026-07-21"},{"id":1784730485910,"match":"San Jose Earthquakes vs Orlando City SC + Flora vs Mgarr United","market":"Doble Oportunidad: San Jose Earthquakes o Empate / Más/Menos 2.5 Goles: Más de 2.5 Goles","odd":1.88,"stake":5,"status":"lost","date":"2026-07-22"},{"id":1784750417376,"match":"Reto Escalera (Día 8): Vardar - Riga FC","market":"2x Riga FC","odd":1.311,"stake":12.8256,"status":"won","date":"2026-07-22"},{"id":1784750452591,"match":"Inter Miami CF vs Chicago Fire FC + Zeleznicar Pancevo vs Braga + FC Cincinnati vs Vancouver Whitecaps + Portland Hearts of Pine vs Union Omaha","market":"Más/Menos 2.5 Goles: Más de 2.5 Goles / Resultado Final (1X2): Braga / Doble Oportunidad: Vancouver Whitecaps o Empate / Más/Menos 2.5 Goles: Más de 2.5 Goles","odd":4.22,"stake":1,"status":"lost","date":"2026-07-22"},{"id":1784815936179,"match":"FC Lugano vs Dukagjini + Hajduk Split vs Pafos","market":"Resultado Final (1X2): FC Lugano / Córners (Saques de Esquina): Más de 7.5 Córners","odd":1.61,"stake":5,"status":"won","date":"2026-07-23"},{"id":1784816900060,"match":"Reto Escalera (Día 9): Hajduk Split vs Pafos","market":"Hajduk Split o Empate","odd":1.28,"stake":16.814361599999998,"status":"won","date":"2026-07-23"},{"id":1784817057612,"match":"FK Liepaja vs Austria Vienna + Independiente Santa Fe vs Caracas FC + Defensa y Justicia vs Aldosivi","market":"Córners (Saques de Esquina): Más de 8.5 Córners / Córners (Saques de Esquina): Más de 8.5 Córners / Córners (Saques de Esquina): Más de 8.5 Córners","odd":3.09,"stake":1,"status":"lost","date":"2026-07-23"},{"id":1784831699974,"match":"Montreal Roses FC vs AFC Toronto","market":"Más de 2.5 goles","odd":1.78,"stake":5,"status":"lost","date":"2026-07-23"},{"id":1784834257928,"match":"St. Gallen - Benfica","market":"Más de 3","odd":1.575,"stake":5,"status":"voided","date":"2026-07-23"},{"id":1784904599257,"match":"2 de Mayo vs Rubio Ñú","market":"Córners (Total del Partido): Más de 8 Córners","odd":1.736,"stake":5,"status":"lost","date":"2026-07-24"},{"id":1784904690361,"match":"Alianza Atlético vs Los Chankas","market":"Ambos Equipos Anotan: Sí","odd":1.84,"stake":2.5,"status":"won","date":"2026-07-24"},{"id":1784909180329,"match":"Mineros de Zacatecas vs Correcaminos UAT + Västerås SK vs Örgryte IS + Vélez Sarsfield vs Instituto (Córdoba)","market":"Córners (Total del Partido): Más de 8.5 Córners / Córners (Total del Partido): Más de 7.5 Córners / Córners (Total del Partido): Más de 8.5 Córners","odd":3.839,"stake":1,"status":"lost","date":"2026-07-24"},{"id":1784909680914,"match":"Deportivo Cali vs Jaguares de Córdoba","market":"Córners (Total del Partido): Más de 8.5 Córners","odd":1.554,"stake":5,"status":"won","date":"2026-07-24"},{"id":1784922007019,"match":"Reto Escalera (Día 10): Portland Thorns FC vs Gotham FC","market":"Más de 2.5 Goles","odd":1.35,"stake":21.52,"status":"won","date":"2026-07-24"},{"id":1784984049803,"match":"Santos Laguna U21 vs Atlas FC U21","market":"Ambos Equipos Anotan: Sí","odd":1.49,"stake":4.65,"status":"lost","date":"2026-07-25"},{"id":1784995107601,"match":"CA Lanús vs San Lorenzo","market":"Total de Goles (Asian 2.0): Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)","odd":2.27,"stake":4.65,"status":"lost","date":"2026-07-25"},{"id":1784995170454,"match":"Estudiantes de Río Cuarto vs Tigre","market":"Total de Goles (Asian 2.0): Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)","odd":2.27,"stake":4.65,"status":"lost","date":"2026-07-25"},{"id":1784995237755,"match":"Recoleta FC vs Sportivo San Lorenzo","market":"Más de 8 corners","odd":1.508,"stake":5,"status":"won","date":"2026-07-25"},{"id":1785080406789,"match":"Orense SC vs Independiente del Valle + CD Fuerte San Francisco U20 vs C.D. Platense Zacatecoluca U20","market":"Handicap 2(0): Independiente del Valle / Handicap 2(+1) : C.D. Platense Zacatecoluca U20 o Empate","odd":1.624,"stake":5,"status":"lost","date":"2026-07-26"},{"id":1785080497192,"match":"Aucas vs Macará + Londrina vs Grêmio Novorizontino","market":"Doble Oportunidad: Aucas o Empate / Doble Oportunidad: Grêmio Novorizontino o Empate","odd":1.525,"stake":5,"status":"lost","date":"2026-07-26"},{"id":1785090602918,"match":"Remo vs Vitória + Cruzeiro vs Botafogo","market":"Doble Oportunidad: Remo o Empate / Doble Oportunidad: Cruzeiro o Empate","odd":1.66,"stake":5,"status":"lost","date":"2026-07-26"},{"id":1785159585278,"match":"LDU vs Barcelona","market":"Menos 10.5 corners","odd":1.8,"stake":5,"status":"lost","date":"2026-07-27"},{"id":1785276517855,"match":"San Francisco Giants - Milwaukee Brewers","market":"Gana Milwaukee Brewers","odd":1.713,"stake":5,"status":"won","date":"2026-07-28"},{"id":1785337966792,"match":"FK Kauno Žalgiris vs Klaksvíkar Ítróttarfelag + Mirassol vs Remo","market":"Doble Oportunidad: FK Kauno Žalgiris o Empate / Córners del Equipo (Individual): Mirassol Más de 4.5 Córners","odd":1.503,"stake":4,"status":"pending","date":"2026-07-29"},{"id":1785338354949,"match":"Górnik Zabrze vs Fenerbahçe + Arsenal de Sarandí Reserve vs Villa Dalmine Reserve","market":"Córners del Equipo (Individual): Fenerbahçe Más de 4.5 Córners / Córners del Equipo (Individual): Arsenal de Sarandí Reserve Más de 4.5 Córners","odd":1.786,"stake":4,"status":"pending","date":"2026-07-29"},{"id":1785338519798,"match":"Reto Escalera (Día 11): FC København vs Polissya Zhytomyr","market":"FC København o Empate","odd":1.205,"stake":29.05,"status":"pending","date":"2026-07-29"},{"id":1785339347547,"match":"FK Crvena zvezda vs Larne FC + FK Kauno Žalgiris vs Klaksvíkar Ítróttarfelag + Górnik Zabrze vs Fenerbahçe + FC København vs Polissya Zhytomyr + Lech Poznań vs AGF","market":"Goles del Equipo (Individual): FK Crvena zvezda Más de 1.5 Goles / Córners del Equipo (Individual): FK Kauno Žalgiris Más de 4.5 Córners / Córners del Equipo (Individual): Fenerbahçe Más de 4.5 Córners / Córners del Equipo (Individual): FC København Más de 4.5 Córners / Córners del Equipo (Individual): Lech Poznań Más de 3.5 Córners","odd":3.96,"stake":1,"status":"lost","date":"2026-07-29"}];
             localStorage.setItem("user_bets", JSON.stringify(userBets));
             localStorage.setItem("starting_bankroll", "53.50918");
         } else {
             userBets = JSON.parse(savedBets);
         }
+
+        const recoveryBets = [
+            { id: 85040140221, match: "Jablonec - NK Varazdin + Nordsjaelland - GAIS", market: "Córners (Ind): Jablonec > 4.5 / Córners (Ind): Nordsjaelland > 4.5", odd: 1.549, stake: 4.0, status: "lost", date: "2026-07-30" },
+            { id: 85040371415, match: "Auda - FCSB + Ludogorets - Hapoel Tel Aviv", market: "Córners (Ind): FCSB > 4.5 / Córners (Ind): Ludogorets > 4.5", odd: 1.818, stake: 4.0, status: "lost", date: "2026-07-30" },
+            { id: 85041008103, match: "KRC Gent - LNZ + Independiente - Newell's Old Boys", market: "Córners (Ind): KRC Gent > 5.5 / Córners (Ind): Independiente > 4.5", odd: 1.835, stake: 4.0, status: "pending", date: "2026-07-30" }
+        ];
+        let hasRecovered = false;
+        recoveryBets.forEach(rb => {
+            if (!userBets.find(b => b.id === rb.id)) {
+                userBets.push(rb);
+                hasRecovered = true;
+            }
+        });
+        if (hasRecovered) {
+            localStorage.setItem("user_bets", JSON.stringify(userBets));
+            setTimeout(() => { SyncManager.pushState(); }, 2000);
+            console.log("[Recovery] Injected missing 3 bets from July 30.");
+        }
+
         
         populateMatchSelect();
         updateBankrollMetrics();
@@ -2916,18 +3033,30 @@ document.addEventListener("DOMContentLoaded", () => {
     // Render registered bets table
     function populateBetsTable() {
         if (!betsTableBody) return;
-        if (userBets.length === 0) {
+        
+        // Force sync from localStorage to guarantee UI is up to date
+        try {
+            const localBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+            if (Array.isArray(localBets)) {
+                userBets = localBets;
+            }
+        } catch (e) {
+            console.error("Error reading userBets from localStorage", e);
+        }
+
+        const visibleBets = userBets.filter(b => !b.deleted).sort((a, b) => a.id - b.id);
+        if (visibleBets.length === 0) {
             betsTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: var(--text-muted); background: rgba(255,255,255,0.01);">No has registrado apuestas todavía.</td></tr>`;
             return;
         }
 
         let rowsHtml = "";
         // Render in reverse chronological order (newest first)
-        [...userBets].reverse().forEach(bet => {
+        [...visibleBets].reverse().forEach(bet => {
             const potentialReturn = bet.stake * bet.odd;
             
             let statusSelect = `
-                <select class="form-input" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; background: rgba(8, 11, 17, 0.8); ${bet.status === 'won' ? 'color: var(--accent-green); border-color: var(--accent-green);' : bet.status === 'lost' ? 'color: var(--accent-pink); border-color: var(--accent-pink);' : 'color: var(--accent-amber); border-color: var(--accent-amber);'}" onchange="resolveBet(${bet.id}, this.value)">
+                <select id="status-select-${bet.id}" class="form-input" autocomplete="off" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; background: rgba(8, 11, 17, 0.8); ${bet.status === 'won' ? 'color: var(--accent-green); border-color: var(--accent-green);' : bet.status === 'lost' ? 'color: var(--accent-pink); border-color: var(--accent-pink);' : 'color: var(--accent-amber); border-color: var(--accent-amber);'}" onchange="resolveBet(${bet.id}, this.value)">
                     <option value="pending" ${bet.status === 'pending' ? 'selected' : ''}>Pendiente</option>
                     <option value="won" ${bet.status === 'won' ? 'selected' : ''}>Ganada</option>
                     <option value="lost" ${bet.status === 'lost' ? 'selected' : ''}>Perdida</option>
@@ -2947,9 +3076,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div style="font-weight: 700; font-size: 0.8rem; color: var(--text-primary);">${bet.match}</div>
                         <div style="font-size: 0.72rem; color: var(--text-muted);">${bet.market}</div>
                     </td>
-                    <td style="padding: 10px 8px; text-align: center; font-family: var(--font-display); font-weight: 700; color: var(--accent-amber);">@${bet.odd.toFixed(2)}</td>
-                    <td style="padding: 10px 8px; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">$${bet.stake.toFixed(2)}</td>
-                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem;">$${potentialReturn.toFixed(2)}</td>
+                    <td style="padding: 10px 8px; text-align: center; font-family: var(--font-display); font-weight: 700; color: var(--accent-amber);">@${Number(bet.odd || 0).toFixed(2)}</td>
+                    <td style="padding: 10px 8px; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">$${Number(bet.stake || 0).toFixed(2)}</td>
+                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem;">$${Number(potentialReturn || 0).toFixed(2)}</td>
                     <td style="padding: 10px 8px; text-align: center;">${statusSelect}</td>
                     <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">${actionsHtml}</td>
                 </tr>
@@ -2959,11 +3088,20 @@ document.addEventListener("DOMContentLoaded", () => {
         betsTableBody.innerHTML = rowsHtml;
     }
 
-    // Global expose of delete and resolve functions so they can be clicked inline in the table
     window.resolveBet = (id, status) => {
-        const bet = userBets.find(b => b.id === id);
-        if (bet) {
-            bet.status = status;
+        let currentBets = [];
+        try {
+            currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+        } catch(e) {
+            currentBets = typeof userBets !== 'undefined' ? userBets : [];
+        }
+        if (!Array.isArray(currentBets)) currentBets = [];
+
+        const betIndex = currentBets.findIndex(b => b.id === id);
+        if (betIndex !== -1) {
+            currentBets[betIndex].status = status;
+            userBets = currentBets; // Update global reference
+            
             lastLocalUserActionTime = Date.now();
             localStorage.setItem("user_bets", JSON.stringify(userBets));
             updateBankrollMetrics();
@@ -2973,12 +3111,16 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.deleteBet = (id) => {
-        userBets = userBets.filter(b => b.id !== id);
-        lastLocalUserActionTime = Date.now();
-        localStorage.setItem("user_bets", JSON.stringify(userBets));
-        updateBankrollMetrics();
-        populateBetsTable();
-        updateBankrollChart();
+        let bet = userBets.find(b => b.id === id);
+        if (bet) {
+            bet.deleted = true;
+            lastLocalUserActionTime = Date.now();
+            localStorage.setItem("user_bets", JSON.stringify(userBets));
+            updateBankrollMetrics();
+            populateBetsTable();
+            updateBankrollChart();
+            if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true); // Force override sync
+        }
     };
 
     // Calculate ROI, Win Rate, and net bankroll balance
@@ -2989,16 +3131,24 @@ document.addEventListener("DOMContentLoaded", () => {
         let resolvedBetsCount = 0;
         let pendingStakes = 0;
 
+        // Helper: identify Boleto Soñador (excluded from win rate stats)
+        const isSoñador = (bet) => {
+            if (bet.is_dreamer) return true;
+            // Soñador = high-risk parlay with many teams and high odd
+            const teamCount = (bet.match || '').split(' + ').length;
+            return teamCount >= 4 && bet.odd >= 2.5;
+        };
+
         userBets.forEach(bet => {
+            if (bet.deleted) return;
             if (bet.status === "won") {
                 netProfit += (bet.stake * bet.odd) - bet.stake;
                 resolvedStakes += bet.stake;
-                wonBets++;
-                resolvedBetsCount++;
+                if (!isSoñador(bet)) { wonBets++; resolvedBetsCount++; }
             } else if (bet.status === "lost") {
                 netProfit -= bet.stake;
                 resolvedStakes += bet.stake;
-                resolvedBetsCount++;
+                if (!isSoñador(bet)) { resolvedBetsCount++; }
             } else if (bet.status === "pending") {
                 pendingStakes += bet.stake;
             }
@@ -3098,6 +3248,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- Register Ticket to History & Bankroll Modal Handler ---
+    // FIXED: Store ticket directly on modal element to avoid overwrite when multiple modals are opened
     let pendingRegisterTicket = null;
 
     function openRegisterTicketModal(ticket, suffix) {
@@ -3111,7 +3262,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!modal || !ticket) return;
 
+        // Store on both the variable AND the modal element — this prevents the overwrite bug
+        // If the modal is already open for another ticket, warn the user
+        if (modal._pendingTicket && !modal.classList.contains("hidden")) {
+            if (!confirm(`⚠️ Ya hay un boleto en proceso de guardar.\n\n¿Descartar ese boleto y abrir este nuevo (Boleto ${suffix})?`)) {
+                return; // User chose to keep the existing modal open
+            }
+        }
+        
         pendingRegisterTicket = ticket;
+        modal._pendingTicket = ticket; // Store on element to survive variable overwrite
+        modal._pendingSuffix = suffix;
         const currentCapital = parseFloat(localStorage.getItem("starting_bankroll")) || 1000;
 
         let label = suffix === "4" ? "Apuesta Soñadora del Dólar" : (suffix === "3" ? "Boleto Extra del Día" : (suffix === "1" ? "Boleto Estrella 1 (Seguro)" : "Boleto Estrella 2 (Valor)"));
@@ -3153,89 +3314,133 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnConfirmRegister) {
         btnConfirmRegister.onclick = () => {
-            if (!pendingRegisterTicket) return;
-            const matchInput = document.getElementById("input-register-match");
-            const marketInput = document.getElementById("input-register-market");
-            const oddInput = document.getElementById("input-register-odd");
-            const stakeInput = document.getElementById("input-register-stake");
-            const statusSelect = document.getElementById("select-register-status");
+            try {
+                const modal = document.getElementById("register-ticket-modal");
+                // Use modal element's stored ticket to prevent overwrite bug
+                const activeTicket = (modal && modal._pendingTicket) ? modal._pendingTicket : pendingRegisterTicket;
+                if (!activeTicket) {
+                    console.warn("No activeTicket found to register");
+                    alert("Error interno: No se detectó qué boleto intentar guardar. Intenta cerrar esta ventana y dar click en 'Registrar' nuevamente.");
+                    return;
+                }
+                pendingRegisterTicket = activeTicket; // Sync back for rest of function
+                
+                const matchInput = document.getElementById("input-register-match");
+                const marketInput = document.getElementById("input-register-market");
+                const oddInput = document.getElementById("input-register-odd");
+                const stakeInput = document.getElementById("input-register-stake");
+                const statusSelect = document.getElementById("select-register-status");
 
-            let defaultMatchSummary = "";
-            pendingRegisterTicket.selections.forEach((s, idx) => {
-                defaultMatchSummary += `${idx > 0 ? " + " : ""}${s.match}`;
-            });
-            let defaultMarketSummary = "";
-            pendingRegisterTicket.selections.forEach((s, idx) => {
-                defaultMarketSummary += `${idx > 0 ? " / " : ""}${s.market}: ${s.pick}`;
-            });
-
-            const matchVal = (matchInput && matchInput.value.trim()) ? matchInput.value.trim() : defaultMatchSummary;
-            const marketVal = (marketInput && marketInput.value.trim()) ? marketInput.value.trim() : defaultMarketSummary;
-            const oddVal = parseFloat(oddInput ? oddInput.value : 0) || pendingRegisterTicket.total_odd;
-            const stakeVal = parseFloat(stakeInput ? stakeInput.value : 0) || 1.0;
-            const statusVal = statusSelect ? statusSelect.value : "pending";
-
-            const newBet = {
-                id: Date.now(),
-                match: matchVal,
-                market: marketVal,
-                odd: oddVal,
-                stake: stakeVal,
-                status: statusVal,
-                date: new Date().toISOString().split("T")[0]
-            };
-
-            userBets.push(newBet);
-            localStorage.setItem("user_bets", JSON.stringify(userBets));
-
-            // If registering a Reto Escalera ticket, update escaleraCurrentRun
-            if (pendingRegisterTicket.type && pendingRegisterTicket.type.includes("Reto Escalera")) {
-                const dayMatch = pendingRegisterTicket.type.match(/Día (\d+)/);
-                const dayNum = dayMatch ? parseInt(dayMatch[1]) : (escaleraCurrentRun.length + 1);
-
-                let existingRunItem = escaleraCurrentRun.find(r => r.day === dayNum);
-                const runStatus = statusVal === "won" ? "won" : (statusVal === "lost" ? "lost" : (statusVal === "voided" ? "voided" : "pending"));
-                const returnAmt = parseFloat((stakeVal * oddVal).toFixed(2));
-
-                if (!existingRunItem) {
-                    escaleraCurrentRun.push({
-                        day: dayNum,
-                        date: new Date().toISOString().split("T")[0],
-                        match: matchVal,
-                        selection: marketVal,
-                        odd: oddVal,
-                        stake: stakeVal,
-                        return: returnAmt,
-                        status: runStatus
+                let defaultMatchSummary = "";
+                if (pendingRegisterTicket.selections && Array.isArray(pendingRegisterTicket.selections)) {
+                    pendingRegisterTicket.selections.forEach((s, idx) => {
+                        defaultMatchSummary += `${idx > 0 ? " + " : ""}${s.match}`;
                     });
-                } else {
-                    existingRunItem.match = matchVal;
-                    existingRunItem.selection = marketVal;
-                    existingRunItem.odd = oddVal;
-                    existingRunItem.stake = stakeVal;
-                    existingRunItem.return = returnAmt;
-                    existingRunItem.status = runStatus;
+                } else if (pendingRegisterTicket.match) {
+                    defaultMatchSummary = pendingRegisterTicket.match;
+                }
+                
+                let defaultMarketSummary = "";
+                if (pendingRegisterTicket.selections && Array.isArray(pendingRegisterTicket.selections)) {
+                    pendingRegisterTicket.selections.forEach((s, idx) => {
+                        defaultMarketSummary += `${idx > 0 ? " / " : ""}${s.market}: ${s.pick || s.selection || ''}`;
+                    });
+                } else if (pendingRegisterTicket.market) {
+                    defaultMarketSummary = pendingRegisterTicket.market;
                 }
 
-                escaleraCurrentRun.sort((a, b) => a.day - b.day);
-                localStorage.setItem("escalera_current_run", JSON.stringify(escaleraCurrentRun));
+                const matchVal = (matchInput && matchInput.value.trim()) ? matchInput.value.trim() : defaultMatchSummary;
+                const marketVal = (marketInput && marketInput.value.trim()) ? marketInput.value.trim() : defaultMarketSummary;
+                const oddVal = parseFloat(oddInput ? oddInput.value : 0) || pendingRegisterTicket.total_odd || pendingRegisterTicket.odd || 1.0;
+                const stakeVal = parseFloat(stakeInput ? stakeInput.value : 0) || 1.0;
+                const statusVal = statusSelect ? statusSelect.value : "pending";
 
-                if (runStatus === "won") {
-                    escaleraCurrentDay = Math.max(escaleraCurrentDay, dayNum + 1);
-                    escaleraCurrentStake = returnAmt;
-                    localStorage.setItem("escalera_day", escaleraCurrentDay);
-                    localStorage.setItem("escalera_current_stake", escaleraCurrentStake);
+                const newBet = {
+                    id: Date.now(),
+                    match: matchVal,
+                    market: marketVal,
+                    odd: oddVal,
+                    stake: stakeVal,
+                    status: statusVal,
+                    date: new Date().toISOString().split("T")[0]
+                };
+
+                // Always reload from localStorage right before saving to prevent multi-tab data loss
+                let currentBets = [];
+                try {
+                    currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+                } catch(e) {
+                    currentBets = typeof userBets !== 'undefined' ? userBets : [];
                 }
-                renderEscaleraTab();
+                if (!Array.isArray(currentBets)) currentBets = [];
+                
+                currentBets.push(newBet);
+                userBets = currentBets; // Update global reference
+                localStorage.setItem("user_bets", JSON.stringify(userBets));
+
+                // If registering a Reto Escalera ticket, update escaleraCurrentRun safely
+                if (pendingRegisterTicket.type && pendingRegisterTicket.type.includes("Reto Escalera")) {
+                    let safeEscaleraRun = [];
+                    try { safeEscaleraRun = JSON.parse(localStorage.getItem("escalera_current_run")) || []; } catch(e){}
+                    
+                    const dayMatch = pendingRegisterTicket.type.match(/Día (\d+)/);
+                    const dayNum = dayMatch ? parseInt(dayMatch[1]) : (safeEscaleraRun.length + 1);
+
+                    let existingRunItem = safeEscaleraRun.find(r => r.day === dayNum);
+                    const runStatus = statusVal === "won" ? "won" : (statusVal === "lost" ? "lost" : (statusVal === "voided" ? "voided" : "pending"));
+                    const returnAmt = parseFloat((stakeVal * oddVal).toFixed(2));
+
+                    if (!existingRunItem) {
+                        safeEscaleraRun.push({
+                            day: dayNum,
+                            date: new Date().toISOString().split("T")[0],
+                            match: matchVal,
+                            selection: marketVal,
+                            odd: oddVal,
+                            stake: stakeVal,
+                            return: returnAmt,
+                            status: runStatus
+                        });
+                    } else {
+                        existingRunItem.match = matchVal;
+                        existingRunItem.selection = marketVal;
+                        existingRunItem.odd = oddVal;
+                        existingRunItem.stake = stakeVal;
+                        existingRunItem.return = returnAmt;
+                        existingRunItem.status = runStatus;
+                    }
+
+                    safeEscaleraRun.sort((a, b) => a.day - b.day);
+                    localStorage.setItem("escalera_current_run", JSON.stringify(safeEscaleraRun));
+                    window.escaleraCurrentRun = safeEscaleraRun; // Sync global
+
+                    if (runStatus === "won") {
+                        let currentEDay = parseInt(localStorage.getItem("escalera_day")) || 1;
+                        currentEDay = Math.max(currentEDay, dayNum + 1);
+                        localStorage.setItem("escalera_day", currentEDay);
+                        localStorage.setItem("escalera_current_stake", returnAmt);
+                        window.escaleraCurrentDay = currentEDay;
+                        window.escaleraCurrentStake = returnAmt;
+                    }
+                    if (typeof renderEscaleraTab === "function") renderEscaleraTab();
+                }
+
+                if (typeof updateBankrollMetrics === "function") updateBankrollMetrics();
+                if (typeof populateBetsTable === "function") populateBetsTable();
+                if (typeof updateBankrollChart === "function") updateBankrollChart();
+                if (typeof SyncManager !== "undefined" && SyncManager.pushState) SyncManager.pushState();
+
+                // Clear the stored ticket on the modal to prevent stale data
+                if (modal) { modal._pendingTicket = null; modal._pendingSuffix = null; }
+                pendingRegisterTicket = null;
+                
+                if (typeof closeRegisterModal === "function") closeRegisterModal();
+                alert("¡Apuesta registrada con éxito en tu Historial y Banca! ✅");
+                
+            } catch (err) {
+                console.error("Error saving ticket:", err);
+                alert("Hubo un error al guardar el boleto: " + err.message);
             }
-
-            updateBankrollMetrics();
-            populateBetsTable();
-            updateBankrollChart();
-            SyncManager.pushState();
-
-            closeRegisterModal();
-            alert("¡Apuesta registrada con éxito en tu Historial y Banca!");
         };
     }
 
@@ -4053,7 +4258,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function populateEscaleraHistoryTable() {
         if (!escaleraHistoryTableBody) return;
-        const currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+        
+        let currentRun = [];
+        try {
+            currentRun = JSON.parse(localStorage.getItem("escalera_current_run")) || [];
+            window.escaleraCurrentRun = currentRun;
+        } catch (e) {
+            console.error(e);
+        }
 
         // Always sync current run to userBets for unified accuracy calculation
         syncEscaleraRunToUserBets();
@@ -4514,9 +4726,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (typeof populateBetsTable === "function") populateBetsTable();
             if (typeof renderEscaleraTab === "function") renderEscaleraTab();
             if (typeof updateBankrollChart === "function") updateBankrollChart();
-        } else if (!SyncManager.getSyncId()) {
-            const autoPin = "sportintel-" + Math.random().toString(36).substring(2, 7);
-            SyncManager.setSyncId(autoPin);
             await SyncManager.pushState();
             console.log("[Sync] PIN automático creado y datos locales subidos a la Nube:", autoPin);
         } else {
