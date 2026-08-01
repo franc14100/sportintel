@@ -1019,14 +1019,54 @@ document.addEventListener("DOMContentLoaded", () => {
         
         statRoi.textContent = `+${stats.roi_percentage}%`;
 
-        // Update Rendimiento chart KPI metrics bar
+        // Calculate dynamic real stats from historical_tickets_registry
+        const reg = (appData && appData.historical_tickets_registry) ? appData.historical_tickets_registry : [];
+        const resTickets = reg.filter(t => {
+            const s = String(t.status || "").toLowerCase();
+            return s === "won" || s === "lost" || s === "ganado" || s === "perdido";
+        });
+
+        let displayAcc = (appData && appData.global_stats && (appData.global_stats.avg_accuracy_30d || appData.global_stats.avg_accuracy_40d)) ? (appData.global_stats.avg_accuracy_30d || appData.global_stats.avg_accuracy_40d) : 0;
+        let streakStr = "0 Aciertos";
+        let avgOddStr = "@1.85";
+
+        if (resTickets.length > 0) {
+            const wonT = resTickets.filter(t => {
+                const s = String(t.status || "").toLowerCase();
+                return s === "won" || s === "ganado";
+            }).length;
+            displayAcc = Math.round((wonT / resTickets.length) * 100);
+
+            // Compute streak starting from most recent ticket
+            const lastT = resTickets[resTickets.length - 1];
+            const lastSt = String(lastT.status || "").toLowerCase();
+            const isWon = (lastSt === "won" || lastSt === "ganado");
+            let strk = 0;
+            for (let i = resTickets.length - 1; i >= 0; i--) {
+                const st = String(resTickets[i].status || "").toLowerCase();
+                const curW = (st === "won" || st === "ganado");
+                if (curW === isWon) strk++;
+                else break;
+            }
+            streakStr = isWon ? `🔥 ${strk} Aciertos` : `❌ ${strk} Pérdidas`;
+
+            const validOdds = resTickets.map(t => parseFloat(t.total_odd || t.odd || 0)).filter(o => o > 1.0);
+            if (validOdds.length > 0) {
+                const avgO = validOdds.reduce((a, b) => a + b, 0) / validOdds.length;
+                avgOddStr = `@${avgO.toFixed(2)}`;
+            }
+        }
+
         const chartStatAcc = document.getElementById("chart-stat-accuracy");
         const chartStatStreak = document.getElementById("chart-stat-streak");
         const chartStatAvgOdd = document.getElementById("chart-stat-avg-odd");
 
-        if (chartStatAcc) chartStatAcc.textContent = `${stats.avg_accuracy_30d || 85.0}%`;
-        if (chartStatStreak) chartStatStreak.textContent = "🔥 5 Aciertos";
-        if (chartStatAvgOdd) chartStatAvgOdd.textContent = "@1.85";
+        if (chartStatAcc) chartStatAcc.textContent = `${displayAcc}%`;
+        if (chartStatStreak) chartStatStreak.textContent = streakStr;
+        if (chartStatAvgOdd) chartStatAvgOdd.textContent = avgOddStr;
+
+        if (statAccuracy) statAccuracy.textContent = `${displayAcc}%`;
+        if (globalAccuracyBadge) globalAccuracyBadge.textContent = `${displayAcc}%`;
     }
 
     // --- Render "Star Ticket" & Key Matches ---
@@ -1337,13 +1377,34 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderChart() {
         const canvas = document.getElementById("performance-chart");
         if (!canvas) return;
+        const reg = (appData && appData.historical_tickets_registry) ? appData.historical_tickets_registry : [];
+        const resTickets = reg.filter(t => {
+            const s = String(t.status || "").toLowerCase();
+            return s === "won" || s === "lost" || s === "ganado" || s === "perdido";
+        });
 
-        const baseAccuracy = (appData && appData.global_stats && appData.global_stats.avg_accuracy_30d) ? appData.global_stats.avg_accuracy_30d : 85;
         const labels = ["Día -14", "Día -13", "Día -12", "Día -11", "Día -10", "Día -9", "Día -8", "Día -7", "Día -6", "Día -5", "Día -4", "Día -3", "Día -2", "Día -1", "Hoy"];
+        let dataValues = [];
+
+        if (resTickets.length === 0) {
+            const baseAcc = (appData && appData.global_stats && (appData.global_stats.avg_accuracy_30d || appData.global_stats.avg_accuracy_40d)) ? (appData.global_stats.avg_accuracy_30d || appData.global_stats.avg_accuracy_40d) : 0;
+            dataValues = baseAcc > 0 ? Array(15).fill(Math.round(baseAcc)) : Array(15).fill(null);
+        } else {
+            const points = 15;
+            const historyCurve = [];
+            for (let i = 0; i < points; i++) {
+                const indexCutoff = Math.floor(((i + 1) / points) * resTickets.length);
+                const subList = resTickets.slice(0, Math.max(1, indexCutoff));
+                const subWon = subList.filter(t => {
+                    const s = String(t.status || "").toLowerCase();
+                    return s === "won" || s === "ganado";
+                }).length;
+                const subAcc = Math.round((subWon / subList.length) * 100);
+                historyCurve.push(subAcc);
+            }
+            dataValues = historyCurve;
+        }
         
-        // Return blank graph (no line) if there is no resolved history
-        const isFresh = appData && appData.global_stats && (appData.global_stats.total_picks_won || 0) === 0 && (appData.global_stats.total_picks_lost || 0) === 0;
-        const dataValues = isFresh ? Array(15).fill(null) : [72, 74, 73, 75, 77, 76, 78, 80, 79, 81, 83, 82, 84, 85, Math.max(75, Math.min(95, Math.round(baseAccuracy)))];
 
         // Compute dynamic Y axis range (tight fit around data)
         const validData = dataValues.filter(v => v !== null);

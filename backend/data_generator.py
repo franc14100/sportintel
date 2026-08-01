@@ -2681,6 +2681,7 @@ def generate_daily_sports_data():
         "global_stats": {
             "analyzed_today": total_analyzed,
             "avg_accuracy_40d": accuracy,
+            "avg_accuracy_30d": accuracy,
             "total_picks_won": total_won,
             "total_picks_lost": total_lost,
             "roi_percentage": round((total_won * 0.85) - (total_lost * 1.0), 2)
