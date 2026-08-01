@@ -1392,55 +1392,26 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
-                    # ─── CÓRNERS INDIVIDUALES DEL EQUIPO ─────────────────────────────
-                    "market": "Córners del Equipo (Individual)",
-                    "selection": (
-                        f"{winner_name} Más de 4.5 Córners" if max(prob_home, prob_away) > 75
-                        else f"{winner_name} Más de 3.5 Córners" if max(prob_home, prob_away) > 60
-                        else f"{winner_name} Más de 2.5 Córners"
-                    ),
-                    "odd": (
-                        round(random.uniform(1.30, 1.45), 2) if max(prob_home, prob_away) > 75
-                        else round(random.uniform(1.20, 1.30), 2) if max(prob_home, prob_away) > 60
-                        else round(random.uniform(1.10, 1.20), 2)
-                    ),
-                    "probability": random.randint(75, 88),
+                    # Mercado 100% garantizado en 1xBet: Empate No Apuesta (DNB)
+                    "market": "Empate No Apuesta",
+                    "selection": f"{winner_name}",
+                    "odd": round(max(1.12, min(1.45, (odd_home if winner_name == home_name else odd_away) * 0.72)), 2),
+                    "probability": int(max(prob_home, prob_away) * 0.90),
                     "risk": "Low",
                     "reasoning": {
-                        "tactical": (
-                            f"{winner_name} concentra el juego ofensivo por las bandas generando centros laterales. "
-                            f"IMPORTANTE: No te dejes tentar por cuotas altas. Mantén la línea baja (ej. Más de 3.5 o 4.5) aunque pague menos."
-                        ),
-                        "statistical": (
-                            f"ADVERTENCIA: Las apuestas individuales de córners son volátiles. "
-                            f"Solo apuesta a líneas seguras que paguen entre 1.15 y 1.40 máximo. "
-                            f"El {random.randint(75, 88)}% de sus partidos como favorito supera esta línea base."
-                        ),
-                        "market": (
-                            f"ESTRATEGIA SEGURA: Las casas de apuestas te ofrecerán el 'Más de 5.5' a cuota 1.80. "
-                            f"NO LO TOMES. Es una trampa. Juega la línea de 3.5 o 4.5 para asegurar el verde en tu combinada."
-                        )
+                        "tactical": f"El mercado de Empate No Apuesta (DNB) para {winner_name} otorga máxima seguridad eliminando el riesgo del empate.",
+                        "statistical": f"Probabilidad implícita estimada del {int(max(prob_home, prob_away) * 0.90)}%. Mercado estándar disponible en 1xBet.",
+                        "market": "Opción segura para boletos combinados o de valor sin arriesgar en mercados volátiles."
                     },
                     "status": "pending"
-                },
-                {
-                    # CÓRNERS TOTALES: La API escanea todas las líneas y elige el lado más probable
-                    **(smart.get('corners') or {
-                        'market': 'Córners (Total del Partido)',
-                        'selection': 'Más de 8.5 Córners' if avg_goals >= 2.3 else 'Más de 7.5 Córners',
-                        'odd': round(random.uniform(1.60, 1.90), 2),
-                        'probability': random.randint(55, 70),
-                        'risk': 'Medium',
-                        'reasoning': {
-                            'tactical': f"Ambos equipos apuestan por centros laterales y juego directo por extremos. El volumen de disparos bloqueados genera un promedio elevado de saques de esquina.",
-                            'statistical': f"Promedio acumulado de {home_name} ({random.randint(4, 7)} córners) y {away_name} ({random.randint(3, 6)} córners) proyecta un total de {random.randint(9, 13)} saques de esquina.",
-                            'market': f"Mercado con menor volatilidad en comparación con el 1X2, ideal para acumular valor en boletos seguros."
-                        },
-                        'valid_for_ticket': False,
-                    }),
-                    'status': 'pending'
-                },
+                }
             ]
+
+            if smart.get("corners"):
+                picks.append({
+                    **smart["corners"],
+                    "status": "pending"
+                })
 
             # For World Cup / Copa knockout rounds: add special elimination markets
             if neutral_venue:
@@ -1833,6 +1804,15 @@ def generate_daily_sports_data():
         selected_football.extend(extra_football)
 
     matches_data = selected_football + selected_tennis
+    # Deduplicar la lista del dashboard principal para garantizar 0 partidos repetidos en la grilla
+    seen_grid_keys = set()
+    clean_grid = []
+    for md in matches_data:
+        mkey = f"{md.get('home')} vs {md.get('away')}".strip()
+        if mkey not in seen_grid_keys:
+            seen_grid_keys.add(mkey)
+            clean_grid.append(md)
+    matches_data = clean_grid
     
     for m in matches_data:
         m.pop('_safety_score', None)
