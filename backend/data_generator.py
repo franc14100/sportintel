@@ -1854,17 +1854,9 @@ def generate_daily_sports_data():
     football_matches.sort(key=lambda x: x['_safety_score'], reverse=True)
     tennis_matches.sort(key=lambda x: x['_safety_score'], reverse=True)
     
-    # Seleccionar Top 30 Fútbol y Top 20 Tenis más seguros
-    selected_football = football_matches[:30]
-    selected_tennis = tennis_matches[:20]
-    
-    # Garantizar SIEMPRE exactamente 50 partidos analizados hoy
-    total_cur = len(selected_football) + len(selected_tennis)
-    if total_cur < 50:
-        needed = 50 - total_cur
-        extra_football = football_matches[len(selected_football):len(selected_football) + needed]
-        selected_football.extend(extra_football)
-
+        # MOTOR ESPN LIBRE (SIN LÍMITES DE PARTIDOS): Incluir TODOS los partidos reales recibidos de ESPN
+    selected_football = football_matches
+    selected_tennis = tennis_matches
     matches_data = selected_football + selected_tennis
     # Deduplicar la lista del dashboard principal para garantizar 0 partidos repetidos en la grilla
     seen_grid_keys = set()

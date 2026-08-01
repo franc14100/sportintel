@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing ESPN Zero-Cost Fallback Engine...")
-run('git commit -m "Implement ESPN 100% Free Zero-Cost Fallback Engine for zero-cost match predictions when RapidAPI quota hits 100%"')
+print("Committing unlimited ESPN match engine & v5.0 bump...")
+run('git commit -m "Remove match limits to display ALL 100+ real matches from free ESPN API and bump cache buster to v5.0"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
