@@ -47523,5 +47523,320 @@
     "start_ts": 1785574800,
     "status": "notstarted",
     "sport": "Tennis"
+  },
+  "16642175": {
+    "homeTeam": "AD Rosario",
+    "awayTeam": "ADR Jicaral Sercoba",
+    "league": "Liga de Ascenso, Apertura, Group 1",
+    "time": "21:00",
+    "start_ts": 1785531600,
+    "status": "finished",
+    "sport": "Football"
+  },
+  "15657464": {
+    "homeTeam": "Miramar Rangers",
+    "awayTeam": "Waterside Karori",
+    "league": "Central League",
+    "time": "02:30",
+    "start_ts": 1785551400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16661750": {
+    "homeTeam": "Scottland FC",
+    "awayTeam": "MWOS FC",
+    "league": "Premier Soccer League",
+    "time": "13:00",
+    "start_ts": 1785589200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16607993": {
+    "homeTeam": "FC Bihor Oradea",
+    "awayTeam": "AFC Unirea 04 Slobozia",
+    "league": "Liga II",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15390074": {
+    "homeTeam": "Lillehammer",
+    "awayTeam": "Drøbak/Frogn",
+    "league": "3rd Division, Group 6",
+    "time": "13:00",
+    "start_ts": 1785589200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16667923": {
+    "homeTeam": "Annagh United",
+    "awayTeam": "Ballymena United",
+    "league": "Club Friendly Games",
+    "time": "11:30",
+    "start_ts": 1785583800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16674244": {
+    "homeTeam": "RB Leipzig",
+    "awayTeam": "VfL Wolfsburg",
+    "league": "Women Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785585600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16627024": {
+    "homeTeam": "Persebaya Surabaya",
+    "awayTeam": "Port FC",
+    "league": "Indonesia President's Cup, Group B",
+    "time": "12:30",
+    "start_ts": 1785587400,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16448431": {
+    "homeTeam": "Ynyshir Albions",
+    "awayTeam": "Cardiff Draconians FC",
+    "league": "Cymru Championship, South",
+    "time": "13:30",
+    "start_ts": 1785591000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16367350": {
+    "homeTeam": "Dover Athletic",
+    "awayTeam": "Carshalton Athletic",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785585600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16607992": {
+    "homeTeam": "ACSM Cetatea 1932 Suceava",
+    "awayTeam": "Concordia Chiajna",
+    "league": "Liga II",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16434972": {
+    "homeTeam": "Cardiff Met FC",
+    "awayTeam": "Holywell Town",
+    "league": "Cymru Premier",
+    "time": "13:30",
+    "start_ts": 1785591000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16428050": {
+    "homeTeam": "Villan Pojat",
+    "awayTeam": "Rollon Pojat",
+    "league": "Kolmonen, North Group",
+    "time": "12:00",
+    "start_ts": 1785585600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16672571": {
+    "homeTeam": "Bognor Regis",
+    "awayTeam": "Chichester City",
+    "league": "Club Friendly Games",
+    "time": "12:00",
+    "start_ts": 1785585600,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15266173": {
+    "homeTeam": "Viking FK",
+    "awayTeam": "Odds BK",
+    "league": "1st Division, Women",
+    "time": "11:00",
+    "start_ts": 1785582000,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16674230": {
+    "homeTeam": "Hamburger SV",
+    "awayTeam": "Everton",
+    "league": "Women Club Friendly Games",
+    "time": "11:30",
+    "start_ts": 1785583800,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "15390073": {
+    "homeTeam": "Råde",
+    "awayTeam": "Bjoerkelangen",
+    "league": "3rd Division, Group 6",
+    "time": "13:00",
+    "start_ts": 1785589200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16607989": {
+    "homeTeam": "CS Gloria Bistrița",
+    "awayTeam": "CSC 1599 Șelimbăr",
+    "league": "Liga II",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Football"
+  },
+  "16680230": {
+    "homeTeam": "G3X FC",
+    "awayTeam": "DesimpaiN",
+    "league": "Kings World Cup Clubs",
+    "time": "20:00",
+    "start_ts": 1785528000,
+    "status": "finished",
+    "sport": "Football"
+  },
+  "16685717": {
+    "homeTeam": "Grzegorzewski O / Pereira T",
+    "awayTeam": "Hrazdil J / Pecak S",
+    "league": "ITF M25 Koszalin Men Doubles",
+    "time": "13:00",
+    "start_ts": 1785589200,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16679203": {
+    "homeTeam": "Broadus S / Collins K",
+    "awayTeam": "Goto R / Lee E",
+    "league": "ITF W75 Lexington, KY Women Doubles",
+    "time": "18:00",
+    "start_ts": 1785520800,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16593678": {
+    "homeTeam": "Kozyreva M / Lumsden M",
+    "awayTeam": "Chan H / Joint M",
+    "league": "Memphis, USA, Doubles",
+    "time": "01:30",
+    "start_ts": 1785547800,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16685931": {
+    "homeTeam": "Gabriele Maria Noce",
+    "awayTeam": "Veljko Krstic",
+    "league": "ITF M15 Kursumlijska Banja 11 Men",
+    "time": "07:30",
+    "start_ts": 1785569400,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16685933": {
+    "homeTeam": "Cattaneo L / Comino L",
+    "awayTeam": "Ochi M / Zagars A",
+    "league": "ITF M15 Kursumlijska Banja 11 Men Doubles",
+    "time": "07:30",
+    "start_ts": 1785569400,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686523": {
+    "homeTeam": "Stefan Adrian Andreescu",
+    "awayTeam": "Francesco Ferrari",
+    "league": "ITF M25 Pitesti Men",
+    "time": "08:00",
+    "start_ts": 1785571200,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16685715": {
+    "homeTeam": "Sandro Kopp",
+    "awayTeam": "Sebastian Sorger",
+    "league": "ITF M25 Bolzano Men",
+    "time": "08:30",
+    "start_ts": 1785573000,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686133": {
+    "homeTeam": "Adithya Karunaratne",
+    "awayTeam": "Naiktha Bains",
+    "league": "ITF W35 Aldershot Women",
+    "time": "09:00",
+    "start_ts": 1785574800,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686136": {
+    "homeTeam": "Bretnacher J / Komano M",
+    "awayTeam": "Kovacevic E / Soulie A",
+    "league": "ITF W15 Savitaipale Women Doubles",
+    "time": "09:00",
+    "start_ts": 1785574800,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686438": {
+    "homeTeam": "Conor Gannon",
+    "awayTeam": "Daniel De Jonge",
+    "league": "ITF M15 Dublin Men",
+    "time": "09:00",
+    "start_ts": 1785574800,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686437": {
+    "homeTeam": "Vendula Valdmannova",
+    "awayTeam": "Valentina Ryser",
+    "league": "ITF W50 Dublin Women",
+    "time": "09:00",
+    "start_ts": 1785574800,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686440": {
+    "homeTeam": "Marlon Vankan",
+    "awayTeam": "Erik Schiessl",
+    "league": "ITF M15 Wels Men",
+    "time": "09:00",
+    "start_ts": 1785574800,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686134": {
+    "homeTeam": "Linda Klimovičová",
+    "awayTeam": "Rina Saigo",
+    "league": "ITF W35 Aldershot Women",
+    "time": "09:30",
+    "start_ts": 1785576600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686436": {
+    "homeTeam": "Viktoria Hrunčakova",
+    "awayTeam": "Amelia Rajecki",
+    "league": "ITF W50 Dublin Women",
+    "time": "09:30",
+    "start_ts": 1785576600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686439": {
+    "homeTeam": "Robin Catry",
+    "awayTeam": "Markus Molder",
+    "league": "ITF M15 Dublin Men",
+    "time": "09:30",
+    "start_ts": 1785576600,
+    "status": "notstarted",
+    "sport": "Tennis"
+  },
+  "16686292": {
+    "homeTeam": "Maileen Nuudi",
+    "awayTeam": "Elza Tomase",
+    "league": "ITF W15 Savitaipale Women",
+    "time": "10:00",
+    "start_ts": 1785578400,
+    "status": "notstarted",
+    "sport": "Tennis"
   }
 }
