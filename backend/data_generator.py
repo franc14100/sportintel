@@ -607,13 +607,22 @@ def fetch_espn_fallback_matches():
             with urllib.request.urlopen(req, timeout=8) as resp:
                 data = json.loads(resp.read().decode('utf-8'))
                 events = data.get("events", [])
-                for ev in events:
-                    comps = ev.get("competitions", [{}])[0]
+                def process_competition(comps, ev_league=""):
                     competitors = comps.get("competitors", [])
                     if len(competitors) >= 2:
-                        h_name = competitors[0].get("team", {}).get("displayName") or competitors[0].get("athlete", {}).get("displayName")
-                        a_name = competitors[1].get("team", {}).get("displayName") or competitors[1].get("athlete", {}).get("displayName")
-                        league_name = ev.get("season", {}).get("slug") or comps.get("league", {}).get("name") or "Liga Profesional"
+                        def extract_name(c):
+                            if not c: return None
+                            if "athlete" in c and isinstance(c["athlete"], dict):
+                                return c["athlete"].get("displayName") or c["athlete"].get("fullName")
+                            if "team" in c and isinstance(c["team"], dict):
+                                return c["team"].get("displayName") or c["team"].get("name")
+                            if "athlete" in c and "displayName" in c:
+                                return c.get("displayName")
+                            return None
+
+                        h_name = extract_name(competitors[0])
+                        a_name = extract_name(competitors[1])
+                        league_name = ev_league or comps.get("league", {}).get("name") or "Torneo Profesional"
                         
                         start_date = comps.get("date", "")
                         time_str = "15:00"
@@ -624,7 +633,7 @@ def fetch_espn_fallback_matches():
                             except Exception:
                                 pass
                         
-                        if h_name and a_name:
+                        if h_name and a_name and h_name != "TBD" and a_name != "TBD":
                             espn_matches.append({
                                 "home": h_name,
                                 "away": a_name,
@@ -644,6 +653,16 @@ def fetch_espn_fallback_matches():
                                 "away_form_raw": "W-W-D-L",
                                 "real_odds": {}
                             })
+
+                for ev in events:
+                    ev_league = ev.get("shortName") or ev.get("season", {}).get("slug") or ""
+                    # 1. Standard competitions
+                    for comps in ev.get("competitions", []):
+                        process_competition(comps, ev_league)
+                    # 2. Tennis groupings
+                    for gr in ev.get("groupings", []):
+                        for comps in gr.get("competitions", []):
+                            process_competition(comps, ev_league)
         except Exception as e:
             print(f"[ESPN Fallback] Error en {ep}: {e}")
     return espn_matches
@@ -1985,7 +2004,24 @@ def generate_daily_sports_data():
         if 'Menos' in mkt and 'Goles' in mkt and prob >= 78:
             return 3  # Under goals seguro
         return 4  # Resto
-    usable_picks = sorted(usable_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
+    # GARANTÍA MULTIDEPORTE EN BOLETOS: Intercalar opciones de Fútbol, Tenis y Baloncesto
+    football_picks = [p for p in usable_picks if p.get('sport') == 'Football']
+    tennis_picks = [p for p in usable_picks if p.get('sport') == 'Tennis']
+    basketball_picks = [p for p in usable_picks if p.get('sport') == 'Basketball']
+
+    football_picks = sorted(football_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
+    tennis_picks = sorted(tennis_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
+    basketball_picks = sorted(basketball_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
+
+    # Intercalar picks de los 3 deportes para garantizar diversidad multideporte en los boletos
+    interleaved_picks = []
+    max_len = max(len(football_picks), len(tennis_picks), len(basketball_picks), 1)
+    for i in range(max_len):
+        if i < len(football_picks): interleaved_picks.append(football_picks[i])
+        if i < len(tennis_picks): interleaved_picks.append(tennis_picks[i])
+        if i < len(basketball_picks): interleaved_picks.append(basketball_picks[i])
+
+    usable_picks = interleaved_picks if len(interleaved_picks) > 0 else sorted(usable_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
 
     
     # ═══════════════════════════════════════════════════════════════════════

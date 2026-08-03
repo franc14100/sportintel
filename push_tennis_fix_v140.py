@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing strict ticket filters & friendly exclusions with v13.0 cache buster...")
-run('git commit -m "Exclude friendly matches from Star Tickets, ban Over 2.5 in low-scoring leagues, and bump cache buster to v13.0"')
+print("Committing Tennis and Basketball groupings fix for Star Tickets with v14.0 cache buster...")
+run('git commit -m "Enable ESPN Tennis groupings parsing (490+ Tennis matches) and interleave Tennis and Basketball in Star Tickets with v14.0 cache bump"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
