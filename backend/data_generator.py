@@ -1894,6 +1894,7 @@ def generate_daily_sports_data():
         for p in m.get('picks', []):
             pick_info = {
                 "match": f"{m['home']} vs {m['away']}",
+                "league": m.get('league', ''),
                 "sport": sport,
                 "market": p['market'],
                 "selection": p['selection'],
@@ -1923,6 +1924,13 @@ def generate_daily_sports_data():
     # ═══════════════════════════════════════════════════════════════════════
     # REGLA 1: Solo picks con cuotas REALES de la API (valid_for_ticket=True)
     #          Picks sin datos de API = cuotas inventadas = NO entran al boleto
+    # REGLA 0: EXCLUSIÓN DE AMISTOSOS (Friendlies) DE LOS BOLETOS ESTRELLA
+    # En partidos amistosos los planteles cambian a 11 jugadores en el 2do tiempo y no hay competitividad real.
+    def is_friendly_match(match_name, league_name=""):
+        combined = (str(match_name) + " " + str(league_name)).lower()
+        return any(term in combined for term in ['friendly', 'amistoso', 'club-friendly', 'preseason', 'exhibition'])
+
+    usable_picks = [p for p in usable_picks if not is_friendly_match(p)]
     usable_picks = [p for p in usable_picks if p.get('valid_for_ticket', True) is not False]
 
     # REGLA 2: Cuota individual entre @1.10 y @1.65
@@ -1936,6 +1944,19 @@ def generate_daily_sports_data():
     # El filtro de 72%+ probabilidad ya garantiza la calidad. Mas mercados = mas opciones.
     BANNED_MARKETS = ['Tarjeta', 'Asian 2.0', 'Primero en Anotar',
                       'Resultado 1er Tiempo', 'Goles del Equipo']
+
+    # REGLA RIGUROSA: Descartar "Más de 2.5 Goles" en ligas típicamente defensivas (Primera Nacional, Copas Femeninas, etc.)
+    LOW_SCORING_LEAGUES = ['primera nacional', 'primera-nacional', 'federal', 'copa argentina', 'argentina', 'lpf', 'liga profesional', 'colombia', 'liga betplay', 'copa africana', 'women', 'femenil', 'femenino', 'liga 2', 'serie b', 'segunda', 'tercera', 'torneo-intermedio', 'copa chile', 'guatemala', 'honduras']
+    def is_invalid_over_pick(pick):
+        mkt = str(pick.get('market', ''))
+        sel = str(pick.get('selection', ''))
+        match_str = str(pick.get('match', '')).lower()
+        league_str = str(pick.get('league', '')).lower()
+        if ('Más de 2.5' in sel or 'Más de 2.5' in mkt) and any(lsl in match_str or lsl in league_str for lsl in LOW_SCORING_LEAGUES):
+            return True
+        return False
+
+    usable_picks = [p for p in usable_picks if not is_invalid_over_pick(p)]
     usable_picks = [p for p in usable_picks if not any(bm in p.get('market', '') for bm in BANNED_MARKETS)]
 
     # REGLA 5: Priorizar picks con cuotas DIRECTAS de la API
@@ -2276,6 +2297,27 @@ def generate_daily_sports_data():
         for sel in st_sels:
             m_name = sel.get("match", "")
             m_market = sel.get("market", "")
+            found_pick = None
+            found_md = None
+            for md in current_matches:
+                if f"{md['home']} vs {md['away']}" == m_name:
+                    found_md = md
+                    for pk in md.get("picks", []):
+                        if pk.get("market") == m_market:
+                            found_pick = pk
+                            break
+                    break
+
+            if found_md and is_friendly_match(m_name, found_md.get("league", "")):
+                clean_name = m_name.encode("ascii", "ignore").decode("ascii")
+                print(f"[INFO] Partido Amistoso '{clean_name}' descartado de Boleto Estrella. Regenerando boleto.")
+                return False, [], 1.0
+
+            if found_pick and is_invalid_over_pick(found_pick):
+                clean_name = m_name.encode("ascii", "ignore").decode("ascii")
+                print(f"[INFO] Pick 'Más de 2.5' en liga defensiva '{clean_name}' descartado de Boleto Estrella. Regenerando boleto.")
+                return False, [], 1.0
+
             if m_name in global_used_set or m_name in local_matches:
                 clean_name = m_name.encode("ascii", "ignore").decode("ascii")
                 print(f"[INFO] Partido '{clean_name}' ya usado en otro boleto. Invalidador activado.")
