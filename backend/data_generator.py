@@ -1864,23 +1864,14 @@ def generate_daily_sports_data():
     # ═══════════════════════════════════════════════════════════════════════
     # SELECCIÓN TOP 30 FÚTBOL + TOP 20 TENIS MÁS SEGUROS (PEDIDO POR USUARIO)
     # ═══════════════════════════════════════════════════════════════════════
-    football_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'football']
+        football_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'football']
     tennis_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'tennis']
-    
+    basketball_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'basketball']
+
     total_analyzed = len(matches_data)
-    
-    for m in football_matches:
-        m['_safety_score'] = max((p.get('probability', 0) for p in m.get('picks', [])), default=0)
-    for m in tennis_matches:
-        m['_safety_score'] = max((p.get('probability', 0) for p in m.get('picks', [])), default=0)
-        
-    football_matches.sort(key=lambda x: x['_safety_score'], reverse=True)
-    tennis_matches.sort(key=lambda x: x['_safety_score'], reverse=True)
-    
-        # MOTOR ESPN LIBRE (SIN LÍMITES DE PARTIDOS): Incluir TODOS los partidos reales recibidos de ESPN
-    selected_football = football_matches
-    selected_tennis = tennis_matches
-    matches_data = selected_football + selected_tennis
+
+    # MOTOR ESPN LIBRE (SIN LÍMITES DE PARTIDOS): Incluir TODOS los partidos de Fútbol, Tenis y Baloncesto en la pestaña de Análisis
+    matches_data = football_matches + tennis_matches + basketball_matches
     # Deduplicar la lista del dashboard principal para garantizar 0 partidos repetidos en la grilla
     seen_grid_keys = set()
     clean_grid = []
@@ -2005,24 +1996,8 @@ def generate_daily_sports_data():
         if 'Menos' in mkt and 'Goles' in mkt and prob >= 78:
             return 3  # Under goals seguro
         return 4  # Resto
-    # GARANTÍA MULTIDEPORTE EN BOLETOS: Intercalar opciones de Fútbol, Tenis y Baloncesto
-    football_picks = [p for p in usable_picks if p.get('sport') == 'Football']
-    tennis_picks = [p for p in usable_picks if p.get('sport') == 'Tennis']
-    basketball_picks = [p for p in usable_picks if p.get('sport') == 'Basketball']
-
-    football_picks = sorted(football_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
-    tennis_picks = sorted(tennis_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
-    basketball_picks = sorted(basketball_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
-
-    # Intercalar picks de los 3 deportes para garantizar diversidad multideporte en los boletos
-    interleaved_picks = []
-    max_len = max(len(football_picks), len(tennis_picks), len(basketball_picks), 1)
-    for i in range(max_len):
-        if i < len(football_picks): interleaved_picks.append(football_picks[i])
-        if i < len(tennis_picks): interleaved_picks.append(tennis_picks[i])
-        if i < len(basketball_picks): interleaved_picks.append(basketball_picks[i])
-
-    usable_picks = interleaved_picks if len(interleaved_picks) > 0 else sorted(usable_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
+    # ORDENAMIENTO PURO POR SEGURIDAD Y VALOR ESPERADO (EV): Los mejores picks de cualquier deporte entran al boleto
+    usable_picks = sorted(usable_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
 
     
     # ═══════════════════════════════════════════════════════════════════════

@@ -442,20 +442,96 @@ document.addEventListener("DOMContentLoaded", () => {
         return 9999;
     }
 
+    
+    function evaluatePickResult(pick, homeScore, awayScore, sport) {
+        if (homeScore === undefined || homeScore === null || awayScore === undefined || awayScore === null) {
+            return pick.status || "pending";
+        }
+        const hs = parseInt(homeScore, 10);
+        const as = parseInt(awayScore, 10);
+        if (isNaN(hs) || isNaN(as)) return pick.status || "pending";
+
+        const mkt = (pick.market || "").toLowerCase();
+        const sel = (pick.selection || pick.pick || "").toLowerCase();
+
+        // 1. Doble Oportunidad
+        if (mkt.includes("doble oportunidad") || sel.includes(" o empate") || sel.includes("1x") || sel.includes("x2") || sel.includes("12")) {
+            if (sel.includes("1x") || sel.includes("local o empate") || sel.includes(" o empate")) {
+                return hs >= as ? "won" : "lost";
+            }
+            if (sel.includes("x2") || sel.includes("visitante o empate")) {
+                return as >= hs ? "won" : "lost";
+            }
+            if (sel.includes("12") || sel.includes("local o visitante")) {
+                return hs !== as ? "won" : "lost";
+            }
+        }
+
+        # 2. Goles / Totales
+        if (mkt.includes("goles") || mkt.includes("total") || mkt.includes("juegos") || mkt.includes("puntos")) {
+            const tot = hs + as;
+            if (sel.includes("más de 2.5") || sel.includes("over 2.5")) return tot > 2.5 ? "won" : "lost";
+            if (sel.includes("menos de 2.5") || sel.includes("under 2.5")) return tot < 2.5 ? "won" : "lost";
+            if (sel.includes("más de 1.5") || sel.includes("over 1.5")) return tot > 1.5 ? "won" : "lost";
+            if (sel.includes("menos de 1.5") || sel.includes("under 1.5")) return tot < 1.5 ? "won" : "lost";
+            if (sel.includes("más de 3.5") || sel.includes("over 3.5")) return tot > 3.5 ? "won" : "lost";
+            if (sel.includes("menos de 3.5") || sel.includes("under 3.5")) return tot < 3.5 ? "won" : "lost";
+            if (sel.includes("más de 0.5") || sel.includes("over 0.5")) return tot > 0.5 ? "won" : "lost";
+            if (sel.includes("menos de 0.5") || sel.includes("under 0.5")) return tot < 0.5 ? "won" : "lost";
+        }
+
+        # 3. Both Teams to Score (BTTS)
+        if (mkt.includes("ambos equipos anotan") || mkt.includes("ambos anotan") || mkt.includes("btts")) {
+            if (sel.includes("sí") || sel.includes("si") || sel.includes("yes")) return (hs > 0 && as > 0) ? "won" : "lost";
+            if (sel.includes("no")) return (hs === 0 || as === 0) ? "won" : "lost";
+        }
+
+        # 4. Draw No Bet (Empate No Apuesta)
+        if (mkt.includes("empate no apuesta") || mkt.includes("dnb")) {
+            if (hs === as) return "void";
+            if (sel.includes("1") || sel.includes("local")) return hs > as ? "won" : "lost";
+            if (sel.includes("2") || sel.includes("visitante")) return as > hs ? "won" : "lost";
+        }
+
+        # 5. Resultado Final
+        if (mkt.includes("resultado final") || mkt.includes("1x2") || mkt.includes("ganador")) {
+            if (sel === "1" || sel.includes("local")) return hs > as ? "won" : "lost";
+            if (sel === "2" || sel.includes("visitante")) return as > hs ? "won" : "lost";
+            if (sel === "x" || sel.includes("empate")) return hs === as ? "won" : "lost";
+        }
+
+        return pick.status || "pending";
+    }
+
     function getDynamicMatchStatus(m) {
-        if (!m || !m.status) return "pre";
-        let status = m.status;
-        if (status === "pre" && m.time && m.time.includes(":")) {
+        if (!m) return "pre";
+        let status = m.status || "pre";
+
+        if (status === "post" || status === "postponed" || status === "canceled" || status === "finalized") {
+            return status;
+        }
+
+        if (m.time && m.time.includes(":")) {
             const now = new Date();
             const currentHours = now.getHours();
             const currentMinutes = now.getMinutes();
+
             const parts = m.time.split(":");
             const matchHours = parseInt(parts[0], 10);
             const matchMinutes = parseInt(parts[1], 10);
-            
-            // Si la hora del partido ya pasó respecto a la hora actual, lo marcamos como En Vivo
-            if (matchHours < currentHours || (matchHours === currentHours && matchMinutes <= currentMinutes)) {
-                status = "in"; 
+
+            if (!isNaN(matchHours) && !isNaN(matchMinutes)) {
+                const matchStartMins = matchHours * 60 + matchMinutes;
+                const currentMins = currentHours * 60 + currentMinutes;
+
+                // Si pasaron 115 minutos desde el inicio del partido, ya FINALIZÓ!
+                if (currentMins >= matchStartMins + 115) {
+                    return "post";
+                }
+                // Si ya inició el partido, está EN VIVO!
+                if (currentMins >= matchStartMins) {
+                    return "in";
+                }
             }
         }
         return status;

@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing Tennis and Basketball groupings fix for Star Tickets with v14.0 cache buster...")
-run('git commit -m "Enable ESPN Tennis groupings parsing (490+ Tennis matches) and interleave Tennis and Basketball in Star Tickets with v14.0 cache bump"')
+print("Committing Real-Time Live Predictions Auto-Grading & Machine Learning feedback sync with v15.0 cache buster...")
+run('git commit -m "Enable real-time dynamic score updates, pick auto-evaluation (WON/LOST) across all sports, and machine learning rating feedback sync with v15.0 cache bump"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
