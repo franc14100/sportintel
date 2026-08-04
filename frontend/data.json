@@ -2,319 +2,6 @@
     "date": "2026-08-04",
     "matches": [
         {
-            "id": "match-1001",
-            "home": "Norway",
-            "away": "England",
-            "home_color": "#EF2B2D",
-            "home_accent": "#00205B",
-            "away_color": "#FFFFFF",
-            "away_accent": "#00205B",
-            "league": "FIFA World Cup",
-            "sport": "Football",
-            "time": "18:00",
-            "stadium": "Arrowhead Stadium (Kansas City)",
-            "status": "pre",
-            "home_score": null,
-            "away_score": null,
-            "home_form": "W-W-L-W-W",
-            "away_form": "W-D-W-W-W",
-            "home_injuries": [
-                {
-                    "player": "Smith",
-                    "type": "Molestias en la rodilla",
-                    "status": "Out",
-                    "days_out": 9
-                },
-                {
-                    "player": "Nico",
-                    "type": "Esguince de tobillo",
-                    "status": "Out",
-                    "days_out": 3
-                }
-            ],
-            "away_injuries": [
-                {
-                    "player": "Gómez",
-                    "type": "Fatiga muscular",
-                    "status": "Doubtful",
-                    "days_out": 0
-                },
-                {
-                    "player": "Ruiz",
-                    "type": "Fractura de dedo",
-                    "status": "Out",
-                    "days_out": 8
-                },
-                {
-                    "player": "Saka",
-                    "type": "Fractura de dedo",
-                    "status": "Out",
-                    "days_out": 2
-                }
-            ],
-            "rumors": [
-                {
-                    "headline": "El analista táctico afirma que Norway explotará la banda izquierda de su rival debido a su lentitud.",
-                    "credibility": 2,
-                    "sentiment": "Negative",
-                    "source": "ESPN Deportes"
-                },
-                {
-                    "headline": "Tensiones en el vestuario de England tras las declaraciones de su estrella en redes sociales.",
-                    "credibility": 5,
-                    "sentiment": "Positive",
-                    "source": "ESPN Deportes"
-                }
-            ],
-            "lineups": {
-                "home": {
-                    "formation": "4-2-3-1",
-                    "players": [
-                        {
-                            "name": "Smith",
-                            "number": 1,
-                            "pos": "PO",
-                            "x": 50,
-                            "y": 8
-                        },
-                        {
-                            "name": "Saliba",
-                            "number": 2,
-                            "pos": "LD",
-                            "x": 15,
-                            "y": 20
-                        },
-                        {
-                            "name": "Fournier",
-                            "number": 4,
-                            "pos": "DFC",
-                            "x": 38,
-                            "y": 18
-                        },
-                        {
-                            "name": "Torres",
-                            "number": 5,
-                            "pos": "DFC",
-                            "x": 62,
-                            "y": 18
-                        },
-                        {
-                            "name": "Williams",
-                            "number": 3,
-                            "pos": "LI",
-                            "x": 85,
-                            "y": 20
-                        },
-                        {
-                            "name": "Mbappé",
-                            "number": 6,
-                            "pos": "MCD",
-                            "x": 40,
-                            "y": 28
-                        },
-                        {
-                            "name": "Roberts",
-                            "number": 8,
-                            "pos": "MCD",
-                            "x": 60,
-                            "y": 28
-                        },
-                        {
-                            "name": "Pedri",
-                            "number": 10,
-                            "pos": "MCO",
-                            "x": 50,
-                            "y": 36
-                        },
-                        {
-                            "name": "Ruiz",
-                            "number": 11,
-                            "pos": "EI",
-                            "x": 80,
-                            "y": 36
-                        }
-                    ]
-                },
-                "away": {
-                    "formation": "4-2-3-1",
-                    "players": [
-                        {
-                            "name": "Thomas",
-                            "number": 1,
-                            "pos": "PO",
-                            "x": 50,
-                            "y": 92
-                        },
-                        {
-                            "name": "Pedri",
-                            "number": 2,
-                            "pos": "LD",
-                            "x": 85,
-                            "y": 80
-                        },
-                        {
-                            "name": "Evans",
-                            "number": 4,
-                            "pos": "DFC",
-                            "x": 62,
-                            "y": 82
-                        },
-                        {
-                            "name": "Leroy",
-                            "number": 5,
-                            "pos": "DFC",
-                            "x": 38,
-                            "y": 82
-                        },
-                        {
-                            "name": "Álvarez",
-                            "number": 3,
-                            "pos": "LI",
-                            "x": 15,
-                            "y": 80
-                        },
-                        {
-                            "name": "Gómez",
-                            "number": 8,
-                            "pos": "MCD",
-                            "x": 40,
-                            "y": 72
-                        },
-                        {
-                            "name": "Roberts",
-                            "number": 10,
-                            "pos": "MCO",
-                            "x": 50,
-                            "y": 64
-                        },
-                        {
-                            "name": "Bertrand",
-                            "number": 7,
-                            "pos": "ED",
-                            "x": 80,
-                            "y": 64
-                        },
-                        {
-                            "name": "Rodríguez",
-                            "number": 11,
-                            "pos": "EI",
-                            "x": 20,
-                            "y": 64
-                        },
-                        {
-                            "name": "Michel",
-                            "number": 9,
-                            "pos": "DC",
-                            "x": 50,
-                            "y": 55
-                        }
-                    ]
-                }
-            },
-            "h2h": {
-                "home_wins": 2,
-                "away_wins": 4,
-                "draws": 0,
-                "last_results": [
-                    {
-                        "date": "2025-10-29",
-                        "score": "0 - 1",
-                        "winner": "England"
-                    },
-                    {
-                        "date": "2025-09-20",
-                        "score": "3 - 2",
-                        "winner": "Norway"
-                    },
-                    {
-                        "date": "2026-01-15",
-                        "score": "1 - 3",
-                        "winner": "England"
-                    },
-                    {
-                        "date": "2026-02-25",
-                        "score": "0 - 3",
-                        "winner": "England"
-                    },
-                    {
-                        "date": "2025-12-18",
-                        "score": "2 - 0",
-                        "winner": "Norway"
-                    }
-                ]
-            },
-            "picks": [
-                {
-                    "market": "Doble Oportunidad",
-                    "selection": "England o Empate",
-                    "odd": 1.17,
-                    "probability": 85,
-                    "risk": "Low",
-                    "reasoning": {
-                        "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de England hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 85%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
-                        "market": "La cuota @1.17 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
-                    },
-                    "status": "pending"
-                },
-                {
-                    "market": "Empate No Apuesta (DNB)",
-                    "selection": "England",
-                    "odd": 1.23,
-                    "probability": 81,
-                    "risk": "Low",
-                    "reasoning": {
-                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con England como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-                        "statistical": "La probabilidad de empate en este compromiso es de solo 19% según el modelo. El 73% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
-                        "market": "@1.23 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
-                    },
-                    "status": "pending"
-                },
-                {
-                    "market": "Total de Goles (Asian 2.0)",
-                    "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
-                    "odd": 1.22,
-                    "probability": 70,
-                    "valid_for_ticket": false,
-                    "risk": "High",
-                    "reasoning": {
-                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 3.0 goles para este partido respalda que terminará con 2+ anotaciones.",
-                        "statistical": "La API indica Over 2.5 a @1.44. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
-                        "market": "La cuota del Asian 2.0 @1.22 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
-                    },
-                    "status": "pending"
-                },
-                {
-                    "market": "Resultado Final (1X2)",
-                    "selection": "England",
-                    "odd": 1.52,
-                    "probability": 65,
-                    "risk": "Low",
-                    "reasoning": {
-                        "tactical": "La formación 4-2-3-1 de England (favorito) tiene una ventaja estructural sobre el esquema 4-2-3-1 de Norway (rival). El equipo favorito presiona alto con efectividad demostrada en sus últimos 8 partidos combinados. Los 2 baja(s) clave en Norway debilitan notablemente su línea defensiva y el mediocampo de control. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-                        "statistical": "La racha reciente de England (W-D-W-W-W) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del 65%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de 3.0 para este choque.",
-                        "market": "Se detectaron movimientos de línea favorables hacia England. El rumor filtrado ('El analista táctico afirma que Norway explotará la banda izquierda de su rival debido a su lentitud.') generó flujo de apuestas sharps hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en 12%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
-                    },
-                    "status": "pending"
-                },
-                {
-                    "market": "Más/Menos Goles",
-                    "selection": "Más de 2.5 Goles",
-                    "odd": 1.44,
-                    "probability": 65,
-                    "risk": "Low",
-                    "reasoning": {
-                        "tactical": "xG proyectado: 3.0 goles combinados. Partido abierto.",
-                        "statistical": "Cuota calculada internamente: @1.44 (65% prob).",
-                        "market": "Fallback sin datos reales de API para esta línea."
-                    },
-                    "valid_for_ticket": true,
-                    "status": "pending"
-                }
-            ],
-            "real_odds": {}
-        },
-        {
             "id": "match-1002",
             "home": "Argentina",
             "away": "Switzerland",
@@ -330,22 +17,16 @@
             "home_score": null,
             "away_score": null,
             "home_form": "W-W-L-W-W",
-            "away_form": "W-D-W-W-W",
+            "away_form": "W-W-D-W-L",
             "home_injuries": [
                 {
-                    "player": "Wilson",
-                    "type": "Fractura de dedo",
+                    "player": "Pedri",
+                    "type": "Esguince de tobillo",
                     "status": "Doubtful",
                     "days_out": 0
                 },
                 {
-                    "player": "Mbappé",
-                    "type": "Fractura de dedo",
-                    "status": "Doubtful",
-                    "days_out": 0
-                },
-                {
-                    "player": "Green",
+                    "player": "Koke",
                     "type": "Lesión muscular en el muslo",
                     "status": "Doubtful",
                     "days_out": 0
@@ -353,78 +34,77 @@
             ],
             "away_injuries": [
                 {
-                    "player": "Gómez",
-                    "type": "Fractura de dedo",
-                    "status": "Out",
-                    "days_out": 8
+                    "player": "Wood",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Bellingham",
+                    "type": "Esguince de tobillo",
+                    "status": "Doubtful",
+                    "days_out": 0
                 }
             ],
             "rumors": [
                 {
-                    "headline": "Tensiones en el vestuario de Switzerland tras las declaraciones de su estrella en redes sociales.",
-                    "credibility": 4,
-                    "sentiment": "Neutral",
-                    "source": "Tennis Magazine"
+                    "headline": "La prensa reporta que Argentina cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 2,
+                    "sentiment": "Positive",
+                    "source": "Diario Marca"
                 },
                 {
                     "headline": "El plantel de Switzerland sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
-                    "credibility": 4,
-                    "sentiment": "Negative",
+                    "credibility": 3,
+                    "sentiment": "Neutral",
                     "source": "Diario Marca"
                 }
             ],
             "lineups": {
                 "home": {
-                    "formation": "3-5-2",
+                    "formation": "4-2-3-1",
                     "players": [
                         {
-                            "name": "Bellingham",
+                            "name": "Yamal",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 8
                         },
                         {
-                            "name": "Green",
+                            "name": "Robinson",
                             "number": 2,
                             "pos": "LD",
                             "x": 15,
                             "y": 20
                         },
                         {
-                            "name": "Aspas",
+                            "name": "Saka",
                             "number": 4,
                             "pos": "DFC",
                             "x": 38,
                             "y": 18
                         },
                         {
-                            "name": "Williams",
-                            "number": 5,
-                            "pos": "DFC",
-                            "x": 62,
-                            "y": 18
+                            "name": "Martin",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
                         },
                         {
-                            "name": "Nico",
+                            "name": "Álvarez",
                             "number": 6,
                             "pos": "MCD",
                             "x": 40,
                             "y": 28
                         },
                         {
-                            "name": "Carvajal",
+                            "name": "Green",
                             "number": 8,
                             "pos": "MCD",
                             "x": 60,
                             "y": 28
-                        },
-                        {
-                            "name": "Torres",
-                            "number": 10,
-                            "pos": "MCO",
-                            "x": 50,
-                            "y": 36
                         },
                         {
                             "name": "Tchouameni",
@@ -434,98 +114,112 @@
                             "y": 36
                         },
                         {
-                            "name": "Jones",
+                            "name": "Aspas",
                             "number": 11,
                             "pos": "EI",
                             "x": 80,
                             "y": 36
+                        },
+                        {
+                            "name": "White",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
                         }
                     ]
                 },
                 "away": {
-                    "formation": "4-2-3-1",
+                    "formation": "3-5-2",
                     "players": [
                         {
-                            "name": "Williams",
+                            "name": "Thomas",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 92
                         },
                         {
-                            "name": "Flores",
+                            "name": "García",
                             "number": 2,
                             "pos": "LD",
                             "x": 85,
                             "y": 80
                         },
                         {
-                            "name": "Ramos",
-                            "number": 4,
-                            "pos": "DFC",
-                            "x": 62,
-                            "y": 82
-                        },
-                        {
-                            "name": "Petit",
+                            "name": "Simon",
                             "number": 5,
                             "pos": "DFC",
                             "x": 38,
                             "y": 82
                         },
                         {
-                            "name": "Ruiz",
+                            "name": "Clarke",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Martínez",
                             "number": 6,
                             "pos": "MCD",
                             "x": 60,
                             "y": 72
                         },
                         {
-                            "name": "Palmer",
-                            "number": 7,
-                            "pos": "ED",
-                            "x": 80,
-                            "y": 64
+                            "name": "Michel",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
                         },
                         {
-                            "name": "Robinson",
+                            "name": "Wood",
                             "number": 11,
                             "pos": "EI",
                             "x": 20,
                             "y": 64
+                        },
+                        {
+                            "name": "Taylor",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
                         }
                     ]
                 }
             },
             "h2h": {
-                "home_wins": 1,
-                "away_wins": 3,
+                "home_wins": 4,
+                "away_wins": 4,
                 "draws": 0,
                 "last_results": [
                     {
-                        "date": "2025-09-22",
-                        "score": "0 - 3",
+                        "date": "2025-10-21",
+                        "score": "1 - 3",
                         "winner": "Switzerland"
                     },
                     {
-                        "date": "2026-05-02",
-                        "score": "0 - 1",
-                        "winner": "Switzerland"
+                        "date": "2025-10-04",
+                        "score": "3 - 2",
+                        "winner": "Argentina"
                     },
                     {
-                        "date": "2026-02-17",
+                        "date": "2026-03-08",
                         "score": "3 - 1",
                         "winner": "Argentina"
                     },
                     {
-                        "date": "2026-04-06",
-                        "score": "2 - 2",
-                        "winner": "Draw"
+                        "date": "2026-02-10",
+                        "score": "0 - 2",
+                        "winner": "Switzerland"
                     },
                     {
-                        "date": "2025-11-24",
-                        "score": "1 - 2",
-                        "winner": "Switzerland"
+                        "date": "2025-09-08",
+                        "score": "3 - 0",
+                        "winner": "Argentina"
                     }
                 ]
             },
@@ -533,53 +227,39 @@
                 {
                     "market": "Doble Oportunidad",
                     "selection": "Argentina o Empate",
-                    "odd": 1.21,
-                    "probability": 82,
+                    "odd": 1.14,
+                    "probability": 87,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Argentina hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 82%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
-                        "market": "La cuota @1.21 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 87%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.14 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
                     },
                     "status": "pending"
                 },
                 {
                     "market": "Empate No Apuesta (DNB)",
                     "selection": "Argentina",
-                    "odd": 1.28,
-                    "probability": 77,
+                    "odd": 1.18,
+                    "probability": 84,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Argentina como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-                        "statistical": "La probabilidad de empate en este compromiso es de solo 19% según el modelo. El 73% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
-                        "market": "@1.28 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 18% según el modelo. El 77% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.18 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
                     },
-                    "status": "pending"
-                },
-                {
-                    "market": "Ambos Equipos Anotan",
-                    "selection": "Sí",
-                    "odd": 1.83,
-                    "probability": 73,
-                    "risk": "Medium",
-                    "reasoning": {
-                        "tactical": "La tendencia táctica de anotación para este compromiso es alta. Ambos equipos plantean esquemas de ataque abierto con líneas ofensivas adelantadas.",
-                        "statistical": "Análisis de Expected Goals (xG): El modelo proyecta un xG combinado de 2.47 goles. Argentina ha marcado en 75% de sus partidos recientes. Switzerland ha marcado en 61% de sus últimos encuentros. Con 4 bajas totales entre ambos equipos, el potencial ofensivo es el esperado. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-                        "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 73% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El plantel de Switzerland sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
-                    },
-                    "valid_for_ticket": false,
                     "status": "pending"
                 },
                 {
                     "market": "Total de Goles (Asian 2.0)",
                     "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
                     "odd": 1.22,
-                    "probability": 70,
+                    "probability": 75,
                     "valid_for_ticket": false,
                     "risk": "High",
                     "reasoning": {
-                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 3.0 goles para este partido respalda que terminará con 2+ anotaciones.",
-                        "statistical": "La API indica Over 2.5 a @1.44. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
+                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 3.6 goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": "La API indica Over 2.5 a @1.37. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
                         "market": "La cuota del Asian 2.0 @1.22 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
                     },
                     "status": "pending"
@@ -587,15 +267,28 @@
                 {
                     "market": "Más/Menos Goles",
                     "selection": "Más de 2.5 Goles",
-                    "odd": 1.44,
-                    "probability": 65,
+                    "odd": 1.37,
+                    "probability": 71,
                     "risk": "Low",
                     "reasoning": {
-                        "tactical": "xG proyectado: 3.0 goles combinados. Partido abierto.",
-                        "statistical": "Cuota calculada internamente: @1.44 (65% prob).",
+                        "tactical": "xG proyectado: 3.6 goles combinados. Partido abierto.",
+                        "statistical": "Cuota calculada internamente: @1.37 (71% prob).",
                         "market": "Fallback sin datos reales de API para esta línea."
                     },
                     "valid_for_ticket": true,
+                    "status": "pending"
+                },
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Argentina",
+                    "odd": 1.45,
+                    "probability": 68,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La formación 4-2-3-1 de Argentina (favorito) tiene una ventaja estructural sobre el esquema 3-5-2 de Switzerland (rival). El equipo favorito presiona alto con efectividad demostrada en sus últimos 7 partidos combinados. Los 2 baja(s) clave en Switzerland debilitan notablemente su línea defensiva y el mediocampo de control. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
+                        "statistical": "La racha reciente de Argentina (W-W-L-W-W) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del 68%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de 3.6 para este choque.",
+                        "market": "Se detectaron movimientos de línea favorables hacia Argentina. El rumor filtrado ('La prensa reporta que Argentina cambiará su portero titular para dar rodaje en este partido clave.') generó flujo de apuestas sharps hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en 74%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                    },
                     "status": "pending"
                 }
             ],
@@ -617,114 +310,116 @@
             "home_score": null,
             "away_score": null,
             "home_form": "W-W-D-W-L",
-            "away_form": "W-W-L-W-W",
+            "away_form": "L-W-D-L-W",
             "home_injuries": [
                 {
-                    "player": "Palmer",
-                    "type": "Lesión muscular en el muslo",
-                    "status": "Doubtful",
-                    "days_out": 0
-                },
-                {
-                    "player": "Wilson",
-                    "type": "Esguince de tobillo",
+                    "player": "Williams",
+                    "type": "Fatiga muscular",
                     "status": "Doubtful",
                     "days_out": 0
                 }
             ],
             "away_injuries": [
                 {
-                    "player": "Roberts",
-                    "type": "Gripe",
-                    "status": "Out",
-                    "days_out": 7
-                },
-                {
-                    "player": "Morata",
-                    "type": "Esguince de tobillo",
-                    "status": "Out",
-                    "days_out": 8
-                },
-                {
-                    "player": "Morata",
+                    "player": "Brown",
                     "type": "Lesión muscular en el muslo",
                     "status": "Doubtful",
                     "days_out": 0
+                },
+                {
+                    "player": "Robert",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Out",
+                    "days_out": 10
                 }
             ],
             "rumors": [
                 {
                     "headline": "El cuerpo técnico de Spain probó una formación ultra-ofensiva en el último entrenamiento.",
-                    "credibility": 4,
-                    "sentiment": "Neutral",
-                    "source": "Tennis Magazine"
+                    "credibility": 2,
+                    "sentiment": "Negative",
+                    "source": "Sports Network"
                 },
                 {
-                    "headline": "Tensiones en el vestuario de Belgium tras las declaraciones de su estrella en redes sociales.",
-                    "credibility": 3,
+                    "headline": "La prensa reporta que Spain cambiará su portero titular para dar rodaje en este partido clave.",
+                    "credibility": 4,
                     "sentiment": "Neutral",
-                    "source": "ESPN Deportes"
+                    "source": "Diario Marca"
                 }
             ],
             "lineups": {
                 "home": {
-                    "formation": "4-3-3",
+                    "formation": "3-5-2",
                     "players": [
                         {
-                            "name": "David",
+                            "name": "Camavinga",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 8
                         },
                         {
-                            "name": "Fournier",
+                            "name": "Williams",
                             "number": 2,
                             "pos": "LD",
                             "x": 15,
                             "y": 20
                         },
                         {
-                            "name": "Palmer",
+                            "name": "White",
                             "number": 4,
                             "pos": "DFC",
                             "x": 38,
                             "y": 18
                         },
                         {
-                            "name": "Moreau",
+                            "name": "Jones",
                             "number": 5,
                             "pos": "DFC",
                             "x": 62,
                             "y": 18
                         },
                         {
-                            "name": "Foden",
+                            "name": "Walker",
                             "number": 3,
                             "pos": "LI",
                             "x": 85,
                             "y": 20
                         },
                         {
-                            "name": "Gavi",
+                            "name": "Simon",
                             "number": 6,
-                            "pos": "MC",
-                            "x": 30,
-                            "y": 32
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
                         },
                         {
-                            "name": "Williams",
+                            "name": "Davies",
                             "number": 8,
                             "pos": "MCD",
-                            "x": 50,
-                            "y": 30
+                            "x": 60,
+                            "y": 28
                         },
                         {
-                            "name": "Camavinga",
+                            "name": "Saka",
                             "number": 10,
-                            "pos": "MC",
-                            "x": 70,
-                            "y": 32
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Hall",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 36
+                        },
+                        {
+                            "name": "Ramos",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 36
                         }
                     ]
                 },
@@ -732,56 +427,56 @@
                     "formation": "3-5-2",
                     "players": [
                         {
-                            "name": "Williams",
+                            "name": "Thomas",
                             "number": 1,
                             "pos": "PO",
                             "x": 50,
                             "y": 92
                         },
                         {
-                            "name": "Ramos",
+                            "name": "Ruiz",
                             "number": 2,
                             "pos": "LD",
                             "x": 85,
                             "y": 80
                         },
                         {
-                            "name": "Davies",
+                            "name": "García",
                             "number": 4,
                             "pos": "DFC",
                             "x": 62,
                             "y": 82
                         },
                         {
-                            "name": "Saliba",
+                            "name": "Wilson",
                             "number": 5,
                             "pos": "DFC",
                             "x": 38,
                             "y": 82
                         },
                         {
-                            "name": "Nico",
+                            "name": "Lefevre",
                             "number": 3,
                             "pos": "LI",
                             "x": 15,
                             "y": 80
                         },
                         {
-                            "name": "Leroy",
+                            "name": "Tchouameni",
                             "number": 8,
                             "pos": "MCD",
                             "x": 40,
                             "y": 72
                         },
                         {
-                            "name": "Fernández",
-                            "number": 7,
-                            "pos": "ED",
-                            "x": 80,
+                            "name": "Koke",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
                             "y": 64
                         },
                         {
-                            "name": "Roberts",
+                            "name": "Foden",
                             "number": 11,
                             "pos": "EI",
                             "x": 20,
@@ -791,34 +486,34 @@
                 }
             },
             "h2h": {
-                "home_wins": 2,
-                "away_wins": 3,
-                "draws": 0,
+                "home_wins": 3,
+                "away_wins": 2,
+                "draws": 1,
                 "last_results": [
                     {
-                        "date": "2026-02-14",
-                        "score": "0 - 2",
+                        "date": "2026-04-28",
+                        "score": "1 - 1",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-07-22",
+                        "score": "0 - 1",
                         "winner": "Belgium"
                     },
                     {
-                        "date": "2025-11-13",
+                        "date": "2025-11-29",
+                        "score": "0 - 1",
+                        "winner": "Belgium"
+                    },
+                    {
+                        "date": "2025-08-05",
+                        "score": "0 - 1",
+                        "winner": "Belgium"
+                    },
+                    {
+                        "date": "2025-09-02",
                         "score": "1 - 2",
                         "winner": "Belgium"
-                    },
-                    {
-                        "date": "2026-04-17",
-                        "score": "2 - 0",
-                        "winner": "Spain"
-                    },
-                    {
-                        "date": "2025-12-17",
-                        "score": "0 - 2",
-                        "winner": "Belgium"
-                    },
-                    {
-                        "date": "2026-03-18",
-                        "score": "2 - 1",
-                        "winner": "Spain"
                     }
                 ]
             },
@@ -826,67 +521,358 @@
                 {
                     "market": "Doble Oportunidad",
                     "selection": "Spain o Empate",
-                    "odd": 1.27,
-                    "probability": 78,
+                    "odd": 1.16,
+                    "probability": 86,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Spain hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 78%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
-                        "market": "La cuota @1.27 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 86%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.16 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
                     },
                     "status": "pending"
                 },
                 {
                     "market": "Empate No Apuesta (DNB)",
                     "selection": "Spain",
-                    "odd": 1.36,
-                    "probability": 73,
+                    "odd": 1.2,
+                    "probability": 83,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Spain como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-                        "statistical": "La probabilidad de empate en este compromiso es de solo 20% según el modelo. El 78% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
-                        "market": "@1.36 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
-                    },
-                    "status": "pending"
-                },
-                {
-                    "market": "Ambos Equipos Anotan",
-                    "selection": "No",
-                    "odd": 1.72,
-                    "probability": 65,
-                    "risk": "Medium",
-                    "reasoning": {
-                        "tactical": "La tendencia táctica de anotación para este compromiso es moderada y de control. La formación defensiva de al menos uno de los equipos reduce las probabilidades de gol, sin ventaja de localidad..",
-                        "statistical": "Análisis de Expected Goals (xG): El modelo proyecta un xG combinado de 2.6 goles. Spain ha marcado en 84% de sus partidos recientes. Belgium ha marcado en 69% de sus últimos encuentros. Con 5 bajas totales entre ambos equipos, el potencial ofensivo es inferior al normal. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-                        "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 62% del volumen de apuestas sharps orientado a este resultado. El rumor: 'Tensiones en el vestuario de Belgium tras las declaraciones de su estrella en redes sociales.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
-                    },
-                    "valid_for_ticket": false,
-                    "status": "pending"
-                },
-                {
-                    "market": "Total de Goles (Asian 2.0)",
-                    "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
-                    "odd": 1.22,
-                    "probability": 64,
-                    "valid_for_ticket": false,
-                    "risk": "High",
-                    "reasoning": {
-                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 2.4 goles para este partido respalda que terminará con 2+ anotaciones.",
-                        "statistical": "La API indica Over 2.5 a @1.96. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
-                        "market": "La cuota del Asian 2.0 @1.22 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 18% según el modelo. El 79% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.2 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
                     },
                     "status": "pending"
                 },
                 {
                     "market": "Resultado Final (1X2)",
                     "selection": "Spain",
-                    "odd": 1.72,
-                    "probability": 58,
+                    "odd": 1.48,
+                    "probability": 67,
                     "risk": "Low",
                     "reasoning": {
-                        "tactical": "La formación 4-3-3 de Spain (favorito) tiene una ventaja estructural sobre el esquema 3-5-2 de Belgium (rival). El equipo favorito presiona alto con efectividad demostrada en sus últimos 7 partidos combinados. Los 3 baja(s) clave en Belgium debilitan notablemente su línea defensiva y el mediocampo de control. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
-                        "statistical": "La racha reciente de Spain (W-W-D-W-L) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del 58%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de 2.4 para este choque.",
-                        "market": "Se detectaron movimientos de línea favorables hacia Spain. El rumor filtrado ('El cuerpo técnico de Spain probó una formación ultra-ofensiva en el último entrenamiento.') generó flujo de apuestas sharps hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en 31%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                        "tactical": "La formación 3-5-2 de Spain (favorito) tiene una ventaja estructural sobre el esquema 3-5-2 de Belgium (rival). El equipo favorito presiona alto con efectividad demostrada en sus últimos 5 partidos combinados. Los 2 baja(s) clave en Belgium debilitan notablemente su línea defensiva y el mediocampo de control. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
+                        "statistical": "La racha reciente de Spain (W-W-D-W-L) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del 67%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de 1.6 para este choque.",
+                        "market": "Se detectaron movimientos de línea favorables hacia Spain. El rumor filtrado ('El cuerpo técnico de Spain probó una formación ultra-ofensiva en el último entrenamiento.') generó flujo de apuestas sharps hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en 48%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Empate No Apuesta",
+                    "selection": "Spain",
+                    "odd": 1.12,
+                    "probability": 60,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El mercado de Empate No Apuesta (DNB) para Spain otorga máxima seguridad eliminando el riesgo del empate.",
+                        "statistical": "Probabilidad implícita estimada del 60%. Mercado estándar disponible en 1xBet.",
+                        "market": "Opción segura para boletos combinados o de valor sin arriesgar en mercados volátiles."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Goles del Equipo (Individual)",
+                    "selection": "Spain Más de 1.5 Goles",
+                    "odd": 1.63,
+                    "probability": 59,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "Spain presenta un xG individual proyectado de 1.0 goles. Su sistema ofensivo con juego posicional por las bandas genera múltiples oportunidades de gol ante una defensa rival que ha concedido goles en 4 de sus últimos 5 partidos.",
+                        "statistical": "El 91% de los partidos donde Spain actúa como favorito termina con al menos 2 goles de su parte. xG individual de Spain: 0.97 goles esperados en este partido.",
+                        "market": "El mercado de goles individuales por equipo tiene menor varianza que el Total del Partido porque solo depende de un equipo. Cuota: @1.22 con probabilidad real estimada del 59%. Ideal para boletos combinados o apuestas únicas de bajo riesgo."
+                    },
+                    "status": "pending"
+                }
+            ],
+            "real_odds": {}
+        },
+        {
+            "id": "match-1001",
+            "home": "Norway",
+            "away": "England",
+            "home_color": "#EF2B2D",
+            "home_accent": "#00205B",
+            "away_color": "#FFFFFF",
+            "away_accent": "#00205B",
+            "league": "FIFA World Cup",
+            "sport": "Football",
+            "time": "18:00",
+            "stadium": "Arrowhead Stadium (Kansas City)",
+            "status": "pre",
+            "home_score": null,
+            "away_score": null,
+            "home_form": "L-W-D-L-W",
+            "away_form": "W-D-W-W-W",
+            "home_injuries": [
+                {
+                    "player": "García",
+                    "type": "Molestias en la rodilla",
+                    "status": "Doubtful",
+                    "days_out": 0
+                },
+                {
+                    "player": "Martínez",
+                    "type": "Fatiga muscular",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "away_injuries": [
+                {
+                    "player": "Gómez",
+                    "type": "Lesión muscular en el muslo",
+                    "status": "Doubtful",
+                    "days_out": 0
+                }
+            ],
+            "rumors": [
+                {
+                    "headline": "El cuerpo técnico de Norway probó una formación ultra-ofensiva en el último entrenamiento.",
+                    "credibility": 5,
+                    "sentiment": "Positive",
+                    "source": "Sports Network"
+                },
+                {
+                    "headline": "Tensiones en el vestuario de England tras las declaraciones de su estrella en redes sociales.",
+                    "credibility": 5,
+                    "sentiment": "Negative",
+                    "source": "ESPN Deportes"
+                }
+            ],
+            "lineups": {
+                "home": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Martínez",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "García",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Dembele",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Pérez",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Smith",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Petit",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Martin",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 28
+                        },
+                        {
+                            "name": "Bernard",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Dubois",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 36
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Thomas",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Torres",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Evans",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Pedri",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Green",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "David",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Davies",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Bernard",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 64
+                        },
+                        {
+                            "name": "Álvarez",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 3,
+                "away_wins": 1,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2025-10-15",
+                        "score": "0 - 0",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-07-15",
+                        "score": "0 - 0",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-08-17",
+                        "score": "3 - 0",
+                        "winner": "Norway"
+                    },
+                    {
+                        "date": "2025-07-11",
+                        "score": "2 - 1",
+                        "winner": "Norway"
+                    },
+                    {
+                        "date": "2026-03-15",
+                        "score": "2 - 0",
+                        "winner": "Norway"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Doble Oportunidad",
+                    "selection": "England o Empate",
+                    "odd": 1.18,
+                    "probability": 85,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de England hace casi imposible un resultado diferente al cubierto por esta apuesta.",
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 85%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.18 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Empate No Apuesta (DNB)",
+                    "selection": "England",
+                    "odd": 1.22,
+                    "probability": 81,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con England como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 17% según el modelo. El 72% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.22 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "England",
+                    "odd": 1.48,
+                    "probability": 67,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La formación 4-2-3-1 de England (favorito) tiene una ventaja estructural sobre el esquema 4-2-3-1 de Norway (rival). El equipo favorito presiona alto con efectividad demostrada en sus últimos 6 partidos combinados. Los 2 baja(s) clave en Norway debilitan notablemente su línea defensiva y el mediocampo de control. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
+                        "statistical": "La racha reciente de England (W-D-W-W-W) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del 67%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de 1.6 para este choque.",
+                        "market": "Se detectaron movimientos de línea favorables hacia England. El rumor filtrado ('El cuerpo técnico de Norway probó una formación ultra-ofensiva en el último entrenamiento.') generó flujo de apuestas sharps hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en 15%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 2.0,
+                    "probability": 65,
+                    "risk": "Medium",
+                    "reasoning": {
+                        "tactical": "La tendencia táctica de anotación para este compromiso es moderada y de control. La formación defensiva de al menos uno de los equipos reduce las probabilidades de gol, sin ventaja de localidad..",
+                        "statistical": "Análisis de Expected Goals (xG): El modelo proyecta un xG combinado de 1.68 goles. Norway ha marcado en 87% de sus partidos recientes. England ha marcado en 54% de sus últimos encuentros. Con 3 bajas totales entre ambos equipos, el potencial ofensivo es inferior al normal. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes.",
+                        "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 67% del volumen de apuestas sharps orientado a este resultado. El rumor: 'Tensiones en el vestuario de England tras las declaraciones de su estrella en redes sociales.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
+                    },
+                    "valid_for_ticket": false,
+                    "status": "pending"
+                },
+                {
+                    "market": "Empate No Apuesta",
+                    "selection": "England",
+                    "odd": 1.12,
+                    "probability": 60,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El mercado de Empate No Apuesta (DNB) para England otorga máxima seguridad eliminando el riesgo del empate.",
+                        "statistical": "Probabilidad implícita estimada del 60%. Mercado estándar disponible en 1xBet.",
+                        "market": "Opción segura para boletos combinados o de valor sin arriesgar en mercados volátiles."
                     },
                     "status": "pending"
                 }
@@ -906,68 +892,75 @@
         "type": "Combinado",
         "selections": [
             {
+                "match": "Argentina vs Switzerland",
+                "sport": "Football",
+                "market": "Doble Oportunidad",
+                "pick": "Argentina o Empate",
+                "odd": 1.14,
+                "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Argentina hace casi imposible un resultado diferente al cubierto por esta apuesta."
+            },
+            {
                 "match": "Norway vs England",
                 "sport": "Football",
                 "market": "Doble Oportunidad",
                 "pick": "England o Empate",
-                "odd": 1.17,
+                "odd": 1.18,
                 "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de England hace casi imposible un resultado diferente al cubierto por esta apuesta."
             },
             {
                 "match": "Spain vs Belgium",
                 "sport": "Football",
-                "market": "Empate No Apuesta (DNB)",
-                "pick": "Spain",
-                "odd": 1.36,
-                "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Spain como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes."
+                "market": "Doble Oportunidad",
+                "pick": "Spain o Empate",
+                "odd": 1.16,
+                "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Spain hace casi imposible un resultado diferente al cubierto por esta apuesta."
             }
         ],
-        "total_odd": 1.59,
-        "confidence": 79,
-        "reasoning": "⚡ Combinado de protección. Se agregó Spain vs Belgium para asegurar cuota total >= @1.50 (Cuota Final: @1.59).",
-        "recommendation_stake": 7.0
+        "total_odd": 1.57,
+        "confidence": 86,
+        "reasoning": "⚡ Combinado de protección. Se agregó Spain vs Belgium para asegurar cuota total >= @1.50 (Cuota Final: @1.57).",
+        "recommendation_stake": 8.0
     },
     "star_ticket_1": {
         "type": "Combinado",
-        "selections": [
-            {
-                "match": "Norway vs England",
-                "sport": "Football",
-                "market": "Doble Oportunidad",
-                "pick": "England o Empate",
-                "odd": 1.17,
-                "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de England hace casi imposible un resultado diferente al cubierto por esta apuesta."
-            },
-            {
-                "match": "Spain vs Belgium",
-                "sport": "Football",
-                "market": "Empate No Apuesta (DNB)",
-                "pick": "Spain",
-                "odd": 1.36,
-                "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Spain como favorito claro, este mercado ofrece la máxima seguridad. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes."
-            }
-        ],
-        "total_odd": 1.59,
-        "confidence": 79,
-        "reasoning": "⚡ Combinado de protección. Se agregó Spain vs Belgium para asegurar cuota total >= @1.50 (Cuota Final: @1.59).",
-        "recommendation_stake": 7.0
-    },
-    "star_ticket_2": {
-        "type": "Simple",
         "selections": [
             {
                 "match": "Argentina vs Switzerland",
                 "sport": "Football",
                 "market": "Doble Oportunidad",
                 "pick": "Argentina o Empate",
-                "odd": 1.21,
+                "odd": 1.14,
                 "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Argentina hace casi imposible un resultado diferente al cubierto por esta apuesta."
+            },
+            {
+                "match": "Norway vs England",
+                "sport": "Football",
+                "market": "Doble Oportunidad",
+                "pick": "England o Empate",
+                "odd": 1.18,
+                "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de England hace casi imposible un resultado diferente al cubierto por esta apuesta."
+            },
+            {
+                "match": "Spain vs Belgium",
+                "sport": "Football",
+                "market": "Doble Oportunidad",
+                "pick": "Spain o Empate",
+                "odd": 1.16,
+                "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. Al tratarse de una sede neutral, ninguno de los dos equipos tiene ventaja de localidad. El factor psicológico y el estado físico son determinantes. La ventaja táctica de Spain hace casi imposible un resultado diferente al cubierto por esta apuesta."
             }
         ],
-        "total_odd": 1.21,
-        "confidence": 82,
-        "reasoning": "Apuesta Simple de Valor @1.21.",
+        "total_odd": 1.57,
+        "confidence": 86,
+        "reasoning": "⚡ Combinado de protección. Se agregó Spain vs Belgium para asegurar cuota total >= @1.50 (Cuota Final: @1.57).",
         "recommendation_stake": 8.0
+    },
+    "star_ticket_2": {
+        "type": "Combinado",
+        "selections": [],
+        "total_odd": 1.0,
+        "confidence": 75,
+        "reasoning": "",
+        "recommendation_stake": 7.0
     },
     "star_ticket_3": {
         "type": "Simple",
