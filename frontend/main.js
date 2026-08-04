@@ -5095,10 +5095,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const homeScoreVal = match.home_score !== undefined && match.home_score !== null ? match.home_score : "0";
             const awayScoreVal = match.away_score !== undefined && match.away_score !== null ? match.away_score : "0";
 
-            if (match.status === "post") {
+            const currentStatus = getDynamicMatchStatus(match);
+            if (currentStatus === "post") {
                 statusBadgeHtml = `<span class="badge" style="background: rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.65rem; border: 1px solid rgba(255,255,255,0.1);"><i class="fa-solid fa-flag-checkered"></i> FINALIZADO</span>`;
                 scoreHtml = `<div style="font-size: 1.45rem; font-weight: 800; color: var(--text-primary); letter-spacing: 4px; background: rgba(255,255,255,0.02); padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border-color);">${homeScoreVal} - ${awayScoreVal}</div>`;
-            } else if (match.status === "in") {
+            } else if (currentStatus === "in") {
                 statusBadgeHtml = `<span class="badge" style="background: rgba(239, 68, 68, 0.15); color: var(--accent-red); font-size: 0.65rem; border: 1px solid rgba(239, 68, 68, 0.3); animation: pulse 1.5s infinite;"><i class="fa-solid fa-circle"></i> EN VIVO</span>`;
                 scoreHtml = `<div style="font-size: 1.45rem; font-weight: 800; color: var(--accent-red); letter-spacing: 4px; background: rgba(239, 68, 68, 0.05); padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.2);">${homeScoreVal} - ${awayScoreVal}</div>`;
             } else {
