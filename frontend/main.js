@@ -1670,10 +1670,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (match.sport === "Basketball") sportIcon = '<i class="fa-solid fa-basketball"></i>';
             if (match.sport === "Tennis") sportIcon = '<i class="fa-solid fa-table-tennis-paddle-ball"></i>';
             
+            const currentStatus = getDynamicMatchStatus(match);
             let statusTag = '';
-            if (match.status === 'in') {
+            if (currentStatus === 'in') {
                 statusTag = ' <span style="color:#ef4444; font-weight:800; font-size:0.65rem;"><i class="fa-solid fa-circle"></i> EN VIVO</span>';
-            } else if (match.status === 'post') {
+            } else if (currentStatus === 'post') {
                 statusTag = ' <span style="color:var(--text-muted); font-size:0.65rem;"><i class="fa-solid fa-flag-checkered"></i> FINAL</span>';
             }
 
@@ -1747,10 +1748,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Set Headers
         let statusBadgeHtml = "";
         let scoreHtml = "";
-        if (selectedMatch.status === "in") {
+        const detailStatus = getDynamicMatchStatus(selectedMatch);
+        if (detailStatus === "in") {
             statusBadgeHtml = `<span class="match-status-badge status-in">EN VIVO</span>`;
             scoreHtml = `<div class="final-score">${selectedMatch.home_score || 0} - ${selectedMatch.away_score || 0}</div>`;
-        } else if (selectedMatch.status === "post") {
+        } else if (detailStatus === "post") {
             statusBadgeHtml = `<span class="match-status-badge status-post">FINALIZADO</span>`;
             scoreHtml = `<div class="final-score">${selectedMatch.home_score || 0} - ${selectedMatch.away_score || 0}</div>`;
         }
