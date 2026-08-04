@@ -603,7 +603,12 @@ def fetch_espn_fallback_matches():
     for ep, sport in endpoints:
         url = f"https://site.api.espn.com/apis/site/v2/sports/{ep}/scoreboard?dates={today_str}&limit=1000"
         try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'application/json, text/plain, */*',
+                'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8'
+            }
+            req = urllib.request.Request(url, headers=headers)
             with urllib.request.urlopen(req, timeout=8) as resp:
                 data = json.loads(resp.read().decode('utf-8'))
                 events = data.get("events", [])
