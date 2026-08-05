@@ -467,7 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        # 2. Goles / Totales
+        // 2. Goles / Totales
         if (mkt.includes("goles") || mkt.includes("total") || mkt.includes("juegos") || mkt.includes("puntos")) {
             const tot = hs + as;
             if (sel.includes("más de 2.5") || sel.includes("over 2.5")) return tot > 2.5 ? "won" : "lost";
@@ -480,20 +480,20 @@ document.addEventListener("DOMContentLoaded", () => {
             if (sel.includes("menos de 0.5") || sel.includes("under 0.5")) return tot < 0.5 ? "won" : "lost";
         }
 
-        # 3. Both Teams to Score (BTTS)
+        // 3. Both Teams to Score (BTTS)
         if (mkt.includes("ambos equipos anotan") || mkt.includes("ambos anotan") || mkt.includes("btts")) {
             if (sel.includes("sí") || sel.includes("si") || sel.includes("yes")) return (hs > 0 && as > 0) ? "won" : "lost";
             if (sel.includes("no")) return (hs === 0 || as === 0) ? "won" : "lost";
         }
 
-        # 4. Draw No Bet (Empate No Apuesta)
+        // 4. Draw No Bet (Empate No Apuesta)
         if (mkt.includes("empate no apuesta") || mkt.includes("dnb")) {
             if (hs === as) return "void";
             if (sel.includes("1") || sel.includes("local")) return hs > as ? "won" : "lost";
             if (sel.includes("2") || sel.includes("visitante")) return as > hs ? "won" : "lost";
         }
 
-        # 5. Resultado Final
+        // 5. Resultado Final
         if (mkt.includes("resultado final") || mkt.includes("1x2") || mkt.includes("ganador")) {
             if (sel === "1" || sel.includes("local")) return hs > as ? "won" : "lost";
             if (sel === "2" || sel.includes("visitante")) return as > hs ? "won" : "lost";

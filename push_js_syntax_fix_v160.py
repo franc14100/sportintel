@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing Real-Time Live Predictions Auto-Grading & Machine Learning feedback sync with v15.0 cache buster...")
-run('git commit -m "Enable real-time dynamic score updates, pick auto-evaluation (WON/LOST) across all sports, and machine learning rating feedback sync with v15.0 cache bump"')
+print("Committing JS syntax comment fix with v16.0 cache buster...")
+run('git commit -m "Fix JS comment token syntax in main.js and bump cache buster to v16.0"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
