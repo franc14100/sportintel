@@ -42039,8 +42039,8 @@
       "time": "04:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -42136,7 +42136,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Katarzyna Kawa en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -42175,7 +42175,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 61% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 66% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -42206,8 +42206,8 @@
       "time": "04:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -42296,7 +42296,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Carol Young Suh Lee en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -42348,7 +42348,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 73% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 60% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -42367,7 +42367,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -42476,7 +42476,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Ella Seidel en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -42533,7 +42533,7 @@
       "time": "05:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -42693,7 +42693,7 @@
       "time": "05:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -43638,7 +43638,7 @@
     "confidence": 78,
     "reasoning": "✅ Apuesta Simple de Valor detectada. La cuota @1.64 con probabilidad del 78% genera un Expected Value positivo de 27.9 puntos — rentable sin necesidad de combinar.",
     "recommendation_stake": 7.0,
-    "status": "lost"
+    "status": "won"
   },
   "star_ticket_4": {
     "type": "Combinado Soñador",
