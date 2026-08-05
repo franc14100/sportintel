@@ -14,7 +14,7 @@
       "time": "18:45",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 2,
+      "home_score": 3,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -221,7 +221,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -892,7 +892,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -1126,7 +1126,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -1167,7 +1167,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 73% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -8294,8 +8294,8 @@
       "time": "18:30",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
-      "away_score": 2,
+      "home_score": 1,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -8516,7 +8516,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 85% del volumen de apuestas sharps orientado a este resultado. El rumor: 'Tensiones en el vestuario de Curicó Unido tras las declaraciones de su estrella en redes sociales.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -8866,8 +8866,8 @@
       "sport": "Football",
       "time": "18:15",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
+      "status": "post",
+      "home_score": 2,
       "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -11159,7 +11159,7 @@
       "time": "19:00",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -20424,7 +20424,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 1,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -20526,7 +20526,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Marin Cilic en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",

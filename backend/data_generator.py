@@ -1,4 +1,6 @@
 
+
+
 def frac_to_decimal(frac_str):
     try:
         if "/" in str(frac_str):
@@ -9,6 +11,64 @@ def frac_to_decimal(frac_str):
         return 1.50
 
 import os
+
+LEARNING_DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "learning_database.json")
+
+def load_learning_database():
+    if os.path.exists(LEARNING_DB_PATH):
+        try:
+            with open(LEARNING_DB_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {
+        "team_rating_adjustments": {},
+        "market_bias_adjustments": {},
+        "total_graded_picks": 0,
+        "total_won": 0,
+        "total_lost": 0
+    }
+
+def update_learning_database(matches_list):
+    db = load_learning_database()
+    team_adj = db.get("team_rating_adjustments", {})
+    market_adj = db.get("market_bias_adjustments", {})
+    
+    for m in matches_list:
+        h = m.get("home")
+        a = m.get("away")
+        lg = m.get("league", "General")
+        status = m.get("status")
+        
+        if status == "post":
+            for p in m.get("picks", []):
+                p_stat = p.get("status")
+                mkt = p.get("market", "")
+                sel = p.get("selection", p.get("pick", ""))
+                
+                if p_stat == "lost":
+                    db["total_lost"] = db.get("total_lost", 0) + 1
+                    if h in str(sel): team_adj[h] = team_adj.get(h, 0) - 2.5
+                    if a in str(sel): team_adj[a] = team_adj.get(a, 0) - 2.5
+                    if "más de" in str(sel).lower() or "over" in str(sel).lower():
+                        key = f"{lg}::Over"
+                        market_adj[key] = market_adj.get(key, 0) - 15
+                elif p_stat == "won":
+                    db["total_won"] = db.get("total_won", 0) + 1
+                    if h in str(sel): team_adj[h] = team_adj.get(h, 0) + 0.8
+                    if a in str(sel): team_adj[a] = team_adj.get(a, 0) + 0.8
+
+    db["team_rating_adjustments"] = team_adj
+    db["market_bias_adjustments"] = market_adj
+    db["total_graded_picks"] = db.get("total_won", 0) + db.get("total_lost", 0)
+    
+    try:
+        with open(LEARNING_DB_PATH, "w", encoding="utf-8") as f:
+            json.dump(db, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"[!] Error saving learning database: {e}")
+        
+    return db
 import json
 import random
 import urllib.request
@@ -703,28 +763,14 @@ def generate_daily_sports_data():
 
     # Sistema de Aprendizaje Autónomo y Auto-Corrección
     # Analizamos los picks anteriores para ajustar los TEAM_RATINGS dinámicamente y corregir errores
-    RATING_ADJUSTMENTS = {}
+    # Sistema de Aprendizaje Autónomo Persistente y Acumulativo
     if raw_previous_json and "matches" in raw_previous_json:
-        for old_match in raw_previous_json.get("matches", []):
-            home_t = old_match.get("home")
-            away_t = old_match.get("away")
-            for p in old_match.get("picks", []):
-                status = p.get("status")
-                selection = p.get("selection")
-                if status == "lost":
-                    # Si fallamos apoyando al local
-                    if home_t in selection or "1" in selection:
-                        RATING_ADJUSTMENTS[home_t] = RATING_ADJUSTMENTS.get(home_t, 0) - 2.5
-                    # Si fallamos apoyando al visitante
-                    if away_t in selection or "2" in selection:
-                        RATING_ADJUSTMENTS[away_t] = RATING_ADJUSTMENTS.get(away_t, 0) - 2.5
-                elif status == "won":
-                    # Si acertamos apoyando al local
-                    if home_t in selection or "1" in selection:
-                        RATING_ADJUSTMENTS[home_t] = RATING_ADJUSTMENTS.get(home_t, 0) + 0.8
-                    # Si acertamos apoyando al visitante
-                    if away_t in selection or "2" in selection:
-                        RATING_ADJUSTMENTS[away_t] = RATING_ADJUSTMENTS.get(away_t, 0) + 0.8
+        update_learning_database(raw_previous_json.get("matches", []))
+    
+    learning_db = load_learning_database()
+    RATING_ADJUSTMENTS = learning_db.get("team_rating_adjustments", {})
+    MARKET_BIAS_ADJUSTMENTS = learning_db.get("market_bias_adjustments", {})
+    print(f"[INFO] Motor de Aprendizaje Autónomo Cargado: {len(RATING_ADJUSTMENTS)} equipos ajustados, {db.get('total_graded_picks', 0) if 'db' in locals() else 0} picks históricos analizados.")
 
     print("[INFO] Conectando a internet para buscar partidos reales...")
     espn_matches, _ = fetch_live_matches()

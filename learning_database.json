@@ -1,0 +1,12 @@
+{
+  "team_rating_adjustments": {
+    "Liverpool FC": -2.5
+  },
+  "market_bias_adjustments": {
+    "Primera Nacional::Over": -15
+  },
+  "league_under_over_stats": {},
+  "total_graded_picks": 2,
+  "total_won": 0,
+  "total_lost": 2
+}
