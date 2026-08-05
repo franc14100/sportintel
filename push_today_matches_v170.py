@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing JS syntax comment fix with v16.0 cache buster...")
-run('git commit -m "Fix JS comment token syntax in main.js and bump cache buster to v16.0"')
+print("Committing fresh August 4, 2026 matches and ESPN fetcher fix with v17.0 cache buster...")
+run('git commit -m "Update match data to 2026-08-04 with 236 live matches across Football, Tennis, Basketball and v17.0 cache bump"')
 
 print("Fetching origin main...")
 run("git fetch origin main")

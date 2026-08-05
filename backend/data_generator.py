@@ -601,12 +601,10 @@ def fetch_espn_fallback_matches():
     ]
     espn_matches = []
     for ep, sport in endpoints:
-        url = f"https://site.api.espn.com/apis/site/v2/sports/{ep}/scoreboard?limit=1000"
+        url = f"https://site.api.espn.com/apis/site/v2/sports/{ep}/scoreboard?dates={today_str}&limit=1000"
         try:
-            import requests
-            resp = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}, timeout=10)
-            if resp.status_code == 200:
-                data = resp.json()
+            with urllib.request.urlopen(url, timeout=10) as response:
+                data = json.loads(response.read().decode('utf-8'))
                 events = data.get("events", [])
                 def process_competition(comps, ev_league=""):
                     competitors = comps.get("competitors", [])
@@ -666,6 +664,7 @@ def fetch_espn_fallback_matches():
                             process_competition(comps, ev_league)
         except Exception as e:
             print(f"[ESPN Fallback] Error en {ep}: {e}")
+
     return espn_matches
 
 def generate_daily_sports_data():
