@@ -115,11 +115,23 @@ def update_scores():
             home_name = home.get('team', {}).get('name') or home.get('team', {}).get('displayName') or home.get('athlete', {}).get('displayName', '')
             away_name = away.get('team', {}).get('name') or away.get('team', {}).get('displayName') or away.get('athlete', {}).get('displayName', '')
             
-            try:
-                home_score = int(home.get('score', 0) or 0)
-                away_score = int(away.get('score', 0) or 0)
-            except Exception:
-                home_score, away_score = 0, 0
+            def extract_espn_score(comp):
+                if not comp: return 0
+                sc = comp.get('score')
+                if sc is not None and str(sc).isdigit():
+                    return int(sc)
+                lines = comp.get('linescores', [])
+                if lines:
+                    sets_won = sum(1 for l in lines if l.get('winner') is True)
+                    if sets_won > 0: return sets_won
+                    total_val = sum(int(l.get('value', 0)) for l in lines if l.get('value') and str(l.get('value')).isdigit())
+                    if total_val > 0: return total_val
+                if comp.get('winner') is True:
+                    return 2
+                return 0
+
+            home_score = extract_espn_score(home)
+            away_score = extract_espn_score(away)
 
             norm_home = normalize_name(home_name)
             norm_away = normalize_name(away_name)

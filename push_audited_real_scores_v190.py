@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing dynamic predictions evaluation and real-time live score sync with v18.0 cache buster...")
-run('git commit -m "Fix predictions tab status badges (GANADA/FALLADA), client-side ESPN live score sync every 45s, and v18.0 cache bump"')
+print("Committing audited real-world scores & universal score extractor with v19.0 cache buster...")
+run('git commit -m "Audit real-world scores: add universal ESPN linescores extractor for Tennis & Basketball, update data.json with exact real scores (2-0, 2-1, etc.), and bump cache buster to v19.0"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
