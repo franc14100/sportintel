@@ -5525,3 +5525,62 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+
+
+
+    // --- Real-Time Client-Side ESPN Scores Sync (Auto-refreshes every 45s) ---
+    async function syncEspnLiveScoresClient() {
+        if (!appData || !appData.matches) return;
+        try {
+            const endpoints = ['soccer/all', 'tennis/atp', 'tennis/wta', 'basketball/wnba', 'basketball/nba'];
+            for (const ep of endpoints) {
+                const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${ep}/scoreboard?limit=1000`);
+                if (!res.ok) continue;
+                const data = await res.json();
+                const events = data.events || [];
+                
+                events.forEach(ev => {
+                    const statusDesc = (ev.status && ev.status.type && ev.status.type.description) ? ev.status.type.description.toLowerCase() : "";
+                    const comps = (ev.competitions && ev.competitions.length > 0) ? ev.competitions[0].competitors : [];
+                    if (comps.length >= 2) {
+                        const t1 = comps[0];
+                        const t2 = comps[1];
+                        const homeComp = (t1.homeAway === "away") ? t2 : t1;
+                        const awayComp = (t1.homeAway === "away") ? t1 : t2;
+                        
+                        const hName = (homeComp.team && homeComp.team.displayName) || (homeComp.athlete && homeComp.athlete.displayName) || "";
+                        const aName = (awayComp.team && awayComp.team.displayName) || (awayComp.athlete && awayComp.athlete.displayName) || "";
+                        const hScore = parseInt(homeComp.score || 0, 10);
+                        const aScore = parseInt(awayComp.score || 0, 10);
+
+                        const normH = hName.toLowerCase().replace(/[^a-z0-9]/g, "");
+                        const normA = aName.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+                        appData.matches.forEach(m => {
+                            const mH = (m.home || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+                            const mA = (m.away || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+
+                            if ((mH.includes(normH) || normH.includes(mH)) && (mA.includes(normA) || normA.includes(mA))) {
+                                m.home_score = hScore;
+                                m.away_score = aScore;
+                                if (statusDesc.includes("final") || statusDesc.includes("full")) {
+                                    m.status = "post";
+                                } else if (statusDesc.includes("progress") || statusDesc.includes("in")) {
+                                    m.status = "in";
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+            // Re-render UI views after live score update!
+            renderPredictionsTab();
+            populateMatchesList();
+        } catch (e) {
+            console.log("[SportIntel] Sync live scores note:", e.message);
+        }
+    }
+
+    // Start auto-sync timer every 45 seconds
+    setInterval(syncEspnLiveScoresClient, 45000);
+    setTimeout(syncEspnLiveScoresClient, 2000);
