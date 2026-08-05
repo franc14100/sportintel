@@ -2637,9 +2637,9 @@
       "sport": "Football",
       "time": "13:30",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -2851,7 +2851,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 88%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.13 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -2864,7 +2864,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 18% según el modelo. El 66% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.17 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -2905,7 +2905,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -2922,8 +2922,8 @@
       "sport": "Football",
       "time": "14:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
+      "status": "post",
+      "home_score": 3,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -3151,7 +3151,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -3209,9 +3209,9 @@
       "sport": "Football",
       "time": "11:30",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -3425,7 +3425,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 79% del volumen de apuestas sharps orientado a este resultado. El rumor: 'Tensiones en el vestuario de Sabah FK tras las declaraciones de su estrella en redes sociales.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -3466,7 +3466,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -3496,8 +3496,8 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
+      "status": "post",
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -7180,9 +7180,9 @@
       "sport": "Football",
       "time": "11:00",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 1,
-      "away_score": 2,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -7485,8 +7485,8 @@
       "sport": "Football",
       "time": "12:00",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 5,
+      "status": "post",
+      "home_score": 8,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -7746,8 +7746,8 @@
       "sport": "Football",
       "time": "12:00",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
+      "status": "post",
+      "home_score": 4,
       "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -8029,7 +8029,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -8059,9 +8059,9 @@
       "sport": "Football",
       "time": "12:00",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -8327,7 +8327,7 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -8632,9 +8632,9 @@
       "sport": "Football",
       "time": "13:30",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -8869,7 +8869,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -8896,7 +8896,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 77% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El cuerpo técnico de Slavia Prague probó una formación ultra-ofensiva en el último entrenamiento.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -8913,9 +8913,9 @@
       "sport": "Football",
       "time": "13:30",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -9142,7 +9142,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Más/Menos Goles",
@@ -9156,7 +9156,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ambos Equipos Anotan",
@@ -9170,7 +9170,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 65% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El analista táctico afirma que Vllaznia explotará la banda izquierda de su rival debido a su lentitud.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -9183,7 +9183,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 80% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -9200,9 +9200,9 @@
       "sport": "Football",
       "time": "14:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -9469,7 +9469,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 77% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "won"
         },
         {
           "market": "Ambos Equipos Anotan",
@@ -9483,7 +9483,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 65% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El analista táctico afirma que Juventus explotará la banda izquierda de su rival debido a su lentitud.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Más/Menos Goles",
@@ -9497,7 +9497,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "won"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -10940,9 +10940,9 @@
       "sport": "Football",
       "time": "15:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 2,
+      "away_score": 6,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -11149,7 +11149,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -11177,7 +11177,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 75% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El plantel de Nigeria sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -11190,7 +11190,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 79% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         },
         {
           "market": "Resultado Final (1X2)",
@@ -11220,9 +11220,9 @@
       "sport": "Football",
       "time": "15:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -11444,7 +11444,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 73% del volumen de apuestas sharps orientado a este resultado. El rumor: 'La prensa reporta que Malawi cambiará su portero titular para dar rodaje en este partido clave.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -11471,7 +11471,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Más/Menos Goles",
@@ -11485,7 +11485,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -11498,7 +11498,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 80% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -11515,8 +11515,8 @@
       "sport": "Football",
       "time": "13:15",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
+      "status": "post",
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -11799,7 +11799,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 69% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -11816,7 +11816,7 @@
       "sport": "Football",
       "time": "12:00",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
       "away_score": 1,
       "home_form": "W---D---W---W",
@@ -12102,9 +12102,9 @@
       "sport": "Football",
       "time": "13:30",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -12329,7 +12329,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 69% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El plantel de CSKA 1948 Sofia sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -12386,7 +12386,7 @@
       "sport": "Football",
       "time": "17:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -12967,9 +12967,9 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -13195,7 +13195,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Más/Menos Goles",
@@ -13236,7 +13236,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 73% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -13253,7 +13253,7 @@
       "sport": "Football",
       "time": "17:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -13547,7 +13547,7 @@
       "sport": "Football",
       "time": "17:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -14669,9 +14669,9 @@
       "sport": "Football",
       "time": "17:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -14975,9 +14975,9 @@
       "sport": "Football",
       "time": "17:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -16967,7 +16967,7 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "postponed",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -17280,7 +17280,7 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "postponed",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -17572,7 +17572,7 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "postponed",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -17866,7 +17866,7 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "postponed",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -18152,7 +18152,7 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "postponed",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -18446,7 +18446,7 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "postponed",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -18740,7 +18740,7 @@
       "sport": "Football",
       "time": "13:00",
       "stadium": "Cancha Principal",
-      "status": "postponed",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -19041,7 +19041,7 @@
       "sport": "Football",
       "time": "17:30",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -19308,7 +19308,7 @@
       "sport": "Football",
       "time": "14:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -19596,8 +19596,8 @@
       "sport": "Football",
       "time": "17:00",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
+      "status": "in",
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -30973,7 +30973,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -31075,7 +31075,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Juan Manuel Cerundolo en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -31132,7 +31132,7 @@
       "time": "11:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -31242,7 +31242,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Cameron Norrie en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -31299,8 +31299,8 @@
       "time": "11:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -31396,7 +31396,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Miomir Kecmanovic en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -31422,7 +31422,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 65% de que el encuentro se defina en el número de sets seleccionado, indicando gran competitividad entre ambos competidores.",
             "market": "Este mercado acumula 58% del volumen de apuestas orientado al Más de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -31466,8 +31466,8 @@
       "time": "11:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -31589,7 +31589,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Zachary Svajda en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -31633,7 +31633,7 @@
       "time": "11:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -31723,7 +31723,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Ben Shelton en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -31793,7 +31793,7 @@
       "time": "13:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -31883,7 +31883,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Alexei Popyrin en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -31954,7 +31954,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -32056,7 +32056,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Taylor Fritz en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ganador 1er Set",
@@ -32114,7 +32114,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -32236,7 +32236,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Alejandro Tabilo en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -32280,8 +32280,8 @@
       "time": "13:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -32370,7 +32370,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Rafael Jodar en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -32440,8 +32440,8 @@
       "time": "13:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -32537,7 +32537,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Tallon Griekspoor en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -32550,7 +32550,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 67% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 70% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Juegos",
@@ -32935,7 +32935,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -44895,7 +44895,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 1,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -44997,7 +44997,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Jessica Pegula en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -45023,7 +45023,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 58% de que el encuentro se defina en el número de sets seleccionado, indicando gran competitividad entre ambos competidores.",
             "market": "Este mercado acumula 65% del volumen de apuestas orientado al Más de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -45054,7 +45054,7 @@
       "time": "11:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -45196,7 +45196,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Sloane Stephens en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -45214,8 +45214,8 @@
       "time": "11:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 1,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -45324,7 +45324,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Daria Kasatkina en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -45350,7 +45350,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 72% de que el encuentro se defina en el número de sets seleccionado, indicando gran competitividad entre ambos competidores.",
             "market": "Este mercado acumula 56% del volumen de apuestas orientado al Más de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -45381,7 +45381,7 @@
       "time": "11:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -45491,7 +45491,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Taylor Townsend en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -45548,7 +45548,7 @@
       "time": "13:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -45645,7 +45645,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Coco Gauff en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -45716,7 +45716,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -45851,7 +45851,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Karolina Pliskova en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -45883,7 +45883,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -45998,7 +45998,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Magda Linette en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -46043,7 +46043,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -46132,7 +46132,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Emma Navarro en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -46202,8 +46202,8 @@
       "time": "14:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 1,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -46299,7 +46299,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Elise Mertens en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -46370,7 +46370,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -46466,7 +46466,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Zeynep Sonmez en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -46536,7 +46536,7 @@
       "time": "16:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -46639,7 +46639,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Naomi Osaka en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -54383,7 +54383,8 @@
     "total_odd": 1.84,
     "confidence": 83,
     "reasoning": "⚡ Combinado de protección. Se agregó Yuan Yue vs Elizara Yaneva para asegurar cuota total >= @1.50 (Cuota Final: @1.84).",
-    "recommendation_stake": 8.0
+    "recommendation_stake": 8.0,
+    "status": "lost"
   },
   "star_ticket_2": {
     "type": "Simple",
