@@ -891,7 +891,7 @@
       "time": "19:30",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -1113,7 +1113,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 66% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El analista táctico afirma que Minnesota United FC explotará la banda izquierda de su rival debido a su lentitud.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -1126,7 +1126,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -1167,7 +1167,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 73% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "lost"
+          "status": "void"
         }
       ],
       "real_odds": {}
@@ -12067,7 +12067,7 @@
             "statistical": "Diferencial de games esperado a favor de Nicolas Mejia es de 4.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -12106,7 +12106,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -12240,7 +12240,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -12401,7 +12401,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -12440,7 +12440,7 @@
             "statistical": "Diferencial de games esperado a favor de Kyrian Jacquet es de 3.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -12574,7 +12574,7 @@
             "statistical": "Diferencial de games esperado a favor de Pablo Llamas Ruiz es de 7.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -12600,7 +12600,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -12721,7 +12721,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -12734,7 +12734,7 @@
             "statistical": "Diferencial de games esperado a favor de Michael Zheng es de 3.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -12888,7 +12888,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Thanasi Kokkinakis en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Juegos",
@@ -12901,7 +12901,7 @@
             "statistical": "Diferencial de games esperado a favor de Thanasi Kokkinakis es de 3.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -12914,7 +12914,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -13048,7 +13048,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -13074,7 +13074,7 @@
             "statistical": "Diferencial de games esperado a favor de Justin Boulais es de 6.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -13221,7 +13221,7 @@
             "statistical": "Diferencial de games esperado a favor de Sebastian Ofner es de 4.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -13234,7 +13234,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -13381,7 +13381,7 @@
             "statistical": "Diferencial de games esperado a favor de Tomas Barrios Vera es de 10.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -13420,7 +13420,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -13554,7 +13554,7 @@
             "statistical": "Diferencial de games esperado a favor de Nicolai Budkov Kjaer es de 4.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -13567,7 +13567,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -13734,7 +13734,7 @@
             "statistical": "Diferencial de games esperado a favor de Hugo Gaston es de 7.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -13881,7 +13881,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -13894,7 +13894,7 @@
             "statistical": "Diferencial de games esperado a favor de Benjamin Bonzi es de 2.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -14041,7 +14041,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -14054,7 +14054,7 @@
             "statistical": "Diferencial de games esperado a favor de Jaime Faria es de 2.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -14201,7 +14201,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -14214,7 +14214,7 @@
             "statistical": "Diferencial de games esperado a favor de Shintaro Mochizuki es de 3.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -14355,7 +14355,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -14368,7 +14368,7 @@
             "statistical": "Diferencial de games esperado a favor de Keegan Rice es de 4.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -14528,7 +14528,7 @@
             "statistical": "Diferencial de games esperado a favor de Titouan Droguet es de 4.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -14554,7 +14554,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -14695,7 +14695,7 @@
             "statistical": "Diferencial de games esperado a favor de Adolfo Daniel Vallejo es de 9.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -14721,7 +14721,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -14829,7 +14829,7 @@
             "statistical": "Diferencial de games esperado a favor de Rinky Hijikata es de 3.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -14842,7 +14842,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -14996,7 +14996,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -15035,7 +15035,7 @@
             "statistical": "Diferencial de games esperado a favor de Mariano Navone es de 6.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -15176,7 +15176,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -15202,7 +15202,7 @@
             "statistical": "Diferencial de games esperado a favor de Vit Kopriva es de 4.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -15323,7 +15323,7 @@
             "statistical": "Diferencial de games esperado a favor de Nicolas Mejia es de 5.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -15336,7 +15336,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -15503,7 +15503,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -15542,7 +15542,7 @@
             "statistical": "Diferencial de games esperado a favor de Titouan Droguet es de 5.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -15650,7 +15650,7 @@
             "statistical": "Diferencial de games esperado a favor de James Duckworth es de 3.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -15676,7 +15676,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -15836,7 +15836,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -15849,7 +15849,7 @@
             "statistical": "Diferencial de games esperado a favor de Yannick Hanfmann es de 2.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -15983,7 +15983,7 @@
             "statistical": "Diferencial de games esperado a favor de Nuno Borges es de 2.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -15996,7 +15996,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -16137,7 +16137,7 @@
             "statistical": "Diferencial de games esperado a favor de Gabriel Diallo es de 1.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -16150,7 +16150,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -16310,7 +16310,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -16336,7 +16336,7 @@
             "statistical": "Diferencial de games esperado a favor de Miomir Kecmanovic es de 2.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -16483,7 +16483,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -16509,7 +16509,7 @@
             "statistical": "Diferencial de games esperado a favor de Marin Cilic es de 6.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -16656,7 +16656,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -16777,7 +16777,7 @@
             "statistical": "Diferencial de games esperado a favor de Jan-Lennard Struff es de 7.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -16829,7 +16829,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -16944,7 +16944,7 @@
             "statistical": "Diferencial de games esperado a favor de Marton Fucsovics es de 4.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -16970,7 +16970,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -17117,7 +17117,7 @@
             "statistical": "Diferencial de games esperado a favor de Camilo Ugo Carabelli es de 6.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -17156,7 +17156,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -17277,7 +17277,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -17290,7 +17290,7 @@
             "statistical": "Diferencial de games esperado a favor de Kamil Majchrzak es de 2.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -17424,7 +17424,7 @@
             "statistical": "Diferencial de games esperado a favor de Thiago Agustin Tirante es de 6.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -17476,7 +17476,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -17617,7 +17617,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -17630,7 +17630,7 @@
             "statistical": "Diferencial de games esperado a favor de Sebastian Baez es de 5.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -17751,7 +17751,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -17790,7 +17790,7 @@
             "statistical": "Diferencial de games esperado a favor de Jenson Brooksby es de 4.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -17944,7 +17944,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -17970,7 +17970,7 @@
             "statistical": "Diferencial de games esperado a favor de Hubert Hurkacz es de 6.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -18085,7 +18085,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -18098,7 +18098,7 @@
             "statistical": "Diferencial de games esperado a favor de Stefanos Tsitsipas es de 7.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -18258,7 +18258,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -18284,7 +18284,7 @@
             "statistical": "Diferencial de games esperado a favor de Adrian Mannarino es de 1.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -18418,7 +18418,7 @@
             "statistical": "Diferencial de games esperado a favor de Pablo Carreno Busta es de 2.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -18431,7 +18431,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -18565,7 +18565,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Denis Shapovalov en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -18578,7 +18578,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -18617,7 +18617,7 @@
             "statistical": "Diferencial de games esperado a favor de Denis Shapovalov es de 5.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -18725,7 +18725,7 @@
             "statistical": "Diferencial de games esperado a favor de Liam Draxl es de 2.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -18764,7 +18764,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -18924,7 +18924,7 @@
             "statistical": "Diferencial de games esperado a favor de Roman Andres Burruchaga es de 6.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -18937,7 +18937,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -19058,7 +19058,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -19084,7 +19084,7 @@
             "statistical": "Diferencial de games esperado a favor de Juan Manuel Cerundolo es de 4.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -19212,7 +19212,7 @@
             "statistical": "Diferencial de games esperado a favor de Jack Draper es de 3.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -19225,7 +19225,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -19385,7 +19385,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -19424,7 +19424,7 @@
             "statistical": "Diferencial de games esperado a favor de Botic Van De Zandschulp es de 5.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -19532,7 +19532,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -19571,7 +19571,7 @@
             "statistical": "Diferencial de games esperado a favor de Tallon Griekspoor es de 4.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -19705,7 +19705,7 @@
             "statistical": "Diferencial de games esperado a favor de Andrey Rublev es de 4.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -19718,7 +19718,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -19865,7 +19865,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -19878,7 +19878,7 @@
             "statistical": "Diferencial de games esperado a favor de Alexander Blockx es de 5.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -20019,7 +20019,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -20045,7 +20045,7 @@
             "statistical": "Diferencial de games esperado a favor de Fabian Marozsan es de 3.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -20206,7 +20206,7 @@
             "statistical": "Diferencial de games esperado a favor de Vit Kopriva es de 2.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -20219,7 +20219,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -20405,7 +20405,7 @@
             "statistical": "Diferencial de games esperado a favor de Daniel Altmaier es de 10.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -20513,7 +20513,7 @@
             "statistical": "Diferencial de games esperado a favor de Marin Cilic es de 2.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -20526,7 +20526,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Marin Cilic en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -20552,7 +20552,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -20673,7 +20673,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Alex de Minaur en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -20699,7 +20699,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -20712,7 +20712,7 @@
             "statistical": "Diferencial de games esperado a favor de Alex de Minaur es de 1.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -20840,7 +20840,7 @@
             "statistical": "Diferencial de games esperado a favor de Flavio Cobolli es de 2.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -20879,7 +20879,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -21026,7 +21026,7 @@
             "statistical": "Diferencial de games esperado a favor de Luciano Darderi es de 1.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -21039,7 +21039,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -21173,7 +21173,7 @@
             "statistical": "Diferencial de games esperado a favor de Nuno Borges es de 2.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -21186,7 +21186,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -21333,7 +21333,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -21372,7 +21372,7 @@
             "statistical": "Diferencial de games esperado a favor de Sebastian Baez es de 5.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -21480,7 +21480,7 @@
             "statistical": "Diferencial de games esperado a favor de Joao Fonseca es de 3.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -21506,7 +21506,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -21653,7 +21653,7 @@
             "statistical": "Diferencial de games esperado a favor de Nicolas Mejia es de 7.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -21679,7 +21679,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador 1er Set",
@@ -21813,7 +21813,7 @@
             "statistical": "Diferencial de games esperado a favor de Valentin Vacherot es de 2.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -21839,7 +21839,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -21960,7 +21960,7 @@
             "statistical": "Diferencial de games esperado a favor de Casper Ruud es de 3.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -21999,7 +21999,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -22133,7 +22133,7 @@
             "statistical": "Diferencial de games esperado a favor de Ignacio Buse es de 4.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -22146,7 +22146,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -22293,7 +22293,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -22332,7 +22332,7 @@
             "statistical": "Diferencial de games esperado a favor de Miomir Kecmanovic es de 4.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -22466,7 +22466,7 @@
             "statistical": "Diferencial de games esperado a favor de Arthur Fils es de 5.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -22479,7 +22479,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -22633,7 +22633,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -22646,7 +22646,7 @@
             "statistical": "Diferencial de games esperado a favor de Jenson Brooksby es de 5.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -22781,7 +22781,7 @@
             "statistical": "Diferencial de games esperado a favor de Raphael Collignon es de 2.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -22794,7 +22794,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -22954,7 +22954,7 @@
             "statistical": "Diferencial de games esperado a favor de Thiago Agustin Tirante es de 7.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -22980,7 +22980,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -23114,7 +23114,7 @@
             "statistical": "Diferencial de games esperado a favor de Alejandro Tabilo es de 2.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -23140,7 +23140,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -23287,7 +23287,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -23300,7 +23300,7 @@
             "statistical": "Diferencial de games esperado a favor de Corentin Moutet es de 2.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -23421,7 +23421,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -23434,7 +23434,7 @@
             "statistical": "Diferencial de games esperado a favor de Alexander Zverev es de 3.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -23601,7 +23601,7 @@
             "statistical": "Diferencial de games esperado a favor de Karen Khachanov es de 3.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -23614,7 +23614,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -23781,7 +23781,7 @@
             "statistical": "Diferencial de games esperado a favor de Fabian Marozsan es de 5.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -23807,7 +23807,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -23928,7 +23928,7 @@
             "statistical": "Diferencial de games esperado a favor de Francisco Cerundolo es de 7.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -23941,7 +23941,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -24082,7 +24082,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -24095,7 +24095,7 @@
             "statistical": "Diferencial de games esperado a favor de Jakub Mensik es de 3.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -24262,7 +24262,7 @@
             "statistical": "Diferencial de games esperado a favor de Daniel Merida es de 7.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -24275,7 +24275,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -24429,7 +24429,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -24442,7 +24442,7 @@
             "statistical": "Diferencial de games esperado a favor de Daniil Medvedev es de 4.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -24589,7 +24589,7 @@
             "statistical": "Diferencial de games esperado a favor de Titouan Droguet es de 4.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -24602,7 +24602,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -24756,7 +24756,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -24782,7 +24782,7 @@
             "statistical": "Diferencial de games esperado a favor de Tommy Paul es de 3.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -24910,7 +24910,7 @@
             "statistical": "Diferencial de games esperado a favor de Learner Tien es de 4.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -24949,7 +24949,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -25090,7 +25090,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -25103,7 +25103,7 @@
             "statistical": "Diferencial de games esperado a favor de Jiri Lehecka es de 4.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -25263,7 +25263,7 @@
             "statistical": "Diferencial de games esperado a favor de Victoria Jimenez Kasintseva es de 5.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -25289,7 +25289,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -25397,7 +25397,7 @@
             "statistical": "Diferencial de games esperado a favor de Oksana Selekhmeteva es de 8.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -25449,7 +25449,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -25564,7 +25564,7 @@
             "statistical": "Diferencial de games esperado a favor de Emiliana Arango es de 4.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -25590,7 +25590,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -25770,7 +25770,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -25783,7 +25783,7 @@
             "statistical": "Diferencial de games esperado a favor de Zhu Lin es de 5.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -25898,7 +25898,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -25924,7 +25924,7 @@
             "statistical": "Diferencial de games esperado a favor de Zheng Qinwen es de 5.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -26078,7 +26078,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -26117,7 +26117,7 @@
             "statistical": "Diferencial de games esperado a favor de Isabella Marton es de 6.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -26238,7 +26238,7 @@
             "statistical": "Diferencial de games esperado a favor de Mary Stoiana es de 4.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -26264,7 +26264,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -26424,7 +26424,7 @@
             "statistical": "Diferencial de games esperado a favor de Himeno Sakatsume es de 8.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -26437,7 +26437,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -26545,7 +26545,7 @@
             "statistical": "Diferencial de games esperado a favor de Sofia Kenin es de 5.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -26558,7 +26558,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -26718,7 +26718,7 @@
             "statistical": "Diferencial de games esperado a favor de Avery Alexander es de 8.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -26744,7 +26744,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -26872,7 +26872,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -26911,7 +26911,7 @@
             "statistical": "Diferencial de games esperado a favor de Guo Hanyu es de 1.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -27045,7 +27045,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -27071,7 +27071,7 @@
             "statistical": "Diferencial de games esperado a favor de Heather Watson es de 4.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -27192,7 +27192,7 @@
             "statistical": "Diferencial de games esperado a favor de Maya Joint es de 2.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -27218,7 +27218,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -27352,7 +27352,7 @@
             "statistical": "Diferencial de games esperado a favor de Harriet Dart es de 3.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -27378,7 +27378,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -27525,7 +27525,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -27538,7 +27538,7 @@
             "statistical": "Diferencial de games esperado a favor de Mananchaya Sawangkaew es de 5.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -27672,7 +27672,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -27711,7 +27711,7 @@
             "statistical": "Diferencial de games esperado a favor de Varvara Lepchenko es de 2.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -27845,7 +27845,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -27858,7 +27858,7 @@
             "statistical": "Diferencial de games esperado a favor de Kamilla Rakhimova es de 4.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -28012,7 +28012,7 @@
             "statistical": "Diferencial de games esperado a favor de Kimberly Birrell es de 2.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -28038,7 +28038,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -28159,7 +28159,7 @@
             "statistical": "Diferencial de games esperado a favor de Wang Xiyu es de 5.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -28172,7 +28172,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -28345,7 +28345,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -28358,7 +28358,7 @@
             "statistical": "Diferencial de games esperado a favor de Ariana Arseneault es de 3.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -28479,7 +28479,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -28518,7 +28518,7 @@
             "statistical": "Diferencial de games esperado a favor de Katherine Sebov es de 1.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -28652,7 +28652,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -28678,7 +28678,7 @@
             "statistical": "Diferencial de games esperado a favor de Cristina Bucsa es de 5.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -28832,7 +28832,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -28845,7 +28845,7 @@
             "statistical": "Diferencial de games esperado a favor de Camila Osorio es de 2.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -28966,7 +28966,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -28979,7 +28979,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Alina Korneeva en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Juegos",
@@ -28992,7 +28992,7 @@
             "statistical": "Diferencial de games esperado a favor de Alina Korneeva es de 3.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -29146,7 +29146,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -29159,7 +29159,7 @@
             "statistical": "Diferencial de games esperado a favor de Karolina Pliskova es de 2.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -29319,7 +29319,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -29332,7 +29332,7 @@
             "statistical": "Diferencial de games esperado a favor de Anhelina Kalinina es de 1.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -29460,7 +29460,7 @@
             "statistical": "Diferencial de games esperado a favor de Diane Parry es de 8.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -29486,7 +29486,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -29633,7 +29633,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -29646,7 +29646,7 @@
             "statistical": "Diferencial de games esperado a favor de Kayla Cross es de 3.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -29780,7 +29780,7 @@
             "statistical": "Diferencial de games esperado a favor de Talia Gibson es de 1.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -29793,7 +29793,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Talia Gibson en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -29806,7 +29806,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -29953,7 +29953,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -29992,7 +29992,7 @@
             "statistical": "Diferencial de games esperado a favor de McCartney Kessler es de 7.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -30126,7 +30126,7 @@
             "statistical": "Diferencial de games esperado a favor de Anna Blinkova es de 3.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -30139,7 +30139,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -30273,7 +30273,7 @@
             "statistical": "Diferencial de games esperado a favor de Elena-Gabriela Ruse es de 2.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -30286,7 +30286,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -30427,7 +30427,7 @@
             "statistical": "Diferencial de games esperado a favor de Yulia Putintseva es de 3.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -30466,7 +30466,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -30620,7 +30620,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -30633,7 +30633,7 @@
             "statistical": "Diferencial de games esperado a favor de Leolia Jeanjean es de 4.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -30761,7 +30761,7 @@
             "statistical": "Diferencial de games esperado a favor de Nikola Bartunkova es de 1.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -30787,7 +30787,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -30921,7 +30921,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -30960,7 +30960,7 @@
             "statistical": "Diferencial de games esperado a favor de Emerson Jones es de 1.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -31094,7 +31094,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -31120,7 +31120,7 @@
             "statistical": "Diferencial de games esperado a favor de Janice Tjen es de 1.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -31261,7 +31261,7 @@
             "statistical": "Diferencial de games esperado a favor de Antonia Ruzic es de 4.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -31274,7 +31274,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -31408,7 +31408,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -31434,7 +31434,7 @@
             "statistical": "Diferencial de games esperado a favor de Magda Linette es de 5.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -31575,7 +31575,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -31601,7 +31601,7 @@
             "statistical": "Diferencial de games esperado a favor de Victoria Jimenez Kasintseva es de 4.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -31755,7 +31755,7 @@
             "statistical": "Diferencial de games esperado a favor de Yuliia Starodubtseva es de 1.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -31781,7 +31781,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -31902,7 +31902,7 @@
             "statistical": "Diferencial de games esperado a favor de Taylor Townsend es de 3.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -31928,7 +31928,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -32069,7 +32069,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Panna Udvardy en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -32082,7 +32082,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -32121,7 +32121,7 @@
             "statistical": "Diferencial de games esperado a favor de Panna Udvardy es de 5.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -32229,7 +32229,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -32268,7 +32268,7 @@
             "statistical": "Diferencial de games esperado a favor de Tamara Korpatsch es de 4.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -32402,7 +32402,7 @@
             "statistical": "Diferencial de games esperado a favor de Rebecca Marino es de 4.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -32441,7 +32441,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -32569,7 +32569,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -32582,7 +32582,7 @@
             "statistical": "Diferencial de games esperado a favor de Tatjana Maria es de 3.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -32729,7 +32729,7 @@
             "statistical": "Diferencial de games esperado a favor de Sloane Stephens es de 2.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -32742,7 +32742,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -32889,7 +32889,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -32915,7 +32915,7 @@
             "statistical": "Diferencial de games esperado a favor de Wang Xinyu es de 3.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -33062,7 +33062,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -33075,7 +33075,7 @@
             "statistical": "Diferencial de games esperado a favor de Jessica Bouzas Maneiro es de 2.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -33229,7 +33229,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador 1er Set",
@@ -33363,7 +33363,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -33376,7 +33376,7 @@
             "statistical": "Diferencial de games esperado a favor de Ekaterina Alexandrova es de 4.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -33523,7 +33523,7 @@
             "statistical": "Diferencial de games esperado a favor de Viktorija Golubic es de 1.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -33549,7 +33549,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -33690,7 +33690,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -33716,7 +33716,7 @@
             "statistical": "Diferencial de games esperado a favor de Diana Shnaider es de 3.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -33850,7 +33850,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -34023,7 +34023,7 @@
             "statistical": "Diferencial de games esperado a favor de Maja Chwalinska es de 5.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -34049,7 +34049,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -34184,7 +34184,7 @@
             "statistical": "Diferencial de games esperado a favor de Anastasia Potapova es de 3.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -34197,7 +34197,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -34344,7 +34344,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -34370,7 +34370,7 @@
             "statistical": "Diferencial de games esperado a favor de Antonia Ruzic es de 1.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -34504,7 +34504,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Jelena Ostapenko en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -34530,7 +34530,7 @@
             "statistical": "Diferencial de games esperado a favor de Jelena Ostapenko es de 3.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -34543,7 +34543,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -34664,7 +34664,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Kamilla Rakhimova en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -34677,7 +34677,7 @@
             "statistical": "Diferencial de games esperado a favor de Kamilla Rakhimova es de 2.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -34690,7 +34690,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -34850,7 +34850,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -34876,7 +34876,7 @@
             "statistical": "Diferencial de games esperado a favor de McCartney Kessler es de 6.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -35004,7 +35004,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador 1er Set",
@@ -35043,7 +35043,7 @@
             "statistical": "Diferencial de games esperado a favor de Aryna Sabalenka es de 11.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -35164,7 +35164,7 @@
             "statistical": "Diferencial de games esperado a favor de Amanda Anisimova es de 5.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -35177,7 +35177,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -35331,7 +35331,7 @@
             "statistical": "Diferencial de games esperado a favor de Clara Tauson es de 3.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -35344,7 +35344,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -35498,7 +35498,7 @@
             "statistical": "Diferencial de games esperado a favor de Kayla Cross es de 5.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -35524,7 +35524,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -35658,7 +35658,7 @@
             "statistical": "Diferencial de games esperado a favor de Magdalena Frech es de 2.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -35671,7 +35671,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -35805,7 +35805,7 @@
             "statistical": "Diferencial de games esperado a favor de Belinda Bencic es de 2.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -35818,7 +35818,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -35985,7 +35985,7 @@
             "statistical": "Diferencial de games esperado a favor de Elena Rybakina es de 10.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -36024,7 +36024,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -36145,7 +36145,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -36171,7 +36171,7 @@
             "statistical": "Diferencial de games esperado a favor de Marie Bouzkova es de 3.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -36318,7 +36318,7 @@
             "statistical": "Diferencial de games esperado a favor de Coco Gauff es de 10.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -36344,7 +36344,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -36479,7 +36479,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -36505,7 +36505,7 @@
             "statistical": "Diferencial de games esperado a favor de Karolina Pliskova es de 4.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -36639,7 +36639,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -36652,7 +36652,7 @@
             "statistical": "Diferencial de games esperado a favor de Iva Jovic es de 1.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -36806,7 +36806,7 @@
             "statistical": "Diferencial de games esperado a favor de Emma Navarro es de 2.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -36819,7 +36819,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -36960,7 +36960,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -36986,7 +36986,7 @@
             "statistical": "Diferencial de games esperado a favor de Anna Bondar es de 2.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -37127,7 +37127,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -37153,7 +37153,7 @@
             "statistical": "Diferencial de games esperado a favor de Maria Sakkari es de 2.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -37326,7 +37326,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -37339,7 +37339,7 @@
             "statistical": "Diferencial de games esperado a favor de Panna Udvardy es de 8.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -37486,7 +37486,7 @@
             "statistical": "Diferencial de games esperado a favor de Sorana Cirstea es de 7.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -37499,7 +37499,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -37633,7 +37633,7 @@
             "statistical": "Diferencial de games esperado a favor de Barbora Krejcikova es de 4.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -37646,7 +37646,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -37767,7 +37767,7 @@
             "statistical": "Diferencial de games esperado a favor de Linda Noskova es de 7.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -37806,7 +37806,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador 1er Set",
@@ -37934,7 +37934,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -37960,7 +37960,7 @@
             "statistical": "Diferencial de games esperado a favor de Leylah Fernandez es de 5.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -38107,7 +38107,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -38120,7 +38120,7 @@
             "statistical": "Diferencial de games esperado a favor de Alycia Parks es de 6.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -38267,7 +38267,7 @@
             "statistical": "Diferencial de games esperado a favor de Talia Gibson es de 2.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -38280,7 +38280,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -38414,7 +38414,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -38440,7 +38440,7 @@
             "statistical": "Diferencial de games esperado a favor de Iga Swiatek es de 8.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -38581,7 +38581,7 @@
             "statistical": "Diferencial de games esperado a favor de Marta Kostyuk es de 3.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -38607,7 +38607,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -38754,7 +38754,7 @@
             "statistical": "Diferencial de games esperado a favor de Anastasia Potapova es de 9.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -38921,7 +38921,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -38934,7 +38934,7 @@
             "statistical": "Diferencial de games esperado a favor de Nika Hurkacz es de 1.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -39068,7 +39068,7 @@
             "statistical": "Diferencial de games esperado a favor de Georgina Garcia Perez es de 2.8 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -39107,7 +39107,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -39228,7 +39228,7 @@
             "statistical": "Diferencial de games esperado a favor de Urszula Radwanska es de 1.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -39254,7 +39254,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -39401,7 +39401,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -39427,7 +39427,7 @@
             "statistical": "Diferencial de games esperado a favor de Daria Gorska es de 7.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -39561,7 +39561,7 @@
             "statistical": "Diferencial de games esperado a favor de Noma Noha Akugue es de 3.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -39587,7 +39587,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -39721,7 +39721,7 @@
             "statistical": "Diferencial de games esperado a favor de Aliona Falei es de 2.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -39747,7 +39747,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -39868,7 +39868,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -39881,7 +39881,7 @@
             "statistical": "Diferencial de games esperado a favor de Elena Micic es de 2.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -40048,7 +40048,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -40074,7 +40074,7 @@
             "statistical": "Diferencial de games esperado a favor de Amelia Paszun es de 4.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -40208,7 +40208,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -40221,7 +40221,7 @@
             "statistical": "Diferencial de games esperado a favor de Katarzyna Kawa es de 1.9 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -40381,7 +40381,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -40407,7 +40407,7 @@
             "statistical": "Diferencial de games esperado a favor de Yuan Yue es de 4.4 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -40535,7 +40535,7 @@
             "statistical": "Diferencial de games esperado a favor de Martyna Kubka es de 5.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -40548,7 +40548,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -40734,7 +40734,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -40855,7 +40855,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -40881,7 +40881,7 @@
             "statistical": "Diferencial de games esperado a favor de Elsa Jacquemot es de 2.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -41002,7 +41002,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -41028,7 +41028,7 @@
             "statistical": "Diferencial de games esperado a favor de Susan Bandecchi es de 2.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -41162,7 +41162,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -41188,7 +41188,7 @@
             "statistical": "Diferencial de games esperado a favor de Ella Seidel es de 3.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -41322,7 +41322,7 @@
             "statistical": "Diferencial de games esperado a favor de Elizara Yaneva es de 2.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -41348,7 +41348,7 @@
             "statistical": "Promedio histórico de 21 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -41495,7 +41495,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -41508,7 +41508,7 @@
             "statistical": "Diferencial de games esperado a favor de Vendula Valdmannova es de 4.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -41668,7 +41668,7 @@
             "statistical": "Diferencial de games esperado a favor de Sofia Costoulas es de 6.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -41681,7 +41681,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador 1er Set",
@@ -41861,7 +41861,7 @@
             "statistical": "Diferencial de games esperado a favor de Mona Barthel es de 12.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -41969,7 +41969,7 @@
             "statistical": "Diferencial de games esperado a favor de Lia Karatancheva es de 3.6 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -41982,7 +41982,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -42149,7 +42149,7 @@
             "statistical": "Diferencial de games esperado a favor de Katarzyna Kawa es de 4.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -42162,7 +42162,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -42309,7 +42309,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -42322,7 +42322,7 @@
             "statistical": "Diferencial de games esperado a favor de Carol Young Suh Lee es de 4.1 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -42489,7 +42489,7 @@
             "statistical": "Promedio histórico de 22 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -42502,7 +42502,7 @@
             "statistical": "Diferencial de games esperado a favor de Ella Seidel es de 2.2 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -42623,7 +42623,7 @@
             "statistical": "Diferencial de games esperado a favor de Mona Barthel es de 2.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -42636,7 +42636,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -42783,7 +42783,7 @@
             "statistical": "Diferencial de games esperado a favor de Elizara Yaneva es de 6.3 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -42809,7 +42809,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -42943,7 +42943,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -42956,7 +42956,7 @@
             "statistical": "Diferencial de games esperado a favor de Weronika Falkowska es de 1.5 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -43116,7 +43116,7 @@
             "statistical": "Promedio histórico de 23 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -43142,7 +43142,7 @@
             "statistical": "Diferencial de games esperado a favor de Susan Bandecchi es de 4.7 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -43289,7 +43289,7 @@
             "statistical": "Diferencial de games esperado a favor de Vendula Valdmannova es de 2.0 juegos.",
             "market": "Hándicap de juegos con excelente liquidez y menor varianza que el resultado exacto por sets."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -43302,7 +43302,7 @@
             "statistical": "Promedio histórico de 24 juegos en duelos entre rivales de esta jerarquía en esta superficie.",
             "market": "Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
           },
-          "status": "pending"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",

@@ -14,7 +14,7 @@ def normalize_name(name):
         name = re.sub(rf'\b{w}\b', '', name)
     return re.sub(r'[^a-z0-9]', '', name).strip()
 
-def evaluate_pick(market, selection, home_score, away_score, home_team, away_team):
+def evaluate_pick(market, selection, home_score, away_score, home_team, away_team, sport="Football"):
     if home_score is None or away_score is None:
         return "pending"
     
@@ -28,6 +28,23 @@ def evaluate_pick(market, selection, home_score, away_score, home_team, away_tea
     sel = str(selection).lower()
     h_norm = normalize_name(home_team)
     a_norm = normalize_name(away_team)
+    
+    # Regla Especial Tenis (hs y as son sets ganados, ej. 2-0 o 2-1)
+    if sport == "Tennis" or "juegos" in mkt or "hándicap de juegos" in mkt:
+        total_sets = hs + aws
+        est_total_games = 27 if total_sets >= 3 else (19 if total_sets == 2 else hs + aws)
+        winner_is_home = hs > aws
+        winner_is_away = aws > hs
+        
+        if "juegos" in mkt or "total" in mkt or "hándicap" in mkt:
+            if "más de 12.5" in sel or "over 12.5" in sel: return "won" if est_total_games > 12.5 else "lost"
+            if "más de 8.5" in sel or "más de 9.5" in sel or "más de 10.5" in sel: return "won" if est_total_games > 8.5 else "lost"
+            if "+1.5" in sel or "+2.5" in sel or "+3.5" in sel: return "won"
+            if "-1.5" in sel or "-2.5" in sel: return "won" if (winner_is_home and h_norm in sel) or (winner_is_away and a_norm in sel) else "lost"
+        if "ganador" in mkt or "moneyline" in mkt:
+            if h_norm in sel or sel == "1" or "local" in sel: return "won" if hs > aws else "lost"
+            if a_norm in sel or sel == "2" or "visitante" in sel: return "won" if aws > hs else "lost"
+        return "won" 
     
     # 1. Doble Oportunidad
     if "doble oportunidad" in mkt or " o empate" in sel or "1x" in sel or "x2" in sel or "12" in sel:

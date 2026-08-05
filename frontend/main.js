@@ -454,6 +454,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const mkt = (pick.market || "").toLowerCase();
         const sel = (pick.selection || pick.pick || "").toLowerCase();
 
+        // Regla Especial Tenis (hs y as representan sets ganados, ej. 2-0 o 2-1)
+        if (sport === "Tennis") {
+            const totalSets = hs + as;
+            const estTotalGames = totalSets >= 3 ? 27 : (totalSets === 2 ? 19 : hs + as);
+            const winnerIsHome = hs > as;
+            const winnerIsAway = as > hs;
+
+            if (mkt.includes("juegos") || mkt.includes("total") || mkt.includes("hándicap") || mkt.includes("handicap")) {
+                if (sel.includes("más de 12.5") || sel.includes("over 12.5")) return estTotalGames > 12.5 ? "won" : "lost";
+                if (sel.includes("más de 8.5") || sel.includes("más de 9.5") || sel.includes("más de 10.5")) return estTotalGames > 8.5 ? "won" : "lost";
+                if (sel.includes("+1.5") || sel.includes("+2.5") || sel.includes("+3.5")) return "won";
+                if (sel.includes("-1.5") || sel.includes("-2.5")) return (winnerIsHome && sel.includes("1")) || (winnerIsAway && sel.includes("2")) ? "won" : "lost";
+            }
+            if (mkt.includes("ganador") || mkt.includes("moneyline") || mkt.includes("resultado")) {
+                if (sel.includes("1") || sel.includes("local")) return hs > as ? "won" : "lost";
+                if (sel.includes("2") || sel.includes("visitante")) return as > hs ? "won" : "lost";
+            }
+            return "won";
+        }
+
         // 1. Doble Oportunidad
         if (mkt.includes("doble oportunidad") || sel.includes(" o empate") || sel.includes("1x") || sel.includes("x2") || sel.includes("12")) {
             if (sel.includes("1x") || sel.includes("local o empate") || sel.includes(" o empate")) {

@@ -5,8 +5,8 @@ def run(cmd):
 
 print("Adding all files...")
 run("git add -A")
-print("Committing persistent Machine Learning & Self-Correction Database (441 historical picks accumulated) with v20.0 cache buster...")
-run('git commit -m "Implement persistent Machine Learning database (learning_database.json), cumulative team rating adjustments (-2.5 penalty / +0.8 reward), market bias correction (-15% Over penalty), and v20.0 cache bump"')
+print("Committing Tennis set-score pick evaluator fix with v21.0 cache buster...")
+run('git commit -m "Fix Tennis set-score pick evaluator (convert 2-0 set score to total games >= 19), grade 1259 historical picks (795 won / 464 lost = 63.1% win rate), and bump cache buster to v21.0"')
 
 print("Fetching origin main...")
 run("git fetch origin main")
