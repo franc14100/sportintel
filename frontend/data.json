@@ -32607,7 +32607,7 @@
       "time": "14:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -32710,7 +32710,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Terence Atmane en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -32767,8 +32767,8 @@
       "time": "14:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -32877,7 +32877,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 69% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 68% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Juegos del Jugador (Individual)",
@@ -32890,7 +32890,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Matteo Arnaldi en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -32935,7 +32935,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -33024,7 +33024,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Alex Michelsen en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -33094,8 +33094,8 @@
       "time": "16:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -33204,7 +33204,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Jacob Fearnley en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -33217,7 +33217,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 70% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 60% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Juegos",
@@ -33261,7 +33261,7 @@
       "time": "16:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -33351,7 +33351,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Daniel Merida en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -33421,7 +33421,7 @@
       "time": "17:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -33518,7 +33518,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Botic Van De Zandschulp en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -33755,7 +33755,7 @@
       "time": "18:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -33852,7 +33852,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Valentin Royer en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -33922,8 +33922,8 @@
       "time": "19:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -34012,7 +34012,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Gael Monfils en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -34038,7 +34038,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 77% de que el encuentro se defina en el número de sets seleccionado, indicando gran competitividad entre ambos competidores.",
             "market": "Este mercado acumula 65% del volumen de apuestas orientado al Más de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -46203,7 +46203,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 1,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -46325,7 +46325,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 63% de que el encuentro se defina en el número de sets seleccionado, indicando gran competitividad entre ambos competidores.",
             "market": "Este mercado acumula 59% del volumen de apuestas orientado al Más de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Juegos (Más/Menos)",
@@ -46696,7 +46696,7 @@
       "time": "16:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -46786,7 +46786,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Maya Joint en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -46857,7 +46857,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -46972,7 +46972,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Liudmila Samsonova en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -47016,7 +47016,7 @@
       "time": "17:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -47132,7 +47132,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Catherine McNally en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -47176,7 +47176,7 @@
       "time": "18:00",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -47273,7 +47273,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Renata Zarazua en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Hándicap de Juegos",
@@ -47343,8 +47343,8 @@
       "time": "19:30",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -47433,7 +47433,7 @@
             "statistical": "La proyección actuarial estima un mínimo de 12.5 juegos ganados por Alexandra Eala en el encuentro.",
             "market": "Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
           },
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -47472,7 +47472,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 70% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 64% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Juegos",
