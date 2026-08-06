@@ -148,10 +148,6 @@ module.exports = async function handler(req, res) {
                             data.historical_tickets_registry = parsedData.historical_tickets_registry || data.historical_tickets_registry;
                             data.starting_bankroll = parsedData.starting_bankroll || data.starting_bankroll;
                             data.user_bets = parsedData.user_bets || data.user_bets;
-                            if (parsedData.star_ticket_1) data.star_ticket_1 = parsedData.star_ticket_1;
-                            if (parsedData.star_ticket_2) data.star_ticket_2 = parsedData.star_ticket_2;
-                            if (parsedData.star_ticket_3) data.star_ticket_3 = parsedData.star_ticket_3;
-                            if (parsedData.star_ticket_4) data.star_ticket_4 = parsedData.star_ticket_4;
                         }
                     } else {
                         console.log("[Data API] Datos de KV obsoletos o corruptos. Ignorando KV y usando data.json fresco.");

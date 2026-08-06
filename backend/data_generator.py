@@ -152,7 +152,10 @@ def fetch_live_matches():
     # Usar hora de Ecuador/Colombia (UTC-5)
     ecuador_time = datetime.now(timezone.utc) - timedelta(hours=5)
     today = ecuador_time.strftime("%Y-%m-%d")
-    cache = load_cache()
+    # Load cache and retain only entries for today
+    raw_cache = load_cache()
+    # Ensure cache only contains matches for the current day
+    cache = {eid: info for eid, info in raw_cache.items() if info.get('date') == today}
     new_events_found = 0
     
     sports_to_fetch = ["football", "tennis"]
@@ -198,9 +201,16 @@ def fetch_live_matches():
                                 "homeTeam": home,
                                 "awayTeam": away,
                                 "league": league,
-                                "time": time_display,
-                                "start_ts": start_ts,
                                 "status": status,
+                                "time": time_display,
+                                "date": today,
+                                "home_score": 0,
+                                "away_score": 0,
+                                "is_cup": False,
+                                "home_form_raw": "",
+                                "away_form_raw": "",
+                                "real_odds": {},
+                                "start_ts": start_ts,
                                 "sport": api_sport.capitalize()
                             }
                 except Exception:
@@ -1909,15 +1919,16 @@ def generate_daily_sports_data():
     # ═══════════════════════════════════════════════════════════════════════
     # SELECCIÓN TOP 30 FÚTBOL + TOP 20 TENIS MÁS SEGUROS (PEDIDO POR USUARIO)
     # ═══════════════════════════════════════════════════════════════════════
-        football_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'football']
+    football_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'football']
     tennis_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'tennis']
     basketball_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'basketball']
 
     total_analyzed = len(matches_data)
 
-    # MOTOR ESPN LIBRE (SIN LÍMITES DE PARTIDOS): Incluir TODOS los partidos de Fútbol, Tenis y Baloncesto en la pestaña de Análisis
     matches_data = football_matches + tennis_matches + basketball_matches
-    # Deduplicar la lista del dashboard principal para garantizar 0 partidos repetidos en la grilla
+    # Keep only matches scheduled for today
+    matches_data = [m for m in matches_data if m.get('date') == today]
+
     seen_grid_keys = set()
     clean_grid = []
     for md in matches_data:
@@ -1926,10 +1937,9 @@ def generate_daily_sports_data():
             seen_grid_keys.add(mkey)
             clean_grid.append(md)
     matches_data = clean_grid
-    
+
     for m in matches_data:
         m.pop('_safety_score', None)
-
 
     ## Guardar en JSON estructurado (en Vercel es /tmp, en GitHub Actions es local)
     is_vercel = os.environ.get("VERCEL") == "1"
@@ -1941,7 +1951,7 @@ def generate_daily_sports_data():
         if not os.path.exists(frontend_dir):
             os.makedirs(frontend_dir)
         json_path = os.path.join(frontend_dir, "data.json")
-    
+
     # Armar boleto estrella premium de forma inteligente (Simple vs Combinado, priorizando Fútbol y Tenis)
     priority_picks = []
     fallback_picks = []
@@ -1957,21 +1967,26 @@ def generate_daily_sports_data():
                 "odd": p['odd'],
                 "probability": p['probability'],
                 "reasoning": p['reasoning'],
-                "valid_for_ticket": p.get('valid_for_ticket', True)  # False = la API indica baja probabilidad
+                "status": m.get('status', 'pre'),
+                "valid_for_ticket": p.get('valid_for_ticket', True)
             }
             if 'Tarjeta' in p['market']:
                 continue
-                
+
+            if m.get('status') in ['post', 'finished', 'ended', 'completed']:
+                continue
+
             if sport in ['Football', 'Tennis', 'Basketball']:
                 priority_picks.append(pick_info)
             else:
                 fallback_picks.append(pick_info)
 
-    # Ordenar por seguridad/probabilidad descendente
-    priority_picks = sorted(priority_picks, key=lambda x: x['probability'], reverse=True)
+    football_picks = sorted([p for p in priority_picks if p['sport'] == 'Football'], key=lambda x: x['probability'], reverse=True)
+    tennis_picks = sorted([p for p in priority_picks if p['sport'] == 'Tennis'], key=lambda x: x['probability'], reverse=True)
+    other_priority = sorted([p for p in priority_picks if p['sport'] not in ['Football', 'Tennis']], key=lambda x: x['probability'], reverse=True)
     fallback_picks = sorted(fallback_picks, key=lambda x: x['probability'], reverse=True)
-    
-    usable_picks = priority_picks if len(priority_picks) >= 2 else (priority_picks + fallback_picks)
+
+    usable_picks = football_picks + tennis_picks + other_priority + fallback_picks
 
     # ═══════════════════════════════════════════════════════════════════════
     # FILTROS DE SEGURIDAD — OBJETIVO: WIN RATE >= 80%
@@ -2404,7 +2419,8 @@ def generate_daily_sports_data():
         global_used_set.update(local_matches)
         return True, refreshed, total
 
-    if raw_previous_json and raw_previous_json.get("date") == date_str and "star_ticket_1" in raw_previous_json:
+    # Disabled reuse of previous tickets to ensure only today's matches are generated
+    if False:
         print("[INFO] Boletos del día ya generados — validando picks con datos actuales...")
 
         st1 = raw_previous_json.get("star_ticket_1", {})
