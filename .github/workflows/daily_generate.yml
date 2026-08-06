@@ -6,10 +6,16 @@ on:
     - cron: '0 10 * * *'
   workflow_dispatch:  # Allow manual trigger
 
+# Prevent concurrent runs - cancel any in-progress run
+concurrency:
+  group: sportintel-data
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 20
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,22 +34,30 @@ jobs:
       - name: Clear date to force fresh generation
         run: |
           python -c "
-          import json
-          with open('frontend/data.json', 'r', encoding='utf-8') as f:
-              d = json.load(f)
-          d['date'] = ''
-          with open('frontend/data.json', 'w', encoding='utf-8') as f:
-              json.dump(d, f, ensure_ascii=False, indent=2)
-          print('Date cleared for fresh generation')
+          import json, os
+          path = 'frontend/data.json'
+          if os.path.exists(path):
+              with open(path, 'r', encoding='utf-8') as f:
+                  d = json.load(f)
+              d['date'] = ''
+              with open(path, 'w', encoding='utf-8') as f:
+                  json.dump(d, f, ensure_ascii=False, indent=2)
+              print('Date cleared for fresh generation')
+          else:
+              print('No existing data.json found, will be created fresh')
           "
 
       - name: Run data generator
         env:
           RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
           SPORT_API_KEY: ${{ secrets.SPORT_API_KEY }}
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+          UPSTASH_REDIS_REST_KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          UPSTASH_REDIS_REST_KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
         run: |
           python backend/data_generator.py
-          echo "Generator completed"
+          echo "Generator completed successfully"
 
       - name: Show generated tickets
         run: |
@@ -65,5 +79,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "SportIntel Bot"
           git add frontend/data.json
-          git diff --staged --quiet || git commit -m "Auto: Fresh data for $(date -u '+%Y-%m-%d') at 5AM Ecuador"
+          git diff --staged --quiet || git commit -m "Auto: Fresh data for $(date -u '+%Y-%m-%d') at 5AM Ecuador [skip ci]"
           git push

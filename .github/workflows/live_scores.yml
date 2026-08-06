@@ -5,23 +5,30 @@ on:
     - cron: '*/15 * * * *' # Cada 15 minutos
   workflow_dispatch: # Permite correrlo manualmente
 
+# Comparte el mismo grupo de concurrencia que el generador diario.
+# Si el generador diario está corriendo, este workflow espera.
+concurrency:
+  group: sportintel-data
+  cancel-in-progress: true
+
 jobs:
   update-scores:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-          
+          python-version: '3.11'
+
       - name: Run Score Updater
         run: python backend/update_scores.py
-        
+
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions[bot]'
