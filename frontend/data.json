@@ -1,8 +1,8 @@
 {
-    "date": "2026-08-05",
+    "date": "2026-08-07",
     "matches": [],
     "global_stats": {
-        "analyzed_today": 466,
+        "analyzed_today": 521,
         "avg_accuracy_40d": 46,
         "avg_accuracy_30d": 46,
         "total_picks_won": 36,
@@ -850,7 +850,7 @@
                     "pick": "Arsenal o Empate",
                     "odd": 1.13,
                     "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Arsenal hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-                    "status": "pending"
+                    "status": "won"
                 },
                 {
                     "match": "Noma Noha Akugue vs Weronika Falkowska",
@@ -859,13 +859,13 @@
                     "pick": "Noma Noha Akugue Más de 12.5 Juegos",
                     "odd": 1.64,
                     "reasoning": "Noma Noha Akugue promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
-                    "status": "pending"
+                    "status": "won"
                 }
             ],
             "total_odd": 1.85,
             "confidence": 83,
             "recommendation_stake": 8.0,
-            "status": "pending"
+            "status": "won"
         },
         {
             "date": "2026-08-05",
@@ -879,13 +879,13 @@
                     "pick": "Taylor Townsend Más de 12.5 Juegos",
                     "odd": 1.62,
                     "reasoning": "Taylor Townsend promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
-                    "status": "pending"
+                    "status": "won"
                 }
             ],
             "total_odd": 1.62,
             "confidence": 78,
             "recommendation_stake": 7.0,
-            "status": "pending"
+            "status": "won"
         },
         {
             "date": "2026-08-05",
@@ -899,13 +899,13 @@
                     "pick": "Magda Linette Más de 12.5 Juegos",
                     "odd": 1.65,
                     "reasoning": "Magda Linette promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
-                    "status": "pending"
+                    "status": "won"
                 }
             ],
             "total_odd": 1.65,
             "confidence": 76,
             "recommendation_stake": 7.0,
-            "status": "pending"
+            "status": "won"
         },
         {
             "date": "2026-08-05",
@@ -919,7 +919,7 @@
                     "pick": "Más de 2.5 Goles",
                     "odd": 1.25,
                     "reasoning": "xG proyectado: 4.6 goles combinados. Partido abierto.",
-                    "status": "pending"
+                    "status": "won"
                 },
                 {
                     "match": "Trujillanos vs Deportivo Táchira",
@@ -928,7 +928,7 @@
                     "pick": "Más de 2.5 Goles",
                     "odd": 1.25,
                     "reasoning": "xG proyectado: 4.6 goles combinados. Partido abierto.",
-                    "status": "pending"
+                    "status": "won"
                 },
                 {
                     "match": "Chelsea vs Juventus",
@@ -937,7 +937,7 @@
                     "pick": "Chelsea o Empate",
                     "odd": 1.26,
                     "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Chelsea hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-                    "status": "pending"
+                    "status": "won"
                 },
                 {
                     "match": "Anzoátegui FC vs Portuguesa",
@@ -946,7 +946,7 @@
                     "pick": "Más de 2.5 Goles",
                     "odd": 1.27,
                     "reasoning": "xG proyectado: 4.4 goles combinados. Partido abierto.",
-                    "status": "pending"
+                    "status": "won"
                 },
                 {
                     "match": "Henrique Rocha vs Martin Damm",
@@ -955,7 +955,7 @@
                     "pick": "Henrique Rocha Más de 12.5 Juegos",
                     "odd": 1.8,
                     "reasoning": "Henrique Rocha promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
-                    "status": "pending"
+                    "status": "won"
                 },
                 {
                     "match": "Mariano Navone vs Matteo Berrettini",
@@ -964,12 +964,32 @@
                     "pick": "Mariano Navone Más de 12.5 Juegos",
                     "odd": 1.52,
                     "reasoning": "Mariano Navone promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
-                    "status": "pending"
+                    "status": "won"
                 }
             ],
             "total_odd": 6.84,
             "confidence": 50,
             "recommendation_stake": 1.0,
+            "status": "won"
+        },
+        {
+            "date": "2026-08-07",
+            "ticket_id": "TK-154085",
+            "name": "Boleto Seguro (Boleto 1)",
+            "selections": [],
+            "total_odd": 1.0,
+            "confidence": 85,
+            "recommendation_stake": 8.0,
+            "status": "pending"
+        },
+        {
+            "date": "2026-08-07",
+            "ticket_id": "TK-447928",
+            "name": "Boleto de Valor (Boleto 2)",
+            "selections": [],
+            "total_odd": 1.0,
+            "confidence": 75,
+            "recommendation_stake": 7.0,
             "status": "pending"
         }
     ],
