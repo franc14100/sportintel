@@ -2859,15 +2859,33 @@ def generate_daily_sports_data():
     }
 
     # Evitar duplicados del mismo día: conservar boletos de hoy si ya existían para mantener fijos los IDs y selecciones
-    today_tickets_exist = any(t.get("date") == date_str for t in historical_registry)
+    today_tickets_exist = any(t.get("date") == date_str and len(t.get("selections", [])) > 0 for t in historical_registry)
     if not today_tickets_exist:
-        historical_registry.append(new_ticket_1)
-        historical_registry.append(new_ticket_2)
+        # Only add tickets that actually have selections (avoid empty @1.00 phantom tickets)
+        if star_selections_1:
+            historical_registry.append(new_ticket_1)
+        if star_selections_2:
+            historical_registry.append(new_ticket_2)
         if star_selections_3:
             historical_registry.append(new_ticket_3)
         if star_selections_4:
             historical_registry.append(new_ticket_4)
-    
+    else:
+        # Update existing today tickets with latest odds/status but keep their ticket_id
+        for t in historical_registry:
+            if t.get("date") != date_str or len(t.get("selections", [])) == 0:
+                continue
+            if "Boleto 1" in t.get("name", "") and star_selections_1:
+                for sel in t.get("selections", []):
+                    for new_s in star_selections_1:
+                        if sel.get("match") == new_s.get("match"):
+                            sel["odd"] = new_s.get("odd", sel["odd"])
+            elif "Boleto 2" in t.get("name", "") and star_selections_2:
+                for sel in t.get("selections", []):
+                    for new_s in star_selections_2:
+                        if sel.get("match") == new_s.get("match"):
+                            sel["odd"] = new_s.get("odd", sel["odd"])
+
     # Mantener el registro compacto (Últimos 30 boletos recomendados)
     historical_registry = historical_registry[-30:]
 

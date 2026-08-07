@@ -29591,21 +29591,94 @@
       "date": "2026-08-07",
       "ticket_id": "TK-421441",
       "name": "Boleto Seguro (Boleto 1)",
-      "selections": [],
-      "total_odd": 1.0,
-      "confidence": 85,
+      "type": "Combinado",
+      "selections": [
+        {
+          "match": "Bayern Munich vs Aston Villa",
+          "sport": "Football",
+          "market": "Doble Oportunidad",
+          "pick": "Bayern Munich o Empate",
+          "odd": 1.11,
+          "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Bayern Munich hace casi imposible un resultado diferente al cubierto por esta apuesta.",
+          "status": "pending"
+        },
+        {
+          "match": "Vendula Valdmannova vs Carol Young Suh Lee",
+          "sport": "Tennis",
+          "market": "Juegos del Jugador (Individual)",
+          "pick": "Vendula Valdmannova Más de 12.5 Juegos",
+          "odd": 1.62,
+          "reasoning": "Vendula Valdmannova promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
+          "status": "pending"
+        }
+      ],
+      "total_odd": 1.8,
+      "confidence": 82,
       "recommendation_stake": 8.0,
-      "status": "won"
+      "status": "pending"
     },
     {
       "date": "2026-08-07",
-      "ticket_id": "TK-340603",
+      "ticket_id": "TK-340683",
       "name": "Boleto de Valor (Boleto 2)",
-      "selections": [],
-      "total_odd": 1.0,
+      "type": "Simple",
+      "selections": [
+        {
+          "match": "Ben Shelton vs Zizou Bergs",
+          "sport": "Tennis",
+          "market": "Juegos del Jugador (Individual)",
+          "pick": "Zizou Bergs Más de 12.5 Juegos",
+          "odd": 1.62,
+          "reasoning": "Zizou Bergs promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
+          "status": "pending"
+        }
+      ],
+      "total_odd": 1.62,
       "confidence": 75,
       "recommendation_stake": 7.0,
-      "status": "won"
+      "status": "pending"
+    },
+    {
+      "date": "2026-08-07",
+      "ticket_id": "TK-371001",
+      "name": "Boleto Extra (Boleto 3)",
+      "type": "Simple",
+      "selections": [
+        {
+          "match": "Joao Fonseca vs Casper Ruud",
+          "sport": "Tennis",
+          "market": "Juegos del Jugador (Individual)",
+          "pick": "Casper Ruud Más de 12.5 Juegos",
+          "odd": 1.57,
+          "reasoning": "Casper Ruud promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
+          "status": "pending"
+        }
+      ],
+      "total_odd": 1.57,
+      "confidence": 76,
+      "recommendation_stake": 7.0,
+      "status": "pending"
+    },
+    {
+      "date": "2026-08-07",
+      "ticket_id": "TK-502992",
+      "name": "Apuesta Soñadora (Boleto 4)",
+      "type": "Combinado Soñador",
+      "selections": [
+        {
+          "match": "Wolverhampton Wanderers vs Port Vale",
+          "sport": "Football",
+          "market": "Ambos Equipos Anotan",
+          "pick": "Sí",
+          "odd": 1.83,
+          "reasoning": "La tendencia táctica de anotación para este compromiso es alta. Ambos equipos plantean esquemas de ataque abierto con líneas ofensivas adelantadas.",
+          "status": "pending"
+        }
+      ],
+      "total_odd": 1.83,
+      "confidence": 50,
+      "recommendation_stake": 1.0,
+      "status": "pending"
     }
   ],
   "starting_bankroll": 53.67,
