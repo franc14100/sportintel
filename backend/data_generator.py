@@ -659,8 +659,9 @@ TEAM_RATINGS = {
 def fetch_espn_fallback_matches():
     """Busca partidos usando la API pública y 100% GRATUITA de ESPN (0 costo de cuota)."""
     ecuador_time = datetime.now(timezone.utc) - timedelta(hours=5)
-    today_str = ecuador_time.strftime("%Y%m%d")
-    
+    today_str = ecuador_time.strftime("%Y%m%d")      # For ESPN URL: YYYYMMDD
+    today_date_str = ecuador_time.strftime("%Y-%m-%d")  # For date field: YYYY-MM-DD
+
     endpoints = [
         ("soccer/all", "Football"),
         ("tennis/atp", "Tennis"),
@@ -695,10 +696,12 @@ def fetch_espn_fallback_matches():
                         
                         start_date = comps.get("date", "")
                         time_str = "15:00"
+                        date_str_match = today_date_str  # Default to today
                         if "T" in start_date:
                             try:
                                 dt = datetime.fromisoformat(start_date.replace("Z", "+00:00")) - timedelta(hours=5)
                                 time_str = dt.strftime("%H:%M")
+                                date_str_match = dt.strftime("%Y-%m-%d")
                             except Exception:
                                 pass
                         
@@ -713,6 +716,7 @@ def fetch_espn_fallback_matches():
                                 "league": league_name,
                                 "sport": sport,
                                 "time": time_str,
+                                "date": date_str_match,
                                 "stadium": "Cancha Principal",
                                 "status": "pre",
                                 "home_score": 0,
@@ -1789,6 +1793,7 @@ def generate_daily_sports_data():
             "league": match["league"],
             "sport": sport,
             "time": match["time"],
+            "date": match.get("date", today),
             "stadium": match["stadium"],
             "status": match.get("status", "pre"),
             "home_score": match.get("home_score"),
@@ -1926,8 +1931,8 @@ def generate_daily_sports_data():
     total_analyzed = len(matches_data)
 
     matches_data = football_matches + tennis_matches + basketball_matches
-    # Keep only matches scheduled for today
-    matches_data = [m for m in matches_data if m.get('date') == today]
+    # Keep only matches scheduled for today (date_str is YYYY-MM-DD string)
+    matches_data = [m for m in matches_data if m.get('date', date_str) == date_str]
 
     seen_grid_keys = set()
     clean_grid = []
