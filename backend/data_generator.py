@@ -1697,15 +1697,12 @@ def generate_daily_sports_data():
                 "statistical": f"El modelo de sets estima una probabilidad del {random.randint(55, 80)}% de que el encuentro se defina en el número de sets seleccionado, indicando {'poca resistencia' if abs(rating_diff) > 5 else 'gran competitividad'} entre ambos competidores.",
                 "market": f"Este mercado acumula {random.randint(55, 72)}% del volumen de apuestas orientado al {'Menos' if abs(rating_diff) > 5 else 'Más'} de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
             }
-            analysis_games_tennis = {
-                "tactical": f"En el mercado de juegos totales, la consistencia con el servicio de {winner_tennis} mantendrá los games ajustados.",
-                "statistical": f"Promedio histórico de {random.randint(21, 24)} juegos en duelos entre rivales de esta jerarquía en esta superficie.",
-                "market": f"Línea de juegos estabilizada en el mercado internacional con alto volumen de apuestas inteligentes."
-            }
-            analysis_player_games = {
-                "tactical": f"{winner_tennis} promedia conservar más del 82% de sus juegos de saque en este tipo de cancha.",
-                "statistical": f"La proyección actuarial estima un mínimo de 12.5 juegos ganados por {winner_tennis} en el encuentro.",
-                "market": f"Cuota de valor positivo (+EV) recomendada para boletos combinados de tenis de bajo riesgo."
+            is_strong_fav = abs(rating_diff) > 4 or max(prob_home, prob_away) >= 62
+
+            analysis_hset_tennis = {
+                "tactical": f"{winner_tennis} domina el servicio y la devolución en esta superficie. Se proyecta una victoria solvente en 2 sets directos (2-0).",
+                "statistical": f"Con un {int(max(prob_home, prob_away))}% de efectividad proyectada, {winner_tennis} resuelve más del 78% de sus victorias sin ceder parciales.",
+                "market": f"Mercado de Hándicap de Sets (-1.5) con alto valor estadístico (+EV) para favoritos en partidos al mejor de 3 sets."
             }
             analysis_handicap_tennis = {
                 "tactical": f"El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
@@ -1729,45 +1726,36 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
-                    "market": "Total de Juegos (Más/Menos)",
-                    "selection": "Menos de 22.5 Juegos" if abs(rating_diff) > 7 else "Más de 21.5 Juegos",
-                    "odd": round(random.uniform(1.70, 2.05), 2),
-                    "probability": random.randint(58, 74),
-                    "risk": "Medium",
-                    "reasoning": analysis_games_tennis,
-                    "status": "pending"
-                },
-                {
-                    "market": "Total de Sets (Más/Menos)",
-                    "selection": "Menos de 2.5 Sets" if abs(rating_diff) > 5 else "Más de 2.5 Sets",
-                    "odd": round(random.uniform(1.65, 2.15), 2),
-                    "probability": random.randint(55, 72),
-                    "risk": "Medium",
-                    "reasoning": analysis_sets_tennis,
-                    "status": "pending"
-                },
-                {
-                    "market": "Juegos del Jugador (Individual)",
-                    "selection": f"{winner_tennis} Más de 12.5 Juegos",
-                    "odd": round(random.uniform(1.45, 1.85), 2),
-                    "probability": random.randint(62, 78),
-                    "risk": "Low",
-                    "reasoning": analysis_player_games,
+                    "market": "Hándicap de Sets",
+                    "selection": f"{winner_tennis} -1.5 Sets (Gana 2-0)" if is_strong_fav else f"{winner_tennis} +1.5 Sets",
+                    "odd": round(random.uniform(1.50, 1.95), 2),
+                    "probability": int(max(prob_home, prob_away) * 0.94) if is_strong_fav else random.randint(60, 72),
+                    "risk": "Low" if is_strong_fav else "Medium",
+                    "reasoning": analysis_hset_tennis,
                     "status": "pending"
                 },
                 {
                     "market": "Hándicap de Juegos",
-                    "selection": f"{winner_tennis} -2.5 Juegos" if abs(rating_diff) > 5 else f"{winner_tennis} +1.5 Juegos",
-                    "odd": round(random.uniform(1.65, 1.95), 2),
-                    "probability": random.randint(58, 75),
-                    "risk": "Medium",
+                    "selection": f"{winner_tennis} -2.5 Juegos" if is_strong_fav else f"{winner_tennis} +1.5 Juegos",
+                    "odd": round(random.uniform(1.60, 1.90), 2),
+                    "probability": random.randint(62, 76),
+                    "risk": "Low" if is_strong_fav else "Medium",
                     "reasoning": analysis_handicap_tennis,
+                    "status": "pending"
+                },
+                {
+                    "market": "Total de Sets (Más/Menos)",
+                    "selection": "Menos de 2.5 Sets" if is_strong_fav else "Más de 2.5 Sets",
+                    "odd": round(random.uniform(1.55, 1.95), 2),
+                    "probability": random.randint(60, 75),
+                    "risk": "Low" if is_strong_fav else "Medium",
+                    "reasoning": analysis_sets_tennis,
                     "status": "pending"
                 },
                 {
                     "market": "Ganador 1er Set",
                     "selection": f"{winner_tennis} Ganador 1er Set",
-                    "odd": round(random.uniform(1.35, 1.75), 2),
+                    "odd": round(random.uniform(1.35, 1.70), 2),
                     "probability": int(max(prob_home, prob_away) * 0.92),
                     "risk": "Low" if max(prob_home, prob_away) > 65 else "Medium",
                     "reasoning": analysis_set1_tennis,

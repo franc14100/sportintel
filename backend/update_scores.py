@@ -30,21 +30,38 @@ def evaluate_pick(market, selection, home_score, away_score, home_team, away_tea
     a_norm = normalize_name(away_team)
     
     # Regla Especial Tenis (hs y as son sets ganados, ej. 2-0 o 2-1)
-    if sport == "Tennis" or "juegos" in mkt or "hándicap de juegos" in mkt:
+    if sport == "Tennis" or "sets" in mkt or "hándicap de sets" in mkt or "hándicap de juegos" in mkt:
         total_sets = hs + aws
         est_total_games = 27 if total_sets >= 3 else (19 if total_sets == 2 else hs + aws)
         winner_is_home = hs > aws
         winner_is_away = aws > hs
         
-        if "juegos" in mkt or "total" in mkt or "hándicap" in mkt:
+        if "sets" in mkt or "set" in mkt:
+            if "menos de 2.5" in sel:
+                return "won" if total_sets < 2.5 else "lost"
+            if "más de 2.5" in sel:
+                return "won" if total_sets > 2.5 else "lost"
+            if "-1.5" in sel or "2-0" in sel or "gana 2-0" in sel:
+                if (winner_is_home and hs == 2 and aws == 0 and h_norm in sel) or (winner_is_away and aws == 2 and hs == 0 and a_norm in sel):
+                    return "won"
+                return "lost"
+            if "+1.5" in sel:
+                if (h_norm in sel and hs >= 1) or (a_norm in sel and aws >= 1):
+                    return "won"
+                return "lost"
+
+        if "juegos" in mkt or "hándicap" in mkt:
             if "más de 12.5" in sel or "over 12.5" in sel: return "won" if est_total_games > 12.5 else "lost"
             if "más de 8.5" in sel or "más de 9.5" in sel or "más de 10.5" in sel: return "won" if est_total_games > 8.5 else "lost"
             if "+1.5" in sel or "+2.5" in sel or "+3.5" in sel: return "won"
-            if "-1.5" in sel or "-2.5" in sel: return "won" if (winner_is_home and h_norm in sel) or (winner_is_away and a_norm in sel) else "lost"
-        if "ganador" in mkt or "moneyline" in mkt:
+            if "-1.5" in sel or "-2.5" in sel or "-3.5" in sel: return "won" if (winner_is_home and h_norm in sel) or (winner_is_away and a_norm in sel) else "lost"
+
+        if "ganador" in mkt or "moneyline" in mkt or "1er set" in mkt:
             if h_norm in sel or sel == "1" or "local" in sel: return "won" if hs > aws else "lost"
             if a_norm in sel or sel == "2" or "visitante" in sel: return "won" if aws > hs else "lost"
-        return "won" 
+        
+        return "won" if (winner_is_home and h_norm in sel) or (winner_is_away and a_norm in sel) else "lost"
+
     
     # 1. Doble Oportunidad
     if "doble oportunidad" in mkt or " o empate" in sel or "1x" in sel or "x2" in sel or "12" in sel:
