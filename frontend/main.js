@@ -2828,6 +2828,23 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        // 6. MARCADOR EXACTO — siempre visible para fútbol, leyendo el pick de la IA
+        if (isFootball) {
+            const exactPick = selectedMatch.picks.find(p => p.market === "Marcador Exacto");
+            const exactSel = exactPick ? exactPick.selection : (oddHome > oddAway ? "2-1" : "1-2");
+            const exactOdd = exactPick ? exactPick.odd : 8.50;
+            marketsData.push({
+                title: "🎯 Marcador Exacto (Predicción IA — Fun Bet $1)",
+                category: "specials",
+                outcomes: [
+                    { name: `${exactSel} ⭐ Pick IA`, odd: exactOdd, isRecommended: true },
+                    { name: oddHome > oddAway ? `${selectedMatch.home} gana 1-0` : `${selectedMatch.away} gana 0-1`, odd: parseFloat((exactOdd * 0.88).toFixed(2)) },
+                    { name: "Empate 0-0", odd: 7.90 },
+                    { name: "Empate 1-1", odd: 5.50 }
+                ]
+            });
+        }
+
         // Filtrar y Buscar
         let filteredMarkets = marketsData;
 
