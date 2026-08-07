@@ -103,6 +103,12 @@ def evaluate_pick(market, selection, home_score, away_score, home_team, away_tea
         if sel == "2" or a_norm in sel or "visitante" in sel: return "won" if aws > hs else "lost"
         if sel == "x" or "empate" in sel: return "won" if hs == aws else "lost"
 
+    # 6. Marcador Exacto / Correcto
+    if "marcador exacto" in mkt or "marcador correcto" in mkt:
+        score_str = f"{hs}-{aws}"
+        sel_clean = sel.strip().replace(" ", "")
+        return "won" if sel_clean == score_str else "lost"
+
     return "pending"
 
 def get_espn_events(sport_endpoint):

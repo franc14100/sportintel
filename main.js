@@ -2895,7 +2895,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Quick Bet Registration helper (Global)
     window.registerQuickBet = (matchName, marketName, selectionName, oddVal) => {
-        const defaultStake = 5;
+        const isMarcadorExacto = marketName && marketName.includes('Marcador Exacto');
+        const defaultStake = isMarcadorExacto ? 1 : 5;
         const stakeInput = prompt(`📌 REGISTRAR APUESTA EN TU BANKROLL:\n\nPartido: ${matchName}\nSelección: ${selectionName} (${marketName})\nCuota: @${parseFloat(oddVal).toFixed(2)}\n\n¿Cuánto deseas apostar ($)?`, defaultStake);
         
         if (stakeInput === null) return;
