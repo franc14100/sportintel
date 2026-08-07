@@ -3261,6 +3261,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const roi = resolvedStakes > 0 ? (netProfit / resolvedStakes) * 100 : 0;
         const winrate = resolvedBetsCount > 0 ? (wonBets / resolvedBetsCount) * 100 : 0;
 
+        // Average odd: mean of all resolved bets' odds
+        let totalOddsSum = 0;
+        let totalOddsCount = 0;
+        userBets.forEach(bet => {
+            if (bet.deleted) return;
+            if ((bet.status === 'won' || bet.status === 'lost') && bet.odd > 0) {
+                totalOddsSum += parseFloat(bet.odd) || 0;
+                totalOddsCount++;
+            }
+        });
+        const avgOdd = totalOddsCount > 0 ? totalOddsSum / totalOddsCount : 0;
+
         // Render card metrics
         const bankrollAvailVal = document.getElementById("bankroll-available-val");
         if (bankrollAvailVal) bankrollAvailVal.textContent = `$${availableBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -3286,6 +3298,14 @@ document.addEventListener("DOMContentLoaded", () => {
             bankrollRoiVal.textContent = `${sign}${roi.toFixed(1)}%`;
         }
         if (bankrollWinrateVal) bankrollWinrateVal.textContent = `${winrate.toFixed(1)}%`;
+
+        // Cuota Promedio
+        const avgOddEl = document.getElementById('bankroll-avg-odd-val');
+        if (avgOddEl) {
+            avgOddEl.textContent = avgOdd > 0 ? `@${avgOdd.toFixed(2)}` : '@—';
+            // Color hint: green if avg odd >= 1.5, yellow if < 1.5
+            avgOddEl.style.color = avgOdd >= 1.5 ? '#a78bfa' : avgOdd > 0 ? '#fbbf24' : '#a78bfa';
+        }
 
         // Dynamic Projections Logic (Monthly Recalibration Model)
         let activeDays = 1;
