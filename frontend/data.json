@@ -2723,8 +2723,8 @@
       "time": "15:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 2,
+      "status": "post",
+      "home_score": 3,
       "away_score": 4,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -13673,7 +13673,7 @@
       "time": "15:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 2,
       "away_score": 1,
       "home_form": "W---D---W---W",
@@ -26655,8 +26655,8 @@
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 1,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -26899,7 +26899,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 83% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El analista táctico afirma que Defensa y Justicia explotará la banda izquierda de su rival debido a su lentitud.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Más/Menos Goles",
@@ -26913,7 +26913,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -26973,7 +26973,7 @@
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -30073,9 +30073,9 @@
       "time": "15:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 1,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -30324,7 +30324,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 72% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El cuerpo técnico de Quilmes probó una formación ultra-ofensiva en el último entrenamiento.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -30337,7 +30337,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 80% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "won"
+          "status": "void"
         },
         {
           "market": "Marcador Exacto",
@@ -30370,8 +30370,8 @@
       "time": "15:30",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
+      "status": "post",
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -30674,8 +30674,8 @@
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 1,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -30896,7 +30896,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 74% del volumen de apuestas sharps orientado a este resultado. El rumor: 'Tensiones en el vestuario de San Martín (San Juan) tras las declaraciones de su estrella en redes sociales.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Más/Menos Goles",
@@ -33076,7 +33076,7 @@
       "time": "17:30",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -34267,7 +34267,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 1,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -34530,7 +34530,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 78% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El plantel de Fortaleza sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -37904,9 +37904,9 @@
       "time": "15:30",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
-      "away_score": 3,
+      "status": "post",
+      "home_score": 2,
+      "away_score": 4,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -41826,9 +41826,9 @@
       "time": "15:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 1,
-      "away_score": 2,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -42136,7 +42136,7 @@
       "time": "15:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
       "away_score": 1,
       "home_form": "W---D---W---W",
@@ -42455,7 +42455,7 @@
       "time": "17:30",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -43055,7 +43055,7 @@
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -45176,7 +45176,7 @@
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
