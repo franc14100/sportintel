@@ -14,9 +14,9 @@
       "time": "10:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -236,7 +236,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -5168,9 +5168,9 @@
       "time": "08:30",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 2,
-      "away_score": 2,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -5357,7 +5357,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 93%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.07 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -5370,7 +5370,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 16% según el modelo. El 68% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.08 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         },
         {
           "market": "Resultado Final (1X2)",
@@ -5410,7 +5410,7 @@
             "statistical": "Probabilidad implícita estimada del 69%. Mercado estándar disponible en 1xBet.",
             "market": "Opción segura para boletos combinados o de valor sin arriesgar en mercados volátiles."
           },
-          "status": "void"
+          "status": "lost"
         },
         {
           "market": "Marcador Exacto",
@@ -10281,8 +10281,8 @@
       "time": "09:45",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 0,
+      "status": "post",
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -10558,7 +10558,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 80% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "won"
         },
         {
           "market": "Marcador Exacto",
@@ -10591,7 +10591,7 @@
       "time": "12:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -12173,8 +12173,8 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 3,
+      "status": "post",
+      "home_score": 4,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -12462,7 +12462,7 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -12763,9 +12763,9 @@
       "time": "10:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 0,
-      "away_score": 1,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -12985,7 +12985,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 63% del volumen de apuestas sharps orientado a este resultado. El rumor: 'La prensa reporta que Rangers cambiará su portero titular para dar rodaje en este partido clave.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Doble Oportunidad",
@@ -13362,7 +13362,7 @@
       "time": "12:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -14622,9 +14622,9 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 1,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -14877,7 +14877,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ambos Equipos Anotan",
@@ -14891,7 +14891,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 67% del volumen de apuestas sharps orientado a este resultado. El rumor: 'La prensa reporta que Zenit St Petersburg cambiará su portero titular para dar rodaje en este partido clave.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -14937,8 +14937,8 @@
       "time": "12:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
+      "status": "in",
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -15877,7 +15877,7 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -16179,8 +16179,8 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 0,
+      "status": "post",
+      "home_score": 2,
       "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -16429,7 +16429,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ambos Equipos Anotan",
@@ -16443,7 +16443,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 68% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El analista táctico afirma que Zulte-Waregem explotará la banda izquierda de su rival debido a su lentitud.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -16502,7 +16502,7 @@
       "time": "11:30",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -18002,9 +18002,9 @@
       "time": "10:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 0,
-      "away_score": 1,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -18253,7 +18253,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -18281,7 +18281,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 63% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El plantel de Rapid Vienna sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -18340,9 +18340,9 @@
       "time": "10:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -18592,7 +18592,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 76% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El analista táctico afirma que Wolfsberger explotará la banda izquierda de su rival debido a su lentitud.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -18651,7 +18651,7 @@
       "time": "12:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -20838,9 +20838,9 @@
       "time": "08:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 2,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -21062,7 +21062,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 78% del volumen de apuestas sharps orientado a este resultado. El rumor: 'La prensa reporta que Northampton on Chenecks cambiará su portero titular para dar rodaje en este partido clave.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -21090,7 +21090,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -21149,9 +21149,9 @@
       "time": "08:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -21391,7 +21391,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Ambos Equipos Anotan",
@@ -21405,7 +21405,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 63% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El plantel de Camberley Town sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -21432,7 +21432,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 73% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         },
         {
           "market": "Más/Menos Goles",
@@ -21446,7 +21446,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Marcador Exacto",
@@ -21795,7 +21795,7 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -22071,9 +22071,9 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -22289,7 +22289,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -22330,7 +22330,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -22343,7 +22343,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 75% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         },
         {
           "market": "Marcador Exacto",
@@ -22376,8 +22376,8 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
+      "status": "post",
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -22655,7 +22655,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 74% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "won"
         },
         {
           "market": "Marcador Exacto",
@@ -22688,9 +22688,9 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 2,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -22939,7 +22939,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 63% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El analista táctico afirma que Roman Glass St. George explotará la banda izquierda de su rival debido a su lentitud.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -23302,8 +23302,8 @@
       "time": "09:45",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
+      "status": "post",
+      "home_score": 2,
       "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -23538,7 +23538,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -24237,9 +24237,9 @@
       "time": "09:30",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -24542,9 +24542,9 @@
       "time": "09:30",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
-      "away_score": 1,
+      "status": "post",
+      "home_score": 3,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -24778,7 +24778,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -24837,7 +24837,7 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -25154,9 +25154,9 @@
       "time": "11:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -25764,9 +25764,9 @@
       "time": "10:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -26000,7 +26000,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 70% del volumen de apuestas sharps orientado a este resultado. El rumor: 'Tensiones en el vestuario de Aalesund tras las declaraciones de su estrella en redes sociales.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -27578,7 +27578,7 @@
       "time": "12:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -31568,8 +31568,8 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
+      "status": "post",
+      "home_score": 3,
       "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -31758,7 +31758,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -31812,7 +31812,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 79% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "won"
         },
         {
           "market": "Marcador Exacto",
@@ -31827,7 +31827,7 @@
             "statistical": "Apuesta de Alto Retorno (@20.0): inversion fija de $1.00 USD para buscar una ganancia neta de $19.00 USD si el partido termina 3-1.",
             "market": "Cuota de valor @20.0 en 1xBet para Marcador Exacto 3-1. Excelente opcion para entradas fijas de 1 dolar."
           },
-          "status": "lost"
+          "status": "won"
         }
       ],
       "real_odds": {}
@@ -33379,8 +33379,8 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
+      "status": "post",
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -34576,7 +34576,7 @@
       "time": "11:30",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -35749,7 +35749,7 @@
       "time": "09:00",
       "date": "2026-08-09",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
       "away_score": 1,
       "home_form": "W---D---W---W",
@@ -49540,7 +49540,8 @@
     "total_odd": 1.69,
     "confidence": 77,
     "reasoning": "⚡ Combinado de protección. Se agregó Hallam vs Irlam para asegurar cuota total >= @1.50 (Cuota Final: @1.69).",
-    "recommendation_stake": 7.0
+    "recommendation_stake": 7.0,
+    "status": "won"
   },
   "star_ticket_3": {
     "type": "Combinado",
