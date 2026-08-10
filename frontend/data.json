@@ -648,9 +648,9 @@
       "time": "13:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -941,7 +941,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 2,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -1163,7 +1163,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -1190,7 +1190,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 71% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El plantel de C.D. Nacional sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -1540,7 +1540,7 @@
       "time": "13:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
       "away_score": 1,
       "home_form": "W---D---W---W",
@@ -1863,8 +1863,8 @@
       "time": "13:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 2,
+      "status": "post",
+      "home_score": 3,
       "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -3672,7 +3672,7 @@
       "time": "13:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 1,
       "away_score": 1,
       "home_form": "W---D---W---W",
@@ -3995,7 +3995,7 @@
       "time": "13:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
       "away_score": 2,
       "home_form": "W---D---W---W",
@@ -6403,7 +6403,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -7305,7 +7305,7 @@
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -9671,7 +9671,8 @@
     "total_odd": 2.15,
     "confidence": 76,
     "reasoning": "⚡ Combinado de protección. Se agregó Iga Swiatek vs Diana Shnaider para asegurar cuota total >= @1.50 (Cuota Final: @2.15).",
-    "recommendation_stake": 7.0
+    "recommendation_stake": 7.0,
+    "status": "lost"
   },
   "star_ticket_2": {
     "type": "Simple",
