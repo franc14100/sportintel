@@ -14,7 +14,7 @@
       "time": "14:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -939,8 +939,8 @@
       "time": "14:15",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
+      "status": "in",
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -1542,7 +1542,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -1864,8 +1864,8 @@
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 1,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -2059,7 +2059,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 73% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El cuerpo técnico de Jong PSV probó una formación ultra-ofensiva en el último entrenamiento.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -2100,7 +2100,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -2146,7 +2146,7 @@
       "time": "12:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 2,
       "away_score": 2,
       "home_form": "W---D---W---W",
@@ -2455,7 +2455,7 @@
       "time": "12:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -2771,7 +2771,7 @@
       "time": "12:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -3673,8 +3673,8 @@
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 1,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -3949,7 +3949,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 80% del volumen de apuestas sharps orientado a este resultado. El rumor: 'La prensa reporta que All Boys cambiará su portero titular para dar rodaje en este partido clave.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -6401,9 +6401,9 @@
       "time": "14:00",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -7304,7 +7304,7 @@
       "time": "14:30",
       "date": "2026-08-10",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
