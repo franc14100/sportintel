@@ -1875,7 +1875,7 @@
       "time": "05:00",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -4581,7 +4581,7 @@
       "time": "19:30",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "postponed",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -27915,9 +27915,9 @@
       "time": "05:30",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "in",
+      "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -28170,7 +28170,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Ambos Equipos Anotan",
@@ -28197,7 +28197,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 74% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         },
         {
           "market": "Marcador Exacto",
