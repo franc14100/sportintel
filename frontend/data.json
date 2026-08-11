@@ -350,7 +350,7 @@
       "time": "18:30",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -24889,7 +24889,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
+      "home_score": 3,
       "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -25123,7 +25123,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 68% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El cuerpo técnico de Boca Juniors probó una formación ultra-ofensiva en el último entrenamiento.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -25824,7 +25824,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -30424,7 +30424,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 0,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -32056,7 +32056,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 1,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -32158,7 +32158,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 72% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 58% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -32217,7 +32217,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -32385,7 +32385,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 1,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -32721,7 +32721,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -36157,7 +36157,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -36319,7 +36319,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -36480,7 +36480,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 1,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -36640,7 +36640,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -36769,7 +36769,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 70% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 72% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -37285,7 +37285,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -37614,7 +37614,7 @@
       "stadium": "Cancha Principal",
       "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
