@@ -2771,7 +2771,7 @@
       "time": "12:30",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "canceled",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -5484,8 +5484,8 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 2,
-      "away_score": 1,
+      "home_score": 3,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -5763,7 +5763,7 @@
             "statistical": "Apuesta de Alto Retorno (@8.5): inversion fija de $1.00 USD para buscar una ganancia neta de $7.50 USD si el partido termina 2-1.",
             "market": "Cuota de valor @8.5 en 1xBet para Marcador Exacto 2-1. Excelente opcion para entradas fijas de 1 dolar."
           },
-          "status": "won"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -5781,8 +5781,8 @@
       "time": "11:00",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 3,
+      "status": "post",
+      "home_score": 4,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -6071,7 +6071,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -6305,7 +6305,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -6332,7 +6332,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 73% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El plantel de Dinamo Zagreb sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -6380,7 +6380,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -6663,7 +6663,7 @@
             "statistical": "Apuesta de Alto Retorno (@7.9): inversion fija de $1.00 USD para buscar una ganancia neta de $6.90 USD si el partido termina 0-0.",
             "market": "Cuota de valor @7.9 en 1xBet para Marcador Exacto 0-0. Excelente opcion para entradas fijas de 1 dolar."
           },
-          "status": "won"
+          "status": "lost"
         }
       ],
       "real_odds": {}
@@ -6681,7 +6681,7 @@
       "time": "13:00",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -6949,7 +6949,7 @@
       "time": "13:15",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -7252,7 +7252,7 @@
       "time": "13:15",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -7557,7 +7557,7 @@
       "time": "13:30",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "in",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -8144,8 +8144,8 @@
       "time": "11:00",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "in",
-      "home_score": 1,
+      "status": "post",
+      "home_score": 2,
       "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -8388,7 +8388,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -28547,7 +28547,7 @@
       "time": "11:00",
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "post",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",
@@ -28857,7 +28857,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -29145,7 +29145,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 77% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "won"
         },
         {
           "market": "Marcador Exacto",
@@ -29496,8 +29496,8 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 1,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -29705,7 +29705,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 83% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El analista táctico afirma que Polokwane City FC explotará la banda izquierda de su rival debido a su lentitud.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Doble Oportunidad",
@@ -29792,7 +29792,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -30047,7 +30047,7 @@
             "market": "Las cuotas para 'Ambos Anotan No' reflejan un valor de mercado sólido. La IA detectó 60% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El cuerpo técnico de TS Galaxy FC probó una formación ultra-ofensiva en el último entrenamiento.' puede impactar el estado mental de alguno de los equipos, reduciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Más/Menos Goles",
@@ -30095,7 +30095,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "post",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -31405,7 +31405,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 1,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -31894,8 +31894,8 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 1,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -32055,7 +32055,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -32217,7 +32217,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -35157,7 +35157,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 1,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -35253,7 +35253,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 75% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 71% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Juegos",
@@ -35325,7 +35325,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 1,
-      "away_score": 0,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -35427,7 +35427,7 @@
             "statistical": "El modelo de sets estima una probabilidad del 62% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
             "market": "Este mercado acumula 63% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Ganador (Moneyline)",
@@ -35654,7 +35654,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 2,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -35989,7 +35989,7 @@
       "date": "2026-08-11",
       "stadium": "Cancha Principal",
       "status": "in",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -36641,7 +36641,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
@@ -36963,7 +36963,7 @@
       "stadium": "Cancha Principal",
       "status": "in",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [],
