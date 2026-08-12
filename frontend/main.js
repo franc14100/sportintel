@@ -3192,6 +3192,9 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
 
             let actionsHtml = `
+                <button class="btn btn-secondary" onclick="editBetStake(${bet.id})" title="Editar stake" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(56, 189, 248, 0.3); color: var(--accent-cyan); background: rgba(56, 189, 248, 0.05); cursor: pointer; border-radius: 4px; margin-right: 4px;">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
                 <button class="btn btn-secondary" onclick="deleteBet(${bet.id})" title="Eliminar apuesta" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(255,255,255,0.1); color: var(--text-muted); background: rgba(255,255,255,0.02); cursor: pointer; border-radius: 4px;">
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
@@ -3203,8 +3206,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div style="font-weight: 700; font-size: 0.8rem; color: var(--text-primary);">${bet.match}</div>
                         <div style="font-size: 0.72rem; color: var(--text-muted);">${bet.market}</div>
                     </td>
-                    <td style="padding: 10px 8px; text-align: center; font-family: var(--font-display); font-weight: 700; color: var(--accent-amber);">@${Number(bet.odd || 0).toFixed(2)}</td>
-                    <td style="padding: 10px 8px; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">$${Number(bet.stake || 0).toFixed(2)}</td>
+                    <td style="padding: 10px 8px; text-align: center; font-family: var(--font-display); font-weight: 700; color: var(--accent-amber); cursor: pointer;" onclick="editBetOdd(${bet.id})" title="Haz clic para editar la cuota">@${Number(bet.odd || 0).toFixed(2)} <i class="fa-solid fa-pen" style="font-size: 0.55rem; color: var(--accent-amber); opacity: 0.4; margin-left: 2px;"></i></td>
+                    <td style="padding: 10px 8px; text-align: center; color: var(--text-secondary); font-size: 0.8rem; cursor: pointer;" onclick="editBetStake(${bet.id})" title="Haz clic para editar el stake">$${Number(bet.stake || 0).toFixed(2)} <i class="fa-solid fa-pen" style="font-size: 0.55rem; color: var(--accent-cyan); opacity: 0.5; margin-left: 2px;"></i></td>
                     <td style="padding: 10px 8px; text-align: center; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem;">$${Number(potentialReturn || 0).toFixed(2)}</td>
                     <td style="padding: 10px 8px; text-align: center;">${statusSelect}</td>
                     <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">${actionsHtml}</td>
@@ -3248,6 +3251,46 @@ document.addEventListener("DOMContentLoaded", () => {
             updateBankrollChart();
             if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true); // Force override sync
         }
+    };
+
+    window.editBetStake = (id) => {
+        const bet = userBets.find(b => b.id === id);
+        if (!bet) return;
+        const currentStake = Number(bet.stake || 0).toFixed(2);
+        const newStakeStr = prompt(`✏️ Editar Stake\n\nApuesta: ${bet.match}\nMercado: ${bet.market}\nStake actual: $${currentStake}\n\nIngresa el nuevo stake:`, currentStake);
+        if (newStakeStr === null) return; // cancelled
+        const newStake = parseFloat(newStakeStr);
+        if (isNaN(newStake) || newStake <= 0) {
+            alert("El stake debe ser un número mayor a 0.");
+            return;
+        }
+        bet.stake = newStake;
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true);
+    };
+
+    window.editBetOdd = (id) => {
+        const bet = userBets.find(b => b.id === id);
+        if (!bet) return;
+        const currentOdd = Number(bet.odd || 0).toFixed(2);
+        const newOddStr = prompt(`✏️ Editar Cuota\n\nApuesta: ${bet.match}\nMercado: ${bet.market}\nCuota actual: @${currentOdd}\n\nIngresa la nueva cuota:`, currentOdd);
+        if (newOddStr === null) return;
+        const newOdd = parseFloat(newOddStr);
+        if (isNaN(newOdd) || newOdd <= 1) {
+            alert("La cuota debe ser un número mayor a 1.00.");
+            return;
+        }
+        bet.odd = newOdd;
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true);
     };
 
     // Calculate ROI, Win Rate, and net bankroll balance

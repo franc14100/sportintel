@@ -3192,6 +3192,9 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
 
             let actionsHtml = `
+                <button class="btn btn-secondary" onclick="editStake(${bet.id})" title="Editar Stake" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-cyan); background: rgba(6, 182, 212, 0.05); cursor: pointer; border-radius: 4px; margin-right: 4px;">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
                 <button class="btn btn-secondary" onclick="deleteBet(${bet.id})" title="Eliminar apuesta" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(255,255,255,0.1); color: var(--text-muted); background: rgba(255,255,255,0.02); cursor: pointer; border-radius: 4px;">
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
@@ -3234,6 +3237,36 @@ document.addEventListener("DOMContentLoaded", () => {
             updateBankrollMetrics();
             populateBetsTable();
             updateBankrollChart();
+        }
+    };
+
+    window.editStake = (id) => {
+        let currentBets = [];
+        try {
+            currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+        } catch(e) {
+            currentBets = typeof userBets !== 'undefined' ? userBets : [];
+        }
+        if (!Array.isArray(currentBets)) currentBets = [];
+
+        const betIndex = currentBets.findIndex(b => b.id === id);
+        if (betIndex !== -1) {
+            const bet = currentBets[betIndex];
+            const newStakeStr = prompt(`Ingresa el nuevo valor apostado (Stake) para:\n${bet.match}\n\nValor actual: $${Number(bet.stake).toFixed(2)}`, bet.stake);
+            if (newStakeStr !== null) {
+                const newStake = parseFloat(newStakeStr);
+                if (!isNaN(newStake) && newStake > 0) {
+                    currentBets[betIndex].stake = newStake;
+                    userBets = currentBets;
+                    lastLocalUserActionTime = Date.now();
+                    localStorage.setItem("user_bets", JSON.stringify(userBets));
+                    updateBankrollMetrics();
+                    populateBetsTable();
+                    updateBankrollChart();
+                } else {
+                    alert("Por favor ingresa un valor numérico válido mayor a 0.");
+                }
+            }
         }
     };
 
