@@ -155,7 +155,7 @@ module.exports = async function handler(req, res) {
                         const mergedRegistry = Array.from(registryMap.values());
                         mergedRegistry.sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
 
-                        if (parsedData.date >= data.date) {
+                        if (parsedData.date > data.date) {
                             data = parsedData;
                         } else {
                             data.global_stats = parsedData.global_stats || data.global_stats;
