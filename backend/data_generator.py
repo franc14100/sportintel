@@ -707,18 +707,28 @@ def fetch_espn_fallback_matches():
                             if "ranks" in c and isinstance(c["ranks"], list) and len(c["ranks"]) > 0:
                                 r = c["ranks"][0].get("current")
                                 if r: return int(r)
+                            # Try seed (e.g. tournament seed number)
+                            seed = c.get("seed") or c.get("curatedRank", {}).get("current") if isinstance(c.get("curatedRank"), dict) else None
+                            if seed:
+                                try: return int(seed)
+                                except: pass
                             return 999
 
                         h_rank = extract_rank(competitors[0])
                         a_rank = extract_rank(competitors[1])
 
-                        if h_name and a_name:
+                        if h_name and a_name and sport == "Tennis":
                             if h_rank < a_rank and h_rank != 999:
                                 TEAM_RATINGS[h_name] = 95.0 + max(0, (100 - min(h_rank, 90))) * 0.1
                                 TEAM_RATINGS[a_name] = 72.0
                             elif a_rank < h_rank and a_rank != 999:
                                 TEAM_RATINGS[a_name] = 95.0 + max(0, (100 - min(a_rank, 90))) * 0.1
                                 TEAM_RATINGS[h_name] = 72.0
+                            elif h_rank == 999 and a_rank == 999:
+                                # ESPN no tiene ranking para ninguno: competitors[0] suele ser
+                                # el seed/favorito del cuadro del torneo — asignar rating levemente superior
+                                TEAM_RATINGS[h_name] = max(TEAM_RATINGS.get(h_name, 76.5), 76.5)
+                                TEAM_RATINGS[a_name] = max(TEAM_RATINGS.get(a_name, 74.5), 74.5)
 
                         league_name = ev_league or comps.get("league", {}).get("name") or "Torneo Profesional"
                         
@@ -1044,7 +1054,7 @@ def generate_daily_sports_data():
                             else: p["status"] = "lost"
                         # Simple grading for total sets/points
                         else:
-                            if "status" == "pending": p["status"] = "won" if random.random() > 0.4 else "lost"
+                            pass  # Dejar como pending — se evaluará con evaluate_pick en update_scores.py
                 except:
                     pass
         else:
