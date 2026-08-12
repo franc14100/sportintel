@@ -1757,21 +1757,9 @@ def generate_daily_sports_data():
                 }
             ]
         else:
-            # Tenis
-            # Tenis: Calculate stable distinct ratings based on player names if not pre-rated
-            rating_home = TEAM_RATINGS.get(home_name)
-            if rating_home:
-                rating_home += RATING_ADJUSTMENTS.get(home_name, 0.0)
-            else:
-                score_home = sum(ord(c) for c in home_name)
-                rating_home = 70 + (score_home % 16) + RATING_ADJUSTMENTS.get(home_name, 0.0)
-                
-            rating_away = TEAM_RATINGS.get(away_name)
-            if rating_away:
-                rating_away += RATING_ADJUSTMENTS.get(away_name, 0.0)
-            else:
-                score_away = sum(ord(c) for c in away_name)
-                rating_away = 70 + (score_away % 16) + RATING_ADJUSTMENTS.get(away_name, 0.0)
+            # Tenis: Usar ratings estables basados en ránquines oficiales y cuotas reales (0 suma ASCII)
+            rating_home = TEAM_RATINGS.get(home_name, 75.0) + RATING_ADJUSTMENTS.get(home_name, 0.0)
+            rating_away = TEAM_RATINGS.get(away_name, 75.0) + RATING_ADJUSTMENTS.get(away_name, 0.0)
                 
             rating_diff = rating_home - rating_away
             
