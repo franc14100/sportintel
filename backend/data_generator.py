@@ -1834,9 +1834,9 @@ def generate_daily_sports_data():
                 {
                     "market": "Hándicap de Sets",
                     "selection": f"{winner_tennis} -1.5 Sets (Gana 2-0)" if is_strong_fav else f"{winner_tennis} +1.5 Sets",
-                    "odd": round(random.uniform(1.50, 1.95), 2),
-                    "probability": int(max(prob_home, prob_away) * 0.94) if is_strong_fav else random.randint(60, 72),
-                    "risk": "Low" if is_strong_fav else "Medium",
+                    "odd": round(random.uniform(2.00, 2.40), 2) if is_strong_fav else round(random.uniform(1.30, 1.50), 2),
+                    "probability": int((max(prob_home, prob_away) / 100) ** 2 * 100) if is_strong_fav else random.randint(60, 72),
+                    "risk": "High" if is_strong_fav else "Medium",
                     "reasoning": analysis_hset_tennis,
                     "status": "pending"
                 },
