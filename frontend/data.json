@@ -58867,7 +58867,7 @@
           "pick": "Más de 2.5 Goles",
           "odd": 1.25,
           "reasoning": "xG proyectado: 4.6 goles combinados. Partido abierto.",
-          "status": "won"
+          "status": "lost"
         },
         {
           "match": "Jacob Fearnley vs Nicolas Mejia",
@@ -58998,7 +58998,7 @@
       "total_odd": 1.81,
       "confidence": 82,
       "recommendation_stake": 8.0,
-      "status": "won"
+      "status": "pending"
     },
     {
       "date": "2026-08-12",
@@ -59085,7 +59085,7 @@
       "total_odd": 6.83,
       "confidence": 50,
       "recommendation_stake": 1.0,
-      "status": "won"
+      "status": "pending"
     }
   ],
   "starting_bankroll": 53.67,

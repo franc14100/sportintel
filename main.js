@@ -1414,10 +1414,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 const todayStr = new Date().toISOString().split('T')[0];
                 sortedRegistry.forEach(t => {
                     let stLower = String(t.status || "").toLowerCase();
-                    // If ticket is from a past date and still marked pending/PENDIENTE, auto-resolve it
-                    if ((stLower === "pending" || stLower === "pendiente") && t.date && t.date < todayStr) {
-                        stLower = (t.confidence >= 75 || Math.random() > 0.3) ? "won" : "lost";
-                        t.status = stLower;
+                    // Render actual ticket status without artificial random fallback
+                    if ((stLower === "pending" || stLower === "pendiente") && t.selections && t.selections.length > 0) {
+                        const anyLost = t.selections.some(s => String(s.status || '').toLowerCase() === 'lost');
+                        const allWon = t.selections.every(s => String(s.status || '').toLowerCase() === 'won');
+                        if (anyLost) {
+                            stLower = "lost";
+                            t.status = "lost";
+                        } else if (allWon) {
+                            stLower = "won";
+                            t.status = "won";
+                        }
                     }
 
                     let badgeClass = "badge bg-secondary";
