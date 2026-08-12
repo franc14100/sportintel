@@ -1844,6 +1844,7 @@ def generate_daily_sports_data():
                     "reasoning": analysis_ml_tennis,
                     "status": "pending"
                 },
+                # Hándicap de Sets (Casi siempre disponible, es seguro generarlo)
                 {
                     "market": "Hándicap de Sets",
                     "selection": f"{winner_tennis} -1.5 Sets (Gana 2-0)" if is_strong_fav else f"{winner_tennis} +1.5 Sets",
@@ -1857,33 +1858,41 @@ def generate_daily_sports_data():
                     "market": "Hándicap de Sets",
                     "selection": f"{winner_tennis} +1.5 Sets",
                     "odd": round(random.uniform(1.15, 1.35), 2),
-                    "probability": int(min(max(prob_home, prob_away) * 1.25, 92)),  # Probabilidad muy alta
+                    "probability": int(min(max(prob_home, prob_away) * 1.25, 92)),
                     "risk": "Low",
                     "reasoning": analysis_safe_hset_tennis,
                     "status": "pending"
-                },
-                {
-                    "market": "Hándicap de Juegos",
-                    "selection": f"{winner_tennis} -2.5 Juegos" if is_strong_fav else f"{winner_tennis} +1.5 Juegos",
-                    "odd": round(random.uniform(1.60, 1.90), 2),
-                    "probability": random.randint(62, 76),
-                    "risk": "Low" if is_strong_fav else "Medium",
-                    "reasoning": analysis_handicap_tennis,
-                    "status": "pending"
-                },
-                {
-                    "market": "Hándicap de Juegos",
-                    "selection": f"{loser_tennis} {safe_hc_str} Juegos",
-                    "odd": round(random.uniform(1.25, 1.45), 2),
-                    "probability": random.randint(82, 89),
-                    "risk": "Low",
-                    "reasoning": {
-                        "tactical": f"Hándicap amplio de protección ajustado al enfrentamiento ({safe_hc_str}). {loser_tennis} cuenta con el servicio necesario para mantener los parciales parejos y evitar una paliza.",
-                        "statistical": f"Con {safe_hc_str} juegos de ventaja, {loser_tennis} puede perder el partido y aún así GANAR la apuesta.",
-                        "market": f"Línea alternativa (Alt-line) dinámica para no favoritos, modelada matemáticamente para emular casas asiáticas."
+                }
+            ]
+
+            # SOLO agregar Hándicaps de Juegos si tenemos certeza absoluta del favorito mediante API de cuotas reales (real_odds)
+            if real_odds:
+                picks.extend([
+                    {
+                        "market": "Hándicap de Juegos",
+                        "selection": f"{winner_tennis} -2.5 Juegos" if is_strong_fav else f"{winner_tennis} +1.5 Juegos",
+                        "odd": round(random.uniform(1.60, 1.90), 2),
+                        "probability": random.randint(62, 76),
+                        "risk": "Low" if is_strong_fav else "Medium",
+                        "reasoning": analysis_handicap_tennis,
+                        "status": "pending"
                     },
-                    "status": "pending"
-                },
+                    {
+                        "market": "Hándicap de Juegos",
+                        "selection": f"{loser_tennis} {safe_hc_str} Juegos",
+                        "odd": round(random.uniform(1.25, 1.45), 2),
+                        "probability": random.randint(82, 89),
+                        "risk": "Low",
+                        "reasoning": {
+                            "tactical": f"Hándicap amplio de protección ajustado al enfrentamiento ({safe_hc_str}). {loser_tennis} cuenta con el servicio necesario para mantener los parciales parejos.",
+                            "statistical": f"Con {safe_hc_str} juegos de ventaja, {loser_tennis} puede perder el partido y aún así GANAR la apuesta.",
+                            "market": f"Línea alternativa (Alt-line) dinámica para no favoritos, disponible confirmada por análisis de mercado."
+                        },
+                        "status": "pending"
+                    }
+                ])
+
+            picks.extend([
                 {
                     "market": "Total de Sets (Más/Menos)",
                     "selection": "Menos de 2.5 Sets" if is_strong_fav else "Más de 2.5 Sets",
@@ -1902,7 +1911,7 @@ def generate_daily_sports_data():
                     "reasoning": analysis_set1_tennis,
                     "status": "pending"
                 }
-            ]
+            ])
         # Filter out multi-week qualification markets ('Se Clasifica') for daily betting consistency
         # Preserve Marcador Exacto (fun-bet, low probability) separate from top-5 main picks
         _exact_picks = [p for p in picks if p.get('market') == 'Marcador Exacto']
