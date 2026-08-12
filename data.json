@@ -50890,7 +50890,7 @@
     "name": "Boleto Seguro (Boleto 1)",
     "confidence": 85,
     "recommendation_stake": 3,
-    "total_odd": 1.6,
+    "total_odd": 1.73,
     "status": "pending",
     "selections": [
       {
@@ -50903,12 +50903,12 @@
         "status": "pending"
       },
       {
-        "match": "Dalibor Svrcina vs Mark Lajal",
+        "match": "Titouan Droguet vs Stefanos Sakellaridis",
         "sport": "Tennis",
-        "market": "Hándicap de Sets",
-        "pick": "Dalibor Svrcina +1.5 Sets",
-        "odd": 1.31,
-        "reasoning": "Apuesta de altísima seguridad sugerida por el usuario: Svrcina solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
+        "market": "Hándicap de Juegos",
+        "pick": "Stefanos Sakellaridis +4.5 Juegos",
+        "odd": 1.42,
+        "reasoning": "Alt-line extensa sugerida por el usuario: Hándicap ampliado que protege de manera brutal al no favorito.",
         "status": "pending"
       }
     ]
@@ -51803,7 +51803,7 @@
       "name": "Boleto Seguro (Boleto 1)",
       "ticket_id": "TK-97345",
       "confidence": 85,
-      "total_odd": 1.6,
+      "total_odd": 1.73,
       "recommendation_stake": 3,
       "status": "pending",
       "selections": [
@@ -51817,12 +51817,12 @@
           "status": "pending"
         },
         {
-          "match": "Dalibor Svrcina vs Mark Lajal",
+          "match": "Titouan Droguet vs Stefanos Sakellaridis",
           "sport": "Tennis",
-          "market": "Hándicap de Sets",
-          "pick": "Dalibor Svrcina +1.5 Sets",
-          "odd": 1.31,
-          "reasoning": "Apuesta de altísima seguridad sugerida por el usuario: Svrcina solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
+          "market": "Hándicap de Juegos",
+          "pick": "Stefanos Sakellaridis +4.5 Juegos",
+          "odd": 1.42,
+          "reasoning": "Alt-line extensa sugerida por el usuario: Hándicap ampliado que protege de manera brutal al no favorito.",
           "status": "pending"
         }
       ]

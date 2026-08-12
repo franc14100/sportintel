@@ -1859,6 +1859,19 @@ def generate_daily_sports_data():
                     "status": "pending"
                 },
                 {
+                    "market": "Hándicap de Juegos",
+                    "selection": f"{loser_tennis} +4.5 Juegos",
+                    "odd": round(random.uniform(1.25, 1.45), 2),
+                    "probability": random.randint(82, 89),
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": f"Hándicap amplio de protección extrema. {loser_tennis} cuenta con el servicio necesario para mantener los parciales parejos y evitar una paliza.",
+                        "statistical": f"Con +4.5 juegos de ventaja, {loser_tennis} puede perder el partido en sets corridos (ej. 6-4, 6-4) perdiendo su saque una vez por set, y aún así GANAR la apuesta.",
+                        "market": f"Línea alternativa (Alt-line) de máxima seguridad descubierta en las tablas principales de Hándicap. Ideal para cuotas bajas y muy seguras."
+                    },
+                    "status": "pending"
+                },
+                {
                     "market": "Total de Sets (Más/Menos)",
                     "selection": "Menos de 2.5 Sets" if is_strong_fav else "Más de 2.5 Sets",
                     "odd": round(random.uniform(1.55, 1.95), 2),
@@ -2130,9 +2143,6 @@ def generate_daily_sports_data():
     usable_picks = direct_api_picks + synthetic_picks
 
     # REGLA 6: Ordenar por TIER de seguridad + probabilidad
-    # Tier 1 (m\u00e1s seguros): M\u00e1s de 0.5 Goles, M\u00e1s de 1.5 Goles con prob >= 80
-    # Tier 2: Doble Oportunidad con prob >= 78
-    # Tier 3: Resto de picks v\u00e1lidos
     def pick_tier(p):
         mkt = p.get('market', '')
         sel = str(p.get('selection', ''))
@@ -2140,7 +2150,9 @@ def generate_daily_sports_data():
         
         # Tier 0 (Seguridad Máxima - Prioridad Top)
         if 'Hándicap de Sets' in mkt and '+1.5' in sel and prob >= 85:
-            return 0  # Hándicap positivo en tenis para favoritos es extremadamente seguro
+            return 0
+        if 'Hándicap de Juegos' in mkt and '+' in sel and ('4.5' in sel or '5.5' in sel) and prob >= 82:
+            return 0  # Alt-lines extensas para el underdog, puede perder el partido pero ganar la apuesta
         if 'M\u00e1s/Menos' in mkt and 'Goles' in mkt and '0.5' in str(p.get('line','')) and prob >= 80:
             return 0  # 1 gol en todo el partido
             
