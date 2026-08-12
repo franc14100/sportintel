@@ -51848,7 +51848,7 @@
       "confidence": 85,
       "total_odd": 1.86,
       "recommendation_stake": 3,
-      "status": "pending",
+      "status": "lost",
       "selections": [
         {
           "match": "Arsenal vs Como",
@@ -51866,7 +51866,7 @@
           "pick": "Brandon Nakashima -2.5 Juegos",
           "odd": 1.65,
           "reasoning": "Nakashima es un jugador top 50 ATP con gran servicio en cancha rápida superando ampliamente el nivel de qualifiers.",
-          "status": "pending"
+          "status": "lost"
         }
       ]
     },
@@ -51877,7 +51877,7 @@
       "confidence": 80,
       "total_odd": 1.65,
       "recommendation_stake": 2,
-      "status": "pending",
+      "status": "lost",
       "selections": [
         {
           "match": "Dusan Lajovic vs Luca Van Assche",
@@ -51886,7 +51886,7 @@
           "pick": "Luca Van Assche -2.5 Juegos",
           "odd": 1.65,
           "reasoning": "Van Assche posee mayor movilidad y dinamismo en superficies rápidas frente a Lajovic especialista en arcilla.",
-          "status": "pending"
+          "status": "lost"
         }
       ]
     },
@@ -51897,7 +51897,7 @@
       "confidence": 78,
       "total_odd": 1.65,
       "recommendation_stake": 2,
-      "status": "pending",
+      "status": "won",
       "selections": [
         {
           "match": "Christopher O'Connell vs Aleksandr Shevchenko",
@@ -51906,7 +51906,7 @@
           "pick": "Menos de 2.5 Sets",
           "odd": 1.65,
           "reasoning": "Ambos tenistas disputan partidos de definición rápida en 2 sets sin alargar a parciales decisivos.",
-          "status": "pending"
+          "status": "won"
         }
       ]
     },
@@ -51917,7 +51917,7 @@
       "confidence": 50,
       "total_odd": 1.47,
       "recommendation_stake": 1,
-      "status": "pending",
+      "status": "won",
       "selections": [
         {
           "match": "Inter Miami CF vs León",

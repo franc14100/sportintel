@@ -37,7 +37,7 @@ def update_learning_database(matches_list):
     for m in matches_list:
         h = m.get("home")
         a = m.get("away")
-        lg = m.get("league", "General")
+        sport = m.get("sport", "Football")
         status = m.get("status")
         
         if status == "post":
@@ -46,17 +46,20 @@ def update_learning_database(matches_list):
                 mkt = p.get("market", "")
                 sel = p.get("selection", p.get("pick", ""))
                 
+                mkt_key = f"{sport}::{mkt}"
+                
                 if p_stat == "lost":
                     db["total_lost"] = db.get("total_lost", 0) + 1
-                    if h in str(sel): team_adj[h] = team_adj.get(h, 0) - 2.5
-                    if a in str(sel): team_adj[a] = team_adj.get(a, 0) - 2.5
-                    if "más de" in str(sel).lower() or "over" in str(sel).lower():
-                        key = f"{lg}::Over"
-                        market_adj[key] = market_adj.get(key, 0) - 15
+                    if h and h in str(sel): team_adj[h] = team_adj.get(h, 0) - 3.0
+                    if a and a in str(sel): team_adj[a] = team_adj.get(a, 0) - 3.0
+                    market_adj[mkt_key] = market_adj.get(mkt_key, 0) - 5.0
+                    market_adj[mkt] = market_adj.get(mkt, 0) - 3.0
                 elif p_stat == "won":
                     db["total_won"] = db.get("total_won", 0) + 1
-                    if h in str(sel): team_adj[h] = team_adj.get(h, 0) + 0.8
-                    if a in str(sel): team_adj[a] = team_adj.get(a, 0) + 0.8
+                    if h and h in str(sel): team_adj[h] = team_adj.get(h, 0) + 1.2
+                    if a and a in str(sel): team_adj[a] = team_adj.get(a, 0) + 1.2
+                    market_adj[mkt_key] = market_adj.get(mkt_key, 0) + 3.0
+                    market_adj[mkt] = market_adj.get(mkt, 0) + 2.0
 
     db["team_rating_adjustments"] = team_adj
     db["market_bias_adjustments"] = market_adj
@@ -2805,19 +2808,9 @@ def generate_daily_sports_data():
                     if status == "lost":
                         ticket_won = False
                 else:
-                    # Si el boleto es de una fecha pasada a hoy, los partidos ya finalizaron en esa fecha
-                    t_date = ticket.get("date", "")
-                    if t_date and t_date != date_str:
-                        # Auto-grade past tickets realistically based on high confidence
-                        if ticket.get("confidence", 70) >= 75 or random.random() > 0.3:
-                            sel["status"] = "won"
-                        else:
-                            sel["status"] = "lost"
-                            ticket_won = False
-                    else:
-                        all_selections_graded = False
+                    all_selections_graded = False
                     
-            if all_selections_graded or (ticket.get("date") and ticket.get("date") != date_str):
+            if all_selections_graded:
                 ticket["status"] = "won" if ticket_won else "lost"
 
     def calculate_dynamic_stake(confidence, odd, ticket_type):
