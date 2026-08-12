@@ -50951,7 +50951,7 @@
     "name": "Boleto Seguro (Boleto 1)",
     "confidence": 85,
     "recommendation_stake": 3,
-    "total_odd": 1.86,
+    "total_odd": 1.83,
     "status": "pending",
     "selections": [
       {
@@ -50960,16 +50960,16 @@
         "market": "Doble Oportunidad",
         "pick": "Arsenal o Empate",
         "odd": 1.13,
-        "reasoning": "Arsenal mantiene superioridad táctica y plantilla completa en amistosos de pretemporada.",
+        "reasoning": "Arsenal mantiene superioridad técnica y plantilla titular en su gira de pretemporada.",
         "status": "pending"
       },
       {
-        "match": "Brandon Nakashima vs Rafael Jodar",
+        "match": "Rafael Jodar vs Brandon Nakashima",
         "sport": "Tennis",
-        "market": "Hándicap de Juegos",
-        "pick": "Brandon Nakashima -2.5 Juegos",
-        "odd": 1.65,
-        "reasoning": "Nakashima es un jugador top 50 ATP con gran servicio en cancha rápida superando ampliamente el nivel de qualifiers.",
+        "market": "Hándicap de Sets",
+        "pick": "Rafael Jodar +1.5 Sets",
+        "odd": 1.62,
+        "reasoning": "Rafael Jódar (ATP #24, UTR #6) es el favorito absoluto según cuotas de Sofascore (@1.44) frente a Nakashima (ATP #33).",
         "status": "pending"
       }
     ]
@@ -50978,16 +50978,16 @@
     "name": "Boleto de Valor (Boleto 2)",
     "confidence": 80,
     "recommendation_stake": 2,
-    "total_odd": 1.65,
-    "status": "lost",
+    "total_odd": 1.68,
+    "status": "pending",
     "selections": [
       {
-        "match": "Dusan Lajovic vs Luca Van Assche",
+        "match": "Rafael Jodar vs Brandon Nakashima",
         "sport": "Tennis",
         "market": "Hándicap de Juegos",
-        "pick": "Luca Van Assche -2.5 Juegos",
-        "odd": 1.65,
-        "reasoning": "Van Assche posee mayor movilidad y dinamismo en superficies rápidas frente a Lajovic especialista en arcilla.",
+        "pick": "Rafael Jodar -2.5 Juegos",
+        "odd": 1.68,
+        "reasoning": "Rafael Jódar (ATP #24) domina el ranking y el valor de cuotas Sofascore (@1.44) superando ampliamente a Nakashima.",
         "status": "pending"
       }
     ]
@@ -50997,7 +50997,7 @@
     "confidence": 78,
     "recommendation_stake": 2,
     "total_odd": 1.65,
-    "status": "won",
+    "status": "pending",
     "selections": [
       {
         "match": "Christopher O'Connell vs Aleksandr Shevchenko",
@@ -51005,7 +51005,7 @@
         "market": "Total de Sets (Más/Menos)",
         "pick": "Menos de 2.5 Sets",
         "odd": 1.65,
-        "reasoning": "Ambos tenistas disputan partidos de definición rápida en 2 sets sin alargar a parciales decisivos.",
+        "reasoning": "Ambos tenistas disputan partidos de definición rápida en 2 sets corridos.",
         "status": "pending"
       }
     ]
@@ -51846,9 +51846,9 @@
       "name": "Boleto Seguro (Boleto 1)",
       "ticket_id": "TK-97345",
       "confidence": 85,
-      "total_odd": 1.86,
+      "total_odd": 1.83,
       "recommendation_stake": 3,
-      "status": "lost",
+      "status": "pending",
       "selections": [
         {
           "match": "Arsenal vs Como",
@@ -51856,17 +51856,17 @@
           "market": "Doble Oportunidad",
           "pick": "Arsenal o Empate",
           "odd": 1.13,
-          "reasoning": "Arsenal mantiene superioridad táctica y plantilla completa en amistosos de pretemporada.",
+          "reasoning": "Arsenal mantiene superioridad técnica y plantilla titular en su gira de pretemporada.",
           "status": "pending"
         },
         {
-          "match": "Brandon Nakashima vs Rafael Jodar",
+          "match": "Rafael Jodar vs Brandon Nakashima",
           "sport": "Tennis",
-          "market": "Hándicap de Juegos",
-          "pick": "Brandon Nakashima -2.5 Juegos",
-          "odd": 1.65,
-          "reasoning": "Nakashima es un jugador top 50 ATP con gran servicio en cancha rápida superando ampliamente el nivel de qualifiers.",
-          "status": "lost"
+          "market": "Hándicap de Sets",
+          "pick": "Rafael Jodar +1.5 Sets",
+          "odd": 1.62,
+          "reasoning": "Rafael Jódar (ATP #24, UTR #6) es el favorito absoluto según cuotas de Sofascore (@1.44) frente a Nakashima (ATP #33).",
+          "status": "pending"
         }
       ]
     },
@@ -51875,18 +51875,18 @@
       "name": "Boleto de Valor (Boleto 2)",
       "ticket_id": "TK-92345",
       "confidence": 80,
-      "total_odd": 1.65,
+      "total_odd": 1.68,
       "recommendation_stake": 2,
-      "status": "lost",
+      "status": "pending",
       "selections": [
         {
-          "match": "Dusan Lajovic vs Luca Van Assche",
+          "match": "Rafael Jodar vs Brandon Nakashima",
           "sport": "Tennis",
           "market": "Hándicap de Juegos",
-          "pick": "Luca Van Assche -2.5 Juegos",
-          "odd": 1.65,
-          "reasoning": "Van Assche posee mayor movilidad y dinamismo en superficies rápidas frente a Lajovic especialista en arcilla.",
-          "status": "lost"
+          "pick": "Rafael Jodar -2.5 Juegos",
+          "odd": 1.68,
+          "reasoning": "Rafael Jódar (ATP #24) domina el ranking y el valor de cuotas Sofascore (@1.44) superando ampliamente a Nakashima.",
+          "status": "pending"
         }
       ]
     },
@@ -51897,7 +51897,7 @@
       "confidence": 78,
       "total_odd": 1.65,
       "recommendation_stake": 2,
-      "status": "won",
+      "status": "pending",
       "selections": [
         {
           "match": "Christopher O'Connell vs Aleksandr Shevchenko",
@@ -51905,8 +51905,8 @@
           "market": "Total de Sets (Más/Menos)",
           "pick": "Menos de 2.5 Sets",
           "odd": 1.65,
-          "reasoning": "Ambos tenistas disputan partidos de definición rápida en 2 sets sin alargar a parciales decisivos.",
-          "status": "won"
+          "reasoning": "Ambos tenistas disputan partidos de definición rápida en 2 sets corridos.",
+          "status": "pending"
         }
       ]
     },
@@ -51917,7 +51917,7 @@
       "confidence": 50,
       "total_odd": 1.47,
       "recommendation_stake": 1,
-      "status": "won",
+      "status": "pending",
       "selections": [
         {
           "match": "Inter Miami CF vs León",
