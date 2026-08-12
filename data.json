@@ -282,7 +282,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1001",
@@ -592,7 +594,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1002",
@@ -921,7 +925,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1003",
@@ -1211,7 +1217,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1004",
@@ -1508,7 +1516,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1005",
@@ -1825,7 +1835,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1006",
@@ -2115,7 +2127,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1007",
@@ -2433,7 +2447,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1008",
@@ -2742,7 +2758,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1009",
@@ -3045,7 +3063,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1010",
@@ -3322,7 +3342,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1011",
@@ -3631,7 +3653,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1012",
@@ -3941,7 +3965,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1013",
@@ -4225,7 +4251,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1014",
@@ -4535,7 +4563,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1015",
@@ -4832,7 +4862,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1016",
@@ -5129,7 +5161,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1017",
@@ -5423,7 +5457,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1018",
@@ -5732,7 +5768,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1019",
@@ -6023,7 +6061,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1020",
@@ -6324,7 +6364,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1021",
@@ -6633,7 +6675,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1022",
@@ -6955,7 +6999,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1023",
@@ -7264,7 +7310,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1024",
@@ -7561,7 +7609,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1025",
@@ -7856,7 +7906,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1026",
@@ -8172,7 +8224,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1027",
@@ -8475,7 +8529,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1028",
@@ -8764,7 +8820,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1029",
@@ -9377,7 +9435,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1031",
@@ -9680,7 +9740,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1032",
@@ -9983,7 +10045,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1033",
@@ -10285,7 +10349,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1034",
@@ -10582,7 +10648,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1035",
@@ -10876,7 +10944,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1036",
@@ -11178,7 +11248,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1037",
@@ -11492,7 +11564,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1038",
@@ -11801,7 +11875,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1039",
@@ -12091,7 +12167,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1040",
@@ -12401,7 +12479,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1041",
@@ -12697,7 +12777,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1042",
@@ -13005,7 +13087,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1043",
@@ -13316,7 +13400,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1044",
@@ -13619,7 +13705,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1045",
@@ -13943,7 +14031,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1046",
@@ -14253,7 +14343,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1047",
@@ -14542,7 +14634,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1048",
@@ -14845,7 +14939,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1049",
@@ -15149,7 +15245,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1050",
@@ -15459,7 +15557,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1051",
@@ -15762,7 +15862,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1052",
@@ -16071,7 +16173,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1053",
@@ -16368,7 +16472,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1054",
@@ -16684,7 +16790,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1055",
@@ -17002,7 +17110,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1056",
@@ -17319,7 +17429,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1057",
@@ -17602,7 +17714,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1058",
@@ -17924,7 +18038,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1059",
@@ -18241,7 +18357,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1060",
@@ -18543,7 +18661,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1061",
@@ -18853,7 +18973,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1062",
@@ -19156,7 +19278,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1063",
@@ -19466,7 +19590,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1064",
@@ -19762,7 +19888,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1065",
@@ -20058,7 +20186,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1066",
@@ -20382,7 +20512,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1067",
@@ -20704,7 +20836,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1068",
@@ -21007,7 +21141,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1069",
@@ -21317,7 +21453,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1070",
@@ -21611,7 +21749,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1071",
@@ -21919,7 +22059,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1072",
@@ -22229,7 +22371,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1073",
@@ -22518,7 +22662,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1074",
@@ -22809,7 +22955,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1075",
@@ -23139,7 +23287,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1076",
@@ -23448,7 +23598,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1077",
@@ -23731,7 +23883,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1078",
@@ -24021,7 +24175,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1079",
@@ -24330,7 +24486,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1080",
@@ -24626,7 +24784,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1081",
@@ -24942,7 +25102,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1082",
@@ -25231,7 +25393,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1083",
@@ -25543,7 +25707,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1084",
@@ -25837,7 +26003,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1085",
@@ -26147,7 +26315,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1086",
@@ -26455,7 +26625,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1087",
@@ -26770,7 +26942,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1088",
@@ -27073,7 +27247,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1089",
@@ -27383,7 +27559,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1090",
@@ -27678,7 +27856,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1091",
@@ -27980,7 +28160,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1092",
@@ -28284,7 +28466,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1093",
@@ -28592,7 +28776,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1094",
@@ -28903,7 +29089,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1095",
@@ -29213,7 +29401,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1096",
@@ -29502,7 +29692,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1097",
@@ -29797,7 +29989,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1098",
@@ -30106,7 +30300,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1099",
@@ -30409,7 +30605,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1100",
@@ -30718,7 +30916,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1101",
@@ -31009,7 +31209,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1102",
@@ -31300,7 +31502,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1103",
@@ -31608,7 +31812,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1104",
@@ -31918,7 +32124,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1105",
@@ -32216,7 +32424,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1106",
@@ -32513,7 +32723,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1107",
@@ -32795,7 +33007,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1108",
@@ -33105,7 +33319,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1109",
@@ -33421,7 +33637,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1110",
@@ -33726,7 +33944,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1111",
@@ -34041,7 +34261,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1112",
@@ -34344,7 +34566,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1113",
@@ -34654,7 +34878,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1114",
@@ -34964,7 +35190,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1115",
@@ -35293,7 +35521,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1116",
@@ -35594,7 +35824,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1117",
@@ -35910,7 +36142,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1118",
@@ -36220,7 +36454,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1119",
@@ -36523,7 +36759,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1120",
@@ -36807,7 +37045,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1121",
@@ -37130,7 +37370,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1122",
@@ -37439,7 +37681,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1123",
@@ -37743,7 +37987,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1124",
@@ -38045,7 +38291,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1125",
@@ -38334,7 +38582,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1126",
@@ -38657,7 +38907,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1127",
@@ -38972,7 +39224,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1128",
@@ -39282,7 +39536,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1129",
@@ -39591,7 +39847,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1130",
@@ -39894,7 +40152,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1131",
@@ -40191,7 +40451,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1132",
@@ -40489,7 +40751,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1133",
@@ -40785,7 +41049,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1134",
@@ -41094,7 +41360,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1135",
@@ -41403,7 +41671,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1136",
@@ -41713,7 +41983,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1137",
@@ -42022,7 +42294,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1138",
@@ -42319,7 +42593,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1139",
@@ -42621,7 +42897,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1140",
@@ -42923,7 +43201,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1141",
@@ -43220,7 +43500,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1142",
@@ -43516,7 +43798,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1143",
@@ -43819,7 +44103,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1144",
@@ -44127,7 +44413,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1145",
@@ -44456,7 +44744,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1146",
@@ -44752,7 +45042,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1147",
@@ -45068,7 +45360,9 @@
           "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1256",
@@ -45207,7 +45501,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 58% de probabilidad de victoria para Rafael Jodar. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Rafael Jodar en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Brandon Nakashima.'. El Factor Caos se calculó en 39%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -45233,10 +45527,12 @@
             "statistical": "Probabilidad proyectada del 53% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1257",
@@ -45368,7 +45664,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 60% de probabilidad de victoria para Ben Shelton. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Ben Shelton en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Learner Tien declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 49%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -45394,10 +45690,12 @@
             "statistical": "Probabilidad proyectada del 55% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1366",
@@ -45549,7 +45847,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 50% de probabilidad de victoria para Elina Svitolina. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Elina Svitolina en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Iga Swiatek entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 29%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -45562,10 +45860,12 @@
             "statistical": "Probabilidad proyectada del 46% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1367",
@@ -45710,7 +46010,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 52% de probabilidad de victoria para Elena Rybakina. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Elena Rybakina en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Coco Gauff en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 15%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -45723,10 +46023,12 @@
             "statistical": "Probabilidad proyectada del 47% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1388",
@@ -45845,7 +46147,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 63% de probabilidad de victoria para Jacob Fearnley. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Jacob Fearnley en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Jacob Fearnley entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 60%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Juegos",
@@ -45884,10 +46186,12 @@
             "statistical": "Probabilidad proyectada del 58% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1389",
@@ -46019,7 +46323,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 59% de probabilidad de victoria para Henrique Rocha. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Henrique Rocha en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Henrique Rocha entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 25%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -46045,10 +46349,12 @@
             "statistical": "Probabilidad proyectada del 55% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1390",
@@ -46180,7 +46486,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 58% de probabilidad de victoria para Mark Lajal. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Mark Lajal en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Dalibor Svrcina entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 14%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -46206,10 +46512,12 @@
             "statistical": "Probabilidad proyectada del 53% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1391",
@@ -46354,7 +46662,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 50% de probabilidad de victoria para Aleksandar Vukic. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Aleksandar Vukic en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Aleksandar Vukic en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 40%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -46367,10 +46675,12 @@
             "statistical": "Probabilidad proyectada del 46% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1392",
@@ -46502,7 +46812,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 60% de probabilidad de victoria para Christopher O'Connell. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Christopher O'Connell en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Aleksandr Shevchenko declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 65%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -46528,10 +46838,12 @@
             "statistical": "Probabilidad proyectada del 55% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1393",
@@ -46683,7 +46995,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 52% de probabilidad de victoria para Dusan Lajovic. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Dusan Lajovic en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Dusan Lajovic entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 90%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -46696,10 +47008,12 @@
             "statistical": "Probabilidad proyectada del 48% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1394",
@@ -46844,7 +47158,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 52% de probabilidad de victoria para Otto Virtanen. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Otto Virtanen en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Chak Lam Coleman Wong declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 62%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -46857,10 +47171,12 @@
             "statistical": "Probabilidad proyectada del 48% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1395",
@@ -47005,7 +47321,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 50% de probabilidad de victoria para Jaime Faria. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Jaime Faria en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Wu Yibing entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 82%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -47018,10 +47334,12 @@
             "statistical": "Probabilidad proyectada del 46% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1396",
@@ -47173,7 +47491,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 52% de probabilidad de victoria para Bu Yunchaokete. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Bu Yunchaokete en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Quentin Halys declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 16%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -47186,10 +47504,12 @@
             "statistical": "Probabilidad proyectada del 48% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1397",
@@ -47334,7 +47654,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 50% de probabilidad de victoria para Trevor Svajda. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Trevor Svajda en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Michael Zheng.'. El Factor Caos se calculó en 79%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -47347,10 +47667,12 @@
             "statistical": "Probabilidad proyectada del 46% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1398",
@@ -47482,7 +47804,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 60% de probabilidad de victoria para Kei Nishikori. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Kei Nishikori en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Marco Trungelliti en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 15%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -47508,10 +47830,12 @@
             "statistical": "Probabilidad proyectada del 55% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1399",
@@ -47643,7 +47967,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 60% de probabilidad de victoria para Kyrian Jacquet. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Kyrian Jacquet en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Kyrian Jacquet entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 23%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -47669,10 +47993,12 @@
             "statistical": "Probabilidad proyectada del 55% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1400",
@@ -47778,7 +48104,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 75% de probabilidad de victoria para Stefanos Sakellaridis. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Stefanos Sakellaridis en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Stefanos Sakellaridis declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 42%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -47817,7 +48143,7 @@
             "statistical": "Probabilidad proyectada del 69% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -47833,7 +48159,9 @@
           "status": "won"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1401",
@@ -47978,7 +48306,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 54% de probabilidad de victoria para J.J. Wolf. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de J.J. Wolf en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Sho Shimabukuro declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 48%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -47991,10 +48319,12 @@
             "statistical": "Probabilidad proyectada del 50% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1402",
@@ -48107,7 +48437,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 63% de probabilidad de victoria para Pablo Carreno Busta. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Pablo Carreno Busta en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Tomas Machac en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 68%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -48159,10 +48489,12 @@
             "statistical": "Probabilidad proyectada del 58% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1403",
@@ -48314,7 +48646,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 54% de probabilidad de victoria para Tallon Griekspoor. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Tallon Griekspoor en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Tallon Griekspoor.'. El Factor Caos se calculó en 25%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -48327,10 +48659,12 @@
             "statistical": "Probabilidad proyectada del 50% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1404",
@@ -48462,7 +48796,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 55% de probabilidad de victoria para Aleksandar Kovacevic. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Aleksandar Kovacevic en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Aleksandar Kovacevic en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 50%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -48488,10 +48822,12 @@
             "statistical": "Probabilidad proyectada del 51% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1405",
@@ -48623,7 +48959,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 58% de probabilidad de victoria para Nuno Borges. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Nuno Borges en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Nuno Borges en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 65%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -48649,10 +48985,12 @@
             "statistical": "Probabilidad proyectada del 53% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1406",
@@ -48784,7 +49122,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 58% de probabilidad de victoria para Stefanos Tsitsipas. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Stefanos Tsitsipas en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Stefanos Tsitsipas.'. El Factor Caos se calculó en 43%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -48810,10 +49148,12 @@
             "statistical": "Probabilidad proyectada del 53% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1407",
@@ -48958,7 +49298,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 54% de probabilidad de victoria para Dino Prizmic. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Dino Prizmic en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Cameron Norrie declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 15%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -48971,10 +49311,12 @@
             "statistical": "Probabilidad proyectada del 50% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1408",
@@ -49106,7 +49448,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 62% de probabilidad de victoria para Terence Atmane. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Terence Atmane en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Marton Fucsovics en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 25%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -49132,10 +49474,12 @@
             "statistical": "Probabilidad proyectada del 57% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1409",
@@ -49267,7 +49611,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 56% de probabilidad de victoria para Hubert Hurkacz. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Hubert Hurkacz en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Corentin Moutet declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 34%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -49293,10 +49637,12 @@
             "statistical": "Probabilidad proyectada del 51% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1410",
@@ -49428,7 +49774,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 62% de probabilidad de victoria para Roman Andres Burruchaga. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Roman Andres Burruchaga en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Jan-Lennard Struff entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 25%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -49454,10 +49800,12 @@
             "statistical": "Probabilidad proyectada del 57% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1411",
@@ -49589,7 +49937,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 61% de probabilidad de victoria para Adrian Mannarino. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Adrian Mannarino en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Adrian Mannarino entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 61%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -49615,10 +49963,12 @@
             "statistical": "Probabilidad proyectada del 56% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1412",
@@ -49757,7 +50107,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 57% de probabilidad de victoria para Rinky Hijikata. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Rinky Hijikata en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Gael Monfils entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 77%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -49783,10 +50133,12 @@
             "statistical": "Probabilidad proyectada del 53% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1413",
@@ -49918,7 +50270,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 59% de probabilidad de victoria para Zachary Svajda. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Zachary Svajda en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Mattia Bellucci entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 80%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -49944,10 +50296,12 @@
             "statistical": "Probabilidad proyectada del 54% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1414",
@@ -50073,7 +50427,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 71% de probabilidad de victoria para Grigor Dimitrov. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Grigor Dimitrov en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Grigor Dimitrov entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 26%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -50112,10 +50466,12 @@
             "statistical": "Probabilidad proyectada del 65% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1415",
@@ -50260,7 +50616,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 51% de probabilidad de victoria para Lorenzo Sonego. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Lorenzo Sonego en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Shang Juncheng declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 14%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -50273,10 +50629,12 @@
             "statistical": "Probabilidad proyectada del 47% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1416",
@@ -50408,7 +50766,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 60% de probabilidad de victoria para Jack Draper. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Jack Draper en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Jack Draper entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 40%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -50434,10 +50792,12 @@
             "statistical": "Probabilidad proyectada del 55% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1417",
@@ -50563,7 +50923,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 65% de probabilidad de victoria para Marin Cilic. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Marin Cilic en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Daniel Merida declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 85%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Juegos",
@@ -50602,10 +50962,12 @@
             "statistical": "Probabilidad proyectada del 60% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1418",
@@ -50750,7 +51112,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 52% de probabilidad de victoria para Alex Michelsen. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Alex Michelsen en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Jesper de Jong entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 84%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -50763,10 +51125,12 @@
             "statistical": "Probabilidad proyectada del 48% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1419",
@@ -50898,7 +51262,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 61% de probabilidad de victoria para Camilo Ugo Carabelli. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Camilo Ugo Carabelli en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Camilo Ugo Carabelli declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 23%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -50924,10 +51288,12 @@
             "statistical": "Probabilidad proyectada del 56% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1420",
@@ -51053,7 +51419,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 68% de probabilidad de victoria para Mariano Navone. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Mariano Navone en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Raphael Collignon.'. El Factor Caos se calculó en 22%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -51092,10 +51458,12 @@
             "statistical": "Probabilidad proyectada del 62% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1421",
@@ -51234,7 +51602,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 60% de probabilidad de victoria para Jan Choinski. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Jan Choinski en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Thiago Agustin Tirante en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 39%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -51260,10 +51628,12 @@
             "statistical": "Probabilidad proyectada del 55% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1441",
@@ -51382,7 +51752,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 66% de probabilidad de victoria para Polina Kudermetova. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Polina Kudermetova en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Polina Kudermetova entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 30%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -51421,10 +51791,12 @@
             "statistical": "Probabilidad proyectada del 60% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1442",
@@ -51583,7 +51955,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 51% de probabilidad de victoria para Wang Xiyu. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Wang Xiyu en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Bianca Andreescu.'. El Factor Caos se calculó en 79%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -51596,10 +51968,12 @@
             "statistical": "Probabilidad proyectada del 47% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1443",
@@ -51744,7 +52118,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 50% de probabilidad de victoria para Aliaksandra Sasnovich. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Aliaksandra Sasnovich en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Emiliana Arango en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 26%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -51757,10 +52131,12 @@
             "statistical": "Probabilidad proyectada del 46% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1444",
@@ -51899,7 +52275,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 59% de probabilidad de victoria para Nadia Podoroska. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Nadia Podoroska en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Nadia Podoroska en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 52%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -51925,10 +52301,12 @@
             "statistical": "Probabilidad proyectada del 54% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1445",
@@ -52067,7 +52445,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 55% de probabilidad de victoria para Kayla Day. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Kayla Day en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Yuan Yue en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 34%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -52093,10 +52471,12 @@
             "statistical": "Probabilidad proyectada del 50% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1446",
@@ -52228,7 +52608,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 56% de probabilidad de victoria para Elsa Jacquemot. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Elsa Jacquemot en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Elsa Jacquemot entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 21%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -52254,10 +52634,12 @@
             "statistical": "Probabilidad proyectada del 52% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 5,
+      "away_games": 7
     },
     {
       "id": "match-1447",
@@ -52402,7 +52784,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 50% de probabilidad de victoria para Lanlana Tararudee. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Lanlana Tararudee en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Mananchaya Sawangkaew entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 68%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -52415,10 +52797,12 @@
             "statistical": "Probabilidad proyectada del 46% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1448",
@@ -52570,7 +52954,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 51% de probabilidad de victoria para Sinja Kraus. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Sinja Kraus en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Sinja Kraus en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 57%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -52583,10 +52967,12 @@
             "statistical": "Probabilidad proyectada del 47% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1449",
@@ -52731,7 +53117,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 53% de probabilidad de victoria para Oksana Selekhmeteva. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Oksana Selekhmeteva en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Mary Stoiana.'. El Factor Caos se calculó en 70%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -52744,10 +53130,12 @@
             "statistical": "Probabilidad proyectada del 49% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1450",
@@ -52892,7 +53280,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 52% de probabilidad de victoria para Lucrezia Stefanini. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Lucrezia Stefanini en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Lucrezia Stefanini declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 74%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -52905,10 +53293,12 @@
             "statistical": "Probabilidad proyectada del 48% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1451",
@@ -53040,7 +53430,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 57% de probabilidad de victoria para Robin Montgomery. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Robin Montgomery en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Lilli Tagger en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 53%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -53066,10 +53456,12 @@
             "statistical": "Probabilidad proyectada del 52% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1452",
@@ -53201,7 +53593,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 55% de probabilidad de victoria para Alina Charaeva. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Alina Charaeva en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Alina Korneeva declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 60%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -53227,10 +53619,12 @@
             "statistical": "Probabilidad proyectada del 50% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1453",
@@ -53375,7 +53769,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 53% de probabilidad de victoria para Aoi Ito. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Aoi Ito en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Harriet Dart entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 63%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -53388,10 +53782,12 @@
             "statistical": "Probabilidad proyectada del 48% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1454",
@@ -53550,7 +53946,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 50% de probabilidad de victoria para Anna Blinkova. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Anna Blinkova en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Eva Lys en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 71%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -53563,10 +53959,12 @@
             "statistical": "Probabilidad proyectada del 46% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1455",
@@ -53698,7 +54096,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 60% de probabilidad de victoria para Katie Boulter. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Katie Boulter en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Katie Volynets.'. El Factor Caos se calculó en 54%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -53724,10 +54122,12 @@
             "statistical": "Probabilidad proyectada del 55% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1456",
@@ -53859,7 +54259,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 56% de probabilidad de victoria para Anhelina Kalinina. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Anhelina Kalinina en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Darja Vidmanova declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 90%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -53885,10 +54285,12 @@
             "statistical": "Probabilidad proyectada del 52% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1457",
@@ -53994,7 +54396,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 82% de probabilidad de victoria para Viktorija Golubic. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Viktorija Golubic en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Alycia Parks declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 55%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -54046,10 +54448,12 @@
             "statistical": "Probabilidad proyectada del 75% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1458",
@@ -54194,7 +54598,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 53% de probabilidad de victoria para Elvina Kalieva. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Elvina Kalieva en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Oleksandra Oliynykova entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 34%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -54207,10 +54611,12 @@
             "statistical": "Probabilidad proyectada del 49% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1459",
@@ -54362,7 +54768,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 50% de probabilidad de victoria para Ashlyn Krueger. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Ashlyn Krueger en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Ashlyn Krueger en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 13%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -54375,10 +54781,12 @@
             "statistical": "Probabilidad proyectada del 46% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1460",
@@ -54523,7 +54931,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 54% de probabilidad de victoria para McCartney Kessler. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de McCartney Kessler en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Catherine McNally en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 35%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -54536,10 +54944,12 @@
             "statistical": "Probabilidad proyectada del 49% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1461",
@@ -54684,7 +55094,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 54% de probabilidad de victoria para Caroline Dolehide. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Caroline Dolehide en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Caroline Dolehide.'. El Factor Caos se calculó en 41%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -54697,10 +55107,12 @@
             "statistical": "Probabilidad proyectada del 49% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1462",
@@ -54839,7 +55251,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 62% de probabilidad de victoria para Simona Waltert. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Simona Waltert en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Simona Waltert declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 40%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -54865,10 +55277,12 @@
             "statistical": "Probabilidad proyectada del 57% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1463",
@@ -55020,7 +55434,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 51% de probabilidad de victoria para Daria Kasatkina. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Daria Kasatkina en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Daria Kasatkina declaró en rueda de prensa sentirse en el mejor estado físico de su carrera.'. El Factor Caos se calculó en 46%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -55033,10 +55447,12 @@
             "statistical": "Probabilidad proyectada del 47% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1464",
@@ -55188,7 +55604,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 53% de probabilidad de victoria para Elena-Gabriela Ruse. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Elena-Gabriela Ruse en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Magda Linette entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 16%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -55201,10 +55617,12 @@
             "statistical": "Probabilidad proyectada del 49% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1465",
@@ -55343,7 +55761,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 56% de probabilidad de victoria para Kimberly Birrell. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Kimberly Birrell en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Kamilla Rakhimova en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 78%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -55369,10 +55787,12 @@
             "statistical": "Probabilidad proyectada del 52% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1466",
@@ -55491,7 +55911,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 62% de probabilidad de victoria para Jessica Bouzas Maneiro. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Jessica Bouzas Maneiro en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'La racha de victorias de Jessica Bouzas Maneiro en esta superficie es excelente esta temporada.'. El Factor Caos se calculó en 14%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -55530,10 +55950,12 @@
             "statistical": "Probabilidad proyectada del 57% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1467",
@@ -55678,7 +56100,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 50% de probabilidad de victoria para Yuliia Starodubtseva. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Yuliia Starodubtseva en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Yuliia Starodubtseva.'. El Factor Caos se calculó en 87%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Ganador 1er Set",
@@ -55691,10 +56113,12 @@
             "statistical": "Probabilidad proyectada del 46% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1468",
@@ -55826,7 +56250,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 57% de probabilidad de victoria para Maria Timofeeva. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Maria Timofeeva en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Katerina Siniakova entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 81%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -55852,10 +56276,12 @@
             "statistical": "Probabilidad proyectada del 52% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1469",
@@ -55981,7 +56407,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 72% de probabilidad de victoria para Cristina Bucsa. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Cristina Bucsa en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Panna Udvardy.'. El Factor Caos se calculó en 73%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -56007,7 +56433,7 @@
             "statistical": "Probabilidad proyectada del 66% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -56023,7 +56449,9 @@
           "status": "won"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1470",
@@ -56155,7 +56583,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 58% de probabilidad de victoria para Tatjana Maria. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Tatjana Maria en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Dayana Yastremska.'. El Factor Caos se calculó en 80%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -56181,10 +56609,12 @@
             "statistical": "Probabilidad proyectada del 53% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1471",
@@ -56303,7 +56733,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 66% de probabilidad de victoria para Antonia Ruzic. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Antonia Ruzic en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Magdalena Frech.'. El Factor Caos se calculó en 45%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -56329,7 +56759,7 @@
             "statistical": "Probabilidad proyectada del 61% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Total de Sets (Más/Menos)",
@@ -56345,7 +56775,9 @@
           "status": "won"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1472",
@@ -56484,7 +56916,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 57% de probabilidad de victoria para Sara Bejlek. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Sara Bejlek en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Analistas de tenis prevén un partido largo debido a la gran resistencia de Karolina Pliskova.'. El Factor Caos se calculó en 78%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -56510,10 +56942,12 @@
             "statistical": "Probabilidad proyectada del 52% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1473",
@@ -56652,7 +57086,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 63% de probabilidad de victoria para Taylor Townsend. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Taylor Townsend en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Camila Osorio entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 87%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -56678,10 +57112,12 @@
             "statistical": "Probabilidad proyectada del 58% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1474",
@@ -56820,7 +57256,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 55% de probabilidad de victoria para Yulia Putintseva. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Yulia Putintseva en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Liudmila Samsonova entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 25%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Sets",
@@ -56846,10 +57282,12 @@
             "statistical": "Probabilidad proyectada del 51% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1475",
@@ -56955,7 +57393,7 @@
             "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 70% de probabilidad de victoria para Maya Joint. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
             "market": "Las casas de apuestas movieron la línea a favor de Maya Joint en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: 'Se vio a Tamara Korpatsch entrenando con protección especial en el codo durante la sesión matutina.'. El Factor Caos se calculó en 38%, dentro del margen manejable."
           },
-          "status": "pending"
+          "status": "lost"
         },
         {
           "market": "Hándicap de Juegos",
@@ -57007,10 +57445,12 @@
             "statistical": "Probabilidad proyectada del 64% para adueñarse de la primera manga.",
             "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
           },
-          "status": "pending"
+          "status": "lost"
         }
       ],
-      "real_odds": {}
+      "real_odds": {},
+      "home_games": 0,
+      "away_games": 0
     },
     {
       "id": "match-1804",
@@ -58436,13 +58876,13 @@
           "pick": "Jacob Fearnley -2.5 Juegos",
           "odd": 1.63,
           "reasoning": "El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
-          "status": "won"
+          "status": "lost"
         }
       ],
       "total_odd": 2.04,
       "confidence": 77,
       "recommendation_stake": 7.0,
-      "status": "won"
+      "status": "lost"
     },
     {
       "date": "2026-08-11",
@@ -58456,13 +58896,13 @@
           "pick": "Himeno Sakatsume -2.5 Juegos",
           "odd": 1.62,
           "reasoning": "El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
-          "status": "won"
+          "status": "lost"
         }
       ],
       "total_odd": 1.62,
       "confidence": 75,
       "recommendation_stake": 7.0,
-      "status": "won"
+      "status": "lost"
     },
     {
       "date": "2026-08-11",
@@ -58552,13 +58992,13 @@
           "pick": "Jaime Faria +1.5 Juegos",
           "odd": 1.6,
           "reasoning": "El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
-          "status": "pending"
+          "status": "won"
         }
       ],
       "total_odd": 1.81,
       "confidence": 82,
       "recommendation_stake": 8.0,
-      "status": "pending"
+      "status": "won"
     },
     {
       "date": "2026-08-12",
@@ -58572,13 +59012,13 @@
           "pick": "Yulia Putintseva -2.5 Juegos",
           "odd": 1.62,
           "reasoning": "El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "total_odd": 1.62,
       "confidence": 75,
       "recommendation_stake": 7.0,
-      "status": "pending"
+      "status": "lost"
     },
     {
       "date": "2026-08-12",
@@ -58592,13 +59032,13 @@
           "pick": "J.J. Wolf +1.5 Sets",
           "odd": 1.65,
           "reasoning": "J.J. Wolf domina el servicio y la devolución en esta superficie. Se proyecta una victoria solvente en 2 sets directos (2-0).",
-          "status": "pending"
+          "status": "lost"
         }
       ],
       "total_odd": 1.65,
       "confidence": 72,
       "recommendation_stake": 6.0,
-      "status": "pending"
+      "status": "lost"
     },
     {
       "date": "2026-08-12",
@@ -58645,7 +59085,7 @@
       "total_odd": 6.83,
       "confidence": 50,
       "recommendation_stake": 1.0,
-      "status": "pending"
+      "status": "won"
     }
   ],
   "starting_bankroll": 53.67,

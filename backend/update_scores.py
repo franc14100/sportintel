@@ -14,7 +14,7 @@ def normalize_name(name):
         name = re.sub(rf'\b{w}\b', '', name)
     return re.sub(r'[^a-z0-9]', '', name).strip()
 
-def evaluate_pick(market, selection, home_score, away_score, home_team, away_team, sport="Football"):
+def evaluate_pick(market, selection, home_score, away_score, home_team, away_team, sport="Football", home_games=None, away_games=None):
     if home_score is None or away_score is None:
         return "pending"
     
@@ -28,39 +28,62 @@ def evaluate_pick(market, selection, home_score, away_score, home_team, away_tea
     sel = str(selection).lower()
     h_norm = normalize_name(home_team)
     a_norm = normalize_name(away_team)
+    sel_norm = normalize_name(selection)
+
+    is_home_sel = (h_norm and h_norm in sel_norm) or 'local' in sel or sel.startswith('1')
+    is_away_sel = (a_norm and a_norm in sel_norm) or 'visitante' in sel or sel.startswith('2')
     
-    # Regla Especial Tenis (hs y as son sets ganados, ej. 2-0 o 2-1)
-    if sport == "Tennis" or "sets" in mkt or "hándicap de sets" in mkt or "hándicap de juegos" in mkt:
-        total_sets = hs + aws
-        est_total_games = 27 if total_sets >= 3 else (19 if total_sets == 2 else hs + aws)
-        winner_is_home = hs > aws
-        winner_is_away = aws > hs
-        
-        if "sets" in mkt or "set" in mkt:
-            if "menos de 2.5" in sel:
-                return "won" if total_sets < 2.5 else "lost"
-            if "más de 2.5" in sel:
-                return "won" if total_sets > 2.5 else "lost"
-            if "-1.5" in sel or "2-0" in sel or "gana 2-0" in sel:
-                if (winner_is_home and hs == 2 and aws == 0 and h_norm in sel) or (winner_is_away and aws == 2 and hs == 0 and a_norm in sel):
-                    return "won"
-                return "lost"
-            if "+1.5" in sel:
-                if (h_norm in sel and hs >= 1) or (a_norm in sel and aws >= 1):
-                    return "won"
-                return "lost"
+    # Regla Especial Tenis (hs y aws son sets ganados, h_games y a_games son juegos ganados)
+    if sport == "Tennis" or "sets" in mkt or "hándicap de sets" in mkt or "hándicap de juegos" in mkt or "juegos" in mkt:
+        home_sets = hs
+        away_sets = aws
+        h_g = int(home_games) if home_games is not None else (home_sets * 6)
+        a_g = int(away_games) if away_games is not None else (away_sets * 6)
 
-        if "juegos" in mkt or "hándicap" in mkt:
-            if "más de 12.5" in sel or "over 12.5" in sel: return "won" if est_total_games > 12.5 else "lost"
-            if "más de 8.5" in sel or "más de 9.5" in sel or "más de 10.5" in sel: return "won" if est_total_games > 8.5 else "lost"
-            if "+1.5" in sel or "+2.5" in sel or "+3.5" in sel: return "won"
-            if "-1.5" in sel or "-2.5" in sel or "-3.5" in sel: return "won" if (winner_is_home and h_norm in sel) or (winner_is_away and a_norm in sel) else "lost"
+        # 1. Total Sets (Más de 2.5 Sets / Menos de 2.5 Sets)
+        if ('más de 2.5' in sel or 'over 2.5' in sel) and ('set' in mkt or 'set' in sel):
+            return 'won' if (home_sets + away_sets) >= 3 else 'lost'
+        if ('menos de 2.5' in sel or 'under 2.5' in sel) and ('set' in mkt or 'set' in sel):
+            return 'won' if (home_sets + away_sets) < 3 else 'lost'
 
-        if "ganador" in mkt or "moneyline" in mkt or "1er set" in mkt:
-            if h_norm in sel or sel == "1" or "local" in sel: return "won" if hs > aws else "lost"
-            if a_norm in sel or sel == "2" or "visitante" in sel: return "won" if aws > hs else "lost"
-        
-        return "won" if (winner_is_home and h_norm in sel) or (winner_is_away and a_norm in sel) else "lost"
+        # 2. Set Handicap / Exact Sets (-1.5 Sets, +1.5 Sets, 2-0 Sets)
+        if 'set' in mkt or 'sets' in sel or 'set' in sel:
+            if '-1.5' in sel or '2-0' in sel:
+                if is_home_sel: return 'won' if (home_sets == 2 and away_sets == 0) else 'lost'
+                if is_away_sel: return 'won' if (away_sets == 2 and home_sets == 0) else 'lost'
+            if '+1.5' in sel:
+                if is_home_sel: return 'won' if home_sets >= 1 else 'lost'
+                if is_away_sel: return 'won' if away_sets >= 1 else 'lost'
+
+        # 3. Game Handicap or Game Totals (ej. Sakatsume -2.5 Juegos)
+        if 'juego' in mkt or 'juegos' in mkt or 'hándicap' in mkt or 'handicap' in mkt or 'juegos' in sel or 'juego' in sel:
+            # Total Games Over/Under
+            if 'más' in sel or 'over' in sel or 'menos' in sel or 'under' in sel:
+                match_num = re.search(r'(\d+(?:\.\d+)?)', sel)
+                if match_num:
+                    line = float(match_num.group(1))
+                    tot_g = h_g + a_g
+                    if 'más' in sel or 'over' in sel:
+                        return 'won' if tot_g > line else 'lost'
+                    if 'menos' in sel or 'under' in sel:
+                        return 'won' if tot_g < line else 'lost'
+            
+            # Game Handicap (ej. -2.5, +2.5)
+            match_h = re.search(r'([+-]?\d+(?:\.\d+)?)', sel)
+            if match_h:
+                handicap_val = float(match_h.group(1))
+                if is_home_sel:
+                    diff = h_g - a_g
+                    return 'won' if (diff + handicap_val) > 0 else 'lost'
+                elif is_away_sel:
+                    diff = a_g - h_g
+                    return 'won' if (diff + handicap_val) > 0 else 'lost'
+
+        # 4. Moneyline / Ganador
+        if is_home_sel: return 'won' if home_sets > away_sets else 'lost'
+        if is_away_sel: return 'won' if away_sets > home_sets else 'lost'
+
+        return 'lost'
 
     
     # 1. Doble Oportunidad
@@ -155,23 +178,21 @@ def update_scores():
             home_name = home.get('team', {}).get('name') or home.get('team', {}).get('displayName') or home.get('athlete', {}).get('displayName', '')
             away_name = away.get('team', {}).get('name') or away.get('team', {}).get('displayName') or away.get('athlete', {}).get('displayName', '')
             
-            def extract_espn_score(comp):
-                if not comp: return 0
-                sc = comp.get('score')
-                if sc is not None and str(sc).isdigit():
-                    return int(sc)
+            def extract_espn_tennis_score(comp):
+                if not comp: return 0, 0
                 lines = comp.get('linescores', [])
-                if lines:
-                    sets_won = sum(1 for l in lines if l.get('winner') is True)
-                    if sets_won > 0: return sets_won
-                    total_val = sum(int(l.get('value', 0)) for l in lines if l.get('value') and str(l.get('value')).isdigit())
-                    if total_val > 0: return total_val
-                if comp.get('winner') is True:
-                    return 2
-                return 0
+                total_games = sum(int(l.get('value', 0)) for l in lines if l.get('value') and str(l.get('value')).replace('.','').isdigit()) if lines else 0
+                sets_won = sum(1 for l in lines if l.get('winner') is True) if lines else 0
+                if sets_won == 0:
+                    sc = comp.get('score')
+                    if sc is not None and str(sc).isdigit():
+                        sets_won = int(sc)
+                    elif comp.get('winner') is True:
+                        sets_won = 2
+                return sets_won, total_games
 
-            home_score = extract_espn_score(home)
-            away_score = extract_espn_score(away)
+            home_score, home_games = extract_espn_tennis_score(home)
+            away_score, away_games = extract_espn_tennis_score(away)
 
             norm_home = normalize_name(home_name)
             norm_away = normalize_name(away_name)
@@ -180,12 +201,16 @@ def update_scores():
                 live_dict[f"{norm_home}-{norm_away}"] = {
                     'status_desc': status_desc,
                     'home_score': home_score,
-                    'away_score': away_score
+                    'away_score': away_score,
+                    'home_games': home_games,
+                    'away_games': away_games
                 }
                 live_dict[f"{norm_away}-{norm_home}"] = {
                     'status_desc': status_desc,
                     'home_score': away_score,
-                    'away_score': home_score
+                    'away_score': home_score,
+                    'home_games': away_games,
+                    'away_games': home_games
                 }
 
     for ev in espn_events:
@@ -231,6 +256,9 @@ def update_scores():
             m['status'] = new_status
             m['home_score'] = live_found['home_score']
             m['away_score'] = live_found['away_score']
+            if 'home_games' in live_found:
+                m['home_games'] = live_found['home_games']
+                m['away_games'] = live_found['away_games']
             updates += 1
             print(f"[+] Actualizado ESPN: {home_team} {live_found['home_score']} - {live_found['away_score']} {away_team} ({new_status})")
         else:
@@ -249,10 +277,13 @@ def update_scores():
         hs = m.get('home_score')
         aws = m.get('away_score')
         m_status = m.get('status')
+        sport_type = m.get('sport', 'Football')
+        h_g = m.get('home_games')
+        a_g = m.get('away_games')
         
         if m_status == 'post' or hs is not None:
             for p in m.get('picks', []):
-                p_stat = evaluate_pick(p.get('market', ''), p.get('selection', p.get('pick', '')), hs, aws, home_team, away_team)
+                p_stat = evaluate_pick(p.get('market', ''), p.get('selection', p.get('pick', '')), hs, aws, home_team, away_team, sport_type, h_g, a_g)
                 if p_stat != 'pending':
                     p['status'] = p_stat
 
@@ -269,7 +300,17 @@ def update_scores():
                         found_match = m
                         break
                 if found_match and found_match.get('status') == 'post':
-                    res = evaluate_pick(sel.get('market', ''), sel.get('pick', ''), found_match.get('home_score'), found_match.get('away_score'), found_match.get('home'), found_match.get('away'))
+                    res = evaluate_pick(
+                        sel.get('market', ''),
+                        sel.get('pick', ''),
+                        found_match.get('home_score'),
+                        found_match.get('away_score'),
+                        found_match.get('home'),
+                        found_match.get('away'),
+                        found_match.get('sport', sel.get('sport', 'Football')),
+                        found_match.get('home_games'),
+                        found_match.get('away_games')
+                    )
                     if res == 'lost':
                         ticket_won = False
                     elif res == 'pending':
@@ -281,6 +322,40 @@ def update_scores():
                 st['status'] = 'won' if ticket_won else 'lost'
                 status_str = "GANADO" if ticket_won else "FALLADO"
                 print(f"[INFO] {st_key} autoevaluado: {status_str}")
+
+    # Re-grade Historical Tickets Registry
+    for tk in data.get('historical_tickets_registry', []):
+        all_graded = True
+        ticket_won = True
+        for sel in tk.get('selections', []):
+            found_match = None
+            for m in matches:
+                if f"{m.get('home')} vs {m.get('away')}" == sel.get('match'):
+                    found_match = m
+                    break
+            if found_match and found_match.get('status') == 'post':
+                res = evaluate_pick(
+                    sel.get('market', ''),
+                    sel.get('pick', ''),
+                    found_match.get('home_score'),
+                    found_match.get('away_score'),
+                    found_match.get('home'),
+                    found_match.get('away'),
+                    found_match.get('sport', sel.get('sport', 'Football')),
+                    found_match.get('home_games'),
+                    found_match.get('away_games')
+                )
+                if res != 'pending':
+                    sel['status'] = res
+                if res == 'lost':
+                    ticket_won = False
+                elif res == 'pending':
+                    all_graded = False
+            elif sel.get('status') == 'lost':
+                ticket_won = False
+        
+        if all_graded:
+            tk['status'] = 'won' if ticket_won else 'lost'
 
     # Actualizar Base de Datos de Aprendizaje Autónomo Persistente
     try:
