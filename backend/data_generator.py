@@ -831,7 +831,7 @@ def generate_daily_sports_data():
         espn_matches = fetch_espn_fallback_matches()
     
     # Filtrar solo partidos de HOY que comiencen durante el día/tarde (antes de las 22:00 hora local)
-    live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis', 'Basketball'] and m.get('date', date_str) == date_str and m.get('time', '15:00') < '22:00']
+    live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis', 'Basketball'] and m.get('date', date_str) == date_str and '08:00' <= m.get('time', '15:00') < '22:00']
     total_analyzed = len(live_matches)
     
     if not live_matches:
