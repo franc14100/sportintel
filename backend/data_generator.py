@@ -1897,41 +1897,16 @@ def generate_daily_sports_data():
                     sel = pk.get("selection", "").strip()
                     graded = "lost"
                     try:
-                        if "Resultado Final" in mk or "Ganador" in mk:
-                            if sel == h_nm and h_f > a_f: graded = "won"
-                            elif sel == a_nm and a_f > h_f: graded = "won"
-                            elif sel == "Empate" and h_f == a_f: graded = "won"
-                        elif "Doble Oportunidad" in mk:
-                            if "o Empate" in sel:
-                                team = sel.replace("o Empate", "").strip()
-                                if team == h_nm and h_f >= a_f: graded = "won"
-                                elif team == a_nm and a_f >= h_f: graded = "won"
-                            elif " o " in sel:
-                                if h_f != a_f: graded = "won"
-                        elif "Córners" in mk or "Tarjetas" in mk or "Saques de Esquina" in mk:
-                            # We don't scrape corner or card data, only goals. So leave as pending for manual verification.
-                            graded = "pending"
-                        elif "Más/Menos" in mk or "Over/Under" in mk or "Total" in mk or "Puntos" in mk or "Goles" in mk:
-                            # Extract numeric threshold from selection or market name (e.g. 160.5, 2.5, 8.5)
-                            import re
-                            limit_match = re.search(r"(\d+(?:\.\d+)?)", sel) or re.search(r"(\d+(?:\.\d+)?)", mk)
-                            limit = float(limit_match.group(1)) if limit_match else 2.5
-                            
-                            if "Más" in sel or "Over" in sel:
-                                if total_goals > limit: graded = "won"
-                            elif "Menos" in sel or "Under" in sel:
-                                if total_goals < limit: graded = "won"
-                        elif "Ambos Equipos Anotan" in mk or "BTTS" in mk:
-                            if sel in ("Sí", "Yes") and h_f > 0 and a_f > 0: graded = "won"
-                            elif sel in ("No") and (h_f == 0 or a_f == 0): graded = "won"
-                        elif "Empate No Apuesta" in mk or "DNB" in mk:
-                            if sel == h_nm and h_f > a_f: graded = "won"
-                            elif sel == a_nm and a_f > h_f: graded = "won"
-                            elif h_f == a_f: graded = "voided"
-                        elif "Marcador Exacto" in mk or "Marcador Correcto" in mk:
-                            score_str = f"{int(h_f)}-{int(a_f)}"
-                            if sel.strip() == score_str: graded = "won"
-                            else: graded = "lost"
+                        try:
+                            from backend.update_scores import evaluate_pick
+                        except ImportError:
+                            from update_scores import evaluate_pick
+                        graded = evaluate_pick(
+                            mk, sel, h_sc, a_sc, h_nm, a_nm,
+                            current_match_entry.get('sport', 'Football'),
+                            current_match_entry.get('home_games'),
+                            current_match_entry.get('away_games')
+                        )
                     except Exception as ge:
                         print(f"[Grade] Error en pick: {ge}")
                     pk["status"] = graded

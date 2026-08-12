@@ -58876,7 +58876,7 @@
           "pick": "Jacob Fearnley -2.5 Juegos",
           "odd": 1.63,
           "reasoning": "El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
-          "status": "won"
+          "status": "lost"
         }
       ],
       "total_odd": 2.04,
@@ -58992,13 +58992,13 @@
           "pick": "Jaime Faria +1.5 Juegos",
           "odd": 1.6,
           "reasoning": "El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
-          "status": "lost"
+          "status": "won"
         }
       ],
       "total_odd": 1.81,
       "confidence": 82,
       "recommendation_stake": 8.0,
-      "status": "pending"
+      "status": "won"
     },
     {
       "date": "2026-08-12",
@@ -59085,7 +59085,7 @@
       "total_odd": 6.83,
       "confidence": 50,
       "recommendation_stake": 1.0,
-      "status": "pending"
+      "status": "won"
     }
   ],
   "starting_bankroll": 53.67,
