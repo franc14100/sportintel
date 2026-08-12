@@ -50890,7 +50890,7 @@
     "name": "Boleto Seguro (Boleto 1)",
     "confidence": 85,
     "recommendation_stake": 3,
-    "total_odd": 1.68,
+    "total_odd": 1.6,
     "status": "pending",
     "selections": [
       {
@@ -50898,17 +50898,17 @@
         "sport": "Football",
         "market": "Doble Oportunidad",
         "pick": "Arsenal o Empate",
-        "odd": 1.13,
+        "odd": 1.22,
         "reasoning": "Arsenal domina en plantilla y forma frente a Como en pretemporada.",
         "status": "pending"
       },
       {
-        "match": "Stefanos Sakellaridis vs Titouan Droguet",
+        "match": "Dalibor Svrcina vs Mark Lajal",
         "sport": "Tennis",
-        "market": "Ganador 1er Set",
-        "pick": "Titouan Droguet Ganador 1er Set",
-        "odd": 1.48,
-        "reasoning": "Droguet es FAVORITO en 1xBet (@1.48 vs @2.47). Verificado con captura del usuario.",
+        "market": "Hándicap de Sets",
+        "pick": "Dalibor Svrcina +1.5 Sets",
+        "odd": 1.31,
+        "reasoning": "Apuesta de altísima seguridad sugerida por el usuario: Svrcina solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
         "status": "pending"
       }
     ]
@@ -51803,7 +51803,7 @@
       "name": "Boleto Seguro (Boleto 1)",
       "ticket_id": "TK-97345",
       "confidence": 85,
-      "total_odd": 1.68,
+      "total_odd": 1.6,
       "recommendation_stake": 3,
       "status": "pending",
       "selections": [
@@ -51812,17 +51812,17 @@
           "sport": "Football",
           "market": "Doble Oportunidad",
           "pick": "Arsenal o Empate",
-          "odd": 1.13,
+          "odd": 1.22,
           "reasoning": "Arsenal domina en plantilla y forma frente a Como en pretemporada.",
           "status": "pending"
         },
         {
-          "match": "Stefanos Sakellaridis vs Titouan Droguet",
+          "match": "Dalibor Svrcina vs Mark Lajal",
           "sport": "Tennis",
-          "market": "Ganador 1er Set",
-          "pick": "Titouan Droguet Ganador 1er Set",
-          "odd": 1.48,
-          "reasoning": "Droguet es FAVORITO en 1xBet (@1.48 vs @2.47). Verificado con captura del usuario.",
+          "market": "Hándicap de Sets",
+          "pick": "Dalibor Svrcina +1.5 Sets",
+          "odd": 1.31,
+          "reasoning": "Apuesta de altísima seguridad sugerida por el usuario: Svrcina solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
           "status": "pending"
         }
       ]

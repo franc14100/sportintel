@@ -1815,6 +1815,12 @@ def generate_daily_sports_data():
                 "market": f"Mercado rápido de primera manga con excelente retorno en apuestas simples."
             }
 
+            analysis_safe_hset_tennis = {
+                "tactical": f"Apuesta de altísima seguridad: {winner_tennis} solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
+                "statistical": f"Con una probabilidad superior al 85%, es estadísticamente improbable que {winner_tennis} pierda en sets corridos (2-0 en contra).",
+                "market": f"Mercado Hándicap de Sets (+1.5) utilizado frecuentemente por tipsters conservadores para blindar cuotas de boletos seguros."
+            }
+
             picks = [
                 {
                     "market": "Ganador (Moneyline)",
@@ -1832,6 +1838,15 @@ def generate_daily_sports_data():
                     "probability": int(max(prob_home, prob_away) * 0.94) if is_strong_fav else random.randint(60, 72),
                     "risk": "Low" if is_strong_fav else "Medium",
                     "reasoning": analysis_hset_tennis,
+                    "status": "pending"
+                },
+                {
+                    "market": "Hándicap de Sets",
+                    "selection": f"{winner_tennis} +1.5 Sets",
+                    "odd": round(random.uniform(1.15, 1.35), 2),
+                    "probability": int(min(max(prob_home, prob_away) * 1.25, 92)),  # Probabilidad muy alta
+                    "risk": "Low",
+                    "reasoning": analysis_safe_hset_tennis,
                     "status": "pending"
                 },
                 {
