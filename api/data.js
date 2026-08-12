@@ -138,17 +138,39 @@ module.exports = async function handler(req, res) {
                     const isKvValid = parsedData && parsedData.date && Array.isArray(parsedData.matches) && parsedData.matches.length >= 5;
                     
                     if (isKvValid) {
-                        // KV es la fuente de verdad. Si KV tiene datos válidos, los usamos completos.
-                        // Comparamos si KV tiene datos más recientes o iguales al data.json local.
+                        const localRegistry = data.historical_tickets_registry || [];
+                        const kvRegistry = parsedData.historical_tickets_registry || [];
+                        
+                        // Merge registries by ticket_id or (date + name) to ensure no historical dates are lost
+                        const registryMap = new Map();
+                        kvRegistry.forEach(t => {
+                            const key = t.ticket_id || `${t.date}-${t.name}`;
+                            registryMap.set(key, t);
+                        });
+                        localRegistry.forEach(t => {
+                            const key = t.ticket_id || `${t.date}-${t.name}`;
+                            registryMap.set(key, t);
+                        });
+                        
+                        const mergedRegistry = Array.from(registryMap.values());
+                        mergedRegistry.sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
+
                         if (parsedData.date >= data.date) {
-                            data = parsedData; // Usar TODO desde KV (partidos de hoy, etc)
+                            data = parsedData;
                         } else {
-                            // KV está atrasado (ej. se borró o falló). Solo fusionamos stats.
                             data.global_stats = parsedData.global_stats || data.global_stats;
-                            data.historical_tickets_registry = parsedData.historical_tickets_registry || data.historical_tickets_registry;
                             data.starting_bankroll = parsedData.starting_bankroll || data.starting_bankroll;
                             data.user_bets = parsedData.user_bets || data.user_bets;
                         }
+                        
+                        data.historical_tickets_registry = mergedRegistry.slice(-40);
+                        
+                        // Update KV with merged data asynchronously to heal KV storage
+                        fetch(`${baseUrl}/set/sportintel_data`, {
+                            method: 'POST',
+                            headers: { 'Authorization': `Bearer ${kvToken}`, 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        }).catch(() => {});
                     } else {
                         console.log("[Data API] Datos de KV obsoletos o corruptos. Ignorando KV y usando data.json fresco.");
                         // Sobrescribir KV con los datos frescos de data.json para sanar el KV
