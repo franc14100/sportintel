@@ -2130,9 +2130,9 @@
       "time": "03:00",
       "date": "2026-08-12",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
-      "away_score": 0,
+      "status": "post",
+      "home_score": 1,
+      "away_score": 1,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -2402,7 +2402,7 @@
             "market": "Las cuotas para 'Ambos Anotan Sí' reflejan un valor de mercado sólido. La IA detectó 74% del volumen de apuestas sharps orientado a este resultado. El rumor: 'El analista táctico afirma que AD Alcorcón explotará la banda izquierda de su rival debido a su lentitud.' puede impactar el estado mental de alguno de los equipos, favoreciendo la producción ofensiva."
           },
           "valid_for_ticket": false,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Empate No Apuesta (DNB)",
@@ -2448,8 +2448,8 @@
       "time": "03:00",
       "date": "2026-08-12",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
+      "status": "post",
+      "home_score": 3,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -2684,7 +2684,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Doble Oportunidad",
@@ -2724,7 +2724,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 66% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "won"
         },
         {
           "market": "Marcador Exacto",
@@ -2757,8 +2757,8 @@
       "time": "05:00",
       "date": "2026-08-12",
       "stadium": "Cancha Principal",
-      "status": "pre",
-      "home_score": 0,
+      "status": "post",
+      "home_score": 3,
       "away_score": 0,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
@@ -6339,9 +6339,9 @@
       "time": "12:30",
       "date": "2026-08-12",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -6561,7 +6561,7 @@
             "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
             "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
           },
-          "status": "won"
+          "status": "lost"
         },
         {
           "market": "Total de Goles (Asian 2.0)",
@@ -6588,7 +6588,7 @@
             "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 73% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
             "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
           },
-          "status": "void"
+          "status": "lost"
         },
         {
           "market": "Ambos Equipos Anotan",
@@ -6648,9 +6648,9 @@
       "time": "12:30",
       "date": "2026-08-12",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "post",
       "home_score": 0,
-      "away_score": 0,
+      "away_score": 3,
       "home_form": "W---D---W---W",
       "away_form": "W---W---D---L",
       "home_injuries": [
@@ -6910,7 +6910,7 @@
             "market": "Fallback sin datos reales de API para esta línea."
           },
           "valid_for_ticket": true,
-          "status": "lost"
+          "status": "won"
         },
         {
           "market": "Ambos Equipos Anotan",
@@ -7576,7 +7576,7 @@
       "time": "13:00",
       "date": "2026-08-12",
       "stadium": "Cancha Principal",
-      "status": "pre",
+      "status": "canceled",
       "home_score": 0,
       "away_score": 0,
       "home_form": "W---D---W---W",

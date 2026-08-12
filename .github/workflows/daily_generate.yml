@@ -6,6 +6,9 @@ on:
     - cron: '0 10 * * *'
   workflow_dispatch:  # Allow manual trigger
 
+permissions:
+  contents: write
+
 # Prevent concurrent runs - cancel any in-progress run
 concurrency:
   group: sportintel-data
@@ -57,6 +60,7 @@ jobs:
           UPSTASH_REDIS_REST_KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
         run: |
           python backend/data_generator.py
+          python -c "import shutil; shutil.copy2('frontend/data.json', 'data.json')"
           echo "Generator completed successfully"
 
       - name: Show generated tickets
@@ -78,6 +82,5 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "SportIntel Bot"
-          git add frontend/data.json
-          git diff --staged --quiet || git commit -m "Auto: Fresh data for $(date -u '+%Y-%m-%d') at 5AM Ecuador [skip ci]"
-          git push
+          git add frontend/data.json data.json
+          git diff --staged --quiet || (git commit -m "Auto: Fresh data for $(date -u '+%Y-%m-%d') at 5AM Ecuador [skip ci]" && (git pull --rebase origin main || git rebase --abort) && git push || true)

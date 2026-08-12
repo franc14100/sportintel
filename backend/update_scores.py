@@ -297,6 +297,14 @@ def update_scores():
 
     with open(data_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+    root_data_path = os.path.join(os.path.dirname(__file__), '..', 'data.json')
+    try:
+        import shutil
+        shutil.copy2(data_path, root_data_path)
+    except Exception as e:
+        print(f"[!] Aviso al copiar a data.json raíz: {e}")
+
     print(f"[INFO] Proceso de actualización finalizado. Partidos procesados: {len(matches)}.")
 
 if __name__ == '__main__':
