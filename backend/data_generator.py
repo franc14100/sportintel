@@ -695,6 +695,31 @@ def fetch_espn_fallback_matches():
 
                         h_name = extract_name(competitors[0])
                         a_name = extract_name(competitors[1])
+
+                        def extract_rank(c):
+                            if not c: return 999
+                            if "athlete" in c and isinstance(c["athlete"], dict):
+                                r = c["athlete"].get("rank") or c["athlete"].get("curatedRank", {}).get("current")
+                                if r: return int(r)
+                            if "curatedRank" in c and isinstance(c["curatedRank"], dict):
+                                r = c["curatedRank"].get("current")
+                                if r: return int(r)
+                            if "ranks" in c and isinstance(c["ranks"], list) and len(c["ranks"]) > 0:
+                                r = c["ranks"][0].get("current")
+                                if r: return int(r)
+                            return 999
+
+                        h_rank = extract_rank(competitors[0])
+                        a_rank = extract_rank(competitors[1])
+
+                        if h_name and a_name:
+                            if h_rank < a_rank and h_rank != 999:
+                                TEAM_RATINGS[h_name] = 95.0 + max(0, (100 - min(h_rank, 90))) * 0.1
+                                TEAM_RATINGS[a_name] = 72.0
+                            elif a_rank < h_rank and a_rank != 999:
+                                TEAM_RATINGS[a_name] = 95.0 + max(0, (100 - min(a_rank, 90))) * 0.1
+                                TEAM_RATINGS[h_name] = 72.0
+
                         league_name = ev_league or comps.get("league", {}).get("name") or "Torneo Profesional"
                         
                         start_date = comps.get("date", "")
@@ -707,7 +732,7 @@ def fetch_espn_fallback_matches():
                                 date_str_match = dt.strftime("%Y-%m-%d")
                             except Exception:
                                 pass
-                        
+
                         if h_name and a_name and h_name != "TBD" and a_name != "TBD" and date_str_match == today_date_str:
                             espn_matches.append({
                                 "home": h_name,
@@ -2844,6 +2869,54 @@ def generate_daily_sports_data():
             return 3.0
         else:
             return 2.0
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # GARANTÍA ESTRICTA DE DEDUPLICACIÓN: 0 PARTIDOS DUPLICADOS ENTRE BOLETOS
+    # ═══════════════════════════════════════════════════════════════════════
+    used_matches_all = set()
+
+    def deduplicate_ticket_selections(selections, unused_candidate_picks):
+        unique_sels = []
+        for s in selections:
+            m_name = s.get("match")
+            if m_name in used_matches_all:
+                found_replacement = None
+                for p in unused_candidate_picks:
+                    alt_m = p.get("match")
+                    if alt_m not in used_matches_all:
+                        found_replacement = {
+                            "match": alt_m,
+                            "sport": p.get("sport", "Football"),
+                            "market": p.get("market"),
+                            "pick": p.get("selection"),
+                            "odd": p.get("odd", 1.50),
+                            "reasoning": p.get("reasoning", "Selección verificada sin duplicados."),
+                            "status": "pending"
+                        }
+                        used_matches_all.add(alt_m)
+                        break
+                if found_replacement:
+                    unique_sels.append(found_replacement)
+            else:
+                used_matches_all.add(m_name)
+                unique_sels.append(s)
+        return unique_sels
+
+    star_selections_1 = deduplicate_ticket_selections(star_selections_1, usable_picks)
+    star_selections_2 = deduplicate_ticket_selections(star_selections_2, usable_picks)
+    star_selections_3 = deduplicate_ticket_selections(star_selections_3, usable_picks)
+    star_selections_4 = deduplicate_ticket_selections(star_selections_4, usable_picks)
+
+    # Recalculate total odds after deduplication pass
+    def calc_tot_odd(sels):
+        o = 1.0
+        for s in sels: o *= float(s.get("odd", 1.0))
+        return round(o, 2)
+
+    total_odd_1 = calc_tot_odd(star_selections_1)
+    total_odd_2 = calc_tot_odd(star_selections_2)
+    total_odd_3 = calc_tot_odd(star_selections_3)
+    total_odd_4 = calc_tot_odd(star_selections_4)
 
     # Generar IDs y agregar los boletos de hoy al registro como "pending"
     # Boleto Estrella 1 (Seguro)
