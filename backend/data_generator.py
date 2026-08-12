@@ -2135,15 +2135,29 @@ def generate_daily_sports_data():
     # Tier 3: Resto de picks v\u00e1lidos
     def pick_tier(p):
         mkt = p.get('market', '')
+        sel = str(p.get('selection', ''))
         prob = p.get('probability', 0)
+        
+        # Tier 0 (Seguridad Máxima - Prioridad Top)
+        if 'Hándicap de Sets' in mkt and '+1.5' in sel and prob >= 85:
+            return 0  # Hándicap positivo en tenis para favoritos es extremadamente seguro
         if 'M\u00e1s/Menos' in mkt and 'Goles' in mkt and '0.5' in str(p.get('line','')) and prob >= 80:
-            return 0  # Tier 1 - m\u00e1ximo
+            return 0  # 1 gol en todo el partido
+            
+        # Tier 1 (Seguridad Muy Alta)
+        if 'Empate No Apuesta' in mkt and prob >= 82:
+            return 1
         if 'M\u00e1s/Menos' in mkt and 'Goles' in mkt and '1.5' in str(p.get('line','')) and prob >= 78:
-            return 1  # Tier 1b
+            return 1
+            
+        # Tier 2 (Seguridad Alta)
         if 'Doble Oportunidad' in mkt and prob >= 78:
-            return 2  # Tier 2
+            return 2
+            
+        # Tier 3 (Seguridad Moderada/Baja Varianza)
         if 'Menos' in mkt and 'Goles' in mkt and prob >= 78:
-            return 3  # Under goals seguro
+            return 3
+            
         return 4  # Resto
     # ORDENAMIENTO PURO POR SEGURIDAD Y VALOR ESPERADO (EV): Los mejores picks de cualquier deporte entran al boleto
     usable_picks = sorted(usable_picks, key=lambda x: (pick_tier(x), -x.get('probability', 0)))
