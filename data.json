@@ -58973,8 +58973,12 @@
     },
     {
       "date": "2026-08-12",
-      "ticket_id": "TK-539519",
       "name": "Boleto Seguro (Boleto 1)",
+      "ticket_id": "TK-94345",
+      "confidence": 82,
+      "total_odd": 1.81,
+      "recommendation_stake": 8.0,
+      "status": "pending",
       "selections": [
         {
           "match": "Arsenal vs Como",
@@ -58992,18 +58996,18 @@
           "pick": "Jaime Faria +1.5 Juegos",
           "odd": 1.6,
           "reasoning": "El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
-          "status": "won"
+          "status": "pending"
         }
-      ],
-      "total_odd": 1.81,
-      "confidence": 82,
-      "recommendation_stake": 8.0,
-      "status": "won"
+      ]
     },
     {
       "date": "2026-08-12",
-      "ticket_id": "TK-638545",
       "name": "Boleto de Valor (Boleto 2)",
+      "ticket_id": "TK-87345",
+      "confidence": 75,
+      "total_odd": 1.62,
+      "recommendation_stake": 7.0,
+      "status": "pending",
       "selections": [
         {
           "match": "Liudmila Samsonova vs Yulia Putintseva",
@@ -59012,18 +59016,18 @@
           "pick": "Yulia Putintseva -2.5 Juegos",
           "odd": 1.62,
           "reasoning": "El hándicap de juegos otorga margen de seguridad cubriendo quiebres de servicio estratégicos.",
-          "status": "lost"
+          "status": "pending"
         }
-      ],
-      "total_odd": 1.62,
-      "confidence": 75,
-      "recommendation_stake": 7.0,
-      "status": "lost"
+      ]
     },
     {
       "date": "2026-08-12",
-      "ticket_id": "TK-694860",
       "name": "Boleto Extra (Boleto 3)",
+      "ticket_id": "TK-84345",
+      "confidence": 72,
+      "total_odd": 1.65,
+      "recommendation_stake": 6.0,
+      "status": "pending",
       "selections": [
         {
           "match": "J.J. Wolf vs Sho Shimabukuro",
@@ -59032,18 +59036,18 @@
           "pick": "J.J. Wolf +1.5 Sets",
           "odd": 1.65,
           "reasoning": "J.J. Wolf domina el servicio y la devolución en esta superficie. Se proyecta una victoria solvente en 2 sets directos (2-0).",
-          "status": "lost"
+          "status": "pending"
         }
-      ],
-      "total_odd": 1.65,
-      "confidence": 72,
-      "recommendation_stake": 6.0,
-      "status": "lost"
+      ]
     },
     {
       "date": "2026-08-12",
-      "ticket_id": "TK-968758",
       "name": "Apuesta Soñadora (Boleto 4)",
+      "ticket_id": "TK-62345",
+      "confidence": 50,
+      "total_odd": 1.94,
+      "recommendation_stake": 1.0,
+      "status": "pending",
       "selections": [
         {
           "match": "Inter Miami CF vs León",
@@ -59053,39 +59057,8 @@
           "odd": 1.94,
           "reasoning": "La tendencia táctica de anotación para este compromiso es alta. Ambos equipos plantean esquemas de ataque abierto con líneas ofensivas adelantadas.",
           "status": "pending"
-        },
-        {
-          "match": "Inter Miami CF vs León",
-          "sport": "Football",
-          "market": "Más/Menos Goles",
-          "pick": "Más de 2.5 Goles",
-          "odd": 1.39,
-          "reasoning": "xG proyectado: 3.4 goles combinados. Partido abierto.",
-          "status": "pending"
-        },
-        {
-          "match": "Inter Miami CF vs León",
-          "sport": "Football",
-          "market": "Doble Oportunidad",
-          "pick": "Inter Miami CF o Empate",
-          "odd": 1.47,
-          "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Inter Miami CF hace casi imposible un resultado diferente al cubierto por esta apuesta.",
-          "status": "pending"
-        },
-        {
-          "match": "Inter Miami CF vs León",
-          "sport": "Football",
-          "market": "Empate No Apuesta (DNB)",
-          "pick": "Inter Miami CF",
-          "odd": 1.72,
-          "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Inter Miami CF como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
-          "status": "pending"
         }
-      ],
-      "total_odd": 6.83,
-      "confidence": 50,
-      "recommendation_stake": 1.0,
-      "status": "won"
+      ]
     }
   ],
   "starting_bankroll": 53.67,
