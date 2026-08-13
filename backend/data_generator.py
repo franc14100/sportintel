@@ -828,13 +828,10 @@ def generate_daily_sports_data():
     MARKET_BIAS_ADJUSTMENTS = learning_db.get("market_bias_adjustments", {})
     print(f"[INFO] Motor de Aprendizaje Autónomo Cargado: {len(RATING_ADJUSTMENTS)} equipos ajustados, {db.get('total_graded_picks', 0) if 'db' in locals() else 0} picks históricos analizados.")
 
-    print("[INFO] Conectando a internet para buscar partidos reales...")
-    espn_matches, _ = fetch_live_matches()
-    api_had_real_odds = bool(espn_matches)  # True = API de cuotas respondió con datos reales
-    if not espn_matches:
-        print("[AVISO] Cuota de RapidAPI agotada o 0 partidos recibidos. Activando Motor de Respaldo ESPN 100% GRATUITO (0 costo de API)...")
-        espn_matches = fetch_espn_fallback_matches()
-        print("[ALERTA] Sistema operando SIN cuotas reales. Los Boletos Seguros seran degradados a 'Baja Confianza'.")
+    print("[INFO] Motor ESPN + Aprendizaje Autónomo activo (100% Gratuito - Sin API de pago)...")
+    espn_matches = fetch_espn_fallback_matches()
+    api_had_real_odds = False  # Modo autónomo sin cuotas de API de pago
+    print("[INFO] Partidos en vivo obtenidos directamente de ESPN API.")
     
     # Filtrar solo partidos de HOY que comiencen durante el día/tarde (antes de las 22:00 hora local)
     live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis', 'Basketball'] and m.get('date', date_str) == date_str and '08:00' <= m.get('time', '15:00') < '22:00']
