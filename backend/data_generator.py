@@ -11,6 +11,10 @@ def frac_to_decimal(frac_str):
         return 1.50
 
 import os
+import json
+import math
+import random
+import unicodedata
 
 LEARNING_DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "learning_database.json")
 
@@ -2127,22 +2131,9 @@ def generate_daily_sports_data():
         combined = (str(match_name) + " " + str(league_name)).lower()
         return any(term in combined for term in ['friendly', 'amistoso', 'club-friendly', 'preseason', 'exhibition'])
 
-    usable_picks = [p for p in usable_picks if not is_friendly_match(p)]
-    usable_picks = [p for p in usable_picks if p.get('valid_for_ticket', True) is not False]
-
-    # REGLA 2: Cuota individual entre @1.10 y @1.65
-    #          Cuotas altas = mayor riesgo. Limite estricto @1.65 para boletos estrella.
-    usable_picks = [p for p in usable_picks if 1.10 <= p.get('odd', 0) <= 1.65]
-
-    # REGLA 3: Probabilidad mínima del 72% — solo picks de alta certeza entran
-    usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 72]
-
-    # REGLA 4: Solo descartar mercados con cuotas inventadas (no reales de la API)
-    # El filtro de 72%+ probabilidad ya garantiza la calidad. Mas mercados = mas opciones.
     BANNED_MARKETS = ['Tarjeta', 'Asian 2.0', 'Primero en Anotar',
                       'Resultado 1er Tiempo', 'Goles del Equipo']
 
-    # REGLA RIGUROSA: Descartar "Más de 2.5 Goles" en ligas típicamente defensivas (Primera Nacional, Copas Femeninas, etc.)
     LOW_SCORING_LEAGUES = ['primera nacional', 'primera-nacional', 'federal', 'copa argentina', 'argentina', 'lpf', 'liga profesional', 'colombia', 'liga betplay', 'copa africana', 'women', 'femenil', 'femenino', 'liga 2', 'serie b', 'segunda', 'tercera', 'torneo-intermedio', 'copa chile', 'guatemala', 'honduras']
     def is_invalid_over_pick(pick):
         mkt = str(pick.get('market', ''))
@@ -2153,8 +2144,25 @@ def generate_daily_sports_data():
             return True
         return False
 
+    # REGLA 0: Exclusión de Amistosos y filtro de datos válidos
+    usable_picks = [p for p in usable_picks if not is_friendly_match(p)]
+    usable_picks = [p for p in usable_picks if p.get('valid_for_ticket', True) is not False]
     usable_picks = [p for p in usable_picks if not is_invalid_over_pick(p)]
     usable_picks = [p for p in usable_picks if not any(bm in p.get('market', '') for bm in BANNED_MARKETS)]
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # PROTECCIÓN ANTI-API-CAÍDA: Si la API no entregó cuotas reales,
+    # degradar TODOS los picks de tenis para que NO entren al boleto seguro.
+    # ═══════════════════════════════════════════════════════════════════════
+    if not api_had_real_odds:
+        for p in usable_picks:
+            if p.get('sport') == 'Tennis':
+                p['probability'] = min(p.get('probability', 50), 50)
+                p['_degraded'] = True
+
+    # REGLA DE CUOTAS Y PROBABILIDAD MÍNIMA
+    usable_picks = [p for p in usable_picks if 1.10 <= p.get('odd', 0) <= 1.95]
+    usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 72]
 
     # REGLA 5: Priorizar picks con cuotas DIRECTAS de la API
     DIRECT_API_MARKETS = ['Más/Menos Goles', 'Ambos Equipos Anotan', 'Doble Oportunidad',
@@ -2195,12 +2203,9 @@ def generate_daily_sports_data():
             return 3
             
         return 4  # Resto
-    # ═══════════════════════════════════════════════════════════════════════
-    # 🎲 AUDITORÍA DE MONTE CARLO DE ALTA PRECISIÓN (DIXON-COLES 10,000 SIMULACIONES)
-    # Modelo matemático bivariado de Poisson con corrección Dixon-Coles (rho=-0.13)
-    # y cálculo de Intervalo de Confianza del 95% (Standard Error).
-    # ═══════════════════════════════════════════════════════════════════════
-    import math
+    import unicodedata
+    def strip_accents(s):
+        return ''.join(c for c in unicodedata.normalize('NFD', str(s)) if unicodedata.category(c) != 'Mn').lower()
 
     def dixon_coles_tau(x, y, lmbda, mu, rho=-0.13):
         if x == 0 and y == 0:
@@ -2215,15 +2220,18 @@ def generate_daily_sports_data():
             return 1.0
 
     def run_monte_carlo_simulation(pick, iterations=10000):
-        mkt = str(pick.get('market', ''))
-        sel = str(pick.get('selection', ''))
+        mkt_raw = str(pick.get('market', ''))
+        sel_raw = str(pick.get('selection', ''))
         prob = pick.get('probability', 70)
         match_name = str(pick.get('match', ''))
         sport = str(pick.get('sport', 'Football'))
 
+        mkt = strip_accents(mkt_raw)
+        sel = strip_accents(sel_raw)
+
         teams = match_name.split(' vs ')
-        home_name = teams[0].strip() if len(teams) > 1 else ''
-        away_name = teams[1].strip() if len(teams) > 1 else ''
+        home_name = strip_accents(teams[0]) if len(teams) > 1 else ''
+        away_name = strip_accents(teams[1]) if len(teams) > 1 else ''
 
         prob_factor = (prob - 50.0) / 100.0
         lmbda = max(0.5, 1.45 + prob_factor * 1.2)
@@ -2232,7 +2240,6 @@ def generate_daily_sports_data():
         wins = 0
         for _ in range(iterations):
             if sport == 'Tennis':
-                # Markov Chain Set-by-Set MCMC simulation
                 p_win_set = min(0.92, max(0.20, prob / 100.0))
                 s_h = 1 if random.random() < p_win_set else 0
                 s_a = 1 - s_h
@@ -2240,7 +2247,6 @@ def generate_daily_sports_data():
                 s_a = 2 - s_h if s_h < 2 else s_a
                 h_g, a_g = (2, 0) if s_h == 2 else (0, 2)
             else:
-                # Football Bivariate Dixon-Coles Poisson simulation
                 L_h = math.exp(-lmbda * random.uniform(0.88, 1.12))
                 k_h = 0; p_h = 1.0
                 while p_h > L_h:
@@ -2258,32 +2264,37 @@ def generate_daily_sports_data():
                     if h_g == a_g and h_g == 0:
                         h_g, a_g = 1, 0
 
-            sel_lower = sel.lower()
-            mkt_lower = mkt.lower()
+            tot = h_g + a_g
 
-            if 'doble oportunidad' in mkt_lower or '1x' in sel_lower or 'x2' in sel_lower or 'empate' in sel_lower:
-                if '1x' in sel_lower or (home_name.lower() in sel_lower and 'empate' in sel_lower):
+            if 'doble oportunidad' in mkt or '1x' in sel or 'x2' in sel or 'empate' in sel:
+                if '1x' in sel or (home_name in sel and 'empate' in sel):
                     if h_g >= a_g: wins += 1
-                elif 'x2' in sel_lower or (away_name.lower() in sel_lower and 'empate' in sel_lower):
+                elif 'x2' in sel or (away_name in sel and 'empate' in sel):
                     if a_g >= h_g: wins += 1
-                elif '12' in sel_lower:
+                elif '12' in sel:
                     if h_g != a_g: wins += 1
                 else:
                     if h_g >= a_g: wins += 1
-            elif 'más/menos' in mkt_lower or 'goles' in mkt_lower or 'total' in mkt_lower:
-                tot = h_g + a_g
-                if 'más de 0.5' in sel_lower and tot >= 1: wins += 1
-                elif 'más de 1.5' in sel_lower and tot >= 2: wins += 1
-                elif 'más de 2.5' in sel_lower and tot >= 3: wins += 1
-                elif 'menos de 2.5' in sel_lower and tot <= 2: wins += 1
-                elif 'menos de 3.5' in sel_lower and tot <= 3: wins += 1
-                elif tot >= 2: wins += 1
-            elif 'empate no apuesta' in mkt_lower or 'dnb' in sel_lower:
-                if home_name.lower() in sel_lower:
+            elif 'mas' in sel or 'menos' in sel or 'goles' in mkt or 'total' in mkt:
+                if 'mas' in sel or 'over' in sel:
+                    if '0.5' in sel and tot >= 1: wins += 1
+                    elif '1.5' in sel and tot >= 2: wins += 1
+                    elif '2.5' in sel and tot >= 3: wins += 1
+                    elif '3.5' in sel and tot >= 4: wins += 1
+                    elif tot >= 2: wins += 1
+                elif 'menos' in sel or 'under' in sel:
+                    if '1.5' in sel and tot <= 1: wins += 1
+                    elif '2.5' in sel and tot <= 2: wins += 1
+                    elif '3.5' in sel and tot <= 3: wins += 1
+                    elif tot <= 2: wins += 1
+                else:
+                    if tot >= 2: wins += 1
+            elif 'empate no apuesta' in mkt or 'dnb' in sel:
+                if home_name in sel:
                     if h_g >= a_g: wins += 1
                 else:
                     if a_g >= h_g: wins += 1
-            elif 'hándicap de sets' in mkt_lower or '+1.5 sets' in sel_lower:
+            elif 'handicap' in mkt or 'sets' in mkt:
                 if h_g >= 1 or a_g >= 1: wins += 1
             else:
                 if h_g >= a_g: wins += 1
@@ -2299,7 +2310,7 @@ def generate_daily_sports_data():
             "simulated_winrate": winrate,
             "confidence_interval_95": f"{ci_lower}% - {ci_upper}%",
             "model": "Dixon-Coles Bivariate Poisson" if sport != 'Tennis' else "Markov Chain Set MCMC",
-            "status": "APPROVED" if winrate >= 78.0 else "REJECTED"
+            "status": "APPROVED" if winrate >= 75.0 else "REJECTED"
         }
         return winrate
 
@@ -2324,12 +2335,13 @@ def generate_daily_sports_data():
         return ev_score
 
     def enforce_min_odd(selections, ticket_type, total_odd, confidence, reasoning, all_picks, used_matches_set):
-        if total_odd >= 1.50 or not selections:
+        if not selections:
             return selections, ticket_type, total_odd, confidence, reasoning
 
         already_used = set(s['match'] for s in selections) | used_matches_set
         current_odd = total_odd
 
+        # Buscar activamente picks complementarios para garantizar Cuota Total >= 1.50
         while current_odd < 1.50:
             best_p = None
             best_score = -1
@@ -2338,7 +2350,8 @@ def generate_daily_sports_data():
                     continue
                 prob = p.get('probability', 60)
                 odd = p.get('odd', 1.25)
-                score = prob * odd
+                # Priorizar picks con alta probabilidad y cuota moderada
+                score = (prob / 100.0) * odd
                 if score > best_score:
                     best_score = score
                     best_p = p
@@ -2358,25 +2371,12 @@ def generate_daily_sports_data():
                 'odd': best_p['odd'],
                 'reasoning': best_p['reasoning'].get('tactical', '') if isinstance(best_p['reasoning'], dict) else best_p['reasoning']
             })
-            confidence = int((confidence + best_p['probability']) / 2)
-            reasoning = f"⚡ Combinado de protección. Se agregó {best_p['match']} para asegurar cuota total >= @1.50 (Cuota Final: @{current_odd:.2f})."
+            confidence = int((confidence + best_p.get('probability', 75)) / 2)
+            reasoning = f"⚡ Boleto Protegido de Valor (Cuota Final: @{current_odd:.2f}). Se combinaron selecciones de alta certeza para superar la cuota mínima de @1.50."
 
         return selections, ticket_type, current_odd, confidence, reasoning
 
     global_used_matches = set()
-
-    # ═══════════════════════════════════════════════════════════════════════
-    # PROTECCIÓN ANTI-API-CAÍDA: Si la API no entregó cuotas reales,
-    # degradar TODOS los picks de tenis que no tengan real_odds.
-    # Esto evita generar "Boletos Seguros" con probabilidades inventadas.
-    # ═══════════════════════════════════════════════════════════════════════
-    if not api_had_real_odds:
-        for p in usable_picks:
-            if p.get('sport') == 'Tennis':
-                p['probability'] = min(p.get('probability', 50), 65)
-                p['_degraded'] = True
-        # Re-filtrar: los picks degradados de tenis ahora tienen prob <= 65 y serán eliminados
-        usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 72]
 
     # ═══════════════════════════════════════════════════════════════════════
     # BOLETO 1 — PRIORIDAD ABSOLUTA: PROBABILIDAD > CUOTA
@@ -3108,6 +3108,41 @@ def generate_daily_sports_data():
     total_odd_3 = calc_tot_odd(star_selections_3)
     total_odd_4 = calc_tot_odd(star_selections_4)
 
+    # ═══════════════════════════════════════════════════════════════════════
+    # 🚨 AUDITORÍA FINAL DE CUOTA MÍNIMA DE BOLETO (GARANTÍA ABSOLUTA >= 1.50)
+    # Ningún boleto estrella se publica con cuota total < 1.50.
+    # ═══════════════════════════════════════════════════════════════════════
+    for sel_list in [star_selections_1, star_selections_2, star_selections_3]:
+        c_odd = calc_tot_odd(sel_list)
+        if c_odd < 1.50 or len(sel_list) == 0:
+            used_in_ticket = set(s.get("match") for s in sel_list) | used_matches_all
+            candidate_pool = usable_picks + priority_picks
+            for p in candidate_pool:
+                alt_m = p.get("match")
+                if alt_m and alt_m not in used_in_ticket:
+                    sel_list.append({
+                        "match": alt_m,
+                        "sport": p.get("sport", "Football"),
+                        "market": p.get("market"),
+                        "pick": p.get("selection"),
+                        "odd": p.get("odd", 1.25),
+                        "reasoning": "Selección combinada de valor para superar cuota mínima @1.50.",
+                        "status": "pending"
+                    })
+                    used_matches_all.add(alt_m)
+                    c_odd = calc_tot_odd(sel_list)
+                    if c_odd >= 1.50:
+                        break
+
+    total_odd_1 = calc_tot_odd(star_selections_1)
+    total_odd_2 = calc_tot_odd(star_selections_2)
+    total_odd_3 = calc_tot_odd(star_selections_3)
+    total_odd_4 = calc_tot_odd(star_selections_4)
+    
+    if star_selections_1 and len(star_selections_1) > 1: ticket_type_1 = "Combinado"
+    if star_selections_2 and len(star_selections_2) > 1: ticket_type_2 = "Combinado"
+    if star_selections_3 and len(star_selections_3) > 1: ticket_type_3 = "Combinado"
+
     # Generar IDs y agregar los boletos de hoy al registro como "pending"
     # Boleto Estrella 1 (Seguro)
     new_ticket_1 = {
@@ -3157,33 +3192,16 @@ def generate_daily_sports_data():
         "status": "pending"
     }
 
-    # Evitar duplicados del mismo día: conservar boletos de hoy si ya existían para mantener fijos los IDs y selecciones
-    today_tickets_exist = any(t.get("date") == date_str and len(t.get("selections", [])) > 0 for t in historical_registry)
-    if not today_tickets_exist:
-        # Only add tickets that actually have selections (avoid empty @1.00 phantom tickets)
-        if star_selections_1:
-            historical_registry.append(new_ticket_1)
-        if star_selections_2:
-            historical_registry.append(new_ticket_2)
-        if star_selections_3:
-            historical_registry.append(new_ticket_3)
-        if star_selections_4:
-            historical_registry.append(new_ticket_4)
-    else:
-        # Update existing today tickets with latest odds/status but keep their ticket_id
-        for t in historical_registry:
-            if t.get("date") != date_str or len(t.get("selections", [])) == 0:
-                continue
-            if "Boleto 1" in t.get("name", "") and star_selections_1:
-                for sel in t.get("selections", []):
-                    for new_s in star_selections_1:
-                        if sel.get("match") == new_s.get("match"):
-                            sel["odd"] = new_s.get("odd", sel["odd"])
-            elif "Boleto 2" in t.get("name", "") and star_selections_2:
-                for sel in t.get("selections", []):
-                    for new_s in star_selections_2:
-                        if sel.get("match") == new_s.get("match"):
-                            sel["odd"] = new_s.get("odd", sel["odd"])
+    # Reemplazar siempre los boletos de hoy con las selecciones frescas verificadas por Monte Carlo
+    historical_registry = [t for t in historical_registry if t.get("date") != date_str]
+    if star_selections_1:
+        historical_registry.append(new_ticket_1)
+    if star_selections_2:
+        historical_registry.append(new_ticket_2)
+    if star_selections_3:
+        historical_registry.append(new_ticket_3)
+    if star_selections_4:
+        historical_registry.append(new_ticket_4)
 
     # Mantener el registro compacto (Últimos 30 boletos recomendados)
     historical_registry = historical_registry[-30:]
