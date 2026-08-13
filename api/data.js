@@ -184,8 +184,9 @@ module.exports = async function handler(req, res) {
             }
         }
 
-        if (data.global_stats) {
-            data.global_stats.analyzed_today = (data.matches || []).length;
+        if (!data.api_status) {
+            data.api_status = "offline";
+            data.api_warning = "⚠️ API DE CUOTAS CAÍDA — Los picks fueron generados con datos limitados de ESPN (sin cuotas reales de casas de apuestas). Las probabilidades son ESTIMACIONES. Apostar con precaución.";
         }
 
         return res.status(200).json(data);
