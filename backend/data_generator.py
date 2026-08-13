@@ -33,10 +33,14 @@ def monte_carlo_simulate_match(lambda_home, mu_away, iterations=10000, rho=-0.13
     results = {
         'home_win': 0, 'draw': 0, 'away_win': 0,
         'home_or_draw': 0, 'away_or_draw': 0,
-        'over_15': 0, 'over_25': 0, 'under_25': 0,
-        'over_35': 0, 'btts_yes': 0, 'btts_no': 0,
-        'over_asian_20': 0,  # Asian 2.0: win if 3+, push if 2, loss if 0-1
+        'over_15': 0, 'under_15': 0,
+        'over_25': 0, 'under_25': 0,
+        'over_35': 0, 'under_35': 0,
+        'btts_yes': 0, 'btts_no': 0,
+        'over_asian_20': 0,  # Asian 2.0 Over: win if 3+, push if 2, loss if 0-1
         'over_asian_20_no_loss': 0,
+        'under_asian_20': 0,  # Asian 2.0 Under: win if 0-1, push if 2, loss if 3+
+        'under_asian_20_no_loss': 0,
         'home_over_05': 0, 'home_over_15': 0, 'home_over_25': 0,
         'away_over_05': 0, 'away_over_15': 0,
         'score_counts': {},
@@ -93,13 +97,20 @@ def monte_carlo_simulate_match(lambda_home, mu_away, iterations=10000, rho=-0.13
         
         # Over/Under
         if tot > 1.5: results['over_15'] += 1
+        else: results['under_15'] += 1
+        
         if tot > 2.5: results['over_25'] += 1
         else: results['under_25'] += 1
-        if tot > 3.5: results['over_35'] += 1
         
-        # Asian 2.0
+        if tot > 3.5: results['over_35'] += 1
+        else: results['under_35'] += 1
+        
+        # Asian 2.0 (Over y Under)
         if tot >= 3: results['over_asian_20'] += 1
         if tot >= 2: results['over_asian_20_no_loss'] += 1
+        
+        if tot <= 1: results['under_asian_20'] += 1
+        if tot <= 2: results['under_asian_20_no_loss'] += 1
         
         # BTTS
         if h_g > 0 and a_g > 0: results['btts_yes'] += 1
@@ -1835,19 +1846,27 @@ def generate_daily_sports_data():
                     elif away_name in sel:
                         mc_prob = round(mc['away_win'] / max(mc['home_win'] + mc['away_win'], 1) * 100, 1)
                 
-                # Goles Over/Under
-                elif 'Goles' in mkt and ('Menos' in mkt or 'Menos' in sel):
-                    mc_prob = mc['under_25']
-                elif 'Goles' in mkt and 'Asian 2.0' in mkt:
-                    mc_prob = mc['over_asian_20_no_loss']
-                elif 'Goles' in mkt and ('3.5' in sel):
-                    mc_prob = mc['over_35']
-                elif 'Goles' in mkt and ('2.5' in sel) and ('Menos' not in sel):
-                    mc_prob = mc['over_25']
-                elif 'Goles' in mkt and ('1.5' in sel) and ('Menos' not in sel):
-                    mc_prob = mc['over_15']
-                elif 'Goles' in mkt and ('Menos de 2.5' in sel):
-                    mc_prob = mc['under_25']
+                # Goles Over/Under y Asiáticos
+                elif 'Asian 2.0' in mkt or 'Asian 2.0' in sel:
+                    if 'Menos' in mkt or 'Menos' in sel:
+                        mc_prob = mc['under_asian_20_no_loss']
+                    else:
+                        mc_prob = mc['over_asian_20_no_loss']
+                elif 'Goles' in mkt:
+                    if 'Menos de 1.5' in sel:
+                        mc_prob = mc['under_15']
+                    elif 'Menos de 2.5' in sel or 'Menos' in sel:
+                        mc_prob = mc['under_25']
+                    elif 'Menos de 3.5' in sel:
+                        mc_prob = mc['under_35']
+                    elif '3.5' in sel:
+                        mc_prob = mc['over_35']
+                    elif '2.5' in sel:
+                        mc_prob = mc['over_25']
+                    elif '1.5' in sel:
+                        mc_prob = mc['over_15']
+                    else:
+                        mc_prob = mc['over_25']
                 
                 # BTTS
                 elif 'Ambos' in mkt and 'Anotan' in mkt:
