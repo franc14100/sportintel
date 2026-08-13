@@ -81,6 +81,15 @@
 
         <!-- Main Content Area -->
         <main class="main-content">
+            <!-- 🚨 ALERTA ROJA PERMANENTE DE CALIDAD DE DATOS (HTML ESTÁTICO) -->
+            <div id="static-api-offline-banner" style="background: linear-gradient(135deg, #dc2626, #b91c1c); color: #ffffff; padding: 14px 20px; border-radius: 12px; margin: 10px 0 20px 0; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.45); border: 1px solid rgba(255,255,255,0.2); font-family: var(--font-body, system-ui);">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 1.5rem; shrink: 0;">⚠️</span>
+                    <span><strong style="text-transform: uppercase; letter-spacing: 0.5px; color: #fef08a;">Alerta de Seguridad Activa:</strong> API de cuotas principal fuera de servicio. Los picks de hoy fueron generados con datos de respaldo de ESPN. Apostar con extrema precaución.</span>
+                </div>
+                <button onclick="document.getElementById('static-api-offline-banner').style.display='none'" style="background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5); color: #fff; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">Entendido</button>
+            </div>
+
             <!-- Top Header -->
             <header class="top-header">
                 <div class="header-left">
@@ -1394,6 +1403,6 @@
             </button>
         </div>
     <!-- Custom JS -->
-    <script src="main.js?v=21.0"></script>
+    <script src="main.js?v=25.0"></script>
 </body>
 </html>
