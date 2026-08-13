@@ -826,9 +826,11 @@ def generate_daily_sports_data():
 
     print("[INFO] Conectando a internet para buscar partidos reales...")
     espn_matches, _ = fetch_live_matches()
+    api_had_real_odds = bool(espn_matches)  # True = API de cuotas respondió con datos reales
     if not espn_matches:
         print("[AVISO] Cuota de RapidAPI agotada o 0 partidos recibidos. Activando Motor de Respaldo ESPN 100% GRATUITO (0 costo de API)...")
         espn_matches = fetch_espn_fallback_matches()
+        print("[ALERTA] Sistema operando SIN cuotas reales. Los Boletos Seguros seran degradados a 'Baja Confianza'.")
     
     # Filtrar solo partidos de HOY que comiencen durante el día/tarde (antes de las 22:00 hora local)
     live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis', 'Basketball'] and m.get('date', date_str) == date_str and '08:00' <= m.get('time', '15:00') < '22:00']
@@ -2250,6 +2252,19 @@ def generate_daily_sports_data():
     global_used_matches = set()
 
     # ═══════════════════════════════════════════════════════════════════════
+    # PROTECCIÓN ANTI-API-CAÍDA: Si la API no entregó cuotas reales,
+    # degradar TODOS los picks de tenis que no tengan real_odds.
+    # Esto evita generar "Boletos Seguros" con probabilidades inventadas.
+    # ═══════════════════════════════════════════════════════════════════════
+    if not api_had_real_odds:
+        for p in usable_picks:
+            if p.get('sport') == 'Tennis':
+                p['probability'] = min(p.get('probability', 50), 65)
+                p['_degraded'] = True
+        # Re-filtrar: los picks degradados de tenis ahora tienen prob <= 65 y serán eliminados
+        usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 72]
+
+    # ═══════════════════════════════════════════════════════════════════════
     # BOLETO 1 — PRIORIDAD ABSOLUTA: PROBABILIDAD > CUOTA
     # ═══════════════════════════════════════════════════════════════════════
     star_selections_1 = []
@@ -3061,6 +3076,8 @@ def generate_daily_sports_data():
 
     payload = {
         "date": date_str,
+        "api_status": "online" if api_had_real_odds else "offline",
+        "api_warning": "" if api_had_real_odds else "⚠️ API DE CUOTAS CAÍDA — Los picks fueron generados con datos limitados de ESPN (sin cuotas reales de casas de apuestas). Las probabilidades son ESTIMACIONES, no datos confirmados. Apostar bajo tu propio riesgo.",
         "matches": matches_data,
         "global_stats": {
             "analyzed_today": total_analyzed,

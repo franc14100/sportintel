@@ -808,6 +808,41 @@ document.addEventListener("DOMContentLoaded", () => {
             populateMatchesList();
             populateNewsAndInjuries();
             renderPredictionsTab();
+
+            // ═══════════════════════════════════════════════════════
+            // 🚨 API OFFLINE WARNING BANNER
+            // Si la API de cuotas estuvo caída, mostrar una alerta
+            // prominente para que el usuario sepa que los picks
+            // fueron generados con datos limitados.
+            // ═══════════════════════════════════════════════════════
+            if (appData && appData.api_status === "offline" && appData.api_warning) {
+                let existingBanner = document.getElementById("api-offline-banner");
+                if (!existingBanner) {
+                    const banner = document.createElement("div");
+                    banner.id = "api-offline-banner";
+                    banner.style.cssText = `
+                        position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+                        background: linear-gradient(135deg, #dc2626, #b91c1c);
+                        color: #fff; padding: 12px 20px; text-align: center;
+                        font-size: 0.85rem; font-weight: 700; letter-spacing: 0.3px;
+                        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.5);
+                        display: flex; align-items: center; justify-content: center; gap: 10px;
+                        font-family: var(--font-body, system-ui);
+                    `;
+                    banner.innerHTML = `
+                        <span style="font-size: 1.3rem;">⚠️</span>
+                        <span>${appData.api_warning}</span>
+                        <button onclick="this.parentElement.remove()" style="
+                            background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
+                            color: #fff; padding: 4px 12px; border-radius: 4px; cursor: pointer;
+                            font-size: 0.75rem; font-weight: 600; margin-left: 10px;
+                        ">Entendido</button>
+                    `;
+                    document.body.prepend(banner);
+                    // Push content down so it doesn't overlap
+                    document.body.style.paddingTop = "52px";
+                }
+            }
             
             // Render first visual chart
             renderChart();
@@ -1204,7 +1239,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : (suffix === "2" ? "rgba(6, 182, 212, 0.3)" : (suffix === "3" ? "rgba(249,115,22,0.3)" : "rgba(168, 85, 247, 0.3)"));
                 
                 const titlePrefix = suffix === "4" ? "Apuesta Soñadora del Dólar" : `Boleto Estrella ${suffix}`;
-                headerTitle.innerHTML = `${titlePrefix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
+                let apiWarningBadge = "";
+                if (appData && appData.api_status === "offline") {
+                    apiWarningBadge = ` <span style="font-size:0.6rem; padding: 3px 6px; margin-left: 6px; border-radius: 4px; font-weight:800; text-transform: uppercase; background: rgba(220,38,38,0.2); color: #ef4444; border: 1px solid rgba(220,38,38,0.4);">⚠️ Sin Cuotas Reales</span>`;
+                }
+                headerTitle.innerHTML = `${titlePrefix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>${apiWarningBadge}`;
             }
 
             const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : (suffix === "3" ? 2.0 : 1.0)));
