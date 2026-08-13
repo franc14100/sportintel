@@ -810,37 +810,59 @@ document.addEventListener("DOMContentLoaded", () => {
             renderPredictionsTab();
 
             // ═══════════════════════════════════════════════════════
-            // 🚨 API OFFLINE WARNING BANNER
-            // Si la API de cuotas estuvo caída, mostrar una alerta
-            // prominente para que el usuario sepa que los picks
-            // fueron generados con datos limitados.
+            // 🚨 API OFFLINE WARNING BANNER (Multicapa)
+            // Si la API de cuotas estuvo caída, mostrar alerta fija
+            // en la parte superior E inyectar banner en el header.
             // ═══════════════════════════════════════════════════════
-            if (appData && appData.api_status === "offline" && appData.api_warning) {
+            if (appData && (appData.api_status === "offline" || appData.api_warning)) {
+                const warnMsg = appData.api_warning || "⚠️ API DE CUOTAS CAÍDA — Los picks fueron generados con datos limitados de ESPN (sin cuotas reales de casas de apuestas). Las probabilidades son ESTIMACIONES. Apostar con precaución.";
+                
+                // 1. Fixed Top Banner
                 let existingBanner = document.getElementById("api-offline-banner");
                 if (!existingBanner) {
                     const banner = document.createElement("div");
                     banner.id = "api-offline-banner";
                     banner.style.cssText = `
-                        position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+                        position: fixed; top: 0; left: 0; right: 0; z-index: 999999;
                         background: linear-gradient(135deg, #dc2626, #b91c1c);
-                        color: #fff; padding: 12px 20px; text-align: center;
+                        color: #ffffff; padding: 12px 20px; text-align: center;
                         font-size: 0.85rem; font-weight: 700; letter-spacing: 0.3px;
-                        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.5);
+                        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.6);
                         display: flex; align-items: center; justify-content: center; gap: 10px;
-                        font-family: var(--font-body, system-ui);
+                        font-family: var(--font-body, system-ui); border-bottom: 2px solid #ef4444;
                     `;
                     banner.innerHTML = `
                         <span style="font-size: 1.3rem;">⚠️</span>
-                        <span>${appData.api_warning}</span>
+                        <span>${warnMsg}</span>
                         <button onclick="this.parentElement.remove()" style="
-                            background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
+                            background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5);
                             color: #fff; padding: 4px 12px; border-radius: 4px; cursor: pointer;
-                            font-size: 0.75rem; font-weight: 600; margin-left: 10px;
+                            font-size: 0.75rem; font-weight: 700; margin-left: 10px; shrink: 0;
                         ">Entendido</button>
                     `;
                     document.body.prepend(banner);
-                    // Push content down so it doesn't overlap
                     document.body.style.paddingTop = "52px";
+                }
+
+                // 2. Inline Banner under top-header
+                const topHeader = document.querySelector(".top-header");
+                if (topHeader && !document.getElementById("api-offline-inline-banner")) {
+                    const inlineBanner = document.createElement("div");
+                    inlineBanner.id = "api-offline-inline-banner";
+                    inlineBanner.style.cssText = `
+                        background: rgba(220, 38, 38, 0.15); border: 1px solid rgba(239, 68, 68, 0.4);
+                        border-radius: 10px; padding: 12px 16px; margin: 15px 0 5px 0;
+                        color: #fca5a5; font-size: 0.82rem; font-weight: 600;
+                        display: flex; align-items: center; gap: 10px;
+                    `;
+                    inlineBanner.innerHTML = `
+                        <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; font-size: 1.2rem;"></i>
+                        <div>
+                            <strong style="color: #ef4444; display: block; margin-bottom: 2px;">Alerta de Calidad de Datos</strong>
+                            ${warnMsg}
+                        </div>
+                    `;
+                    topHeader.after(inlineBanner);
                 }
             }
             
