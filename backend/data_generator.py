@@ -1865,10 +1865,17 @@ def generate_daily_sports_data():
                     elif '0.5' in sel:
                         mc_prob = mc['home_over_05'] if winner_name == home_name else mc['away_over_05']
                 
-                # Marcador Exacto: usar score_counts del MC
+                # Marcador Exacto: seleccionar automáticamente el marcador #1 más frecuente de las 10,000 simulaciones
                 elif 'Marcador Exacto' in mkt:
-                    score_key = sel.strip()
-                    mc_prob = mc['score_counts'].get(score_key, round(100.0 / max(pick.get('odd', 7.0), 1), 1))
+                    if mc.get('score_counts'):
+                        top_score, top_pct = max(mc['score_counts'].items(), key=lambda x: x[1])
+                        pick['selection'] = top_score
+                        mc_prob = top_pct
+                        if isinstance(pick.get('reasoning'), dict):
+                            pick['reasoning']['tactical'] = f"El modelo de Poisson y 10,000 simulaciones de Monte Carlo identifican el marcador exacto {top_score} como el más probable del encuentro ({top_pct}% de probabilidad simulada)."
+                    else:
+                        score_key = sel.strip()
+                        mc_prob = mc.get('score_counts', {}).get(score_key, round(100.0 / max(pick.get('odd', 7.0), 1), 1))
                 
                 # Aplicar probabilidad simulada si se encontró
                 if mc_prob is not None:
