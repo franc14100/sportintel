@@ -135,7 +135,48 @@ def monte_carlo_simulate_match(lambda_home, mu_away, iterations=10000, rho=-0.13
         else:
             pct[key] = round((results[key] / iterations) * 100, 1)
     
+    # Optional corners simulation if lambda_corners is provided
     return pct
+
+def simulate_corners_poisson(lambda_c, mu_c, iterations=10000):
+    """Simula 10,000 partidos para córners usando Poisson Bivariado."""
+    over_85 = 0; over_95 = 0; over_105 = 0
+    under_95 = 0; under_105 = 0
+    home_more = 0; away_more = 0; draw_c = 0
+
+    for _ in range(iterations):
+        L_h = math.exp(-lambda_c)
+        k_h = 0; p_h = 1.0
+        while p_h > L_h: k_h += 1; p_h *= random.random()
+        h_c = max(0, k_h - 1)
+
+        L_a = math.exp(-mu_c)
+        k_a = 0; p_a = 1.0
+        while p_a > L_a: k_a += 1; p_a *= random.random()
+        a_c = max(0, k_a - 1)
+
+        tot = h_c + a_c
+        if tot > 8.5: over_85 += 1
+        if tot > 9.5: over_95 += 1
+        else: under_95 += 1
+        if tot > 10.5: over_105 += 1
+        else: under_105 += 1
+
+        if h_c > a_c: home_more += 1
+        elif a_c > h_c: away_more += 1
+        else: draw_c += 1
+
+    return {
+        "corners_over_85": round((over_85 / iterations) * 100, 1),
+        "corners_over_95": round((over_95 / iterations) * 100, 1),
+        "corners_under_95": round((under_95 / iterations) * 100, 1),
+        "corners_over_105": round((over_105 / iterations) * 100, 1),
+        "corners_under_105": round((under_105 / iterations) * 100, 1),
+        "corners_home_win": round((home_more / iterations) * 100, 1),
+        "corners_away_win": round((away_more / iterations) * 100, 1),
+        "corners_draw": round((draw_c / iterations) * 100, 1),
+        "expected_total_corners": round(lambda_c + mu_c, 1)
+    }
 
 def load_learning_database():
     if os.path.exists(LEARNING_DB_PATH):
@@ -1903,6 +1944,29 @@ def generate_daily_sports_data():
                     elif '0.5' in sel:
                         mc_prob = mc['home_over_05'] if winner_name == home_name else mc['away_over_05']
                 
+                # Córners (Total y Hándicap)
+                elif 'Córner' in mkt or 'Corner' in mkt:
+                    # Simular 10,000 iteraciones con Poisson bivariado de córners
+                    c_lambda = round(max(3.8, min(8.0, 5.2 * home_strength)), 1)
+                    c_mu = round(max(2.8, min(7.0, 4.3 * away_strength)), 1)
+                    c_sim = simulate_corners_poisson(c_lambda, c_mu)
+                    if 'Más de 8.5' in sel or '8.5' in sel:
+                        mc_prob = c_sim['corners_over_85']
+                    elif 'Más de 9.5' in sel or '9.5' in sel:
+                        mc_prob = c_sim['corners_over_95']
+                    elif 'Menos de 9.5' in sel:
+                        mc_prob = c_sim['corners_under_95']
+                    elif 'Más de 10.5' in sel or '10.5' in sel:
+                        mc_prob = c_sim['corners_over_105']
+                    elif 'Menos de 10.5' in sel:
+                        mc_prob = c_sim['corners_under_105']
+                    elif home_name in sel:
+                        mc_prob = c_sim['corners_home_win']
+                    elif away_name in sel:
+                        mc_prob = c_sim['corners_away_win']
+                    else:
+                        mc_prob = c_sim['corners_over_85']
+
                 # Marcador Exacto: seleccionar automáticamente el marcador #1 más frecuente de las 10,000 simulaciones
                 elif 'Marcador Exacto' in mkt:
                     if mc.get('score_counts'):
