@@ -2875,43 +2875,66 @@ def generate_daily_sports_data():
         global_used_matches.add(s["match"])
 
     # ═══════════════════════════════════════════════════════════════════════
-    # BOLETO 4 — APUESTA SOÑADORA (@5.00+)
+    # BOLETO 4 — APUESTA SOÑADORA DEL DÓLAR (TOP MARCADORES EXACTOS POISSON)
     # ═══════════════════════════════════════════════════════════════════════
     star_selections_4 = []
-    ticket_type_4 = "Combinado Soñador"
+    ticket_type_4 = "Combinado Soñador (Marcadores Exactos)"
     total_odd_4 = 1.0
-    star_confidence_4 = 60
+    star_confidence_4 = 45
     star_reasoning_4 = ""
 
-    dream_candidates = []
-    for p in priority_picks + fallback_picks:
-        if p["match"] not in global_used_matches and p.get("odd", 0) >= 1.25 and p.get("probability", 0) >= 55:
-            dream_candidates.append(p)
+    # Buscar los marcadores exactos con mayor probabilidad simulada (Moda Monte Carlo)
+    exact_score_pool = []
+    for m in matches_data:
+        if m.get('sport') == 'Football':
+            m_name = f"{m['home']} vs {m['away']}"
+            for p in m.get('picks', []):
+                if p.get('market') == 'Marcador Exacto' and p.get('selection'):
+                    exact_score_pool.append({
+                        "match": m_name,
+                        "sport": "Football",
+                        "market": "Marcador Exacto",
+                        "selection": p['selection'],
+                        "odd": p.get('odd', 6.50),
+                        "probability": p.get('probability', 12),
+                        "mc_winrate": p.get('mc_winrate', p.get('probability', 12)),
+                        "reasoning": f"Moda estadística #1 de Monte Carlo: Marcador {p['selection']} ({p.get('probability', 12)}% prob)."
+                    })
 
-    if len(dream_candidates) >= 3:
-        curr_odd = 1.0
-        selected_dream = []
-        for p in dream_candidates:
-            selected_dream.append(p)
-            curr_odd *= p["odd"]
-            if curr_odd >= 5.00 and len(selected_dream) >= 3:
+    # Ordenar por mayor probabilidad de acierto del marcador
+    exact_score_pool.sort(key=lambda x: x['mc_winrate'], reverse=True)
+
+    # Seleccionar los 2 o 3 mejores marcadores de partidos distintos
+    chosen_exact = []
+    seen_exact_matches = set()
+    for es in exact_score_pool:
+        if es["match"] not in seen_exact_matches:
+            chosen_exact.append(es)
+            seen_exact_matches.add(es["match"])
+            if len(chosen_exact) >= 3:
                 break
 
-        for p in selected_dream:
+    if len(chosen_exact) >= 2:
+        curr_odd = 1.0
+        for p in chosen_exact:
             star_selections_4.append({
                 "match": p["match"], "sport": p["sport"],
-                "market": p["market"], "pick": p["selection"],
+                "market": p["market"], "pick": f"Marcador Exacto: {p['selection']}",
                 "odd": p["odd"],
-                "reasoning": p["reasoning"].get("tactical", "") if isinstance(p["reasoning"], dict) else p["reasoning"]
+                "reasoning": p["reasoning"]
             })
+            curr_odd *= p["odd"]
         total_odd_4 = round(curr_odd, 2)
-        avg_prob = sum(p["probability"] for p in selected_dream) / float(len(selected_dream))
-        star_confidence_4 = max(50, int(avg_prob * (0.85 ** (len(selected_dream) - 1))))
-        star_reasoning_4 = f"🚀 Apuesta Soñadora del Dólar (Cuota Total: @{total_odd_4:.2f})."
+        star_confidence_4 = 40
+        star_reasoning_4 = (
+            f"🚀 Apuesta Soñadora del Dólar (Cuota Jackpot: @{total_odd_4:.2f}). "
+            f"Combina los {len(chosen_exact)} Marcadores Exactos con mayor probabilidad matemática del día "
+            f"según 10,000 simulaciones de Monte Carlo. Inversión sugerida: $1.00 USD para retorno de ${total_odd_4:.2f} USD."
+        )
     else:
-        total_odd_4 = 5.25
-        star_confidence_4 = 55
-        star_reasoning_4 = "Boleto Soñador de contingencia (Cuota @5.25)."
+        total_odd_4 = 45.50
+        star_confidence_4 = 40
+        star_reasoning_4 = "Apuesta Soñadora de Marcadores Exactos (Cuota @45.50)."
 
     for s in star_selections_4:
         global_used_matches.add(s["match"])
