@@ -33034,7 +33034,8 @@
                 "reasoning": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61; con 3 goles hay reembolso total.",
                 "status": "pending"
             }
-        ]
+        ],
+        "recommendation_stake": 8.0
     },
     "star_ticket_1": {
         "date": "2026-08-14",
@@ -33059,7 +33060,8 @@
                 "reasoning": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61; con 3 goles hay reembolso total.",
                 "status": "pending"
             }
-        ]
+        ],
+        "recommendation_stake": 8.0
     },
     "star_ticket_2": {
         "date": "2026-08-14",
@@ -33084,7 +33086,8 @@
                 "reasoning": "Galatasaray proyecta 2.45 goles xG. Con victoria por 2+ goles cobras @1.62; con victoria por la mínima se reembolsa la mitad de la apuesta.",
                 "status": "pending"
             }
-        ]
+        ],
+        "recommendation_stake": 7.0
     },
     "star_ticket_3": {
         "date": "2026-08-14",
@@ -33120,7 +33123,8 @@
                 "reasoning": "🚩 Córners Verificados por Monte Carlo: Al-Hilal promedia 7.4 córners a favor vs 2.8 de su rival. La simulación proyecta un 90.5% de probabilidad de ganar en saques de esquina.",
                 "status": "pending"
             }
-        ]
+        ],
+        "recommendation_stake": 7.0
     },
     "star_ticket_4": {
         "type": "Combinado Soñador",

@@ -1268,7 +1268,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 headerTitle.innerHTML = `${titlePrefix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>${apiWarningBadge}`;
             }
 
-            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : (suffix === "3" ? 2.0 : 1.0)));
+            const recStake = ticket.recommendation_stake || (suffix === "4" ? 1.0 : (ticket.confidence >= 75 ? 7.0 : (ticket.confidence >= 65 ? 5.0 : 4.0)));
 
             let selectionsHtml = "";
             const confidenceBox = document.querySelector(`#star-ticket-card-${suffix} .confidence-box`);
@@ -3542,7 +3542,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (marketInput) marketInput.value = marketSummary;
         if (oddInput) oddInput.value = ticket.total_odd.toFixed(2);
 
-        const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : 1.0));
+        const recStake = ticket.recommendation_stake || (suffix === "4" ? 1.0 : (ticket.confidence >= 75 ? 7.0 : (ticket.confidence >= 65 ? 5.0 : 4.0)));
         let defaultCash = suffix === "4" ? 1.0 : (currentCapital * recStake / 100);
         if (stakeInput) stakeInput.value = defaultCash.toFixed(2);
         if (statusSelect) statusSelect.value = "pending";
