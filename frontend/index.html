@@ -16,7 +16,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=120.0">
+    <link rel="stylesheet" href="styles.css?v=130.0">
     <style>
         /* CRITICAL STATUS SELECT STYLING - ZERO CACHE DEPENDENCY */
         select:has(option[value="voided"]:checked),
@@ -1439,7 +1439,7 @@
             </button>
         </div>
     <!-- Custom JS -->
-    <script src="main.js?v=120.0"></script>
+    <script src="main.js?v=130.0"></script>
     <script>
         // Real-time Mutation Observer to guarantee status select borders match their value
         document.addEventListener("DOMContentLoaded", () => {
@@ -1469,6 +1469,26 @@
             const target = document.getElementById("bets-table-body");
             if (target) obs.observe(target, { childList: true, subtree: true });
             setInterval(applySelectColors, 500);
+
+            // Global 1-Click Editor for Cuota and Stake on the table
+            document.addEventListener("click", (e) => {
+                const td = e.target.closest("td");
+                if (!td) return;
+                const tr = td.closest("tr");
+                if (!tr || !tr.parentElement || tr.parentElement.id !== "bets-table-body") return;
+                
+                const colIdx = Array.from(tr.children).indexOf(td);
+                const select = tr.querySelector('select[id^="status-select-"]');
+                if (!select) return;
+                const betId = parseInt(select.id.replace("status-select-", ""));
+                if (isNaN(betId)) return;
+
+                if (colIdx === 1) { // Cuota column
+                    if (typeof window.editBetOdd === "function") window.editBetOdd(betId);
+                } else if (colIdx === 2) { // Stake column
+                    if (typeof window.editBetStake === "function") window.editBetStake(betId);
+                }
+            });
         });
     </script>
 </body>
