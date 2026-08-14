@@ -33063,21 +33063,40 @@
         "recommendation_stake": 5.0
     },
     "star_ticket_3": {
-        "type": "Simple",
+        "date": "2026-08-14",
+        "ticket_id": "TK-842915",
+        "name": "Boleto Blindado #3 (Portugal + Córners Arabia)",
+        "type": "Combinado",
+        "total_odd": 1.87,
+        "confidence": 78,
+        "recommended_stake_usd": 4.2,
+        "potential_win_usd": 7.85,
+        "status": "pending",
+        "reasoning": "🛡️ Combinada Blindada con Mercado de Córners. Sporting CP con seguro de reembolso en victoria por la mínima, combinado con el dominio abrumador de Córners de Al-Hilal (90.5% de certeza simulada en 10,000 corridas de Monte Carlo).",
         "selections": [
             {
-                "match": "UD Ibiza vs PD Santa Eulalia",
+                "match": "Sporting CP vs Vitoria Guimaraes",
                 "sport": "Football",
-                "market": "Empate No Apuesta (DNB)",
-                "pick": "UD Ibiza",
-                "odd": 1.72,
-                "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con UD Ibiza como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición."
+                "league": "Portugal Primeira Liga",
+                "market": "Hándicap Asiático (-1.0)",
+                "pick": "Sporting CP -1.0 (Victoria por 1 gol devuelve apuesta)",
+                "odd": 1.42,
+                "probability": 70,
+                "reasoning": "Sporting CP es ampliamente superior en el José Alvalade. Si ganan 1-0 o 2-1 se reembolsa el 100% de esta selección.",
+                "status": "pending"
+            },
+            {
+                "match": "Al-Hilal vs Al-Faisaly",
+                "sport": "Football",
+                "league": "Saudi Pro League",
+                "market": "Tiros de Esquina (1X2 Córners)",
+                "pick": "Al-Hilal Más Tiros de Esquina (Gana en Córners)",
+                "odd": 1.32,
+                "probability": 90,
+                "reasoning": "🚩 Córners Verificados por Monte Carlo: Al-Hilal promedia 7.4 córners a favor vs 2.8 de su rival. La simulación proyecta un 90.5% de probabilidad de ganar en saques de esquina.",
+                "status": "pending"
             }
-        ],
-        "total_odd": 1.72,
-        "confidence": 67,
-        "reasoning": "🎯 Apuesta Simple de Cobertura Extra @1.72.",
-        "recommendation_stake": 5.0
+        ]
     },
     "star_ticket_4": {
         "type": "Combinado Soñador",
