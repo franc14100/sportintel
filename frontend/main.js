@@ -826,8 +826,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // Si la API de cuotas estuvo caída, mostrar alerta fija
             // en la parte superior E inyectar banner en el header.
             // ═══════════════════════════════════════════════════════
-            if (!appData || appData.api_status !== "online" || appData.api_warning) {
-                const warnMsg = (appData && appData.api_warning) || "⚠️ API DE CUOTAS CAÍDA — Los picks fueron generados con datos limitados de ESPN (sin cuotas reales de casas de apuestas). Las probabilidades son ESTIMACIONES. Apostar con precaución.";
+            if (appData && appData.api_status === "offline" && appData.api_warning) {
+                const warnMsg = appData.api_warning;
                 
                 // 1. Fixed Top Banner
                 let existingBanner = document.getElementById("api-offline-banner");

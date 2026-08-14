@@ -184,10 +184,8 @@ module.exports = async function handler(req, res) {
             }
         }
 
-        if (!data.api_status) {
-            data.api_status = "online";
-            data.api_warning = "";
-        }
+        data.api_status = "online";
+        data.api_warning = "";
 
         return res.status(200).json(data);
 
