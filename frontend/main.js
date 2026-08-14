@@ -3268,7 +3268,7 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
 
             let actionsHtml = `
-                <button class="btn btn-secondary" onclick="editBetStake(${bet.id})" title="Editar stake" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(56, 189, 248, 0.3); color: var(--accent-cyan); background: rgba(56, 189, 248, 0.05); cursor: pointer; border-radius: 4px; margin-right: 4px;">
+                <button class="btn btn-secondary" onclick="editBetDetails(${bet.id})" title="Editar Cuota y Stake" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(56, 189, 248, 0.3); color: var(--accent-cyan); background: rgba(56, 189, 248, 0.05); cursor: pointer; border-radius: 4px; margin-right: 4px;">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 <button class="btn btn-secondary" onclick="deleteBet(${bet.id})" title="Eliminar apuesta" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(255,255,255,0.1); color: var(--text-muted); background: rgba(255,255,255,0.02); cursor: pointer; border-radius: 4px;">
@@ -3329,18 +3329,38 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    window.editBetStake = (id) => {
-        const bet = userBets.find(b => b.id === id);
+    window.editBetDetails = (id) => {
+        let currentBets = [];
+        try {
+            currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+        } catch(e) {
+            currentBets = typeof userBets !== 'undefined' ? userBets : [];
+        }
+        const bet = currentBets.find(b => b.id === id) || userBets.find(b => b.id === id);
         if (!bet) return;
+
+        const currentOdd = Number(bet.odd || 0).toFixed(2);
         const currentStake = Number(bet.stake || 0).toFixed(2);
-        const newStakeStr = prompt(`✏️ Editar Stake\n\nApuesta: ${bet.match}\nMercado: ${bet.market}\nStake actual: $${currentStake}\n\nIngresa el nuevo stake:`, currentStake);
-        if (newStakeStr === null) return; // cancelled
+
+        const newOddStr = prompt(`✏️ EDITAR CUOTA Y RETORNO\n\nPartido: ${bet.match}\nMercado: ${bet.market}\n\nCuota actual: @${currentOdd}\n(Tip: Si fue Medio Cobro de +0.25 con cuota @1.90, pon cuota @1.45 para cobrar $6.09)\n\nIngresa la nueva Cuota:`, currentOdd);
+        if (newOddStr === null) return;
+        const newOdd = parseFloat(newOddStr);
+        if (isNaN(newOdd) || newOdd <= 1) {
+            alert("La cuota debe ser un número mayor a 1.00.");
+            return;
+        }
+
+        const newStakeStr = prompt(`✏️ EDITAR STAKE (IMPORTE)\n\nStake actual: $${currentStake}\n\nIngresa el nuevo Stake en dólares:`, currentStake);
+        if (newStakeStr === null) return;
         const newStake = parseFloat(newStakeStr);
         if (isNaN(newStake) || newStake <= 0) {
             alert("El stake debe ser un número mayor a 0.");
             return;
         }
+
+        bet.odd = newOdd;
         bet.stake = newStake;
+        userBets = currentBets;
         lastLocalUserActionTime = Date.now();
         localStorage.setItem("user_bets", JSON.stringify(userBets));
         updateBankrollMetrics();
@@ -3349,25 +3369,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true);
     };
 
-    window.editBetOdd = (id) => {
-        const bet = userBets.find(b => b.id === id);
-        if (!bet) return;
-        const currentOdd = Number(bet.odd || 0).toFixed(2);
-        const newOddStr = prompt(`✏️ Editar Cuota\n\nApuesta: ${bet.match}\nMercado: ${bet.market}\nCuota actual: @${currentOdd}\n\nIngresa la nueva cuota:`, currentOdd);
-        if (newOddStr === null) return;
-        const newOdd = parseFloat(newOddStr);
-        if (isNaN(newOdd) || newOdd <= 1) {
-            alert("La cuota debe ser un número mayor a 1.00.");
-            return;
-        }
-        bet.odd = newOdd;
-        lastLocalUserActionTime = Date.now();
-        localStorage.setItem("user_bets", JSON.stringify(userBets));
-        updateBankrollMetrics();
-        populateBetsTable();
-        updateBankrollChart();
-        if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true);
-    };
+    window.editBetStake = (id) => window.editBetDetails(id);
+    window.editBetOdd = (id) => window.editBetDetails(id);
 
     // Calculate ROI, Win Rate, and net bankroll balance
     function updateBankrollMetrics() {
