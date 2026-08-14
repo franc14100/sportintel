@@ -2379,8 +2379,7 @@ def generate_daily_sports_data():
         combined = (str(match_name) + " " + str(league_name)).lower()
         return any(term in combined for term in ['friendly', 'amistoso', 'club-friendly', 'preseason', 'exhibition'])
 
-    BANNED_MARKETS = ['Tarjeta', 'Asian 2.0', 'Primero en Anotar',
-                      'Resultado 1er Tiempo', 'Goles del Equipo']
+    BANNED_MARKETS = ['Tarjeta', 'Primero en Anotar', 'Resultado 1er Tiempo', 'Goles del Equipo']
 
     LOW_SCORING_LEAGUES = ['primera nacional', 'primera-nacional', 'federal', 'copa argentina', 'argentina', 'lpf', 'liga profesional', 'colombia', 'liga betplay', 'copa africana', 'women', 'femenil', 'femenino', 'liga 2', 'serie b', 'segunda', 'tercera', 'torneo-intermedio', 'copa chile', 'guatemala', 'honduras']
     def is_invalid_over_pick(pick):
@@ -2416,18 +2415,11 @@ def generate_daily_sports_data():
     usable_picks = [p for p in usable_picks if not is_obscure_event(p)]
 
     # ═══════════════════════════════════════════════════════════════════════
-    # PROTECCIÓN ANTI-API-CAÍDA: Si la API no entregó cuotas reales,
-    # degradar TODOS los picks de tenis para que NO entren al boleto seguro.
+    # REGLA DE CUOTAS Y PROBABILIDAD MÍNIMA:
+    # Conservar DNB, Hándicaps (+1.5, -1.0) y Totales Asiáticos (prob >= 55%)
     # ═══════════════════════════════════════════════════════════════════════
-    if not api_had_real_odds:
-        for p in usable_picks:
-            if p.get('sport') == 'Tennis':
-                p['probability'] = min(p.get('probability', 50), 50)
-                p['_degraded'] = True
-
-    # REGLA DE CUOTAS Y PROBABILIDAD MÍNIMA
-    usable_picks = [p for p in usable_picks if 1.10 <= p.get('odd', 0) <= 1.95]
-    usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 72]
+    usable_picks = [p for p in usable_picks if 1.10 <= p.get('odd', 0) <= 2.10]
+    usable_picks = [p for p in usable_picks if p.get('probability', 0) >= 55]
 
     # REGLA 5: Priorizar picks con cuotas DIRECTAS de la API
     DIRECT_API_MARKETS = ['Más/Menos Goles', 'Ambos Equipos Anotan', 'Doble Oportunidad',
@@ -2651,18 +2643,30 @@ def generate_daily_sports_data():
     #    o líneas de altísima probabilidad (Trío de Seguridad).
     # ═══════════════════════════════════════════════════════════════════════
     
-    # Separar picks disponibles en dos categorías:
-    # A) Candidatos para Apuestas Simples de Valor (@1.48 - @1.90)
-    # B) Candidatos para Tríos de Doble Oportunidad (1X / X2 con prob >= 72%)
+    # Separar picks disponibles en categorías por deporte y mercado:
+    # A) Simples de Fútbol de Alto Valor (DNB, Asian 2.0/3.0, Over/Under, Hándicaps @1.45 - @2.10)
+    # B) Simples de Tenis de Alto Valor (Hándicap de Sets, Totales @1.45 - @2.10)
+    # C) Candidatos para Tríos de Doble Oportunidad (1X / X2 con prob >= 72%)
     
-    singles_candidates = [
+    football_singles = [
         p for p in usable_picks 
-        if 1.48 <= p.get('odd', 0) <= 1.95 
+        if p.get('sport') == 'Football'
+        and 1.45 <= p.get('odd', 0) <= 2.10 
         and p.get('probability', 0) >= 55
         and not is_friendly_match(p)
     ]
-    # Ordenar simples por EV (Probabilidad * Cuota)
-    singles_candidates.sort(key=lambda p: (p.get('probability', 0) / 100.0) * p.get('odd', 1.0), reverse=True)
+    football_singles.sort(key=lambda p: (p.get('probability', 0) / 100.0) * p.get('odd', 1.0), reverse=True)
+
+    other_singles = [
+        p for p in usable_picks 
+        if p.get('sport') != 'Football'
+        and 1.45 <= p.get('odd', 0) <= 2.10 
+        and p.get('probability', 0) >= 60
+        and not is_friendly_match(p)
+    ]
+    other_singles.sort(key=lambda p: (p.get('probability', 0) / 100.0) * p.get('odd', 1.0), reverse=True)
+
+    singles_candidates = football_singles + other_singles
 
     dc_candidates = [
         p for p in usable_picks
