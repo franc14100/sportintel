@@ -3082,10 +3082,19 @@ document.addEventListener("DOMContentLoaded", () => {
             userBets = JSON.parse(savedBets);
         }
 
+        // Clean up any stale legacy pending bets from July
+        if (Array.isArray(userBets)) {
+            userBets.forEach(b => {
+                if (b.status === "pending" && b.date && b.date.startsWith("2026-07")) {
+                    b.status = "lost";
+                }
+            });
+        }
+
         const recoveryBets = [
             { id: 85040140221, match: "Jablonec - NK Varazdin + Nordsjaelland - GAIS", market: "Córners (Ind): Jablonec > 4.5 / Córners (Ind): Nordsjaelland > 4.5", odd: 1.549, stake: 4.0, status: "lost", date: "2026-07-30" },
             { id: 85040371415, match: "Auda - FCSB + Ludogorets - Hapoel Tel Aviv", market: "Córners (Ind): FCSB > 4.5 / Córners (Ind): Ludogorets > 4.5", odd: 1.818, stake: 4.0, status: "lost", date: "2026-07-30" },
-            { id: 85041008103, match: "KRC Gent - LNZ + Independiente - Newell's Old Boys", market: "Córners (Ind): KRC Gent > 5.5 / Córners (Ind): Independiente > 4.5", odd: 1.835, stake: 4.0, status: "pending", date: "2026-07-30" }
+            { id: 85041008103, match: "KRC Gent - LNZ + Independiente - Newell's Old Boys", market: "Córners (Ind): KRC Gent > 5.5 / Córners (Ind): Independiente > 4.5", odd: 1.835, stake: 4.0, status: "lost", date: "2026-07-30" }
         ];
         let hasRecovered = false;
         recoveryBets.forEach(rb => {
