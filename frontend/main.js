@@ -3341,8 +3341,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div style="font-weight: 700; font-size: 0.8rem; color: var(--text-primary);">${bet.match}</div>
                         <div style="font-size: 0.72rem; color: var(--text-muted);">${bet.market}</div>
                     </td>
-                    <td style="padding: 10px 8px; text-align: center; font-family: var(--font-display); font-weight: 700; color: var(--accent-amber); cursor: pointer;" onclick="editBetOdd(${bet.id})" title="Haz clic para editar la cuota">@${Number(bet.odd || 0).toFixed(2)} <i class="fa-solid fa-pen" style="font-size: 0.55rem; color: var(--accent-amber); opacity: 0.4; margin-left: 2px;"></i></td>
-                    <td style="padding: 10px 8px; text-align: center; color: var(--text-secondary); font-size: 0.8rem; cursor: pointer;" onclick="editBetStake(${bet.id})" title="Haz clic para editar el stake">$${Number(bet.stake || 0).toFixed(2)} <i class="fa-solid fa-pen" style="font-size: 0.55rem; color: var(--accent-cyan); opacity: 0.5; margin-left: 2px;"></i></td>
+                    <td style="padding: 10px 8px; text-align: center;">
+                        <span onclick="editBetOdd(${bet.id})" style="cursor: pointer; display: inline-flex; align-items: center; gap: 5px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); padding: 3px 8px; border-radius: 6px; font-family: var(--font-display); font-weight: 800; color: var(--accent-amber);" title="Haz clic para cambiar la cuota">
+                            @${Number(bet.odd || 0).toFixed(2)} <i class="fa-solid fa-pen-to-square" style="font-size: 0.75rem; color: #fbbf24;"></i>
+                        </span>
+                    </td>
+                    <td style="padding: 10px 8px; text-align: center;">
+                        <span onclick="editBetStake(${bet.id})" style="cursor: pointer; display: inline-flex; align-items: center; gap: 5px; background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; color: var(--accent-cyan);" title="Haz clic para cambiar el importe">
+                            $${Number(bet.stake || 0).toFixed(2)} <i class="fa-solid fa-pen-to-square" style="font-size: 0.75rem; color: var(--accent-cyan);"></i>
+                        </span>
+                    </td>
                     <td style="padding: 10px 8px; text-align: center; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem;">$${Number(potentialReturn || 0).toFixed(2)}</td>
                     <td style="padding: 10px 8px; text-align: center;">${statusSelect}</td>
                     <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">${actionsHtml}</td>
