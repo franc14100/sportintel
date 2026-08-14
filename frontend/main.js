@@ -3242,21 +3242,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Render in reverse chronological order (newest first)
         [...visibleBets].reverse().forEach(bet => {
             const potentialReturn = bet.stake * bet.odd;
-            
-            const statusStyle = bet.status === 'won' 
-                ? 'color: var(--accent-green); border-color: var(--accent-green); background: rgba(16, 185, 129, 0.1);' 
-                : bet.status === 'lost' 
-                ? 'color: var(--accent-pink); border-color: var(--accent-pink); background: rgba(244, 63, 94, 0.1);' 
-                : bet.status === 'voided' 
-                ? 'color: #38bdf8; border-color: #38bdf8; background: rgba(56, 189, 248, 0.15); font-weight: 700;' 
-                : 'color: var(--accent-amber); border-color: var(--accent-amber); background: rgba(245, 158, 11, 0.1);';
-
+            const statusClass = `status-select-${bet.status || 'pending'}`;
             let statusSelect = `
-                <select id="status-select-${bet.id}" class="form-input" autocomplete="off" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; ${statusStyle}" onchange="resolveBet(${bet.id}, this.value)">
-                    <option value="pending" ${bet.status === 'pending' ? 'selected' : ''}>Pendiente</option>
-                    <option value="won" ${bet.status === 'won' ? 'selected' : ''}>Ganada</option>
-                    <option value="lost" ${bet.status === 'lost' ? 'selected' : ''}>Perdida</option>
-                    <option value="voided" ${bet.status === 'voided' ? 'selected' : ''}>Anulada</option>
+                <select id="status-select-${bet.id}" class="form-input ${statusClass}" autocomplete="off" style="font-size: 0.72rem; padding: 4px 6px; width: 92px; border-radius: 6px; cursor: pointer;" onchange="resolveBet(${bet.id}, this.value)">
+                    <option value="pending" style="background:#0f172a; color:#f59e0b;" ${bet.status === 'pending' ? 'selected' : ''}>⏳ Pendiente</option>
+                    <option value="won" style="background:#0f172a; color:#10b981;" ${bet.status === 'won' ? 'selected' : ''}>✅ Ganada</option>
+                    <option value="lost" style="background:#0f172a; color:#f43f5e;" ${bet.status === 'lost' ? 'selected' : ''}>❌ Perdida</option>
+                    <option value="voided" style="background:#0f172a; color:#38bdf8;" ${bet.status === 'voided' ? 'selected' : ''}>🔵 Anulada</option>
                 </select>
             `;
 
