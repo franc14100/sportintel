@@ -100,6 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 user_bets: JSON.stringify(bets),
                 sb: localStorage.getItem("starting_bankroll") || "53.50918",
                 starting_bankroll: localStorage.getItem("starting_bankroll") || "53.50918",
+                mtb: localStorage.getItem("manual_target_balance") || "",
+                manual_target_balance: localStorage.getItem("manual_target_balance") || "",
                 ed: localStorage.getItem("escalera_day") || "8",
                 ess: localStorage.getItem("escalera_start_stake") || "10",
                 ecs: localStorage.getItem("escalera_current_stake") || "9.6",
@@ -122,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const hist = typeof rawHist === "string" ? JSON.parse(rawHist) : rawHist;
             
             const sbVal = s.sb !== undefined ? s.sb : s.starting_bankroll;
+            const mtbVal = s.mtb !== undefined ? s.mtb : s.manual_target_balance;
             
             if (bets) {
                 userBets = bets;
@@ -130,6 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (sbVal !== undefined) {
                 startingBankroll = parseFloat(sbVal);
                 originalSetItem.call(localStorage, "starting_bankroll", sbVal);
+            }
+            if (mtbVal !== undefined && mtbVal !== "") {
+                originalSetItem.call(localStorage, "manual_target_balance", mtbVal);
             }
             if (s.ed !== undefined) originalSetItem.call(localStorage, "escalera_day", s.ed);
             if (s.ess !== undefined) originalSetItem.call(localStorage, "escalera_start_stake", s.ess);
@@ -3019,11 +3025,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Load initial bets from local storage or set default mock data
     function initBankroll() {
-        const savedCapital = localStorage.getItem("starting_bankroll");
-        if (savedCapital) {
-            startingBankroll = parseFloat(savedCapital) || 29.65;
+        const savedManual = localStorage.getItem("manual_target_balance");
+        if (savedManual !== null && !isNaN(parseFloat(savedManual))) {
+            const targetAvail = parseFloat(savedManual);
+            let netProf = 0, pendStakes = 0;
+            const bets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+            bets.forEach(b => {
+                if (b.deleted) return;
+                if (b.status === "won") netProf += (b.stake * b.odd) - b.stake;
+                else if (b.status === "lost") netProf -= b.stake;
+                else if (b.status === "pending") pendStakes += b.stake;
+            });
+            startingBankroll = targetAvail + pendStakes - netProf;
+            localStorage.setItem("starting_bankroll", startingBankroll.toString());
         } else {
-            localStorage.setItem("starting_bankroll", startingBankroll);
+            const savedCapital = localStorage.getItem("starting_bankroll");
+            if (savedCapital) {
+                startingBankroll = parseFloat(savedCapital) || 29.65;
+            } else {
+                localStorage.setItem("starting_bankroll", startingBankroll.toString());
+            }
         }
 
         const input1xBet = document.getElementById("input-1xbet-balance");
@@ -3031,15 +3052,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const handleBalanceChange = (e) => {
                 const targetAvail = parseFloat(e.target.value);
                 if (!isNaN(targetAvail) && targetAvail >= 0) {
+                    localStorage.setItem("manual_target_balance", targetAvail.toString());
                     let netProf = 0, pendStakes = 0;
                     userBets.forEach(b => {
+                        if (b.deleted) return;
                         if (b.status === "won") netProf += (b.stake * b.odd) - b.stake;
                         else if (b.status === "lost") netProf -= b.stake;
                         else if (b.status === "pending") pendStakes += b.stake;
                     });
                     startingBankroll = targetAvail + pendStakes - netProf;
                     localStorage.setItem("starting_bankroll", startingBankroll.toString());
-                    localStorage.setItem("last_manual_balance", targetAvail.toString());
+                    localStorage.setItem("sync_ts", Date.now().toString());
                     lastLocalUserActionTime = Date.now();
                     updateBankrollMetrics();
                     updateBankrollChart();
