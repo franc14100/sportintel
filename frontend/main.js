@@ -3028,7 +3028,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const input1xBet = document.getElementById("input-1xbet-balance");
         if (input1xBet) {
-            input1xBet.oninput = (e) => {
+            const handleBalanceChange = (e) => {
                 const targetAvail = parseFloat(e.target.value);
                 if (!isNaN(targetAvail) && targetAvail >= 0) {
                     let netProf = 0, pendStakes = 0;
@@ -3038,11 +3038,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         else if (b.status === "pending") pendStakes += b.stake;
                     });
                     startingBankroll = targetAvail + pendStakes - netProf;
-                    localStorage.setItem("starting_bankroll", startingBankroll);
+                    localStorage.setItem("starting_bankroll", startingBankroll.toString());
+                    localStorage.setItem("last_manual_balance", targetAvail.toString());
+                    lastLocalUserActionTime = Date.now();
                     updateBankrollMetrics();
                     updateBankrollChart();
+                    if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true);
                 }
             };
+            input1xBet.oninput = handleBalanceChange;
+            input1xBet.onchange = handleBalanceChange;
         }
         let savedBets = localStorage.getItem("user_bets");
         if (!savedBets) {
