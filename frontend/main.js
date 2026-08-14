@@ -3342,14 +3342,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div style="font-size: 0.72rem; color: var(--text-muted);">${bet.market}</div>
                     </td>
                     <td style="padding: 10px 8px; text-align: center;">
-                        <span onclick="editBetOdd(${bet.id})" style="cursor: pointer; display: inline-flex; align-items: center; gap: 5px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); padding: 3px 8px; border-radius: 6px; font-family: var(--font-display); font-weight: 800; color: var(--accent-amber);" title="Haz clic para cambiar la cuota">
-                            @${Number(bet.odd || 0).toFixed(2)} <i class="fa-solid fa-pen-to-square" style="font-size: 0.75rem; color: #fbbf24;"></i>
-                        </span>
+                        <div style="display: inline-flex; align-items: center; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 6px; padding: 2px 6px;">
+                            <span style="color: var(--accent-amber); font-weight: 800; font-size: 0.75rem; margin-right: 2px;">@</span>
+                            <input type="number" step="0.01" min="1.01" value="${Number(bet.odd || 0).toFixed(2)}" style="width: 56px; background: transparent; border: none; color: var(--accent-amber); font-family: var(--font-display); font-weight: 800; font-size: 0.8rem; text-align: left; outline: none; padding: 2px 0;" onchange="updateBetOddDirect(${bet.id}, this.value)" title="Escribe aquí para cambiar la cuota directamente">
+                        </div>
                     </td>
                     <td style="padding: 10px 8px; text-align: center;">
-                        <span onclick="editBetStake(${bet.id})" style="cursor: pointer; display: inline-flex; align-items: center; gap: 5px; background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); padding: 3px 8px; border-radius: 6px; font-weight: 700; color: var(--accent-cyan);" title="Haz clic para cambiar el importe">
-                            $${Number(bet.stake || 0).toFixed(2)} <i class="fa-solid fa-pen-to-square" style="font-size: 0.75rem; color: var(--accent-cyan);"></i>
-                        </span>
+                        <div style="display: inline-flex; align-items: center; background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 6px; padding: 2px 6px;">
+                            <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.75rem; margin-right: 2px;">$</span>
+                            <input type="number" step="0.01" min="0.1" value="${Number(bet.stake || 0).toFixed(2)}" style="width: 52px; background: transparent; border: none; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem; text-align: left; outline: none; padding: 2px 0;" onchange="updateBetStakeDirect(${bet.id}, this.value)" title="Escribe aquí para cambiar el stake directamente">
+                        </div>
                     </td>
                     <td style="padding: 10px 8px; text-align: center; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem;">$${Number(potentialReturn || 0).toFixed(2)}</td>
                     <td style="padding: 10px 8px; text-align: center;">${statusSelect}</td>
@@ -3360,6 +3362,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
         betsTableBody.innerHTML = rowsHtml;
     }
+
+    window.updateBetOddDirect = (id, val) => {
+        const newOdd = parseFloat(val);
+        if (isNaN(newOdd) || newOdd <= 1.0) {
+            alert("La cuota debe ser un número válido mayor a 1.00");
+            populateBetsTable();
+            return;
+        }
+        let currentBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+        const bet = currentBets.find(b => b.id === id);
+        if (!bet) return;
+        bet.odd = newOdd;
+        userBets = currentBets;
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        localStorage.setItem("sync_ts", Date.now().toString());
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(false, true);
+    };
+
+    window.updateBetStakeDirect = (id, val) => {
+        const newStake = parseFloat(val);
+        if (isNaN(newStake) || newStake <= 0) {
+            alert("El stake debe ser un número válido mayor a 0");
+            populateBetsTable();
+            return;
+        }
+        let currentBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+        const bet = currentBets.find(b => b.id === id);
+        if (!bet) return;
+        bet.stake = newStake;
+        userBets = currentBets;
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        localStorage.setItem("sync_ts", Date.now().toString());
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(false, true);
+    };
 
     window.resolveBet = (id, status) => {
         let currentBets = [];
