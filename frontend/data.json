@@ -32681,136 +32681,162 @@
         "roi_percentage": -11.4
     },
     "star_ticket": {
+        "date": "2026-08-14",
+        "ticket_id": "TK-566467",
+        "name": "Boleto Seguro #1 (Fija del Día - Noruega)",
         "type": "Simple",
+        "total_odd": 1.61,
+        "confidence": 78,
+        "recommended_stake_usd": 4.2,
+        "potential_win_usd": 6.76,
+        "status": "pending",
+        "reasoning": "🎯 Apuesta Simple de Valor Puro. Más de 3.0 Goles Asiático en la liga más goleadora de Europa (Noruega Eliteserien). Reembolso 100% garantizado si el partido termina con exactamente 3 goles (2-1 o 3-0). Tasa de No Pérdida: 64.3%.",
         "selections": [
             {
-                "match": "Roda JC Kerkrade vs Helmond Sport",
+                "match": "Rosenborg vs Viking",
                 "sport": "Football",
-                "market": "Empate No Apuesta (DNB)",
-                "pick": "Roda JC Kerkrade",
-                "odd": 1.72,
-                "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Roda JC Kerkrade como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición."
+                "league": "Noruega Eliteserien",
+                "market": "Total de Goles (Asian 3.0)",
+                "pick": "Más de 3.0 Goles (Asian 3.0 — 3 goles devuelve apuesta)",
+                "odd": 1.61,
+                "probability": 64,
+                "reasoning": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61; con 3 goles hay reembolso total.",
+                "status": "pending"
             }
-        ],
-        "total_odd": 1.72,
-        "confidence": 68,
-        "reasoning": "🎯 Apuesta Simple de Valor @1.72. Selección individual con cobertura validada por Monte Carlo.",
-        "recommendation_stake": 5.0
+        ]
     },
     "star_ticket_1": {
+        "date": "2026-08-14",
+        "ticket_id": "TK-566467",
+        "name": "Boleto Seguro #1 (Fija del Día - Noruega)",
         "type": "Simple",
+        "total_odd": 1.61,
+        "confidence": 78,
+        "recommended_stake_usd": 4.2,
+        "potential_win_usd": 6.76,
+        "status": "pending",
+        "reasoning": "🎯 Apuesta Simple de Valor Puro. Más de 3.0 Goles Asiático en la liga más goleadora de Europa (Noruega Eliteserien). Reembolso 100% garantizado si el partido termina con exactamente 3 goles (2-1 o 3-0). Tasa de No Pérdida: 64.3%.",
         "selections": [
             {
-                "match": "Roda JC Kerkrade vs Helmond Sport",
+                "match": "Rosenborg vs Viking",
                 "sport": "Football",
-                "market": "Empate No Apuesta (DNB)",
-                "pick": "Roda JC Kerkrade",
-                "odd": 1.72,
-                "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Roda JC Kerkrade como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición."
+                "league": "Noruega Eliteserien",
+                "market": "Total de Goles (Asian 3.0)",
+                "pick": "Más de 3.0 Goles (Asian 3.0 — 3 goles devuelve apuesta)",
+                "odd": 1.61,
+                "probability": 64,
+                "reasoning": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61; con 3 goles hay reembolso total.",
+                "status": "pending"
             }
-        ],
-        "total_odd": 1.72,
-        "confidence": 68,
-        "reasoning": "🎯 Apuesta Simple de Valor @1.72. Selección individual con cobertura validada por Monte Carlo.",
-        "recommendation_stake": 5.0
+        ]
     },
     "star_ticket_2": {
+        "date": "2026-08-14",
+        "ticket_id": "TK-898120",
+        "name": "Boleto de Cobertura #2 (Turquía SuperLig)",
         "type": "Simple",
+        "total_odd": 1.5,
+        "confidence": 77,
+        "recommended_stake_usd": 4.2,
+        "potential_win_usd": 6.3,
+        "status": "pending",
+        "reasoning": "🎯 Apuesta Simple con Cobertura. Galatasaray en Estambul es ampliamente favorito (76.7% winrate). Si gana por 2+ goles cobras la cuota; si gana por la mínima (1-0 o 2-1) hay reembolso del 100% de tu dinero.",
         "selections": [
             {
-                "match": "Troyes vs Panetolikos",
+                "match": "Galatasaray vs Çorum FK",
                 "sport": "Football",
-                "market": "Empate No Apuesta (DNB)",
-                "pick": "Troyes",
-                "odd": 1.72,
-                "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Troyes como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición."
+                "league": "Turquía SuperLig",
+                "market": "Hándicap Asiático (-1.0)",
+                "pick": "Galatasaray -1.0 (Victoria por 1 gol devuelve apuesta)",
+                "odd": 1.5,
+                "probability": 77,
+                "reasoning": "Galatasaray tiene un xG proyectado de 2.45 goles. Cobertura completa ante victoria por la mínima.",
+                "status": "pending"
             }
-        ],
-        "total_odd": 1.72,
-        "confidence": 68,
-        "reasoning": "🎯 Apuesta Simple de Cobertura @1.72 con alta esperanza matemática (+EV).",
-        "recommendation_stake": 5.0
+        ]
     },
     "star_ticket_3": {
-        "type": "Simple",
+        "date": "2026-08-14",
+        "ticket_id": "TK-726174",
+        "name": "Boleto Combinado #3 (Portugal + Arabia)",
+        "type": "Combinado",
+        "total_odd": 1.82,
+        "confidence": 72,
+        "recommended_stake_usd": 4.2,
+        "potential_win_usd": 7.64,
+        "status": "pending",
+        "reasoning": "🛡️ Combinada de Alto Rendimiento con Protección. Sporting CP en casa con seguro de reembolso en victoria ajustada y Al-Hilal como aplanadora ofensiva en su estadio.",
         "selections": [
             {
-                "match": "South Carolina State vs Southern Utah",
+                "match": "Sporting CP vs Vitoria Guimaraes",
                 "sport": "Football",
-                "market": "Empate No Apuesta (DNB)",
-                "pick": "South Carolina State",
-                "odd": 1.72,
-                "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con South Carolina State como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición."
+                "league": "Portugal Primeira Liga",
+                "market": "Hándicap Asiático (-1.0)",
+                "pick": "Sporting CP -1.0 (Victoria por 1 gol devuelve apuesta)",
+                "odd": 1.42,
+                "probability": 70,
+                "reasoning": "Sporting CP domina en el Alvalade. Reembolso total si gana 1-0 o 2-1.",
+                "status": "pending"
+            },
+            {
+                "match": "Al-Hilal vs Al-Faisaly",
+                "sport": "Football",
+                "league": "Saudi Pro League",
+                "market": "Goles del Equipo (Individual)",
+                "pick": "Al-Hilal Más de 1.5 Goles",
+                "odd": 1.28,
+                "probability": 85,
+                "reasoning": "Al-Hilal promedia 2.75 goles por partido como local. Alta certeza de al menos 2 goles.",
+                "status": "pending"
             }
-        ],
-        "total_odd": 1.72,
-        "confidence": 68,
-        "reasoning": "🎯 Apuesta Simple de Cobertura Extra @1.72.",
-        "recommendation_stake": 5.0
+        ]
     },
     "star_ticket_4": {
-        "type": "Combinado Soñador",
+        "date": "2026-08-14",
+        "ticket_id": "TK-521917",
+        "name": "Boleto Conservador #4 (Trío de Doble Oportunidad)",
+        "type": "Combinado",
+        "total_odd": 1.65,
+        "confidence": 82,
+        "recommended_stake_usd": 3.5,
+        "potential_win_usd": 5.77,
+        "status": "pending",
+        "reasoning": "🛡️ Trío de Seguridad 1X/X2 respaldando a los favoritos reales de 1xBet sin riesgo de victorias directas engañosas.",
         "selections": [
             {
-                "match": "Gotham FC vs Kansas City Current",
+                "match": "FC Cagliari vs Arezzo",
                 "sport": "Football",
-                "market": "Más/Menos Goles",
-                "pick": "Más de 2.5 Goles",
-                "odd": 1.34,
-                "reasoning": "xG proyectado: 3.8 goles combinados. Partido abierto."
-            },
-            {
-                "match": "Stefanos Tsitsipas vs Valentin Royer",
-                "sport": "Tennis",
-                "market": "Hándicap de Sets",
-                "pick": "Valentin Royer +1.5 Sets",
-                "odd": 1.26,
-                "reasoning": {
-                    "tactical": "Apuesta de altísima seguridad: Valentin Royer solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
-                    "statistical": "Con una probabilidad superior al 85%, es estadísticamente improbable que Valentin Royer pierda en sets corridos (2-0 en contra).",
-                    "market": "Mercado Hándicap de Sets (+1.5) utilizado frecuentemente por tipsters conservadores para blindar cuotas de boletos seguros."
-                },
-                "status": "pending"
-            },
-            {
-                "match": "Adolfo Daniel Vallejo vs Kyrian Jacquet",
-                "sport": "Tennis",
-                "market": "Hándicap de Sets",
-                "pick": "Adolfo Daniel Vallejo +1.5 Sets",
-                "odd": 1.31,
-                "reasoning": {
-                    "tactical": "Apuesta de altísima seguridad: Adolfo Daniel Vallejo solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
-                    "statistical": "Con una probabilidad superior al 85%, es estadísticamente improbable que Adolfo Daniel Vallejo pierda en sets corridos (2-0 en contra).",
-                    "market": "Mercado Hándicap de Sets (+1.5) utilizado frecuentemente por tipsters conservadores para blindar cuotas de boletos seguros."
-                },
-                "status": "pending"
-            },
-            {
-                "match": "Daniel Altmaier vs Chak Lam Coleman Wong",
-                "sport": "Tennis",
-                "market": "Hándicap de Sets",
-                "pick": "Daniel Altmaier +1.5 Sets",
-                "odd": 1.2,
-                "reasoning": {
-                    "tactical": "Apuesta de altísima seguridad: Daniel Altmaier solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
-                    "statistical": "Con una probabilidad superior al 85%, es estadísticamente improbable que Daniel Altmaier pierda en sets corridos (2-0 en contra).",
-                    "market": "Mercado Hándicap de Sets (+1.5) utilizado frecuentemente por tipsters conservadores para blindar cuotas de boletos seguros."
-                },
-                "status": "pending"
-            },
-            {
-                "match": "San Diego Wave FC vs Denver Summit FC",
-                "sport": "Football",
+                "league": "Coppa Italia",
                 "market": "Doble Oportunidad",
-                "pick": "San Diego Wave FC o Empate",
-                "odd": 1.47,
-                "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de San Diego Wave FC hace casi imposible un resultado diferente al cubierto por esta apuesta."
+                "pick": "FC Cagliari o Empate (1X)",
+                "odd": 1.11,
+                "probability": 90,
+                "reasoning": "Diferencial de categoría en Coppa Italia. Cagliari juega en casa.",
+                "status": "pending"
+            },
+            {
+                "match": "Neom SC vs Al Feiha",
+                "sport": "Football",
+                "league": "Saudi Pro League",
+                "market": "Doble Oportunidad",
+                "pick": "Neom SC o Empate (1X)",
+                "odd": 1.16,
+                "probability": 86,
+                "reasoning": "Neom SC muy sólido como local.",
+                "status": "pending"
+            },
+            {
+                "match": "Grenoble vs FC Metz",
+                "sport": "Football",
+                "league": "Francia Ligue 2",
+                "market": "Doble Oportunidad",
+                "pick": "FC Metz o Empate (X2)",
+                "odd": 1.28,
+                "probability": 76,
+                "reasoning": "FC Metz es el favorito real de 1xBet. Gran solidez como visitante.",
+                "status": "pending"
             }
-        ],
-        "total_odd": 3.9,
-        "confidence": 50,
-        "reasoning": "🚀 Apuesta Soñadora del Dólar (Cuota Total: @6.48).",
-        "recommendation_stake": 1.0
+        ]
     },
     "historical_tickets_registry": [
         {
