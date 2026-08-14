@@ -3031,19 +3031,39 @@ document.addEventListener("DOMContentLoaded", () => {
     let userBets = [];
     let startingBankroll = 29.65;
 
+    function calculateNetProfitAndPending(bets) {
+        let netProf = 0, pendStakes = 0, resolvedStakes = 0, wonBets = 0, resolvedBetsCount = 0;
+        (bets || []).forEach(b => {
+            if (b.deleted) return;
+            const st = String(b.status || 'pending').toLowerCase();
+            const odd = parseFloat(b.odd) || 1.0;
+            const stake = parseFloat(b.stake) || 0.0;
+            const isDreamer = b.is_dreamer || ((b.match || '').split(' + ').length >= 4 && odd >= 2.5);
+
+            if (st === "won" || st === "ganada" || st === "ganado") {
+                netProf += (stake * odd) - stake;
+                resolvedStakes += stake;
+                if (!isDreamer) { wonBets++; resolvedBetsCount++; }
+            } else if (st === "lost" || st === "perdida" || st === "perdido") {
+                netProf -= stake;
+                resolvedStakes += stake;
+                if (!isDreamer) { resolvedBetsCount++; }
+            } else if (st === "pending" || st === "pendiente") {
+                pendStakes += stake;
+            }
+        });
+        return { netProf, pendStakes, resolvedStakes, wonBets, resolvedBetsCount };
+    }
+
     // Load initial bets from local storage or set default mock data
     function initBankroll() {
+        const currentBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+        userBets = currentBets;
+
         const savedManual = localStorage.getItem("manual_target_balance");
         if (savedManual !== null && !isNaN(parseFloat(savedManual))) {
             const targetAvail = parseFloat(savedManual);
-            let netProf = 0, pendStakes = 0;
-            const bets = JSON.parse(localStorage.getItem("user_bets") || "[]");
-            bets.forEach(b => {
-                if (b.deleted) return;
-                if (b.status === "won") netProf += (b.stake * b.odd) - b.stake;
-                else if (b.status === "lost") netProf -= b.stake;
-                else if (b.status === "pending") pendStakes += b.stake;
-            });
+            const { netProf, pendStakes } = calculateNetProfitAndPending(currentBets);
             startingBankroll = targetAvail + pendStakes - netProf;
             localStorage.setItem("starting_bankroll", startingBankroll.toString());
         } else {
@@ -3061,13 +3081,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const targetAvail = parseFloat(e.target.value);
                 if (!isNaN(targetAvail) && targetAvail >= 0) {
                     localStorage.setItem("manual_target_balance", targetAvail.toString());
-                    let netProf = 0, pendStakes = 0;
-                    userBets.forEach(b => {
-                        if (b.deleted) return;
-                        if (b.status === "won") netProf += (b.stake * b.odd) - b.stake;
-                        else if (b.status === "lost") netProf -= b.stake;
-                        else if (b.status === "pending") pendStakes += b.stake;
-                    });
+                    const currentBetsList = JSON.parse(localStorage.getItem("user_bets") || "[]");
+                    userBets = currentBetsList;
+                    const { netProf, pendStakes } = calculateNetProfitAndPending(currentBetsList);
                     startingBankroll = targetAvail + pendStakes - netProf;
                     localStorage.setItem("starting_bankroll", startingBankroll.toString());
                     localStorage.setItem("sync_ts", Date.now().toString());
@@ -3421,34 +3437,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Calculate ROI, Win Rate, and net bankroll balance
     function updateBankrollMetrics() {
-        let netProfit = 0;
-        let resolvedStakes = 0;
-        let wonBets = 0;
-        let resolvedBetsCount = 0;
-        let pendingStakes = 0;
-
-        // Helper: identify Boleto Soñador (excluded from win rate stats)
-        const isSoñador = (bet) => {
-            if (bet.is_dreamer) return true;
-            // Soñador = high-risk parlay with many teams and high odd
-            const teamCount = (bet.match || '').split(' + ').length;
-            return teamCount >= 4 && bet.odd >= 2.5;
-        };
-
-        userBets.forEach(bet => {
-            if (bet.deleted) return;
-            if (bet.status === "won") {
-                netProfit += (bet.stake * bet.odd) - bet.stake;
-                resolvedStakes += bet.stake;
-                if (!isSoñador(bet)) { wonBets++; resolvedBetsCount++; }
-            } else if (bet.status === "lost") {
-                netProfit -= bet.stake;
-                resolvedStakes += bet.stake;
-                if (!isSoñador(bet)) { resolvedBetsCount++; }
-            } else if (bet.status === "pending") {
-                pendingStakes += bet.stake;
-            }
-        });
+        const currentBets = Array.isArray(userBets) && userBets.length > 0 ? userBets : JSON.parse(localStorage.getItem("user_bets") || "[]");
+        userBets = currentBets;
+        
+        const { netProf: netProfit, pendStakes: pendingStakes, resolvedStakes, wonBets, resolvedBetsCount } = calculateNetProfitAndPending(currentBets);
 
         const currentBalance = startingBankroll + netProfit;
         const availableBalance = currentBalance - pendingStakes;
