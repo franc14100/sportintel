@@ -3390,20 +3390,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    window.editBetDetails = (id) => {
+    window.editBetOdd = (id) => {
         let currentBets = [];
         try {
             currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
         } catch(e) {
             currentBets = typeof userBets !== 'undefined' ? userBets : [];
         }
-        const bet = currentBets.find(b => b.id === id) || userBets.find(b => b.id === id);
+        const bet = currentBets.find(b => b.id === id) || (userBets && userBets.find(b => b.id === id));
         if (!bet) return;
 
         const currentOdd = Number(bet.odd || 0).toFixed(2);
-        const currentStake = Number(bet.stake || 0).toFixed(2);
-
-        const newOddStr = prompt(`✏️ EDITAR CUOTA Y RETORNO\n\nPartido: ${bet.match}\nMercado: ${bet.market}\n\nCuota actual: @${currentOdd}\n(Tip: Si fue Medio Cobro de +0.25 con cuota @1.90, pon cuota @1.45 para cobrar $6.09)\n\nIngresa la nueva Cuota:`, currentOdd);
+        const newOddStr = prompt(`✏️ EDITAR CUOTA (ODD)\n\nPartido: ${bet.match}\nMercado: ${bet.market}\n\nCuota actual: @${currentOdd}\n(Ejemplo: Si en una combinada se anula un partido o hubo medio cobro, ajusta aquí la cuota)\n\nIngresa la nueva Cuota:`, currentOdd);
         if (newOddStr === null) return;
         const newOdd = parseFloat(newOddStr);
         if (isNaN(newOdd) || newOdd <= 1) {
@@ -3411,7 +3409,29 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const newStakeStr = prompt(`✏️ EDITAR STAKE (IMPORTE)\n\nStake actual: $${currentStake}\n\nIngresa el nuevo Stake en dólares:`, currentStake);
+        bet.odd = newOdd;
+        userBets = currentBets;
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        localStorage.setItem("sync_ts", Date.now().toString());
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(false, true);
+    };
+
+    window.editBetStake = (id) => {
+        let currentBets = [];
+        try {
+            currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+        } catch(e) {
+            currentBets = typeof userBets !== 'undefined' ? userBets : [];
+        }
+        const bet = currentBets.find(b => b.id === id) || (userBets && userBets.find(b => b.id === id));
+        if (!bet) return;
+
+        const currentStake = Number(bet.stake || 0).toFixed(2);
+        const newStakeStr = prompt(`✏️ EDITAR STAKE (IMPORTE)\n\nPartido: ${bet.match}\nMercado: ${bet.market}\n\nStake actual: $${currentStake}\n\nIngresa el nuevo Stake en dólares:`, currentStake);
         if (newStakeStr === null) return;
         const newStake = parseFloat(newStakeStr);
         if (isNaN(newStake) || newStake <= 0) {
@@ -3419,19 +3439,18 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        bet.odd = newOdd;
         bet.stake = newStake;
         userBets = currentBets;
         lastLocalUserActionTime = Date.now();
         localStorage.setItem("user_bets", JSON.stringify(userBets));
+        localStorage.setItem("sync_ts", Date.now().toString());
         updateBankrollMetrics();
         populateBetsTable();
         updateBankrollChart();
-        if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true);
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(false, true);
     };
 
-    window.editBetStake = (id) => window.editBetDetails(id);
-    window.editBetOdd = (id) => window.editBetDetails(id);
+    window.editBetDetails = (id) => window.editBetOdd(id);
 
     // Calculate ROI, Win Rate, and net bankroll balance
     function updateBankrollMetrics() {
