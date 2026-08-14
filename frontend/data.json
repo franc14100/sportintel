@@ -33046,21 +33046,29 @@
         "recommendation_stake": 5.0
     },
     "star_ticket_2": {
+        "date": "2026-08-14",
+        "ticket_id": "TK-592811",
+        "name": "Boleto de Cobertura #2 (Turquía SuperLig)",
         "type": "Simple",
+        "total_odd": 1.62,
+        "confidence": 77,
+        "recommended_stake_usd": 4.2,
+        "potential_win_usd": 6.8,
+        "status": "pending",
+        "reasoning": "🎯 Apuesta Simple Optimizada con Cobertura. Galatasaray Hándicap Asiático (-1.25). Si ganan por 2+ goles cobras el 100% a cuota @1.62. Si ganan por 1 gol exacto (1-0 o 2-1), se aplica Medio Reembolso (salvas el 50% del dinero). Tasa de No Pérdida Total: 77.4%.",
         "selections": [
             {
-                "match": "Utah Royals vs Bay FC",
+                "match": "Galatasaray vs Çorum FK",
                 "sport": "Football",
-                "market": "Empate No Apuesta (DNB)",
-                "pick": "Utah Royals",
-                "odd": 1.72,
-                "reasoning": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Utah Royals como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición."
+                "league": "Turquía SuperLig",
+                "market": "Hándicap Asiático (-1.25)",
+                "pick": "Galatasaray -1.25 (Gana por 1 gol salva 50% capital)",
+                "odd": 1.62,
+                "probability": 77,
+                "reasoning": "Galatasaray proyecta 2.45 goles xG. Con victoria por 2+ goles cobras @1.62; con victoria por la mínima se reembolsa la mitad de la apuesta.",
+                "status": "pending"
             }
-        ],
-        "total_odd": 1.72,
-        "confidence": 67,
-        "reasoning": "🎯 Apuesta Simple de Cobertura @1.72 con alta esperanza matemática (+EV).",
-        "recommendation_stake": 5.0
+        ]
     },
     "star_ticket_3": {
         "date": "2026-08-14",
