@@ -130,12 +130,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 userBets = bets;
                 originalSetItem.call(localStorage, "user_bets", JSON.stringify(bets));
             }
-            if (sbVal !== undefined) {
+            if (mtbVal !== undefined && mtbVal !== "" && !isNaN(parseFloat(mtbVal))) {
+                originalSetItem.call(localStorage, "manual_target_balance", mtbVal);
+                let netProf = 0, pendStakes = 0;
+                (userBets || []).forEach(b => {
+                    if (b.deleted) return;
+                    if (b.status === "won") netProf += (b.stake * b.odd) - b.stake;
+                    else if (b.status === "lost") netProf -= b.stake;
+                    else if (b.status === "pending") pendStakes += b.stake;
+                });
+                startingBankroll = parseFloat(mtbVal) + pendStakes - netProf;
+                originalSetItem.call(localStorage, "starting_bankroll", startingBankroll.toString());
+            } else if (sbVal !== undefined) {
                 startingBankroll = parseFloat(sbVal);
                 originalSetItem.call(localStorage, "starting_bankroll", sbVal);
-            }
-            if (mtbVal !== undefined && mtbVal !== "") {
-                originalSetItem.call(localStorage, "manual_target_balance", mtbVal);
             }
             if (s.ed !== undefined) originalSetItem.call(localStorage, "escalera_day", s.ed);
             if (s.ess !== undefined) originalSetItem.call(localStorage, "escalera_start_stake", s.ess);
@@ -3347,9 +3355,11 @@ document.addEventListener("DOMContentLoaded", () => {
             
             lastLocalUserActionTime = Date.now();
             localStorage.setItem("user_bets", JSON.stringify(userBets));
+            localStorage.setItem("sync_ts", Date.now().toString());
             updateBankrollMetrics();
             populateBetsTable();
             updateBankrollChart();
+            if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true);
         }
     };
 
