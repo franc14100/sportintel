@@ -755,6 +755,25 @@ TEAM_RATINGS = {
     "Chelsea": 83,
     "Bayern Munich": 89,
     "Paris Saint-Germain": 86,
+    "Galatasaray": 88,
+    "Sporting CP": 89,
+    "Sporting Clube de Portugal": 89,
+    "Vitoria Guimaraes": 77,
+    "Al-Hilal": 89,
+    "Al-Hilal Riyadh": 89,
+    "Rosenborg": 78,
+    "Viking": 78,
+    "FC Cagliari": 81,
+    "Cagliari": 81,
+    "Arezzo": 64,
+    "FC Metz": 84,
+    "Metz": 84,
+    "Grenoble": 70,
+    "Grenoble Foot 38": 70,
+    "Clube Náutico Capibaribe": 80,
+    "Náutico": 80,
+    "Associação Atlética Ponte Preta": 70,
+    "Ponte Preta": 70,
     "Sheriff Tiraspol": 81,
     "NK Aluminij": 63,
     "Aluminij": 63,
@@ -2378,6 +2397,10 @@ def generate_daily_sports_data():
     usable_picks = [p for p in usable_picks if p.get('valid_for_ticket', True) is not False]
     usable_picks = [p for p in usable_picks if not is_invalid_over_pick(p)]
     usable_picks = [p for p in usable_picks if not any(bm in p.get('market', '') for bm in BANNED_MARKETS)]
+
+    # REGLA EXCLUSIÓN DE DIVISIONES MENORES Y SEMIPROFESIONALES
+    OBSCURE_LEAGUES = ['serie d', 'serie c', 'tercera', 'tercera rfef', 'segunda rfef', 'eccellenza', 'promozione', 'regional', 'u20', 'u19', 'reserves', 'amateur', 'asd ']
+    usable_picks = [p for p in usable_picks if not any(ol in str(p.get('league', '')).lower() or ol in str(p.get('match', '')).lower() for ol in OBSCURE_LEAGUES)]
 
     # ═══════════════════════════════════════════════════════════════════════
     # PROTECCIÓN ANTI-API-CAÍDA: Si la API no entregó cuotas reales,
