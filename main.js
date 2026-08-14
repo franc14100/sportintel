@@ -100,6 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 user_bets: JSON.stringify(bets),
                 sb: localStorage.getItem("starting_bankroll") || "53.50918",
                 starting_bankroll: localStorage.getItem("starting_bankroll") || "53.50918",
+                mtb: localStorage.getItem("manual_target_balance") || "",
+                manual_target_balance: localStorage.getItem("manual_target_balance") || "",
                 ed: localStorage.getItem("escalera_day") || "8",
                 ess: localStorage.getItem("escalera_start_stake") || "10",
                 ecs: localStorage.getItem("escalera_current_stake") || "9.6",
@@ -122,12 +124,22 @@ document.addEventListener("DOMContentLoaded", () => {
             const hist = typeof rawHist === "string" ? JSON.parse(rawHist) : rawHist;
             
             const sbVal = s.sb !== undefined ? s.sb : s.starting_bankroll;
+            const mtbVal = s.mtb !== undefined ? s.mtb : s.manual_target_balance;
             
             if (bets) {
                 userBets = bets;
                 originalSetItem.call(localStorage, "user_bets", JSON.stringify(bets));
             }
-            if (sbVal !== undefined) {
+            const effectiveMtb = (mtbVal !== undefined && mtbVal !== "" && !isNaN(parseFloat(mtbVal))) 
+                ? mtbVal 
+                : localStorage.getItem("manual_target_balance");
+
+            if (effectiveMtb !== null && effectiveMtb !== "" && !isNaN(parseFloat(effectiveMtb))) {
+                originalSetItem.call(localStorage, "manual_target_balance", effectiveMtb);
+                const { netProf, pendStakes } = calculateNetProfitAndPending(userBets);
+                startingBankroll = parseFloat(effectiveMtb) + pendStakes - netProf;
+                originalSetItem.call(localStorage, "starting_bankroll", startingBankroll.toString());
+            } else if (sbVal !== undefined) {
                 startingBankroll = parseFloat(sbVal);
                 originalSetItem.call(localStorage, "starting_bankroll", sbVal);
             }
@@ -295,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const originalSetItem = localStorage.setItem;
     localStorage.setItem = function(key, value) {
         originalSetItem.apply(this, arguments);
-        if (!isApplyingCloudState && !isInitializingPage && (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll")) {
+        if (!isApplyingCloudState && !isInitializingPage && (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll" || key === "manual_target_balance" || key === "user_liquid_balance")) {
             if (key !== "sync_ts") {
                 originalSetItem.call(localStorage, "sync_ts", Date.now().toString());
             }
@@ -808,6 +820,63 @@ document.addEventListener("DOMContentLoaded", () => {
             populateMatchesList();
             populateNewsAndInjuries();
             renderPredictionsTab();
+
+            // ═══════════════════════════════════════════════════════
+            // 🚨 API OFFLINE WARNING BANNER (Multicapa)
+            // Si la API de cuotas estuvo caída, mostrar alerta fija
+            // en la parte superior E inyectar banner en el header.
+            // ═══════════════════════════════════════════════════════
+            if (!appData || appData.api_status !== "online" || appData.api_warning) {
+                const warnMsg = (appData && appData.api_warning) || "⚠️ API DE CUOTAS CAÍDA — Los picks fueron generados con datos limitados de ESPN (sin cuotas reales de casas de apuestas). Las probabilidades son ESTIMACIONES. Apostar con precaución.";
+                
+                // 1. Fixed Top Banner
+                let existingBanner = document.getElementById("api-offline-banner");
+                if (!existingBanner) {
+                    const banner = document.createElement("div");
+                    banner.id = "api-offline-banner";
+                    banner.style.cssText = `
+                        position: fixed; top: 0; left: 0; right: 0; z-index: 999999;
+                        background: linear-gradient(135deg, #dc2626, #b91c1c);
+                        color: #ffffff; padding: 12px 20px; text-align: center;
+                        font-size: 0.85rem; font-weight: 700; letter-spacing: 0.3px;
+                        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.6);
+                        display: flex; align-items: center; justify-content: center; gap: 10px;
+                        font-family: var(--font-body, system-ui); border-bottom: 2px solid #ef4444;
+                    `;
+                    banner.innerHTML = `
+                        <span style="font-size: 1.3rem;">⚠️</span>
+                        <span>${warnMsg}</span>
+                        <button onclick="this.parentElement.remove()" style="
+                            background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5);
+                            color: #fff; padding: 4px 12px; border-radius: 4px; cursor: pointer;
+                            font-size: 0.75rem; font-weight: 700; margin-left: 10px; shrink: 0;
+                        ">Entendido</button>
+                    `;
+                    document.body.prepend(banner);
+                    document.body.style.paddingTop = "52px";
+                }
+
+                // 2. Inline Banner under top-header
+                const topHeader = document.querySelector(".top-header");
+                if (topHeader && !document.getElementById("api-offline-inline-banner")) {
+                    const inlineBanner = document.createElement("div");
+                    inlineBanner.id = "api-offline-inline-banner";
+                    inlineBanner.style.cssText = `
+                        background: rgba(220, 38, 38, 0.15); border: 1px solid rgba(239, 68, 68, 0.4);
+                        border-radius: 10px; padding: 12px 16px; margin: 15px 0 5px 0;
+                        color: #fca5a5; font-size: 0.82rem; font-weight: 600;
+                        display: flex; align-items: center; gap: 10px;
+                    `;
+                    inlineBanner.innerHTML = `
+                        <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; font-size: 1.2rem;"></i>
+                        <div>
+                            <strong style="color: #ef4444; display: block; margin-bottom: 2px;">Alerta de Calidad de Datos</strong>
+                            ${warnMsg}
+                        </div>
+                    `;
+                    topHeader.after(inlineBanner);
+                }
+            }
             
             // Render first visual chart
             renderChart();
@@ -1204,10 +1273,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 const badgeBorder = suffix === "1" ? "rgba(16, 185, 129, 0.3)" : (suffix === "2" ? "rgba(6, 182, 212, 0.3)" : (suffix === "3" ? "rgba(249,115,22,0.3)" : "rgba(168, 85, 247, 0.3)"));
                 
                 const titlePrefix = suffix === "4" ? "Apuesta Soñadora del Dólar" : `Boleto Estrella ${suffix}`;
-                headerTitle.innerHTML = `${titlePrefix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>`;
+                let apiWarningBadge = "";
+                if (appData && appData.api_status === "offline") {
+                    apiWarningBadge = ` <span style="font-size:0.6rem; padding: 3px 6px; margin-left: 6px; border-radius: 4px; font-weight:800; text-transform: uppercase; background: rgba(220,38,38,0.2); color: #ef4444; border: 1px solid rgba(220,38,38,0.4);">⚠️ Sin Cuotas Reales</span>`;
+                }
+                headerTitle.innerHTML = `${titlePrefix} <span class="badge" style="font-size:0.7rem; padding: 4px 8px; margin-left: 8px; border-radius: 6px; font-weight:800; text-transform: uppercase; background:${badgeBg}; color:${badgeColor}; border: 1px solid ${badgeBorder};">${typeStr}</span>${apiWarningBadge}`;
             }
 
-            const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : (suffix === "3" ? 2.0 : 1.0)));
+            const recStake = ticket.recommendation_stake || (suffix === "4" ? 1.0 : (ticket.confidence >= 75 ? 7.0 : (ticket.confidence >= 65 ? 5.0 : 4.0)));
 
             let selectionsHtml = "";
             const confidenceBox = document.querySelector(`#star-ticket-card-${suffix} .confidence-box`);
@@ -2956,32 +3029,70 @@ document.addEventListener("DOMContentLoaded", () => {
     let userBets = [];
     let startingBankroll = 29.65;
 
+    function calculateNetProfitAndPending(bets) {
+        let netProf = 0, pendStakes = 0, resolvedStakes = 0, wonBets = 0, resolvedBetsCount = 0;
+        (bets || []).forEach(b => {
+            if (b.deleted) return;
+            const st = String(b.status || 'pending').toLowerCase();
+            const odd = parseFloat(b.odd) || 1.0;
+            const stake = parseFloat(b.stake) || 0.0;
+            const isDreamer = b.is_dreamer || ((b.match || '').split(' + ').length >= 4 && odd >= 2.5);
+
+            if (st === "won" || st === "ganada" || st === "ganado") {
+                netProf += (stake * odd) - stake;
+                resolvedStakes += stake;
+                if (!isDreamer) { wonBets++; resolvedBetsCount++; }
+            } else if (st === "lost" || st === "perdida" || st === "perdido") {
+                netProf -= stake;
+                resolvedStakes += stake;
+                if (!isDreamer) { resolvedBetsCount++; }
+            } else if (st === "pending" || st === "pendiente") {
+                pendStakes += stake;
+            }
+        });
+        return { netProf, pendStakes, resolvedStakes, wonBets, resolvedBetsCount };
+    }
+
     // Load initial bets from local storage or set default mock data
     function initBankroll() {
-        const savedCapital = localStorage.getItem("starting_bankroll");
-        if (savedCapital) {
-            startingBankroll = parseFloat(savedCapital) || 29.65;
+        const currentBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+        userBets = currentBets;
+
+        const savedManual = localStorage.getItem("manual_target_balance");
+        if (savedManual !== null && !isNaN(parseFloat(savedManual))) {
+            const targetAvail = parseFloat(savedManual);
+            const { netProf, pendStakes } = calculateNetProfitAndPending(currentBets);
+            startingBankroll = targetAvail + pendStakes - netProf;
+            localStorage.setItem("starting_bankroll", startingBankroll.toString());
         } else {
-            localStorage.setItem("starting_bankroll", startingBankroll);
+            const savedCapital = localStorage.getItem("starting_bankroll");
+            if (savedCapital) {
+                startingBankroll = parseFloat(savedCapital) || 29.65;
+            } else {
+                localStorage.setItem("starting_bankroll", startingBankroll.toString());
+            }
         }
 
         const input1xBet = document.getElementById("input-1xbet-balance");
         if (input1xBet) {
-            input1xBet.oninput = (e) => {
+            const handleBalanceChange = (e) => {
                 const targetAvail = parseFloat(e.target.value);
                 if (!isNaN(targetAvail) && targetAvail >= 0) {
-                    let netProf = 0, pendStakes = 0;
-                    userBets.forEach(b => {
-                        if (b.status === "won") netProf += (b.stake * b.odd) - b.stake;
-                        else if (b.status === "lost") netProf -= b.stake;
-                        else if (b.status === "pending") pendStakes += b.stake;
-                    });
+                    localStorage.setItem("manual_target_balance", targetAvail.toString());
+                    const currentBetsList = JSON.parse(localStorage.getItem("user_bets") || "[]");
+                    userBets = currentBetsList;
+                    const { netProf, pendStakes } = calculateNetProfitAndPending(currentBetsList);
                     startingBankroll = targetAvail + pendStakes - netProf;
-                    localStorage.setItem("starting_bankroll", startingBankroll);
+                    localStorage.setItem("starting_bankroll", startingBankroll.toString());
+                    localStorage.setItem("sync_ts", Date.now().toString());
+                    lastLocalUserActionTime = Date.now();
                     updateBankrollMetrics();
                     updateBankrollChart();
+                    if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true);
                 }
             };
+            input1xBet.oninput = handleBalanceChange;
+            input1xBet.onchange = handleBalanceChange;
         }
         let savedBets = localStorage.getItem("user_bets");
         if (!savedBets) {
@@ -2993,10 +3104,19 @@ document.addEventListener("DOMContentLoaded", () => {
             userBets = JSON.parse(savedBets);
         }
 
+        // Clean up any stale legacy pending bets from July
+        if (Array.isArray(userBets)) {
+            userBets.forEach(b => {
+                if (b.status === "pending" && b.date && b.date.startsWith("2026-07")) {
+                    b.status = "lost";
+                }
+            });
+        }
+
         const recoveryBets = [
             { id: 85040140221, match: "Jablonec - NK Varazdin + Nordsjaelland - GAIS", market: "Córners (Ind): Jablonec > 4.5 / Córners (Ind): Nordsjaelland > 4.5", odd: 1.549, stake: 4.0, status: "lost", date: "2026-07-30" },
             { id: 85040371415, match: "Auda - FCSB + Ludogorets - Hapoel Tel Aviv", market: "Córners (Ind): FCSB > 4.5 / Córners (Ind): Ludogorets > 4.5", odd: 1.818, stake: 4.0, status: "lost", date: "2026-07-30" },
-            { id: 85041008103, match: "KRC Gent - LNZ + Independiente - Newell's Old Boys", market: "Córners (Ind): KRC Gent > 5.5 / Córners (Ind): Independiente > 4.5", odd: 1.835, stake: 4.0, status: "pending", date: "2026-07-30" }
+            { id: 85041008103, match: "KRC Gent - LNZ + Independiente - Newell's Old Boys", market: "Córners (Ind): KRC Gent > 5.5 / Córners (Ind): Independiente > 4.5", odd: 1.835, stake: 4.0, status: "lost", date: "2026-07-30" }
         ];
         let hasRecovered = false;
         recoveryBets.forEach(rb => {
@@ -3181,18 +3301,33 @@ document.addEventListener("DOMContentLoaded", () => {
         // Render in reverse chronological order (newest first)
         [...visibleBets].reverse().forEach(bet => {
             const potentialReturn = bet.stake * bet.odd;
-            
+            const st = String(bet.status || 'pending').toLowerCase();
+            const isWon = st === 'won' || st === 'ganada' || st === 'ganado';
+            const isLost = st === 'lost' || st === 'perdida' || st === 'perdido';
+            const isVoided = st === 'voided' || st === 'anulada' || st === 'anulado' || st === 'reembolso' || st === 'push';
+
+            let inlineStyle = "";
+            if (isWon) {
+                inlineStyle = "color: #10b981 !important; border: 1.5px solid #10b981 !important; background: rgba(16, 185, 129, 0.15) !important; font-weight: 700;";
+            } else if (isLost) {
+                inlineStyle = "color: #f43f5e !important; border: 1.5px solid #f43f5e !important; background: rgba(244, 63, 94, 0.15) !important; font-weight: 700;";
+            } else if (isVoided) {
+                inlineStyle = "color: #38bdf8 !important; border: 1.5px solid #38bdf8 !important; background: rgba(56, 189, 248, 0.25) !important; box-shadow: 0 0 10px rgba(56, 189, 248, 0.35) !important; font-weight: 800;";
+            } else {
+                inlineStyle = "color: #f59e0b !important; border: 1.5px solid #f59e0b !important; background: rgba(245, 158, 11, 0.12) !important; font-weight: 700;";
+            }
+
             let statusSelect = `
-                <select id="status-select-${bet.id}" class="form-input" autocomplete="off" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; background: rgba(8, 11, 17, 0.8); ${bet.status === 'won' ? 'color: var(--accent-green); border-color: var(--accent-green);' : bet.status === 'lost' ? 'color: var(--accent-pink); border-color: var(--accent-pink);' : 'color: var(--accent-amber); border-color: var(--accent-amber);'}" onchange="resolveBet(${bet.id}, this.value)">
-                    <option value="pending" ${bet.status === 'pending' ? 'selected' : ''}>Pendiente</option>
-                    <option value="won" ${bet.status === 'won' ? 'selected' : ''}>Ganada</option>
-                    <option value="lost" ${bet.status === 'lost' ? 'selected' : ''}>Perdida</option>
-                    <option value="voided" ${bet.status === 'voided' ? 'selected' : ''}>Anulada</option>
+                <select id="status-select-${bet.id}" class="form-input" autocomplete="off" style="font-size: 0.72rem; padding: 4px 6px; width: 95px; border-radius: 6px; cursor: pointer; ${inlineStyle}" onchange="resolveBet(${bet.id}, this.value)">
+                    <option value="pending" style="background:#0f172a; color:#f59e0b;" ${!isWon && !isLost && !isVoided ? 'selected' : ''}>⏳ Pendiente</option>
+                    <option value="won" style="background:#0f172a; color:#10b981;" ${isWon ? 'selected' : ''}>✅ Ganada</option>
+                    <option value="lost" style="background:#0f172a; color:#f43f5e;" ${isLost ? 'selected' : ''}>❌ Perdida</option>
+                    <option value="voided" style="background:#0f172a; color:#38bdf8;" ${isVoided ? 'selected' : ''}>🔵 Anulada</option>
                 </select>
             `;
 
             let actionsHtml = `
-                <button class="btn btn-secondary" onclick="editStake(${bet.id})" title="Editar Stake" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-cyan); background: rgba(6, 182, 212, 0.05); cursor: pointer; border-radius: 4px; margin-right: 4px;">
+                <button class="btn btn-secondary" onclick="editBetDetails(${bet.id})" title="Editar Cuota y Stake" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(56, 189, 248, 0.3); color: var(--accent-cyan); background: rgba(56, 189, 248, 0.05); cursor: pointer; border-radius: 4px; margin-right: 4px;">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 <button class="btn btn-secondary" onclick="deleteBet(${bet.id})" title="Eliminar apuesta" style="padding: 4px 8px; font-size: 0.75rem; border-color: rgba(255,255,255,0.1); color: var(--text-muted); background: rgba(255,255,255,0.02); cursor: pointer; border-radius: 4px;">
@@ -3206,8 +3341,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div style="font-weight: 700; font-size: 0.8rem; color: var(--text-primary);">${bet.match}</div>
                         <div style="font-size: 0.72rem; color: var(--text-muted);">${bet.market}</div>
                     </td>
-                    <td style="padding: 10px 8px; text-align: center; font-family: var(--font-display); font-weight: 700; color: var(--accent-amber);">@${Number(bet.odd || 0).toFixed(2)}</td>
-                    <td style="padding: 10px 8px; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">$${Number(bet.stake || 0).toFixed(2)}</td>
+                    <td style="padding: 10px 8px; text-align: center;">
+                        <div style="display: inline-flex; align-items: center; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 6px; padding: 2px 6px;">
+                            <span style="color: var(--accent-amber); font-weight: 800; font-size: 0.75rem; margin-right: 2px;">@</span>
+                            <input type="number" step="0.01" min="1.01" value="${Number(bet.odd || 0).toFixed(2)}" style="width: 56px; background: transparent; border: none; color: var(--accent-amber); font-family: var(--font-display); font-weight: 800; font-size: 0.8rem; text-align: left; outline: none; padding: 2px 0;" onchange="updateBetOddDirect(${bet.id}, this.value)" title="Escribe aquí para cambiar la cuota directamente">
+                        </div>
+                    </td>
+                    <td style="padding: 10px 8px; text-align: center;">
+                        <div style="display: inline-flex; align-items: center; background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 6px; padding: 2px 6px;">
+                            <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.75rem; margin-right: 2px;">$</span>
+                            <input type="number" step="0.01" min="0.1" value="${Number(bet.stake || 0).toFixed(2)}" style="width: 52px; background: transparent; border: none; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem; text-align: left; outline: none; padding: 2px 0;" onchange="updateBetStakeDirect(${bet.id}, this.value)" title="Escribe aquí para cambiar el stake directamente">
+                        </div>
+                    </td>
                     <td style="padding: 10px 8px; text-align: center; color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem;">$${Number(potentialReturn || 0).toFixed(2)}</td>
                     <td style="padding: 10px 8px; text-align: center;">${statusSelect}</td>
                     <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">${actionsHtml}</td>
@@ -3217,6 +3362,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
         betsTableBody.innerHTML = rowsHtml;
     }
+
+    window.updateBetOddDirect = (id, val) => {
+        const newOdd = parseFloat(val);
+        if (isNaN(newOdd) || newOdd <= 1.0) {
+            alert("La cuota debe ser un número válido mayor a 1.00");
+            populateBetsTable();
+            return;
+        }
+        let currentBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+        const bet = currentBets.find(b => b.id === id);
+        if (!bet) return;
+        bet.odd = newOdd;
+        userBets = currentBets;
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        localStorage.setItem("sync_ts", Date.now().toString());
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(false, true);
+    };
+
+    window.updateBetStakeDirect = (id, val) => {
+        const newStake = parseFloat(val);
+        if (isNaN(newStake) || newStake <= 0) {
+            alert("El stake debe ser un número válido mayor a 0");
+            populateBetsTable();
+            return;
+        }
+        let currentBets = JSON.parse(localStorage.getItem("user_bets") || "[]");
+        const bet = currentBets.find(b => b.id === id);
+        if (!bet) return;
+        bet.stake = newStake;
+        userBets = currentBets;
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        localStorage.setItem("sync_ts", Date.now().toString());
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(false, true);
+    };
 
     window.resolveBet = (id, status) => {
         let currentBets = [];
@@ -3234,39 +3421,11 @@ document.addEventListener("DOMContentLoaded", () => {
             
             lastLocalUserActionTime = Date.now();
             localStorage.setItem("user_bets", JSON.stringify(userBets));
+            localStorage.setItem("sync_ts", Date.now().toString());
             updateBankrollMetrics();
             populateBetsTable();
             updateBankrollChart();
-        }
-    };
-
-    window.editStake = (id) => {
-        let currentBets = [];
-        try {
-            currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
-        } catch(e) {
-            currentBets = typeof userBets !== 'undefined' ? userBets : [];
-        }
-        if (!Array.isArray(currentBets)) currentBets = [];
-
-        const betIndex = currentBets.findIndex(b => b.id === id);
-        if (betIndex !== -1) {
-            const bet = currentBets[betIndex];
-            const newStakeStr = prompt(`Ingresa el nuevo valor apostado (Stake) para:\n${bet.match}\n\nValor actual: $${Number(bet.stake).toFixed(2)}`, bet.stake);
-            if (newStakeStr !== null) {
-                const newStake = parseFloat(newStakeStr);
-                if (!isNaN(newStake) && newStake > 0) {
-                    currentBets[betIndex].stake = newStake;
-                    userBets = currentBets;
-                    lastLocalUserActionTime = Date.now();
-                    localStorage.setItem("user_bets", JSON.stringify(userBets));
-                    updateBankrollMetrics();
-                    populateBetsTable();
-                    updateBankrollChart();
-                } else {
-                    alert("Por favor ingresa un valor numérico válido mayor a 0.");
-                }
-            }
+            if (typeof SyncManager !== 'undefined') SyncManager.pushState(true, true);
         }
     };
 
@@ -3283,36 +3442,74 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    window.editBetOdd = (id) => {
+        let currentBets = [];
+        try {
+            currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+        } catch(e) {
+            currentBets = typeof userBets !== 'undefined' ? userBets : [];
+        }
+        const bet = currentBets.find(b => b.id === id) || (userBets && userBets.find(b => b.id === id));
+        if (!bet) return;
+
+        const currentOdd = Number(bet.odd || 0).toFixed(2);
+        const newOddStr = prompt(`✏️ EDITAR CUOTA (ODD)\n\nPartido: ${bet.match}\nMercado: ${bet.market}\n\nCuota actual: @${currentOdd}\n(Ejemplo: Si en una combinada se anula un partido o hubo medio cobro, ajusta aquí la cuota)\n\nIngresa la nueva Cuota:`, currentOdd);
+        if (newOddStr === null) return;
+        const newOdd = parseFloat(newOddStr);
+        if (isNaN(newOdd) || newOdd <= 1) {
+            alert("La cuota debe ser un número mayor a 1.00.");
+            return;
+        }
+
+        bet.odd = newOdd;
+        userBets = currentBets;
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        localStorage.setItem("sync_ts", Date.now().toString());
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(false, true);
+    };
+
+    window.editBetStake = (id) => {
+        let currentBets = [];
+        try {
+            currentBets = JSON.parse(localStorage.getItem("user_bets")) || [];
+        } catch(e) {
+            currentBets = typeof userBets !== 'undefined' ? userBets : [];
+        }
+        const bet = currentBets.find(b => b.id === id) || (userBets && userBets.find(b => b.id === id));
+        if (!bet) return;
+
+        const currentStake = Number(bet.stake || 0).toFixed(2);
+        const newStakeStr = prompt(`✏️ EDITAR STAKE (IMPORTE)\n\nPartido: ${bet.match}\nMercado: ${bet.market}\n\nStake actual: $${currentStake}\n\nIngresa el nuevo Stake en dólares:`, currentStake);
+        if (newStakeStr === null) return;
+        const newStake = parseFloat(newStakeStr);
+        if (isNaN(newStake) || newStake <= 0) {
+            alert("El stake debe ser un número mayor a 0.");
+            return;
+        }
+
+        bet.stake = newStake;
+        userBets = currentBets;
+        lastLocalUserActionTime = Date.now();
+        localStorage.setItem("user_bets", JSON.stringify(userBets));
+        localStorage.setItem("sync_ts", Date.now().toString());
+        updateBankrollMetrics();
+        populateBetsTable();
+        updateBankrollChart();
+        if (typeof SyncManager !== 'undefined') SyncManager.pushState(false, true);
+    };
+
+    window.editBetDetails = (id) => window.editBetOdd(id);
+
     // Calculate ROI, Win Rate, and net bankroll balance
     function updateBankrollMetrics() {
-        let netProfit = 0;
-        let resolvedStakes = 0;
-        let wonBets = 0;
-        let resolvedBetsCount = 0;
-        let pendingStakes = 0;
-
-        // Helper: identify Boleto Soñador (excluded from win rate stats)
-        const isSoñador = (bet) => {
-            if (bet.is_dreamer) return true;
-            // Soñador = high-risk parlay with many teams and high odd
-            const teamCount = (bet.match || '').split(' + ').length;
-            return teamCount >= 4 && bet.odd >= 2.5;
-        };
-
-        userBets.forEach(bet => {
-            if (bet.deleted) return;
-            if (bet.status === "won") {
-                netProfit += (bet.stake * bet.odd) - bet.stake;
-                resolvedStakes += bet.stake;
-                if (!isSoñador(bet)) { wonBets++; resolvedBetsCount++; }
-            } else if (bet.status === "lost") {
-                netProfit -= bet.stake;
-                resolvedStakes += bet.stake;
-                if (!isSoñador(bet)) { resolvedBetsCount++; }
-            } else if (bet.status === "pending") {
-                pendingStakes += bet.stake;
-            }
-        });
+        const currentBets = Array.isArray(userBets) && userBets.length > 0 ? userBets : JSON.parse(localStorage.getItem("user_bets") || "[]");
+        userBets = currentBets;
+        
+        const { netProf: netProfit, pendStakes: pendingStakes, resolvedStakes, wonBets, resolvedBetsCount } = calculateNetProfitAndPending(currentBets);
 
         const currentBalance = startingBankroll + netProfit;
         const availableBalance = currentBalance - pendingStakes;
@@ -3471,7 +3668,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (marketInput) marketInput.value = marketSummary;
         if (oddInput) oddInput.value = ticket.total_odd.toFixed(2);
 
-        const recStake = ticket.recommendation_stake || (suffix === "1" ? 4.0 : (suffix === "2" ? 2.0 : 1.0));
+        const recStake = ticket.recommendation_stake || (suffix === "4" ? 1.0 : (ticket.confidence >= 75 ? 7.0 : (ticket.confidence >= 65 ? 5.0 : 4.0)));
         let defaultCash = suffix === "4" ? 1.0 : (currentCapital * recStake / 100);
         if (stakeInput) stakeInput.value = defaultCash.toFixed(2);
         if (statusSelect) statusSelect.value = "pending";
@@ -4459,6 +4656,8 @@ document.addEventListener("DOMContentLoaded", () => {
         [...currentRun].reverse().forEach((item, index) => {
             let statusColor = "var(--text-muted)";
             if (item.status === "won") statusColor = "var(--accent-green)";
+            else if (item.status === "lost") statusColor = "var(--accent-pink)";
+            else if (item.status === "voided") statusColor = "#38bdf8";
             else if (item.status === "pending") statusColor = "var(--accent-amber)";
             
             html += `

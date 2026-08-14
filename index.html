@@ -16,7 +16,43 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=21.0">
+    <link rel="stylesheet" href="styles.css?v=200.0">
+    <style>
+        /* CRITICAL STATUS SELECT STYLING - ZERO CACHE DEPENDENCY */
+        select:has(option[value="voided"]:checked),
+        select:has(option[value="anulada"]:checked),
+        select[id^="status-select-"]:has(option[value="voided"]:checked),
+        select[id^="status-select-"]:has(option[value="anulada"]:checked),
+        .status-select-voided {
+            color: #38bdf8 !important;
+            border: 2px solid #38bdf8 !important;
+            background: rgba(56, 189, 248, 0.25) !important;
+            background-color: rgba(56, 189, 248, 0.25) !important;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.45) !important;
+            font-weight: 800 !important;
+        }
+        select:has(option[value="won"]:checked),
+        .status-select-won {
+            color: #10b981 !important;
+            border: 1.5px solid #10b981 !important;
+            background: rgba(16, 185, 129, 0.15) !important;
+            font-weight: 700 !important;
+        }
+        select:has(option[value="lost"]:checked),
+        .status-select-lost {
+            color: #f43f5e !important;
+            border: 1.5px solid #f43f5e !important;
+            background: rgba(244, 63, 94, 0.15) !important;
+            font-weight: 700 !important;
+        }
+        select:has(option[value="pending"]:checked),
+        .status-select-pending {
+            color: #f59e0b !important;
+            border: 1.5px solid #f59e0b !important;
+            background: rgba(245, 158, 11, 0.12) !important;
+            font-weight: 700 !important;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -81,6 +117,15 @@
 
         <!-- Main Content Area -->
         <main class="main-content">
+            <!-- 🚨 ALERTA ROJA PERMANENTE DE CALIDAD DE DATOS (HTML ESTÁTICO) -->
+            <div id="static-api-offline-banner" style="background: linear-gradient(135deg, #dc2626, #b91c1c); color: #ffffff; padding: 14px 20px; border-radius: 12px; margin: 10px 0 20px 0; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.45); border: 1px solid rgba(255,255,255,0.2); font-family: var(--font-body, system-ui);">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 1.5rem; shrink: 0;">⚠️</span>
+                    <span><strong style="text-transform: uppercase; letter-spacing: 0.5px; color: #fef08a;">Alerta de Seguridad Activa:</strong> API de cuotas principal fuera de servicio. Los picks de hoy fueron generados con datos de respaldo de ESPN. Apostar con extrema precaución.</span>
+                </div>
+                <button onclick="document.getElementById('static-api-offline-banner').style.display='none'" style="background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5); color: #fff; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">Entendido</button>
+            </div>
+
             <!-- Top Header -->
             <header class="top-header">
                 <div class="header-left">
@@ -927,7 +972,7 @@
                             <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
                                 <div style="display: flex; align-items: center; gap: 6px; background: rgba(6, 182, 212, 0.05); border: 1px solid var(--accent-cyan); padding: 4px 8px; border-radius: 6px;">
                                     <span style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: 700;">Ajustar Saldo 1xBet ($):</span>
-                                    <input type="number" id="input-1xbet-balance" value="38.87" step="0.01" style="width: 80px; background: none; border: none; color: var(--accent-green); font-family: var(--font-display); font-weight: 800; font-size: 0.8rem; text-align: center; outline: none; padding: 0;">
+                                    <input type="number" id="input-1xbet-balance" placeholder="0.00" step="0.01" style="width: 80px; background: none; border: none; color: var(--accent-green); font-family: var(--font-display); font-weight: 800; font-size: 0.8rem; text-align: center; outline: none; padding: 0;">
                                 </div>
                                 <button class="btn btn-secondary" id="btn-export-data" style="padding: 4px 10px; font-size: 0.72rem; border-color: var(--accent-blue); color: var(--accent-blue); cursor: pointer;" title="Copiar datos para el celular">
                                     <i class="fa-solid fa-cloud-arrow-up"></i> Exportar
@@ -1394,6 +1439,57 @@
             </button>
         </div>
     <!-- Custom JS -->
-    <script src="main.js?v=21.0"></script>
+    <script src="main.js?v=200.0"></script>
+    <script>
+        // Real-time Mutation Observer to guarantee status select borders match their value
+        document.addEventListener("DOMContentLoaded", () => {
+            const applySelectColors = () => {
+                document.querySelectorAll('select[id^="status-select-"]').forEach(sel => {
+                    const val = (sel.value || "").toLowerCase();
+                    if (val === "voided" || val === "anulada") {
+                        sel.style.setProperty("color", "#38bdf8", "important");
+                        sel.style.setProperty("border", "2px solid #38bdf8", "important");
+                        sel.style.setProperty("background-color", "rgba(56, 189, 248, 0.25)", "important");
+                    } else if (val === "won") {
+                        sel.style.setProperty("color", "#10b981", "important");
+                        sel.style.setProperty("border", "1.5px solid #10b981", "important");
+                        sel.style.setProperty("background-color", "rgba(16, 185, 129, 0.15)", "important");
+                    } else if (val === "lost") {
+                        sel.style.setProperty("color", "#f43f5e", "important");
+                        sel.style.setProperty("border", "1.5px solid #f43f5e", "important");
+                        sel.style.setProperty("background-color", "rgba(244, 63, 94, 0.15)", "important");
+                    } else {
+                        sel.style.setProperty("color", "#f59e0b", "important");
+                        sel.style.setProperty("border", "1.5px solid #f59e0b", "important");
+                        sel.style.setProperty("background-color", "rgba(245, 158, 11, 0.12)", "important");
+                    }
+                });
+            };
+            const obs = new MutationObserver(applySelectColors);
+            const target = document.getElementById("bets-table-body");
+            if (target) obs.observe(target, { childList: true, subtree: true });
+            setInterval(applySelectColors, 500);
+
+            // Global 1-Click Editor for Cuota and Stake on the table
+            document.addEventListener("click", (e) => {
+                const td = e.target.closest("td");
+                if (!td) return;
+                const tr = td.closest("tr");
+                if (!tr || !tr.parentElement || tr.parentElement.id !== "bets-table-body") return;
+                
+                const colIdx = Array.from(tr.children).indexOf(td);
+                const select = tr.querySelector('select[id^="status-select-"]');
+                if (!select) return;
+                const betId = parseInt(select.id.replace("status-select-", ""));
+                if (isNaN(betId)) return;
+
+                if (colIdx === 1) { // Cuota column
+                    if (typeof window.editBetOdd === "function") window.editBetOdd(betId);
+                } else if (colIdx === 2) { // Stake column
+                    if (typeof window.editBetStake === "function") window.editBetStake(betId);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
