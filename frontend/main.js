@@ -130,16 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 userBets = bets;
                 originalSetItem.call(localStorage, "user_bets", JSON.stringify(bets));
             }
-            if (mtbVal !== undefined && mtbVal !== "" && !isNaN(parseFloat(mtbVal))) {
-                originalSetItem.call(localStorage, "manual_target_balance", mtbVal);
-                let netProf = 0, pendStakes = 0;
-                (userBets || []).forEach(b => {
-                    if (b.deleted) return;
-                    if (b.status === "won") netProf += (b.stake * b.odd) - b.stake;
-                    else if (b.status === "lost") netProf -= b.stake;
-                    else if (b.status === "pending") pendStakes += b.stake;
-                });
-                startingBankroll = parseFloat(mtbVal) + pendStakes - netProf;
+            const effectiveMtb = (mtbVal !== undefined && mtbVal !== "" && !isNaN(parseFloat(mtbVal))) 
+                ? mtbVal 
+                : localStorage.getItem("manual_target_balance");
+
+            if (effectiveMtb !== null && effectiveMtb !== "" && !isNaN(parseFloat(effectiveMtb))) {
+                originalSetItem.call(localStorage, "manual_target_balance", effectiveMtb);
+                const { netProf, pendStakes } = calculateNetProfitAndPending(userBets);
+                startingBankroll = parseFloat(effectiveMtb) + pendStakes - netProf;
                 originalSetItem.call(localStorage, "starting_bankroll", startingBankroll.toString());
             } else if (sbVal !== undefined) {
                 startingBankroll = parseFloat(sbVal);
@@ -309,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const originalSetItem = localStorage.setItem;
     localStorage.setItem = function(key, value) {
         originalSetItem.apply(this, arguments);
-        if (!isApplyingCloudState && !isInitializingPage && (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll")) {
+        if (!isApplyingCloudState && !isInitializingPage && (key.startsWith("escalera_") || key === "user_bets" || key === "starting_bankroll" || key === "manual_target_balance" || key === "user_liquid_balance")) {
             if (key !== "sync_ts") {
                 originalSetItem.call(localStorage, "sync_ts", Date.now().toString());
             }
