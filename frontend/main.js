@@ -3243,8 +3243,16 @@ document.addEventListener("DOMContentLoaded", () => {
         [...visibleBets].reverse().forEach(bet => {
             const potentialReturn = bet.stake * bet.odd;
             
+            const statusStyle = bet.status === 'won' 
+                ? 'color: var(--accent-green); border-color: var(--accent-green); background: rgba(16, 185, 129, 0.1);' 
+                : bet.status === 'lost' 
+                ? 'color: var(--accent-pink); border-color: var(--accent-pink); background: rgba(244, 63, 94, 0.1);' 
+                : bet.status === 'voided' 
+                ? 'color: #38bdf8; border-color: #38bdf8; background: rgba(56, 189, 248, 0.15); font-weight: 700;' 
+                : 'color: var(--accent-amber); border-color: var(--accent-amber); background: rgba(245, 158, 11, 0.1);';
+
             let statusSelect = `
-                <select id="status-select-${bet.id}" class="form-input" autocomplete="off" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; background: rgba(8, 11, 17, 0.8); ${bet.status === 'won' ? 'color: var(--accent-green); border-color: var(--accent-green);' : bet.status === 'lost' ? 'color: var(--accent-pink); border-color: var(--accent-pink);' : 'color: var(--accent-amber); border-color: var(--accent-amber);'}" onchange="resolveBet(${bet.id}, this.value)">
+                <select id="status-select-${bet.id}" class="form-input" autocomplete="off" style="font-size: 0.7rem; padding: 4px 6px; width: 85px; ${statusStyle}" onchange="resolveBet(${bet.id}, this.value)">
                     <option value="pending" ${bet.status === 'pending' ? 'selected' : ''}>Pendiente</option>
                     <option value="won" ${bet.status === 'won' ? 'selected' : ''}>Ganada</option>
                     <option value="lost" ${bet.status === 'lost' ? 'selected' : ''}>Perdida</option>
@@ -4530,6 +4538,8 @@ document.addEventListener("DOMContentLoaded", () => {
         [...currentRun].reverse().forEach((item, index) => {
             let statusColor = "var(--text-muted)";
             if (item.status === "won") statusColor = "var(--accent-green)";
+            else if (item.status === "lost") statusColor = "var(--accent-pink)";
+            else if (item.status === "voided") statusColor = "#38bdf8";
             else if (item.status === "pending") statusColor = "var(--accent-amber)";
             
             html += `
