@@ -2608,207 +2608,165 @@ def generate_daily_sports_data():
     global_used_matches = set()
 
     # ═══════════════════════════════════════════════════════════════════════
-    # BOLETO 1 — PRIORIDAD ABSOLUTA: PROBABILIDAD > CUOTA
+    # REGLA DE ORO DE BOLETOS: CERO TRAMPAS DE CUOTA BAJA (NO 1.20 x 1.30)
+    # 1. Si existe un pick con cuota >= 1.50 y cobertura (DNB, +1.5, Asian, 1X),
+    #    se juega como APUESTA SIMPLE. NUNCA se le agrega otra pata.
+    # 2. Si se hace combinada, ÚNICAMENTE se permiten Dobles Oportunidades (1X/X2)
+    #    o líneas de altísima probabilidad (Trío de Seguridad).
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    # Separar picks disponibles en dos categorías:
+    # A) Candidatos para Apuestas Simples de Valor (@1.48 - @1.90)
+    # B) Candidatos para Tríos de Doble Oportunidad (1X / X2 con prob >= 72%)
+    
+    singles_candidates = [
+        p for p in usable_picks 
+        if 1.48 <= p.get('odd', 0) <= 1.95 
+        and p.get('probability', 0) >= 55
+        and not is_friendly_match(p)
+    ]
+    # Ordenar simples por EV (Probabilidad * Cuota)
+    singles_candidates.sort(key=lambda p: (p.get('probability', 0) / 100.0) * p.get('odd', 1.0), reverse=True)
+
+    dc_candidates = [
+        p for p in usable_picks
+        if ('Doble Oportunidad' in p.get('market', '') or '1X' in str(p.get('selection', '')) or 'X2' in str(p.get('selection', '')) or 'o Empate' in str(p.get('selection', '')))
+        and p.get('probability', 0) >= 72
+        and not is_friendly_match(p)
+    ]
+    dc_candidates.sort(key=lambda p: p.get('probability', 0), reverse=True)
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # BOLETO 1: APUESTA SIMPLE DE VALOR #1 (CON COBERTURA) O TRÍO DE SEGURIDAD
     # ═══════════════════════════════════════════════════════════════════════
     star_selections_1 = []
     ticket_type_1 = "Simple"
     total_odd_1 = 1.0
-    star_confidence_1 = 85
+    star_confidence_1 = 80
     star_reasoning_1 = ""
-    SIMPLE_THRESHOLD = 85
-    COMBO_THRESHOLD = 82
 
-    usable_for_t1 = [p for p in usable_picks if p["match"] not in global_used_matches]
-    if usable_for_t1:
-        best_pick = usable_for_t1[0]
-        best_prob = best_pick.get('probability', 0)
-
-        if best_prob >= SIMPLE_THRESHOLD:
-            ticket_type_1 = "Simple"
-            star_selections_1.append({
-                "match": best_pick["match"], "sport": best_pick["sport"],
-                "market": best_pick["market"], "pick": best_pick["selection"],
-                "odd": best_pick["odd"],
-                "reasoning": best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
-            })
-            total_odd_1 = best_pick["odd"]
-            star_confidence_1 = best_prob
-            star_reasoning_1 = f"Apuesta Simple — Probabilidad {best_prob}% según la API. Cuota @{total_odd_1:.2f}."
-        else:
-            second_pick = None
-            for p in usable_for_t1[1:]:
-                if p["match"] != best_pick["match"] and p.get('probability', 0) >= COMBO_THRESHOLD:
-                    combined_prob = (best_prob / 100) * (p['probability'] / 100) * 100
-                    if combined_prob >= 67:
-                        second_pick = p
-                        break
-
-            if second_pick and best_prob >= COMBO_THRESHOLD:
-                ticket_type_1 = "Combinado"
-                for pk in [best_pick, second_pick]:
-                    star_selections_1.append({
-                        "match": pk["match"], "sport": pk["sport"],
-                        "market": pk["market"], "pick": pk["selection"],
-                        "odd": pk["odd"],
-                        "reasoning": pk["reasoning"].get("tactical", "") if isinstance(pk["reasoning"], dict) else pk["reasoning"]
-                    })
-                total_odd_1 = round(best_pick["odd"] * second_pick["odd"], 2)
-                combined_prob = round((best_prob / 100) * (second_pick['probability'] / 100) * 100)
-                star_confidence_1 = combined_prob
-                star_reasoning_1 = f"Combinada de Alto Valor @{total_odd_1:.2f}. Probabilidad conjunta ~{combined_prob}%."
-            else:
-                ticket_type_1 = "Simple"
+    t1_single = next((p for p in singles_candidates if p["match"] not in global_used_matches), None)
+    if t1_single:
+        star_selections_1.append({
+            "match": t1_single["match"], "sport": t1_single["sport"],
+            "market": t1_single["market"], "pick": t1_single["selection"],
+            "odd": t1_single["odd"],
+            "reasoning": t1_single["reasoning"].get("tactical", "") if isinstance(t1_single["reasoning"], dict) else t1_single["reasoning"]
+        })
+        total_odd_1 = t1_single["odd"]
+        star_confidence_1 = t1_single["probability"]
+        star_reasoning_1 = f"🎯 Apuesta Simple de Valor @{total_odd_1:.2f}. Selección individual con cobertura validada por Monte Carlo."
+        ticket_type_1 = "Simple"
+        global_used_matches.add(t1_single["match"])
+    else:
+        # Fallback a Trío de Doble Oportunidad si no hay simple >= 1.50
+        available_dc = [p for p in dc_candidates if p["match"] not in global_used_matches]
+        if len(available_dc) >= 2:
+            chosen_dc = available_dc[:3]
+            ticket_type_1 = "Combinado"
+            calc_odd = 1.0
+            sum_prob = 0
+            for pk in chosen_dc:
                 star_selections_1.append({
-                    "match": best_pick["match"], "sport": best_pick["sport"],
-                    "market": best_pick["market"], "pick": best_pick["selection"],
-                    "odd": best_pick["odd"],
-                    "reasoning": best_pick["reasoning"].get("tactical", "") if isinstance(best_pick["reasoning"], dict) else best_pick["reasoning"]
+                    "match": pk["match"], "sport": pk["sport"],
+                    "market": pk["market"], "pick": pk["selection"],
+                    "odd": pk["odd"],
+                    "reasoning": pk["reasoning"].get("tactical", "") if isinstance(pk["reasoning"], dict) else pk["reasoning"]
                 })
-                total_odd_1 = best_pick["odd"]
-                star_confidence_1 = best_prob
-                star_reasoning_1 = f"Apuesta Simple @{total_odd_1:.2f}."
-
-    star_selections_1, ticket_type_1, total_odd_1, star_confidence_1, star_reasoning_1 = enforce_min_odd(
-        star_selections_1, ticket_type_1, total_odd_1, star_confidence_1, star_reasoning_1,
-        usable_for_t1, global_used_matches
-    )
-    for s in star_selections_1:
-        global_used_matches.add(s["match"])
+                calc_odd *= pk["odd"]
+                sum_prob += pk["probability"]
+                global_used_matches.add(pk["match"])
+            total_odd_1 = round(calc_odd, 2)
+            star_confidence_1 = int(sum_prob / len(chosen_dc))
+            star_reasoning_1 = f"🛡️ Trío de Seguridad IA @{total_odd_1:.2f} (Doble Oportunidad 1X/X2 puras de alta certeza)."
 
     # ═══════════════════════════════════════════════════════════════════════
-    # BOLETO 2 — BOLETO DE VALOR (IA DECIDE SIMPLE O COMBINADA)
+    # BOLETO 2: APUESTA SIMPLE DE VALOR #2 (DNB / HÁNDICAP / ASIÁTICO)
     # ═══════════════════════════════════════════════════════════════════════
     star_selections_2 = []
-    ticket_type_2 = "Combinado"
+    ticket_type_2 = "Simple"
     total_odd_2 = 1.0
     star_confidence_2 = 75
     star_reasoning_2 = ""
 
-    usable_for_t2 = [p for p in usable_picks if p["match"] not in global_used_matches]
-    if usable_for_t2:
-        best_simple_pick = max(usable_for_t2, key=lambda p: compute_ev_score(p)) if usable_for_t2 else None
-        best_simple_ev = compute_ev_score(best_simple_pick) if best_simple_pick else 0
-
-        best_combo_score = -1
-        best_combo_p1 = None
-        best_combo_p2 = None
-        for i, pa in enumerate(usable_for_t2):
-            for pb in usable_for_t2[i+1:]:
-                if pa["match"] == pb["match"]: continue
-                ev_a = compute_ev_score(pa)
-                ev_b = compute_ev_score(pb)
-                combo_odd = pa["odd"] * pb["odd"]
-                combo_bonus = 1.0 if 1.55 <= combo_odd <= 3.00 else (0.75 if 1.40 <= combo_odd <= 3.50 else 0.4)
-                combo_score = ((ev_a + ev_b) / 2) * combo_bonus
-                if combo_score > best_combo_score and combo_odd >= 1.40:
-                    best_combo_score = combo_score
-                    best_combo_p1 = pa
-                    best_combo_p2 = pb
-
-        go_simple = False
-        simple_reason = ""
-        p1 = best_simple_pick
-        odd1 = p1["odd"] if p1 else 1.0
-        prob1 = p1["probability"] if p1 else 50
-        ev1 = best_simple_ev
-
-        if p1 and (odd1 >= 1.75 and ev1 >= 5 or odd1 >= 1.55 and prob1 >= 63 and ev1 >= 10 or best_combo_p1 is None):
-            go_simple = True
-            simple_reason = f"Apuesta Simple de Valor @{odd1:.2f}."
-        elif ev1 * 1.15 > best_combo_score:
-            go_simple = True
-            simple_reason = f"Apuesta Simple de Valor preferida por EV."
-
-        if go_simple and p1:
-            ticket_type_2 = "Simple"
-            star_selections_2.append({
-                "match": p1["match"], "sport": p1["sport"],
-                "market": p1["market"], "pick": p1["selection"],
-                "odd": p1["odd"],
-                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
-            })
-            total_odd_2 = odd1
-            star_confidence_2 = prob1
-            star_reasoning_2 = simple_reason
-        elif best_combo_p1 and best_combo_p2:
+    t2_single = next((p for p in singles_candidates if p["match"] not in global_used_matches), None)
+    if t2_single:
+        star_selections_2.append({
+            "match": t2_single["match"], "sport": t2_single["sport"],
+            "market": t2_single["market"], "pick": t2_single["selection"],
+            "odd": t2_single["odd"],
+            "reasoning": t2_single["reasoning"].get("tactical", "") if isinstance(t2_single["reasoning"], dict) else t2_single["reasoning"]
+        })
+        total_odd_2 = t2_single["odd"]
+        star_confidence_2 = t2_single["probability"]
+        star_reasoning_2 = f"🎯 Apuesta Simple de Cobertura @{total_odd_2:.2f} con alta esperanza matemática (+EV)."
+        ticket_type_2 = "Simple"
+        global_used_matches.add(t2_single["match"])
+    else:
+        available_dc = [p for p in dc_candidates if p["match"] not in global_used_matches]
+        if len(available_dc) >= 2:
+            chosen_dc = available_dc[:2]
             ticket_type_2 = "Combinado"
-            for pk in [best_combo_p1, best_combo_p2]:
+            calc_odd = 1.0
+            sum_prob = 0
+            for pk in chosen_dc:
                 star_selections_2.append({
                     "match": pk["match"], "sport": pk["sport"],
                     "market": pk["market"], "pick": pk["selection"],
                     "odd": pk["odd"],
                     "reasoning": pk["reasoning"].get("tactical", "") if isinstance(pk["reasoning"], dict) else pk["reasoning"]
                 })
-            total_odd_2 = round(best_combo_p1["odd"] * best_combo_p2["odd"], 2)
-            star_confidence_2 = int((best_combo_p1["probability"] + best_combo_p2["probability"]) / 2)
-            star_reasoning_2 = f"Combinada de Valor optimizada @{total_odd_2:.2f}."
-
-    star_selections_2, ticket_type_2, total_odd_2, star_confidence_2, star_reasoning_2 = enforce_min_odd(
-        star_selections_2, ticket_type_2, total_odd_2, star_confidence_2, star_reasoning_2,
-        usable_for_t2, global_used_matches
-    )
+                calc_odd *= pk["odd"]
+                sum_prob += pk["probability"]
+                global_used_matches.add(pk["match"])
+            total_odd_2 = round(calc_odd, 2)
+            star_confidence_2 = int(sum_prob / len(chosen_dc))
+            star_reasoning_2 = f"🛡️ Dúo de Doble Oportunidad @{total_odd_2:.2f}."
     for s in star_selections_2:
         global_used_matches.add(s["match"])
 
     # ═══════════════════════════════════════════════════════════════════════
-    # BOLETO 3 — BOLETO EXTRA DE VALOR
+    # BOLETO 3: APUESTA SIMPLE DE VALOR #3 O TRÍO DE COBERTURA
     # ═══════════════════════════════════════════════════════════════════════
     star_selections_3 = []
-    ticket_type_3 = "Combinado"
+    ticket_type_3 = "Simple"
     total_odd_3 = 1.0
     star_confidence_3 = 70
     star_reasoning_3 = ""
 
-    usable_for_t3 = [p for p in usable_picks if p["match"] not in global_used_matches]
-    if usable_for_t3:
-        best_simple_pick_3 = max(usable_for_t3, key=lambda p: compute_ev_score(p))
-        ev3 = compute_ev_score(best_simple_pick_3)
-
-        best_combo_score_3 = -1
-        best_combo_3_p1 = None
-        best_combo_3_p2 = None
-        for i, pa in enumerate(usable_for_t3):
-            for pb in usable_for_t3[i+1:]:
-                if pa["match"] == pb["match"]: continue
-                ev_a = compute_ev_score(pa)
-                ev_b = compute_ev_score(pb)
-                combo_odd = pa["odd"] * pb["odd"]
-                combo_bonus = 1.0 if 1.55 <= combo_odd <= 3.00 else (0.75 if 1.40 <= combo_odd <= 3.50 else 0.4)
-                combo_score = ((ev_a + ev_b) / 2) * combo_bonus
-                if combo_score > best_combo_score_3 and combo_odd >= 1.40:
-                    best_combo_score_3 = combo_score
-                    best_combo_3_p1 = pa
-                    best_combo_3_p2 = pb
-
-        if best_simple_pick_3["odd"] >= 1.55 or best_combo_3_p1 is None:
-            ticket_type_3 = "Simple"
-            p1 = best_simple_pick_3
-            star_selections_3.append({
-                "match": p1["match"], "sport": p1["sport"],
-                "market": p1["market"], "pick": p1["selection"],
-                "odd": p1["odd"],
-                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
-            })
-            total_odd_3 = p1["odd"]
-            star_confidence_3 = p1["probability"]
-            star_reasoning_3 = f"Boleto Simple de Valor @{total_odd_3:.2f}."
-        elif best_combo_3_p1 and best_combo_3_p2:
+    t3_single = next((p for p in singles_candidates if p["match"] not in global_used_matches), None)
+    if t3_single:
+        star_selections_3.append({
+            "match": t3_single["match"], "sport": t3_single["sport"],
+            "market": t3_single["market"], "pick": t3_single["selection"],
+            "odd": t3_single["odd"],
+            "reasoning": t3_single["reasoning"].get("tactical", "") if isinstance(t3_single["reasoning"], dict) else t3_single["reasoning"]
+        })
+        total_odd_3 = t3_single["odd"]
+        star_confidence_3 = t3_single["probability"]
+        star_reasoning_3 = f"🎯 Apuesta Simple de Cobertura Extra @{total_odd_3:.2f}."
+        ticket_type_3 = "Simple"
+        global_used_matches.add(t3_single["match"])
+    else:
+        available_dc = [p for p in dc_candidates if p["match"] not in global_used_matches]
+        if len(available_dc) >= 2:
+            chosen_dc = available_dc[:2]
             ticket_type_3 = "Combinado"
-            for pk in [best_combo_3_p1, best_combo_3_p2]:
+            calc_odd = 1.0
+            sum_prob = 0
+            for pk in chosen_dc:
                 star_selections_3.append({
                     "match": pk["match"], "sport": pk["sport"],
                     "market": pk["market"], "pick": pk["selection"],
                     "odd": pk["odd"],
                     "reasoning": pk["reasoning"].get("tactical", "") if isinstance(pk["reasoning"], dict) else pk["reasoning"]
                 })
-            total_odd_3 = round(best_combo_3_p1["odd"] * best_combo_3_p2["odd"], 2)
-            star_confidence_3 = int((best_combo_3_p1["probability"] + best_combo_3_p2["probability"]) / 2)
-            star_reasoning_3 = f"Combinada de Valor Extra @{total_odd_3:.2f}."
-
-    star_selections_3, ticket_type_3, total_odd_3, star_confidence_3, star_reasoning_3 = enforce_min_odd(
-        star_selections_3, ticket_type_3, total_odd_3, star_confidence_3, star_reasoning_3,
-        usable_for_t3, global_used_matches
-    )
+                calc_odd *= pk["odd"]
+                sum_prob += pk["probability"]
+                global_used_matches.add(pk["match"])
+            total_odd_3 = round(calc_odd, 2)
+            star_confidence_3 = int(sum_prob / len(chosen_dc))
+            star_reasoning_3 = f"🛡️ Combinada de Doble Oportunidad @{total_odd_3:.2f}."
     for s in star_selections_3:
         global_used_matches.add(s["match"])
 
@@ -2967,172 +2925,6 @@ def generate_daily_sports_data():
             print("[INFO] Boleto 4 regenerado (pick anterior inválido o duplicado).")
 
 
-
-    # === GENERAR BOLETO 3 DESPUÉS DEL LOCK (para leer T1 y T2 finales) ===
-    # Generar Boleto Estrella 3 (Boleto de Valor - IA decide Simple o Combinada)
-    star_selections_3 = []
-    ticket_type_3 = "Combinado"
-    total_odd_3 = 1.0
-    star_confidence_3 = 70
-    star_reasoning_3 = ""
-
-    # Buscamos picks que no estén en el Boleto 1
-    used_matches = set(s["match"] for s in star_selections_1) | set(s["match"] for s in star_selections_2) | set(s["match"] for s in star_selections_4) | global_used_matches
-    unused_picks = [p for p in usable_picks if p["match"] not in used_matches]
-
-    # ─────────────────────────────────────────────────────────────────────────────
-    # MOTOR DE DECISION IA: Simple de Valor vs Combinada de Valor
-    # Evalúa métricas de valor esperado (EV) para decidir el mejor tipo de boleto.
-    # ─────────────────────────────────────────────────────────────────────────────
-
-    if unused_picks:
-        # 1. Encontrar el MEJOR pick individual por EV puro en toda la lista
-        best_simple_pick = None
-        best_simple_ev = -1
-        for p in unused_picks:
-            ev = compute_ev_score(p)
-            if ev > best_simple_ev:
-                best_simple_ev = ev
-                best_simple_pick = p
-
-        if best_simple_pick is None:
-            best_simple_pick = unused_picks[0]
-            best_simple_ev = compute_ev_score(best_simple_pick)
-
-        # 2. Encontrar la MEJOR combinada posible evaluando todos los pares
-        best_combo_score = -1
-        best_combo_p1 = None
-        best_combo_p2 = None
-        for i, pa in enumerate(unused_picks):
-            for pb in unused_picks[i+1:]:
-                if pa["match"] == pb["match"]: 
-                    continue
-                
-                ev_a = compute_ev_score(pa)
-                ev_b = compute_ev_score(pb)
-                combo_odd = pa["odd"] * pb["odd"]
-                combo_prob = int((pa["probability"] + pb["probability"]) / 2)
-                
-                # Bonus si la combinada cae en el sweet spot de cuotas, penaliza combinadas basura
-                combo_bonus = 1.0 if 1.55 <= combo_odd <= 3.00 else (0.75 if 1.40 <= combo_odd <= 3.50 else 0.4)
-                combo_score = ((ev_a + ev_b) / 2) * combo_bonus
-                
-                if combo_score > best_combo_score and combo_odd >= 1.40:
-                    best_combo_score = combo_score
-                    best_combo_p1 = pa
-                    best_combo_p2 = pb
-
-        # 3. Decisión: Simple vs Combinada
-        SIMPLE_THRESHOLD = 1.15  # simple gana si su EV es 15% mejor que la combinada
-        go_simple = False
-        simple_reason = ""
-
-        p1 = best_simple_pick
-        odd1 = p1["odd"]
-        prob1 = p1["probability"]
-        ev1 = best_simple_ev
-
-        # Caso 1: cuota individual ya es muy fuerte (@1.75+) y tiene buen EV → Simple pura
-        # (Esto previene arruinar un gran pick individual combinándolo con basura de @1.16)
-        if odd1 >= 1.75 and ev1 >= 5:
-            go_simple = True
-            simple_reason = (
-                f"✅ Apuesta Simple de Gran Valor detectada. La cuota @{odd1:.2f} por sí sola ya ofrece "
-                f"un excelente retorno esperado para el riesgo asumido ({prob1}% prob). "
-                f"Combinarla con otro evento solo añadiría un punto de fallo innecesario."
-            )
-        # Caso 2: cuota atractiva + muy segura
-        elif odd1 >= 1.55 and prob1 >= 63 and ev1 >= 10:
-            go_simple = True
-            simple_reason = (
-                f"✅ Apuesta Simple de Valor detectada. La cuota @{odd1:.2f} con probabilidad del {prob1}% "
-                f"genera un Expected Value positivo de {ev1:.1f} puntos — rentable sin necesidad de combinar."
-            )
-        # Caso 3: no hay combos válidos
-        elif best_combo_p1 is None:
-            go_simple = True
-            simple_reason = f"Apuesta Simple de Valor. Cuota: @{odd1:.2f}."
-        # Caso 4: el EV de la simple supera a la mejor combinada
-        elif ev1 * SIMPLE_THRESHOLD > best_combo_score:
-            go_simple = True
-            combo_odd_preview = best_combo_p1["odd"] * best_combo_p2["odd"]
-            simple_reason = (
-                f"✅ El modelo optó por Apuesta Simple de Valor sobre la combinada. "
-                f"Su EV Individual supera el EV de la mejor combinada disponible (@{combo_odd_preview:.2f}). "
-                f"Cuando el EV de la simple es más sólido, combinar añade riesgo sin mejorar el retorno esperado."
-            )
-
-        if go_simple:
-            ticket_type_3 = "Simple"
-            star_selections_3.append({
-                "match": p1["match"],
-                "sport": p1["sport"],
-                "market": p1["market"],
-                "pick": p1["selection"],
-                "odd": p1["odd"],
-                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
-            })
-            total_odd_3 = odd1
-            star_confidence_3 = prob1
-            star_reasoning_3 = simple_reason
-        else:
-            # Combinada de valor
-            p1 = best_combo_p1
-            p2 = best_combo_p2
-            ticket_type_3 = "Combinado"
-            star_selections_3.append({
-                "match": p1["match"],
-                "sport": p1["sport"],
-                "market": p1["market"],
-                "pick": p1["selection"],
-                "odd": p1["odd"],
-                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
-            })
-            star_selections_3.append({
-                "match": p2["match"],
-                "sport": p2["sport"],
-                "market": p2["market"],
-                "pick": p2["selection"],
-                "odd": p2["odd"],
-                "reasoning": p2["reasoning"].get("tactical", "") if isinstance(p2["reasoning"], dict) else p2["reasoning"]
-            })
-            total_odd_3 = p1["odd"] * p2["odd"]
-            star_confidence_3 = int((p1["probability"] + p2["probability"]) / 2)
-            star_reasoning_3 = (
-                f"🔗 Combinada de Valor optimizada por IA. Las selecciones individuales (@{p1['odd']:.2f} y @{p2['odd']:.2f}) "
-                f"generan mayor rendimiento al combinarse (@{total_odd_3:.2f}). "
-                f"El modelo evaluó el EV de cada pick individualmente y concluyó que la combinada ofrece "
-                f"mejor relación riesgo/retorno con una probabilidad conjunta estimada del {star_confidence_3}%."
-            )
-    else:
-        # Si no hay suficientes partidos distintos en ESPN, tomamos otros mercados de los mismos partidos
-        fallback_unused = [p for p in priority_picks + fallback_picks if p["match"] not in used_matches]
-        if len(fallback_unused) >= 1:
-            p1 = fallback_unused[0]
-            ticket_type_3 = "Simple"
-            star_selections_3.append({
-                "match": p1["match"],
-                "sport": p1["sport"],
-                "market": p1["market"],
-                "pick": p1["selection"],
-                "odd": p1["odd"],
-                "reasoning": p1["reasoning"].get("tactical", "") if isinstance(p1["reasoning"], dict) else p1["reasoning"]
-            })
-            total_odd_3 = p1["odd"]
-            star_confidence_3 = p1["probability"]
-            star_reasoning_3 = f"Boleto Simple de Valor. Cuota: @{total_odd_3:.2f}."
-        else:
-            # Fallback total
-            ticket_type_3 = "Simple"
-            total_odd_3 = 1.85
-            star_confidence_3 = 75
-            star_reasoning_3 = "Boleto de valor de contingencia por escasez de partidos."
-
-    # ═══════════════════════════════════════════════════════════════════════
-    star_selections_3, ticket_type_3, total_odd_3, star_confidence_3, star_reasoning_3 = enforce_min_odd(
-        star_selections_3, ticket_type_3, total_odd_3, star_confidence_3, star_reasoning_3,
-        usable_for_t3, global_used_matches
-    )
 
     # Post-gen: eliminar los partidos del Boleto 3 del pool de la Soñadora (T4)
     # ya que star_selections_3 ahora está completo con datos finales
