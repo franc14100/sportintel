@@ -2398,9 +2398,22 @@ def generate_daily_sports_data():
     usable_picks = [p for p in usable_picks if not is_invalid_over_pick(p)]
     usable_picks = [p for p in usable_picks if not any(bm in p.get('market', '') for bm in BANNED_MARKETS)]
 
-    # REGLA EXCLUSIÓN DE DIVISIONES MENORES Y SEMIPROFESIONALES
-    OBSCURE_LEAGUES = ['serie d', 'serie c', 'tercera', 'tercera rfef', 'segunda rfef', 'eccellenza', 'promozione', 'regional', 'u20', 'u19', 'reserves', 'amateur', 'asd ']
-    usable_picks = [p for p in usable_picks if not any(ol in str(p.get('league', '')).lower() or ol in str(p.get('match', '')).lower() for ol in OBSCURE_LEAGUES)]
+    # REGLA ESTRICTA: EXCLUSIÓN TOTAL DE DIVISIONES MENORES, FILIALES Y LIGAS OSCURAS
+    OBSCURE_LEAGUES = [
+        'serie d', 'serie c', 'tercera', 'tercera rfef', 'segunda rfef', 'primera rfef',
+        'eccellenza', 'promozione', 'regional', 'u20', 'u19', 'u21', 'u23',
+        'reserves', 'amateur', 'asd ', 'asd', 'copa santa fe', 'intermedia',
+        'metropolitana', 'primera b', 'primera c', 'primera d', 'bjelovar',
+        'honduras', 'guatemala', 'salvador', 'nicaragua', 'panama',
+        ' ii', ' 2', 'youth', 'juvenil'
+    ]
+    def is_obscure_event(pick):
+        league_str = str(pick.get('league', '')).lower()
+        match_str = str(pick.get('match', '')).lower()
+        full_text = league_str + " " + match_str
+        return any(term in full_text for term in OBSCURE_LEAGUES)
+
+    usable_picks = [p for p in usable_picks if not is_obscure_event(p)]
 
     # ═══════════════════════════════════════════════════════════════════════
     # PROTECCIÓN ANTI-API-CAÍDA: Si la API no entregó cuotas reales,
