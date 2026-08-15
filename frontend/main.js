@@ -1915,31 +1915,40 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // 1. Render Tactics / 2D Field Pitch
-        tacticsFormationLabel.textContent = `${selectedMatch.lineups.home.formation} vs ${selectedMatch.lineups.away.formation}`;
+        const homeFormation = (selectedMatch.lineups && selectedMatch.lineups.home && selectedMatch.lineups.home.formation) || "Alineación";
+        const awayFormation = (selectedMatch.lineups && selectedMatch.lineups.away && selectedMatch.lineups.away.formation) || "Alineación";
+        tacticsFormationLabel.textContent = `${homeFormation} vs ${awayFormation}`;
         
         // Draw Field Players
         const isFootball = selectedMatch.sport === "Football";
         const isBasketball = selectedMatch.sport === "Basketball";
+        const isBaseball = selectedMatch.sport === "Baseball";
         
         // Adjust Pitch styling based on sport
         const pitch = document.querySelector(".field-pitch");
-        if (isFootball) {
-            pitch.style.background = "radial-gradient(circle, #1a3e21 0%, #0d220e 100%)";
-            pitch.querySelector(".pitch-center-circle").style.display = "block";
-            pitch.querySelector(".pitch-box-top").style.display = "block";
-            pitch.querySelector(".pitch-box-bottom").style.display = "block";
-        } else if (isBasketball) {
-            // Basketball Court
-            pitch.style.background = "radial-gradient(circle, #a16207 0%, #713f12 100%)"; // color madera
-            pitch.querySelector(".pitch-center-circle").style.display = "block";
-            pitch.querySelector(".pitch-box-top").style.display = "none";
-            pitch.querySelector(".pitch-box-bottom").style.display = "none";
-        } else {
-            // Tennis Court
-            pitch.style.background = "radial-gradient(circle, #1b3a4b 0%, #0f202a 100%)"; // color azul cancha rápida
-            pitch.querySelector(".pitch-center-circle").style.display = "none";
-            pitch.querySelector(".pitch-box-top").style.display = "none";
-            pitch.querySelector(".pitch-box-bottom").style.display = "none";
+        if (pitch) {
+            if (isFootball) {
+                pitch.style.background = "radial-gradient(circle, #1a3e21 0%, #0d220e 100%)";
+                if (pitch.querySelector(".pitch-center-circle")) pitch.querySelector(".pitch-center-circle").style.display = "block";
+                if (pitch.querySelector(".pitch-box-top")) pitch.querySelector(".pitch-box-top").style.display = "block";
+                if (pitch.querySelector(".pitch-box-bottom")) pitch.querySelector(".pitch-box-bottom").style.display = "block";
+            } else if (isBasketball) {
+                pitch.style.background = "radial-gradient(circle, #a16207 0%, #713f12 100%)"; // color madera
+                if (pitch.querySelector(".pitch-center-circle")) pitch.querySelector(".pitch-center-circle").style.display = "block";
+                if (pitch.querySelector(".pitch-box-top")) pitch.querySelector(".pitch-box-top").style.display = "none";
+                if (pitch.querySelector(".pitch-box-bottom")) pitch.querySelector(".pitch-box-bottom").style.display = "none";
+            } else if (isBaseball) {
+                pitch.style.background = "radial-gradient(circle, #1e3a1e 0%, #0f220f 100%)"; // diamante de béisbol
+                if (pitch.querySelector(".pitch-center-circle")) pitch.querySelector(".pitch-center-circle").style.display = "none";
+                if (pitch.querySelector(".pitch-box-top")) pitch.querySelector(".pitch-box-top").style.display = "none";
+                if (pitch.querySelector(".pitch-box-bottom")) pitch.querySelector(".pitch-box-bottom").style.display = "none";
+            } else {
+                // Tennis Court
+                pitch.style.background = "radial-gradient(circle, #1b3a4b 0%, #0f202a 100%)"; // color azul cancha rápida
+                if (pitch.querySelector(".pitch-center-circle")) pitch.querySelector(".pitch-center-circle").style.display = "none";
+                if (pitch.querySelector(".pitch-box-top")) pitch.querySelector(".pitch-box-top").style.display = "none";
+                if (pitch.querySelector(".pitch-box-bottom")) pitch.querySelector(".pitch-box-bottom").style.display = "none";
+            }
         }
 
         // Render Home team players
@@ -2723,14 +2732,82 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!container || !selectedMatch) return;
 
         const isFootball = selectedMatch.sport === "Football";
-        const oddHome = selectedMatch.picks[0].odd;
-        const oddAway = selectedMatch.picks.length > 1 ? selectedMatch.picks[1].odd : (100 / (100/oddHome * 0.8));
+        const isBaseball = selectedMatch.sport === "Baseball";
+        const isTennis = selectedMatch.sport === "Tennis";
+        const isBasketball = selectedMatch.sport === "Basketball";
+
+        const oddHome = selectedMatch.picks && selectedMatch.picks[0] ? selectedMatch.picks[0].odd : 1.90;
+        const oddAway = selectedMatch.picks && selectedMatch.picks.length > 1 ? selectedMatch.picks[1].odd : parseFloat((100 / (100/oddHome * 0.8)).toFixed(2));
         const oddDraw = isFootball ? 3.60 : 1.0;
 
         const marketsData = [];
 
-        // 1. DOBLE OPORTUNIDAD (Fútbol)
-        if (isFootball) {
+        if (isBaseball) {
+            // ═══════════════ MERCADOS EXCLUSIVOS DE BÉISBOL (MLB) ═══════════════
+            // 1. Ganador del Encuentro (Moneyline)
+            marketsData.push({
+                title: "Ganador del Encuentro (Moneyline)",
+                category: "main",
+                outcomes: [
+                    { name: `${selectedMatch.home} (Local)`, odd: oddHome, isRecommended: selectedMatch.picks.some(p => p.selection === selectedMatch.home) },
+                    { name: `${selectedMatch.away} (Visita)`, odd: oddAway, isRecommended: selectedMatch.picks.some(p => p.selection === selectedMatch.away) }
+                ]
+            });
+
+            // 2. Total de Carreras (Over / Under)
+            marketsData.push({
+                title: "Total de Carreras (Más / Menos)",
+                category: "goals",
+                outcomes: [
+                    { name: "Más de 7.5 Carreras", odd: 1.78, isRecommended: selectedMatch.picks.some(p => p.selection === "Más de 7.5 Carreras") },
+                    { name: "Menos de 7.5 Carreras", odd: 2.05 },
+                    { name: "Más de 8.5 Carreras", odd: 1.95 },
+                    { name: "Menos de 8.5 Carreras", odd: 1.85, isRecommended: selectedMatch.picks.some(p => p.selection === "Menos de 8.5 Carreras") },
+                    { name: "Más de 9.5 Carreras", odd: 2.35 },
+                    { name: "Menos de 9.5 Carreras", odd: 1.60 }
+                ]
+            });
+
+            // 3. Línea de Carreras (Run Line / Hándicap)
+            marketsData.push({
+                title: "Línea de Carreras (Run Line)",
+                category: "handicaps",
+                outcomes: [
+                    { name: `${selectedMatch.home} -1.5 Carreras`, odd: parseFloat((oddHome * 1.35).toFixed(2)) },
+                    { name: `${selectedMatch.away} +1.5 Carreras`, odd: 1.68, isRecommended: selectedMatch.picks.some(p => p.selection.includes("+1.5 Carreras")) },
+                    { name: `${selectedMatch.home} +1.5 Carreras`, odd: 1.50 },
+                    { name: `${selectedMatch.away} -1.5 Carreras`, odd: parseFloat((oddAway * 1.35).toFixed(2)) }
+                ]
+            });
+
+            // 4. Primeras 5 Entradas (F5) y Especiales de MLB
+            marketsData.push({
+                title: "Primeras 5 Entradas (F5 - Duelo de Abridores)",
+                category: "specials",
+                outcomes: [
+                    { name: `${selectedMatch.home} Ganador F5`, odd: parseFloat((oddHome * 0.95).toFixed(2)), isRecommended: selectedMatch.picks.some(p => p.market.includes("F5")) },
+                    { name: `${selectedMatch.away} Ganador F5`, odd: parseFloat((oddAway * 0.95).toFixed(2)) },
+                    { name: "Empate en F5 (Entrada 5)", odd: 3.90 },
+                    { name: "Más de 4.5 Carreras en F5", odd: 1.88 },
+                    { name: "Menos de 4.5 Carreras en F5", odd: 1.88 }
+                ]
+            });
+
+            marketsData.push({
+                title: "Especiales de Partido MLB",
+                category: "specials",
+                outcomes: [
+                    { name: "Habrá Entrada Extra (Extra Innings: Sí)", odd: 4.20 },
+                    { name: "Habrá Entrada Extra (Extra Innings: No)", odd: 1.22 },
+                    { name: "Ambos Equipos Anotan 3+ Carreras", odd: 1.82 },
+                    { name: "Carrera en la 1ra Entrada (Sí / YRFI)", odd: 1.75 },
+                    { name: "Sin Carrera en la 1ra Entrada (No / NRFI)", odd: 2.05 }
+                ]
+            });
+
+        } else if (isFootball) {
+            // ═══════════════ MERCADOS DE FÚTBOL ═══════════════
+            // 1. DOBLE OPORTUNIDAD (Fútbol)
             const dcHomeDraw = parseFloat((1 / (1/oddHome + 1/oddDraw) * 0.95).toFixed(2));
             const dcHomeAway = parseFloat((1 / (1/oddHome + 1/oddAway) * 0.95).toFixed(2));
             const dcDrawAway = parseFloat((1 / (1/oddDraw + 1/oddAway) * 0.95).toFixed(2));
@@ -2743,10 +2820,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     { name: "X2 (Empate o Visita)", odd: dcDrawAway }
                 ]
             });
-        }
 
-        // 2. TOTAL DE GOLES / PUNTOS (Over / Under)
-        if (isFootball) {
+            // 2. TOTAL DE GOLES (Over / Under)
             marketsData.push({
                 title: "Total de Goles (Más de / Menos de)",
                 category: "goals",
@@ -2759,24 +2834,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     { name: "Menos de 3.5", odd: parseFloat((oddHome > oddAway ? 1.30 : 1.40).toFixed(2)) }
                 ]
             });
-        } else {
-            // Baloncesto Puntos
-            marketsData.push({
-                title: "Total de Puntos WNBA (Más / Menos)",
-                category: "goals",
-                outcomes: [
-                    { name: "Más de 155.5", odd: 1.55 },
-                    { name: "Menos de 155.5", odd: 2.30 },
-                    { name: "Más de 160.5", odd: 1.88, isRecommended: selectedMatch.picks.some(p => p.market === "Total de Puntos") },
-                    { name: "Menos de 160.5", odd: 1.88 },
-                    { name: "Más de 165.5", odd: 2.45 },
-                    { name: "Menos de 165.5", odd: 1.50 }
-                ]
-            });
-        }
 
-        // 3. HÁNDICAPS
-        if (isFootball) {
+            // 3. HÁNDICAPS
             marketsData.push({
                 title: "Hándicap Asiático",
                 category: "handicaps",
@@ -2787,24 +2846,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     { name: `${selectedMatch.away} +0.5`, odd: parseFloat((1 / (1/oddHome) * 0.9).toFixed(2)) }
                 ]
             });
-        } else {
-            // Baloncesto Handicap
-            marketsData.push({
-                title: "Hándicap de Puntos",
-                category: "handicaps",
-                outcomes: [
-                    { name: `${selectedMatch.home} -4.5`, odd: 1.90, isRecommended: selectedMatch.picks.some(p => p.market === "Hándicap") },
-                    { name: `${selectedMatch.away} +4.5`, odd: 1.90 },
-                    { name: `${selectedMatch.home} -7.5`, odd: 2.65 },
-                    { name: `${selectedMatch.away} +7.5`, odd: 1.45 }
-                ]
-            });
-        }
 
-        // 4. CÓRNERS / TARJETAS / ESPECIALES
-        if (isFootball) {
-            const p1 = selectedMatch.lineups.home.players.find(p => p.pos === "DC")?.name || selectedMatch.lineups.home.players[1]?.name || "Jugador 1";
-            const p2 = selectedMatch.lineups.away.players.find(p => p.pos === "DC")?.name || selectedMatch.lineups.away.players[1]?.name || "Jugador 2";
+            // 4. CÓRNERS / TARJETAS / ESPECIALES
+            const p1 = (selectedMatch.lineups && selectedMatch.lineups.home && selectedMatch.lineups.home.players.find(p => p.pos === "DC")?.name) || (selectedMatch.lineups && selectedMatch.lineups.home && selectedMatch.lineups.home.players[1]?.name) || "Goleador Local";
+            const p2 = (selectedMatch.lineups && selectedMatch.lineups.away && selectedMatch.lineups.away.players.find(p => p.pos === "DC")?.name) || (selectedMatch.lineups && selectedMatch.lineups.away && selectedMatch.lineups.away.players[1]?.name) || "Goleador Visita";
 
             marketsData.push({
                 title: "Goleadores (Cualquier Momento)",
@@ -2832,19 +2877,64 @@ document.addEventListener("DOMContentLoaded", () => {
                     { name: "Menos de 3.5 Tarjetas", odd: 2.00 }
                 ]
             });
-        } else {
-            // Baloncesto Especiales
-            const p1 = selectedMatch.lineups.home.players[0]?.name || "Jugadora 1";
-            const p2 = selectedMatch.lineups.away.players[0]?.name || "Jugadora 2";
 
+        } else if (isBasketball) {
+            // ═══════════════ MERCADOS DE BALONCESTO ═══════════════
             marketsData.push({
-                title: "Especiales de Jugadora WNBA",
-                category: "specials",
+                title: "Ganador del Encuentro",
+                category: "main",
                 outcomes: [
-                    { name: `${p1} +18.5 Puntos`, odd: 1.85 },
-                    { name: `${p1} -18.5 Puntos`, odd: 1.85 },
-                    { name: `${p2} +8.5 Rebotes`, odd: 1.95 },
-                    { name: `${p2} -8.5 Rebotes`, odd: 1.75 }
+                    { name: `${selectedMatch.home} (Local)`, odd: oddHome },
+                    { name: `${selectedMatch.away} (Visita)`, odd: oddAway }
+                ]
+            });
+            marketsData.push({
+                title: "Total de Puntos (Más / Menos)",
+                category: "goals",
+                outcomes: [
+                    { name: "Más de 155.5", odd: 1.55 },
+                    { name: "Menos de 155.5", odd: 2.30 },
+                    { name: "Más de 160.5", odd: 1.88, isRecommended: selectedMatch.picks.some(p => p.market === "Total de Puntos") },
+                    { name: "Menos de 160.5", odd: 1.88 },
+                    { name: "Más de 165.5", odd: 2.45 },
+                    { name: "Menos de 165.5", odd: 1.50 }
+                ]
+            });
+            marketsData.push({
+                title: "Hándicap de Puntos",
+                category: "handicaps",
+                outcomes: [
+                    { name: `${selectedMatch.home} -4.5`, odd: 1.90, isRecommended: selectedMatch.picks.some(p => p.market === "Hándicap") },
+                    { name: `${selectedMatch.away} +4.5`, odd: 1.90 },
+                    { name: `${selectedMatch.home} -7.5`, odd: 2.65 },
+                    { name: `${selectedMatch.away} +7.5`, odd: 1.45 }
+                ]
+            });
+
+        } else {
+            // ═══════════════ MERCADOS DE TENIS ═══════════════
+            marketsData.push({
+                title: "Ganador del Partido (Moneyline)",
+                category: "main",
+                outcomes: [
+                    { name: `${selectedMatch.home}`, odd: oddHome },
+                    { name: `${selectedMatch.away}`, odd: oddAway }
+                ]
+            });
+            marketsData.push({
+                title: "Total de Sets (Más / Menos 2.5)",
+                category: "goals",
+                outcomes: [
+                    { name: "Más de 2.5 Sets", odd: 1.85 },
+                    { name: "Menos de 2.5 Sets", odd: 1.70 }
+                ]
+            });
+            marketsData.push({
+                title: "Hándicap de Sets / Juegos",
+                category: "handicaps",
+                outcomes: [
+                    { name: `${selectedMatch.home} -1.5 Sets`, odd: 1.95 },
+                    { name: `${selectedMatch.away} +1.5 Sets`, odd: 1.65 }
                 ]
             });
         }
