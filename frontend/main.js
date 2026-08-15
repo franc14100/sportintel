@@ -3128,6 +3128,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!isNaN(targetAvail) && targetAvail >= 0) {
                     let netProf = 0, pendStakes = 0;
                     userBets.forEach(b => {
+                        if (b.deleted) return;
                         if (b.status === "won") netProf += (b.stake * b.odd) - b.stake;
                         else if (b.status === "lost") netProf -= b.stake;
                         else if (b.status === "pending") pendStakes += b.stake;
