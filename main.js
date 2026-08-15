@@ -1423,35 +1423,47 @@ document.addEventListener("DOMContentLoaded", () => {
                     if ((stLower === "pending" || stLower === "pendiente") && t.selections && t.selections.length > 0) {
                         const anyLost = t.selections.some(s => String(s.status || '').toLowerCase() === 'lost');
                         const allWon = t.selections.every(s => String(s.status || '').toLowerCase() === 'won');
+                        const allVoided = t.selections.every(s => ['voided', 'anulado', 'reembolsado', 'push'].includes(String(s.status || '').toLowerCase()));
                         if (anyLost) {
                             stLower = "lost";
                             t.status = "lost";
                         } else if (allWon) {
                             stLower = "won";
                             t.status = "won";
+                        } else if (allVoided) {
+                            stLower = "voided";
+                            t.status = "voided";
                         }
                     }
 
                     let badgeClass = "badge bg-secondary";
                     let badgeLabel = "Pendiente";
+                    let badgeCustomStyle = "";
                     if (stLower === "won" || stLower === "ganado" || stLower === "acertado") {
                         badgeClass = "badge bg-green";
                         badgeLabel = "Ganado";
                     } else if (stLower === "lost" || stLower === "perdido" || stLower === "fallado") {
                         badgeClass = "badge bg-pink";
                         badgeLabel = "Perdido";
+                    } else if (stLower === "voided" || stLower === "anulado" || stLower === "reembolsado" || stLower === "push") {
+                        badgeClass = "badge";
+                        badgeLabel = "Anulado";
+                        badgeCustomStyle = "background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4);";
                     }
                     
                     let selectionsStr = "";
-                    t.selections.forEach(sel => {
+                    (t.selections || t.picks || []).forEach(sel => {
                         let selStatusHtml = "";
-                        if (sel.status === "won") {
-                            selStatusHtml = ` <i class="fa-solid fa-circle-check" style="color:var(--accent-green)"></i>`;
-                        } else if (sel.status === "lost") {
-                            selStatusHtml = ` <i class="fa-solid fa-circle-xmark" style="color:var(--accent-pink)"></i>`;
+                        const selSt = String(sel.status || "").toLowerCase();
+                        if (selSt === "won" || selSt === "ganado") {
+                            selStatusHtml = ` <i class="fa-solid fa-circle-check" style="color:var(--accent-green)" title="Acertado"></i>`;
+                        } else if (selSt === "lost" || selSt === "perdido") {
+                            selStatusHtml = ` <i class="fa-solid fa-circle-xmark" style="color:var(--accent-pink)" title="Fallado"></i>`;
+                        } else if (selSt === "voided" || selSt === "anulado" || selSt === "reembolsado") {
+                            selStatusHtml = ` <i class="fa-solid fa-rotate-left" style="color:#f59e0b" title="Anulado / Reembolso Total"></i>`;
                         }
                         selectionsStr += `<div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom: 2px;">
-                            • <b>${sel.match}</b>: ${sel.pick} (@${sel.odd.toFixed(2)})${selStatusHtml}
+                            • <b>${sel.match}</b>: ${sel.pick || sel.market} (@${Number(sel.odd || 1.5).toFixed(2)})${selStatusHtml}
                         </div>`;
                     });
                     
@@ -1468,14 +1480,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ${selectionsStr}
                             </td>
                             <td style="padding: 12px 10px; font-size:0.78rem; font-weight:700; text-align: center; vertical-align: top; color: var(--text-primary);">
-                                @${t.total_odd.toFixed(2)}
+                                @${Number(t.total_odd || 1.5).toFixed(2)}
                             </td>
                             <td style="padding: 12px 10px; font-size:0.75rem; text-align: center; vertical-align: top;">
                                 <div>${t.confidence}% Conf.</div>
                                 <div style="font-size:0.68rem; color:var(--text-muted);">Stake: ${t.recommendation_stake || 2}%</div>
                             </td>
                             <td style="padding: 12px 10px; text-align: center; vertical-align: top;">
-                                <span class="${badgeClass}" style="font-size: 0.68rem; font-weight: 800; text-transform: uppercase;">${badgeLabel}</span>
+                                <span class="${badgeClass}" style="font-size: 0.68rem; font-weight: 800; text-transform: uppercase; ${badgeCustomStyle}">${badgeLabel}</span>
                             </td>
                         </tr>
                     `;

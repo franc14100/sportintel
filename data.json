@@ -51981,8 +51981,8 @@
         {
           "match": "Rosenborg vs Viking",
           "sport": "Football",
-          "market": "Total de Goles (Asian 3.0): Más de 3.0 Goles",
-          "pick": "Más de 3.0 Goles",
+          "market": "Total de Goles (Asian 3.0)",
+          "pick": "Más de 3.0 Goles (Asian 3.0)",
           "odd": 1.61,
           "status": "voided"
         }
@@ -52021,7 +52021,7 @@
         {
           "match": "Fiorentina vs Benevento",
           "sport": "Football",
-          "market": "Ambos equipos anotarán + Doble resultado: 1X y No",
+          "market": "Ambos equipos anotarán + Doble resultado: 1X y No Anotan",
           "pick": "1X y No Anotan",
           "odd": 1.7,
           "status": "lost"

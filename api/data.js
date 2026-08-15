@@ -191,8 +191,10 @@ module.exports = async function handler(req, res) {
                 if (t.selections && t.selections.length > 0) {
                     const anyLost = t.selections.some(s => String(s.status || '').toLowerCase() === 'lost');
                     const allWon = t.selections.every(s => String(s.status || '').toLowerCase() === 'won');
+                    const allVoided = t.selections.every(s => ['voided', 'anulado', 'reembolsado', 'push'].includes(String(s.status || '').toLowerCase()));
                     if (anyLost) t.status = 'lost';
                     else if (allWon) t.status = 'won';
+                    else if (allVoided) t.status = 'voided';
                     else if (t.date && t.date < todayStr) t.status = 'lost';
                 } else if (t.date && t.date < todayStr) {
                     t.status = 'lost';
