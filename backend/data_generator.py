@@ -3135,7 +3135,7 @@ def generate_daily_sports_data():
             print("[INFO] Boleto 3 regenerado (pick anterior inválido o duplicado).")
 
         st4 = raw_previous_json.get("star_ticket_4", {})
-        valid4, fresh_sels4, fresh_odd4 = validate_and_refresh_ticket(st4.get("selections", []), matches_data, global_used_matches)
+        valid4 = False
         if valid4:
             print("[INFO] Boleto 4 bloqueado para hoy (cuotas actualizadas).")
             ticket_type_4 = st4.get("type", ticket_type_4)
