@@ -1178,7 +1178,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // Helper to render a single ticket
         const renderTicket = (ticket, suffix, colorTheme) => {
             const cardEl = document.getElementById(`star-ticket-card-${suffix}`);
-            if (!ticket || !ticket.selections || ticket.selections.length === 0) {
+            if (!ticket) {
+                if (cardEl) cardEl.style.display = "none";
+                return;
+            }
+            if (!ticket.selections && ticket.picks) ticket.selections = ticket.picks;
+            if (!ticket.selections || ticket.selections.length === 0) {
                 if (cardEl) cardEl.style.display = "none";
                 return;
             }

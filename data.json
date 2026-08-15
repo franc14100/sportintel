@@ -50862,131 +50862,195 @@
     "roi_percentage": -11.4
   },
   "star_ticket": {
-    "type": "Combinado",
-    "selections": [
-      {
-        "match": "FC Cartagena vs Orihuela",
-        "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "FC Cartagena o Empate",
-        "odd": 1.12,
-        "reasoning": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de FC Cartagena hace casi imposible un resultado diferente al cubierto por esta apuesta."
-      },
-      {
-        "match": "Titouan Droguet vs Stefanos Sakellaridis",
-        "sport": "Tennis",
-        "market": "Ganador 1er Set",
-        "pick": "Stefanos Sakellaridis Ganador 1er Set",
-        "odd": 1.58,
-        "reasoning": "Stefanos Sakellaridis destaca por su alta efectividad al inicio de los partidos, ganando el primer set en 82% de sus últimas apariciones."
-      }
-    ],
-    "total_odd": 1.77,
-    "confidence": 85,
-    "reasoning": "⚡ Combinado de protección. Se agregó Titouan Droguet vs Stefanos Sakellaridis para asegurar cuota total >= @1.50 (Cuota Final: @1.77).",
-    "recommendation_stake": 8.0
-  },
-  "star_ticket_1": {
     "ticket_id": "850414001",
     "name": "Boleto Estrella 1: Seguro",
     "type": "Simple",
-    "picks": [
+    "selections": [
       {
         "match": "Rosenborg vs Viking",
         "sport": "Football",
-        "market": "Total de Goles (Asian 3.0): Más de 3.0 Goles (Asian 3.0 — 3 goles devuelve apuesta)",
+        "market": "Total de Goles (Asian 3.0)",
+        "pick": "Más de 3.0 Goles (Asian 3.0 — 3 goles devuelve apuesta)",
         "odd": 1.61,
         "confidence": 88,
-        "status": "voided",
-        "analysis": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61, con 3 goles hay reembolso total."
+        "reasoning": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61, con 3 goles hay reembolso total."
       }
     ],
     "total_odd": 1.61,
     "confidence": 88,
     "recommendation_stake": 8,
-    "status": "voided",
-    "reasoning": "Apuesta Simple de Valor Puro. Más de 3.0 Goles Asiático en la liga más goleadora de Europa (Noruega Eliteserien)."
+    "reasoning": "Apuesta Simple de Valor Puro. Más de 3.0 Goles Asiático en la liga más goleadora de Europa (Noruega Eliteserien).",
+    "picks": [
+      {
+        "match": "Rosenborg vs Viking",
+        "sport": "Football",
+        "market": "Total de Goles (Asian 3.0)",
+        "pick": "Más de 3.0 Goles (Asian 3.0 — 3 goles devuelve apuesta)",
+        "odd": 1.61,
+        "confidence": 88,
+        "reasoning": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61, con 3 goles hay reembolso total."
+      }
+    ]
+  },
+  "star_ticket_1": {
+    "ticket_id": "850414001",
+    "name": "Boleto Estrella 1: Seguro",
+    "type": "Simple",
+    "selections": [
+      {
+        "match": "Rosenborg vs Viking",
+        "sport": "Football",
+        "market": "Total de Goles (Asian 3.0)",
+        "pick": "Más de 3.0 Goles (Asian 3.0 — 3 goles devuelve apuesta)",
+        "odd": 1.61,
+        "confidence": 88,
+        "reasoning": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61, con 3 goles hay reembolso total."
+      }
+    ],
+    "total_odd": 1.61,
+    "confidence": 88,
+    "recommendation_stake": 8,
+    "reasoning": "Apuesta Simple de Valor Puro. Más de 3.0 Goles Asiático en la liga más goleadora de Europa (Noruega Eliteserien).",
+    "picks": [
+      {
+        "match": "Rosenborg vs Viking",
+        "sport": "Football",
+        "market": "Total de Goles (Asian 3.0)",
+        "pick": "Más de 3.0 Goles (Asian 3.0 — 3 goles devuelve apuesta)",
+        "odd": 1.61,
+        "confidence": 88,
+        "reasoning": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61, con 3 goles hay reembolso total."
+      }
+    ]
   },
   "star_ticket_2": {
     "ticket_id": "850414002",
     "name": "Boleto Estrella 2: Valor",
     "type": "Simple",
-    "picks": [
+    "selections": [
       {
         "match": "Galatasaray vs Çorum FK",
         "sport": "Football",
-        "market": "Hándicap Asiático (-1.25): Galatasaray -1.25 (Gana por 1 gol salva 50% capital)",
+        "market": "Hándicap Asiático (-1.25)",
+        "pick": "Galatasaray -1.25 (Gana por 1 gol salva 50% capital)",
         "odd": 1.62,
         "confidence": 84,
-        "status": "lost",
-        "analysis": "Galatasaray de local con plantel de Champions League ante rival de ascenso turco."
+        "reasoning": "Galatasaray de local con plantel de Champions League ante rival de ascenso turco."
       }
     ],
     "total_odd": 1.62,
     "confidence": 84,
     "recommendation_stake": 6,
-    "status": "lost",
-    "reasoning": "Valor en victoria contundente del Galatasaray en Rams Park con cobertura asiática."
+    "reasoning": "Valor en victoria contundente del Galatasaray en Rams Park con cobertura asiática.",
+    "picks": [
+      {
+        "match": "Galatasaray vs Çorum FK",
+        "sport": "Football",
+        "market": "Hándicap Asiático (-1.25)",
+        "pick": "Galatasaray -1.25 (Gana por 1 gol salva 50% capital)",
+        "odd": 1.62,
+        "confidence": 84,
+        "reasoning": "Galatasaray de local con plantel de Champions League ante rival de ascenso turco."
+      }
+    ]
   },
   "star_ticket_3": {
     "ticket_id": "850414003",
     "name": "Boleto Estrella 3: Extra",
     "type": "Simple",
-    "picks": [
+    "selections": [
       {
         "match": "Fiorentina vs Benevento",
         "sport": "Football",
-        "market": "Ambos equipos anotarán + Doble resultado: Al menos un equipo no anotará y 1X - Sí",
+        "market": "Ambos equipos anotarán + Doble resultado",
+        "pick": "Al menos un equipo no anotará y 1X - Sí",
         "odd": 1.7,
         "confidence": 80,
-        "status": "lost",
-        "analysis": "Fiorentina en el Artemio Franchi controlando el ritmo y la posesión ante Benevento."
+        "reasoning": "Fiorentina en el Artemio Franchi controlando el ritmo y la posesión ante Benevento."
       }
     ],
     "total_odd": 1.7,
     "confidence": 80,
     "recommendation_stake": 4,
-    "status": "lost",
-    "reasoning": "Estrategia de posesión y solidez defensiva de la Fiorentina como local."
+    "reasoning": "Estrategia de posesión y solidez defensiva de la Fiorentina como local.",
+    "picks": [
+      {
+        "match": "Fiorentina vs Benevento",
+        "sport": "Football",
+        "market": "Ambos equipos anotarán + Doble resultado",
+        "pick": "Al menos un equipo no anotará y 1X - Sí",
+        "odd": 1.7,
+        "confidence": 80,
+        "reasoning": "Fiorentina en el Artemio Franchi controlando el ritmo y la posesión ante Benevento."
+      }
+    ]
   },
   "star_ticket_4": {
     "ticket_id": "850414004",
-    "name": "Boleto Estrella 4: Soñadora (@250.25)",
+    "name": "Apuesta Soñadora del Dólar",
     "type": "Combinado",
-    "picks": [
+    "selections": [
       {
         "match": "Fiorentina vs Benevento Calcio",
         "sport": "Football",
-        "market": "Marcador Exacto: 2-0",
+        "market": "Marcador Exacto",
+        "pick": "2-0",
         "odd": 6.5,
         "confidence": 60,
-        "status": "lost",
-        "analysis": "Marcador Exacto 2-0 proyectado."
+        "reasoning": "Marcador Exacto 2-0 proyectado."
       },
       {
         "match": "Sporting CP vs Vitoria Guimaraes",
         "sport": "Football",
-        "market": "Marcador Exacto: 2-0",
+        "market": "Marcador Exacto",
+        "pick": "2-0",
         "odd": 6.2,
         "confidence": 62,
-        "status": "won",
-        "analysis": "Sporting CP victoria 2-0 / 3-0 en el Alvalade."
+        "reasoning": "Sporting CP victoria 2-0 / 3-0 en el Alvalade."
       },
       {
         "match": "Galatasaray vs Çorum FK",
         "sport": "Football",
-        "market": "Marcador Exacto: 2-0",
+        "market": "Marcador Exacto",
+        "pick": "2-0",
         "odd": 6.2,
         "confidence": 58,
-        "status": "lost",
-        "analysis": "Marcador Exacto 2-0 proyectado."
+        "reasoning": "Marcador Exacto 2-0 proyectado."
       }
     ],
     "total_odd": 250.25,
     "confidence": 60,
     "recommendation_stake": 1,
-    "status": "lost",
-    "reasoning": "Boleto Soñador de alta cuota con gestión estricta de riesgo (solo .00 USD)."
+    "reasoning": "Boleto Soñador de alta cuota con gestión estricta de riesgo (solo .00 USD).",
+    "picks": [
+      {
+        "match": "Fiorentina vs Benevento Calcio",
+        "sport": "Football",
+        "market": "Marcador Exacto",
+        "pick": "2-0",
+        "odd": 6.5,
+        "confidence": 60,
+        "reasoning": "Marcador Exacto 2-0 proyectado."
+      },
+      {
+        "match": "Sporting CP vs Vitoria Guimaraes",
+        "sport": "Football",
+        "market": "Marcador Exacto",
+        "pick": "2-0",
+        "odd": 6.2,
+        "confidence": 62,
+        "reasoning": "Sporting CP victoria 2-0 / 3-0 en el Alvalade."
+      },
+      {
+        "match": "Galatasaray vs Çorum FK",
+        "sport": "Football",
+        "market": "Marcador Exacto",
+        "pick": "2-0",
+        "odd": 6.2,
+        "confidence": 58,
+        "reasoning": "Marcador Exacto 2-0 proyectado."
+      }
+    ]
   },
   "historical_tickets_registry": [
     {
