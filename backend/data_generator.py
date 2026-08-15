@@ -1936,9 +1936,19 @@ def generate_daily_sports_data():
             lambda_home = round((league_avg / 2) * home_strength + (0.35 if not neutral_venue else 0), 2)
             mu_away = round((league_avg / 2) * away_strength - (0.15 if not neutral_venue else 0), 2)
             
-            # Clamp para valores razonables
-            lambda_home = max(0.45, min(3.50, lambda_home))
-            mu_away = max(0.30, min(3.00, mu_away))
+            # DR. STRANGE UPGRADE v4: Proyección absoluta de goles
+            # Reconstruir la probabilidad base usando el diferencial de rating
+            # Elevamos al cuadrado para castigar severamente al equipo débil y predecir ceros en el arco.
+            rating_diff_calc = rating_home - rating_away
+            prob_home_est = min(max(38 + rating_diff_calc * 2.12, 10), 95)
+            prob_away_est = min(max(38 - rating_diff_calc * 2.12, 10), 95)
+            
+            lambda_home = ((prob_home_est / 100.0) ** 2.0) * 6.0
+            mu_away = ((prob_away_est / 100.0) ** 2.0) * 6.0
+            
+            # Clamp para valores razonables (evitar excesos pero permitir goleadas como moda estadística)
+            lambda_home = max(0.45, min(4.50, lambda_home))
+            mu_away = max(0.30, min(4.00, mu_away))
             
             # Ejecutar 10,000 simulaciones de Monte Carlo con Dixon-Coles
             mc = monte_carlo_simulate_match(lambda_home, mu_away)
