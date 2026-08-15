@@ -50887,111 +50887,105 @@
     "recommendation_stake": 8.0
   },
   "star_ticket_1": {
-    "ticket_id": "85041400101",
+    "ticket_id": "850414001",
     "name": "Boleto Estrella 1: Seguro",
-    "type": "Combinado",
+    "type": "Simple",
     "picks": [
       {
-        "match": "Independiente del Valle vs Delfín SC",
+        "match": "Rosenborg vs Viking",
         "sport": "Football",
-        "market": "Total de Goles de IDV: Más de 1.5 Goles",
-        "odd": 1.53,
+        "market": "Total de Goles (Asian 3.0): Más de 3.0 Goles (Asian 3.0 — 3 goles devuelve apuesta)",
+        "odd": 1.61,
         "confidence": 88,
-        "analysis": "IDV en Sangolquí (2,500m) somete con alta presión a rivales del llano. Promedia 2.2 goles por juego en casa."
-      },
-      {
-        "match": "Sporting CP vs Vitória Guimarães",
-        "sport": "Football",
-        "market": "Hándicap Asiático (-1.0)",
-        "odd": 1.42,
-        "confidence": 85,
-        "analysis": "Sporting CP domina en el Alvalade con Gyökeres y Trincão. Si gana por 1 gol devuelve apuesta."
+        "status": "voided",
+        "analysis": "Promedio proyectado de 3.3 goles combinados. Si hay 4+ goles cobras @1.61, con 3 goles hay reembolso total."
       }
     ],
-    "total_odd": 2.17,
+    "total_odd": 1.61,
     "confidence": 88,
     "recommendation_stake": 8,
-    "reasoning": "Combinada blindada con alta probabilidad de gol de IDV en altitud y cobertura de hándicap con Sporting CP."
+    "status": "voided",
+    "reasoning": "Apuesta Simple de Valor Puro. Más de 3.0 Goles Asiático en la liga más goleadora de Europa (Noruega Eliteserien)."
   },
   "star_ticket_2": {
-    "ticket_id": "85041400202",
-    "name": "Boleto Estrella 2: Valor (Córners)",
-    "type": "Combinado",
+    "ticket_id": "850414002",
+    "name": "Boleto Estrella 2: Valor",
+    "type": "Simple",
     "picks": [
       {
-        "match": "Racing Club vs Banfield",
+        "match": "Galatasaray vs Çorum FK",
         "sport": "Football",
-        "market": "Córners de Racing: Más de 4.5 Córners",
-        "odd": 1.6,
+        "market": "Hándicap Asiático (-1.25): Galatasaray -1.25 (Gana por 1 gol salva 50% capital)",
+        "odd": 1.62,
         "confidence": 84,
-        "analysis": "Racing en El Cilindro ataca intensamente por bandas con Martirena y Rojas. Promedia 6.4 córners."
-      },
-      {
-        "match": "Al-Hilal vs Al-Faisaly",
-        "sport": "Football",
-        "market": "1X2 Córners: Al-Hilal Más Córners",
-        "odd": 1.19,
-        "confidence": 86,
-        "analysis": "Al-Hilal asedia con más del 70% de posesión y domina ampliamente el volumen de tiros de esquina."
+        "status": "lost",
+        "analysis": "Galatasaray de local con plantel de Champions League ante rival de ascenso turco."
       }
     ],
-    "total_odd": 1.9,
+    "total_odd": 1.62,
     "confidence": 84,
     "recommendation_stake": 6,
-    "reasoning": "Valor puro en saques de esquina: Racing supera 4.5 córners en el 75.8% de las simulaciones de Monte Carlo."
+    "status": "lost",
+    "reasoning": "Valor en victoria contundente del Galatasaray en Rams Park con cobertura asiática."
   },
   "star_ticket_3": {
-    "ticket_id": "85041400303",
+    "ticket_id": "850414003",
     "name": "Boleto Estrella 3: Extra",
-    "type": "Combinado",
+    "type": "Simple",
     "picks": [
       {
-        "match": "Galatasaray vs Arca Çorum",
+        "match": "Fiorentina vs Benevento",
         "sport": "Football",
-        "market": "Hándicap Asiático: Galatasaray +0.25",
-        "odd": 1.45,
+        "market": "Ambos equipos anotarán + Doble resultado: Al menos un equipo no anotará y 1X - Sí",
+        "odd": 1.7,
         "confidence": 80,
-        "analysis": "Cobertura asiática de medio cobro ante cualquier empate o victoria."
-      },
-      {
-        "match": "Ettifaq Dammam vs Al-Riyadh SC",
-        "sport": "Football",
-        "market": "Hándicap Asiático: Ettifaq -1.0",
-        "odd": 2.15,
-        "confidence": 76,
-        "analysis": "Ettifaq como local con respaldo de devolución completa en caso de victoria por 1 gol."
+        "status": "lost",
+        "analysis": "Fiorentina en el Artemio Franchi controlando el ritmo y la posesión ante Benevento."
       }
     ],
-    "total_odd": 3.12,
-    "confidence": 78,
+    "total_odd": 1.7,
+    "confidence": 80,
     "recommendation_stake": 4,
-    "reasoning": "Excelente cuota combinada con blindajes asiáticos de retorno de capital."
+    "status": "lost",
+    "reasoning": "Estrategia de posesión y solidez defensiva de la Fiorentina como local."
   },
   "star_ticket_4": {
-    "ticket_id": "85041400404",
-    "name": "Boleto Estrella 4: Soñadora (@28.50)",
+    "ticket_id": "850414004",
+    "name": "Boleto Estrella 4: Soñadora (@250.25)",
     "type": "Combinado",
     "picks": [
       {
-        "match": "Independiente del Valle vs Delfín SC",
+        "match": "Fiorentina vs Benevento Calcio",
         "sport": "Football",
         "market": "Marcador Exacto: 2-0",
-        "odd": 5.5,
+        "odd": 6.5,
         "confidence": 60,
-        "analysis": "Marcador más repetido en simulaciones de Monte Carlo (14.9% probabilidad)."
+        "status": "lost",
+        "analysis": "Marcador Exacto 2-0 proyectado."
       },
       {
-        "match": "Racing Club vs Banfield",
+        "match": "Sporting CP vs Vitoria Guimaraes",
         "sport": "Football",
-        "market": "Marcador Exacto: 1-0 o 2-0",
-        "odd": 5.2,
+        "market": "Marcador Exacto: 2-0",
+        "odd": 6.2,
+        "confidence": 62,
+        "status": "won",
+        "analysis": "Sporting CP victoria 2-0 / 3-0 en el Alvalade."
+      },
+      {
+        "match": "Galatasaray vs Çorum FK",
+        "sport": "Football",
+        "market": "Marcador Exacto: 2-0",
+        "odd": 6.2,
         "confidence": 58,
-        "analysis": "Banfield plantea bloque bajo y Racing suele liquidar por la mínima en El Cilindro."
+        "status": "lost",
+        "analysis": "Marcador Exacto 2-0 proyectado."
       }
     ],
-    "total_odd": 28.6,
-    "confidence": 59,
+    "total_odd": 250.25,
+    "confidence": 60,
     "recommendation_stake": 1,
+    "status": "lost",
     "reasoning": "Boleto Soñador de alta cuota con gestión estricta de riesgo (solo .00 USD)."
   },
   "historical_tickets_registry": [
@@ -51913,6 +51907,102 @@
           "status": "pending"
         }
       ]
+    },
+    {
+      "ticket_id": "850414001",
+      "date": "2026-08-14",
+      "name": "Boleto Estrella 1: Seguro (Rosenborg vs Viking)",
+      "type": "Simple",
+      "selections": [
+        {
+          "match": "Rosenborg vs Viking",
+          "sport": "Football",
+          "market": "Total de Goles (Asian 3.0): Más de 3.0 Goles",
+          "pick": "Más de 3.0 Goles",
+          "odd": 1.61,
+          "status": "voided"
+        }
+      ],
+      "total_odd": 1.61,
+      "confidence": 88,
+      "recommendation_stake": 8,
+      "status": "voided"
+    },
+    {
+      "ticket_id": "850414002",
+      "date": "2026-08-14",
+      "name": "Boleto Estrella 2: Valor (Galatasaray -1.25)",
+      "type": "Simple",
+      "selections": [
+        {
+          "match": "Galatasaray vs Çorum FK",
+          "sport": "Football",
+          "market": "Hándicap Asiático (-1.25)",
+          "pick": "Galatasaray -1.25",
+          "odd": 1.62,
+          "status": "lost"
+        }
+      ],
+      "total_odd": 1.62,
+      "confidence": 84,
+      "recommendation_stake": 6,
+      "status": "lost"
+    },
+    {
+      "ticket_id": "850414003",
+      "date": "2026-08-14",
+      "name": "Boleto Estrella 3: Extra (Fiorentina)",
+      "type": "Simple",
+      "selections": [
+        {
+          "match": "Fiorentina vs Benevento",
+          "sport": "Football",
+          "market": "Ambos equipos anotarán + Doble resultado: 1X y No",
+          "pick": "1X y No Anotan",
+          "odd": 1.7,
+          "status": "lost"
+        }
+      ],
+      "total_odd": 1.7,
+      "confidence": 80,
+      "recommendation_stake": 4,
+      "status": "lost"
+    },
+    {
+      "ticket_id": "850414004",
+      "date": "2026-08-14",
+      "name": "Boleto Estrella 4: Soñadora (@250.25)",
+      "type": "Combinado",
+      "selections": [
+        {
+          "match": "Fiorentina vs Benevento Calcio",
+          "sport": "Football",
+          "market": "Marcador Exacto: 2-0",
+          "pick": "2-0",
+          "odd": 6.5,
+          "status": "lost"
+        },
+        {
+          "match": "Sporting CP vs Vitoria Guimaraes",
+          "sport": "Football",
+          "market": "Marcador Exacto: 2-0",
+          "pick": "2-0",
+          "odd": 6.2,
+          "status": "won"
+        },
+        {
+          "match": "Galatasaray vs Çorum FK",
+          "sport": "Football",
+          "market": "Marcador Exacto: 2-0",
+          "pick": "2-0",
+          "odd": 6.2,
+          "status": "lost"
+        }
+      ],
+      "total_odd": 250.25,
+      "confidence": 60,
+      "recommendation_stake": 1,
+      "status": "lost"
     }
   ],
   "starting_bankroll": 53.67,
