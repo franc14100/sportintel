@@ -50887,103 +50887,112 @@
     "recommendation_stake": 8.0
   },
   "star_ticket_1": {
-    "name": "Boleto Seguro (Boleto 1)",
-    "confidence": 85,
-    "recommendation_stake": 3,
-    "total_odd": 1.73,
-    "status": "pending",
-    "selections": [
+    "ticket_id": "85041400101",
+    "name": "Boleto Estrella 1: Seguro",
+    "type": "Combinado",
+    "picks": [
       {
-        "match": "Arsenal vs Como",
+        "match": "Independiente del Valle vs Delfín SC",
         "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "Arsenal o Empate",
-        "odd": 1.22,
-        "reasoning": "Arsenal domina en plantilla y forma frente a Como en pretemporada.",
-        "status": "pending"
+        "market": "Total de Goles de IDV: Más de 1.5 Goles",
+        "odd": 1.53,
+        "confidence": 88,
+        "analysis": "IDV en Sangolquí (2,500m) somete con alta presión a rivales del llano. Promedia 2.2 goles por juego en casa."
       },
       {
-        "match": "Titouan Droguet vs Stefanos Sakellaridis",
-        "sport": "Tennis",
-        "market": "Hándicap de Juegos",
-        "pick": "Stefanos Sakellaridis +4.5 Juegos",
+        "match": "Sporting CP vs Vitória Guimarães",
+        "sport": "Football",
+        "market": "Hándicap Asiático (-1.0)",
         "odd": 1.42,
-        "reasoning": "Alt-line extensa sugerida por el usuario: Hándicap ampliado que protege de manera brutal al no favorito.",
-        "status": "pending"
+        "confidence": 85,
+        "analysis": "Sporting CP domina en el Alvalade con Gyökeres y Trincão. Si gana por 1 gol devuelve apuesta."
       }
-    ]
+    ],
+    "total_odd": 2.17,
+    "confidence": 88,
+    "recommendation_stake": 8,
+    "reasoning": "Combinada blindada con alta probabilidad de gol de IDV en altitud y cobertura de hándicap con Sporting CP."
   },
   "star_ticket_2": {
-    "name": "Boleto de Valor (Boleto 2)",
-    "confidence": 80,
-    "recommendation_stake": 2,
-    "total_odd": 1.74,
-    "status": "pending",
-    "selections": [
+    "ticket_id": "85041400202",
+    "name": "Boleto Estrella 2: Valor (Córners)",
+    "type": "Combinado",
+    "picks": [
       {
-        "match": "Quentin Halys vs Bu Yunchaokete",
-        "sport": "Tennis",
-        "market": "Hándicap de Juegos",
-        "pick": "Quentin Halys -1.5 Juegos",
-        "odd": 1.74,
-        "reasoning": "Halys es FAVORITO al 59% en 1xBet. Linea 1(-1.5) cotiza @1.74. Verificado con captura del usuario.",
-        "status": "pending"
+        "match": "Racing Club vs Banfield",
+        "sport": "Football",
+        "market": "Córners de Racing: Más de 4.5 Córners",
+        "odd": 1.6,
+        "confidence": 84,
+        "analysis": "Racing en El Cilindro ataca intensamente por bandas con Martirena y Rojas. Promedia 6.4 córners."
+      },
+      {
+        "match": "Al-Hilal vs Al-Faisaly",
+        "sport": "Football",
+        "market": "1X2 Córners: Al-Hilal Más Córners",
+        "odd": 1.19,
+        "confidence": 86,
+        "analysis": "Al-Hilal asedia con más del 70% de posesión y domina ampliamente el volumen de tiros de esquina."
       }
-    ]
+    ],
+    "total_odd": 1.9,
+    "confidence": 84,
+    "recommendation_stake": 6,
+    "reasoning": "Valor puro en saques de esquina: Racing supera 4.5 córners en el 75.8% de las simulaciones de Monte Carlo."
   },
   "star_ticket_3": {
-    "name": "Boleto Extra (Boleto 3)",
-    "confidence": 78,
-    "recommendation_stake": 2,
-    "total_odd": 1.62,
-    "status": "pending",
-    "selections": [
+    "ticket_id": "85041400303",
+    "name": "Boleto Estrella 3: Extra",
+    "type": "Combinado",
+    "picks": [
       {
-        "match": "FC Cartagena vs Orihuela",
+        "match": "Galatasaray vs Arca Çorum",
         "sport": "Football",
-        "market": "Empate No Apuesta (DNB)",
-        "pick": "FC Cartagena",
-        "odd": 1.37,
-        "reasoning": "FC Cartagena juega como local y es claro favorito del cuadro.",
-        "status": "pending"
+        "market": "Hándicap Asiático: Galatasaray +0.25",
+        "odd": 1.45,
+        "confidence": 80,
+        "analysis": "Cobertura asiática de medio cobro ante cualquier empate o victoria."
       },
       {
-        "match": "Atzeneta vs La Nucía",
+        "match": "Ettifaq Dammam vs Al-Riyadh SC",
         "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "La Nucía o Empate",
-        "odd": 1.18,
-        "reasoning": "La Nucía mantiene invicto en partidos de preparación.",
-        "status": "pending"
+        "market": "Hándicap Asiático: Ettifaq -1.0",
+        "odd": 2.15,
+        "confidence": 76,
+        "analysis": "Ettifaq como local con respaldo de devolución completa en caso de victoria por 1 gol."
       }
-    ]
+    ],
+    "total_odd": 3.12,
+    "confidence": 78,
+    "recommendation_stake": 4,
+    "reasoning": "Excelente cuota combinada con blindajes asiáticos de retorno de capital."
   },
   "star_ticket_4": {
-    "name": "Apuesta Soñadora (Boleto 4)",
-    "confidence": 50,
-    "recommendation_stake": 1,
-    "total_odd": 2.06,
-    "status": "pending",
-    "selections": [
+    "ticket_id": "85041400404",
+    "name": "Boleto Estrella 4: Soñadora (@28.50)",
+    "type": "Combinado",
+    "picks": [
       {
-        "match": "Inter Miami CF vs León",
+        "match": "Independiente del Valle vs Delfín SC",
         "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "Inter Miami CF o Empate",
-        "odd": 1.47,
-        "reasoning": "Inter Miami invicto de local en Leagues Cup.",
-        "status": "pending"
+        "market": "Marcador Exacto: 2-0",
+        "odd": 5.5,
+        "confidence": 60,
+        "analysis": "Marcador más repetido en simulaciones de Monte Carlo (14.9% probabilidad)."
       },
       {
-        "match": "Seattle Sounders FC vs Guadalajara",
+        "match": "Racing Club vs Banfield",
         "sport": "Football",
-        "market": "Doble Oportunidad",
-        "pick": "Seattle Sounders FC o Empate",
-        "odd": 1.4,
-        "reasoning": "Seattle aprovecha su localía en Lumen Field.",
-        "status": "pending"
+        "market": "Marcador Exacto: 1-0 o 2-0",
+        "odd": 5.2,
+        "confidence": 58,
+        "analysis": "Banfield plantea bloque bajo y Racing suele liquidar por la mínima en El Cilindro."
       }
-    ]
+    ],
+    "total_odd": 28.6,
+    "confidence": 59,
+    "recommendation_stake": 1,
+    "reasoning": "Boleto Soñador de alta cuota con gestión estricta de riesgo (solo .00 USD)."
   },
   "historical_tickets_registry": [
     {
