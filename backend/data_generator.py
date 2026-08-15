@@ -762,12 +762,13 @@ def smart_pick_selector(real_odds, home_name, away_name):
     h2h_away = real_odds.get('h2h_away')
     
     if h2h_home and h2h_home < 1.45:
-        synth_ah_odd = round((h2h_home - 1.0) * 2.2 + 1.0, 2)
-        if 1.40 <= synth_ah_odd <= VALUE_MAX and 'ah' not in best_picks:
+        synth_ah_odd = round(max(1.85, (h2h_home - 1.0) * 2.5 + 1.10), 2)
+        if 1.50 <= synth_ah_odd <= VALUE_MAX and 'ah' not in best_picks:
+            is_elite = any(l in str(real_odds.get('league', '')).lower() for l in ['premier', 'champions', 'laliga', 'serie a', 'bundesliga'])
             best_picks['ah'] = {
                 'market': 'Hándicap Asiático -1.5',
                 'selection': f'{home_name} -1.5',
-                'odd': synth_ah_odd,
+                'odd': synth_ah_odd + (0.05 if is_elite else 0),
                 'probability': round(100 / synth_ah_odd),
                 'valid_for_ticket': True,
                 'risk': 'Medium',
@@ -777,8 +778,8 @@ def smart_pick_selector(real_odds, home_name, away_name):
                     'market': f"Forzamos la línea a -1.5 para extraer valor profesional ante el claro favoritismo."
                 }
             }
-        synth_tg_odd = round((h2h_home - 1.0) * 1.5 + 1.0, 2)
-        if 1.30 <= synth_tg_odd <= VALUE_MAX:
+        synth_tg_odd = round(max(1.80, (h2h_home - 1.0) * 2.0 + 1.10), 2)
+        if 1.50 <= synth_tg_odd <= VALUE_MAX:
             best_picks['team_goals'] = {
                 'market': 'Goles del Equipo (Individual)',
                 'selection': f'{home_name} Más de 1.5 Goles',
@@ -794,8 +795,8 @@ def smart_pick_selector(real_odds, home_name, away_name):
             }
 
     elif h2h_away and h2h_away < 1.45:
-        synth_ah_odd = round((h2h_away - 1.0) * 2.2 + 1.0, 2)
-        if 1.40 <= synth_ah_odd <= VALUE_MAX and 'ah' not in best_picks:
+        synth_ah_odd = round(max(1.85, (h2h_away - 1.0) * 2.5 + 1.10), 2)
+        if 1.50 <= synth_ah_odd <= VALUE_MAX and 'ah' not in best_picks:
             best_picks['ah'] = {
                 'market': 'Hándicap Asiático -1.5',
                 'selection': f'{away_name} -1.5',
@@ -809,8 +810,8 @@ def smart_pick_selector(real_odds, home_name, away_name):
                     'market': f"Forzamos la línea a -1.5 para extraer valor profesional ante el claro favoritismo."
                 }
             }
-        synth_tg_odd = round((h2h_away - 1.0) * 1.5 + 1.0, 2)
-        if 1.30 <= synth_tg_odd <= VALUE_MAX:
+        synth_tg_odd = round(max(1.80, (h2h_away - 1.0) * 2.0 + 1.10), 2)
+        if 1.50 <= synth_tg_odd <= VALUE_MAX:
             best_picks['team_goals'] = {
                 'market': 'Goles del Equipo (Individual)',
                 'selection': f'{away_name} Más de 1.5 Goles',
@@ -2785,7 +2786,7 @@ def generate_daily_sports_data():
     football_singles = [
         p for p in usable_picks 
         if p.get('sport') == 'Football'
-        and 1.30 <= p.get('odd', 0) <= 2.30 
+        and 1.50 <= p.get('odd', 0) <= 2.50 
         and p.get('probability', 0) >= 55
         and not is_friendly_match(p)
     ]
