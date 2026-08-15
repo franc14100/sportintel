@@ -16,7 +16,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=260.0">
+    <link rel="stylesheet" href="styles.css?v=300.0">
 </head>
 <body>
     <div class="app-container">
@@ -1389,207 +1389,13 @@
                 <div id="post-analysis-lesson" style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;"></div>
             </div>
 
-                </p>
-                <div class="form-group" style="margin-bottom: 12px;">
-                    <input type="password" id="input-gemini-api-key" class="form-input" placeholder="Ingresa tu API Key (Ej: AIzaSy...)" style="font-family: monospace; font-size: 0.85rem; padding: 10px 14px;">
-                </div>
-                <button class="btn btn-primary btn-full-width" id="btn-save-gemini-key">
-                    <i class="fa-solid fa-floppy-disk"></i> Guardar Clave y Chatear
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Custom Bet Analyzer Modal -->
-    <div class="modal hidden" id="custom-bet-modal">
-        <div class="modal-overlay" id="custom-bet-modal-overlay"></div>
-        <div class="modal-card" style="width: 450px;">
-            <button class="modal-close" id="btn-close-custom-bet-modal"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <i class="fa-solid fa-wand-magic-sparkles modal-player-avatar" style="color: var(--accent-pink); font-size: 2.2rem; display: flex; align-items: center; justify-content: center;"></i>
-                <div>
-                    <h3>Analizador de Apuestas Propias</h3>
-                    <p>La IA evalúa si tu boleto es seguro</p>
-                </div>
-            </div>
-            <div class="modal-body" style="padding-top: 10px;">
-                <div class="form-group" style="margin-bottom: 12px;">
-                    <label class="form-label" style="font-size: 0.75rem;">Partido / Evento</label>
-                    <input type="text" id="custom-bet-event" class="form-input" placeholder="Ej: Real Madrid vs Barcelona" style="font-size: 0.85rem; padding: 10px 14px;">
-                </div>
-                <div class="form-group" style="margin-bottom: 12px;">
-                    <label class="form-label" style="font-size: 0.75rem;">Mercado / Selección</label>
-                    <input type="text" id="custom-bet-selection" class="form-input" placeholder="Ej: Real Madrid Gana" style="font-size: 0.85rem; padding: 10px 14px;">
-                </div>
-                <div class="form-group" style="margin-bottom: 15px;">
-                    <label class="form-label" style="font-size: 0.75rem;">Cuota (Odd)</label>
-                    <input type="number" id="custom-bet-odd" class="form-input" placeholder="Ej: 1.85" step="0.01" min="1.01" style="font-size: 0.85rem; padding: 10px 14px;">
-                </div>
-                
-                <button class="btn btn-primary btn-full-width" id="btn-analyze-custom-bet" style="margin-bottom: 15px;">
-                    <i class="fa-solid fa-brain-circuit"></i> Ejecutar Análisis IA
-                </button>
-
-                <div id="custom-bet-result" class="hidden" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px;">
-                    <h4 style="margin-bottom: 10px; font-size: 0.9rem; display: flex; align-items: center; gap: 6px;" id="custom-bet-result-title">
-                        <i class="fa-solid fa-shield-check text-green"></i> Veredicto: Seguro
-                    </h4>
-                    <p id="custom-bet-result-text" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
-                        Análisis...
-                    </p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">Recomendación de Bankroll:</span>
-                        <span id="custom-bet-result-bank" class="badge bg-green" style="font-size: 0.85rem;">3%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- GitHub Token Configuration Modal (Actualizador en Vivo) -->
-    <div class="modal hidden" id="github-api-modal">
-        <div class="modal-overlay" id="github-api-modal-overlay"></div>
-        <div class="modal-card" style="width: 420px;">
-            <button class="modal-close" id="btn-close-github-modal"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <i class="fa-brands fa-github modal-player-avatar" style="color: var(--accent-cyan); font-size: 2.2rem; display: flex; align-items: center; justify-content: center; background: rgba(6,182,212,0.1);"></i>
-                <div>
-                    <h3>Actualización en Tiempo Real</h3>
-                    <p>Configura tu Token de GitHub para forzar el análisis</p>
-                </div>
-            </div>
-            <div class="modal-body" style="padding-top: 10px;">
-                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px;">
-                    Para ejecutar el algoritmo de IA y descargar los partidos del día en vivo directamente de ESPN, ingresa tu GitHub Personal Access Token (PAT):
-                </p>
-                <div class="form-group" style="margin-bottom: 15px;">
-                    <label class="form-label" style="font-size: 0.75rem;">GitHub PAT Token</label>
-                    <input type="password" id="input-github-api-key" class="form-input" placeholder="Pegar ghp_..." style="font-size: 0.85rem; padding: 10px 14px; letter-spacing: 2px;">
-                </div>
-                
-                <div style="background: rgba(6,182,212,0.06); border: 1px solid rgba(6,182,212,0.2); border-radius: 8px; padding: 12px; margin-bottom: 20px;">
-                    <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Tu Token de Enlace:</div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <code id="github-pat-display" style="font-size: 0.75rem; color: var(--accent-cyan); font-family: monospace; word-break: break-all;">Cargando...</code>
-                        <button class="btn btn-secondary" id="btn-copy-github-pat-helper" style="padding: 2px 8px; font-size: 0.65rem; border-color: var(--accent-cyan); color: var(--accent-cyan); cursor: pointer; flex-shrink: 0; margin-left: 8px;">
-                            Copiar
-                        </button>
-                    </div>
-                </div>
-
-                <button class="btn btn-primary btn-full-width" id="btn-save-github-key">
-                    <i class="fa-solid fa-floppy-disk"></i> Guardar Token y Sincronizar
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cloud Sync Configuration Modal -->
-    <div class="modal hidden" id="sync-modal">
-        <div class="modal-overlay" id="sync-modal-overlay"></div>
-        <div class="modal-card" style="width: 420px;">
-            <button class="modal-close" id="btn-close-sync-modal"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header" style="text-align: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
-                <i class="fa-solid fa-cloud" style="color: var(--accent-cyan); font-size: 2.2rem; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; text-align: center;"></i>
-                <h3>Enlace en la Nube (PC ⇄ Móvil)</h3>
-                <p class="sub" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Vincule su computadora con su iPhone o Android de forma instantánea para compartir apuestas y progreso.</p>
-            </div>
-            <div class="modal-body" id="sync-container" style="padding-top: 15px; display: flex; flex-direction: column; gap: 15px;">
-                <!-- Dynamically loaded from app.js renderSyncPanel -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Register Ticket to History & Bankroll Modal -->
-    <div class="modal hidden" id="register-ticket-modal">
-        <div class="modal-overlay" id="register-ticket-modal-overlay"></div>
-        <div class="modal-card" style="width: 440px;">
-            <button class="modal-close" id="btn-close-register-ticket-modal"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header" style="text-align: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
-                <i class="fa-solid fa-bookmark" style="color: var(--accent-green); font-size: 2.2rem; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;"></i>
-                <h3 id="register-modal-title">Registrar Apuesta en Historial</h3>
-                <p class="sub" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Añada esta apuesta a su banca e historial personal para llevar el seguimiento en tiempo real.</p>
-            </div>
-            <div class="modal-body" style="padding-top: 15px; display: flex; flex-direction: column; gap: 12px;">
-                <div class="form-group">
-                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Partido / Eventos (Editar)</label>
-                    <input type="text" id="input-register-match" class="form-input" placeholder="Ej: Clyde vs Annan + Fenerbahce vs Gornik" style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary); padding: 8px 12px;">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Mercado / Pronósticos (Editar)</label>
-                    <input type="text" id="input-register-market" class="form-input" placeholder="Ej: Más de 2.5 + G1" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); padding: 8px 12px;">
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                    <div class="form-group">
-                        <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Cuota Real (@ Editar)</label>
-                        <input type="number" id="input-register-odd" step="0.01" class="form-input" style="font-size: 1rem; font-weight: 800; font-family: var(--font-display); text-align: center; color: var(--accent-amber); padding: 8px 12px;">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Monto Apostado ($ USD)</label>
-                        <input type="number" id="input-register-stake" step="0.5" class="form-input" style="font-size: 1rem; font-weight: 800; font-family: var(--font-display); text-align: center; color: var(--accent-green); padding: 8px 12px;">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" style="font-size: 0.78rem; color: var(--text-secondary);">Estado de la Apuesta</label>
-                    <select id="select-register-status" class="form-input" style="font-size: 0.85rem; font-weight: 700; padding: 8px 12px; background: rgba(0,0,0,0.3); color: var(--text-primary);">
-                        <option value="pending">⏳ Pendiente (Por jugar)</option>
-                        <option value="won">✅ Ganada (Acertada)</option>
-                        <option value="lost">❌ Perdida (Fallada)</option>
-                        <option value="voided">🔄 Anulada / Reembolsada</option>
-                    </select>
-                </div>
-
-                <button class="btn btn-primary btn-full-width" id="btn-confirm-register-ticket" style="background: var(--accent-green); border-color: var(--accent-green); font-weight: 800; font-size: 0.9rem; padding: 10px;">
-                    <i class="fa-solid fa-floppy-disk"></i> Guardar en Mi Historial y Banca
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Post-Match Analysis Modal -->
-    <div class="modal hidden" id="post-analysis-modal">
-        <div class="modal-overlay" id="post-analysis-modal-overlay"></div>
-        <div class="modal-card" style="width: 520px; max-width: 95vw;">
-            <button class="modal-close" id="btn-close-post-analysis"><i class="fa-solid fa-xmark"></i></button>
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #ef4444, #b91c1c); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🔍</div>
-                <div>
-                    <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary);">Análisis Post-Partido</h3>
-                    <p id="post-analysis-match-title" style="font-size: 0.8rem; color: var(--text-muted);"></p>
-                </div>
-            </div>
-
-            <!-- Result Badge -->
-            <div id="post-analysis-result-badge" style="padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;"></div>
-
-            <!-- What the AI predicted -->
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; margin-bottom: 14px;">
-                <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px;">🎯 Predicción de la IA</div>
-                <div id="post-analysis-prediction" style="font-size: 0.9rem; color: var(--text-primary);"></div>
-            </div>
-
-            <!-- Explanation -->
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; margin-bottom: 14px;">
-                <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px;">📋 ¿Qué pasó?</div>
-                <div id="post-analysis-explanation" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;"></div>
-            </div>
-
-            <!-- Lesson Learned -->
-            <div style="background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6,182,212,0.3); border-radius: 10px; padding: 14px; margin-bottom: 18px;">
-                <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-cyan); font-weight: 700; margin-bottom: 8px;">💡 Lección Aprendida</div>
-                <div id="post-analysis-lesson" style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;"></div>
-            </div>
-
             <button class="btn btn-secondary btn-full-width" id="btn-close-post-analysis-btn" style="font-size: 0.9rem;">
                 <i class="fa-solid fa-check"></i> Entendido
             </button>
         </div>
     </div>
+    </div>
     <!-- Custom JS -->
-    <script src="main.js?v=260.0"></script>
+    <script src="main.js?v=300.0"></script>
 </body>
 </html>
