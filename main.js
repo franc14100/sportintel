@@ -1790,6 +1790,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let sportIcon = '<i class="fa-solid fa-soccer-ball"></i>';
             if (match.sport === "Basketball") sportIcon = '<i class="fa-solid fa-basketball"></i>';
             if (match.sport === "Tennis") sportIcon = '<i class="fa-solid fa-table-tennis-paddle-ball"></i>';
+            if (match.sport === "Baseball") sportIcon = '<i class="fa-solid fa-baseball-bat-ball" style="color:#eab308;"></i>';
             
             const currentStatus = getDynamicMatchStatus(match);
             let statusTag = '';
@@ -5404,10 +5405,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const sportIcon = match.sport === "Football" ? '<i class="fa-solid fa-soccer-ball" style="color:var(--accent-green);"></i>' :
                               match.sport === "Basketball" ? '<i class="fa-solid fa-basketball" style="color:#f97316;"></i>' :
+                              match.sport === "Baseball" ? '<i class="fa-solid fa-baseball-bat-ball" style="color:#eab308;"></i>' :
                               '<i class="fa-solid fa-table-tennis-paddle-ball" style="color:var(--accent-cyan);"></i>';
 
+            const borderAccentColor = match.sport === 'Football' ? 'var(--accent-green)' :
+                                      match.sport === 'Basketball' ? '#f97316' :
+                                      match.sport === 'Baseball' ? '#eab308' :
+                                      'var(--accent-cyan)';
+
             html += `
-                <div class="card match-prediction-card" style="margin-bottom: 0; padding: 15px; display:flex; flex-direction:column; justify-content:space-between; border-left: 3px solid ${match.sport === 'Football' ? 'var(--accent-green)' : (match.sport === 'Basketball' ? '#f97316' : 'var(--accent-cyan)')};">
+                <div class="card match-prediction-card" style="margin-bottom: 0; padding: 15px; display:flex; flex-direction:column; justify-content:space-between; border-left: 3px solid ${borderAccentColor};">
                     <div>
                         <!-- Header row -->
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
@@ -5699,7 +5706,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function syncEspnLiveScoresClient() {
         if (!appData || !appData.matches) return;
         try {
-            const endpoints = ['soccer/all', 'tennis/atp', 'tennis/wta', 'basketball/wnba', 'basketball/nba'];
+            const endpoints = ['soccer/all', 'tennis/atp', 'tennis/wta', 'basketball/wnba', 'basketball/nba', 'baseball/mlb'];
             for (const ep of endpoints) {
                 const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${ep}/scoreboard?limit=1000`);
                 if (!res.ok) continue;

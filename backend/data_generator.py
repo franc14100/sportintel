@@ -854,7 +854,8 @@ def fetch_espn_fallback_matches():
         ("tennis/wta", "Tennis"),
         ("basketball/wnba", "Basketball"),
         ("basketball/nba", "Basketball"),
-        ("basketball/mens-college-basketball", "Basketball")
+        ("basketball/mens-college-basketball", "Basketball"),
+        ("baseball/mlb", "Baseball")
     ]
     espn_matches = []
     for ep, sport in endpoints:
