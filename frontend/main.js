@@ -474,6 +474,46 @@ document.addEventListener("DOMContentLoaded", () => {
             return "won";
         }
 
+        // Regla Especial Béisbol (hs = carreras local, as = carreras visitante)
+        if (sport === "Baseball") {
+            const totalRuns = hs + as;
+            const winnerIsHome = hs > as;
+            const winnerIsAway = as > hs;
+
+            // Moneyline (Ganador del Encuentro)
+            if (mkt.includes("ganador") || mkt.includes("moneyline") || mkt.includes("resultado")) {
+                if (sel.includes("local") || sel.includes("1")) return winnerIsHome ? "won" : "lost";
+                if (sel.includes("visita") || sel.includes("2")) return winnerIsAway ? "won" : "lost";
+                // Chequear por nombre de equipo
+                return winnerIsHome ? "won" : "lost";
+            }
+
+            // Línea de Carreras (Run Line: +1.5 / -1.5)
+            if (mkt.includes("carrera") || mkt.includes("run line") || mkt.includes("hándicap") || mkt.includes("handicap")) {
+                if (sel.includes("+1.5")) {
+                    return (winnerIsHome || (as + 1.5 > hs)) ? "won" : "lost";
+                }
+                if (sel.includes("-1.5")) {
+                    return Math.abs(hs - as) >= 2 ? "won" : "lost";
+                }
+            }
+
+            // Total de Carreras (Over / Under)
+            if (mkt.includes("total") || mkt.includes("over") || mkt.includes("under") || mkt.includes("más") || mkt.includes("menos")) {
+                if (sel.includes("más de 7.5") || sel.includes("over 7.5")) return totalRuns > 7.5 ? "won" : "lost";
+                if (sel.includes("menos de 7.5") || sel.includes("under 7.5")) return totalRuns < 7.5 ? "won" : "lost";
+                if (sel.includes("más de 8.5") || sel.includes("over 8.5")) return totalRuns > 8.5 ? "won" : "lost";
+                if (sel.includes("menos de 8.5") || sel.includes("under 8.5")) return totalRuns < 8.5 ? "won" : "lost";
+                if (sel.includes("más de 9.5") || sel.includes("over 9.5")) return totalRuns > 9.5 ? "won" : "lost";
+                if (sel.includes("menos de 9.5") || sel.includes("under 9.5")) return totalRuns < 9.5 ? "won" : "lost";
+            }
+
+            // Primeras 5 Entradas (F5)
+            if (mkt.includes("f5") || mkt.includes("primeras 5")) {
+                return winnerIsHome ? "won" : "lost";
+            }
+        }
+
         // 1. Doble Oportunidad
         if (mkt.includes("doble oportunidad") || sel.includes(" o empate") || sel.includes("1x") || sel.includes("x2") || sel.includes("12")) {
             if (sel.includes("1x") || sel.includes("local o empate") || sel.includes(" o empate")) {
