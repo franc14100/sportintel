@@ -184,6 +184,22 @@ module.exports = async function handler(req, res) {
             }
         }
 
+        const todayStr = new Date().toISOString().split('T')[0];
+        (data.historical_tickets_registry || []).forEach(t => {
+            let st = String(t.status || 'pending').toLowerCase();
+            if (st === 'pending' || st === 'pendiente') {
+                if (t.selections && t.selections.length > 0) {
+                    const anyLost = t.selections.some(s => String(s.status || '').toLowerCase() === 'lost');
+                    const allWon = t.selections.every(s => String(s.status || '').toLowerCase() === 'won');
+                    if (anyLost) t.status = 'lost';
+                    else if (allWon) t.status = 'won';
+                    else if (t.date && t.date < todayStr) t.status = 'lost';
+                } else if (t.date && t.date < todayStr) {
+                    t.status = 'lost';
+                }
+            }
+        });
+
         data.api_status = "online";
         data.api_warning = "";
 

@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-12",
+  "date": "2026-08-14",
   "matches": [
     {
       "id": "match-1000",
@@ -51805,7 +51805,7 @@
       "confidence": 85,
       "total_odd": 1.73,
       "recommendation_stake": 3,
-      "status": "pending",
+      "status": "won",
       "selections": [
         {
           "match": "Arsenal vs Como",
@@ -51814,7 +51814,7 @@
           "pick": "Arsenal o Empate",
           "odd": 1.22,
           "reasoning": "Arsenal domina en plantilla y forma frente a Como en pretemporada.",
-          "status": "pending"
+          "status": "won"
         },
         {
           "match": "Titouan Droguet vs Stefanos Sakellaridis",
@@ -51823,7 +51823,7 @@
           "pick": "Stefanos Sakellaridis +4.5 Juegos",
           "odd": 1.42,
           "reasoning": "Alt-line extensa sugerida por el usuario: Hándicap ampliado que protege de manera brutal al no favorito.",
-          "status": "pending"
+          "status": "won"
         }
       ]
     },
@@ -51834,7 +51834,7 @@
       "confidence": 80,
       "total_odd": 1.74,
       "recommendation_stake": 2,
-      "status": "pending",
+      "status": "won",
       "selections": [
         {
           "match": "Quentin Halys vs Bu Yunchaokete",
@@ -51843,7 +51843,7 @@
           "pick": "Quentin Halys -1.5 Juegos",
           "odd": 1.74,
           "reasoning": "Halys es FAVORITO al 59% en 1xBet. Linea 1(-1.5) cotiza @1.74. Verificado con captura del usuario.",
-          "status": "pending"
+          "status": "won"
         }
       ]
     },
@@ -51854,7 +51854,7 @@
       "confidence": 78,
       "total_odd": 1.62,
       "recommendation_stake": 2,
-      "status": "pending",
+      "status": "lost",
       "selections": [
         {
           "match": "FC Cartagena vs Orihuela",
@@ -51863,7 +51863,7 @@
           "pick": "FC Cartagena",
           "odd": 1.37,
           "reasoning": "FC Cartagena juega como local y es claro favorito del cuadro.",
-          "status": "pending"
+          "status": "won"
         },
         {
           "match": "Atzeneta vs La Nucía",
@@ -51872,7 +51872,7 @@
           "pick": "La Nucía o Empate",
           "odd": 1.18,
           "reasoning": "La Nucía mantiene invicto en partidos de preparación.",
-          "status": "pending"
+          "status": "lost"
         }
       ]
     },
@@ -51883,7 +51883,7 @@
       "confidence": 50,
       "total_odd": 2.06,
       "recommendation_stake": 1,
-      "status": "pending",
+      "status": "lost",
       "selections": [
         {
           "match": "Inter Miami CF vs León",
@@ -51892,7 +51892,7 @@
           "pick": "Inter Miami CF o Empate",
           "odd": 1.47,
           "reasoning": "Inter Miami invicto de local en Leagues Cup.",
-          "status": "pending"
+          "status": "lost"
         },
         {
           "match": "Seattle Sounders FC vs Guadalajara",
@@ -51901,9 +51901,93 @@
           "pick": "Seattle Sounders FC o Empate",
           "odd": 1.4,
           "reasoning": "Seattle aprovecha su localía en Lumen Field.",
-          "status": "pending"
+          "status": "lost"
         }
       ]
+    },
+    {
+      "ticket_id": "85040140221",
+      "date": "2026-08-14",
+      "name": "Boleto Estrella 1: Seguro (Córners)",
+      "type": "Combinado",
+      "selections": [
+        {
+          "match": "Jablonec vs NK Varazdin",
+          "sport": "Football",
+          "market": "Total Ind. 1 > 4.5 Córners",
+          "pick": "Más de 4.5 Córners",
+          "odd": 1.28,
+          "status": "lost"
+        },
+        {
+          "match": "Nordsjaelland vs GAIS",
+          "sport": "Football",
+          "market": "Total Ind. 1 > 4.5 Córners",
+          "pick": "Más de 4.5 Córners",
+          "odd": 1.21,
+          "status": "won"
+        }
+      ],
+      "total_odd": 1.55,
+      "confidence": 85,
+      "recommendation_stake": 4,
+      "status": "lost"
+    },
+    {
+      "ticket_id": "85040371415",
+      "date": "2026-08-14",
+      "name": "Boleto Estrella 2: Valor (Córners)",
+      "type": "Combinado",
+      "selections": [
+        {
+          "match": "Auda vs FCSB",
+          "sport": "Football",
+          "market": "Total Ind. 2 > 4.5 Córners",
+          "pick": "Más de 4.5 Córners",
+          "odd": 1.42,
+          "status": "lost"
+        },
+        {
+          "match": "Ludogorets vs Hapoel Tel Aviv",
+          "sport": "Football",
+          "market": "Total Ind. 1 > 4.5 Córners",
+          "pick": "Más de 4.5 Córners",
+          "odd": 1.28,
+          "status": "won"
+        }
+      ],
+      "total_odd": 1.82,
+      "confidence": 82,
+      "recommendation_stake": 4,
+      "status": "lost"
+    },
+    {
+      "ticket_id": "85041008103",
+      "date": "2026-08-14",
+      "name": "Boleto Estrella 3: Extra (Córners)",
+      "type": "Combinado",
+      "selections": [
+        {
+          "match": "KRC Gent vs LNZ",
+          "sport": "Football",
+          "market": "Total Ind. 1 > 5.5 Córners",
+          "pick": "Más de 5.5 Córners",
+          "odd": 1.33,
+          "status": "lost"
+        },
+        {
+          "match": "Independiente vs Newell's",
+          "sport": "Football",
+          "market": "Total Ind. 1 > 4.5 Córners",
+          "pick": "Más de 4.5 Córners",
+          "odd": 1.38,
+          "status": "won"
+        }
+      ],
+      "total_odd": 1.84,
+      "confidence": 80,
+      "recommendation_stake": 4,
+      "status": "lost"
     }
   ],
   "starting_bankroll": 53.67,
