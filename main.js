@@ -1829,6 +1829,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 selectMatchById(matchId);
             });
         });
+
+        // Auto-select first match if none selected or current selection is not in filtered list
+        if (sortedMatches.length > 0) {
+            const isCurrentInFiltered = selectedMatch && sortedMatches.some(m => m.id === selectedMatch.id);
+            if (!isCurrentInFiltered) {
+                selectMatchById(sortedMatches[0].id);
+            }
+        }
     }
 
     function selectMatchById(matchId) {
