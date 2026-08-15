@@ -50853,754 +50853,14 @@
       "real_odds": {}
     },
     {
-      "id": "mlb_401816527",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "Chicago Cubs",
-      "away": "St. Louis Cardinals",
-      "home_color": "#0e3386",
-      "away_color": "#be0a14",
-      "time": "18:20",
-      "date": "2026-08-14",
-      "status": "post",
-      "score": "3 - 0",
-      "home_score": 3,
-      "away_score": 0,
-      "picks": [
-        {
-          "selection": "Chicago Cubs",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.7,
-          "probability": 55,
-          "status": "won",
-          "reasoning": {
-            "tactical": "Chicago Cubs presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 55% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "St. Louis Cardinals +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "lost",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para St. Louis Cardinals, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 58,
-          "status": "lost",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 8.6 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "Chicago Cubs Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "lost",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "Chicago Cubs",
-      "confidence": 55,
-      "odds": 1.7,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "Chicago Cubs presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 55% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816521",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "Cincinnati Reds",
-      "away": "Miami Marlins",
-      "home_color": "#c6011f",
-      "away_color": "#00a3e0",
-      "time": "22:10",
-      "date": "2026-08-14",
-      "status": "in",
-      "score": "1 - 0",
-      "home_score": 1,
-      "away_score": 0,
-      "picks": [
-        {
-          "selection": "Cincinnati Reds",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.54,
-          "probability": 62,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cincinnati Reds presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 62% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "Miami Marlins +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Miami Marlins, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 57,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 8.3 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "Cincinnati Reds Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "Cincinnati Reds",
-      "confidence": 62,
-      "odds": 1.54,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "Cincinnati Reds presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 62% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816519",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "Pittsburgh Pirates",
-      "away": "Boston Red Sox",
-      "home_color": "#000000",
-      "away_color": "#0d2b56",
-      "time": "22:40",
-      "date": "2026-08-14",
-      "status": "in",
-      "score": "7 - 2",
-      "home_score": 7,
-      "away_score": 2,
-      "picks": [
-        {
-          "selection": "Pittsburgh Pirates",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.5,
-          "probability": 62,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Pittsburgh Pirates presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 62% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "Boston Red Sox +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Boston Red Sox, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 58,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 8.5 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "Pittsburgh Pirates Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "Pittsburgh Pirates",
-      "confidence": 62,
-      "odds": 1.5,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "Pittsburgh Pirates presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 62% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816520",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "Detroit Tigers",
-      "away": "Chicago White Sox",
-      "home_color": "#0a2240",
-      "away_color": "#000000",
-      "time": "22:40",
-      "date": "2026-08-14",
-      "status": "in",
-      "score": "3 - 8",
-      "home_score": 3,
-      "away_score": 8,
-      "picks": [
-        {
-          "selection": "Detroit Tigers",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.67,
-          "probability": 56,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Detroit Tigers presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 56% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "Chicago White Sox +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Chicago White Sox, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 58,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 8.7 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "Detroit Tigers Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "Detroit Tigers",
-      "confidence": 56,
-      "odds": 1.67,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "Detroit Tigers presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 56% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816518",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "Tampa Bay Rays",
-      "away": "Baltimore Orioles",
-      "home_color": "#092c5c",
-      "away_color": "#df4601",
-      "time": "23:10",
-      "date": "2026-08-14",
-      "status": "in",
-      "score": "2 - 2",
-      "home_score": 2,
-      "away_score": 2,
-      "picks": [
-        {
-          "selection": "Tampa Bay Rays",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.75,
-          "probability": 54,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Tampa Bay Rays presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 54% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "Baltimore Orioles +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Baltimore Orioles, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 59,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 8.6 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "Tampa Bay Rays Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "Tampa Bay Rays",
-      "confidence": 54,
-      "odds": 1.75,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "Tampa Bay Rays presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 54% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816523",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "Cleveland Guardians",
-      "away": "San Diego Padres",
-      "home_color": "#002b5c",
-      "away_color": "#2f241d",
-      "time": "23:10",
-      "date": "2026-08-14",
-      "status": "in",
-      "score": "3 - 5",
-      "home_score": 3,
-      "away_score": 5,
-      "picks": [
-        {
-          "selection": "Cleveland Guardians",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.7,
-          "probability": 55,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cleveland Guardians presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 55% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "San Diego Padres +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para San Diego Padres, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 57,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 8.4 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "Cleveland Guardians Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "Cleveland Guardians",
-      "confidence": 55,
-      "odds": 1.7,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "Cleveland Guardians presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 55% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816524",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "New York Mets",
-      "away": "Washington Nationals",
-      "home_color": "#002d72",
-      "away_color": "#ab0003",
-      "time": "23:10",
-      "date": "2026-08-14",
-      "status": "in",
-      "score": "0 - 1",
-      "home_score": 0,
-      "away_score": 1,
-      "picks": [
-        {
-          "selection": "New York Mets",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.48,
-          "probability": 63,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "New York Mets presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 63% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "Washington Nationals +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Washington Nationals, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 53,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 8.5 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "New York Mets Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "New York Mets",
-      "confidence": 63,
-      "odds": 1.48,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "New York Mets presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 63% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816517",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "Atlanta Braves",
-      "away": "Arizona Diamondbacks",
-      "home_color": "#0c2340",
-      "away_color": "#aa182c",
-      "time": "23:15",
-      "date": "2026-08-14",
-      "status": "in",
-      "score": "0 - 1",
-      "home_score": 0,
-      "away_score": 1,
-      "picks": [
-        {
-          "selection": "Atlanta Braves",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.4,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Atlanta Braves presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 68% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "Arizona Diamondbacks +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Arizona Diamondbacks, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 62,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 9.4 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "Atlanta Braves Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "Atlanta Braves",
-      "confidence": 68,
-      "odds": 1.4,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "Atlanta Braves presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 68% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816522",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "Toronto Blue Jays",
-      "away": "New York Yankees",
-      "home_color": "#134a8e",
-      "away_color": "#132448",
-      "time": "23:15",
-      "date": "2026-08-14",
-      "status": "in",
-      "score": "0 - 0",
-      "home_score": 0,
-      "away_score": 0,
-      "picks": [
-        {
-          "selection": "Toronto Blue Jays",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.53,
-          "probability": 60,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Toronto Blue Jays presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 60% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "New York Yankees +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para New York Yankees, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 60,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 9.2 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "Toronto Blue Jays Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "Toronto Blue Jays",
-      "confidence": 60,
-      "odds": 1.53,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "Toronto Blue Jays presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 60% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816526",
-      "sport": "Baseball",
-      "league": "MLB - Grandes Ligas",
-      "home": "Houston Astros",
-      "away": "Seattle Mariners",
-      "home_color": "#002d62",
-      "away_color": "#005c5c",
-      "time": "00:10",
-      "date": "2026-08-14",
-      "status": "in",
-      "score": "1 - 2",
-      "home_score": 1,
-      "away_score": 2,
-      "picks": [
-        {
-          "selection": "Houston Astros",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.42,
-          "probability": 67,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Houston Astros presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 67% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-          }
-        },
-        {
-          "selection": "Seattle Mariners +1.5 Carreras",
-          "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Seattle Mariners, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
-          }
-        },
-        {
-          "selection": "Más de 7.5 Carreras",
-          "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 62,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 8.3 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
-          }
-        },
-        {
-          "selection": "Houston Astros Ganador Primeras 5 Entradas (F5)",
-          "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
-          "status": "pending",
-          "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
-          }
-        }
-      ],
-      "prediction": "Houston Astros",
-      "confidence": 67,
-      "odds": 1.42,
-      "market": "Ganador del Partido (Moneyline)",
-      "analysis": {
-        "tactical": "Houston Astros presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 67% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
-      }
-    },
-    {
-      "id": "mlb_401816529",
+      "id": "mlb_laa_kcr_2038",
       "sport": "Baseball",
       "league": "MLB - Grandes Ligas",
       "home": "Los Angeles Angels",
       "away": "Kansas City Royals",
-      "home_color": "#ba0021",
+      "home_color": "#BA0021",
       "away_color": "#004687",
-      "time": "01:38",
+      "time": "20:38",
       "date": "2026-08-14",
       "status": "pre",
       "score": null,
@@ -51608,73 +50868,73 @@
       "away_score": null,
       "picks": [
         {
-          "selection": "Los Angeles Angels",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.49,
-          "probability": 63,
+          "selection": "Kansas City Royals",
+          "market": "Ganador del Encuentro (Moneyline)",
+          "odd": 1.9,
+          "probability": 50.8,
           "status": "pending",
           "reasoning": {
-            "tactical": "Los Angeles Angels presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 63% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
+            "tactical": "Kansas City Royals cuenta con ventaja en la lomita con efectividad WHIP superior y mayor porcentaje de strikes en primer lanzamiento.",
+            "statistical": "Simulación Monte Carlo (10,000 iteraciones) otorga a Kansas City Royals un 50.8% de probabilidad de triunfo.",
+            "market": "Cuota de valor @1.9 respaldada por el modelo sabermétrico de Pythagenpat."
           }
         },
         {
-          "selection": "Kansas City Royals +1.5 Carreras",
+          "selection": "Los Angeles Angels +1.5 Carreras",
           "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
+          "odd": 3.47,
+          "probability": 27.1,
           "status": "pending",
           "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Kansas City Royals, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
+            "tactical": "Protección de 1.5 carreras para Los Angeles Angels. La apuesta se cobra incluso si pierden por 1 sola carrera.",
+            "statistical": "El modelo proyecta que Los Angeles Angels cubre la línea de +1.5 en el 27.1% de las simulaciones.",
+            "market": "Excelente opción de cobertura contra marcadores cerrados."
           }
         },
         {
           "selection": "Más de 7.5 Carreras",
           "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 58,
+          "odd": 1.85,
+          "probability": 66.3,
           "status": "pending",
           "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 9.0 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
+            "tactical": "Duelo cerrado de abridores en Angel Stadium. El bullpen de Royals tiene ligera ventaja en ERA combinada.",
+            "statistical": "Total de carreras proyectadas combinadas: 8.9 carreras.",
+            "market": "Línea equilibrada en casas de apuestas asiáticas."
           }
         },
         {
-          "selection": "Los Angeles Angels Ganador Primeras 5 Entradas (F5)",
+          "selection": "Kansas City Royals Ganador 1ras 5 Entradas (F5)",
           "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
+          "odd": 1.8,
+          "probability": 41.4,
           "status": "pending",
           "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
+            "tactical": "Aisla el duelo directo de abridores eliminando la varianza tardía del bullpen.",
+            "statistical": "Efectividad abridora favorable en el primer tercio del partido.",
+            "market": "Mercado prioritario para apostadores profesionales en MLB."
           }
         }
       ],
-      "prediction": "Los Angeles Angels",
-      "confidence": 63,
-      "odds": 1.49,
-      "market": "Ganador del Partido (Moneyline)",
+      "prediction": "Kansas City Royals",
+      "confidence": 50.8,
+      "odds": 1.9,
+      "market": "Ganador del Encuentro (Moneyline)",
       "analysis": {
-        "tactical": "Los Angeles Angels presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 63% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
+        "tactical": "Kansas City Royals cuenta con ventaja en la lomita con efectividad WHIP superior y mayor porcentaje de strikes en primer lanzamiento.",
+        "statistical": "Simulación Monte Carlo (10,000 iteraciones) otorga a Kansas City Royals un 50.8% de probabilidad de triunfo.",
+        "market": "Cuota de valor @1.9 respaldada por el modelo sabermétrico de Pythagenpat."
       }
     },
     {
-      "id": "mlb_401816531",
+      "id": "mlb_oak_tex_2040",
       "sport": "Baseball",
       "league": "MLB - Grandes Ligas",
       "home": "Athletics",
       "away": "Texas Rangers",
       "home_color": "#003831",
       "away_color": "#003278",
-      "time": "01:40",
+      "time": "20:40",
       "date": "2026-08-14",
       "status": "pre",
       "score": null,
@@ -51682,73 +50942,73 @@
       "away_score": null,
       "picks": [
         {
-          "selection": "Athletics",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.4,
-          "probability": 66,
+          "selection": "Texas Rangers",
+          "market": "Ganador del Encuentro (Moneyline)",
+          "odd": 1.9,
+          "probability": 54.4,
           "status": "pending",
           "reasoning": {
-            "tactical": "Athletics presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 66% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
+            "tactical": "Texas Rangers cuenta con ventaja en la lomita con efectividad WHIP superior y mayor porcentaje de strikes en primer lanzamiento.",
+            "statistical": "Simulación Monte Carlo (10,000 iteraciones) otorga a Texas Rangers un 54.4% de probabilidad de triunfo.",
+            "market": "Cuota de valor @1.9 respaldada por el modelo sabermétrico de Pythagenpat."
           }
         },
         {
-          "selection": "Texas Rangers +1.5 Carreras",
+          "selection": "Athletics +1.5 Carreras",
           "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
+          "odd": 3.9,
+          "probability": 24.1,
           "status": "pending",
           "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Texas Rangers, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
+            "tactical": "Protección de 1.5 carreras para Athletics. La apuesta se cobra incluso si pierden por 1 sola carrera.",
+            "statistical": "El modelo proyecta que Athletics cubre la línea de +1.5 en el 24.1% de las simulaciones.",
+            "market": "Excelente opción de cobertura contra marcadores cerrados."
           }
         },
         {
           "selection": "Más de 7.5 Carreras",
           "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 56,
+          "odd": 1.85,
+          "probability": 64.9,
           "status": "pending",
           "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 9.4 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
+            "tactical": "Rangers buscan dominar en Oakland con mayor poder de extrabases y porcentaje de slugging frente a diestros.",
+            "statistical": "Total de carreras proyectadas combinadas: 8.9 carreras.",
+            "market": "Línea equilibrada en casas de apuestas asiáticas."
           }
         },
         {
-          "selection": "Athletics Ganador Primeras 5 Entradas (F5)",
+          "selection": "Texas Rangers Ganador 1ras 5 Entradas (F5)",
           "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
+          "odd": 1.8,
+          "probability": 43.2,
           "status": "pending",
           "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
+            "tactical": "Aisla el duelo directo de abridores eliminando la varianza tardía del bullpen.",
+            "statistical": "Efectividad abridora favorable en el primer tercio del partido.",
+            "market": "Mercado prioritario para apostadores profesionales en MLB."
           }
         }
       ],
-      "prediction": "Athletics",
-      "confidence": 66,
-      "odds": 1.4,
-      "market": "Ganador del Partido (Moneyline)",
+      "prediction": "Texas Rangers",
+      "confidence": 54.4,
+      "odds": 1.9,
+      "market": "Ganador del Encuentro (Moneyline)",
       "analysis": {
-        "tactical": "Athletics presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 66% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
+        "tactical": "Texas Rangers cuenta con ventaja en la lomita con efectividad WHIP superior y mayor porcentaje de strikes en primer lanzamiento.",
+        "statistical": "Simulación Monte Carlo (10,000 iteraciones) otorga a Texas Rangers un 54.4% de probabilidad de triunfo.",
+        "market": "Cuota de valor @1.9 respaldada por el modelo sabermétrico de Pythagenpat."
       }
     },
     {
-      "id": "mlb_401816530",
+      "id": "mlb_lad_mil_2110",
       "sport": "Baseball",
       "league": "MLB - Grandes Ligas",
       "home": "Los Angeles Dodgers",
       "away": "Milwaukee Brewers",
-      "home_color": "#005a9c",
-      "away_color": "#13294b",
-      "time": "02:10",
+      "home_color": "#005A9C",
+      "away_color": "#FFC52F",
+      "time": "21:10",
       "date": "2026-08-14",
       "status": "pre",
       "score": null,
@@ -51757,72 +51017,72 @@
       "picks": [
         {
           "selection": "Los Angeles Dodgers",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.44,
-          "probability": 65,
+          "market": "Ganador del Encuentro (Moneyline)",
+          "odd": 1.53,
+          "probability": 74.8,
           "status": "pending",
           "reasoning": {
-            "tactical": "Los Angeles Dodgers presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 65% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
+            "tactical": "Los Angeles Dodgers cuenta con ventaja en la lomita con efectividad WHIP superior y mayor porcentaje de strikes en primer lanzamiento.",
+            "statistical": "Simulación Monte Carlo (10,000 iteraciones) otorga a Los Angeles Dodgers un 74.8% de probabilidad de triunfo.",
+            "market": "Cuota de valor @1.53 respaldada por el modelo sabermétrico de Pythagenpat."
           }
         },
         {
           "selection": "Milwaukee Brewers +1.5 Carreras",
           "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
+          "odd": 1.91,
+          "probability": 49.1,
           "status": "pending",
           "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Milwaukee Brewers, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
+            "tactical": "Protección de 1.5 carreras para Milwaukee Brewers. La apuesta se cobra incluso si pierden por 1 sola carrera.",
+            "statistical": "El modelo proyecta que Milwaukee Brewers cubre la línea de +1.5 en el 49.1% de las simulaciones.",
+            "market": "Excelente opción de cobertura contra marcadores cerrados."
           }
         },
         {
           "selection": "Más de 7.5 Carreras",
           "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 55,
+          "odd": 1.85,
+          "probability": 64.9,
           "status": "pending",
           "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 9.4 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
+            "tactical": "Dodgers en Dodger Stadium con su rotación élite y alineación profunda (Ohtani, Freeman, Betts). Proyección contundente.",
+            "statistical": "Total de carreras proyectadas combinadas: 9.1 carreras.",
+            "market": "Línea equilibrada en casas de apuestas asiáticas."
           }
         },
         {
-          "selection": "Los Angeles Dodgers Ganador Primeras 5 Entradas (F5)",
+          "selection": "Los Angeles Dodgers Ganador 1ras 5 Entradas (F5)",
           "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
+          "odd": 1.45,
+          "probability": 58.8,
           "status": "pending",
           "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
+            "tactical": "Aisla el duelo directo de abridores eliminando la varianza tardía del bullpen.",
+            "statistical": "Efectividad abridora favorable en el primer tercio del partido.",
+            "market": "Mercado prioritario para apostadores profesionales en MLB."
           }
         }
       ],
       "prediction": "Los Angeles Dodgers",
-      "confidence": 65,
-      "odds": 1.44,
-      "market": "Ganador del Partido (Moneyline)",
+      "confidence": 74.8,
+      "odds": 1.53,
+      "market": "Ganador del Encuentro (Moneyline)",
       "analysis": {
-        "tactical": "Los Angeles Dodgers presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 65% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
+        "tactical": "Los Angeles Dodgers cuenta con ventaja en la lomita con efectividad WHIP superior y mayor porcentaje de strikes en primer lanzamiento.",
+        "statistical": "Simulación Monte Carlo (10,000 iteraciones) otorga a Los Angeles Dodgers un 74.8% de probabilidad de triunfo.",
+        "market": "Cuota de valor @1.53 respaldada por el modelo sabermétrico de Pythagenpat."
       }
     },
     {
-      "id": "mlb_401816528",
+      "id": "mlb_sfg_col_2115",
       "sport": "Baseball",
       "league": "MLB - Grandes Ligas",
       "home": "San Francisco Giants",
       "away": "Colorado Rockies",
-      "home_color": "#000000",
-      "away_color": "#33006f",
-      "time": "02:15",
+      "home_color": "#FD5A1E",
+      "away_color": "#33006F",
+      "time": "21:15",
       "date": "2026-08-14",
       "status": "pre",
       "score": null,
@@ -51831,61 +51091,61 @@
       "picks": [
         {
           "selection": "San Francisco Giants",
-          "market": "Ganador del Partido (Moneyline)",
-          "odd": 1.6,
-          "probability": 58,
+          "market": "Ganador del Encuentro (Moneyline)",
+          "odd": 1.71,
+          "probability": 67.6,
           "status": "pending",
           "reasoning": {
-            "tactical": "San Francisco Giants presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-            "statistical": "Modelo de expectativas de carreras proyecta victoria con 58% de probabilidad.",
-            "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
+            "tactical": "San Francisco Giants cuenta con ventaja en la lomita con efectividad WHIP superior y mayor porcentaje de strikes en primer lanzamiento.",
+            "statistical": "Simulación Monte Carlo (10,000 iteraciones) otorga a San Francisco Giants un 67.6% de probabilidad de triunfo.",
+            "market": "Cuota de valor @1.71 respaldada por el modelo sabermétrico de Pythagenpat."
           }
         },
         {
           "selection": "Colorado Rockies +1.5 Carreras",
           "market": "Línea de Carreras (Run Line)",
-          "odd": 1.68,
-          "probability": 72,
+          "odd": 1.64,
+          "probability": 57.4,
           "status": "pending",
           "reasoning": {
-            "tactical": "Cobertura de seguridad de +1.5 carreras para Colorado Rockies, permitiendo cobrar la apuesta incluso si pierden por 1 sola carrera.",
-            "statistical": "El 68.4% de los juegos divisionales de MLB se definen por margen de 1 carrera.",
-            "market": "Línea con alto valor esperado (EV+) en casas de apuestas asiáticas."
+            "tactical": "Protección de 1.5 carreras para Colorado Rockies. La apuesta se cobra incluso si pierden por 1 sola carrera.",
+            "statistical": "El modelo proyecta que Colorado Rockies cubre la línea de +1.5 en el 57.4% de las simulaciones.",
+            "market": "Excelente opción de cobertura contra marcadores cerrados."
           }
         },
         {
           "selection": "Más de 7.5 Carreras",
           "market": "Total de Carreras (Over/Under)",
-          "odd": 1.82,
-          "probability": 53,
+          "odd": 1.85,
+          "probability": 63.4,
           "status": "pending",
           "reasoning": {
-            "tactical": "Condiciones de viento favorables y alineaciones con alto OPS frente a lanzadores diestros.",
-            "statistical": "Proyección de 9.5 carreras combinadas según simulación de bateo.",
-            "market": "Flujo constante de apuestas hacia el Over en los tableros de Las Vegas."
+            "tactical": "Rockies bajan sustancialmente su rendimiento ofensivo fuera de Coors Field. Giants dominan en Oracle Park.",
+            "statistical": "Total de carreras proyectadas combinadas: 8.9 carreras.",
+            "market": "Línea equilibrada en casas de apuestas asiáticas."
           }
         },
         {
-          "selection": "San Francisco Giants Ganador Primeras 5 Entradas (F5)",
+          "selection": "San Francisco Giants Ganador 1ras 5 Entradas (F5)",
           "market": "Primeras 5 Entradas (F5)",
-          "odd": 1.55,
-          "probability": 68,
+          "odd": 1.62,
+          "probability": 52.2,
           "status": "pending",
           "reasoning": {
-            "tactical": "Aprovecha la ventaja del lanzador abridor estelar sin depender del desgaste del bullpen.",
-            "statistical": "Efectividad en las primeras 5 entradas superior al promedio de la liga.",
-            "market": "Mercado preferido por apostadores profesionales en MLB."
+            "tactical": "Aisla el duelo directo de abridores eliminando la varianza tardía del bullpen.",
+            "statistical": "Efectividad abridora favorable en el primer tercio del partido.",
+            "market": "Mercado prioritario para apostadores profesionales en MLB."
           }
         }
       ],
       "prediction": "San Francisco Giants",
-      "confidence": 58,
-      "odds": 1.6,
-      "market": "Ganador del Partido (Moneyline)",
+      "confidence": 67.6,
+      "odds": 1.71,
+      "market": "Ganador del Encuentro (Moneyline)",
       "analysis": {
-        "tactical": "San Francisco Giants presenta un cuerpo de lanzadores abridor con efectividad proyectada sólida y mayor índice de ponches (K/9).",
-        "statistical": "Modelo de expectativas de carreras proyecta victoria con 58% de probabilidad.",
-        "market": "Tendencia de dinero inteligente y ventaja en el bullpen en entradas finales."
+        "tactical": "San Francisco Giants cuenta con ventaja en la lomita con efectividad WHIP superior y mayor porcentaje de strikes en primer lanzamiento.",
+        "statistical": "Simulación Monte Carlo (10,000 iteraciones) otorga a San Francisco Giants un 67.6% de probabilidad de triunfo.",
+        "market": "Cuota de valor @1.71 respaldada por el modelo sabermétrico de Pythagenpat."
       }
     }
   ],
@@ -51896,7 +51156,7 @@
     "total_picks_won": 36,
     "total_picks_lost": 42,
     "roi_percentage": -11.4,
-    "total_matches_analyzed": 196
+    "total_matches_analyzed": 186
   },
   "star_ticket": {
     "ticket_id": "850414001",
