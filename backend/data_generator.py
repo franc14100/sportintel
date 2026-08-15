@@ -757,8 +757,73 @@ def smart_pick_selector(real_odds, home_name, away_name):
                             )
                         }
                     }
-        if best_ah:
-            best_picks['ah'] = best_ah
+    # ── SYNTHETIC PROFESSIONAL PICKS (Heavy Favorites & Team Goals) ──────────
+    h2h_home = real_odds.get('h2h_home')
+    h2h_away = real_odds.get('h2h_away')
+    
+    if h2h_home and h2h_home < 1.45:
+        synth_ah_odd = round((h2h_home - 1.0) * 2.2 + 1.0, 2)
+        if 1.40 <= synth_ah_odd <= VALUE_MAX and 'ah' not in best_picks:
+            best_picks['ah'] = {
+                'market': 'Hándicap Asiático -1.5',
+                'selection': f'{home_name} -1.5',
+                'odd': synth_ah_odd,
+                'probability': round(100 / synth_ah_odd),
+                'valid_for_ticket': True,
+                'risk': 'Medium',
+                'reasoning': {
+                    'tactical': f"{home_name} es ampliamente favorito (@{h2h_home}). El Hándicap Asiático -1.5 maximiza el valor.",
+                    'statistical': f"Cuota sintética AH -1.5 proyectada a @{synth_ah_odd}.",
+                    'market': f"Forzamos la línea a -1.5 para extraer valor profesional ante el claro favoritismo."
+                }
+            }
+        synth_tg_odd = round((h2h_home - 1.0) * 1.5 + 1.0, 2)
+        if 1.30 <= synth_tg_odd <= VALUE_MAX:
+            best_picks['team_goals'] = {
+                'market': 'Goles del Equipo (Individual)',
+                'selection': f'{home_name} Más de 1.5 Goles',
+                'odd': synth_tg_odd,
+                'probability': round(100 / synth_tg_odd),
+                'valid_for_ticket': True,
+                'risk': 'Low',
+                'reasoning': {
+                    'tactical': f"{home_name} dominará ofensivamente. Proyección de más de 1.5 goles individuales.",
+                    'statistical': f"Cuota proyectada @{synth_tg_odd} para el Over 1.5 del equipo.",
+                    'market': f"Alternativa profesional para evitar depender de la defensa."
+                }
+            }
+
+    elif h2h_away and h2h_away < 1.45:
+        synth_ah_odd = round((h2h_away - 1.0) * 2.2 + 1.0, 2)
+        if 1.40 <= synth_ah_odd <= VALUE_MAX and 'ah' not in best_picks:
+            best_picks['ah'] = {
+                'market': 'Hándicap Asiático -1.5',
+                'selection': f'{away_name} -1.5',
+                'odd': synth_ah_odd,
+                'probability': round(100 / synth_ah_odd),
+                'valid_for_ticket': True,
+                'risk': 'Medium',
+                'reasoning': {
+                    'tactical': f"{away_name} es ampliamente favorito (@{h2h_away}). El Hándicap Asiático -1.5 maximiza el valor.",
+                    'statistical': f"Cuota sintética AH -1.5 proyectada a @{synth_ah_odd}.",
+                    'market': f"Forzamos la línea a -1.5 para extraer valor profesional ante el claro favoritismo."
+                }
+            }
+        synth_tg_odd = round((h2h_away - 1.0) * 1.5 + 1.0, 2)
+        if 1.30 <= synth_tg_odd <= VALUE_MAX:
+            best_picks['team_goals'] = {
+                'market': 'Goles del Equipo (Individual)',
+                'selection': f'{away_name} Más de 1.5 Goles',
+                'odd': synth_tg_odd,
+                'probability': round(100 / synth_tg_odd),
+                'valid_for_ticket': True,
+                'risk': 'Low',
+                'reasoning': {
+                    'tactical': f"{away_name} dominará ofensivamente. Proyección de más de 1.5 goles individuales.",
+                    'statistical': f"Cuota proyectada @{synth_tg_odd} para el Over 1.5 del equipo.",
+                    'market': f"Alternativa profesional para evitar depender de la defensa."
+                }
+            }
 
     return best_picks
 
@@ -2444,7 +2509,7 @@ def generate_daily_sports_data():
         combined = (str(match_name) + " " + str(league_name)).lower()
         return any(term in combined for term in ['friendly', 'amistoso', 'club-friendly', 'preseason', 'exhibition'])
 
-    BANNED_MARKETS = ['Tarjeta', 'Primero en Anotar', 'Resultado 1er Tiempo', 'Goles del Equipo']
+    BANNED_MARKETS = ['Tarjeta', 'Primero en Anotar', 'Resultado 1er Tiempo']
 
     LOW_SCORING_LEAGUES = ['primera nacional', 'primera-nacional', 'federal', 'copa argentina', 'argentina', 'lpf', 'liga profesional', 'colombia', 'liga betplay', 'copa africana', 'women', 'femenil', 'femenino', 'liga 2', 'serie b', 'segunda', 'tercera', 'torneo-intermedio', 'copa chile', 'guatemala', 'honduras']
     def is_invalid_over_pick(pick):
@@ -2509,10 +2574,14 @@ def generate_daily_sports_data():
             return 0  # Alt-lines extensas para el underdog, puede perder el partido pero ganar la apuesta
         if 'M\u00e1s/Menos' in mkt and 'Goles' in mkt and '0.5' in str(p.get('line','')) and prob >= 80:
             return 0  # 1 gol en todo el partido
+        if 'Hándicap Asiático' in mkt and prob >= 70:
+            return 0  # AH Professional VIP
             
         # Tier 1 (Seguridad Muy Alta)
         if 'Empate No Apuesta' in mkt and prob >= 82:
             return 1
+        if 'Goles del Equipo' in mkt and prob >= 75:
+            return 1  # Professional Team Goals
         if 'M\u00e1s/Menos' in mkt and 'Goles' in mkt and '1.5' in str(p.get('line','')) and prob >= 78:
             return 1
             
@@ -2716,11 +2785,14 @@ def generate_daily_sports_data():
     football_singles = [
         p for p in usable_picks 
         if p.get('sport') == 'Football'
-        and 1.45 <= p.get('odd', 0) <= 2.10 
+        and 1.30 <= p.get('odd', 0) <= 2.30 
         and p.get('probability', 0) >= 55
         and not is_friendly_match(p)
     ]
-    football_singles.sort(key=lambda p: (p.get('probability', 0) / 100.0) * p.get('odd', 1.0), reverse=True)
+    def get_tier(p):
+        return 0 if ('Hándicap Asiático' in str(p.get('market')) or 'Goles del Equipo' in str(p.get('market'))) else 1
+
+    football_singles.sort(key=lambda p: (-get_tier(p), (p.get('probability', 0) / 100.0) * p.get('odd', 1.0)), reverse=True)
 
     other_singles = [
         p for p in usable_picks 
