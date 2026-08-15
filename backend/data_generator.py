@@ -3029,6 +3029,8 @@ def generate_daily_sports_data():
         ticket_type_4 = "Combinado Soñador (Marcadores Exactos)"
         star_reasoning_4 = "Apuesta Soñadora Combinada de Marcadores Exactos (Cuota @45.00)."
 
+    print(f"[DEBUG-T4] After exact match logic, length is: {len(star_selections_4)}")
+
     for s in star_selections_4:
         global_used_matches.add(s["match"])
 
@@ -3146,11 +3148,7 @@ def generate_daily_sports_data():
 
 
 
-    # Post-gen: eliminar los partidos del Boleto 3 del pool de la Soñadora (T4)
-    # ya que star_selections_3 ahora está completo con datos finales
-    t3_matches_final = set(s['match'] for s in star_selections_3)
-    star_selections_4 = [s for s in star_selections_4 if s['match'] not in t3_matches_final]
-    # Recalcular cuota total de T4 en caso de que se haya eliminado alguna selección
+    # Se mantiene la independencia del Boleto 4 (puede compartir partidos con T3 porque los mercados son totalmente diferentes)
     if star_selections_4:
         total_odd_4 = round(1.0, 2)
         for s in star_selections_4:
@@ -3336,8 +3334,7 @@ def generate_daily_sports_data():
     star_selections_1 = deduplicate_ticket_selections(star_selections_1, usable_picks)
     star_selections_2 = deduplicate_ticket_selections(star_selections_2, usable_picks)
     star_selections_3 = deduplicate_ticket_selections(star_selections_3, usable_picks)
-    star_selections_4 = deduplicate_ticket_selections(star_selections_4, usable_picks)
-
+    
     # Recalculate total odds after deduplication pass
     def calc_tot_odd(sels):
         o = 1.0
@@ -3491,18 +3488,23 @@ def generate_daily_sports_data():
             "confidence": star_confidence_3,
             "reasoning": star_reasoning_3,
             "recommendation_stake": calculate_dynamic_stake(star_confidence_3, total_odd_3, 3)
-        },
-        "star_ticket_4": {
-            "type": ticket_type_4,
-            "selections": star_selections_4,
-            "total_odd": round(total_odd_4, 2),
-            "confidence": star_confidence_4,
-            "reasoning": star_reasoning_4,
-            "recommendation_stake": calculate_dynamic_stake(star_confidence_4, total_odd_4, 4)
-        },
-        "historical_tickets_registry": historical_registry,
-        "starting_bankroll": 53.67,
-        "user_bets": [
+        }
+    }
+
+    print(f"[DEBUG-T4] Before payload assignment, length is: {len(star_selections_4)}")
+
+    payload["star_ticket_4"] = {
+        "type": ticket_type_4,
+        "selections": star_selections_4,
+        "total_odd": round(total_odd_4, 2),
+        "confidence": star_confidence_4,
+        "reasoning": star_reasoning_4,
+        "recommendation_stake": calculate_dynamic_stake(star_confidence_4, total_odd_4, 4)
+    }
+    
+    payload["historical_tickets_registry"] = historical_registry
+    payload["starting_bankroll"] = 53.67
+    payload["user_bets"] = [
             {
                 "id": 1,
                 "match": "Reto Escalera (Día 1) - Sheriff Tiraspol vs Aluminij",
@@ -3566,8 +3568,9 @@ def generate_daily_sports_data():
                 "status": "pending",
                 "date": "2026-07-21"
             }
-        ],
-        "escalera_current_run": [
+    ]
+    
+    payload["escalera_current_run"] = [
             {
                 "day": 1,
                 "date": "2026-07-16",
@@ -3599,9 +3602,8 @@ def generate_daily_sports_data():
                 "status": "pending"
             }
         ]
-    }
 
-    # ── GUARDAR EN UPSTASH REDIS (VERCEL KV) ──
+    # 💾 GUARDAR EN UPSTASH REDIS (VERCEL KV) 💾──
     # Extraemos las credenciales que ya tienes configuradas en Vercel
     kv_url = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_URL") or os.environ.get("KV_REST_API_URL")
     kv_token = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_TOKEN") or os.environ.get("KV_REST_API_TOKEN")
@@ -3630,9 +3632,9 @@ def generate_daily_sports_data():
         print("[AVISO] Variables de Upstash no encontradas. Asegúrate de estar en Vercel.")
 
     # Respaldo local (por si pruebas en tu computadora)
-    # GARANTÍA ABSOLUTA DE DEDUPLICACIÓN ENTRE LOS 4 BOLETOS ESTRELLAS
+    # GARANTÍA ABSOLUTA DE DEDUPLICACIÓN ENTRE LOS 3 PRIMEROS BOLETOS ESTRELLAS
     final_seen_matches = set()
-    for t_key in ['star_ticket_1', 'star_ticket_2', 'star_ticket_3', 'star_ticket_4']:
+    for t_key in ['star_ticket_1', 'star_ticket_2', 'star_ticket_3']:
         tk_obj = payload.get(t_key)
         if not tk_obj:
             continue
