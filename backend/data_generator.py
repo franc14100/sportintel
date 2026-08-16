@@ -18,6 +18,14 @@ import unicodedata
 
 LEARNING_DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "learning_database.json")
 
+try:
+    from odds_client import odds_client
+except Exception:
+    try:
+        from backend.odds_client import odds_client
+    except Exception:
+        odds_client = None
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # MOTOR DE SIMULACIÓN MONTE CARLO (10,000 ITERACIONES)
 # Modelo Bivariado de Poisson con Corrección Dixon-Coles (rho = -0.13)
@@ -1180,7 +1188,7 @@ def generate_daily_sports_data():
         match_id = f"{home_name} vs {away_name}"
         prev_match = previous_data.get(match_id)
         
-        if prev_match:
+        if prev_match and prev_match.get("real_odds") and prev_match.get("real_odds").get("h2h_home"):
             # Preserve generated random stats (form, injuries, lineups, h2h) for consistency
             home_form = prev_match.get("home_form", "W-D-W")
             away_form = prev_match.get("away_form", "W-D-W")
@@ -1320,81 +1328,17 @@ def generate_daily_sports_data():
         # Forma de los equipos (usar datos reales si están disponibles, formateando con guiones)
         def format_form_str(f_raw):
             if not f_raw:
-                return random.choice(["W-W-D-W-L", "W-D-W-W-W", "L-W-D-L-W", "D-W-W-L-D", "W-W-L-W-W"])
-            return "-".join(list(str(f_raw).strip()))
+                return "?-?-?-?-?"
+            return "-".join(str(f_raw).strip())
             
         home_form = format_form_str(match.get("home_form_raw"))
         away_form = format_form_str(match.get("away_form_raw"))
 
         # Lesionados
-        injury_levels = ["Doubtful", "Out"]
-        injury_types = ["Esguince de tobillo", "Lesión muscular en el muslo", "Molestias en la rodilla", "Fractura de dedo", "Fatiga muscular", "Gripe"]
-        if sport == "Tennis":
-            injury_types = ["Molestias en el hombro", "Fatiga de codo", "Dolor lumbar", "Tensión muscular"]
-            
         home_injuries = []
         away_injuries = []
-        
-        # Lesionados local
-        num_injuries_home = (1 if random.random() < 0.2 else 0) if sport == "Tennis" else random.randint(1, 3)
-        for _ in range(num_injuries_home):
-            player = random.choice(home_squad)
-            severity = "Doubtful" if sport == "Tennis" else random.choice(injury_levels)
-            home_injuries.append({
-                "player": player,
-                "type": random.choice(injury_types),
-                "status": severity,
-                "days_out": random.randint(2, 10) if severity == "Out" else 0
-            })
-
-        # Lesionados visitante
-        num_injuries_away = (1 if random.random() < 0.2 else 0) if sport == "Tennis" else random.randint(1, 3)
-        for _ in range(num_injuries_away):
-            player = random.choice(away_squad)
-            severity = "Doubtful" if sport == "Tennis" else random.choice(injury_levels)
-            away_injuries.append({
-                "player": player,
-                "type": random.choice(injury_types),
-                "status": severity,
-                "days_out": random.randint(2, 10) if severity == "Out" else 0
-            })
-
-        # Noticias dinámicas adaptadas a los equipos reales
-        news_options_football = [
-            f"El cuerpo técnico de {home_name} probó una formación ultra-ofensiva en el último entrenamiento.",
-            f"Tensiones en el vestuario de {away_name} tras las declaraciones de su estrella en redes sociales.",
-            f"La prensa reporta que {home_name} cambiará su portero titular para dar rodaje en este partido clave.",
-            f"El plantel de {away_name} sufrió demoras en su viaje, recortando su tiempo de descanso previo al partido.",
-            f"El analista táctico afirma que {home_name} explotará la banda izquierda de su rival debido a su lentitud."
-        ]
-        news_options_basketball = [
-            f"El entrenador de {home_name} declaró que planea limitar los minutos de sus jugadoras principales.",
-            f"Rumores apuntan a que {away_name} jugará a un ritmo extremadamente rápido para fatigar la defensa local.",
-            f"La pivot estrella de {home_name} entrenó con protección especial y se le vio incómoda en los tiros libres.",
-            f"Reporte de estadísticas: {away_name} viene con un récord excelente jugando como visitante esta temporada."
-        ]
-        news_options_tennis = [
-            f"Se vio a {home_name} entrenando con protección especial en el codo durante la sesión matutina.",
-            f"La racha de victorias de {away_name} en esta superficie es excelente esta temporada.",
-            f"Analistas de tenis prevén un partido largo debido a la gran resistencia de {home_name}.",
-            f"{away_name} declaró en rueda de prensa sentirse en el mejor estado físico de su carrera."
-        ]
-
-        if sport == "Football":
-            news_items = random.sample(news_options_football, 2)
-        elif sport == "Basketball":
-            news_items = random.sample(news_options_basketball, 2)
-        else:
-            news_items = random.sample(news_options_tennis, 2)
 
         rumors = []
-        for news in news_items:
-            rumors.append({
-                "headline": news,
-                "credibility": random.randint(2, 5),
-                "sentiment": random.choice(["Positive", "Negative", "Neutral"]),
-                "source": random.choice(["ESPN Deportes", "Sky Sports", "Diario Marca", "Tennis Magazine", "Sports Network"])
-            })
 
         # Alineación Táctica Dinámica
         lineups = {"home": {"formation": "", "players": []}, "away": {"formation": "", "players": []}}
@@ -1525,6 +1469,15 @@ def generate_daily_sports_data():
 
         # Generar recomendaciones de apuestas
         real_odds = match.get('real_odds', {})  # Real odds from The Odds API if available
+        if (not real_odds or not real_odds.get('h2h_home')) and odds_client:
+            try:
+                fetched_odds = odds_client.get_real_odds_for_match(home_name, away_name, match.get("league"))
+                if fetched_odds:
+                    real_odds = fetched_odds
+                    match['real_odds'] = fetched_odds
+                    api_had_real_odds = True
+            except Exception as e:
+                print(f"[ODDS ERROR] {home_name} vs {away_name}: {e}")
 
         # ── SELECTOR INTELIGENTE DE MERCADOS ──────────────────────────────────
         # Escanea todas las cuotas reales de la API y elige el lado más probable
@@ -1602,14 +1555,14 @@ def generate_daily_sports_data():
             btts_prob = random.randint(55, 75) if btts_selection == "Sí" else random.randint(50, 68)
             
             analysis_1x2 = {
-                "tactical": f"La formación {winner_formation} de {venue_winner_txt} tiene una ventaja estructural sobre el esquema {loser_formation} de {venue_loser_txt}. El equipo favorito presiona alto con efectividad demostrada en sus últimos {home_form.count('W') + away_form.count('W')} partidos combinados. Los {loser_injuries} baja(s) clave en {loser_name} debilitan notablemente su línea defensiva y el mediocampo de control. {venue_context}",
+                "tactical": f"La formación {winner_formation} de {venue_winner_txt} tiene una ventaja estructural sobre el esquema {loser_formation} de {venue_loser_txt}. El equipo favorito presiona alto con efectividad demostrada en sus últimos {home_form.count('W') + away_form.count('W')} partidos combinados. {venue_context}",
                 "statistical": f"La racha reciente de {winner_name} ({winner_form}) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del {int(max(prob_home, prob_away))}%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de {avg_goals} para este choque.",
-                "market": f"Se detectaron movimientos de línea favorables hacia {winner_name}. El rumor filtrado ('{rumors[0]['headline']}') generó flujo de apuestas sharps hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en {factor_suerte}%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                "market": f"Se detectaron movimientos de línea favorables hacia {winner_name}. Flujo de apuestas sharps fue detectado hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en {factor_suerte}%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
             }
             analysis_btts = {
                 "tactical": f"La tendencia táctica de anotación para este compromiso es {'alta' if avg_goals >= 2.5 else 'moderada y de control'}. {'Ambos equipos plantean esquemas de ataque abierto con líneas ofensivas adelantadas' if btts_selection == 'Sí' else venue_btts_defensive.capitalize()}.",
-                "statistical": f"Análisis de Expected Goals (xG): El modelo proyecta un xG combinado de {round(avg_goals * random.uniform(0.8, 1.1), 2)} goles. {home_name} ha marcado en {random.randint(60, 90)}% de sus partidos recientes. {away_name} ha marcado en {random.randint(50, 85)}% de sus últimos encuentros. Con {len(home_injuries) + len(away_injuries)} bajas totales entre ambos equipos, el potencial ofensivo es {'el esperado' if btts_selection == 'Sí' else 'inferior al normal'}. {venue_context}",
-                "market": f"Las cuotas para 'Ambos Anotan {btts_selection}' reflejan un valor de mercado sólido. La IA detectó {random.randint(60, 85)}% del volumen de apuestas sharps orientado a este resultado. El rumor: '{rumors[1]['headline']}' puede impactar el estado mental de alguno de los equipos, {'favoreciendo' if btts_selection == 'Sí' else 'reduciendo'} la producción ofensiva."
+                "statistical": f"Análisis de Expected Goals (xG): El modelo proyecta un xG combinado de {round(avg_goals * random.uniform(0.8, 1.1), 2)} goles. {home_name} ha marcado en {random.randint(60, 90)}% de sus partidos recientes. {away_name} ha marcado en {random.randint(50, 85)}% de sus últimos encuentros. El potencial ofensivo es {'el esperado' if btts_selection == 'Sí' else 'inferior al normal'}. {venue_context}",
+                "market": f"Las cuotas para 'Ambos Anotan {btts_selection}' reflejan un valor de mercado sólido. La IA detectó {random.randint(60, 85)}% del volumen de apuestas sharps orientado a este resultado."
             }
 
             reasoning_1x2 = analysis_1x2
@@ -2138,12 +2091,12 @@ def generate_daily_sports_data():
             analysis_ml_bball = {
                 "tactical": f"{winner_bball} ejecuta un sistema ofensivo de alta eficiencia que explota las debilidades defensivas de {loser_bball} en el perímetro y la zona pintada. Con {loser_bball_inj} baja(s) confirmadas en el rival, su rotación queda comprometida para los cuartos finales donde se deciden los partidos.",
                 "statistical": f"Con una racha actual de {winner_bball_form}, el modelo de proyección estadística (PER, TS%) indica una ventaja del {int(max(prob_home, prob_away))}% de probabilidad de victoria para {winner_bball}. Las bajas totales impactarán el ritmo del partido, inclinando la balanza.",
-                "market": f"Las líneas de moneyline para este partido muestran movimiento hacia {winner_bball} en las últimas 4 horas. Reporte interno filtrado: '{rumors[0]['headline']}'. El factor sorpresa (varianza) se estimó en {factor_suerte}%, dentro del rango controlable por el modelo. El value bet es positivo según el cálculo actuarial."
+                "market": f"Las líneas de moneyline para este partido muestran movimiento hacia {winner_bball} en las últimas 4 horas. El factor sorpresa (varianza) se estimó en {factor_suerte}%, dentro del rango controlable por el modelo. El value bet es positivo según el cálculo actuarial."
             }
             analysis_total_bball = {
                 "tactical": f"El ritmo de juego (PACE) proyectado para este partido es de {random.randint(95, 108)} posesiones por cuarto. Los sistemas ofensivos de ambos equipos generan {random.randint(100, 120)} puntos promedio en sus últimas 5 salidas, lo que presiona la línea de totales hacia el Over.",
                 "statistical": f"Con las bajas de ambos equipos, el PACE puede caer {random.randint(2, 8)} puntos por partido. El modelo proyecta un total entre {random.randint(155, 165)} y {random.randint(165, 175)} puntos en base al rendimiento ofensivo actual, con un 67% de confianza estadística.",
-                "market": f"El 'Más de 160.5 Puntos' acumula {random.randint(55, 75)}% del volumen de apuestas sharps según el monitoreo de líneas. Rumor que impacta el estado anímico: '{rumors[1]['headline']}'. Factor Caos estimado: {factor_suerte}%."
+                "market": f"El 'Más de 160.5 Puntos' acumula {random.randint(55, 75)}% del volumen de apuestas sharps según el monitoreo de líneas. Factor Caos estimado: {factor_suerte}%."
             }
 
             reasoning_ml = analysis_ml_bball
@@ -2192,7 +2145,7 @@ def generate_daily_sports_data():
             analysis_ml_tennis = {
                 "tactical": f"{winner_tennis} demuestra superioridad táctica con un primer servicio que supera el 65% de efectividad en superficies similares. Su estilo de juego ({winner_tennis_form} en racha) contrarresta directamente el patrón de juego de {loser_tennis}, que además arrastra {loser_tennis_inj} molestia(s) física(s) que limitan su desplazamiento lateral y alcance en la red.",
                 "statistical": f"Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un {int(max(prob_home, prob_away))}% de probabilidad de victoria para {winner_tennis}. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
-                "market": f"Las casas de apuestas movieron la línea a favor de {winner_tennis} en las últimas horas, señal de dinero inteligente (sharps) apostando. Reporte filtrado: '{rumors[0]['headline']}'. El Factor Caos se calculó en {factor_suerte}%, dentro del margen manejable."
+                "market": f"Las casas de apuestas movieron la línea a favor de {winner_tennis} en las últimas horas, señal de dinero inteligente (sharps) apostando. El Factor Caos se calculó en {factor_suerte}%, dentro del margen manejable."
             }
             analysis_sets_tennis = {
                 "tactical": f"Dado el nivel de {winner_tennis} y las condiciones del partido, la probabilidad de que el match se resuelva de forma contundente {'en 2 sets es alta' if abs(rating_diff) > 5 else 'requiriendo 3 sets es considerable'}. El estilo de juego de {winner_tennis} {'tiende a cerrar partidos rápido' if abs(rating_diff) > 5 else 'deja margen de respuesta al rival'}.",

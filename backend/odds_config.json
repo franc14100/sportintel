@@ -1,0 +1,11 @@
+{
+  "api_keys": [
+    "23f45f3523e669ec68000aa6c49df3bec49d8943b0df286b7f4af685793c337f",
+    "d3d75f4dd66d3906aeba7a4c0cd94a0ab0b1804bac16f99f576bfcb12e2fbabb",
+    "772f454b27430654047db726a5bdb0046da8ab9e4dbf80ba19692483aec2aaae"
+  ],
+  "cache_ttl_minutes": 120,
+  "max_odds_fetch_per_run": 45,
+  "preferred_bookmakers": "1xbet,Bet365",
+  "base_url": "https://api.odds-api.io/v3"
+}
