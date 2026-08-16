@@ -2431,10 +2431,21 @@ def generate_daily_sports_data():
             os.makedirs(frontend_dir)
         json_path = os.path.join(frontend_dir, "data.json")
 
+    def strip_accents(s):
+        import unicodedata
+        return ''.join(c for c in unicodedata.normalize('NFD', str(s)) if unicodedata.category(c) != 'Mn').lower()
+
     # Armar boleto estrella premium de forma inteligente (Simple vs Combinado, priorizando Fútbol y Tenis)
     priority_picks = []
     fallback_picks = []
+    POSTPONED_MATCHES = ['internacional de bogota', 'al hazem', 'al bukayriyah', 'lindenwood', 'alcorn state', 'olancho']
     for m in matches_data:
+        m_stat = str(m.get('status', '')).lower()
+        if m_stat != 'pre' or m_stat in ['post', 'in', 'postponed', 'canceled', 'suspended', 'aplazado', 'cancelado']:
+            continue
+        m_name_norm = strip_accents(f"{m.get('home', '')} vs {m.get('away', '')}")
+        if any(pm in m_name_norm for pm in POSTPONED_MATCHES):
+            continue
         sport = m.get('sport')
         for p in m.get('picks', []):
             pick_info = {
@@ -2447,7 +2458,8 @@ def generate_daily_sports_data():
                 "probability": p['probability'],
                 "reasoning": p['reasoning'],
                 "status": m.get('status', 'pre'),
-                "valid_for_ticket": p.get('valid_for_ticket', True)
+                "valid_for_ticket": p.get('valid_for_ticket', True),
+                "has_real_odds": bool(m.get('real_odds', {}).get('h2h_home'))
             }
             if 'Tarjeta' in p['market']:
                 continue
@@ -2460,10 +2472,10 @@ def generate_daily_sports_data():
             else:
                 fallback_picks.append(pick_info)
 
-    football_picks = sorted([p for p in priority_picks if p['sport'] == 'Football'], key=lambda x: x['probability'], reverse=True)
-    tennis_picks = sorted([p for p in priority_picks if p['sport'] == 'Tennis'], key=lambda x: x['probability'], reverse=True)
-    other_priority = sorted([p for p in priority_picks if p['sport'] not in ['Football', 'Tennis']], key=lambda x: x['probability'], reverse=True)
-    fallback_picks = sorted(fallback_picks, key=lambda x: x['probability'], reverse=True)
+    football_picks = sorted([p for p in priority_picks if p['sport'] == 'Football'], key=lambda x: (-int(x.get('has_real_odds', False)), -x['probability']))
+    tennis_picks = sorted([p for p in priority_picks if p['sport'] == 'Tennis'], key=lambda x: (-int(x.get('has_real_odds', False)), -x['probability']))
+    other_priority = sorted([p for p in priority_picks if p['sport'] not in ['Football', 'Tennis']], key=lambda x: (-int(x.get('has_real_odds', False)), -x['probability']))
+    fallback_picks = sorted(fallback_picks, key=lambda x: (-int(x.get('has_real_odds', False)), -x['probability']))
 
     usable_picks = football_picks + tennis_picks + other_priority + fallback_picks
 
@@ -2504,6 +2516,7 @@ def generate_daily_sports_data():
         'eccellenza', 'promozione', 'regional', 'u20', 'u19', 'u21', 'u23',
         'reserves', 'amateur', 'asd ', 'asd', 'copa santa fe', 'intermedia',
         'metropolitana', 'primera b', 'primera c', 'primera d', 'bjelovar',
+        'ncaa', 'college', 'university', 'univ', 'state', 'women', 'femenil', 'femenino',
         'honduras', 'guatemala', 'salvador', 'nicaragua', 'panama',
         ' ii', ' 2', 'youth', 'juvenil'
     ]
@@ -2763,7 +2776,7 @@ def generate_daily_sports_data():
     def get_tier(p):
         return 0 if ('Hándicap Asiático' in str(p.get('market')) or 'Goles del Equipo' in str(p.get('market'))) else 1
 
-    football_singles.sort(key=lambda p: (-get_tier(p), (p.get('probability', 0) / 100.0) * p.get('odd', 1.0)), reverse=True)
+    football_singles.sort(key=lambda p: (int(p.get('has_real_odds', False)), -get_tier(p), (p.get('probability', 0) / 100.0) * p.get('odd', 1.0)), reverse=True)
 
     other_singles = [
         p for p in usable_picks 
@@ -3007,6 +3020,13 @@ def generate_daily_sports_data():
                             found_pick = pk
                             break
                     break
+
+            if found_md:
+                f_stat = str(found_md.get("status", "")).lower()
+                if f_stat != "pre" or f_stat in ["post", "in", "postponed", "canceled", "suspended", "aplazado", "cancelado"]:
+                    clean_name = m_name.encode("ascii", "ignore").decode("ascii")
+                    print(f"[INFO] Partido '{clean_name}' ya finalizado/iniciado/aplazado (status: {f_stat}). Regenerando boleto.")
+                    return False, [], 1.0
 
             if found_md and is_friendly_match(m_name, found_md.get("league", "")):
                 clean_name = m_name.encode("ascii", "ignore").decode("ascii")
