@@ -2943,6 +2943,12 @@ def generate_daily_sports_data():
     # Buscar los marcadores exactos con mayor probabilidad simulada (Moda Monte Carlo)
     exact_score_pool = []
     for m in matches_data:
+        m_stat = str(m.get('status', '')).lower()
+        if m_stat != 'pre' or m_stat in ['post', 'in', 'postponed', 'canceled', 'suspended', 'aplazado', 'cancelado']:
+            continue
+        m_name_norm = strip_accents(f"{m.get('home', '')} vs {m.get('away', '')}")
+        if any(pm in m_name_norm for pm in POSTPONED_MATCHES):
+            continue
         if m.get('sport') == 'Football':
             m_name = f"{m['home']} vs {m['away']}"
             for p in m.get('picks', []):

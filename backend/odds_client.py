@@ -339,6 +339,33 @@ class OddsClient:
                     except Exception:
                         pass
 
+            # Mercados de Córners (Totales e Individuales)
+            elif "corners totals" in m_name:
+                for line_entry in odds_entries:
+                    hdp = line_entry.get("hdp") or line_entry.get("line")
+                    try:
+                        hdp_f = float(hdp)
+                        if "over" in line_entry: result[f"corners_over_{hdp_f}"] = float(line_entry["over"])
+                        if "under" in line_entry: result[f"corners_under_{hdp_f}"] = float(line_entry["under"])
+                    except Exception:
+                        pass
+            elif "corners totals home" in m_name:
+                for line_entry in odds_entries:
+                    hdp = line_entry.get("hdp") or line_entry.get("line")
+                    try:
+                        hdp_f = float(hdp)
+                        if "over" in line_entry: result[f"corners_home_over_{hdp_f}"] = float(line_entry["over"])
+                    except Exception:
+                        pass
+            elif "corners totals away" in m_name:
+                for line_entry in odds_entries:
+                    hdp = line_entry.get("hdp") or line_entry.get("line")
+                    try:
+                        hdp_f = float(hdp)
+                        if "over" in line_entry: result[f"corners_away_over_{hdp_f}"] = float(line_entry["over"])
+                    except Exception:
+                        pass
+
         h_odd = result.get("h2h_home")
         d_odd = result.get("h2h_draw")
         a_odd = result.get("h2h_away")
