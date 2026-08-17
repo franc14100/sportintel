@@ -2982,21 +2982,25 @@ def generate_daily_sports_data():
             continue
         if m.get('sport') == 'Football':
             m_name = f"{m['home']} vs {m['away']}"
+            if is_obscure_event({'league': m.get('league', ''), 'match': m_name}):
+                continue
             for p in m.get('picks', []):
                 if p.get('market') == 'Marcador Exacto' and p.get('selection'):
                     exact_score_pool.append({
                         "match": m_name,
                         "sport": "Football",
+                        "league": m.get('league', ''),
                         "market": "Marcador Exacto",
                         "selection": p['selection'],
                         "odd": p.get('odd', 6.50),
                         "probability": p.get('probability', 12),
                         "mc_winrate": p.get('mc_winrate', p.get('probability', 12)),
+                        "is_elite": is_elite_league({'league': m.get('league', ''), 'match': m_name, 'sport': 'Football'}),
                         "reasoning": f"Moda estadística #1 de Monte Carlo: Marcador {p['selection']} ({p.get('probability', 12)}% prob)."
                     })
 
-    # Ordenar por mayor probabilidad de acierto del marcador
-    exact_score_pool.sort(key=lambda x: x['mc_winrate'], reverse=True)
+    # Ordenar por ligas de élite y mayor probabilidad de acierto del marcador
+    exact_score_pool.sort(key=lambda x: (int(x.get('is_elite', False)), x['mc_winrate']), reverse=True)
 
     # Seleccionar los 2 mejores marcadores de partidos distintos
     chosen_exact = []
