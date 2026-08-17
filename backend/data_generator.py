@@ -2780,15 +2780,21 @@ def generate_daily_sports_data():
         'bundesliga', 'germany', 'ligue 1', 'france', 'portugal', 'primeira liga',
         'mls', 'usa - mls', 'libertadores', 'sudamericana', 'champions league',
         'argentina', 'lpf', 'liga profesional', 'ecuador', 'ligapro', 'peru', 'liga 1',
-        'chile', 'primera division', 'uruguay', 'paraguay'
+        'chile', 'primera division', 'uruguay', 'paraguay', 'mlb', 'baseball', 'atp', 'wta'
     ]
     def is_elite_league(p):
-        full_txt = (str(p.get('league', '')) + " " + str(p.get('match', ''))).lower()
+        full_txt = (str(p.get('league', '')) + " " + str(p.get('match', '')) + " " + str(p.get('sport', ''))).lower()
         return any(el in full_txt for el in ELITE_LEAGUES)
 
-    def get_tier(p):
+    def get_market_tier(p):
         mkt = str(p.get('market', ''))
-        if 'Resultado Final' in mkt and p.get('probability', 0) >= 58:
+        sport = str(p.get('sport', ''))
+        prob = p.get('probability', 0)
+        if sport == 'Baseball' and ('Hándicap' in mkt or 'Línea de Carreras' in mkt or 'Ganador' in mkt) and prob >= 70:
+            return 0
+        if sport == 'Tennis' and ('Sets' in mkt or 'Hándicap' in mkt or 'Ganador' in mkt) and prob >= 75:
+            return 0
+        if 'Resultado Final' in mkt and prob >= 58:
             return 0
         if 'Empate No Apuesta' in mkt or 'DNB' in str(p.get('selection', '')):
             return 0
@@ -2798,23 +2804,21 @@ def generate_daily_sports_data():
             return 1
         return 2
 
-    football_singles.sort(key=lambda p: (
+    all_singles = [
+        p for p in usable_picks 
+        if 1.25 <= p.get('odd', 0) <= 2.50 
+        and p.get('probability', 0) >= 55
+        and not is_friendly_match(p)
+    ]
+
+    all_singles.sort(key=lambda p: (
         int(is_elite_league(p)),
         int(p.get('has_real_odds', False)),
-        -get_tier(p),
+        -get_market_tier(p),
         (p.get('probability', 0) / 100.0) * p.get('odd', 1.0)
     ), reverse=True)
 
-    other_singles = [
-        p for p in usable_picks 
-        if p.get('sport') != 'Football'
-        and 1.45 <= p.get('odd', 0) <= 2.10 
-        and p.get('probability', 0) >= 60
-        and not is_friendly_match(p)
-    ]
-    other_singles.sort(key=lambda p: (p.get('probability', 0) / 100.0) * p.get('odd', 1.0), reverse=True)
-
-    singles_candidates = football_singles + other_singles
+    singles_candidates = all_singles
 
     dc_candidates = [
         p for p in usable_picks
