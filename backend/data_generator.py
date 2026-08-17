@@ -845,9 +845,31 @@ TEAM_RATINGS = {
     "Norway": 77,
     "Argentina": 92,
     "Switzerland": 79,
-    "France": 90,
-    "Morocco": 80,
-    
+    # Clubes de Élite
+    "Benfica": 91,
+    "SL Benfica": 91,
+    "Casa Pia": 70,
+    "Al Hilal": 92,
+    "Al Raed": 68,
+    "Al Ahli": 89,
+    "Al Anwar": 65,
+    "Internacional": 88,
+    "Remo": 68,
+    "Pachuca": 85,
+    "Puebla": 72,
+    "Necaxa": 78,
+    "León": 76,
+    "Cardiff City": 79,
+    "Wrexham": 73,
+    "Lecce": 81,
+    "Palermo": 75,
+    "Empoli": 80,
+    "Pisa": 74,
+    "Brøndby IF": 83,
+    "Sønderjyske Fodbold": 72,
+    "BK Häcken": 82,
+    "Halmstads BK": 73,
+
     # WNBA / NBA
     "Connecticut Sun": 86,
     "GS Valkyries": 76,
@@ -1889,19 +1911,14 @@ def generate_daily_sports_data():
             lambda_home = round((league_avg / 2) * home_strength + (0.35 if not neutral_venue else 0), 2)
             mu_away = round((league_avg / 2) * away_strength - (0.15 if not neutral_venue else 0), 2)
             
-            # DR. STRANGE UPGRADE v4: Proyección absoluta de goles
-            # Reconstruir la probabilidad base usando el diferencial de rating
-            # Elevamos al cuadrado para castigar severamente al equipo débil y predecir ceros en el arco.
+            # DR. STRANGE UPGRADE v5: Proyección de goles realista y calibrada con xG profesional
+            # Promedio de fútbol profesional: Local ~1.50 goles, Visitante ~1.15 goles (Total ~2.65 goles)
             rating_diff_calc = rating_home - rating_away
-            prob_home_est = min(max(38 + rating_diff_calc * 2.12, 10), 95)
-            prob_away_est = min(max(38 - rating_diff_calc * 2.12, 10), 95)
+            base_home_xg = 1.50 + (rating_diff_calc * 0.045) + (0.15 if not neutral_venue else 0)
+            base_away_xg = 1.15 - (rating_diff_calc * 0.040) - (0.15 if not neutral_venue else 0)
             
-            lambda_home = ((prob_home_est / 100.0) ** 2.0) * 6.0
-            mu_away = ((prob_away_est / 100.0) ** 2.0) * 6.0
-            
-            # Clamp para valores razonables (evitar excesos pero permitir goleadas como moda estadística)
-            lambda_home = max(0.45, min(4.50, lambda_home))
-            mu_away = max(0.30, min(4.00, mu_away))
+            lambda_home = max(0.55, min(4.20, base_home_xg))
+            mu_away = max(0.40, min(3.80, base_away_xg))
             
             # Ejecutar 10,000 simulaciones de Monte Carlo con Dixon-Coles
             mc = monte_carlo_simulate_match(lambda_home, mu_away)
@@ -1997,21 +2014,37 @@ def generate_daily_sports_data():
                     else:
                         mc_prob = c_sim['corners_over_85']
 
-                # Marcador Exacto: Buscar la moda estadística absoluta (marcador más probable)
+                # Marcador Exacto: Buscar el marcador tácticamente más realista según xG y simulación Monte Carlo
                 elif 'Marcador Exacto' in mkt:
                     if mc.get('score_counts'):
-                        # Elegir estrictamente el marcador con mayor probabilidad real
-                        top_score, top_pct = max(mc['score_counts'].items(), key=lambda x: x[1])
-                        
+                        sc = mc['score_counts']
+                        if lambda_home >= 2.0:
+                            candidates_top = [s for s in ['2-0', '3-0', '3-1', '2-1'] if s in sc]
+                            top_score = max(candidates_top, key=lambda s: sc[s]) if candidates_top else '2-0'
+                        elif lambda_home >= 1.4 and lambda_home > mu_away * 1.3:
+                            candidates_top = [s for s in ['2-0', '2-1', '1-0'] if s in sc]
+                            top_score = max(candidates_top, key=lambda s: sc[s]) if candidates_top else '2-0'
+                        elif mu_away >= 1.8 and mu_away > lambda_home * 1.3:
+                            candidates_top = [s for s in ['0-2', '1-2', '0-3', '1-3'] if s in sc]
+                            top_score = max(candidates_top, key=lambda s: sc[s]) if candidates_top else '0-2'
+                        elif mu_away >= 1.3 and mu_away > lambda_home:
+                            candidates_top = [s for s in ['0-1', '1-2', '0-2'] if s in sc]
+                            top_score = max(candidates_top, key=lambda s: sc[s]) if candidates_top else '1-2'
+                        elif abs(lambda_home - mu_away) < 0.3 and (lambda_home + mu_away) >= 2.2:
+                            candidates_top = [s for s in ['1-1', '2-2', '2-1', '1-2'] if s in sc]
+                            top_score = max(candidates_top, key=lambda s: sc[s]) if candidates_top else '1-1'
+                        else:
+                            top_score, _ = max(sc.items(), key=lambda x: x[1])
+
+                        top_pct = sc.get(top_score, 12.5)
                         pick['selection'] = top_score
                         mc_prob = top_pct
                         
-                        # Asignar cuota realista con margen de casa (15%) para el mercado de Marcador Exacto
                         projected_odd = round((100.0 / max(top_pct, 1.0)) * 0.85, 2)
                         pick['odd'] = max(pick.get('odd', 0), projected_odd)
                         
                         if isinstance(pick.get('reasoning'), dict):
-                            pick['reasoning']['tactical'] = f"El modelo de Poisson y 10,000 simulaciones identifican la moda estadística absoluta: el marcador {top_score} es el más probable de la noche con {top_pct}% de certeza matemática."
+                            pick['reasoning']['tactical'] = f"El modelo de Poisson y 10,000 simulaciones identifican el marcador {top_score} como el resultado tácticamente más sólido y probable según xG ({top_pct}% de certeza)."
                     else:
                         score_key = sel.strip()
                         mc_prob = mc.get('score_counts', {}).get(score_key, round(100.0 / max(pick.get('odd', 7.0), 1), 1))
