@@ -71,7 +71,7 @@
                             "y": 28
                         },
                         {
-                            "name": "Saliba",
+                            "name": "Davies",
                             "number": 10,
                             "pos": "MCO",
                             "x": 50,
@@ -3830,6 +3830,21 @@
                         "date": "2026-02-12",
                         "score": "0 - 0",
                         "winner": "Draw"
+                    },
+                    {
+                        "date": "2026-01-24",
+                        "score": "0 - 1",
+                        "winner": "Al Hilal"
+                    },
+                    {
+                        "date": "2026-05-16",
+                        "score": "3 - 3",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2026-05-27",
+                        "score": "1 - 0",
+                        "winner": "Al Raed"
                     }
                 ]
             },
@@ -6354,7 +6369,27 @@
                     "mc_mu": 0.60065376
                 }
             ],
-            "real_odds": {}
+            "real_odds": {
+                "bookmaker": "1xbet",
+                "source": "Odds-API.io (1xbet)",
+                "event_name": "Sporting Gijon vs CE Sabadell FC",
+                "date": "2026-08-17T17:00:00Z",
+                "home_win": 1.82,
+                "h2h_home": 1.82,
+                "draw": 3.5,
+                "h2h_draw": 3.5,
+                "away_win": 4.58,
+                "h2h_away": 4.58,
+                "dc_1x": 1.203,
+                "dc_x2": 1.984,
+                "dc_12": 1.308,
+                "over_2.5": 2.44,
+                "under_2.5": 1.47,
+                "btts_yes": 1.94,
+                "btts_no": 1.771,
+                "dnb_home": 1.3,
+                "dnb_away": 3.27
+            }
         },
         {
             "id": "match-1021",
@@ -7605,7 +7640,7 @@
                     ]
                 },
                 "away": {
-                    "formation": "3-5-2",
+                    "formation": "4-2-3-1",
                     "players": [
                         {
                             "name": "Roux",
@@ -9210,13 +9245,15 @@
                     "selection": "Menos de 2.5 Goles",
                     "odd": 1.96,
                     "probability": 74,
-                    "risk": "Medium",
-                    "reasoning": {
-                        "tactical": "xG proyectado: 2.4 goles combinados. Partido defensivo.",
-                        "statistical": "Cuota calculada internamente: @1.96 (41% prob).",
-                        "market": "Fallback sin datos reales de API para esta línea."
-                    },
+                    "direction": "under",
+                    "line": "2.5",
                     "valid_for_ticket": true,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La cuota real de la API para 'Menos de 2.5 Goles' es @1.51, lo que implica una probabilidad de mercado del 66%. Las casas de apuestas ven alta probabilidad de partido defensivo de pocos goles.",
+                        "statistical": "Probabilidad implícita según cuota de mercado: 66%. Pick validado con datos reales de SportAPI7 en 1xBet.",
+                        "market": "@1.51 para 'Menos de 2.5 Goles' representa el mejor valor de la línea de goles según la API. Under 2.5 tiene mayor probabilidad que el lado contrario (@2.36)."
+                    },
                     "status": "pending",
                     "mc_simulated": true,
                     "mc_winrate": 73.5,
@@ -9278,19 +9315,19 @@
                 {
                     "market": "Marcador Exacto",
                     "selection": "1-0",
-                    "odd": 8.5,
-                    "probability": 20,
+                    "odd": 11.0,
+                    "probability": 19,
                     "risk": "High",
                     "recommended_stake_usd": 1.0,
                     "valid_for_ticket": false,
                     "reasoning": {
-                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican la moda estadística absoluta: el marcador 1-0 es el más probable de la noche con 20.0% de certeza matemática.",
-                        "statistical": "Apuesta de Alto Retorno (@8.5): inversion fija de $1.00 USD para buscar una ganancia neta de $7.50 USD si el partido termina 2-1.",
-                        "market": "Cuota de valor @8.5 en 1xBet para Marcador Exacto 2-1. Excelente opcion para entradas fijas de 1 dolar."
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican la moda estadística absoluta: el marcador 1-0 es el más probable de la noche con 19.1% de certeza matemática.",
+                        "statistical": "Apuesta de Alto Retorno (@11.0): inversion fija de $1.00 USD para buscar una ganancia neta de $10.00 USD si el partido termina 2-0.",
+                        "market": "Cuota de valor @11.0 en 1xBet para Marcador Exacto 2-0. Excelente opcion para entradas fijas de 1 dolar."
                     },
                     "status": "pending",
                     "mc_simulated": true,
-                    "mc_winrate": 20.0,
+                    "mc_winrate": 19.1,
                     "mc_lambda": 1.18068576,
                     "mc_mu": 0.60065376
                 }
@@ -9900,7 +9937,7 @@
             "home_accent": "#3B82F6",
             "away_color": "#1F2937",
             "away_accent": "#EF4444",
-            "league": "KENT @ UK",
+            "league": "SUU @ CIT",
             "sport": "Football",
             "time": "10:00",
             "date": "2026-08-17",
@@ -9915,7 +9952,7 @@
             "rumors": [],
             "lineups": {
                 "home": {
-                    "formation": "4-2-3-1",
+                    "formation": "3-5-2",
                     "players": [
                         {
                             "name": "Koke",
@@ -9979,7 +10016,7 @@
                             "y": 92
                         },
                         {
-                            "name": "Brown",
+                            "name": "Wilson",
                             "number": 2,
                             "pos": "LD",
                             "x": 85,
@@ -10136,7 +10173,7 @@
                     "market": "Resultado Final (1X2)",
                     "selection": "Kentucky",
                     "odd": 2.25,
-                    "probability": 50,
+                    "probability": 49,
                     "risk": "Medium",
                     "reasoning": {
                         "tactical": "La formación 4-2-3-1 de Kentucky tiene una ventaja estructural sobre el esquema 4-3-3 de Kent State. El equipo favorito presiona alto con efectividad demostrada en sus últimos 5 partidos combinados. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
@@ -13431,7 +13468,7 @@
                     "formation": "5 Titular",
                     "players": [
                         {
-                            "name": "Murray",
+                            "name": "Irving",
                             "number": 30,
                             "pos": "B",
                             "x": 50,
@@ -13499,7 +13536,7 @@
                             "y": 62
                         },
                         {
-                            "name": "Jokic",
+                            "name": "Doncic",
                             "number": 14,
                             "pos": "P",
                             "x": 40,
@@ -13509,8 +13546,8 @@
                 }
             },
             "h2h": {
-                "home_wins": 4,
-                "away_wins": 4,
+                "home_wins": 3,
+                "away_wins": 2,
                 "draws": 0,
                 "last_results": [
                     {
