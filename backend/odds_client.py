@@ -156,7 +156,7 @@ class OddsClient:
             return
         
         all_events = []
-        for sport in ["football", "basketball", "tennis"]:
+        for sport in ["football", "basketball", "tennis", "baseball"]:
             evs = self.fetch_pending_events(sport=sport)
             all_events.extend(evs)
 

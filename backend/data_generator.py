@@ -1087,14 +1087,14 @@ def generate_daily_sports_data():
     api_had_real_odds = False  # Modo autónomo sin cuotas de API de pago
     print("[INFO] Partidos en vivo obtenidos directamente de ESPN API.")
     
-    # Filtrar solo partidos de HOY que comiencen durante el día/tarde (antes de las 22:00 hora local)
-    live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis', 'Basketball'] and m.get('date', date_str) == date_str and '08:00' <= m.get('time', '15:00') < '22:00']
+    # Filtrar solo partidos de HOY que comiencen durante el día/tarde (antes de las 23:59 hora local)
+    live_matches = [m for m in espn_matches if m['sport'] in ['Football', 'Tennis', 'Basketball', 'Baseball'] and m.get('date', date_str) == date_str]
     total_analyzed = len(live_matches)
     
     if not live_matches:
         print("[AVISO] No se obtuvieron partidos filtrados en vivo desde la API para el día de hoy.")
     else:
-        print(f"[INFO] Total partidos reales (Fútbol, Basket, Tenis): {len(live_matches)} partidos")
+        print(f"[INFO] Total partidos reales (Fútbol, Basket, Tenis, Béisbol): {len(live_matches)} partidos")
     
     # Si no hay partidos en vivo (ej. día sin partidos programados en la API)
     # se usan partidos reales de respaldo
@@ -2401,10 +2401,11 @@ def generate_daily_sports_data():
     football_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'football']
     tennis_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'tennis']
     basketball_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'basketball']
+    baseball_matches = [m for m in matches_data if str(m.get('sport', '')).lower() == 'baseball']
 
     total_analyzed = len(matches_data)
 
-    matches_data = football_matches + tennis_matches + basketball_matches
+    matches_data = football_matches + tennis_matches + basketball_matches + baseball_matches
     # Keep only matches scheduled for today (date_str is YYYY-MM-DD string)
     matches_data = [m for m in matches_data if m.get('date', date_str) == date_str]
 
@@ -2467,7 +2468,7 @@ def generate_daily_sports_data():
             if m.get('status') in ['post', 'finished', 'ended', 'completed']:
                 continue
 
-            if sport in ['Football', 'Tennis', 'Basketball']:
+            if sport in ['Football', 'Tennis', 'Basketball', 'Baseball']:
                 priority_picks.append(pick_info)
             else:
                 fallback_picks.append(pick_info)
