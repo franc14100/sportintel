@@ -2439,7 +2439,7 @@ def generate_daily_sports_data():
     # Armar boleto estrella premium de forma inteligente (Simple vs Combinado, priorizando Fútbol y Tenis)
     priority_picks = []
     fallback_picks = []
-    POSTPONED_MATCHES = ['internacional de bogota', 'al hazem', 'al bukayriyah', 'lindenwood', 'alcorn state', 'olancho']
+    POSTPONED_MATCHES = ['internacional de bogota', 'al hazem', 'al bukayriyah', 'lindenwood', 'alcorn state', 'olancho', 'millonarios', 'deportivo cali', 'cali']
     for m in matches_data:
         m_stat = str(m.get('status', '')).lower()
         if m_stat != 'pre' or m_stat in ['post', 'in', 'postponed', 'canceled', 'suspended', 'aplazado', 'cancelado']:
