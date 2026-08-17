@@ -2492,7 +2492,7 @@ def generate_daily_sports_data():
         combined = (str(match_name) + " " + str(league_name)).lower()
         return any(term in combined for term in ['friendly', 'amistoso', 'club-friendly', 'preseason', 'exhibition'])
 
-    BANNED_MARKETS = ['Tarjeta', 'Primero en Anotar', 'Resultado 1er Tiempo']
+    BANNED_MARKETS = ['Tarjeta', 'Primero en Anotar', 'Resultado 1er Tiempo', 'Ambos Equipos Anotan', 'BTTS', 'Ambos Anotan']
 
     LOW_SCORING_LEAGUES = ['primera nacional', 'primera-nacional', 'federal', 'copa argentina', 'argentina', 'lpf', 'liga profesional', 'colombia', 'liga betplay', 'copa africana', 'women', 'femenil', 'femenino', 'liga 2', 'serie b', 'segunda', 'tercera', 'torneo-intermedio', 'copa chile', 'guatemala', 'honduras']
     def is_invalid_over_pick(pick):
@@ -2773,10 +2773,36 @@ def generate_daily_sports_data():
         and p.get('probability', 0) >= 55
         and not is_friendly_match(p)
     ]
-    def get_tier(p):
-        return 0 if ('Hándicap Asiático' in str(p.get('market')) or 'Goles del Equipo' in str(p.get('market'))) else 1
+    ELITE_LEAGUES = [
+        'mexico', 'liga mx', 'colombia', 'liga betplay', 'dimayor', 'brazil', 'brasileirao',
+        'premier league', 'england', 'laliga', 'la liga', 'spain', 'serie a', 'italy',
+        'bundesliga', 'germany', 'ligue 1', 'france', 'portugal', 'primeira liga',
+        'mls', 'usa - mls', 'libertadores', 'sudamericana', 'champions league',
+        'argentina', 'lpf', 'liga profesional', 'ecuador', 'ligapro', 'peru', 'liga 1',
+        'chile', 'primera division', 'uruguay', 'paraguay'
+    ]
+    def is_elite_league(p):
+        full_txt = (str(p.get('league', '')) + " " + str(p.get('match', ''))).lower()
+        return any(el in full_txt for el in ELITE_LEAGUES)
 
-    football_singles.sort(key=lambda p: (int(p.get('has_real_odds', False)), -get_tier(p), (p.get('probability', 0) / 100.0) * p.get('odd', 1.0)), reverse=True)
+    def get_tier(p):
+        mkt = str(p.get('market', ''))
+        if 'Resultado Final' in mkt and p.get('probability', 0) >= 58:
+            return 0
+        if 'Empate No Apuesta' in mkt or 'DNB' in str(p.get('selection', '')):
+            return 0
+        if 'Doble Oportunidad' in mkt:
+            return 1
+        if 'Hándicap Asiático' in mkt or 'Goles del Equipo' in mkt:
+            return 1
+        return 2
+
+    football_singles.sort(key=lambda p: (
+        int(is_elite_league(p)),
+        int(p.get('has_real_odds', False)),
+        -get_tier(p),
+        (p.get('probability', 0) / 100.0) * p.get('odd', 1.0)
+    ), reverse=True)
 
     other_singles = [
         p for p in usable_picks 
@@ -2795,7 +2821,7 @@ def generate_daily_sports_data():
         and p.get('probability', 0) >= 72
         and not is_friendly_match(p)
     ]
-    dc_candidates.sort(key=lambda p: p.get('probability', 0), reverse=True)
+    dc_candidates.sort(key=lambda p: (int(is_elite_league(p)), int(p.get('has_real_odds', False)), p.get('probability', 0)), reverse=True)
 
     # ═══════════════════════════════════════════════════════════════════════
     # BOLETO 1: APUESTA SIMPLE DE VALOR #1 (CON COBERTURA) O TRÍO DE SEGURIDAD
