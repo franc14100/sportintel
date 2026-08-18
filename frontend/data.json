@@ -471,7 +471,7 @@
                     "market": "Doble Oportunidad",
                     "selection": "Persib o Empate",
                     "odd": 1.47,
-                    "probability": 82,
+                    "probability": 81,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Persib hace casi imposible un resultado diferente al cubierto por esta apuesta.",
@@ -480,7 +480,7 @@
                     },
                     "status": "pending",
                     "mc_simulated": true,
-                    "mc_winrate": 81.9,
+                    "mc_winrate": 81.4,
                     "mc_lambda": 1.785,
                     "mc_mu": 0.8799999999999998
                 },
@@ -985,7 +985,7 @@
                             "y": 92
                         },
                         {
-                            "name": "González",
+                            "name": "Kane",
                             "number": 2,
                             "pos": "LD",
                             "x": 85,
@@ -1016,7 +1016,7 @@
                             "name": "Kane",
                             "number": 8,
                             "pos": "MCD",
-                            "x": 40,
+                            "x": 60,
                             "y": 72
                         },
                         {
@@ -1089,7 +1089,7 @@
                     },
                     "status": "pending",
                     "mc_simulated": true,
-                    "mc_winrate": 81.7,
+                    "mc_winrate": 82.5,
                     "mc_lambda": 1.785,
                     "mc_mu": 0.8799999999999998
                 },
@@ -1149,7 +1149,7 @@
                     "market": "Resultado Final (1X2)",
                     "selection": "ES Setif",
                     "odd": 2.25,
-                    "probability": 59,
+                    "probability": 58,
                     "risk": "Medium",
                     "reasoning": {
                         "tactical": "La formación 4-2-3-1 de ES Setif tiene una ventaja estructural sobre el esquema 3-5-2 de CA Batna. El equipo favorito presiona alto con efectividad demostrada en sus últimos 5 partidos combinados. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
@@ -1171,13 +1171,13 @@
                     "recommended_stake_usd": 1.0,
                     "valid_for_ticket": false,
                     "reasoning": {
-                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.2% de certeza).",
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.1% de certeza).",
                         "statistical": "Apuesta de Alto Retorno (@8.5): inversion fija de $1.00 USD para buscar una ganancia neta de $7.50 USD si el partido termina 2-1.",
                         "market": "Cuota de valor @8.5 en 1xBet para Marcador Exacto 2-1. Excelente opcion para entradas fijas de 1 dolar."
                     },
                     "status": "pending",
                     "mc_simulated": true,
-                    "mc_winrate": 12.2,
+                    "mc_winrate": 12.1,
                     "mc_lambda": 1.785,
                     "mc_mu": 0.8799999999999998
                 }
@@ -1248,7 +1248,7 @@
                             "name": "González",
                             "number": 8,
                             "pos": "MCD",
-                            "x": 60,
+                            "x": 40,
                             "y": 28
                         },
                         {
@@ -1895,7 +1895,7 @@
                     ]
                 },
                 "away": {
-                    "formation": "4-2-3-1",
+                    "formation": "3-5-2",
                     "players": [
                         {
                             "name": "Carvajal",
@@ -1938,13 +1938,221 @@
                             "pos": "MCO",
                             "x": 50,
                             "y": 64
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 1,
+                "away_wins": 1,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2026-06-01",
+                        "score": "3 - 2",
+                        "winner": "Reading"
+                    },
+                    {
+                        "date": "2026-01-27",
+                        "score": "0 - 2",
+                        "winner": "Wycombe Wanderers"
+                    },
+                    {
+                        "date": "2026-06-07",
+                        "score": "1 - 1",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-10-20",
+                        "score": "3 - 0",
+                        "winner": "Reading"
+                    },
+                    {
+                        "date": "2025-09-26",
+                        "score": "0 - 3",
+                        "winner": "Wycombe Wanderers"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Doble Oportunidad",
+                    "selection": "Reading o Empate",
+                    "odd": 1.4,
+                    "probability": 83,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Reading hace casi imposible un resultado diferente al cubierto por esta apuesta.",
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 71%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.4 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 82.6,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta (DNB)",
+                    "selection": "Reading",
+                    "odd": 1.66,
+                    "probability": 77,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Reading como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 28% según el modelo. El 70% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.66 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 77.4,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta",
+                    "selection": "Reading",
+                    "odd": 1.45,
+                    "probability": 77,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El mercado de Empate No Apuesta (DNB) para Reading otorga máxima seguridad eliminando el riesgo del empate.",
+                        "statistical": "Probabilidad implícita estimada del 38%. Mercado estándar disponible en 1xBet.",
+                        "market": "Opción segura para boletos combinados o de valor sin arriesgar en mercados volátiles."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 77.4,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Total de Goles (Asian 2.0)",
+                    "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
+                    "odd": 2.5,
+                    "probability": 74,
+                    "valid_for_ticket": false,
+                    "risk": "High",
+                    "reasoning": {
+                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 3.0 goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": "La API indica Over 2.5 a @7.13. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
+                        "market": "La cuota del Asian 2.0 @2.5 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 74.2,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Reading",
+                    "odd": 2.31,
+                    "probability": 60,
+                    "risk": "Medium",
+                    "reasoning": {
+                        "tactical": "La formación 4-2-3-1 de Reading tiene una ventaja estructural sobre el esquema 3-5-2 de Wycombe Wanderers. El equipo favorito presiona alto con efectividad demostrada en sus últimos 5 partidos combinados. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
+                        "statistical": "La racha reciente de Reading (W---D---W---W) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del 43%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de 3.0 para este choque.",
+                        "market": "Se detectaron movimientos de línea favorables hacia Reading. Flujo de apuestas sharps fue detectado hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en 87%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 59.5,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Marcador Exacto",
+                    "selection": "1-0",
+                    "odd": 11.0,
+                    "probability": 13,
+                    "risk": "High",
+                    "recommended_stake_usd": 1.0,
+                    "valid_for_ticket": false,
+                    "reasoning": {
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (13.1% de certeza).",
+                        "statistical": "Apuesta de Alto Retorno (@11.0): inversion fija de $1.00 USD para buscar una ganancia neta de $10.00 USD si el partido termina 2-2.",
+                        "market": "Cuota de valor @11.0 en 1xBet para Marcador Exacto 2-2. Excelente opcion para entradas fijas de 1 dolar."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 13.1,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                }
+            ],
+            "real_odds": {
+                "bookmaker": "1xbet",
+                "source": "Odds-API.io (1xbet)",
+                "event_name": "Reading FC vs Wycombe Wanderers",
+                "date": "2026-08-18T18:00:00Z",
+                "home_win": 2.31,
+                "h2h_home": 2.31,
+                "draw": 3.54,
+                "h2h_draw": 3.54,
+                "away_win": 2.53,
+                "h2h_away": 2.53,
+                "dc_1x": 1.4,
+                "dc_x2": 1.48,
+                "dc_12": 1.21,
+                "over_2.5": 7.13,
+                "under_2.5": 1.014,
+                "btts_yes": 1.45,
+                "btts_no": 2.529,
+                "dnb_home": 1.66,
+                "dnb_away": 1.82
+            }
+        },
+        {
+            "id": "match-1024",
+            "home": "Stockport County",
+            "away": "Everton U21",
+            "home_color": "#1F2937",
+            "home_accent": "#3B82F6",
+            "away_color": "#1F2937",
+            "away_accent": "#EF4444",
+            "league": "EVE @ STO",
+            "sport": "Football",
+            "time": "13:00",
+            "date": "2026-08-18",
+            "stadium": "Cancha Principal",
+            "status": "pre",
+            "home_score": 0,
+            "away_score": 0,
+            "home_form": "W---D---W---W",
+            "away_form": "W---W---D---L",
+            "home_injuries": [],
+            "away_injuries": [],
+            "rumors": [],
+            "lineups": {
+                "home": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Pérez",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
                         },
                         {
                             "name": "Rice",
                             "number": 7,
                             "pos": "ED",
-                            "x": 80,
-                            "y": 64
+                            "x": 20,
+                            "y": 36
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "González",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
                         },
                         {
                             "name": "Roberts",
@@ -2055,8 +2263,8 @@
                     "valid_for_ticket": false,
                     "risk": "High",
                     "reasoning": {
-                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 4.0 goles para este partido respalda que terminará con 2+ anotaciones.",
-                        "statistical": "La API indica Over 2.5 a @1.32. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
+                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 4.6 goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": "La API indica Over 2.5 a @1.25. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
                         "market": "La cuota del Asian 2.0 @1.22 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
                     },
                     "status": "pending",
@@ -3594,18 +3802,304 @@
                     "market": "Marcador Exacto",
                     "selection": "1-0",
                     "odd": 20.0,
-                    "probability": 13,
+                    "probability": 12,
                     "risk": "High",
                     "recommended_stake_usd": 1.0,
                     "valid_for_ticket": false,
                     "reasoning": {
-                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.6% de certeza).",
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.2% de certeza).",
                         "statistical": "Apuesta de Alto Retorno (@20.0): inversion fija de $1.00 USD para buscar una ganancia neta de $19.00 USD si el partido termina 3-1.",
                         "market": "Cuota de valor @20.0 en 1xBet para Marcador Exacto 3-1. Excelente opcion para entradas fijas de 1 dolar."
                     },
                     "status": "pending",
                     "mc_simulated": true,
-                    "mc_winrate": 12.6,
+                    "mc_winrate": 12.2,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                }
+            ],
+            "real_odds": {}
+        },
+        {
+            "id": "match-1025",
+            "home": "Wigan Athletic",
+            "away": "Aston Villa U21",
+            "home_color": "#1F2937",
+            "home_accent": "#3B82F6",
+            "away_color": "#1F2937",
+            "away_accent": "#EF4444",
+            "league": "AVL @ WGA",
+            "sport": "Football",
+            "time": "13:00",
+            "date": "2026-08-18",
+            "stadium": "Cancha Principal",
+            "status": "pre",
+            "home_score": 0,
+            "away_score": 0,
+            "home_form": "W---D---W---W",
+            "away_form": "W---W---D---L",
+            "home_injuries": [],
+            "away_injuries": [],
+            "rumors": [],
+            "lineups": {
+                "home": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Green",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Yamal",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Griezmann",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Bernard",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Koke",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Wood",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Martin",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 28
+                        },
+                        {
+                            "name": "González",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Pedri",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Thompson",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Lefevre",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Pedri",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Ramos",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Torres",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Roberts",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Johnson",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 1,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2026-03-13",
+                        "score": "1 - 2",
+                        "winner": "Aston Villa U21"
+                    },
+                    {
+                        "date": "2026-03-08",
+                        "score": "2 - 2",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2025-10-12",
+                        "score": "2 - 3",
+                        "winner": "Aston Villa U21"
+                    },
+                    {
+                        "date": "2026-01-16",
+                        "score": "3 - 3",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2026-06-29",
+                        "score": "0 - 3",
+                        "winner": "Aston Villa U21"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Doble Oportunidad",
+                    "selection": "Wigan Athletic o Empate",
+                    "odd": 1.47,
+                    "probability": 81,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Wigan Athletic hace casi imposible un resultado diferente al cubierto por esta apuesta.",
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 81.0,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta (DNB)",
+                    "selection": "Wigan Athletic",
+                    "odd": 1.72,
+                    "probability": 76,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Wigan Athletic como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 78% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 75.5,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta",
+                    "selection": "Wigan Athletic",
+                    "odd": 1.45,
+                    "probability": 76,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El mercado de Empate No Apuesta (DNB) para Wigan Athletic otorga máxima seguridad eliminando el riesgo del empate.",
+                        "statistical": "Probabilidad implícita estimada del 39%. Mercado estándar disponible en 1xBet.",
+                        "market": "Opción segura para boletos combinados o de valor sin arriesgar en mercados volátiles."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 75.5,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Total de Goles (Asian 2.0)",
+                    "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
+                    "odd": 1.22,
+                    "probability": 74,
+                    "valid_for_ticket": false,
+                    "risk": "High",
+                    "reasoning": {
+                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 4.2 goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": "La API indica Over 2.5 a @1.3. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
+                        "market": "La cuota del Asian 2.0 @1.22 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 73.9,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Wigan Athletic",
+                    "odd": 2.25,
+                    "probability": 59,
+                    "risk": "Medium",
+                    "reasoning": {
+                        "tactical": "La formación 4-2-3-1 de Wigan Athletic tiene una ventaja estructural sobre el esquema 4-2-3-1 de Aston Villa U21. El equipo favorito presiona alto con efectividad demostrada en sus últimos 5 partidos combinados. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
+                        "statistical": "La racha reciente de Wigan Athletic (W---D---W---W) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del 44%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de 4.2 para este choque.",
+                        "market": "Se detectaron movimientos de línea favorables hacia Wigan Athletic. Flujo de apuestas sharps fue detectado hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en 48%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 58.6,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Marcador Exacto",
+                    "selection": "1-0",
+                    "odd": 20.0,
+                    "probability": 13,
+                    "risk": "High",
+                    "recommended_stake_usd": 1.0,
+                    "valid_for_ticket": false,
+                    "reasoning": {
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.7% de certeza).",
+                        "statistical": "Apuesta de Alto Retorno (@20.0): inversion fija de $1.00 USD para buscar una ganancia neta de $19.00 USD si el partido termina 3-1.",
+                        "market": "Cuota de valor @20.0 en 1xBet para Marcador Exacto 3-1. Excelente opcion para entradas fijas de 1 dolar."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 12.7,
                     "mc_lambda": 1.785,
                     "mc_mu": 0.8799999999999998
                 }
@@ -4008,7 +4502,7 @@
                     ]
                 },
                 "away": {
-                    "formation": "4-2-3-1",
+                    "formation": "4-3-3",
                     "players": [
                         {
                             "name": "Flores",
@@ -4048,9 +4542,9 @@
                         {
                             "name": "Michel",
                             "number": 6,
-                            "pos": "MCD",
-                            "x": 60,
-                            "y": 72
+                            "pos": "MC",
+                            "x": 70,
+                            "y": 68
                         },
                         {
                             "name": "Brown",
@@ -6242,7 +6736,7 @@
                     "market": "Empate No Apuesta (DNB)",
                     "selection": "Shanghai Shenhua",
                     "odd": 1.72,
-                    "probability": 76,
+                    "probability": 77,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Shanghai Shenhua como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
@@ -6259,7 +6753,7 @@
                     "market": "Empate No Apuesta",
                     "selection": "Shanghai Shenhua",
                     "odd": 1.45,
-                    "probability": 76,
+                    "probability": 77,
                     "risk": "Low",
                     "reasoning": {
                         "tactical": "El mercado de Empate No Apuesta (DNB) para Shanghai Shenhua otorga máxima seguridad eliminando el riesgo del empate.",
@@ -6316,9 +6810,1200 @@
                     "recommended_stake_usd": 1.0,
                     "valid_for_ticket": false,
                     "reasoning": {
-                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.7% de certeza).",
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (13.1% de certeza).",
                         "statistical": "Apuesta de Alto Retorno (@8.5): inversion fija de $1.00 USD para buscar una ganancia neta de $7.50 USD si el partido termina 2-1.",
                         "market": "Cuota de valor @8.5 en 1xBet para Marcador Exacto 2-1. Excelente opcion para entradas fijas de 1 dolar."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 13.1,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                }
+            ],
+            "real_odds": {}
+        },
+        {
+            "id": "match-1027",
+            "home": "Deportivo Recoleta",
+            "away": "Boca Juniors",
+            "home_color": "#1F2937",
+            "home_accent": "#3B82F6",
+            "away_color": "#1F2937",
+            "away_accent": "#EF4444",
+            "league": "CABJ @ DEP",
+            "sport": "Football",
+            "time": "17:00",
+            "date": "2026-08-18",
+            "stadium": "Cancha Principal",
+            "status": "pre",
+            "home_score": 0,
+            "away_score": 0,
+            "home_form": "W---D---W---W",
+            "away_form": "W---W---D---L",
+            "home_injuries": [],
+            "away_injuries": [],
+            "rumors": [],
+            "lineups": {
+                "home": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Martin",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Gómez",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Fournier",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Álvarez",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Camavinga",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Thompson",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Sánchez",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 36
+                        },
+                        {
+                            "name": "Fernández",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 36
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-3-3",
+                    "players": [
+                        {
+                            "name": "Davies",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Walker",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "González",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Wilson",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Saliba",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Clarke",
+                            "number": 10,
+                            "pos": "MC",
+                            "x": 30,
+                            "y": 68
+                        },
+                        {
+                            "name": "Durand",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        },
+                        {
+                            "name": "Torres",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 58
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 2,
+                "away_wins": 2,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2025-12-18",
+                        "score": "0 - 1",
+                        "winner": "Boca Juniors"
+                    },
+                    {
+                        "date": "2026-02-06",
+                        "score": "0 - 2",
+                        "winner": "Boca Juniors"
+                    },
+                    {
+                        "date": "2025-12-23",
+                        "score": "0 - 0",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2026-05-02",
+                        "score": "3 - 2",
+                        "winner": "Deportivo Recoleta"
+                    },
+                    {
+                        "date": "2025-11-01",
+                        "score": "0 - 2",
+                        "winner": "Boca Juniors"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Total de Goles (Asian 2.0)",
+                    "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
+                    "odd": 2.2,
+                    "probability": 75,
+                    "valid_for_ticket": false,
+                    "risk": "High",
+                    "reasoning": {
+                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 2.0 goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": "La API indica Over 2.5 a @2.93. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
+                        "market": "La cuota del Asian 2.0 @2.2 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 74.8,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Goles del Equipo (Individual)",
+                    "selection": "Boca Juniors Más de 1.5 Goles",
+                    "odd": 1.92,
+                    "probability": 75,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "Boca Juniors presenta un xG individual proyectado de 1.2 goles. Su sistema ofensivo con variantes de transición rápida genera múltiples oportunidades de gol ante una defensa rival que ha concedido goles en 4 de sus últimos 5 partidos.",
+                        "statistical": "El 80% de los partidos donde Boca Juniors actúa como favorito termina con al menos 2 goles de su parte. xG individual de Boca Juniors: 1.15 goles esperados en este partido.",
+                        "market": "El mercado de goles individuales por equipo tiene menor varianza que el Total del Partido porque solo depende de un equipo. Cuota: @1.74 con probabilidad real estimada del 55%. Ideal para boletos combinados o apuestas únicas de bajo riesgo."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 74.8,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Resultado 1er Tiempo",
+                    "selection": "Boca Juniors",
+                    "odd": 2.58,
+                    "probability": 53,
+                    "risk": "Medium",
+                    "reasoning": {
+                        "tactical": "El primer tiempo es clave para determinar la dinámica del partido. Boca Juniors tiende a dominar en la segunda parte. La presión inicial favorece al favorito.",
+                        "statistical": "La IA detecta un patrón de inicio consistente en las últimas participaciones de ambos equipos, sugiriendo un dominio táctico temprano o una postura defensiva inicial antes del descanso.",
+                        "market": "Los mercados de primer tiempo ofrecen cuotas más altas que el resultado final al 90'. @2.58 para 'Boca Juniors' al descanso representa un value bet con probabilidad proyectada alineada al modelo."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Ambos Equipos Anotan",
+                    "selection": "No",
+                    "odd": 1.686,
+                    "probability": 51,
+                    "valid_for_ticket": true,
+                    "risk": "Medium",
+                    "reasoning": {
+                        "tactical": "La API indica BTTS No como el lado más probable @1.686 (59% prob). Al menos uno de los equipos tiene un bloque defensivo sólido que limitará al rival.",
+                        "statistical": "BTTS Sí @2.05 (49% prob) vs BTTS No @1.686 (59% prob). La API de 1xBet indica que 'No' es la opción más probable.",
+                        "market": "@1.686 para BTTS No representa mejor valor que el lado contrario (@2.05)."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 50.9,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Más/Menos Goles",
+                    "selection": "Menos de 2.5 Goles",
+                    "odd": 1.3,
+                    "probability": 50,
+                    "direction": "under",
+                    "line": "2.5",
+                    "valid_for_ticket": true,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La cuota real de la API para 'Menos de 2.5 Goles' es @1.3, lo que implica una probabilidad de mercado del 77%. Las casas de apuestas ven alta probabilidad de partido defensivo de pocos goles.",
+                        "statistical": "Probabilidad implícita según cuota de mercado: 77%. Pick validado con datos reales de SportAPI7 en 1xBet.",
+                        "market": "@1.3 para 'Menos de 2.5 Goles' representa el mejor valor de la línea de goles según la API. Under 2.5 tiene mayor probabilidad que el lado contrario (@2.93)."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 49.8,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Marcador Exacto",
+                    "selection": "1-0",
+                    "odd": 9.5,
+                    "probability": 12,
+                    "risk": "High",
+                    "recommended_stake_usd": 1.0,
+                    "valid_for_ticket": false,
+                    "reasoning": {
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.2% de certeza).",
+                        "statistical": "Apuesta de Alto Retorno (@9.5): inversion fija de $1.00 USD para buscar una ganancia neta de $8.50 USD si el partido termina 0-2.",
+                        "market": "Cuota de valor @9.5 en 1xBet para Marcador Exacto 0-2. Excelente opcion para entradas fijas de 1 dolar."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 12.2,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                }
+            ],
+            "real_odds": {
+                "bookmaker": "1xbet",
+                "source": "Odds-API.io (1xbet)",
+                "event_name": "Recoleta FC vs Boca Juniors",
+                "date": "2026-08-18T22:00:00Z",
+                "home_win": 5.55,
+                "h2h_home": 5.55,
+                "draw": 4.02,
+                "h2h_draw": 4.02,
+                "away_win": 1.6,
+                "h2h_away": 1.6,
+                "dc_1x": 2.385,
+                "dc_x2": 1.173,
+                "dc_12": 1.274,
+                "over_2.5": 2.93,
+                "under_2.5": 1.3,
+                "btts_yes": 2.05,
+                "btts_no": 1.686,
+                "dnb_home": 4.17,
+                "dnb_away": 1.2
+            }
+        },
+        {
+            "id": "match-1028",
+            "home": "São Paulo",
+            "away": "Bolívar",
+            "home_color": "#1F2937",
+            "home_accent": "#3B82F6",
+            "away_color": "#1F2937",
+            "away_accent": "#EF4444",
+            "league": "BOL @ SAO",
+            "sport": "Football",
+            "time": "19:30",
+            "date": "2026-08-18",
+            "stadium": "Cancha Principal",
+            "status": "pre",
+            "home_score": 0,
+            "away_score": 0,
+            "home_form": "W---D---W---W",
+            "away_form": "W---W---D---L",
+            "home_injuries": [],
+            "away_injuries": [],
+            "rumors": [],
+            "lineups": {
+                "home": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Aspas",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "David",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Bernard",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Morata",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 18
+                        },
+                        {
+                            "name": "Fernández",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Dubois",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 28
+                        },
+                        {
+                            "name": "Sánchez",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Ramos",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Camavinga",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Yamal",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Thomas",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Lefevre",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "David",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Clarke",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "Sánchez",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 1,
+                "away_wins": 1,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2026-06-11",
+                        "score": "2 - 2",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2026-03-09",
+                        "score": "3 - 3",
+                        "winner": "Draw"
+                    },
+                    {
+                        "date": "2026-03-16",
+                        "score": "2 - 3",
+                        "winner": "Bolívar"
+                    },
+                    {
+                        "date": "2025-12-13",
+                        "score": "3 - 2",
+                        "winner": "São Paulo"
+                    },
+                    {
+                        "date": "2026-03-08",
+                        "score": "2 - 0",
+                        "winner": "São Paulo"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Doble Oportunidad",
+                    "selection": "São Paulo o Empate",
+                    "odd": 1.087,
+                    "probability": 82,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de São Paulo hace casi imposible un resultado diferente al cubierto por esta apuesta.",
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 92%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.08 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 81.8,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta (DNB)",
+                    "selection": "São Paulo",
+                    "odd": 1.1,
+                    "probability": 76,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con São Paulo como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 20% según el modelo. El 76% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.1 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 76.5,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta",
+                    "selection": "São Paulo",
+                    "odd": 1.12,
+                    "probability": 76,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El mercado de Empate No Apuesta (DNB) para São Paulo otorga máxima seguridad eliminando el riesgo del empate.",
+                        "statistical": "Probabilidad implícita estimada del 64%. Mercado estándar disponible en 1xBet.",
+                        "market": "Opción segura para boletos combinados o de valor sin arriesgar en mercados volátiles."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 76.5,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Total de Goles (Asian 2.0)",
+                    "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
+                    "odd": 2.36,
+                    "probability": 74,
+                    "valid_for_ticket": false,
+                    "risk": "High",
+                    "reasoning": {
+                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 4.4 goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": "La API indica Over 2.5 a @3.15. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
+                        "market": "La cuota del Asian 2.0 @2.36 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 74.5,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Goles del Equipo (Individual)",
+                    "selection": "São Paulo Más de 1.5 Goles",
+                    "odd": 1.87,
+                    "probability": 74,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "São Paulo presenta un xG individual proyectado de 2.7 goles. Su sistema ofensivo con juego posicional por las bandas genera múltiples oportunidades de gol ante una defensa rival que ha concedido goles en 5 de sus últimos 5 partidos.",
+                        "statistical": "El 90% de los partidos donde São Paulo actúa como favorito termina con al menos 2 goles de su parte. xG individual de São Paulo: 2.43 goles esperados en este partido.",
+                        "market": "El mercado de goles individuales por equipo tiene menor varianza que el Total del Partido porque solo depende de un equipo. Cuota: @1.38 con probabilidad real estimada del 63%. Ideal para boletos combinados o apuestas únicas de bajo riesgo."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 74.5,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Marcador Exacto",
+                    "selection": "1-0",
+                    "odd": 20.0,
+                    "probability": 13,
+                    "risk": "High",
+                    "recommended_stake_usd": 1.0,
+                    "valid_for_ticket": false,
+                    "reasoning": {
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.9% de certeza).",
+                        "statistical": "Apuesta de Alto Retorno (@20.0): inversion fija de $1.00 USD para buscar una ganancia neta de $19.00 USD si el partido termina 3-1.",
+                        "market": "Cuota de valor @20.0 en 1xBet para Marcador Exacto 3-1. Excelente opcion para entradas fijas de 1 dolar."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 12.9,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                }
+            ],
+            "real_odds": {
+                "bookmaker": "1xbet",
+                "source": "Odds-API.io (1xbet)",
+                "event_name": "Sao Paulo FC SP vs Club Bolivar",
+                "date": "2026-08-19T00:30:00Z",
+                "home_win": 1.395,
+                "h2h_home": 1.395,
+                "draw": 4.8,
+                "h2h_draw": 4.8,
+                "away_win": 7.8,
+                "h2h_away": 7.8,
+                "dc_1x": 1.087,
+                "dc_x2": 3.025,
+                "dc_12": 1.214,
+                "over_2.5": 3.15,
+                "under_2.5": 1.26,
+                "btts_yes": 2.11,
+                "btts_no": 1.649,
+                "dnb_home": 1.1,
+                "dnb_away": 6.17
+            }
+        },
+        {
+            "id": "match-1029",
+            "home": "Deportivo Riestra",
+            "away": "Gimnasia La Plata",
+            "home_color": "#1F2937",
+            "home_accent": "#3B82F6",
+            "away_color": "#1F2937",
+            "away_accent": "#EF4444",
+            "league": "GLP @ RIE",
+            "sport": "Football",
+            "time": "15:00",
+            "date": "2026-08-18",
+            "stadium": "Cancha Principal",
+            "status": "pre",
+            "home_score": 0,
+            "away_score": 0,
+            "home_form": "W---D---W---W",
+            "away_form": "W---W---D---L",
+            "home_injuries": [],
+            "away_injuries": [],
+            "rumors": [],
+            "lineups": {
+                "home": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Brown",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Gómez",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Taylor",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Rice",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Smith",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 28
+                        },
+                        {
+                            "name": "Mbappé",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Ruiz",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 20,
+                            "y": 36
+                        },
+                        {
+                            "name": "Jones",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Bernard",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Thomas",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Thompson",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Smith",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Martin",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 15,
+                            "y": 80
+                        },
+                        {
+                            "name": "Nico",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Wright",
+                            "number": 7,
+                            "pos": "ED",
+                            "x": 80,
+                            "y": 64
+                        },
+                        {
+                            "name": "Davies",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 3,
+                "away_wins": 1,
+                "draws": 0,
+                "last_results": [
+                    {
+                        "date": "2025-09-29",
+                        "score": "2 - 0",
+                        "winner": "Deportivo Riestra"
+                    },
+                    {
+                        "date": "2026-07-01",
+                        "score": "1 - 0",
+                        "winner": "Deportivo Riestra"
+                    },
+                    {
+                        "date": "2026-01-31",
+                        "score": "3 - 0",
+                        "winner": "Deportivo Riestra"
+                    },
+                    {
+                        "date": "2026-01-29",
+                        "score": "1 - 0",
+                        "winner": "Deportivo Riestra"
+                    },
+                    {
+                        "date": "2026-06-11",
+                        "score": "3 - 2",
+                        "winner": "Deportivo Riestra"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Doble Oportunidad",
+                    "selection": "Deportivo Riestra o Empate",
+                    "odd": 1.47,
+                    "probability": 82,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Deportivo Riestra hace casi imposible un resultado diferente al cubierto por esta apuesta.",
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 68%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.47 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 82.1,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta (DNB)",
+                    "selection": "Deportivo Riestra",
+                    "odd": 1.72,
+                    "probability": 77,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Deportivo Riestra como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 23% según el modelo. El 71% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.72 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 76.9,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta",
+                    "selection": "Deportivo Riestra",
+                    "odd": 1.45,
+                    "probability": 77,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El mercado de Empate No Apuesta (DNB) para Deportivo Riestra otorga máxima seguridad eliminando el riesgo del empate.",
+                        "statistical": "Probabilidad implícita estimada del 39%. Mercado estándar disponible en 1xBet.",
+                        "market": "Opción segura para boletos combinados o de valor sin arriesgar en mercados volátiles."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 76.9,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Total de Goles (Asian 2.0)",
+                    "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
+                    "odd": 1.22,
+                    "probability": 75,
+                    "valid_for_ticket": false,
+                    "risk": "High",
+                    "reasoning": {
+                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 2.4 goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": "La API indica Over 2.5 a @1.96. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
+                        "market": "La cuota del Asian 2.0 @1.22 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 75.0,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Deportivo Riestra",
+                    "odd": 2.25,
+                    "probability": 60,
+                    "risk": "Medium",
+                    "reasoning": {
+                        "tactical": "La formación 4-2-3-1 de Deportivo Riestra tiene una ventaja estructural sobre el esquema 4-2-3-1 de Gimnasia La Plata. El equipo favorito presiona alto con efectividad demostrada en sus últimos 5 partidos combinados. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
+                        "statistical": "La racha reciente de Deportivo Riestra (W---D---W---W) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del 44%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de 2.4 para este choque.",
+                        "market": "Se detectaron movimientos de línea favorables hacia Deportivo Riestra. Flujo de apuestas sharps fue detectado hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en 19%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 59.7,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Marcador Exacto",
+                    "selection": "1-0",
+                    "odd": 8.5,
+                    "probability": 12,
+                    "risk": "High",
+                    "recommended_stake_usd": 1.0,
+                    "valid_for_ticket": false,
+                    "reasoning": {
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.0% de certeza).",
+                        "statistical": "Apuesta de Alto Retorno (@8.5): inversion fija de $1.00 USD para buscar una ganancia neta de $7.50 USD si el partido termina 2-1.",
+                        "market": "Cuota de valor @8.5 en 1xBet para Marcador Exacto 2-1. Excelente opcion para entradas fijas de 1 dolar."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 12.0,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                }
+            ],
+            "real_odds": {}
+        },
+        {
+            "id": "match-1030",
+            "home": "Banfield",
+            "away": "Midland",
+            "home_color": "#1F2937",
+            "home_accent": "#3B82F6",
+            "away_color": "#1F2937",
+            "away_accent": "#EF4444",
+            "league": "MID @ BAN",
+            "sport": "Football",
+            "time": "19:15",
+            "date": "2026-08-18",
+            "stadium": "Cancha Principal",
+            "status": "pre",
+            "home_score": 0,
+            "away_score": 0,
+            "home_form": "W---D---W---W",
+            "away_form": "W---W---D---L",
+            "home_injuries": [],
+            "away_injuries": [],
+            "rumors": [],
+            "lineups": {
+                "home": {
+                    "formation": "3-5-2",
+                    "players": [
+                        {
+                            "name": "Johnson",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 8
+                        },
+                        {
+                            "name": "Bellingham",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 15,
+                            "y": 20
+                        },
+                        {
+                            "name": "Roux",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 18
+                        },
+                        {
+                            "name": "Rodríguez",
+                            "number": 3,
+                            "pos": "LI",
+                            "x": 85,
+                            "y": 20
+                        },
+                        {
+                            "name": "Saka",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 28
+                        },
+                        {
+                            "name": "Yamal",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 28
+                        },
+                        {
+                            "name": "Roberts",
+                            "number": 10,
+                            "pos": "MCO",
+                            "x": 50,
+                            "y": 36
+                        },
+                        {
+                            "name": "Simon",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 80,
+                            "y": 36
+                        },
+                        {
+                            "name": "González",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 45
+                        }
+                    ]
+                },
+                "away": {
+                    "formation": "4-2-3-1",
+                    "players": [
+                        {
+                            "name": "Petit",
+                            "number": 1,
+                            "pos": "PO",
+                            "x": 50,
+                            "y": 92
+                        },
+                        {
+                            "name": "Martin",
+                            "number": 2,
+                            "pos": "LD",
+                            "x": 85,
+                            "y": 80
+                        },
+                        {
+                            "name": "Thomas",
+                            "number": 4,
+                            "pos": "DFC",
+                            "x": 62,
+                            "y": 82
+                        },
+                        {
+                            "name": "Gómez",
+                            "number": 5,
+                            "pos": "DFC",
+                            "x": 38,
+                            "y": 82
+                        },
+                        {
+                            "name": "Robert",
+                            "number": 6,
+                            "pos": "MCD",
+                            "x": 60,
+                            "y": 72
+                        },
+                        {
+                            "name": "Williams",
+                            "number": 8,
+                            "pos": "MCD",
+                            "x": 40,
+                            "y": 72
+                        },
+                        {
+                            "name": "Gavi",
+                            "number": 11,
+                            "pos": "EI",
+                            "x": 20,
+                            "y": 64
+                        },
+                        {
+                            "name": "Ramos",
+                            "number": 9,
+                            "pos": "DC",
+                            "x": 50,
+                            "y": 55
+                        }
+                    ]
+                }
+            },
+            "h2h": {
+                "home_wins": 3,
+                "away_wins": 2,
+                "draws": 1,
+                "last_results": [
+                    {
+                        "date": "2025-12-16",
+                        "score": "0 - 1",
+                        "winner": "Midland"
+                    },
+                    {
+                        "date": "2026-02-10",
+                        "score": "0 - 3",
+                        "winner": "Midland"
+                    },
+                    {
+                        "date": "2025-10-06",
+                        "score": "2 - 3",
+                        "winner": "Midland"
+                    },
+                    {
+                        "date": "2025-10-22",
+                        "score": "2 - 3",
+                        "winner": "Midland"
+                    },
+                    {
+                        "date": "2026-04-07",
+                        "score": "2 - 1",
+                        "winner": "Banfield"
+                    }
+                ]
+            },
+            "picks": [
+                {
+                    "market": "Doble Oportunidad",
+                    "selection": "Banfield o Empate",
+                    "odd": 1.225,
+                    "probability": 81,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "La Doble Oportunidad es el mercado más seguro para este partido dado el desequilibrio de fuerzas. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición. La ventaja táctica de Banfield hace casi imposible un resultado diferente al cubierto por esta apuesta.",
+                        "statistical": "El modelo de proyección bayesiano de la IA estima una probabilidad de éxito superior al 81%, sustentado por la consistencia defensiva del favorito en sus recientes presentaciones oficiales.",
+                        "market": "La cuota @1.23 ofrece protección ante el empate manteniendo valor positivo. Recomendado para estrategias de capital protegido o combinadas con cuotas altas de otros partidos."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 81.2,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta (DNB)",
+                    "selection": "Banfield",
+                    "odd": 1.37,
+                    "probability": 76,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El 'Empate No Apuesta' elimina el único escenario adverso (empate) y te protege tu inversión si el partido termina igualado. Con Banfield como favorito claro, este mercado ofrece la máxima seguridad. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
+                        "statistical": "La probabilidad de empate en este compromiso es de solo 30% según el modelo. El 67% de los partidos entre equipos con esta diferencia de rating se resuelven con un ganador claro.",
+                        "market": "@1.37 es una cuota excelente para el DNB considerando el perfil del partido. Estrategia recomendada para bankrolls conservadores que buscan consistencia a largo plazo."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 75.6,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Empate No Apuesta",
+                    "selection": "Banfield",
+                    "odd": 1.42,
+                    "probability": 76,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "El mercado de Empate No Apuesta (DNB) para Banfield otorga máxima seguridad eliminando el riesgo del empate.",
+                        "statistical": "Probabilidad implícita estimada del 45%. Mercado estándar disponible en 1xBet.",
+                        "market": "Opción segura para boletos combinados o de valor sin arriesgar en mercados volátiles."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 75.6,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Total de Goles (Asian 2.0)",
+                    "selection": "Más de 2 Goles (Asian 2.0 — Empate a 2 devuelve apuesta)",
+                    "odd": 2.5,
+                    "probability": 74,
+                    "valid_for_ticket": false,
+                    "risk": "High",
+                    "reasoning": {
+                        "tactical": "El Asiático Total 2.0 es el mercado más seguro de goles: si el partido termina con exactamente 2 goles (1-1, 2-0, 0-2) tu apuesta se ANULA y recuperas el dinero. Solo pierdes con 0 o 1 gol. El xG proyectado de 3.4 goles para este partido respalda que terminará con 2+ anotaciones.",
+                        "statistical": "La API indica Over 2.5 a @3.97. Se requiere cautela: la cuota refleja una probabilidad moderada de partido goleador.",
+                        "market": "La cuota del Asian 2.0 @2.5 tiene protección ante marcadores de 2 goles exactos. Solo recomendado cuando over_2.5 < 2.30 según la API."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 74.0,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Resultado Final (1X2)",
+                    "selection": "Banfield",
+                    "odd": 1.968,
+                    "probability": 58,
+                    "risk": "Medium",
+                    "reasoning": {
+                        "tactical": "La formación 3-5-2 de Banfield tiene una ventaja estructural sobre el esquema 4-2-3-1 de Midland. El equipo favorito presiona alto con efectividad demostrada en sus últimos 5 partidos combinados. El factor cancha propia puede beneficiar al equipo que juega como local con el apoyo de su afición.",
+                        "statistical": "La racha reciente de Banfield (W---D---W---W) supera estadísticamente a la de su oponente. El modelo de simulación bayesiana de la IA proyecta una probabilidad de victoria directa del 50%, representando un Edge de valor sobre la línea inicial. Se espera un promedio de goles proyectado de 3.4 para este choque.",
+                        "market": "Se detectaron movimientos de línea favorables hacia Banfield. Flujo de apuestas sharps fue detectado hacia este resultado. El Factor Caos (variables impredecibles del día) se estimó en 70%, dentro del rango aceptable. La cuota actual ofrece valor matemático positivo según el modelo actuarial de la IA."
+                    },
+                    "status": "pending",
+                    "mc_simulated": true,
+                    "mc_winrate": 58.1,
+                    "mc_lambda": 1.785,
+                    "mc_mu": 0.8799999999999998
+                },
+                {
+                    "market": "Marcador Exacto",
+                    "selection": "1-0",
+                    "odd": 20.0,
+                    "probability": 13,
+                    "risk": "High",
+                    "recommended_stake_usd": 1.0,
+                    "valid_for_ticket": false,
+                    "reasoning": {
+                        "tactical": "El modelo de Poisson y 10,000 simulaciones identifican el marcador 1-0 como el resultado tácticamente más sólido y probable según xG (12.7% de certeza).",
+                        "statistical": "Apuesta de Alto Retorno (@20.0): inversion fija de $1.00 USD para buscar una ganancia neta de $19.00 USD si el partido termina 3-1.",
+                        "market": "Cuota de valor @20.0 en 1xBet para Marcador Exacto 3-1. Excelente opcion para entradas fijas de 1 dolar."
                     },
                     "status": "pending",
                     "mc_simulated": true,
@@ -6327,7 +8012,27 @@
                     "mc_mu": 0.8799999999999998
                 }
             ],
-            "real_odds": {}
+            "real_odds": {
+                "bookmaker": "1xbet",
+                "source": "Odds-API.io (1xbet)",
+                "event_name": "CA Banfield vs CA Ferrocarril Midland",
+                "date": "2026-08-19T00:15:00Z",
+                "home_win": 1.968,
+                "h2h_home": 1.968,
+                "draw": 3.305,
+                "h2h_draw": 3.305,
+                "away_win": 4.035,
+                "h2h_away": 4.035,
+                "dc_1x": 1.225,
+                "dc_x2": 1.799,
+                "dc_12": 1.314,
+                "over_2.5": 3.97,
+                "under_2.5": 1.16,
+                "btts_yes": 2.16,
+                "btts_no": 1.618,
+                "dnb_home": 1.37,
+                "dnb_away": 2.81
+            }
         },
         {
             "id": "match-1021",
@@ -8592,7 +10297,7 @@
             },
             "h2h": {
                 "home_wins": 2,
-                "away_wins": 4,
+                "away_wins": 2,
                 "draws": 0,
                 "last_results": [
                     {
@@ -9028,7 +10733,27 @@
                     "mc_mu": 0.8799999999999998
                 }
             ],
-            "real_odds": {}
+            "real_odds": {
+                "bookmaker": "1xbet",
+                "source": "Odds-API.io (1xbet)",
+                "event_name": "Nautico PE vs Ceara SC CE",
+                "date": "2026-08-19T00:30:00Z",
+                "home_win": 2.21,
+                "h2h_home": 2.21,
+                "draw": 2.85,
+                "h2h_draw": 2.85,
+                "away_win": 3.7,
+                "h2h_away": 3.7,
+                "dc_1x": 1.24,
+                "dc_x2": 1.61,
+                "dc_12": 1.38,
+                "over_2.5": 4.525,
+                "under_2.5": 1.117,
+                "btts_yes": 1.85,
+                "btts_no": 1.854,
+                "dnb_home": 1.43,
+                "dnb_away": 2.4
+            }
         },
         {
             "id": "match-1030",
@@ -14140,7 +15865,7 @@
                     "formation": "Singles",
                     "players": [
                         {
-                            "name": "Daniil Medvedev",
+                            "name": "Lorenzo Musetti",
                             "number": 1,
                             "pos": "TEN",
                             "x": 50,
@@ -14152,7 +15877,7 @@
                     "formation": "Singles",
                     "players": [
                         {
-                            "name": "Brandon Nakashima",
+                            "name": "Michael Zheng",
                             "number": 1,
                             "pos": "TEN",
                             "x": 50,
@@ -14201,15 +15926,15 @@
                     "probability": 92,
                     "risk": "Low",
                     "reasoning": {
-                        "tactical": "Apuesta de altísima seguridad: Daniil Medvedev solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
-                        "statistical": "Con una probabilidad superior al 85%, es estadísticamente improbable que Daniil Medvedev pierda en sets corridos (2-0 en contra).",
+                        "tactical": "Apuesta de altísima seguridad: Lorenzo Musetti solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
+                        "statistical": "Con una probabilidad superior al 85%, es estadísticamente improbable que Lorenzo Musetti pierda en sets corridos (2-0 en contra).",
                         "market": "Mercado Hándicap de Sets (+1.5) utilizado frecuentemente por tipsters conservadores para blindar cuotas de boletos seguros."
                     },
                     "status": "pending"
                 },
                 {
                     "market": "Ganador (Moneyline)",
-                    "selection": "Daniil Medvedev",
+                    "selection": "Lorenzo Musetti",
                     "odd": 1.11,
                     "probability": 90,
                     "risk": "Low",
@@ -14240,8 +15965,8 @@
                     "probability": 81,
                     "risk": "High",
                     "reasoning": {
-                        "tactical": "Daniil Medvedev domina el servicio y la devolución en esta superficie. Se proyecta una victoria solvente en 2 sets directos (2-0).",
-                        "statistical": "Con un 90% de efectividad proyectada, Daniil Medvedev resuelve más del 78% de sus victorias sin ceder parciales.",
+                        "tactical": "Lorenzo Musetti domina el servicio y la devolución en esta superficie. Se proyecta una victoria solvente en 2 sets directos (2-0).",
+                        "statistical": "Con un 90% de efectividad proyectada, Lorenzo Musetti resuelve más del 78% de sus victorias sin ceder parciales.",
                         "market": "Mercado de Hándicap de Sets (-1.5) con alto valor estadístico (+EV) para favoritos en partidos al mejor de 3 sets."
                     },
                     "status": "pending"
@@ -14519,7 +16244,7 @@
                 {
                     "market": "Ganador 1er Set",
                     "selection": "Felix Auger-Aliassime Ganador 1er Set",
-                    "odd": 1.68,
+                    "odd": 1.52,
                     "probability": 82,
                     "risk": "Low",
                     "reasoning": {
@@ -15522,6 +17247,21 @@
                         "date": "2026-04-02",
                         "score": "104 - 77",
                         "winner": "Mirra Andreeva"
+                    },
+                    {
+                        "date": "2026-04-03",
+                        "score": "108 - 105",
+                        "winner": "Mirra Andreeva"
+                    },
+                    {
+                        "date": "2025-08-29",
+                        "score": "86 - 99",
+                        "winner": "Janice Tjen"
+                    },
+                    {
+                        "date": "2026-04-18",
+                        "score": "94 - 95",
+                        "winner": "Janice Tjen"
                     }
                 ]
             },
@@ -15562,6 +17302,19 @@
                         "tactical": "Mirra Andreeva destaca por su alta efectividad al inicio de los partidos, ganando el primer set en 87% de sus últimas apariciones.",
                         "statistical": "Probabilidad proyectada del 75% para adueñarse de la primera manga.",
                         "market": "Mercado rápido de primera manga con excelente retorno en apuestas simples."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Total de Sets (Más/Menos)",
+                    "selection": "Menos de 2.5 Sets",
+                    "odd": 1.93,
+                    "probability": 74,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "Dado el nivel de Mirra Andreeva y las condiciones del partido, la probabilidad de que el match se resuelva de forma contundente en 2 sets es alta. El estilo de juego de Mirra Andreeva tiende a cerrar partidos rápido.",
+                        "statistical": "El modelo de sets estima una probabilidad del 76% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
+                        "market": "Este mercado acumula 62% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
                     },
                     "status": "pending"
                 },
@@ -16012,7 +17765,7 @@
                 {
                     "market": "Ganador 1er Set",
                     "selection": "Marta Kostyuk Ganador 1er Set",
-                    "odd": 1.57,
+                    "odd": 1.43,
                     "probability": 59,
                     "risk": "Medium",
                     "reasoning": {
@@ -16288,7 +18041,7 @@
                     "reasoning": {
                         "tactical": "Aryna Sabalenka demuestra superioridad táctica con un primer servicio que supera el 65% de efectividad en superficies similares. Su estilo de juego (W---W---D---L en racha) contrarresta directamente el patrón de juego de Wang Xinyu, que además arrastra 0 molestia(s) física(s) que limitan su desplazamiento lateral y alcance en la red.",
                         "statistical": "Los datos de efectividad de primer servicio, Break Points ganados y porcentaje de retención proyectan un 77% de probabilidad de victoria para Aryna Sabalenka. El modelo de sets apunta a una definición rápida con alta confianza estadística.",
-                        "market": "Las casas de apuestas movieron la línea a favor de Aryna Sabalenka en las últimas horas, señal de dinero inteligente (sharps) apostando. El Factor Caos se calculó en 42%, dentro del margen manejable."
+                        "market": "Las casas de apuestas movieron la línea a favor de Aryna Sabalenka en las últimas horas, señal de dinero inteligente (sharps) apostando. El Factor Caos se calculó en 62%, dentro del margen manejable."
                     },
                     "status": "pending"
                 },
@@ -16328,6 +18081,19 @@
                         "tactical": "Aryna Sabalenka domina el servicio y la devolución en esta superficie. Se proyecta una victoria solvente en 2 sets directos (2-0).",
                         "statistical": "Con un 77% de efectividad proyectada, Aryna Sabalenka resuelve más del 78% de sus victorias sin ceder parciales.",
                         "market": "Mercado de Hándicap de Sets (-1.5) con alto valor estadístico (+EV) para favoritos en partidos al mejor de 3 sets."
+                    },
+                    "status": "pending"
+                },
+                {
+                    "market": "Total de Sets (Más/Menos)",
+                    "selection": "Menos de 2.5 Sets",
+                    "odd": 1.92,
+                    "probability": 60,
+                    "risk": "Low",
+                    "reasoning": {
+                        "tactical": "Dado el nivel de Aryna Sabalenka y las condiciones del partido, la probabilidad de que el match se resuelva de forma contundente en 2 sets es alta. El estilo de juego de Aryna Sabalenka tiende a cerrar partidos rápido.",
+                        "statistical": "El modelo de sets estima una probabilidad del 56% de que el encuentro se defina en el número de sets seleccionado, indicando poca resistencia entre ambos competidores.",
+                        "market": "Este mercado acumula 60% del volumen de apuestas orientado al Menos de 2.5 sets. La cuota actual representa valor positivo (+EV) según el modelo de Kelly Criterion adaptado de la IA."
                     },
                     "status": "pending"
                 }
@@ -16776,7 +18542,18 @@
                     "status": "pending"
                 }
             ],
-            "real_odds": {}
+            "real_odds": {
+                "bookmaker": "1xbet",
+                "source": "Odds-API.io (1xbet)",
+                "event_name": "Philadelphia Phillies vs Miami Marlins",
+                "date": "2026-08-18T22:40:00Z",
+                "home_win": 1.42,
+                "h2h_home": 1.42,
+                "away_win": 2.87,
+                "h2h_away": 2.87,
+                "over_2.5": 2.81,
+                "under_2.5": 1.39
+            }
         },
         {
             "id": "match-1067",
@@ -17449,12 +19226,12 @@
             "rumors": [],
             "lineups": {
                 "home": {
-                    "formation": "5 Titular",
+                    "formation": "Singles",
                     "players": [
                         {
-                            "name": "Randle",
-                            "number": 30,
-                            "pos": "B",
+                            "name": "Cleveland Guardians",
+                            "number": 1,
+                            "pos": "TEN",
                             "x": 50,
                             "y": 15
                         },
@@ -17489,7 +19266,7 @@
                     ]
                 },
                 "away": {
-                    "formation": "5 Titular",
+                    "formation": "Singles",
                     "players": [
                         {
                             "name": "Wembanyama",
@@ -17706,8 +19483,8 @@
                 }
             },
             "h2h": {
-                "home_wins": 1,
-                "away_wins": 4,
+                "home_wins": 4,
+                "away_wins": 1,
                 "draws": 0,
                 "last_results": [
                     {
@@ -17915,7 +19692,7 @@
                     "selection": "New York Yankees +1.5 Sets",
                     "odd": 1.29,
                     "probability": 62,
-                    "risk": "Low",
+                    "risk": "Medium",
                     "reasoning": {
                         "tactical": "Apuesta de altísima seguridad: New York Yankees solo necesita ganar 1 set en todo el partido para acertar. Su nivel base garantiza competitividad extrema.",
                         "statistical": "Con una probabilidad superior al 85%, es estadísticamente improbable que New York Yankees pierda en sets corridos (2-0 en contra).",
@@ -19564,8 +21341,8 @@
                 }
             },
             "h2h": {
-                "home_wins": 4,
-                "away_wins": 3,
+                "home_wins": 1,
+                "away_wins": 1,
                 "draws": 0,
                 "last_results": [
                     {
@@ -20169,7 +21946,7 @@
         "recommendation_stake": 6.0
     },
     "star_ticket_3": {
-        "type": "Simple",
+        "type": "Combinado",
         "selections": [
             {
                 "match": "Kansas City Royals vs Athletics",
