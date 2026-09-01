@@ -3232,13 +3232,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Clear history button handler
         if (btnClearBets) {
-            btnClearBets.onclick = () => {
+            btnClearBets.onclick = async () => {
                 if (confirm("¿Estás seguro de que deseas vaciar todo tu historial de apuestas? Esto reiniciará tu bankroll.")) {
                     userBets = [];
                     localStorage.setItem("user_bets", JSON.stringify(userBets));
+                    
+                    // Asegurar que también se borre en la nube si hay sincronización activa
+                    if (typeof SyncManager !== 'undefined' && SyncManager.pushState) {
+                        await SyncManager.pushState(true, true);
+                    }
+                    
                     updateBankrollMetrics();
                     populateBetsTable();
                     updateBankrollChart();
+                    alert("Historial limpiado correctamente. Tu nuevo balance base ha sido establecido.");
                 }
             };
         }
