@@ -3234,18 +3234,36 @@ document.addEventListener("DOMContentLoaded", () => {
         if (btnClearBets) {
             btnClearBets.onclick = async () => {
                 if (confirm("¿Estás seguro de que deseas vaciar todo tu historial de apuestas? Esto reiniciará tu bankroll.")) {
+                    localStorage.removeItem("user_bets");
+                    localStorage.removeItem("escalera_current_run");
+                    localStorage.removeItem("escalera_history");
                     userBets = [];
-                    localStorage.setItem("user_bets", JSON.stringify(userBets));
                     
-                    // Asegurar que también se borre en la nube si hay sincronización activa
-                    if (typeof SyncManager !== 'undefined' && SyncManager.pushState) {
-                        await SyncManager.pushState(true, true);
+                    if (typeof SyncManager !== 'undefined') {
+                        // Forzar el estado vacío directamente a la API saltando la lógica interna
+                        const emptyState = {
+                            ub: [],
+                            user_bets: "[]",
+                            sb: localStorage.getItem("starting_bankroll") || "53.50",
+                            starting_bankroll: localStorage.getItem("starting_bankroll") || "53.50",
+                            ed: "1",
+                            ess: "10",
+                            ecs: "10",
+                            ecr: [],
+                            eh: [],
+                            ts: Date.now() + 100000 // forzar timestamp futuro
+                        };
+                        try {
+                            await fetch("/api/sync", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(emptyState)
+                            });
+                        } catch(e) {}
                     }
                     
-                    updateBankrollMetrics();
-                    populateBetsTable();
-                    updateBankrollChart();
                     alert("Historial limpiado correctamente. Tu nuevo balance base ha sido establecido.");
+                    location.reload();
                 }
             };
         }
