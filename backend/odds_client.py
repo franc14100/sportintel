@@ -323,21 +323,31 @@ class OddsClient:
                 if "no" in entry: result["btts_no"] = float(entry["no"])
 
             elif "total" in m_name or "over/under" in m_name:
+                # Determinar si es un total global, del local o del visitante (Player/Team Totals)
+                prefix = ""
+                if "home" in m_name or "local" in m_name:
+                    prefix = "home_"
+                elif "away" in m_name or "visit" in m_name:
+                    prefix = "away_"
+
                 for line_entry in odds_entries:
-                    total_line = line_entry.get("line") or line_entry.get("total") or 2.5
-                    try:
-                        total_float = float(total_line)
-                        if total_float == 2.5:
-                            if "over" in line_entry: result["over_2.5"] = float(line_entry["over"])
-                            if "under" in line_entry: result["under_2.5"] = float(line_entry["under"])
-                        elif total_float == 1.5:
-                            if "over" in line_entry: result["over_1.5"] = float(line_entry["over"])
-                            if "under" in line_entry: result["under_1.5"] = float(line_entry["under"])
-                        elif total_float == 3.5:
-                            if "over" in line_entry: result["over_3.5"] = float(line_entry["over"])
-                            if "under" in line_entry: result["under_3.5"] = float(line_entry["under"])
-                    except Exception:
-                        pass
+                    total_line = line_entry.get("line") or line_entry.get("total") or line_entry.get("hdp")
+                    if total_line is not None:
+                        try:
+                            total_float = float(total_line)
+                            if "over" in line_entry: result[f"{prefix}over_{total_float}"] = float(line_entry["over"])
+                            if "under" in line_entry: result[f"{prefix}under_{total_float}"] = float(line_entry["under"])
+                        except Exception: pass
+
+            elif "spread" in m_name or "handicap" in m_name or "hcap" in m_name:
+                for line_entry in odds_entries:
+                    hdp = line_entry.get("hdp") or line_entry.get("line")
+                    if hdp is not None:
+                        try:
+                            hdp_float = float(hdp)
+                            if "home" in line_entry: result[f"hdp_home_{hdp_float}"] = float(line_entry["home"])
+                            if "away" in line_entry: result[f"hdp_away_{hdp_float}"] = float(line_entry["away"])
+                        except Exception: pass
 
             # Mercados de Córners (Totales e Individuales)
             elif "corners totals" in m_name:

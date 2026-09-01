@@ -2649,12 +2649,31 @@ def generate_daily_sports_data():
         wins = 0
         for _ in range(iterations):
             if sport == 'Tennis':
-                p_win_set = min(0.92, max(0.20, prob / 100.0))
-                s_h = 1 if random.random() < p_win_set else 0
-                s_a = 1 - s_h
-                s_h += 1 if random.random() < p_win_set else 0
-                s_a = 2 - s_h if s_h < 2 else s_a
-                h_g, a_g = (2, 0) if s_h == 2 else (0, 2)
+                p_hold_h = min(0.95, max(0.60, 0.70 + (prob/100.0 - 0.5) * 0.4))
+                p_hold_a = min(0.95, max(0.60, 0.70 - (prob/100.0 - 0.5) * 0.4))
+                s_h, s_a, tot_games = 0, 0, 0
+                for _set in range(3):
+                    g_h, g_a = 0, 0
+                    server = 1 if _set % 2 == 0 else 0
+                    while True:
+                        if server == 1:
+                            if random.random() < p_hold_h: g_h += 1
+                            else: g_a += 1
+                        else:
+                            if random.random() < p_hold_a: g_a += 1
+                            else: g_h += 1
+                        server = 1 - server
+                        if g_h >= 6 and g_h - g_a >= 2:
+                            s_h += 1; tot_games += (g_h + g_a); break
+                        if g_a >= 6 and g_a - g_h >= 2:
+                            s_a += 1; tot_games += (g_h + g_a); break
+                        if g_h == 6 and g_a == 6:
+                            if random.random() < (prob/100.0): s_h += 1
+                            else: s_a += 1
+                            tot_games += 13; break
+                    if s_h == 2 or s_a == 2: break
+                h_g, a_g = s_h, s_a
+                tot_val = tot_games if ('juegos' in str(mkt).lower() or 'games' in str(mkt).lower()) else (s_h + s_a)
             else:
                 L_h = math.exp(-lmbda * random.uniform(0.88, 1.12))
                 k_h = 0; p_h = 1.0
@@ -2673,8 +2692,15 @@ def generate_daily_sports_data():
                     if h_g == a_g and h_g == 0:
                         h_g, a_g = 1, 0
 
-            tot = h_g + a_g
+            tot = tot_val if sport == 'Tennis' else (h_g + a_g)
 
+            # Extraer numéricos dinámicos de la selección
+            import re
+            line_match = re.search(r'[-+]?\d*\.?\d+', sel)
+            target_line = float(line_match.group()) if line_match else None
+            is_home_sel = home_name.lower() in sel or 'local' in sel
+            is_away_sel = away_name.lower() in sel or 'visit' in sel
+            
             if 'doble oportunidad' in mkt or '1x' in sel or 'x2' in sel or 'empate' in sel:
                 if '1x' in sel or (home_name in sel and 'empate' in sel):
                     if h_g >= a_g: wins += 1
@@ -2684,29 +2710,39 @@ def generate_daily_sports_data():
                     if h_g != a_g: wins += 1
                 else:
                     if h_g >= a_g: wins += 1
-            elif 'mas' in sel or 'menos' in sel or 'goles' in mkt or 'total' in mkt:
-                if 'mas' in sel or 'over' in sel:
-                    if '0.5' in sel and tot >= 1: wins += 1
-                    elif '1.5' in sel and tot >= 2: wins += 1
-                    elif '2.5' in sel and tot >= 3: wins += 1
-                    elif '3.5' in sel and tot >= 4: wins += 1
-                    elif tot >= 2: wins += 1
-                elif 'menos' in sel or 'under' in sel:
-                    if '1.5' in sel and tot <= 1: wins += 1
-                    elif '2.5' in sel and tot <= 2: wins += 1
-                    elif '3.5' in sel and tot <= 3: wins += 1
-                    elif tot <= 2: wins += 1
+            elif 'handicap' in mkt or 'spread' in mkt or ('sets' in mkt and ('+' in sel or '-' in sel)):
+                if target_line is not None:
+                    if is_home_sel or home_name.lower() in sel:
+                        if (h_g + target_line) > a_g: wins += 1
+                        elif (h_g + target_line) == a_g: wins += 0.5
+                    else:
+                        if (a_g + target_line) > h_g: wins += 1
+                        elif (a_g + target_line) == h_g: wins += 0.5
+            elif 'mas' in sel or 'menos' in sel or 'total' in mkt or 'goles' in mkt or 'juegos' in mkt:
+                if target_line is not None:
+                    check_val = h_g if is_home_sel else (a_g if is_away_sel else tot)
+                    if 'mas' in sel or 'over' in sel:
+                        if check_val > target_line: wins += 1
+                        elif check_val == target_line: wins += 0.5
+                    else:
+                        if check_val < target_line: wins += 1
+                        elif check_val == target_line: wins += 0.5
                 else:
                     if tot >= 2: wins += 1
             elif 'empate no apuesta' in mkt or 'dnb' in sel:
-                if home_name in sel:
-                    if h_g >= a_g: wins += 1
+                if is_home_sel or home_name.lower() in sel:
+                    if h_g > a_g: wins += 1
+                    elif h_g == a_g: wins += 0.5
                 else:
-                    if a_g >= h_g: wins += 1
-            elif 'handicap' in mkt or 'sets' in mkt:
-                if h_g >= 1 or a_g >= 1: wins += 1
+                    if a_g > h_g: wins += 1
+                    elif a_g == h_g: wins += 0.5
             else:
-                if h_g >= a_g: wins += 1
+                if is_home_sel or home_name.lower() in sel:
+                    if h_g > a_g: wins += 1
+                elif is_away_sel or away_name.lower() in sel:
+                    if a_g > h_g: wins += 1
+                else:
+                    if h_g >= a_g: wins += 1
 
         winrate = round((wins / iterations) * 100, 1)
         se = math.sqrt((winrate/100 * (1 - winrate/100)) / iterations) * 100
@@ -3651,6 +3687,7 @@ def generate_daily_sports_data():
         ]
 
     # 💾 GUARDAR EN UPSTASH REDIS (VERCEL KV) 💾──
+    # GUARDAR EN UPSTASH REDIS (VERCEL KV)
     # Extraemos las credenciales que ya tienes configuradas en Vercel
     kv_url = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_URL") or os.environ.get("KV_REST_API_URL")
     kv_token = os.environ.get("UPSTASH_REDIS_REST_KV_REST_API_TOKEN") or os.environ.get("KV_REST_API_TOKEN")

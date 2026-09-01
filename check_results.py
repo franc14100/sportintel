@@ -1,25 +1,30 @@
-import json
-with open('frontend/data.json', 'r', encoding='utf-8') as f:
-    d = json.load(f)
+import urllib.request, json
+url_ger = 'https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard'
+url_ita = 'https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard'
+url_ita_all = 'https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard'
 
-for k in ['star_ticket_1','star_ticket_2','star_ticket_3','star_ticket_4']:
-    t = d.get(k,{})
-    if t:
-        sels = t.get('selections',[])
-        odd = t.get('total_odd','?')
-        conf = t.get('confidence','?')
-        print(f'\n{k} @{odd} conf:{conf}%')
-        for s in sels:
-            match = s.get('match','?')
-            market = s.get('market','?')
-            pick = s.get('pick','?')
-            sodd = s.get('odd','?')
-            status = s.get('status','pending')
-            print(f'  [{status}] {match} | {market} | {pick} @{sodd}')
+def fetch_events(url, team):
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        resp = urllib.request.urlopen(req, timeout=10)
+        data = json.loads(resp.read().decode())
+        found = False
+        for ev in data.get('events', []):
+            if team.lower() in ev['name'].lower():
+                print(f"Match: {ev['name']}")
+                print(f"Status: {ev['status']['type']['detail']}")
+                for comp in ev['competitions'][0]['competitors']:
+                    print(f"{comp['team']['name']}: {comp['score']}")
+                found = True
+        if not found:
+            # Maybe the match is in a different league/cup or the name is slightly different
+            pass
+    except Exception as e:
+        print('Error:', e)
 
-gs = d.get('global_stats', {})
-won = gs.get('total_picks_won', 0)
-lost = gs.get('total_picks_lost', 0)
-total = won + lost
-pct = round(won/total*100) if total > 0 else 0
-print(f'\nGlobal: won={won} lost={lost} accuracy={pct}%')
+print("=== RESULTADOS BUNDESLIGA ===")
+fetch_events(url_ger, 'dortmund')
+fetch_events('https://site.api.espn.com/apis/site/v2/sports/soccer/ger.2/scoreboard', 'dortmund')
+print("=== RESULTADOS SERIE A ===")
+fetch_events(url_ita, 'juventus')
+fetch_events(url_ita, 'parma')
